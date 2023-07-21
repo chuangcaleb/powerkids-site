@@ -8,7 +8,8 @@ import { buttonVariants } from "@/components/ui/button";
   <Section class="flex max-md:flex-col md:max-h-[600px] fl-gap-y-s md:fl-pt-m">
     <div class="max-md:fl-py-l md:my-auto fl-space-y-m max-md:text-center">
       <h1 class="fl-text-step-5 font-marker leading-none">
-        the <mark class="blue">Centre</mark><br /> with a <mark class="red"
+        the <mark class="blue">Centre</mark><br />
+        <span class="tracking-tighter">with</span> a <mark class="red"
           >Heart</mark
         >
       </h1>
@@ -53,7 +54,7 @@ import { buttonVariants } from "@/components/ui/button";
     background-size: 200% 100%;
     background-position: 100% 0;
     color: white;
-    padding-inline: 10px;
+    @apply ml-1 fl-px-2xs;
   }
 
   @-webkit-keyframes highlight {

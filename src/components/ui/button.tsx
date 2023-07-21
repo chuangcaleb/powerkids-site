@@ -17,9 +17,8 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground hover:bg-secondary/60",
         red: "bg-accent-red text-accent-red-foreground hover:bg-accent-red/60",
         blue: "bg-accent-blue text-accent-blue-foreground hover:bg-accent-blue/60",
-        ghost:
-          "border-0 hover:translate-x-0 hover:translate-y-0 hover:bg-accent hover:text-accent-foreground",
-        link: "border-0 hover:translate-x-0 hover:translate-y-0 text-primary underline-offset-4 hover:underline",
+        ghost: "border-0 hover:bg-accent hover:text-accent-foreground",
+        link: "border-0 text-primary underline-offset-4 hover:underline",
       },
       size: {
         sm: "fl-h-l fl-px-2xs fl-py-xs fl-text-step--1 ",
@@ -38,7 +37,7 @@ const buttonVariants = cva(
       {
         variant: ["default", "red", "blue", "secondary", "outline"],
         class:
-          "border-4 border-black hover:-translate-y-1 hover:translate-x-1 shadow-[0.25em_0.25em_0px_rgba(0,0,0,1)]",
+          "border-4 border-black hover:-translate-y-1 hover:translate-x-1 transition shadow-[0.25em_0.25em_0px_rgba(0,0,0,1)]",
       },
     ],
   },
