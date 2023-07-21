@@ -1,87 +1,71 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Card from "../components/Card.astro";
-import { Button } from "@/components/ui/button";
-
-import "@/styles/global.css";
+import Document from "@/components/layout/Document.astro";
+import Section from "@/components/layout/Section.astro";
+import { buttonVariants } from "@/components/ui/button";
 ---
 
-<Layout title="Welcome to Astro.">
-  <main>
-    <h1 class="fl-text-step-4">PowerKids</h1>
-    <p class="instructions">
-      To get started, open the directory <code>src/pages</code> in your project.<br
-      />
-      <strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message
-      above.
-    </p>
-    <ul class="link-card-grid">
-      <Card
-        href="https://docs.astro.build/"
-        title="Documentation"
-        body="Learn how Astro works and explore the official API docs."
-      />
-      <Card
-        href="https://astro.build/integrations/"
-        title="Integrations"
-        body="Supercharge your project with new frameworks and libraries."
-      />
-      <Card
-        href="https://astro.build/themes/"
-        title="Themes"
-        body="Explore a galaxy of community-built starter themes."
-      />
-      <Card
-        href="https://astro.build/chat/"
-        title="Community"
-        body="Come say hi to our amazing Discord community. ❤️"
-      />
-    </ul>
-    <Button className="animate-in fade-in zoom-in">Hello</Button>
-  </main>
-</Layout>
+<Document>
+  <Section class="flex max-md:flex-col md:max-h-[600px] fl-gap-y-s md:fl-pt-m">
+    <div class="max-md:fl-py-l md:my-auto fl-space-y-m max-md:text-center">
+      <h1 class="fl-text-step-5 leading-none font-extrabold tracking-tight">
+        the <mark class="blue">Centre</mark><br /> with a <mark class="red"
+          >Heart</mark
+        >
+      </h1>
+      <p class="fl-text-step-1 [text-wrap:balance]">
+        PowerKids provides first-class 21st-Century <u>Kindergarten Education</u
+        >, powered by the FunGates curriculum since 2001
+      </p>
+      <div class="fl-space-x-s fl-space-y-s">
+        <a href="/" class={buttonVariants({ size: "xl" })}>register</a>
+        <a
+          href="/"
+          class={buttonVariants({ size: "xl", variant: "secondary" })}
+        >
+          contact
+        </a>
+      </div>
+    </div>
+    <img
+      src="hero.jpg"
+      alt="hero"
+      class="mx-auto md:fl-pl-l max-w-[50%] object-contain"
+    />
+  </Section>
+  <Section class="h-[600px]">Hello</Section>
+</Document>
 
 <style>
-  main {
-    margin: auto;
-    padding: 1.5rem;
-    max-width: 60ch;
+  .red {
+    --highlight: var(--red);
   }
-  h1 {
-    font-size: 3rem;
-    font-weight: 800;
-    margin: 0;
+  .blue {
+    --highlight: var(--blue);
   }
-  .text-gradient {
-    background-image: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 400%;
-    background-position: 0%;
+  mark {
+    -webkit-animation: 1.5s highlight 0.2s 1 normal forwards;
+    animation: 1.5s highlight 0.2s 1 normal forwards;
+    background-color: none;
+    background: linear-gradient(
+      90deg,
+      var(--highlight) 50%,
+      rgba(255, 255, 255, 0) 50%
+    );
+    background-size: 200% 100%;
+    background-position: 100% 0;
+    color: white;
+    padding-inline: 10px;
   }
-  .instructions {
-    line-height: 1.6;
-    margin: 1rem 0;
-    border: 1px solid rgba(var(--accent), 25%);
-    background-color: white;
-    padding: 1rem;
-    border-radius: 0.4rem;
+
+  @-webkit-keyframes highlight {
+    to {
+      background-position: 0 0;
+    }
   }
-  .instructions code {
-    font-size: 0.875em;
-    font-weight: bold;
-    background: rgba(var(--accent), 12%);
-    color: rgb(var(--accent));
-    border-radius: 4px;
-    padding: 0.3em 0.45em;
-  }
-  .instructions strong {
-    color: rgb(var(--accent));
-  }
-  .link-card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-    gap: 1rem;
-    padding: 0;
+
+  @keyframes highlight {
+    to {
+      background-position: 0 0;
+    }
   }
 </style>

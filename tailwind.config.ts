@@ -11,13 +11,22 @@ const config = {
       utopia: () => ({
         // utopia: (theme) => ({
         // minScreen: theme("screens.xs"),
-        minSize: 16,
-        minScale: 1.2,
+        minSize: 12,
+        minScale: 1.3,
         // maxScreen: theme("screens.3xl"),
-        maxSize: 20,
-        maxScale: 1.5,
+        maxSize: 16,
+        maxScale: 1.4,
         // textSizes: ["xs", "sm", "base", "lg", "xl", "2xl", "3xl"],
       }),
+      colors: {
+        pk: {
+          red: "var(--red)",
+          blue: "var(--blue)",
+        },
+      },
+      screens: {
+        sm: "425px",
+      },
     },
   },
 

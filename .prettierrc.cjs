@@ -15,4 +15,5 @@ module.exports = {
   tabWidth: 2,
   singleQuote: false,
   astroAllowShorthand: false,
+  tailwindConfig: './tailwind.config.ts',
 };
