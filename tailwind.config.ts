@@ -19,9 +19,15 @@ const config = {
         // textSizes: ["xs", "sm", "base", "lg", "xl", "2xl", "3xl"],
       }),
       colors: {
-        pk: {
-          red: "var(--red)",
-          blue: "var(--blue)",
+        accent: {
+          red: {
+            DEFAULT: "hsl(var(--accent-red))",
+            foreground: "hsl(var(--accent-blue-foreground))",
+          },
+          blue: {
+            DEFAULT: "hsl(var(--accent-blue))",
+            foreground: "hsl(var(--accent-blue-foreground))",
+          },
         },
       },
       screens: {

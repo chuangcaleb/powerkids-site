@@ -2,8 +2,7 @@
 
 ## MVP
 
-- [ ] redo with <https://github.com/davidhellmann/tailwindcss-fluid-type>
-- [ ] migrate red/blue from primary/secondary to accent red/blue
+- [x] migrate red/blue from primary/secondary to accent red/blue
 - [ ] custom font?
 - [ ] better highlighting
 - [ ] favicon
