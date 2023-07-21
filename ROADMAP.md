@@ -3,7 +3,7 @@
 ## MVP
 
 - [x] migrate red/blue from primary/secondary to accent red/blue
-- [ ] custom font?
+- [x] custom font?
 - [ ] better highlighting
 - [ ] favicon
 - [ ] heading / footer

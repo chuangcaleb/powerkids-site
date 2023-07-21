@@ -1,18 +1,19 @@
 ---
 import { cn } from "@/lib/utils";
+import { buttonVariants } from "../ui/button";
 ---
 
 <header class="border-b-2">
   <div class="fl-py-3xs fl-px-xs mx-auto flex items-center">
     <a
       href="/"
-      class={cn(
-        // buttonVariants({ variant: "ghost" }),
-        "p-0 fl-h-2xl flex items-center fl-gap-xs",
+      class:list={cn(
+        buttonVariants({ variant: "ghost", size: "unset" }),
+        "fl-h-2xl fl-px-3xs fl-gap-xs",
       )}
     >
       <img src="/logo.svg" alt="PowerKids Logo" class="h-full" />
-      <h1 class="fl-text-step-2 font-black">
+      <h1 class="fl-text-step-3 font-marker fl-mt-xs">
         <span class="text-accent-red">Power</span><span class="text-accent-blue"
           >Kids</span
         >
