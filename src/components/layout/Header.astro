@@ -1,6 +1,7 @@
 ---
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "../ui/button";
+import Drawer from "./nav-sheet";
 ---
 
 <header class="border-b-2">
@@ -19,6 +20,8 @@ import { buttonVariants } from "../ui/button";
         >
       </h1>
     </a>
-    <div>asldas</div>
+    <div>
+      <Drawer client:visible />
+    </div>
   </div>
 </header>
