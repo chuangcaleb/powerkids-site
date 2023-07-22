@@ -5,7 +5,7 @@ import Drawer from "./nav-sheet";
 import PowerKidsNavMenu from "./nav-bar";
 ---
 
-<header class="border-b-2 sticky top-0 bg-background">
+<header class="border-b-[2.5px] sticky top-0 bg-background">
   <div class="fl-py-3xs fl-px-xs mx-auto flex items-center gap-x-4">
     <a
       href="/"
@@ -21,7 +21,7 @@ import PowerKidsNavMenu from "./nav-bar";
         >
       </h1>
     </a>
-    <div class="">
+    <div class="max-md:ml-auto">
       <PowerKidsNavMenu client:visible />
       <Drawer client:visible />
     </div>

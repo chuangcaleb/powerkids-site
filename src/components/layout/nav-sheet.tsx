@@ -34,7 +34,7 @@ export default function Drawer() {
       <SheetContent className="w-[400px] sm:w-[540px]">
         <SheetHeader>
           <SheetTitle className="inline-flex gap-x-2 fl-text-step-2">
-            <LucideMenu /> Navigation
+            <LucideMenu className="place-self-center" /> Navigation
           </SheetTitle>
         </SheetHeader>
         <nav className="grid gap-4 py-8">

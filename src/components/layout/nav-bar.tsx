@@ -1,7 +1,4 @@
-"use client";
-
 import * as React from "react";
-
 import { cn } from "@/lib/utils";
 
 import {
@@ -13,11 +10,21 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import {
+  LucideCamera,
+  LucideGraduationCap,
+  LucideHeartHandshake,
+  LucideSun,
+  LucideSunrise,
+  LucideSunset,
+  LucideTrophy,
+} from "lucide-react";
 
 type NavGroup = {
   title: string;
   href: string;
   description: string;
+  icon?: React.ReactNode;
 }[];
 
 const programs: NavGroup = [
@@ -26,18 +33,21 @@ const programs: NavGroup = [
     href: "/programs/morning-school",
     description:
       "Early childhood education provided for children from ages 2-6.",
+    icon: <LucideSunrise />,
   },
   {
     title: "After School Program (12:30pm - 3:00pm)",
     href: "/programs/after-school",
     description:
       "Lunch, homework coaching, and a variety of enrichment classes!",
+    icon: <LucideSun />,
   },
   {
     title: "Daycare (3:00pm - 6:00pm)",
     href: "/programs/daycare",
     description:
       "Care is given to your child while they wait for you to finish your work in a day.",
+    icon: <LucideSunset />,
   },
 ];
 const events: NavGroup = [
@@ -46,24 +56,28 @@ const events: NavGroup = [
     href: "/events/graduation",
     description:
       "A celebration of our children who completed their pre-school learning. Stage performance is a showcase of discipline and training of children over the years!",
+    icon: <LucideGraduationCap />,
   },
   {
     title: "Sports Day",
     href: "/events/sports-day",
     description:
       "It's about championship, sportsmanship, winning, competing, participation, and most of all: a family day out.",
+    icon: <LucideTrophy />,
   },
   {
     title: "Field Trips",
     href: "/events/field-trips",
     description:
       "Bring learning outside the classroom, and give new perspective to boost cognitive development.",
+    icon: <LucideCamera />,
   },
   {
     title: "Community Service",
     href: "/events/community-service",
     description:
       "A portion of your child's monthly school fees is channelled to support FunGates SuperFlow Foundation.",
+    icon: <LucideHeartHandshake />,
   },
 ];
 
@@ -74,13 +88,9 @@ export default function PowerKidsNavMenu() {
         <NavigationMenuItem>
           <NavigationMenuTrigger>programs</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+            <ul className="w-[40ch] space-y-2 p-3 [&_svg]:h-8 [&_svg]:w-8">
               {programs.map((program) => (
-                <ListItem
-                  key={program.title}
-                  title={program.title}
-                  href={program.href}
-                >
+                <ListItem key={program.title} {...program}>
                   {program.description}
                 </ListItem>
               ))}
@@ -90,13 +100,9 @@ export default function PowerKidsNavMenu() {
         <NavigationMenuItem>
           <NavigationMenuTrigger>events</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+            <ul className="w-[400px] space-y-2 p-3 [&_svg]:h-8 [&_svg]:w-8">
               {events.map((event) => (
-                <ListItem
-                  key={event.title}
-                  title={event.title}
-                  href={event.href}
-                >
+                <ListItem key={event.title} {...event}>
                   {event.description}
                 </ListItem>
               ))}
@@ -149,23 +155,26 @@ export default function PowerKidsNavMenu() {
 
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a">
->(({ className, title, children, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<"a"> & { icon?: React.ReactNode }
+>(({ className, title, icon, children, ...props }, ref) => {
   return (
     <li>
       <NavigationMenuLink asChild>
         <a
           ref={ref}
           className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            "grid select-none grid-flow-col place-items-center gap-x-4 rounded-md px-3 py-2 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
             className,
           )}
           {...props}
         >
-          <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-            {children}
-          </p>
+          {icon}
+          <div className="row-span-full space-y-1">
+            <div className="text-sm font-medium leading-none">{title}</div>
+            <p className="line-clamp-2 text-sm text-muted-foreground">
+              {children}
+            </p>
+          </div>
         </a>
       </NavigationMenuLink>
     </li>
