@@ -21,3 +21,8 @@ pnpm-debug.log*
 .DS_Store
 
 .vscode
+
+# temp
+public/*.png
+public/*.jpg
+public/*.jpeg

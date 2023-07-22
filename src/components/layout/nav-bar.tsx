@@ -55,21 +55,21 @@ const events: NavGroup = [
     title: "Graduation",
     href: "/events/graduation",
     description:
-      "A celebration of our children who completed their pre-school learning. Stage performance is a showcase of discipline and training of children over the years!",
+      "A stage-performance celebration of our children who've completed their pre-school learning, showcasing the discipline and training of our children over the years!",
     icon: <LucideGraduationCap />,
   },
   {
     title: "Sports Day",
     href: "/events/sports-day",
     description:
-      "It's about championship, sportsmanship, winning, competing, participation, and most of all: a family day out.",
+      "Championship, sportsmanship, winning, competing, participation — a family day-out.",
     icon: <LucideTrophy />,
   },
   {
     title: "Field Trips",
     href: "/events/field-trips",
     description:
-      "Bring learning outside the classroom, and give new perspective to boost cognitive development.",
+      "Learning beyond the classroom walls, bringing perspective to boost cognitive development.",
     icon: <LucideCamera />,
   },
   {
@@ -87,8 +87,9 @@ export default function PowerKidsNavMenu() {
       <NavigationMenuList>
         <NavigationMenuItem>
           <NavigationMenuTrigger>programs</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="w-[40ch] space-y-2 p-3 [&_svg]:h-8 [&_svg]:w-8">
+          <NavigationMenuContent className="flex">
+            <img src="after.jpg" alt="after" className="" />
+            <ul className="w-[65ch] space-y-2 p-3 [&_svg]:h-10 [&_svg]:w-10">
               {programs.map((program) => (
                 <ListItem key={program.title} {...program}>
                   {program.description}
@@ -100,7 +101,7 @@ export default function PowerKidsNavMenu() {
         <NavigationMenuItem>
           <NavigationMenuTrigger>events</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="w-[400px] space-y-2 p-3 [&_svg]:h-8 [&_svg]:w-8">
+            <ul className="grid w-[45ch] space-y-2 p-3 lg:w-[90ch] lg:grid-cols-2 [&_svg]:h-10 [&_svg]:w-10">
               {events.map((event) => (
                 <ListItem key={event.title} {...event}>
                   {event.description}
@@ -163,15 +164,15 @@ const ListItem = React.forwardRef<
         <a
           ref={ref}
           className={cn(
-            "grid select-none grid-flow-col place-items-center gap-x-4 rounded-md px-3 py-2 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            "grid select-none grid-flow-col place-items-center gap-x-5 rounded-md px-3 py-2 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
             className,
           )}
           {...props}
         >
           {icon}
           <div className="row-span-full space-y-1">
-            <div className="text-sm font-medium leading-none">{title}</div>
-            <p className="line-clamp-2 text-sm text-muted-foreground">
+            <div className="text-md font-medium leading-none">{title}</div>
+            <p className="line-clamp-2 text-sm leading-tight text-muted-foreground">
               {children}
             </p>
           </div>

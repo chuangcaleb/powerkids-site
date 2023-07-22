@@ -14,6 +14,7 @@
 ## Enhcancements
 
 - [ ] shaving bundle
+- [ ] lazy react components to hidden before interactive
 - [ ] SEO
 - [ ] form
 - [ ] analytics
