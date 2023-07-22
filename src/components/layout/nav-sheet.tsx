@@ -22,21 +22,28 @@ export default function Drawer() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button className="md:hidden" variant="outline" size="icon">
+        <Button
+          className="md:hidden"
+          variant="outline"
+          size="icon"
+          aria-label="Open Navigation Menu"
+        >
           <LucideMenu />
         </Button>
       </SheetTrigger>
       <SheetContent className="w-[400px] sm:w-[540px]">
         <SheetHeader>
-          <SheetTitle className="fl-text-step-2">Navigation</SheetTitle>
+          <SheetTitle className="inline-flex gap-x-2 fl-text-step-2">
+            <LucideMenu /> Navigation
+          </SheetTitle>
         </SheetHeader>
-        <div className="grid gap-4 py-8">
+        <nav className="grid gap-4 py-8">
           <DrawerItem label="home" href="/" />
           <DrawerItem label="programs" href="/" />
           <DrawerItem label="events" href="/" />
           <DrawerItem label="register" href="/" />
           <DrawerItem label="contact" href="/" />
-        </div>
+        </nav>
         <SheetFooter>PowerKids</SheetFooter>
       </SheetContent>
     </Sheet>
