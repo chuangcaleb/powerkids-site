@@ -1,5 +1,5 @@
-import * as React from "react";
 import { cn } from "@/lib/utils";
+import * as React from "react";
 
 import {
   NavigationMenu,
@@ -8,17 +8,24 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import {
   LucideCamera,
+  LucideEye,
   LucideGraduationCap,
   LucideHeartHandshake,
+  LucideLocate,
+  LucideSchool,
   LucideSun,
   LucideSunrise,
   LucideSunset,
+  LucideTarget,
   LucideTrophy,
+  LucideUser2,
+  LucideUsers,
+  LucideWarehouse,
 } from "lucide-react";
+import { Button } from "../ui/button";
 
 type NavGroup = {
   title: string;
@@ -86,10 +93,60 @@ export default function PowerKidsNavMenu() {
     <NavigationMenu className="max-md:hidden">
       <NavigationMenuList>
         <NavigationMenuItem>
+          <NavigationMenuTrigger>about</NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.6fr_1fr] [&_svg]:h-8 [&_svg]:w-8">
+              <li className="row-span-3">
+                <NavigationMenuLink asChild>
+                  <a
+                    className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none hover:animate-pulse focus:shadow-md"
+                    href="/"
+                  >
+                    {/* <Icons.logo className="h-6 w-6" /> */}
+                    <LucideSchool className="h-10 w-10" />
+                    <div className="mb-2 mt-4 text-lg font-medium">
+                      Our Schools
+                    </div>
+                    <p className="text-sm text-muted-foreground">
+                      <ul>
+                        <li>Sri Petaling</li>
+                        <li>Salak South Garden</li>
+                        <li>Bukit Jalil</li>
+                        <li>Puchong Utama</li>
+                        <li>Parkane OUG</li>
+                      </ul>
+                    </p>
+                  </a>
+                </NavigationMenuLink>
+              </li>
+              <ListItem
+                href="/docs"
+                title="Our Mission / Vision"
+                icon={<LucideTarget />}
+              >
+                To raise a new generation of 21st-Century Children with heart.
+              </ListItem>
+              <ListItem
+                href="/docs/installation"
+                title="Our Team"
+                icon={<LucideUsers />}
+              >
+                Trained, qualified teachers who are passionate and dynamic
+              </ListItem>
+              <ListItem
+                href="/docs/primitives/typography"
+                title="Our Facilities"
+                icon={<LucideWarehouse />}
+              >
+                Modern apparatus and technology to inspire learning.
+              </ListItem>
+            </ul>
+          </NavigationMenuContent>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
           <NavigationMenuTrigger>programs</NavigationMenuTrigger>
-          <NavigationMenuContent className="flex">
-            <img src="after.jpg" alt="after" className="" />
-            <ul className="w-[65ch] space-y-2 p-3 [&_svg]:h-10 [&_svg]:w-10">
+          <NavigationMenuContent>
+            <ul className="w-[45ch] space-y-2 p-3 [&_svg]:h-10 [&_svg]:w-10">
               {programs.map((program) => (
                 <ListItem key={program.title} {...program}>
                   {program.description}
@@ -101,7 +158,7 @@ export default function PowerKidsNavMenu() {
         <NavigationMenuItem>
           <NavigationMenuTrigger>events</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid w-[45ch] space-y-2 p-3 lg:w-[90ch] lg:grid-cols-2 [&_svg]:h-10 [&_svg]:w-10">
+            <ul className="grid w-[45ch] space-y-2 p-3 lg:w-[80ch] lg:grid-cols-2 [&_svg]:h-10 [&_svg]:w-10">
               {events.map((event) => (
                 <ListItem key={event.title} {...event}>
                   {event.description}
@@ -111,42 +168,8 @@ export default function PowerKidsNavMenu() {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-              <li className="row-span-3">
-                <NavigationMenuLink asChild>
-                  <a
-                    className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                    href="/"
-                  >
-                    {/* <Icons.logo className="h-6 w-6" /> */}
-                    <div className="mb-2 mt-4 text-lg font-medium">
-                      shadcn/ui
-                    </div>
-                    <p className="text-sm leading-tight text-muted-foreground">
-                      Beautifully designed components built with Radix UI and
-                      Tailwind CSS.
-                    </p>
-                  </a>
-                </NavigationMenuLink>
-              </li>
-              <ListItem href="/docs" title="Introduction">
-                Re-usable components built using Radix UI and Tailwind CSS.
-              </ListItem>
-              <ListItem href="/docs/installation" title="Installation">
-                How to install dependencies and structure your app.
-              </ListItem>
-              <ListItem href="/docs/primitives/typography" title="Typography">
-                Styles for headings, paragraphs, lists...etc
-              </ListItem>
-            </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-
-        <NavigationMenuItem>
-          <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-            Documentation
+          <NavigationMenuLink>
+            <Button>register</Button>
           </NavigationMenuLink>
         </NavigationMenuItem>
       </NavigationMenuList>
@@ -164,7 +187,7 @@ const ListItem = React.forwardRef<
         <a
           ref={ref}
           className={cn(
-            "grid select-none grid-flow-col place-items-center gap-x-5 rounded-md px-3 py-2 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            "grid h-full select-none grid-flow-col grid-cols-[min-content_1fr] items-center gap-x-5 rounded-md px-3 py-2 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
             className,
           )}
           {...props}
@@ -172,9 +195,11 @@ const ListItem = React.forwardRef<
           {icon}
           <div className="row-span-full space-y-1">
             <div className="text-md font-medium leading-none">{title}</div>
-            <p className="line-clamp-2 text-sm leading-tight text-muted-foreground">
-              {children}
-            </p>
+            {children ? (
+              <p className="line-clamp-2 text-sm leading-tight text-muted-foreground">
+                {children}
+              </p>
+            ) : null}
           </div>
         </a>
       </NavigationMenuLink>
