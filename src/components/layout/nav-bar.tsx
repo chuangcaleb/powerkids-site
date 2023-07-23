@@ -11,17 +11,14 @@ import {
 } from "@/components/ui/navigation-menu";
 import {
   LucideCamera,
-  LucideEye,
   LucideGraduationCap,
   LucideHeartHandshake,
-  LucideLocate,
   LucideSchool,
   LucideSun,
   LucideSunrise,
   LucideSunset,
   LucideTarget,
   LucideTrophy,
-  LucideUser2,
   LucideUsers,
   LucideWarehouse,
 } from "lucide-react";
@@ -95,27 +92,22 @@ export default function PowerKidsNavMenu() {
         <NavigationMenuItem>
           <NavigationMenuTrigger>about</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.6fr_1fr] [&_svg]:h-8 [&_svg]:w-8">
+            <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[540px] lg:grid-cols-[.6fr_1fr] [&_svg]:h-8 [&_svg]:w-8">
               <li className="row-span-3">
                 <NavigationMenuLink asChild>
                   <a
-                    className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none hover:animate-pulse focus:shadow-md"
+                    className="grid h-full w-full select-none grid-cols-[min-content_1fr] flex-col gap-x-4 gap-y-2 rounded-md bg-gradient-to-bl from-accent-blue/10 to-accent-red/10 p-4 no-underline outline-none hover:from-accent-red/10 hover:to-accent-blue/5 focus:shadow-md lg:flex lg:justify-end"
                     href="/"
                   >
-                    {/* <Icons.logo className="h-6 w-6" /> */}
-                    <LucideSchool className="h-10 w-10" />
-                    <div className="mb-2 mt-4 text-lg font-medium">
-                      Our Schools
-                    </div>
-                    <p className="text-sm text-muted-foreground">
-                      <ul>
-                        <li>Sri Petaling</li>
-                        <li>Salak South Garden</li>
-                        <li>Bukit Jalil</li>
-                        <li>Puchong Utama</li>
-                        <li>Parkane OUG</li>
-                      </ul>
-                    </p>
+                    <LucideSchool className="block h-10 w-10 max-lg:row-span-2" />
+                    <div className="text-lg font-medium">Our Schools</div>
+                    <ul className="text-muted-foreground fl-text-step-0">
+                      <li>Sri Petaling</li>
+                      <li>Salak South Garden</li>
+                      <li>Bukit Jalil</li>
+                      <li>Puchong Utama</li>
+                      <li>Parkane OUG</li>
+                    </ul>
                   </a>
                 </NavigationMenuLink>
               </li>
@@ -158,7 +150,7 @@ export default function PowerKidsNavMenu() {
         <NavigationMenuItem>
           <NavigationMenuTrigger>events</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid w-[45ch] space-y-2 p-3 lg:w-[80ch] lg:grid-cols-2 [&_svg]:h-10 [&_svg]:w-10">
+            <ul className="grid w-[45ch] space-y-2 p-3 [&_svg]:h-10 [&_svg]:w-10">
               {events.map((event) => (
                 <ListItem key={event.title} {...event}>
                   {event.description}
@@ -196,7 +188,7 @@ const ListItem = React.forwardRef<
           <div className="row-span-full space-y-1">
             <div className="text-md font-medium leading-none">{title}</div>
             {children ? (
-              <p className="line-clamp-2 text-sm leading-tight text-muted-foreground">
+              <p className="line-clamp-2 leading-tight text-muted-foreground fl-text-step-0">
                 {children}
               </p>
             ) : null}

@@ -7,15 +7,17 @@ import { buttonVariants } from "@/components/ui/button";
 <Document>
   <Section class="flex max-md:flex-col md:max-h-[600px] fl-gap-y-s md:fl-pt-m">
     <div class="max-md:fl-py-l md:my-auto fl-space-y-m max-md:text-center">
-      <h1 class="fl-text-step-5 font-marker leading-none">
+      <h1 class="fl-text-step-5 font-marker leading-[1.075em]">
         the <mark class="blue">Centre</mark><br />
         <span class="tracking-tighter">with</span> a <mark class="red"
           >Heart</mark
         >
       </h1>
-      <p class="fl-text-step-1 [text-wrap:balance]">
-        PowerKids provides first-class 21st-Century <u>Kindergarten Education</u
-        >, powered by the FunGates curriculum since 2001
+      <p class="fl-text-step-1 [text-wrap:balance] max-lg:max-w-[50ch] mx-auto">
+        First-class 21st-Century <u class="whitespace-nowrap"
+          >Kindergarten Education</u
+        >, powered by the FunGates curriculum since 2001 voluptate cupidatat
+        aliqua et aliquip nisi reprehend
       </p>
       <div class="fl-space-x-s fl-space-y-s">
         <a href="/" class={buttonVariants({ variant: "red", size: "xl" })}
@@ -37,10 +39,10 @@ import { buttonVariants } from "@/components/ui/button";
 
 <style>
   .red {
-    --highlight: var(--red);
+    --highlight: var(--accent-red);
   }
   .blue {
-    --highlight: var(--blue);
+    --highlight: var(--accent-blue);
   }
   mark {
     -webkit-animation: 1.5s highlight 0.2s 1 normal forwards;
@@ -48,7 +50,7 @@ import { buttonVariants } from "@/components/ui/button";
     background-color: none;
     background: linear-gradient(
       90deg,
-      var(--highlight) 50%,
+      hsl(var(--highlight)) 50%,
       rgba(255, 255, 255, 0) 50%
     );
     background-size: 200% 100%;
