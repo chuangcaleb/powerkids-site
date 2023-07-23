@@ -39,14 +39,14 @@ const programs: NavGroup = [
     children:
       "Essential early childhood education (ECE) provided for children from ages 2-6!",
     icon: <LucideSunrise />,
-    pill: "8:30am - 12 noon",
+    pill: "08:30am - 12 noon",
   },
   {
     title: "After School Program",
     href: "/programs/after-school",
     children: "Lunch, homework coaching, and a variety of enrichment classes!",
     icon: <LucideSun />,
-    pill: "12:30pm - 3:00pm",
+    pill: "12:30pm - 03:00pm",
   },
   {
     title: "Evening Daycare",
@@ -54,7 +54,7 @@ const programs: NavGroup = [
     children:
       "Care and activities for your child, while they wait for you to finish your work in a day!",
     icon: <LucideSunset />,
-    pill: "3:00pm - 6:00pm",
+    pill: "03:00pm - 06:00pm",
   },
 ];
 const events: NavGroup = [
@@ -90,7 +90,7 @@ const events: NavGroup = [
 
 export default function PowerKidsNavMenu() {
   return (
-    <NavigationMenu className="max-md:hidden">
+    <NavigationMenu className="flex-grow max-md:hidden">
       <NavigationMenuList>
         <NavigationMenuItem>
           <NavigationMenuTrigger>about</NavigationMenuTrigger>
@@ -159,9 +159,14 @@ export default function PowerKidsNavMenu() {
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
+        <NavigationMenuItem className="flex-grow basis-full">
+          <NavigationMenuLink>
+            <Button variant="red">register</Button>
+          </NavigationMenuLink>
+        </NavigationMenuItem>
         <NavigationMenuItem>
           <NavigationMenuLink>
-            <Button>register</Button>
+            <Button variant="blue">contact</Button>
           </NavigationMenuLink>
         </NavigationMenuItem>
       </NavigationMenuList>

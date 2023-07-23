@@ -12,9 +12,11 @@ import { LucideMenu } from "lucide-react";
 
 function DrawerItem({ label, href }: { label: string; href: string }) {
   return (
-    <Button variant="outline" size="xl" asChild>
-      <a href={href}>{label}</a>
-    </Button>
+    <li>
+      <Button variant="outline" size="xl" asChild>
+        <a href={href}>{label}</a>
+      </Button>
+    </li>
   );
 }
 
@@ -23,7 +25,7 @@ export default function Drawer() {
     <Sheet>
       <SheetTrigger asChild>
         <Button
-          className="md:hidden"
+          className="absolute right-2 top-2 md:hidden"
           variant="outline"
           size="icon"
           aria-label="Open Navigation Menu"
@@ -37,13 +39,13 @@ export default function Drawer() {
             <LucideMenu className="place-self-center" /> Navigation
           </SheetTitle>
         </SheetHeader>
-        <nav className="grid gap-4 py-8">
+        <ul className="grid gap-4 py-8">
           <DrawerItem label="home" href="/" />
           <DrawerItem label="programs" href="/" />
           <DrawerItem label="events" href="/" />
           <DrawerItem label="register" href="/" />
           <DrawerItem label="contact" href="/" />
-        </nav>
+        </ul>
         <SheetFooter>PowerKids</SheetFooter>
       </SheetContent>
     </Sheet>

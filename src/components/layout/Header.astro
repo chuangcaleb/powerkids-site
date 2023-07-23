@@ -6,7 +6,7 @@ import PowerKidsNavMenu from "./nav-bar";
 ---
 
 <header class="border-b-[2.5px] sticky top-0 bg-background">
-  <div class="fl-py-3xs fl-px-xs mx-auto flex items-center gap-x-4">
+  <nav class="fl-py-3xs fl-px-xs gap-x-4 flex">
     <a
       href="/"
       class:list={cn(
@@ -21,9 +21,8 @@ import PowerKidsNavMenu from "./nav-bar";
         >
       </h1>
     </a>
-    <div class="max-md:ml-auto">
-      <PowerKidsNavMenu client:visible />
-      <Drawer client:visible />
-    </div>
-  </div>
+
+    <PowerKidsNavMenu client:visible />
+    <Drawer client:visible />
+  </nav>
 </header>
