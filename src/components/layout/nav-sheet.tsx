@@ -1,5 +1,10 @@
-import { Button } from "@/components/ui/button";
-
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
@@ -9,44 +14,86 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { LucideMenu } from "lucide-react";
+import { ABOUT, PROGRAMS, type NavGroup, EVENTS } from "./nav-links";
+import { cn } from "@/lib/utils";
 
-function DrawerItem({ label, href }: { label: string; href: string }) {
+function DrawerItem({
+  title,
+  navGroup,
+}: {
+  title: string;
+  navGroup: NavGroup;
+}) {
   return (
     <li>
-      <Button variant="outline" size="xl" asChild>
-        <a href={href}>{label}</a>
-      </Button>
+      <Accordion type="single" collapsible className="[&_a]:block">
+        <AccordionItem value={title}>
+          <AccordionTrigger>{title}</AccordionTrigger>
+          <AccordionContent>
+            {navGroup.map((link) => (
+              <a
+                href={link.href}
+                key={link.title}
+                className={cn(
+                  buttonVariants({
+                    variant: "link",
+                    size: "lg",
+                    font: "unset",
+                  }),
+                )}
+              >
+                {link.icon}
+                {link.title}
+              </a>
+            ))}
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
     </li>
   );
 }
 
-export default function Drawer() {
+export default function PowerKidsNavDrawer() {
   return (
     <Sheet>
       <SheetTrigger asChild>
         <Button
-          className="absolute right-2 top-2 md:hidden"
+          className="absolute right-2 top-1 inline-flex fl-px-xs fl-py-2xs md:hidden"
           variant="outline"
-          size="icon"
+          size="unset"
           aria-label="Open Navigation Menu"
         >
-          <LucideMenu />
+          <LucideMenu className="mr-2" /> Menu
         </Button>
       </SheetTrigger>
-      <SheetContent className="w-[400px] sm:w-[540px]">
+      <SheetContent className="w-[min(100%,400px)] overflow-auto md:hidden [&_a>svg]:mr-2 [&_svg]:inline-block">
         <SheetHeader>
           <SheetTitle className="inline-flex gap-x-2 fl-text-step-2">
-            <LucideMenu className="place-self-center" /> Navigation
+            <LucideMenu className="place-self-center" />
+            Navigation Menu
           </SheetTitle>
         </SheetHeader>
-        <ul className="grid gap-4 py-8">
-          <DrawerItem label="home" href="/" />
-          <DrawerItem label="programs" href="/" />
-          <DrawerItem label="events" href="/" />
-          <DrawerItem label="register" href="/" />
-          <DrawerItem label="contact" href="/" />
+        <ul className="grid gap-4 pb-8 pt-4">
+          <DrawerItem title="about" navGroup={ABOUT} />
+          <DrawerItem title="programs" navGroup={PROGRAMS} />
+          <DrawerItem title="events" navGroup={EVENTS} />
         </ul>
-        <SheetFooter>PowerKids</SheetFooter>
+        <SheetFooter>
+          <div className="flex w-full justify-around">
+            <a
+              href="/"
+              className={buttonVariants({ variant: "red", size: "xl" })}
+            >
+              register
+            </a>
+            <a
+              href="/"
+              className={buttonVariants({ size: "xl", variant: "blue" })}
+            >
+              contact
+            </a>
+          </div>
+        </SheetFooter>
       </SheetContent>
     </Sheet>
   );

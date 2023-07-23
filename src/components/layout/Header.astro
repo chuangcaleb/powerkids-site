@@ -1,11 +1,11 @@
 ---
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "../ui/button";
-import Drawer from "./nav-sheet";
+import PowerKidsNavDrawer from "./nav-sheet";
 import PowerKidsNavMenu from "./nav-bar";
 ---
 
-<header class="border-b-[2.5px] sticky top-0 bg-background">
+<header class="border-b-[0.15em] sticky top-0 bg-background">
   <nav class="fl-py-3xs fl-px-xs gap-x-4 flex">
     <a
       href="/"
@@ -23,6 +23,6 @@ import PowerKidsNavMenu from "./nav-bar";
     </a>
 
     <PowerKidsNavMenu client:visible />
-    <Drawer client:visible />
+    <PowerKidsNavDrawer client:visible />
   </nav>
 </header>

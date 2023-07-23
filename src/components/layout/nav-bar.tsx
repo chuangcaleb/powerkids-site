@@ -9,84 +9,8 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-import {
-  LucideCamera,
-  LucideGraduationCap,
-  LucideHeartHandshake,
-  LucideSchool,
-  LucideSun,
-  LucideSunrise,
-  LucideSunset,
-  LucideTarget,
-  LucideTrophy,
-  LucideUsers,
-  LucideWarehouse,
-} from "lucide-react";
-import { Button } from "../ui/button";
-
-type NavGroup = {
-  title: string;
-  href: string;
-  children: React.ReactNode;
-  icon: React.ReactNode;
-  pill?: string;
-}[];
-
-const programs: NavGroup = [
-  {
-    title: "Morning School",
-    href: "/programs/morning-school",
-    children:
-      "Essential early childhood education (ECE) provided for children from ages 2-6!",
-    icon: <LucideSunrise />,
-    pill: "08:30am - 12 noon",
-  },
-  {
-    title: "After School Program",
-    href: "/programs/after-school",
-    children: "Lunch, homework coaching, and a variety of enrichment classes!",
-    icon: <LucideSun />,
-    pill: "12:30pm - 03:00pm",
-  },
-  {
-    title: "Evening Daycare",
-    href: "/programs/daycare",
-    children:
-      "Care and activities for your child, while they wait for you to finish your work in a day!",
-    icon: <LucideSunset />,
-    pill: "03:00pm - 06:00pm",
-  },
-];
-const events: NavGroup = [
-  {
-    title: "Graduation",
-    href: "/events/graduation",
-    children:
-      "A stage-performance celebration of our children who've completed their pre-school learning, showcasing the discipline and training of our children over the years!",
-    icon: <LucideGraduationCap />,
-  },
-  {
-    title: "Sports Day",
-    href: "/events/sports-day",
-    children:
-      "Championship, sportsmanship, winning, competing, participation — a family day-out.",
-    icon: <LucideTrophy />,
-  },
-  {
-    title: "Field Trips",
-    href: "/events/field-trips",
-    children:
-      "Learning beyond the classroom walls, bringing perspective to boost cognitive development.",
-    icon: <LucideCamera />,
-  },
-  {
-    title: "Community Service",
-    href: "/events/community-service",
-    children:
-      "A portion of your child's monthly school fees is channelled to support FunGates SuperFlow Foundation.",
-    icon: <LucideHeartHandshake />,
-  },
-];
+import { LucideSchool } from "lucide-react";
+import { ABOUT, EVENTS, PROGRAMS } from "./nav-links";
 
 export default function PowerKidsNavMenu() {
   return (
@@ -99,12 +23,12 @@ export default function PowerKidsNavMenu() {
               <li className="row-span-3">
                 <NavigationMenuLink asChild>
                   <a
-                    className="grid h-full w-full select-none grid-cols-[min-content_1fr] flex-col gap-x-4 gap-y-2 rounded-md bg-gradient-to-bl from-accent-blue/10 to-accent-red/10 p-4 no-underline outline-none hover:from-accent-red/10 hover:to-accent-blue/5 focus:shadow-md lg:flex lg:justify-end"
+                    className="grid h-full w-full select-none grid-cols-[min-content_1fr] flex-col gap-x-4 gap-y-2 rounded-md bg-gradient-to-bl from-accent-blue/70 to-accent-red/80 p-4 text-primary-foreground no-underline outline-none hover:animate-pulse hover:from-accent-red/70 hover:to-accent-blue/80 focus:shadow-md lg:flex lg:justify-end"
                     href="/"
                   >
                     <LucideSchool className="block h-10 w-10 max-lg:row-span-2" />
                     <div className="text-lg font-medium">Our Schools</div>
-                    <ul className="text-muted-foreground fl-text-step-0">
+                    <ul className="text-primary-foreground/70 fl-text-step-0">
                       <li>Sri Petaling</li>
                       <li>Salak South Garden</li>
                       <li>Bukit Jalil</li>
@@ -114,28 +38,9 @@ export default function PowerKidsNavMenu() {
                   </a>
                 </NavigationMenuLink>
               </li>
-              <ListItem
-                href="/docs"
-                title="Our Mission / Vision"
-                icon={<LucideTarget />}
-              >
-                To raise a new generation of 21st-Century Children with heart.
-              </ListItem>
-              <ListItem
-                href="/docs/installation"
-                title="Our Team"
-                icon={<LucideUsers />}
-                pill="We're Hiring!"
-              >
-                Trained & qualified teachers who are passionate and dynamic.
-              </ListItem>
-              <ListItem
-                href="/docs/primitives/typography"
-                title="Our Facilities"
-                icon={<LucideWarehouse />}
-              >
-                Modern apparatus and technology to inspire learning.
-              </ListItem>
+              {ABOUT.map((a) => (
+                <ListItem key={a.title} {...a} />
+              ))}
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
@@ -143,7 +48,7 @@ export default function PowerKidsNavMenu() {
           <NavigationMenuTrigger>programs</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="w-[45ch] space-y-2 p-3 [&_svg]:h-10 [&_svg]:w-10">
-              {programs.map((program) => (
+              {PROGRAMS.map((program) => (
                 <ListItem key={program.title} {...program} />
               ))}
             </ul>
@@ -153,13 +58,13 @@ export default function PowerKidsNavMenu() {
           <NavigationMenuTrigger>events</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[45ch] space-y-2 p-3 [&_svg]:h-10 [&_svg]:w-10">
-              {events.map((event) => (
+              {EVENTS.map((event) => (
                 <ListItem key={event.title} {...event} />
               ))}
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
-        <NavigationMenuItem className="flex-grow basis-full">
+        {/* <NavigationMenuItem className="flex-grow basis-full">
           <NavigationMenuLink>
             <Button variant="red">register</Button>
           </NavigationMenuLink>
@@ -168,7 +73,7 @@ export default function PowerKidsNavMenu() {
           <NavigationMenuLink>
             <Button variant="blue">contact</Button>
           </NavigationMenuLink>
-        </NavigationMenuItem>
+        </NavigationMenuItem> */}
       </NavigationMenuList>
     </NavigationMenu>
   );
