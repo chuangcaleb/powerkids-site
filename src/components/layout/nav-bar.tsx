@@ -27,59 +27,62 @@ import { Button } from "../ui/button";
 type NavGroup = {
   title: string;
   href: string;
-  description: string;
-  icon?: React.ReactNode;
+  children: React.ReactNode;
+  icon: React.ReactNode;
+  pill?: string;
 }[];
 
 const programs: NavGroup = [
   {
-    title: "Morning School (8:30am - 12noon)",
+    title: "Morning School",
     href: "/programs/morning-school",
-    description:
-      "Early childhood education provided for children from ages 2-6.",
+    children:
+      "Essential early childhood education (ECE) provided for children from ages 2-6!",
     icon: <LucideSunrise />,
+    pill: "8:30am - 12 noon",
   },
   {
-    title: "After School Program (12:30pm - 3:00pm)",
+    title: "After School Program",
     href: "/programs/after-school",
-    description:
-      "Lunch, homework coaching, and a variety of enrichment classes!",
+    children: "Lunch, homework coaching, and a variety of enrichment classes!",
     icon: <LucideSun />,
+    pill: "12:30pm - 3:00pm",
   },
   {
-    title: "Daycare (3:00pm - 6:00pm)",
+    title: "Evening Daycare",
     href: "/programs/daycare",
-    description:
-      "Care is given to your child while they wait for you to finish your work in a day.",
+    children:
+      "Care and activities for your child, while they wait for you to finish your work in a day!",
     icon: <LucideSunset />,
+    pill: "3:00pm - 6:00pm",
   },
 ];
 const events: NavGroup = [
   {
     title: "Graduation",
     href: "/events/graduation",
-    description:
+    children:
       "A stage-performance celebration of our children who've completed their pre-school learning, showcasing the discipline and training of our children over the years!",
     icon: <LucideGraduationCap />,
   },
   {
     title: "Sports Day",
     href: "/events/sports-day",
-    description:
+    children:
       "Championship, sportsmanship, winning, competing, participation — a family day-out.",
     icon: <LucideTrophy />,
   },
   {
     title: "Field Trips",
     href: "/events/field-trips",
-    description:
+    children:
       "Learning beyond the classroom walls, bringing perspective to boost cognitive development.",
     icon: <LucideCamera />,
   },
   {
     title: "Community Service",
     href: "/events/community-service",
-    description:
+    children:
       "A portion of your child's monthly school fees is channelled to support FunGates SuperFlow Foundation.",
     icon: <LucideHeartHandshake />,
   },
@@ -92,7 +95,7 @@ export default function PowerKidsNavMenu() {
         <NavigationMenuItem>
           <NavigationMenuTrigger>about</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[540px] lg:grid-cols-[.6fr_1fr] [&_svg]:h-8 [&_svg]:w-8">
+            <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[510px] lg:grid-cols-[.6fr_1fr] [&_svg]:h-8 [&_svg]:w-8">
               <li className="row-span-3">
                 <NavigationMenuLink asChild>
                   <a
@@ -122,8 +125,9 @@ export default function PowerKidsNavMenu() {
                 href="/docs/installation"
                 title="Our Team"
                 icon={<LucideUsers />}
+                pill="We're Hiring!"
               >
-                Trained, qualified teachers who are passionate and dynamic
+                Trained & qualified teachers who are passionate and dynamic.
               </ListItem>
               <ListItem
                 href="/docs/primitives/typography"
@@ -140,9 +144,7 @@ export default function PowerKidsNavMenu() {
           <NavigationMenuContent>
             <ul className="w-[45ch] space-y-2 p-3 [&_svg]:h-10 [&_svg]:w-10">
               {programs.map((program) => (
-                <ListItem key={program.title} {...program}>
-                  {program.description}
-                </ListItem>
+                <ListItem key={program.title} {...program} />
               ))}
             </ul>
           </NavigationMenuContent>
@@ -152,9 +154,7 @@ export default function PowerKidsNavMenu() {
           <NavigationMenuContent>
             <ul className="grid w-[45ch] space-y-2 p-3 [&_svg]:h-10 [&_svg]:w-10">
               {events.map((event) => (
-                <ListItem key={event.title} {...event}>
-                  {event.description}
-                </ListItem>
+                <ListItem key={event.title} {...event} />
               ))}
             </ul>
           </NavigationMenuContent>
@@ -171,8 +171,12 @@ export default function PowerKidsNavMenu() {
 
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a"> & { icon?: React.ReactNode }
->(({ className, title, icon, children, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<"a"> & {
+    title: string;
+    icon: React.ReactNode;
+    pill?: string;
+  }
+>(({ className, title, icon, children, pill, ...props }, ref) => {
   return (
     <li>
       <NavigationMenuLink asChild>
@@ -186,7 +190,14 @@ const ListItem = React.forwardRef<
         >
           {icon}
           <div className="row-span-full space-y-1">
-            <div className="text-md font-medium leading-none">{title}</div>
+            <div className="text-md flex font-medium leading-normal">
+              {title}
+              {pill ? (
+                <span className="ml-auto self-center rounded-sm bg-muted px-1 py-0.5 text-xs font-bold text-muted-foreground">
+                  {pill}
+                </span>
+              ) : null}
+            </div>
             {children ? (
               <p className="line-clamp-2 leading-tight text-muted-foreground fl-text-step-0">
                 {children}
