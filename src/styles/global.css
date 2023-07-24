@@ -41,3 +41,8 @@
     --radius: 0.5rem;
   }
 }
+@layer components {
+  .shadow-pk {
+    box-shadow: 0.25em 0px hsl(var(--border));
+  }
+}
