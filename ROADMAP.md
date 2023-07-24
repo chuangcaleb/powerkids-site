@@ -1,6 +1,6 @@
 # Roadmap
 
-## MVP
+## MVP 1
 
 - [x] migrate red/blue from primary/secondary to accent red/blue
 - [x] custom font?
@@ -9,12 +9,16 @@
 - [ ] navigation / scaffolding pages
 - [ ] image handling
 - [ ] favicon
+- [ ] shaving bundle
 - [ ] deploying to cloudfare pages
 
-## Enhcancements
+## MVP 2
 
-- [ ] shaving bundle
-- [ ] lazy react components to hidden before interactive
 - [ ] SEO
 - [ ] form
+- [ ] 404
+
+### Enhancements
+
+- [ ] lazy react components to hidden/disabled before interactive
 - [ ] analytics

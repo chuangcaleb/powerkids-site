@@ -35,9 +35,10 @@ function DrawerItem({
             className={cn(
               buttonVariants({
                 variant: "link",
-                size: "lg",
+                size: "unset",
                 font: "unset",
               }),
+              "p-3",
             )}
           >
             {link.icon}
@@ -74,6 +75,18 @@ export default function PowerKidsNavDrawer() {
           collapsible
           className="grid gap-4 pb-8 pt-4 [&_a]:block"
         >
+          {/* <a
+            href="/"
+            className={cn(
+              buttonVariants({
+                variant: "outline",
+                size: "unset",
+                font: "unset",
+              }),
+            )}
+          >
+            schools
+          </a> */}
           <DrawerItem title="about" navGroup={ABOUT} />
           <DrawerItem title="programs" navGroup={PROGRAMS} />
           <DrawerItem title="events" navGroup={EVENTS} />
