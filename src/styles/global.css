@@ -43,6 +43,6 @@
 }
 @layer components {
   .shadow-pk {
-    box-shadow: 0.25em 0px hsl(var(--border));
+    box-shadow: 0.25em 0.25em 0px hsl(var(--border));
   }
 }
