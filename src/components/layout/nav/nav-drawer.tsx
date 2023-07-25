@@ -13,7 +13,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { LucideMenu } from "lucide-react";
+import { LucideArrowRight, LucideMenu, LucideSchool } from "lucide-react";
 import { ABOUT, PROGRAMS, type NavGroup, EVENTS } from "./nav-links";
 import { cn } from "@/lib/utils";
 
@@ -43,6 +43,7 @@ function DrawerItem({
           >
             {link.icon}
             {link.title}
+            <LucideArrowRight className="float-right" />
           </a>
         ))}
       </AccordionContent>
@@ -63,7 +64,7 @@ export default function PowerKidsNavDrawer() {
           <LucideMenu className="mr-2" /> Menu
         </Button>
       </SheetTrigger>
-      <SheetContent className="w-[min(100%,400px)] overflow-auto md:hidden [&_a>svg]:mr-2 [&_svg]:inline-block">
+      <SheetContent className="w-[min(100%,400px)] overflow-auto md:hidden [&__svg:first-child]:mr-2 [&_svg]:inline-block">
         <SheetHeader>
           <SheetTitle className="inline-flex gap-x-3 fl-text-step-2">
             <LucideMenu className="place-self-center" />
@@ -75,7 +76,7 @@ export default function PowerKidsNavDrawer() {
           collapsible
           className="grid gap-4 pb-8 pt-4 [&_a]:block"
         >
-          {/* <a
+          <a
             href="/"
             className={cn(
               buttonVariants({
@@ -83,10 +84,13 @@ export default function PowerKidsNavDrawer() {
                 size: "unset",
                 font: "unset",
               }),
+              "hover:underline˝ p-3 leading-normal fl-text-step-1",
             )}
           >
-            schools
-          </a> */}
+            <LucideSchool />
+            Our Five Schools
+            <LucideArrowRight className="float-right" />
+          </a>
           <DrawerItem title="about" navGroup={ABOUT} />
           <DrawerItem title="programs" navGroup={PROGRAMS} />
           <DrawerItem title="events" navGroup={EVENTS} />
