@@ -4,7 +4,7 @@ import tailwind from "@astrojs/tailwind";
 import compress from "astro-compress";
 import compressor from "astro-compressor";
 import { defineConfig } from "astro/config";
-import { fileURLToPath, URL } from "url";
+import { resolve } from "path";
 
 // https://astro.build/config
 export default defineConfig({
@@ -22,7 +22,7 @@ export default defineConfig({
     },
     resolve: {
       alias: {
-        "@": fileURLToPath(new URL("./src", import.meta.url)),
+        "@": resolve(__dirname, "src"),
       },
     },
   },
