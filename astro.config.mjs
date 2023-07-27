@@ -4,7 +4,6 @@ import tailwind from "@astrojs/tailwind";
 import compress from "astro-compress";
 import compressor from "astro-compressor";
 import { defineConfig } from "astro/config";
-import { resolve } from "path";
 
 // https://astro.build/config
 export default defineConfig({
@@ -21,9 +20,7 @@ export default defineConfig({
       noExternal: ["@radix-ui/*"],
     },
     resolve: {
-      alias: {
-        "@": resolve(__dirname, "src"),
-      },
+      alias: [{ find: "@", replacement: "/src" }],
     },
   },
 });
