@@ -4,6 +4,7 @@ import tailwind from "@astrojs/tailwind";
 import compress from "astro-compress";
 import compressor from "astro-compressor";
 import { defineConfig } from "astro/config";
+import path from "path";
 
 // https://astro.build/config
 export default defineConfig({
@@ -18,6 +19,11 @@ export default defineConfig({
   vite: {
     ssr: {
       noExternal: ["@radix-ui/*"],
+    },
+    resolve: {
+      alias: {
+        "@": path.resolve(import.meta.url, "./src"),
+      },
     },
   },
 });
