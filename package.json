@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@astrojs/react": "^2.2.1",
+    "@astrojs/sitemap": "^2.0.1",
     "@astrojs/tailwind": "^4.0.0",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-dialog": "^1.0.4",
@@ -19,12 +20,16 @@
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "astro": "^2.8.5",
+    "astro-compress": "^1.1.50",
+    "astro-compressor": "^0.4.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "lodash": "^4.17.21",
     "lucide-react": "^0.263.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tailwind-merge": "^1.14.0",
+    "tailwind-utopia": "github:cwsdigital/tailwind-utopia",
     "tailwindcss": "^3.3.3",
     "tailwindcss-animate": "^1.0.6"
   },
@@ -36,10 +41,8 @@
     "eslint-plugin-astro": "^0.27.2",
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.32.2",
-    "lodash": "^4.17.21",
     "prettier": "^3.0.0",
     "prettier-plugin-astro": "^0.11.0",
-    "prettier-plugin-tailwindcss": "^0.4.1",
-    "tailwind-utopia": "github:cwsdigital/tailwind-utopia"
+    "prettier-plugin-tailwindcss": "^0.4.1"
   }
 }

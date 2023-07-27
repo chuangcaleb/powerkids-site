@@ -50,6 +50,9 @@ const config = {
       // baseTextSize: "base",
     }),
   ],
+  // corePlugins: {
+  //   preflight: false,
+  // },
 } satisfies Config;
 
 export default config;
