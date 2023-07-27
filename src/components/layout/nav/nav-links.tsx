@@ -46,14 +46,14 @@ export const PROGRAMS: NavGroup = [
     children:
       "Essential early childhood education (ECE) provided for children from ages 2-6!",
     icon: <LucideSunrise />,
-    pill: "08:30am - 12 noon",
+    pill: "08:30AM - 12:00noon",
   },
   {
     title: "After School Program",
     href: "/programs/after-school",
     children: "Lunch, homework coaching, and a variety of enrichment classes!",
     icon: <LucideSun />,
-    pill: "12:30pm - 03:00pm",
+    pill: "12:30PM - 03:00PM",
   },
   {
     title: "Evening Daycare",
@@ -61,7 +61,7 @@ export const PROGRAMS: NavGroup = [
     children:
       "Care and activities for your child, while they wait for you to finish your work in a day!",
     icon: <LucideSunset />,
-    pill: "03:00pm - 06:00pm",
+    pill: "03:00PM - 06:00PM",
   },
 ];
 export const EVENTS: NavGroup = [

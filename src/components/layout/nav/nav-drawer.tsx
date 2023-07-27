@@ -74,7 +74,7 @@ export default function PowerKidsNavDrawer() {
         <Accordion
           type="single"
           collapsible
-          className="grid gap-4 pb-8 pt-4 [&_a]:block"
+          className="grid gap-4 py-8 [&_a]:block"
         >
           <a
             href="/"

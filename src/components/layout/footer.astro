@@ -1,0 +1,51 @@
+---
+import {
+  LucideCalendar,
+  LucideClock,
+  LucideMail,
+  LucidePhone,
+} from "lucide-react";
+import Section from "./section.astro";
+---
+
+<footer class="bg-secondary fl-py-2xl">
+  <div id="register"></div>
+  <Section
+    class="[&_svg]:inline-block [&_svg]:mr-2 [&_svg]:mb-1 fl-text-step-1 [&>ul]:fl-mb-l [&_li]:mb-4 grid md:grid-cols-2 [&_svg]:fl-h-m"
+  >
+    <h2 class="fl-text-step-5 font-bold font-marker row-span-3">Contact Us</h2>
+    <ul>
+      <li><LucideClock /><span class="my-auto">8:30am - 5:00pm</span></li>
+      <li><LucideCalendar />Monday - Friday</li>
+    </ul>
+    <ul>
+      <li>
+        <a href="tel:+60390592979">
+          <LucidePhone /> 03 - 9059 2979
+        </a>
+      </li>
+      <li>
+        <a href="tel:+60102212482">
+          <LucidePhone /> 010 - 221 2482
+        </a>
+      </li>
+      <li>
+        <a href="tel:+60390564288">
+          <LucidePhone /> 03 - 9056 4288
+        </a>
+      </li>
+      <li>
+        <a href="tel:+0102212483">
+          <LucidePhone /> 010 - 221 2483
+        </a>
+      </li>
+    </ul>
+    <ul>
+      <li>
+        <a href="mailto:powerkidschool@gmail.com">
+          <LucideMail />powerkidschool@gmail.com
+        </a>
+      </li>
+    </ul>
+  </Section>
+</footer>
