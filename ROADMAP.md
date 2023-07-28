@@ -9,11 +9,12 @@
 - [ ] navigation / scaffolding pages
 - [ ] image handling
 - [ ] favicon
-- [ ] shaving bundle
-- [ ] deploying to cloudfare pages
+- [x] shaving bundle
+- [x] deploying to cloudfare pages
 
 ## MVP 2
 
+- [ ] manually manage tailwind preflight
 - [ ] SEO
 - [ ] form
 - [ ] 404

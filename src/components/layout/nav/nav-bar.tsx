@@ -100,7 +100,7 @@ const ListItem = React.forwardRef<
         >
           {icon}
           <div className="row-span-full space-y-1">
-            <div className="text-md flex font-medium leading-normal">
+            <div className="flex font-medium leading-normal">
               {title}
               {pill ? (
                 <span className="ml-auto self-center rounded-sm bg-muted px-1 py-0.5 text-xs font-bold text-muted-foreground">

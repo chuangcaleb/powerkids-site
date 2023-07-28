@@ -8,7 +8,7 @@ const config = {
 
   theme: {
     fontFamily: {
-      sans: ['"PT Sans"', "sans-serif"],
+      sans: ['"Helvetica"', "sans-serif"],
       marker: ['"Marker Felt"', "sans-serif"],
     },
     extend: {
@@ -16,11 +16,11 @@ const config = {
         // utopia: (theme) => ({
         // minScreen: theme("screens.xs"),
         minSize: 12,
-        minScale: 1.25,
+        minScale: 1.3,
         // maxScreen: theme("screens.3xl"),
-        // maxScreen: '1280px',
+        maxScreen: "1280px",
         maxSize: 15,
-        maxScale: 1.4,
+        maxScale: 1.45,
         // textSizes: ["xs", "sm", "base", "lg", "xl", "2xl", "3xl"],
       }),
       colors: {

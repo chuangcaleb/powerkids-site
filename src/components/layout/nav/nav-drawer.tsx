@@ -33,12 +33,8 @@ function DrawerItem({
             href={link.href}
             key={link.title}
             className={cn(
-              buttonVariants({
-                variant: "link",
-                size: "unset",
-                font: "unset",
-              }),
-              "p-3",
+              buttonVariants({ variant: "link", size: "unset", font: "unset" }),
+              "p-3 fl-text-step-1",
             )}
           >
             {link.icon}
@@ -56,7 +52,7 @@ export default function PowerKidsNavDrawer() {
     <Sheet>
       <SheetTrigger asChild>
         <Button
-          className="absolute right-2 top-1 inline-flex fl-px-xs fl-py-2xs md:hidden"
+          className="absolute right-3 top-1 inline-flex fl-px-xs fl-py-2xs md:hidden"
           variant="outline"
           size="unset"
           aria-label="Open Navigation Menu"
@@ -84,7 +80,7 @@ export default function PowerKidsNavDrawer() {
                 size: "unset",
                 font: "unset",
               }),
-              "hover:underline˝ p-3 leading-normal fl-text-step-1",
+              "underline underline-offset-4 p-3 leading-normal fl-text-step-1",
             )}
           >
             <LucideSchool />
