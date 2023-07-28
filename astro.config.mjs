@@ -21,9 +21,7 @@ export default defineConfig({
       noExternal: ["@radix-ui/*"],
     },
     resolve: {
-      alias: [
-        { find: "@", replacement: resolve(import.meta.env.BASE_URL, "src") },
-      ],
+      alias: [{ find: "@", replacement: resolve(import.meta.url, "src") }],
     },
   },
 });
