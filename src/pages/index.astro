@@ -2,6 +2,7 @@
 import Document from "@/components/layout/document.astro";
 import Section from "@/components/layout/section.astro";
 import { buttonVariants } from "@/components/ui/button";
+import { Image } from "astro-preload/components";
 ---
 
 <Document>
@@ -14,9 +15,10 @@ import { buttonVariants } from "@/components/ui/button";
         >
       </h1>
       <p class="fl-text-step-1 [text-wrap:balance] max-lg:max-w-[50ch] mx-auto">
-        First-class 21st-Century <u class="whitespace-nowrap"
+        First-Class 21st-Century <u class="whitespace-nowrap"
           >Kindergarten Education</u
-        >, based across five locations around Kuala Lumpur. Powered by the FunGates curriculum since 2001.
+        >, based across five locations around Kuala Lumpur. Powered by the
+        FunGates curriculum since 2001.
       </p>
       <div class="flex fl-gap-s max-md:justify-center flex-wrap">
         <a href="/" class={buttonVariants({ variant: "red", size: "xl" })}
@@ -33,7 +35,9 @@ import { buttonVariants } from "@/components/ui/button";
       class="mx-auto md:fl-pl-l max-w-[50%] object-contain"
     />
   </Section>
-  <Section class="h-[600px]">Hello</Section>
+  <Section class="h-[600px]">
+    <Image url="https://picsum.photos/seed/1690547287745/300/300" />
+  </Section>
 </Document>
 
 <style>

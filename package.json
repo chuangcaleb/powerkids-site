@@ -22,6 +22,7 @@
     "astro": "^2.8.5",
     "astro-compress": "^1.1.50",
     "astro-compressor": "^0.4.0",
+    "astro-preload": "^1.1.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "lodash": "^4.17.21",

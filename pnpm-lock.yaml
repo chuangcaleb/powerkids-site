@@ -41,6 +41,9 @@ dependencies:
   astro-compressor:
     specifier: ^0.4.0
     version: 0.4.0
+  astro-preload:
+    specifier: ^1.1.2
+    version: 1.1.2
   class-variance-authority:
     specifier: ^0.7.0
     version: 0.7.0
@@ -1970,6 +1973,10 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /astro-preload@1.1.2:
+    resolution: {integrity: sha512-96UHdATRp/K8iVysylYu0V5QMD3FXBqqj2+cUwHOmc0/+lstY5Xnb+A5UgmecbrfHpwMws5SQaOYZ1c63cQu/A==}
+    dev: false
 
   /astro@2.8.5(@types/node@20.4.2):
     resolution: {integrity: sha512-qfPUKLpZ9lVi5Hc5MrzyekUUx54AyrEphW5eetNQj/+d0iodHEneZXFDzZxTEsk3rL8Y2Y9pYFXJPmQB3eahUA==}
