@@ -42,7 +42,7 @@ const buttonVariants = cva(
       {
         variant: ["default", "red", "blue", "secondary", "outline"],
         class:
-          "border-[0.2em] border-black hover:-translate-y-1 hover:translate-x-1 transition shadow-pk",
+          "border-black hover:-translate-y-1 hover:translate-x-1 transition pk-border",
       },
     ],
   },

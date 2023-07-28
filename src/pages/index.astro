@@ -2,7 +2,6 @@
 import Document from "@/components/layout/document.astro";
 import Section from "@/components/layout/section.astro";
 import { buttonVariants } from "@/components/ui/button";
-import { Image } from "astro-preload/components";
 ---
 
 <Document>
@@ -35,9 +34,7 @@ import { Image } from "astro-preload/components";
       class="mx-auto md:fl-pl-l max-w-[50%] object-contain"
     />
   </Section>
-  <Section class="h-[600px]">
-    <Image url="https://picsum.photos/seed/1690547287745/300/300" />
-  </Section>
+  <Section class="h-[600px]" />
 </Document>
 
 <style>

@@ -17,6 +17,9 @@ const {
 } = Astro.props;
 ---
 
-<section class={cn("max-w-screen-lg mx-auto fl-px-xs", extraClass)} {...attrs}>
+<section
+  class={cn("max-w-screen-lg mx-auto fl-px-xs md:fl-px-m", extraClass)}
+  {...attrs}
+>
   <slot />
 </section>

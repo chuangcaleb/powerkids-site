@@ -41,8 +41,9 @@
     --radius: 0.5rem;
   }
 }
-@layer components {
-  .shadow-pk {
+@layer utilities {
+  .pk-border {
+    border-width: 0.2em;
     box-shadow: 0.25em 0.25em 0px hsl(var(--border));
   }
 }
