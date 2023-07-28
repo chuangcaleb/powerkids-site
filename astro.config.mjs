@@ -22,7 +22,7 @@ export default defineConfig({
     },
     resolve: {
       alias: [
-        { find: "@", replacement: resolve(import.meta.BASE_URL, "./src") },
+        { find: "@", replacement: resolve(import.meta.env.BASE_URL, "./src") },
       ],
     },
   },
