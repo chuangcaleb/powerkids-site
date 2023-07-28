@@ -8,7 +8,7 @@ const config = {
 
   theme: {
     fontFamily: {
-      sans: ['"Helvetica"', "sans-serif"],
+      sans: ['"PT Sans"', "sans-serif"],
       marker: ['"Marker Felt"', "sans-serif"],
     },
     extend: {

@@ -60,7 +60,7 @@ export default function PowerKidsNavDrawer() {
           <LucideMenu className="mr-2" /> Menu
         </Button>
       </SheetTrigger>
-      <SheetContent className="w-[min(100%,400px)] overflow-auto md:hidden [&__svg:first-child]:mr-2 [&_svg]:inline-block">
+      <SheetContent className="w-[min(100%,400px)] overflow-auto md:hidden [&_a_svg:first-child]:mr-2 [&_svg]:inline-block">
         <SheetHeader>
           <SheetTitle className="inline-flex gap-x-3 fl-text-step-2">
             <LucideMenu className="place-self-center" />
