@@ -19,8 +19,5 @@ export default defineConfig({
     ssr: {
       noExternal: ["@radix-ui/*"],
     },
-    resolve: {
-      alias: [{ find: "@", replacement: "./src" }],
-    },
   },
 });
