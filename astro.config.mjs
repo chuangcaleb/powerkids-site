@@ -16,7 +16,7 @@ export default defineConfig({
       applyBaseStyles: false,
     }),
     react(),
-    // ...(import.meta.env.PROD ? [sitemap(), compress(), compressor()] : []),
+    ...(import.meta.env.PROD ? [sitemap(), compress(), compressor()] : []),
   ],
   vite: {
     ssr: {
