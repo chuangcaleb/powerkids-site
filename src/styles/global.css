@@ -40,6 +40,9 @@
 
     --radius: 0.5rem;
   }
+  html {
+    scroll-padding-top: var(--fs-xl);
+  }
 }
 
 @layer components {

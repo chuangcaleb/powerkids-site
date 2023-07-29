@@ -27,7 +27,7 @@ export default function PowerKidsNavMenu() {
                 <NavigationMenuLink asChild>
                   <a
                     className="grid h-full w-full select-none grid-cols-[min-content_1fr] flex-col gap-x-4 gap-y-2 rounded-md bg-gradient-to-bl from-accent-blue/70 to-accent-red/80 p-4 text-primary-foreground no-underline outline-none hover:animate-pulse hover:from-accent-red/70 hover:to-accent-blue/80 focus:shadow-md lg:flex lg:justify-end"
-                    href="/"
+                    href="/about#our-schools"
                   >
                     <LucideSchool className="block h-10 w-10 max-lg:row-span-2" />
                     <div className="text-lg font-medium">Our Schools</div>
