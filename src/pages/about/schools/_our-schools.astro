@@ -23,7 +23,14 @@ function stripNonNumeric(str: string) {
           <article class="grid sm:grid-cols-[min-content_1fr] fl-gap-y-l fl-gap-x-3xl items-center">
             <div class="fl-space-y-m whitespace-nowrap">
               <h3 class="fl-text-step-3 font-marker">{school.name}</h3>
-              <p class="whitespace-pre">{school.address.join("\n")}</p>
+              <p class="">
+                {school.address.map((a) => (
+                  <>
+                    {a}
+                    <br />
+                  </>
+                ))}
+              </p>
               <address class="[&>a]:block ">
                 {school.contacts.map((c) => (
                   <a href={`tel:+60${stripNonNumeric(c)}`}>
@@ -34,7 +41,12 @@ function stripNonNumeric(str: string) {
               </address>
             </div>
             <Card>
-              <Cloudinary src={school.image} alt="" errorImage="" />
+              <Cloudinary
+                src={school.image}
+                alt=""
+                errorImage=""
+                cornerRadius={6}
+              />
             </Card>
           </article>
           <hr />

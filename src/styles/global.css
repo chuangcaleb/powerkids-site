@@ -57,7 +57,7 @@
     box-sizing: content-box;
   }
   hr::after {
-    content: url("heart.svg");
+    content: url("./heart.svg");
     display: inline-block;
     margin-top: -1.5em;
     background-color: hsl(var(--background));

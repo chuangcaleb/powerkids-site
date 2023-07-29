@@ -11,6 +11,9 @@ import {
 } from "@/components/ui/navigation-menu";
 import { LucideSchool } from "lucide-react";
 import { ABOUT, EVENTS, PROGRAMS } from "./nav-links";
+import { SCHOOLS } from "@/pages/about/schools/schools";
+
+const SCHOOLS_NAMELIST = SCHOOLS.map((s) => s.name);
 
 export default function PowerKidsNavMenu() {
   return (
@@ -29,11 +32,9 @@ export default function PowerKidsNavMenu() {
                     <LucideSchool className="block h-10 w-10 max-lg:row-span-2" />
                     <div className="text-lg font-medium">Our Schools</div>
                     <ul className="text-primary-foreground/70 fl-text-step-0">
-                      <li>Sri Petaling</li>
-                      <li>Salak South Garden</li>
-                      <li>Bukit Jalil</li>
-                      <li>Puchong Utama</li>
-                      <li>Parkane OUG</li>
+                      {SCHOOLS_NAMELIST.map((name, i) => (
+                        <li key={i}>{name}</li>
+                      ))}
                     </ul>
                   </a>
                 </NavigationMenuLink>
