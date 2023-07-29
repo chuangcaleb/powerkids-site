@@ -1,0 +1,112 @@
+---
+import Document from "@/components/layout/document.astro";
+import Section from "@/components/layout/section.astro";
+import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Cloudinary } from "astro-cloudinary-image";
+
+const years = new Date().getFullYear() - 2001;
+---
+
+<Document>
+  <Section
+    class="grid sm:grid-cols-[1fr,min-content,30%] lg:grid-cols-10 fl-gap-l lg:fl-gap-x-xl fl-text-step-1 lg:grid-rows-[min-content_min-content_1fr_min-content]"
+  >
+    <h1 class="font-marker fl-text-step-4 lg:col-span-6">About</h1>
+    <Card
+      className="my-auto sm:row-start-3 lg:row-start-4 lg:col-start-6 lg:col-span-full"
+    >
+      <Cloudinary
+        src="v1690554655/powerkids/about/apple-girl.jpg"
+        alt=""
+        errorImage=""
+      />
+    </Card>
+    <div
+      class="sm:col-span-full fl-space-y-l text-justify max-w-prose lg:col-span-6 lg:row-span-2 fl-pb-l"
+    >
+      <p>
+        <span class="font-marker fl-text-step-2 leading-none"
+          ><span class="text-accent-red">Power</span><span
+            class="text-accent-blue">Kids</span
+          >
+        </span> was founded <b>{years} years ago</b> in 2001, based on the
+        Fungates curriculum. We empower your little child’s early education by
+        injecting play and care to stimulate your little one’s learning.
+      </p>
+      <p>
+        Guided by educational policies from Ministry of Education Malaysia and
+        Jabatan Kebajikan Malaysia, we constantly keep up with best practices to
+        ensure our students become competent learners to navigate the
+        21st-Century world.
+      </p>
+      <p>
+        <span class="font-marker"
+          ><span class="text-accent-red">Power</span><span
+            class="text-accent-blue">Kids</span
+          ></span
+        >... Opening the Gates to First-Class Fun Learning!
+      </p>
+    </div>
+
+    <Card className="sm:col-span-2 grid sm:place-content-center lg:col-span-4">
+      <CardHeader>
+        <CardTitle className="font-marker">Our Mission</CardTitle>
+      </CardHeader>
+      <CardFooter>
+        <p class="whitespace-nowrap">
+          To raise a new generation of <br /> 21st-Century children with <span
+            class="underline underline-offset-4">heart</span
+          >.
+        </p>
+      </CardFooter>
+    </Card>
+
+    <Card className="sm:col-span-2 lg:col-span-5 grid sm:place-content-center">
+      <CardHeader>
+        <CardTitle className="font-marker">Our Vision</CardTitle>
+      </CardHeader>
+      <CardFooter>
+        <ul class="list-disc fl-ml-m">
+          <li>
+            <span class="fl-text-step-2 font-marker tracking-wider">A</span
+            >cademic Excellence
+          </li>
+          <li>
+            <span class="fl-text-step-2 font-marker tracking-wider">B</span
+            >uilding Character
+          </li>
+          <li class="whitespace-nowrap">
+            <span class="fl-text-step-2 font-marker tracking-wider">C</span
+            >ultivating Moral & Spiritual Values
+          </li>
+        </ul>
+      </CardFooter>
+    </Card>
+
+    <Card
+      className="grid place-items-center max-sm:hidden lg:col-span-4 lg:row-start-1 lg:col-start-7 lg:row-span-2 fl-py-m"
+    >
+      <img src="/logo.svg" alt="" class="max-h-40" />
+    </Card>
+  </Section>
+  <Section>
+    <div class="max-w-prose fl-text-step-1 [text-wrap:balance] fl-space-y-m">
+      <h2 class="fl-text-step-4 font-marker">Our Team</h2>
+      <p>
+        At PowerKids, we have trained, qualified teachers who are passionate and
+        dynamic. Their joy comes from seeing our little learners light up as
+        they make new friends or learn new letters, words or concepts.
+      </p>
+      <p>
+        Every class teacher is qualified in Early Childhood Education and
+        further up-graded with latest FunGates teaching practices on yearly
+        basis. Our teaching team is up-to-date on trainings by KSPK Ministry of
+        Education of Malaysia for guru-guru pra-sekolah.
+      </p>
+      <p>
+        “Children First” is our basis to all our decisions in managing children
+        entrusted to our care.
+      </p>
+    </div>
+  </Section>
+</Document>

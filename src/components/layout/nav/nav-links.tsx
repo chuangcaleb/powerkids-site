@@ -21,8 +21,8 @@ export type NavGroup = {
 
 export const ABOUT: NavGroup = [
   {
-    title: "Our Mission / Vision",
-    href: "/about#mission-vision",
+    title: "Who We Are",
+    href: "/about",
     children: "To raise a new generation of 21st-Century Children with heart.",
     icon: <LucideTarget />,
   },

@@ -35,15 +35,15 @@ dependencies:
   astro:
     specifier: ^2.8.5
     version: 2.8.5(@types/node@20.4.2)
+  astro-cloudinary-image:
+    specifier: ^0.0.6
+    version: 0.0.6
   astro-compress:
     specifier: ^1.1.50
     version: 1.1.50
   astro-compressor:
     specifier: ^0.4.0
     version: 0.4.0
-  astro-preload:
-    specifier: ^1.1.2
-    version: 1.1.2
   class-variance-authority:
     specifier: ^0.7.0
     version: 0.7.0
@@ -479,6 +479,18 @@ packages:
       '@babel/helper-string-parser': 7.22.5
       '@babel/helper-validator-identifier': 7.22.5
       to-fast-properties: 2.0.0
+    dev: false
+
+  /@cloudinary/transformation-builder-sdk@1.4.0:
+    resolution: {integrity: sha512-atU25SFAmR4aXlPHDs7fERmcl0OSnwQl80b5Fy3unvwHSj10fnqHBdLeeOEBNaOXdF3WQLmNSGMkOV8IlDPfMA==}
+    dependencies:
+      '@cloudinary/url-gen': 1.11.0
+    dev: false
+
+  /@cloudinary/url-gen@1.11.0:
+    resolution: {integrity: sha512-jShJoh+5JQfsMnh/NUqe8Z2EzZo/++BQ/CuF/VND4hA7zNpXn6vYi5JMIZ4YvLGRrqHuMtqCFahaTe1RBsLJJQ==}
+    dependencies:
+      '@cloudinary/transformation-builder-sdk': 1.4.0
     dev: false
 
   /@emmetio/abbreviation@2.3.3:
@@ -1941,6 +1953,12 @@ packages:
     resolution: {integrity: sha512-eBvWn1lvIApYMhzQMsu9ciLfkBY499mFZlNqG+/9WR7PVlroQw0vG30cOQQbaKz3sCEc44TAOu2ykzqXSNnwag==}
     dev: true
 
+  /astro-cloudinary-image@0.0.6:
+    resolution: {integrity: sha512-xmCIqmqdagdmEBScBHWS6dAu3YQKpnhH6sAUsHVCVWkUkZgqIDw8oQiDw7+9ekcHjQJaFJ0uPvnGFiADneg4VQ==}
+    dependencies:
+      '@cloudinary/url-gen': 1.11.0
+    dev: false
+
   /astro-compress@1.1.50:
     resolution: {integrity: sha512-DsaDLpJT8yizuRfRoyTHGtS+NfPt/y+3z8QkdQFMSigV+apOHKWuTlC0hspMNW/6w+3WOWE8yO19RFoy2/fITQ==}
     dependencies:
@@ -1973,10 +1991,6 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
-
-  /astro-preload@1.1.2:
-    resolution: {integrity: sha512-96UHdATRp/K8iVysylYu0V5QMD3FXBqqj2+cUwHOmc0/+lstY5Xnb+A5UgmecbrfHpwMws5SQaOYZ1c63cQu/A==}
-    dev: false
 
   /astro@2.8.5(@types/node@20.4.2):
     resolution: {integrity: sha512-qfPUKLpZ9lVi5Hc5MrzyekUUx54AyrEphW5eetNQj/+d0iodHEneZXFDzZxTEsk3rL8Y2Y9pYFXJPmQB3eahUA==}
