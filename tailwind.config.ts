@@ -36,7 +36,7 @@ const config = {
         },
       },
       // screens: {
-      //   sm: "425px",
+      //   sm: "475px",
       // },
     },
   },

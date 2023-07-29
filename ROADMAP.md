@@ -8,7 +8,7 @@
 - [ ] heading / footer
 - [ ] navigation / scaffolding pages
 - [ ] image handling
-- [ ] favicon
+- [x] favicon
 - [x] shaving bundle
 - [x] deploying to cloudfare pages
 

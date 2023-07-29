@@ -41,9 +41,38 @@
     --radius: 0.5rem;
   }
 }
+
+@layer components {
+  hr {
+    border-width: 0.15em;
+    text-align: center;
+    overflow: visible;
+    font-size: var(--text-size-step-1);
+
+    /* ensure 1px gap between borders */
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    -ms-box-sizing: content-box;
+    -o-box-sizing: content-box;
+    box-sizing: content-box;
+  }
+  hr::after {
+    content: url("heart.svg");
+    display: inline-block;
+    margin-top: -1.5em;
+    background-color: hsl(var(--background));
+    padding: 0 0.5em;
+  }
+}
+
 @layer utilities {
   .pk-border {
     border-width: 0.2em;
     box-shadow: 0.25em 0.25em 0px hsl(var(--border));
+  }
+  .inline-icon {
+    height: 1em;
+    width: 1em;
+    display: inline-block;
   }
 }
