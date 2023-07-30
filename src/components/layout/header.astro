@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import { Button, buttonVariants } from "../ui/button";
 import PowerKidsNavDrawer from "./nav/nav-drawer";
 import PowerKidsNavMenu from "./nav/nav-bar";
+import PowerKids from "@/components/brand/PowerKids.astro";
 ---
 
 <header class="border-b-[0.15em] sticky top-0 bg-background z-10">
@@ -16,9 +17,7 @@ import PowerKidsNavMenu from "./nav/nav-bar";
     >
       <img src="/images/logo.svg" alt="PowerKids Logo" class="h-full" />
       <h1 class="fl-text-step-3 font-marker fl-mt-s">
-        <span class="text-accent-red">Power</span><span class="text-accent-blue"
-          >Kids</span
-        >
+        <PowerKids />
       </h1>
     </a>
 
