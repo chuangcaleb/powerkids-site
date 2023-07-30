@@ -2,6 +2,8 @@
 import Section from "../section.astro";
 import BottomNav from "./BottomNav.astro";
 import ContactCard from "./ContactCard.astro";
+
+const today = new Date();
 ---
 
 <footer>
@@ -10,4 +12,7 @@ import ContactCard from "./ContactCard.astro";
     <ContactCard />
   </Section>
   <BottomNav />
+  <div class="col-span-full text-primary/30 sm:text-center">
+    &copy; {today.getFullYear()} PowerKids Kindergarten. All rights reserved.
+  </div>
 </footer>

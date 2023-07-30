@@ -1,21 +1,21 @@
 ---
 import PowerKids from "@/components/brand/PowerKids.astro";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { LINKS } from "../nav/nav-links";
 import Section from "../section.astro";
 ---
 
-<div class="border-t-[0.2em] fl-text-step-1">
+<div class="border-t-[0.2em] fl-text-step-0">
   <Section
     contentWidth="xl"
-    class="grid md:grid-cols-2 lg:grid-cols-[max-content_repeat(3,1fr)] fl-gap-l"
+    class="flex flex-wrap max-sm:flex-col fl-gap-y-xl fl-gap-x-2xl"
   >
     <a
       href="/"
       class:list={cn(
         buttonVariants({ variant: "ghost", size: "unset" }),
-        "fl-h-3xl fl-p-3xs fl-gap-xs justify-start",
+        "fl-h-3xl fl-p-3xs fl-gap-s justify-start",
       )}
     >
       <img src="/images/logo.svg" alt="PowerKids Logo" class="h-full" />
@@ -23,19 +23,31 @@ import Section from "../section.astro";
         <PowerKids />
       </h3>
     </a>
-    {
-      Object.entries(LINKS).map(([groupName, group]) => (
-        <div>
-          <h3>{groupName}</h3>
-          <ul>
-            {group.map(({ title }) => (
-              <li>
-                <Button variant="link">{title}</Button>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))
-    }
+
+    <div class="flex flex-wrap fl-gap-2xl md:fl-mt-l justify-stretch">
+      {
+        Object.entries(LINKS).map(([groupName, group]) => (
+          <div class="fl-space-y-s">
+            <h3 class="font-bold font-marker fl-text-step-1">{groupName}</h3>
+            <ul class="fl-space-y-s">
+              {group.map(({ title, href }) => (
+                <li>
+                  <a
+                    href={href}
+                    class={buttonVariants({
+                      variant: "link",
+                      font: "unset",
+                      size: "unset",
+                    })}
+                  >
+                    {title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
   </Section>
 </div>
