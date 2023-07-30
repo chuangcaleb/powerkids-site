@@ -10,7 +10,7 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { LucideSchool } from "lucide-react";
-import { ABOUT, EVENTS, PROGRAMS } from "./nav-links";
+import { ABOUT, EVENTS, OUR_SCHOOLS, PROGRAMS } from "./nav-links";
 import { SCHOOLS } from "@/pages/about/schools/schools";
 
 const SCHOOLS_NAMELIST = SCHOOLS.map((s) => s.name);
@@ -27,10 +27,12 @@ export default function PowerKidsNavMenu() {
                 <NavigationMenuLink asChild>
                   <a
                     className="grid h-full w-full select-none grid-cols-[min-content_1fr] flex-col gap-x-4 gap-y-2 rounded-md bg-gradient-to-bl from-accent-blue/70 to-accent-red/80 p-4 text-primary-foreground no-underline outline-none hover:animate-pulse hover:from-accent-red/70 hover:to-accent-blue/80 focus:shadow-md lg:flex lg:justify-end"
-                    href="/about#our-schools"
+                    href={OUR_SCHOOLS.href}
                   >
                     <LucideSchool className="block h-10 w-10 max-lg:row-span-2" />
-                    <div className="text-lg font-medium">Our Schools</div>
+                    <div className="text-lg font-medium">
+                      {OUR_SCHOOLS.title}
+                    </div>
                     <ul className="text-primary-foreground/70 fl-text-step-0">
                       {SCHOOLS_NAMELIST.map((name, i) => (
                         <li key={i}>{name}</li>

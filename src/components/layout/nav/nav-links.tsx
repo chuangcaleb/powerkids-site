@@ -2,6 +2,7 @@ import {
   LucideCamera,
   LucideGraduationCap,
   LucideHeartHandshake,
+  LucideSchool,
   LucideSun,
   LucideSunrise,
   LucideSunset,
@@ -11,15 +12,27 @@ import {
   LucideWarehouse,
 } from "lucide-react";
 
-export type NavGroup = {
+function insert<T>(arr: T[], el: T, i: number) {
+  arr.splice(i, 0, el);
+  return arr;
+}
+
+export interface NavLink {
   title: string;
   href: string;
   children: React.ReactNode;
   icon: React.ReactNode;
   pill?: string;
-}[];
+}
 
-export const ABOUT: NavGroup = [
+export const OUR_SCHOOLS: NavLink = {
+  title: "Our Schools",
+  href: "/about#our-schools",
+  children: null,
+  icon: <LucideSchool />,
+};
+
+export const ABOUT: NavLink[] = [
   {
     title: "Who We Are",
     href: "/about",
@@ -39,7 +52,10 @@ export const ABOUT: NavGroup = [
     icon: <LucideWarehouse />,
   },
 ];
-export const PROGRAMS: NavGroup = [
+
+export const FULL_ABOUT = insert([...ABOUT], OUR_SCHOOLS, 1);
+
+export const PROGRAMS: NavLink[] = [
   {
     title: "Morning School",
     href: "/programs/morning-school",
@@ -64,7 +80,7 @@ export const PROGRAMS: NavGroup = [
     pill: "03:00PM - 06:00PM",
   },
 ];
-export const EVENTS: NavGroup = [
+export const EVENTS: NavLink[] = [
   {
     title: "Graduation",
     href: "/events/graduation",
@@ -94,3 +110,9 @@ export const EVENTS: NavGroup = [
     icon: <LucideHeartHandshake />,
   },
 ];
+
+export const LINKS = {
+  about: FULL_ABOUT,
+  programs: PROGRAMS,
+  events: EVENTS,
+};

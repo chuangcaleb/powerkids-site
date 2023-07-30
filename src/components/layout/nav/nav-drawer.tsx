@@ -14,7 +14,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { LucideArrowRight, LucideMenu, LucideSchool } from "lucide-react";
-import { ABOUT, PROGRAMS, type NavGroup, EVENTS } from "./nav-links";
+import { ABOUT, PROGRAMS, type NavLink, EVENTS } from "./nav-links";
 import { cn } from "@/lib/utils";
 
 function DrawerItem({
@@ -22,7 +22,7 @@ function DrawerItem({
   navGroup,
 }: {
   title: string;
-  navGroup: NavGroup;
+  navGroup: NavLink[];
 }) {
   return (
     <AccordionItem value={title}>
@@ -80,7 +80,7 @@ export default function PowerKidsNavDrawer() {
                 size: "unset",
                 font: "unset",
               }),
-              "underline underline-offset-4 p-3 leading-normal fl-text-step-1",
+              "p-3 leading-normal underline underline-offset-4 fl-text-step-1",
             )}
           >
             <LucideSchool />
@@ -95,13 +95,13 @@ export default function PowerKidsNavDrawer() {
           <div className="flex w-full justify-around">
             <a
               href="/"
-              className={buttonVariants({ variant: "red", size: "xl" })}
+              className={buttonVariants({ variant: "red", size: "lg" })}
             >
               register
             </a>
             <a
               href="/"
-              className={buttonVariants({ size: "xl", variant: "blue" })}
+              className={buttonVariants({ size: "lg", variant: "blue" })}
             >
               contact
             </a>

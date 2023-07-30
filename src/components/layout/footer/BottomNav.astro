@@ -1,17 +1,21 @@
 ---
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import Section from "../section.astro";
 import PowerKids from "@/components/brand/PowerKids.astro";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { LINKS } from "../nav/nav-links";
+import Section from "../section.astro";
 ---
 
-<div class="border-t-[0.2em]">
-  <Section contentWidth="xl">
+<div class="border-t-[0.2em] fl-text-step-1">
+  <Section
+    contentWidth="xl"
+    class="grid md:grid-cols-2 lg:grid-cols-[max-content_repeat(3,1fr)] fl-gap-l"
+  >
     <a
       href="/"
       class:list={cn(
         buttonVariants({ variant: "ghost", size: "unset" }),
-        "fl-h-3xl fl-p-3xs fl-gap-xs",
+        "fl-h-3xl fl-p-3xs fl-gap-xs justify-start",
       )}
     >
       <img src="/images/logo.svg" alt="PowerKids Logo" class="h-full" />
@@ -19,5 +23,19 @@ import PowerKids from "@/components/brand/PowerKids.astro";
         <PowerKids />
       </h3>
     </a>
+    {
+      Object.entries(LINKS).map(([groupName, group]) => (
+        <div>
+          <h3>{groupName}</h3>
+          <ul>
+            {group.map(({ title }) => (
+              <li>
+                <Button variant="link">{title}</Button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
   </Section>
 </div>
