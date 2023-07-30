@@ -1,9 +1,9 @@
 ---
 import Section from "@/components/layout/section.astro";
+import { cardStyle } from "@/components/ui/card";
 import { Cloudinary } from "astro-cloudinary-image";
 import { LucidePhone, LucideSchool } from "lucide-react";
 import { SCHOOLS } from "./schools";
-import { Card } from "@/components/ui/card";
 
 function stripNonNumeric(str: string) {
   return str.replace(/\D/g, "");
@@ -40,14 +40,13 @@ function stripNonNumeric(str: string) {
                 ))}
               </address>
             </div>
-            <Card>
-              <Cloudinary
-                src={school.image}
-                alt=""
-                errorImage=""
-                cornerRadius={6}
-              />
-            </Card>
+
+            <Cloudinary
+              src={school.image}
+              alt=""
+              errorImage=""
+              class:list={cardStyle()}
+            />
           </article>
           <hr />
         </>

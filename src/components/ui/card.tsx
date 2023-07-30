@@ -1,19 +1,19 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { cva } from "class-variance-authority";
+
+const cardTabHeaderStyle = cva(
+  "inline-block border-[0.1em]  rounded-t-md border-b-0 fl-px-m",
+);
+
+const cardStyle = cva("pk-border rounded-lg bg-card text-card-foreground");
 
 const Card = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      "pk-border rounded-lg bg-card text-card-foreground shadow-sm",
-      className,
-    )}
-    {...props}
-  />
+  <div ref={ref} className={cn(cardStyle(), className)} {...props} />
 ));
 Card.displayName = "Card";
 
@@ -77,6 +77,8 @@ const CardFooter = React.forwardRef<
 CardFooter.displayName = "CardFooter";
 
 export {
+  cardStyle,
+  cardTabHeaderStyle,
   Card,
   CardHeader,
   CardFooter,

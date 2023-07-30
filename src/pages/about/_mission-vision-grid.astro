@@ -1,6 +1,13 @@
 ---
 import Section from "@/components/layout/section.astro";
-import { Card, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  cardStyle,
+} from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 import { Cloudinary } from "astro-cloudinary-image";
 
 const years = new Date().getFullYear() - 2001;
@@ -9,17 +16,18 @@ const years = new Date().getFullYear() - 2001;
 <Section
   class="grid sm:grid-cols-[1fr,min-content,30%] lg:grid-cols-10 fl-gap-l lg:fl-gap-x-xl fl-text-step-1 lg:grid-rows-[min-content_min-content_1fr_min-content]"
 >
-  <h1 class="font-marker fl-text-step-4 lg:col-span-6">About</h1>
-  <Card
-    className="my-auto sm:row-start-3 lg:row-start-4 lg:col-start-6 lg:col-span-full"
-  >
-    <Cloudinary
-      src="v1690554655/powerkids/about/apple-girl.jpg"
-      alt="A PowerKids student offering an apple"
-      errorImage=""
-      cornerRadius={12}
-    />
-  </Card>
+  <h1 class="font-marker fl-text-step-4 lg:col-span-6">Who We Are</h1>
+
+  <Cloudinary
+    src="v1690554655/powerkids/about/apple-girl.jpg"
+    alt="A PowerKids student offering an apple"
+    errorImage=""
+    class:list={cn(
+      cardStyle(),
+      "my-auto sm:row-start-3 lg:row-start-4 lg:col-start-6 lg:col-span-full",
+    )}
+  />
+
   <div
     class="sm:col-span-full fl-space-y-l text-justify max-w-prose lg:col-span-6 lg:row-span-2 fl-pb-l"
   >

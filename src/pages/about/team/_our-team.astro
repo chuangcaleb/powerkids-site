@@ -1,0 +1,51 @@
+---
+import Section from "@/components/layout/section.astro";
+import { cardStyle, cardTabHeaderStyle } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
+import { Cloudinary } from "astro-cloudinary-image";
+import { TEAM } from "./teams";
+---
+
+<Section class="overflow-hidden fl-space-y-xl" id="our-team">
+  <div class="max-w-prose fl-text-step-1 [text-wrap:balance] fl-space-y-m">
+    <h2 class="fl-text-step-4 font-marker whitespace-nowrap">
+      Our Team
+      <span class="text-primary/40">Team</span>
+      <span class="text-primary/20">Team</span>
+      <span class="text-primary/10">Team</span>
+      <span class="text-primary/5">Team</span>
+    </h2>
+    <p>
+      At PowerKids, we have trained, qualified teachers who are passionate and
+      dynamic. Their joy comes from seeing our little learners light up as they
+      make new friends or learn new letters, words or concepts.
+    </p>
+    <p>
+      Every class teacher is qualified in Early Childhood Education and further
+      up-graded with latest FunGates teaching practices on a yearly basis. Our
+      teaching team is up-to-date on trainings by KSPK Ministry of Education of
+      Malaysia for <i>guru-guru pra-sekolah</i>.
+    </p>
+    <p>
+      “Children First” is our basis to all our decisions in managing children
+      entrusted to our care.
+    </p>
+  </div>
+  <div class="grid md:grid-cols-2 fl-gap-l">
+    {
+      Object.entries(TEAM).map(([name, image]) => (
+        <div>
+          <h3 class={cn("fl-text-step-2 font-marker", cardTabHeaderStyle())}>
+            {name}
+          </h3>
+          <Cloudinary
+            src={image}
+            alt=""
+            errorImage=""
+            class:list={cn(cardStyle(), "rounded-tl-none")}
+          />
+        </div>
+      ))
+    }
+  </div>
+</Section>

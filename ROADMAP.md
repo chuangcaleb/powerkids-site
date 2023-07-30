@@ -18,6 +18,7 @@
 - [ ] SEO
 - [ ] form
 - [ ] 404
+- [ ] nav pill icon
 
 ### Enhancements
 
