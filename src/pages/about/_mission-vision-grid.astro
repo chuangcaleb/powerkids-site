@@ -1,4 +1,5 @@
 ---
+import PowerKids from "@/components/brand/PowerKids.astro";
 import Section from "@/components/layout/section.astro";
 import {
   Card,
@@ -32,13 +33,11 @@ const years = new Date().getFullYear() - 2001;
     class="sm:col-span-full fl-space-y-l text-justify max-w-prose lg:col-span-6 lg:row-span-2 fl-pb-l"
   >
     <p>
-      <span class="font-marker fl-text-step-2 leading-none"
-        ><span class="text-accent-red">Power</span><span
-          class="text-accent-blue">Kids</span
-        >
-      </span> was founded <b>{years} years ago</b> in 2001, based on the
-      Fungates curriculum. We empower your little child’s early education by
-      injecting play and care to stimulate your little one’s learning.
+      <PowerKids class="fl-text-step-2 leading-none" /> was founded <b
+        >{years} years ago</b
+      > in 2001, based on the Fungates curriculum. We empower your little
+      child’s early education by injecting play and care to stimulate your
+      little one’s learning.
     </p>
     <p>
       Guided by educational policies from Ministry of Education Malaysia and
@@ -47,11 +46,7 @@ const years = new Date().getFullYear() - 2001;
       world.
     </p>
     <p>
-      <span class="font-marker"
-        ><span class="text-accent-red">Power</span><span
-          class="text-accent-blue">Kids</span
-        ></span
-      >... Opening the Gates to First-Class Fun Learning!
+      <PowerKids />... Opening the Gates to First-Class Fun Learning!
     </p>
   </div>
 
