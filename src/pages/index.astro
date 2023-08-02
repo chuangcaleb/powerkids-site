@@ -5,8 +5,12 @@ import { buttonVariants } from "@/components/ui/button";
 ---
 
 <Document>
-  <Section class="flex max-md:flex-col md:max-h-[600px] fl-gap-y-s md:fl-pt-m">
-    <div class="max-md:fl-py-l md:my-auto fl-space-y-m max-md:text-center">
+  <Section
+    class="flex max-md:flex-col md:max-h-[700px] fl-gap-y-s md:fl-pt-m justify-evenly"
+  >
+    <div
+      class="max-md:fl-py-l md:my-auto fl-space-y-l max-md:text-center max-w-prose max-md:mx-auto"
+    >
       <h1 class="fl-text-step-5 font-marker leading-[1.075em]">
         the <mark class="blue">Centre</mark><br />
         <span class="tracking-tighter">with</span> a <mark class="red"
@@ -19,7 +23,7 @@ import { buttonVariants } from "@/components/ui/button";
         >, based across five locations around Kuala Lumpur. Powered by the
         FunGates curriculum since 2001.
       </p>
-      <div class="flex fl-gap-s max-md:justify-center flex-wrap">
+      <div class="flex fl-gap-m max-md:justify-center flex-wrap">
         <a href="/" class={buttonVariants({ variant: "red", size: "lg" })}
           >register</a
         >
@@ -31,7 +35,7 @@ import { buttonVariants } from "@/components/ui/button";
     <img
       src="images/hero.jpg"
       alt="hero"
-      class="mx-auto md:fl-pl-l max-w-[50%] object-contain"
+      class="max-md:mx-auto md:fl-pl-l max-w-[49%] object-contain"
     />
   </Section>
   <Section class="h-[600px]" />

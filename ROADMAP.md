@@ -16,10 +16,13 @@
 
 - [ ] manually manage tailwind preflight
 - [ ] SEO
+- [ ] good images
 - [ ] form
 - [ ] 404
 - [ ] nav pill icon
 - [ ] fix asChild
+- [ ] prefetch
+- [ ] don't use pure white?
 
 ### Enhancements
 
