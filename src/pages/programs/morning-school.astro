@@ -55,6 +55,8 @@ const program = PROGRAMS.find((p) => p.title === "Morning School");
           class={cn(cardStyle(), "fl-mb-s col-span-2")}
           height={image.height}
           width={image.width}
+          loading="lazy"
+          decoding="async"
         />
       ))
     }
