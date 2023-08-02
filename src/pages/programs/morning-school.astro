@@ -5,14 +5,8 @@ import { PROGRAMS } from "@/components/layout/nav/nav-links";
 import Section from "@/components/layout/section.astro";
 import { buttonVariants } from "@/components/ui/button";
 import { cardStyle } from "@/components/ui/card";
-import pkCloudinary from "@/lib/cloudinary";
+import pkCloudinary, { CldImage } from "@/lib/cloudinary";
 import { cn } from "@/lib/utils";
-
-interface CldImage {
-  url: string;
-  height: number;
-  width: number;
-}
 
 const morningPhotos = await pkCloudinary.api.resources({
   type: "upload",
@@ -24,7 +18,7 @@ const program = PROGRAMS.find((p) => p.title === "Morning School");
 
 <Document>
   <Section contentWidth="lg">
-    <div class="[&>p]:fl-text-step-1 fl-space-y-l max-w-screen-md">
+    <div class="[&_a]:fl-text-step-1 fl-space-y-l max-w-screen-md">
       <div class="flex fl-gap-x-m flex-wrap">
         <h1 class="fl-text-step-4 font-marker">Morning School</h1>
         <Pill size="lg" className="my-auto">
@@ -55,7 +49,7 @@ const program = PROGRAMS.find((p) => p.title === "Morning School");
       morningPhotos.resources.map((image: CldImage) => (
         <img
           src={image.url}
-          alt="A PowerKids student offering an apple"
+          alt=""
           class={cn(cardStyle(), "fl-mb-s col-span-2")}
           height={image.height}
           width={image.width}

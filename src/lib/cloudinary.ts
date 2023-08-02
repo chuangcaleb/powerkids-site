@@ -1,5 +1,11 @@
 import cloudinary from "cloudinary";
 
+export interface CldImage {
+  url: string;
+  height: number;
+  width: number;
+}
+
 cloudinary.v2.config({
   api_key: import.meta.env.CLOUDINARY_API_KEY,
   api_secret: import.meta.env.CLOUDINARY_SECRET,

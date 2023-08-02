@@ -66,7 +66,7 @@ export const PROGRAMS: NavLink[] = [
   },
   {
     title: "After School Program",
-    href: "/programs/after-school",
+    href: "/programs/after-school-program",
     children: "Lunch, homework coaching, and a variety of enrichment classes!",
     icon: <LucideSun />,
     pill: "12:30PM - 03:00PM",

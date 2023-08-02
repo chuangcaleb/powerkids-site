@@ -23,6 +23,7 @@
 - [ ] fix asChild
 - [ ] prefetch
 - [ ] don't use pure white?
+- [ ] alt tags
 
 ### Enhancements
 
