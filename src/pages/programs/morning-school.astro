@@ -1,9 +1,10 @@
 ---
 import Document from "@/components/layout/document.astro";
 import Section from "@/components/layout/section.astro";
+import { buttonVariants } from "@/components/ui/button";
 import { cardStyle } from "@/components/ui/card";
+import pkCloudinary from "@/lib/cloudinary";
 import { cn } from "@/lib/utils";
-import cloudinary from "cloudinary";
 
 interface CldImage {
   url: string;
@@ -11,16 +12,15 @@ interface CldImage {
   width: number;
 }
 
-const morningPhotos = await cloudinary.v2.api.resources({
+const morningPhotos = await pkCloudinary.api.resources({
   type: "upload",
   prefix: "powerkids/programs/morning",
 });
-// const morningPhotos = { resources: [] };
 ---
 
 <Document>
-  <Section class="fl-space-y-l">
-    <div class="[&>p]:fl-text-step-1 max-w-screen-md fl-space-y-l">
+  <Section contentWidth="lg">
+    <div class="[&>p]:fl-text-step-1 fl-space-y-l max-w-screen-md">
       <h1 class="fl-text-step-4 font-marker">Morning School</h1>
       <p>
         Essential early childhood education (ECE) provided for children from
@@ -31,19 +31,27 @@ const morningPhotos = await cloudinary.v2.api.resources({
         from very young age. PowerKids has a track record of strong academics
         and good character transformation.
       </p>
+      <div class="flex fl-gap-m max-md:justify-center flex-wrap">
+        <a href="/" class={buttonVariants({ variant: "red", size: "lg" })}
+          >register</a
+        >
+        <a href="/" class={buttonVariants({ size: "lg", variant: "blue" })}>
+          contact
+        </a>
+      </div>
     </div>
-    <div class="fl-space-y-l columns-sm fl-gap-s">
-      {
-        morningPhotos.resources.map((image: CldImage) => (
-          <img
-            src={image.url}
-            alt="A PowerKids student offering an apple"
-            class={cn(cardStyle(), "fl-mb-s col-span-2")}
-            height={image.height}
-            width={image.width}
-          />
-        ))
-      }
-    </div>
+  </Section>
+  <Section class="fl-space-y-l columns-sm fl-gap-s" contentWidth="xl">
+    {
+      morningPhotos.resources.map((image: CldImage) => (
+        <img
+          src={image.url}
+          alt="A PowerKids student offering an apple"
+          class={cn(cardStyle(), "fl-mb-s col-span-2")}
+          height={image.height}
+          width={image.width}
+        />
+      ))
+    }
   </Section>
 </Document>

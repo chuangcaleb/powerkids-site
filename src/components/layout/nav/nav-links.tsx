@@ -60,7 +60,7 @@ export const PROGRAMS: NavLink[] = [
     title: "Morning School",
     href: "/programs/morning-school",
     children:
-      "Essential early childhood education (ECE) provided for children from ages 2-6!",
+      "Essential early childhood education (ECE) provided for children from Ages 2-6!",
     icon: <LucideSunrise />,
     pill: "08:30AM - 12:00noon",
   },

@@ -4,15 +4,6 @@ import "@/styles/global.css";
 import Footer from "./footer/footer.astro";
 import Header from "./header.astro";
 
-import cloudinary from "cloudinary";
-
-// Return "https" URLs by setting secure: true
-cloudinary.v2.config({
-  api_key: import.meta.env.CLOUDINARY_API_KEY,
-  api_secret: import.meta.env.CLOUDINARY_SECRET,
-  cloud_name: import.meta.env.CLOUDINARY_CLOUD_NAME,
-  secure: true,
-});
 interface Props {
   title?: string;
 }
