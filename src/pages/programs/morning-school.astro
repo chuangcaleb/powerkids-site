@@ -1,5 +1,7 @@
 ---
+import Pill from "@/components/brand/pill";
 import Document from "@/components/layout/document.astro";
+import { PROGRAMS } from "@/components/layout/nav/nav-links";
 import Section from "@/components/layout/section.astro";
 import { buttonVariants } from "@/components/ui/button";
 import { cardStyle } from "@/components/ui/card";
@@ -16,12 +18,19 @@ const morningPhotos = await pkCloudinary.api.resources({
   type: "upload",
   prefix: "powerkids/programs/morning",
 });
+
+const program = PROGRAMS.find((p) => p.title === "Morning School");
 ---
 
 <Document>
   <Section contentWidth="lg">
     <div class="[&>p]:fl-text-step-1 fl-space-y-l max-w-screen-md">
-      <h1 class="fl-text-step-4 font-marker">Morning School</h1>
+      <div class="flex fl-gap-x-m flex-wrap">
+        <h1 class="fl-text-step-4 font-marker">Morning School</h1>
+        <Pill size="lg" className="my-auto">
+          {program?.pill}
+        </Pill>
+      </div>
       <p>
         Essential early childhood education (ECE) provided for children from
         Ages 2 to 6!
@@ -31,7 +40,7 @@ const morningPhotos = await pkCloudinary.api.resources({
         from very young age. PowerKids has a track record of strong academics
         and good character transformation.
       </p>
-      <div class="flex fl-gap-m max-md:justify-center flex-wrap">
+      <div class="flex fl-gap-m flex-wrap">
         <a href="/" class={buttonVariants({ variant: "red", size: "lg" })}
           >register</a
         >

@@ -12,6 +12,7 @@ import {
 import { LucideSchool } from "lucide-react";
 import { ABOUT, EVENTS, OUR_SCHOOLS, PROGRAMS } from "./nav-links";
 import { SCHOOLS } from "@/pages/about/schools/schools";
+import Pill from "@/components/brand/pill";
 
 const SCHOOLS_NAMELIST = SCHOOLS.map((s) => s.name);
 
@@ -105,11 +106,7 @@ const ListItem = React.forwardRef<
           <div className="row-span-full space-y-1">
             <div className="flex font-medium leading-normal">
               {title}
-              {pill ? (
-                <span className="ml-auto self-center rounded-sm bg-muted px-1 py-0.5 text-xs font-bold text-muted-foreground">
-                  {pill}
-                </span>
-              ) : null}
+              <Pill className="ml-auto self-center font-bold">{pill}</Pill>
             </div>
             {children ? (
               <p className="line-clamp-2 leading-tight text-muted-foreground fl-text-step-0">
