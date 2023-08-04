@@ -23,8 +23,8 @@ const buttonVariants = cva(
       size: {
         xs: "fl-h-l fl-px-2xs fl-py-xs fl-text-step--1 ",
         sm: "fl-h-l fl-py-s fl-px-m fl-text-step-0",
-        default: "fl-h-xl fl-py-s fl-px-l fl-text-step-1",
-        lg: "fl-h-xl fl-py-m fl-px-xl fl-text-step-2",
+        default: "fl-h-xl fl-py-m fl-px-xl fl-text-step-1",
+        lg: "fl-h-xl fl-py-l fl-px-xl fl-text-step-2",
         icon: "fl-h-xl fl-w-xl",
         unset: "",
       },

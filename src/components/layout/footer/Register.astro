@@ -1,0 +1,24 @@
+---
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { LucideExternalLink } from "lucide-react";
+---
+
+<div class="fl-space-y-m text-center max-w-screen-sm mx-auto" id="register">
+  <h2 class="font-marker fl-text-step-4 font-bold">Register Today!</h2>
+  <ol
+    class="list-decimal fl-text-step-1 [&>li]:fl-pl-m w-fit text-left mx-auto"
+  >
+    <li>Complete and sign the Registration Form</li>
+    <li>Attach with photocopy of birth certificate</li>
+    <li>Make full payment for registration</li>
+  </ol>
+
+  <a
+    href="https://docs.google.com/forms/d/e/1FAIpQLScx6CBPRCpy701cuUepOTB2r7_d0DdaYDuIRtPN5U5OtV7phQ/viewform?usp=sf_link"
+    class={cn(buttonVariants({ size: "lg", variant: "red" }))}
+  >
+    <LucideExternalLink className="fl-mr-xs" />
+     Open Sign-Up Form
+  </a>
+</div>

@@ -2,12 +2,15 @@
 import Section from "../section.astro";
 import BottomNav from "./BottomNav.astro";
 import ContactCard from "./ContactCard.astro";
+import Register from "./Register.astro";
 
 const today = new Date();
 ---
 
 <footer>
-  <div id="register"></div>
+  <Section contentWidth="xl">
+    <Register />
+  </Section>
   <Section contentWidth="lg">
     <ContactCard />
   </Section>
