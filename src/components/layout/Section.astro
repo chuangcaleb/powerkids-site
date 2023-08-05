@@ -4,13 +4,13 @@ import type { HTMLAttributes } from "astro/types";
 interface Props extends HTMLAttributes<"section"> {
   contentWidth?: "lg" | "xl" | "2xl"; // default: max-w-xl
   // paddingX?: "always" | "none" | "mobile"; // default: (gutters only on) mobile
-  noPaddingY?: boolean; // default: paddingY true
+  noPaddingY?: boolean;
   // variant?: "base" | "dark" | "secondary"; // default: base
 }
 const {
   contentWidth = "xl",
   // paddingX = "mobile",
-  noPaddingY,
+  noPaddingY = false,
   // variant = "base",
   class: extraClass,
   ...attrs
@@ -23,7 +23,7 @@ const {
     contentWidth === "2xl" && "max-w-screen-[1400px] mx-auto",
     contentWidth === "lg" && "max-w-screen-lg mx-auto",
     contentWidth === "xl" && "max-w-screen-xl mx-auto",
-    !noPaddingY && "fl-py-2xl [header>&]:fl-pt-l",
+    !noPaddingY && "fl-py-2xl",
     extraClass,
   )}
   {...attrs}

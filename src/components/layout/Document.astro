@@ -51,7 +51,7 @@ const { title = "PowerKids Kindergarten" } = Astro.props;
     <title>{title}</title>
     <slot name="head" />
   </head>
-  <body>
+  <body class="[&>section:first-of-type]:fl-pt-l">
     <Header />
     <slot />
     <Footer />

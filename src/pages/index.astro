@@ -12,6 +12,7 @@ import { Cloudinary } from "astro-cloudinary-image";
 <Document>
   <Section
     class="flex max-md:flex-col md:max-h-[700px] fl-gap-y-s md:fl-pt-m justify-evenly"
+    noPaddingY
   >
     <div
       class="max-md:fl-py-l md:my-auto fl-space-y-l max-md:text-center max-w-prose max-md:mx-auto"
@@ -48,8 +49,9 @@ import { Cloudinary } from "astro-cloudinary-image";
     />
   </Section>
   <!-- social proof -->
+  <hr class="max-md:hidden" />
   <Section
-    class="grid lg:grid-cols-2 fl-text-step-1 fl-gap-x-l fl-gap-y-xl lg:place-items-center"
+    class="grid md:grid-cols-2 fl-text-step-1 fl-gap-x-xl fl-gap-y-xl md:place-items-center"
   >
     <div class="fl-space-y-l max-w-prose">
       <Pill color="red">Who We Are</Pill>
@@ -67,7 +69,10 @@ import { Cloudinary } from "astro-cloudinary-image";
       src="v1690554655/powerkids/about/apple-girl.jpg"
       alt="A PowerKids student offering an apple"
       errorImage=""
-      class:list={cn(cardStyle(), "lg:-order-1 max-lg:max-h-80")}
+      class:list={cn(
+        cardStyle(),
+        "h-full object-cover md:-order-1 max-md:max-h-80",
+      )}
     />
   </Section>
 </Document>
