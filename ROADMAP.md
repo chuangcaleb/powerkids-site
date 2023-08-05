@@ -24,6 +24,7 @@
 - [ ] prefetch
 - [ ] don't use pure white?
 - [ ] alt tags
+- [ ] gmaps
 
 ### Enhancements
 

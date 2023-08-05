@@ -3,8 +3,13 @@ import { Slot } from "@radix-ui/react-slot";
 import { VariantProps, cva } from "class-variance-authority";
 import React from "react";
 
-const pillVariants = cva("bg-muted text-muted-foreground font-bold", {
+const pillVariants = cva("font-bold", {
   variants: {
+    color: {
+      default: "bg-muted text-muted-foreground",
+      red: "bg-accent-red/10 text-accent-red",
+      blue: "bg-accent-blue/10 text-accent-blue",
+    },
     size: {
       xs: "px-1 py-0.5 text-xs rounded-sm",
       md: "fl-px-s fl-py-xs fl-text-step-0 rounded-lg",
@@ -12,23 +17,24 @@ const pillVariants = cva("bg-muted text-muted-foreground font-bold", {
     },
   },
   defaultVariants: {
-    size: "xs",
+    color: "default",
+    size: "md",
   },
 });
 
 export interface PillProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+  extends Omit<React.HTMLAttributes<HTMLSpanElement>, "color">,
     VariantProps<typeof pillVariants> {
   asChild?: boolean;
 }
 
-const Pill = React.forwardRef<HTMLButtonElement, PillProps>(
-  ({ size, className, asChild = false, ...props }, ref) => {
+const Pill = React.forwardRef<HTMLSpanElement, PillProps>(
+  ({ size, color, className, asChild = false, ...props }, ref) => {
     // if (!children) return null;
     const Comp = asChild ? Slot : "span";
     return (
       <Comp
-        className={cn(pillVariants({ size, className }))}
+        className={cn(pillVariants({ size, color, className }))}
         ref={ref}
         {...props}
       />

@@ -1,7 +1,12 @@
 ---
+import IdentityStatement from "@/components/brand/IdentityStatement.astro";
+import Pill from "@/components/brand/pill";
 import Document from "@/components/layout/Document.astro";
 import Section from "@/components/layout/Section.astro";
 import { buttonVariants } from "@/components/ui/button";
+import { cardStyle } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
+import { Cloudinary } from "astro-cloudinary-image";
 ---
 
 <Document>
@@ -40,6 +45,29 @@ import { buttonVariants } from "@/components/ui/button";
       src="images/hero.jpg"
       alt="hero"
       class="max-md:mx-auto md:fl-pl-l max-w-[49%] object-contain"
+    />
+  </Section>
+  <!-- social proof -->
+  <Section
+    class="grid md:grid-cols-2 fl-text-step-1 fl-gap-l md:place-items-center"
+  >
+    <div class="fl-space-y-l max-w-prose [text-wrap:balance]">
+      <Pill color="red">Who We Are</Pill>
+      <p>
+        <IdentityStatement />
+      </p>
+      <p>
+        Our Mission is to raise a new generation of 21st-Century children with <span
+          class="underline underline-offset-4">heart</span
+        >.
+      </p>
+      <a class={cn(buttonVariants(), "")} href="/about">read about us</a>
+    </div>
+    <Cloudinary
+      src="v1690554655/powerkids/about/apple-girl.jpg"
+      alt="A PowerKids student offering an apple"
+      errorImage=""
+      class:list={cn(cardStyle(), "md:-order-1 max-md:max-h-80")}
     />
   </Section>
 </Document>

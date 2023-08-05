@@ -1,4 +1,5 @@
 ---
+import IdentityStatement from "@/components/brand/IdentityStatement.astro";
 import PowerKids from "@/components/brand/PowerKids.astro";
 import Section from "@/components/layout/Section.astro";
 import {
@@ -10,8 +11,6 @@ import {
 } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { Cloudinary } from "astro-cloudinary-image";
-
-const years = new Date().getFullYear() - 2001;
 ---
 
 <Section
@@ -34,11 +33,7 @@ const years = new Date().getFullYear() - 2001;
     class="sm:col-span-full fl-space-y-l text-justify max-w-prose lg:col-span-6 lg:row-span-2 fl-pb-l"
   >
     <p>
-      <PowerKids class="fl-text-step-2 leading-none" /> was founded <b
-        >{years} years ago</b
-      > in 2001, based on the Fungates curriculum. We empower your little
-      child’s early education by injecting play and care to stimulate your
-      little one’s learning.
+      <IdentityStatement />
     </p>
     <p>
       Guided by educational policies from Ministry of Education Malaysia and

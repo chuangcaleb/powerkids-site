@@ -106,7 +106,9 @@ const ListItem = React.forwardRef<
           <div className="row-span-full space-y-1">
             <div className="flex font-medium leading-normal">
               {title}
-              <Pill className="ml-auto self-center font-bold">{pill}</Pill>
+              <Pill size="xs" className="ml-auto self-center">
+                {pill}
+              </Pill>
             </div>
             {children ? (
               <p className="line-clamp-2 leading-tight text-muted-foreground fl-text-step-0">
