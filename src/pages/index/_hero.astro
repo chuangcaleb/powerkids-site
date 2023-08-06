@@ -1,0 +1,76 @@
+---
+import Section from "@/components/layout/Section.astro";
+import { buttonVariants } from "@/components/ui/button";
+---
+
+<Section
+  class="flex max-md:flex-col md:max-h-[700px] fl-gap-y-s md:fl-pt-m justify-evenly"
+  noPaddingY
+>
+  <div
+    class="max-md:fl-py-l md:my-auto fl-space-y-l max-md:text-center max-w-prose max-md:mx-auto"
+  >
+    <h1 class="fl-text-step-5 font-marker leading-[1.075em]">
+      the <mark class="blue">Centre</mark><br />
+      <span class="tracking-tighter">with</span> a <mark class="red">Heart</mark
+      >
+    </h1>
+    <p class="fl-text-step-1 [text-wrap:balance] max-lg:max-w-[50ch] mx-auto">
+      First-Class 21st-Century <u class="whitespace-nowrap"
+        >Kindergarten Education</u
+      >, based across five locations around Kuala Lumpur. Powered by the
+      FunGates curriculum since 2001.
+    </p>
+    <div class="flex fl-gap-m max-md:justify-center flex-wrap">
+      <a href="#register" class={buttonVariants({ variant: "red", size: "lg" })}
+        >register</a
+      >
+      <a
+        href="#contact"
+        class={buttonVariants({ size: "lg", variant: "blue" })}
+      >
+        contact
+      </a>
+    </div>
+  </div>
+  <img
+    src="images/hero.jpg"
+    alt="hero"
+    class="max-md:mx-auto md:fl-pl-l max-w-[49%] object-contain"
+  />
+</Section>
+
+<style>
+  .red {
+    --highlight: var(--accent-red);
+  }
+  .blue {
+    --highlight: var(--accent-blue);
+  }
+  mark {
+    -webkit-animation: 1.5s highlight 0.2s 1 normal forwards;
+    animation: 1.5s highlight 0.2s 1 normal forwards;
+    background-color: none;
+    background: linear-gradient(
+      90deg,
+      hsl(var(--highlight)) 50%,
+      rgba(255, 255, 255, 0) 50%
+    );
+    background-size: 200% 100%;
+    background-position: 100% 0;
+    color: white;
+    @apply ml-1 fl-px-2xs;
+  }
+
+  @-webkit-keyframes highlight {
+    to {
+      background-position: 0 0;
+    }
+  }
+
+  @keyframes highlight {
+    to {
+      background-position: 0 0;
+    }
+  }
+</style>
