@@ -75,7 +75,7 @@ export const PROGRAMS: NavLink[] = [
     title: "Evening Daycare",
     href: "/programs/daycare",
     children:
-      "Care and activities for your child, while they wait for you to finish your work in a day!",
+      "Care and activities for your child, while they wait for you to finish your day's work!",
     icon: <LucideSunset />,
     pill: "03:00PM - 06:00PM",
   },

@@ -11,10 +11,8 @@ import {
 } from "@/components/ui/navigation-menu";
 import { LucideSchool } from "lucide-react";
 import { ABOUT, EVENTS, OUR_SCHOOLS, PROGRAMS } from "./nav-links";
-import { SCHOOLS } from "@/pages/about/schools/schools";
+import { SCHOOLS_NAMELIST } from "@/pages/about/schools/schools";
 import Pill from "@/components/brand/pill";
-
-const SCHOOLS_NAMELIST = SCHOOLS.map((s) => s.name);
 
 export default function PowerKidsNavMenu() {
   return (

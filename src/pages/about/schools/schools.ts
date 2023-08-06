@@ -50,3 +50,5 @@ export const SCHOOLS: School[] = [
     image: "v1690641775/powerkids/about/schools/parklane.jpg",
   },
 ];
+
+export const SCHOOLS_NAMELIST = SCHOOLS.map((s) => s.name);

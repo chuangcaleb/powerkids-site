@@ -2,21 +2,22 @@
 import PowerKids from "@/components/brand/PowerKids.astro";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { LINKS } from "../nav/nav-links";
+import { SCHOOLS_NAMELIST } from "@/pages/about/schools/schools";
 import Section from "../Section.astro";
+import { LINKS } from "../nav/nav-links";
 ---
 
-<div class="border-t-[0.2em] fl-text-step-0">
-  <Section
-    class="flex flex-wrap max-sm:flex-col fl-gap-y-xl fl-gap-x-2xl fl-pt-s fl-pb-xl"
-    contentWidth="2xl"
-    noPaddingY
-  >
+<Section
+  class="flex flex-wrap fl-gap-y-xl fl-gap-x-2xl fl-pt-s fl-pb-xl border-t-[0.2em] fl-text-step-0 justify-stretch"
+  contentWidth="2xl"
+  noPaddingY
+>
+  <div class="flex flex-col justify-stretch fl-gap-y-m md:max-w-[37ch]">
     <a
       href="/"
       class:list={cn(
         buttonVariants({ variant: "ghost", size: "unset" }),
-        "fl-h-3xl fl-p-3xs fl-gap-s justify-start",
+        "fl-h-3xl fl-p-3xs fl-gap-s w-max",
       )}
     >
       <img
@@ -25,35 +26,39 @@ import Section from "../Section.astro";
         class="h-full"
         loading="lazy"
       />
-      <h3 class="fl-text-step-3 font-marker fl-mt-s">
+      <h3 class="fl-text-step-3 font-marker fl-mt-s w-full">
         <PowerKids />
       </h3>
     </a>
 
-    <div class="flex flex-wrap fl-gap-2xl md:fl-mt-l justify-stretch">
-      {
-        Object.entries(LINKS).map(([groupName, group]) => (
-          <div class="fl-space-y-s">
-            <h3 class="font-bold font-marker fl-text-step-1">{groupName}</h3>
-            <ul class="fl-space-y-s">
-              {group.map(({ title, href }) => (
-                <li>
-                  <a
-                    href={href}
-                    class={buttonVariants({
-                      variant: "link",
-                      font: "unset",
-                      size: "unset",
-                    })}
-                  >
-                    {title}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))
-      }
-    </div>
-  </Section>
-</div>
+    <ul class="fl-text-step-0 justify-stretch fl-gap-x-m flex flex-wrap">
+      {SCHOOLS_NAMELIST.map((name) => <li>{name}</li>)}
+    </ul>
+  </div>
+
+  <div class="flex flex-wrap fl-gap-2xl md:fl-mt-l justify-stretch">
+    {
+      Object.entries(LINKS).map(([groupName, group]) => (
+        <div class="fl-space-y-s">
+          <h3 class="font-bold font-marker fl-text-step-1">{groupName}</h3>
+          <ul class="fl-space-y-s">
+            {group.map(({ title, href }) => (
+              <li>
+                <a
+                  href={href}
+                  class={buttonVariants({
+                    variant: "link",
+                    font: "unset",
+                    size: "unset",
+                  })}
+                >
+                  {title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
+</Section>
