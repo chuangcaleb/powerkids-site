@@ -106,7 +106,7 @@ const ListItem = React.forwardRef<
           <div className="row-span-full space-y-1">
             <div className="flex font-medium leading-normal">
               {title}
-              <Pill size="xs" className="ml-auto self-center">
+              <Pill size="xs" color="muted" className="ml-auto self-center">
                 {pill}
               </Pill>
             </div>

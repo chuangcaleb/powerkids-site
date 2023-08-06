@@ -6,7 +6,8 @@ import React from "react";
 const pillVariants = cva("font-bold", {
   variants: {
     color: {
-      default: "bg-muted text-muted-foreground",
+      default: "bg-primary/10 text-primary",
+      muted: "bg-muted text-muted-foreground",
       red: "bg-accent-red/10 text-accent-red",
       blue: "bg-accent-blue/10 text-accent-blue",
     },
