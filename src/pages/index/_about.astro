@@ -1,17 +1,38 @@
 ---
 import IdentityStatement from "@/components/brand/IdentityStatement.astro";
 import Pill from "@/components/brand/pill";
+import Youtube from "@/components/common/Youtube.astro";
 import Section from "@/components/layout/Section.astro";
 import { buttonVariants } from "@/components/ui/button";
 import { cardStyle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { Cloudinary } from "astro-cloudinary-image";
 ---
 
+<!-- <Section class="fl-text-step-1">
+  <Card
+    className="fl-py-l col-span-full text-center flex flex-wrap fl-gap-x-3xl fl-gap-y-m justify-center items-center"
+  >
+    <div class="flex flex-wrap fl-gap-x-m justify-center">
+      <span>Sri Petaling</span>
+      <span>Salak South Garden</span>
+      <div class="inline whitespace-nowrap fl-space-x-m">
+        <span>Bukit Jalil</span>
+        <span>Puchong Utama</span>
+        <span> Parklane OUG</span>
+      </div>
+    </div>
+    <a
+      class={cn(buttonVariants({ variant: "link" }), "fl-gap-x-xs")}
+      href="/about#our-schools"
+    >
+      see our schools!<LucideArrowRight className="float-right" />
+    </a>
+  </Card>
+</Section> -->
 <Section
   class="grid md:grid-cols-2 fl-text-step-1 fl-gap-x-xl fl-gap-y-xl md:place-items-center"
 >
-  <div class="fl-space-y-l max-w-prose">
+  <div class="fl-space-y-l max-w-prose md:order-1">
     <Pill>Who We Are</Pill>
     <p>
       <IdentityStatement />
@@ -23,13 +44,8 @@ import { Cloudinary } from "astro-cloudinary-image";
     </p>
     <a class={cn(buttonVariants())} href="/about">read about us</a>
   </div>
-  <Cloudinary
-    src="v1690554655/powerkids/about/apple-girl.jpg"
-    alt="A PowerKids student offering an apple"
-    errorImage=""
-    class:list={cn(
-      cardStyle(),
-      "h-full object-cover md:-order-1 max-md:max-h-80",
-    )}
+  <Youtube
+    src="https://www.youtube.com/embed/pWK_QZkIbQ0"
+    class={cn(cardStyle(), "h-full object-cover")}
   />
 </Section>
