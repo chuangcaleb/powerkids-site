@@ -1,21 +1,68 @@
 ---
 import Pill from "@/components/brand/pill";
 import Section from "@/components/layout/Section.astro";
-import { cardStyle } from "@/components/ui/card";
+import { PROGRAMS } from "@/components/layout/nav/nav-links";
+import { buttonVariants } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  cardStyle,
+} from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { Cloudinary } from "astro-cloudinary-image";
+import { LucideClock } from "lucide-react";
+
+const colStartClasses = ["lg:col-start-1", "", "lg:col-start-3"];
+const rowSpanClasses = [
+  "lg:row-start-1",
+  "lg:row-span-1 md:row-start-2",
+  "lg:row-start-1",
+];
 ---
 
-<Section
-  class="grid md:grid-cols-2 fl-text-step-1 fl-gap-x-xl fl-gap-y-xl md:place-items-center"
->
-  <div class="fl-space-y-l max-w-prose">
+<Section class="fl-gap-m grid md:grid-cols-2 lg:grid-cols-3 place-items-center">
+  <h2 class="text-center max-md:fl-mb-l lg:col-start-2 md:fl-py-l">
     <Pill color="red">Our Programs</Pill>
-  </div>
-  <Cloudinary
-    src="v1690554655/powerkids/about/apple-girl.jpg"
-    alt="A PowerKids student offering an apple"
-    errorImage=""
-    class:list={cn(cardStyle(), "h-full object-cover max-md:max-h-80")}
-  />
+  </h2>
+
+  {
+    PROGRAMS.map((p, i) => (
+      <Card
+        className={cn(
+          colStartClasses[i],
+          rowSpanClasses[i],
+          "max-md:max-w-[50ch] lg:text-center h-min md:row-span-2",
+        )}
+      >
+        <CardHeader>
+          <CardTitle className="font-marker">{p.title}</CardTitle>
+          <CardDescription>
+            <LucideClock className="inline" />
+            {p.pill}
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="fl-space-y-m">
+          <Cloudinary
+            src={p.image}
+            alt=""
+            errorImage=""
+            width="330"
+            height="220"
+            resize="fill"
+            class:list={cn(cardStyle(), "mx-auto sm:mx-0 lg:mx-auto")}
+          />
+          <p>{p.children}</p>
+        </CardContent>
+        <CardFooter className="justify-end">
+          <a class={cn(buttonVariants({ size: "sm" }))} href={p.href}>
+            more!
+          </a>
+        </CardFooter>
+      </Card>
+    ))
+  }
 </Section>

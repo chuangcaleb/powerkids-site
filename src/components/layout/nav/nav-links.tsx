@@ -25,6 +25,10 @@ export interface NavLink {
   pill?: string;
 }
 
+interface ImageNavLink extends NavLink {
+  image: string;
+}
+
 export const OUR_SCHOOLS: NavLink = {
   title: "Our Schools",
   href: "/about#our-schools",
@@ -55,13 +59,15 @@ export const ABOUT: NavLink[] = [
 
 export const FULL_ABOUT = insert([...ABOUT], OUR_SCHOOLS, 1);
 
-export const PROGRAMS: NavLink[] = [
+export const PROGRAMS: ImageNavLink[] = [
   {
     title: "Morning School",
     href: "/programs/morning-school",
     children:
       "Essential early childhood education (ECE) provided for children from Ages 2-6!",
     icon: <LucideSunrise />,
+    image:
+      "v1690805202/powerkids/programs/morning/IMG_20210116_0004_yowtwg.jpg",
     pill: "08:30AM - 12:00noon",
   },
   {
@@ -69,6 +75,7 @@ export const PROGRAMS: NavLink[] = [
     href: "/programs/after-school-program",
     children: "Lunch, homework coaching, and a variety of enrichment classes!",
     icon: <LucideSun />,
+    image: "v1690805202/powerkids/programs/after/IMG_20210116_0001_qgyuoz.jpg",
     pill: "12:30PM - 03:00PM",
   },
   {
@@ -76,6 +83,7 @@ export const PROGRAMS: NavLink[] = [
     href: "/programs/daycare",
     children:
       "Care and activities for your child, while they wait for you to finish your day's work!",
+    image: "v1691417629/powerkids/programs/daycare/Prog_daycare2_tbpzb0.jpg",
     icon: <LucideSunset />,
     pill: "03:00PM - 06:00PM",
   },
