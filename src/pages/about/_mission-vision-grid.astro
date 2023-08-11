@@ -11,6 +11,8 @@ import {
 } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { Cloudinary } from "astro-cloudinary-image";
+
+const years = new Date().getFullYear() - 2001;
 ---
 
 <Section
@@ -36,13 +38,16 @@ import { Cloudinary } from "astro-cloudinary-image";
       <IdentityStatement />
     </p>
     <p>
-      Guided by educational policies from Ministry of Education Malaysia and
-      Jabatan Kebajikan Malaysia, we constantly keep up with best practices to
-      ensure our students become competent learners to navigate the 21st-Century
-      world.
+      We've been around for <b>{years} years</b>, powered by the Fungates
+      system. Together with educational policies from the <i>
+        Ministry of Education Malaysia
+      </i> and <i>Jabatan Kebajikan Malaysia</i>, we constantly keep up with the
+      best practices to ensure our students become competent learners to
+      navigate the 21st-Century world.
     </p>
     <p>
-      <PowerKids />... Opening the Gates to First-Class Fun Learning!
+      <PowerKids class="fl-text-step-2 leading-none" />... Opening the Gates to
+      First-Class Fun Learning!
     </p>
   </div>
 
