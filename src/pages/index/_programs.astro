@@ -16,53 +16,71 @@ import { cn } from "@/lib/utils";
 import { Cloudinary } from "astro-cloudinary-image";
 import { LucideClock } from "lucide-react";
 
-const colStartClasses = ["lg:col-start-1", "", "lg:col-start-3"];
-const rowSpanClasses = [
-  "lg:row-start-1",
-  "lg:row-span-1 md:row-start-2",
-  "lg:row-start-1",
+const gridItemClasses = [
+  "lg:row-start-1 lg:col-start-1 mr-auto",
+  "lg:row-span-1 md:row-start-2 ml-auto",
+  "lg:row-start-1 lg:col-start-3 mr-auto",
 ];
 ---
 
-<Section class="fl-gap-m grid md:grid-cols-2 lg:grid-cols-3 place-items-center">
-  <h2 class="text-center max-md:fl-mb-l lg:col-start-2 md:fl-py-l">
+<Section class="md:fl-space-y-xl">
+  <div class="flex flex-col text-center items-center fl-space-y-m">
     <Pill color="red">Our Programs</Pill>
-  </h2>
-
-  {
-    PROGRAMS.map((p, i) => (
-      <Card
-        className={cn(
-          colStartClasses[i],
-          rowSpanClasses[i],
-          "max-md:max-w-[50ch] lg:text-center h-min md:row-span-2",
-        )}
-      >
-        <CardHeader>
-          <CardTitle className="font-marker">{p.title}</CardTitle>
-          <CardDescription>
-            <LucideClock className="inline" />
-            {p.pill}
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="fl-space-y-m">
-          <Cloudinary
-            src={p.image}
-            alt=""
-            errorImage=""
-            width="330"
-            height="220"
-            resize="fill"
-            class:list={cn(cardStyle(), "mx-auto sm:mx-0 lg:mx-auto")}
-          />
-          <p>{p.children}</p>
-        </CardContent>
-        <CardFooter className="justify-end">
-          <a class={cn(buttonVariants({ size: "sm" }))} href={p.href}>
-            more!
-          </a>
-        </CardFooter>
-      </Card>
-    ))
-  }
+    <h2
+      class="font-marker fl-text-step-4 lg:col-start-2 leading-snug [text-wrap:balance]"
+    >
+      <u>Fun learning</u> is our <u>serious</u> business
+    </h2>
+    <p
+      class="flex fl-gap-x-xs justify-center font-bold fl-text-step-2 tracking-widest flex-wrap"
+    >
+      <span>Play.</span>
+      <span>Explore.</span>
+      <span>Grow.</span>
+      <span>Collaborate.</span>
+    </p>
+  </div>
+  <div class="fl-gap-m lg:fl-gap-y-xs grid md:grid-cols-2 lg:grid-cols-3">
+    <p
+      class="fl-text-step-1 text-center leading-tight fl-space-y-xs fl-py-l tracking-wide [text-wrap:balance]"
+    >
+      <b>High-value</b> lessons and activities, with the <b>love and care</b> of
+      our professional teachers, all throughout <b>the entire day</b>!
+    </p>
+    {
+      PROGRAMS.map((p, i) => (
+        <Card
+          className={cn(
+            gridItemClasses[i],
+            "max-md:max-w-[50ch] lg:text-center h-min md:row-span-2",
+          )}
+        >
+          <CardHeader>
+            <CardTitle className="font-marker">{p.title}</CardTitle>
+            <CardDescription>
+              <LucideClock className="inline" />
+              {p.pill}
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="fl-space-y-m">
+            <Cloudinary
+              src={p.image}
+              alt=""
+              errorImage=""
+              width="330"
+              height="220"
+              resize="fill"
+              class:list={cn(cardStyle(), "mx-auto sm:mx-0 lg:mx-auto")}
+            />
+            <p>{p.children}</p>
+          </CardContent>
+          <CardFooter className="justify-end">
+            <a class={cn(buttonVariants({ size: "default" }))} href={p.href}>
+              more!
+            </a>
+          </CardFooter>
+        </Card>
+      ))
+    }
+  </div>
 </Section>
