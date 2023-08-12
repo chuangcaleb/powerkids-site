@@ -12,9 +12,9 @@ const pillVariants = cva("font-bold", {
       blue: "bg-accent-blue/10 text-accent-blue",
     },
     size: {
-      xs: "px-1 py-0.5 text-xs rounded-sm",
-      md: "fl-px-s fl-py-xs fl-text-step-0 rounded-lg",
-      lg: "fl-px-m fl-py-s fl-text-step-1 rounded-xl",
+      xs: "fl-px-2xs fl-py-3xs fl-text-step--2 rounded-sm",
+      md: "fl-px-s fl-py-xs fl-text-step--1 rounded-lg",
+      lg: "fl-px-s fl-py-xs fl-text-step-0 rounded-xl",
     },
   },
   defaultVariants: {

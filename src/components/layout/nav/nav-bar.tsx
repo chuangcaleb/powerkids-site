@@ -32,7 +32,7 @@ export default function PowerKidsNavMenu() {
                     <div className="text-lg font-medium">
                       {OUR_SCHOOLS.title}
                     </div>
-                    <ul className="text-primary-foreground/70 fl-text-step-0">
+                    <ul className="text-primary-foreground/70 fl-text-step--1">
                       {SCHOOLS_NAMELIST.map((name, i) => (
                         <li key={i}>{name}</li>
                       ))}
@@ -101,7 +101,7 @@ const ListItem = React.forwardRef<
           {...props}
         >
           {icon}
-          <div className="row-span-full space-y-1">
+          <div className="fl-space-s row-span-full">
             <div className="flex font-medium leading-normal">
               {title}
               <Pill size="xs" color="muted" className="ml-auto self-center">
@@ -109,7 +109,7 @@ const ListItem = React.forwardRef<
               </Pill>
             </div>
             {children ? (
-              <p className="line-clamp-2 leading-tight text-muted-foreground fl-text-step-0">
+              <p className="line-clamp-2 leading-tight text-muted-foreground fl-text-step--1">
                 {children}
               </p>
             ) : null}

@@ -3,9 +3,7 @@ import Pill from "@/components/brand/pill";
 import Document from "@/components/layout/Document.astro";
 import { PROGRAMS } from "@/components/layout/nav/nav-links";
 import Section from "@/components/layout/Section.astro";
-import { buttonVariants } from "@/components/ui/button";
 import { cardStyle } from "@/components/ui/card";
-
 import { cn } from "@/lib/utils";
 import { Cloudinary } from "astro-cloudinary-image";
 
@@ -15,14 +13,18 @@ const program = PROGRAMS.find((p) => p.title === "After School Program");
 <Document>
   <Section contentWidth="lg">
     <div class="fl-space-y-l">
-      <div class="flex fl-gap-x-m flex-wrap">
-        <h1 class="fl-text-step-4 font-marker">After School Program</h1>
-        <Pill size="lg" className="my-auto">
-          {program?.pill}
-        </Pill>
+      <div>
+        <div class="flex fl-gap-x-m flex-wrap">
+          <h1 class="fl-text-step-4 font-marker">After School Program</h1>
+          <Pill size="lg" className="my-auto">
+            {program?.pill}
+          </Pill>
+        </div>
+        <p class="fl-text-step-1 tracking-widest font-bold">
+          Learning beyond traditional academics.
+        </p>
       </div>
-      <div class="fl-space-y-l [&_*]:fl-text-step-1">
-        <p>Learning beyond traditional academics.</p>
+      <div class="fl-space-y-l">
         <p>
           After in-house prepared lunch and homework coaching, we have a variety
           of
@@ -48,14 +50,14 @@ const program = PROGRAMS.find((p) => p.title === "After School Program");
           </li>
         </ul>
         <p>Take a look at one of our featured programs!</p>
-        <div class="flex fl-gap-m flex-wrap">
-          <a href="/" class={buttonVariants({ variant: "red" })}>register</a>
-          <a href="/" class={buttonVariants({ variant: "blue" })}> contact</a>
-        </div>
       </div>
     </div>
   </Section>
-  <Section class="fl-space-y-l columns-lg fl-gap-s" contentWidth="xl">
+  <Section
+    class="fl-space-y-l columns-lg fl-gap-s"
+    contentWidth="xl"
+    paddingY="bottom"
+  >
     <Cloudinary
       src="v1690987797/powerkids/programs/after/ASP_front.jpg"
       alt=""

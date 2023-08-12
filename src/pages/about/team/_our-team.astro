@@ -8,7 +8,7 @@ import PowerKids from "@/components/brand/PowerKids.astro";
 ---
 
 <Section class="overflow-hidden fl-space-y-2xl" id="our-team">
-  <div class="max-w-prose fl-text-step-1 [text-wrap:balance] fl-space-y-m">
+  <div class="max-w-prose [text-wrap:balance] fl-space-y-m">
     <h2 class="fl-text-step-4 font-marker whitespace-nowrap">
       Our Team
       <span class="text-primary/40">Team</span>
@@ -22,8 +22,8 @@ import PowerKids from "@/components/brand/PowerKids.astro";
       they make new friends or learn new letters, words or concepts.
     </p>
     <p>
-      Every class teacher is qualified in Early Childhood Education and further
-      up-graded with latest FunGates teaching practices on a yearly basis. Our
+      Every class teacher is certified in Early Childhood Education, and then
+      further annually up-graded with latest FunGates teaching practices. Our
       teaching team is up-to-date on trainings by KSPK Ministry of Education of
       Malaysia for <i>guru-guru pra-sekolah</i>.
     </p>
@@ -36,7 +36,7 @@ import PowerKids from "@/components/brand/PowerKids.astro";
     {
       Object.entries(TEAM).map(([name, image]) => (
         <div>
-          <h3 class={cn("fl-text-step-2 font-marker", cardTabHeaderStyle())}>
+          <h3 class={cn(cardTabHeaderStyle(), "fl-text-step-2 font-marker")}>
             {name}
           </h3>
           <Cloudinary

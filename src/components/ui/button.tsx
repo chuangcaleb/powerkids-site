@@ -21,11 +21,10 @@ const buttonVariants = cva(
         link: "border-0 text-primary underline-offset-4 max-md:underline hover:underline",
       },
       size: {
-        xs: "fl-h-l fl-px-2xs fl-py-xs fl-text-step--1 ",
-        sm: "fl-h-l fl-py-s fl-px-m fl-text-step-0",
-        default: "fl-h-xl fl-py-m fl-px-xl fl-text-step-1",
-        lg: "fl-h-xl fl-py-l fl-px-xl fl-text-step-2",
-        icon: "fl-h-xl fl-w-xl",
+        sm: "fl-py-3xs fl-px-s fl-text-step--1",
+        default: "fl-py-3xs fl-px-l fl-text-step-0",
+        lg: "fl-py-3xs fl-px-l fl-text-step-1",
+        icon: "fl-w-l",
         unset: "",
       },
       font: {

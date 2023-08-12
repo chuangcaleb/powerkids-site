@@ -32,17 +32,17 @@ const years = new Date().getFullYear() - 2001;
   </Card>
 </Section> -->
 <Section
-  class="grid md:grid-cols-2 fl-text-step-1 fl-gap-x-xl fl-gap-y-xl md:place-items-center"
+  class="grid md:grid-cols-2 fl-gap-l md:place-items-center"
   contentWidth="2xl"
 >
-  <div class="fl-space-y-l max-w-prose md:order-1">
+  <div class="fl-space-y-m max-w-prose md:order-1 [text-wrap:balance]">
     <Pill>Who We Are</Pill>
-    <h2 class="font-marker fl-text-step-4 [text-wrap:balance] leading-snug">
+    <h2 class="font-marker fl-text-step-4 leading-snug">
       <u>{years} years</u> and counting!
     </h2>
-    <p>
+    <div>
       <IdentityStatement />
-    </p>
+    </div>
     <a class={cn(buttonVariants())} href="/about">read about us</a>
   </div>
   <Youtube

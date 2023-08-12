@@ -17,22 +17,22 @@ import { Cloudinary } from "astro-cloudinary-image";
 import { LucideClock } from "lucide-react";
 
 const gridItemClasses = [
-  "lg:row-start-1 lg:col-start-1 mr-auto",
-  "lg:row-span-1 md:row-start-2 ml-auto",
-  "lg:row-start-1 lg:col-start-3 mr-auto",
+  "xl:row-start-1 xl:col-start-1 mr-auto",
+  "xl:row-span-1 md:row-start-2 ml-auto",
+  "xl:row-start-1 xl:col-start-3 mr-auto",
 ];
 ---
 
-<Section class="md:fl-space-y-xl">
-  <div class="flex flex-col text-center items-center fl-space-y-m">
+<Section class="md:fl-space-y-l">
+  <div class="flex flex-col text-center items-center fl-space-y-s">
     <Pill color="red">Our Programs</Pill>
     <h2
-      class="font-marker fl-text-step-4 lg:col-start-2 leading-snug [text-wrap:balance]"
+      class="font-marker fl-text-step-4 xl:col-start-2 leading-snug [text-wrap:balance]"
     >
       <u>Fun learning</u> is our <u>serious</u> business
     </h2>
     <p
-      class="flex fl-gap-x-xs justify-center font-bold fl-text-step-2 tracking-widest flex-wrap"
+      class="flex fl-gap-x-2xs justify-center font-bold fl-text-step-1 tracking-widest flex-wrap"
     >
       <span>Play.</span>
       <span>Explore.</span>
@@ -40,9 +40,9 @@ const gridItemClasses = [
       <span>Collaborate.</span>
     </p>
   </div>
-  <div class="fl-gap-m lg:fl-gap-y-xs grid md:grid-cols-2 lg:grid-cols-3">
+  <div class="fl-gap-s xl:fl-gap-y-2xs grid md:grid-cols-2 xl:grid-cols-3">
     <p
-      class="fl-text-step-1 text-center leading-tight fl-space-y-xs fl-py-l tracking-wide [text-wrap:balance]"
+      class="text-center leading-tight fl-space-y-2xs md:max-xl:fl-py-xl fl-py-s tracking-wide [text-wrap:balance]"
     >
       <b>High-value</b> lessons and activities, with the <b>love and care</b> of
       our professional teachers, all throughout <b>the entire day</b>!
@@ -52,17 +52,17 @@ const gridItemClasses = [
         <Card
           className={cn(
             gridItemClasses[i],
-            "max-md:max-w-[50ch] lg:text-center h-min md:row-span-2",
+            "max-md:max-w-[50ch] xl:text-center h-min md:row-span-2",
           )}
         >
           <CardHeader>
             <CardTitle className="font-marker">{p.title}</CardTitle>
             <CardDescription>
-              <LucideClock className="inline" />
+              <LucideClock className="inline fl-w-s" />
               {p.pill}
             </CardDescription>
           </CardHeader>
-          <CardContent className="fl-space-y-m">
+          <CardContent className="fl-space-y-s">
             <Cloudinary
               src={p.image}
               alt=""
@@ -70,9 +70,9 @@ const gridItemClasses = [
               width="330"
               height="220"
               resize="fill"
-              class:list={cn(cardStyle(), "mx-auto sm:mx-0 lg:mx-auto")}
+              class:list={cn(cardStyle(), "mx-auto sm:mx-0 xl:mx-auto")}
             />
-            <p>{p.children}</p>
+            <p class="fl-text-step-0">{p.children}</p>
           </CardContent>
           <CardFooter className="justify-end">
             <a class={cn(buttonVariants({ size: "default" }))} href={p.href}>

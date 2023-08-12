@@ -26,7 +26,7 @@ function DrawerItem({
 }) {
   return (
     <AccordionItem value={title}>
-      <AccordionTrigger>{title}</AccordionTrigger>
+      <AccordionTrigger className="fl-text-step-0">{title}</AccordionTrigger>
       <AccordionContent>
         {navGroup.map((link) => (
           <a
@@ -34,7 +34,7 @@ function DrawerItem({
             key={link.title}
             className={cn(
               buttonVariants({ variant: "link", size: "unset", font: "unset" }),
-              "p-3 fl-text-step-1",
+              "p-3 fl-text-step-0",
             )}
           >
             {link.icon}
@@ -62,7 +62,7 @@ export default function PowerKidsNavDrawer() {
       </SheetTrigger>
       <SheetContent className="w-[min(100%,400px)] overflow-auto md:hidden [&_a_svg:first-child]:mr-2 [&_svg]:inline-block">
         <SheetHeader>
-          <SheetTitle className="inline-flex gap-x-3 fl-text-step-2">
+          <SheetTitle className="inline-flex gap-x-3 fl-text-step-1">
             <LucideMenu className="place-self-center" />
             Navigation Menu
           </SheetTitle>
@@ -80,7 +80,7 @@ export default function PowerKidsNavDrawer() {
                 size: "unset",
                 font: "unset",
               }),
-              "p-3 leading-normal underline underline-offset-4 fl-text-step-1",
+              "p-3 leading-normal underline underline-offset-4 fl-text-step-0",
             )}
           >
             <LucideSchool />

@@ -15,7 +15,14 @@ const today = new Date();
     <ContactCard />
   </Section>
   <BottomNav />
-  <div class="col-span-full text-primary/30 text-center fl-text-step--1">
-    &copy; {today.getFullYear()} PowerKids Kindergarten. All rights reserved.
+  <div
+    class="col-span-full text-primary/30 text-center fl-text-step--1 flex fl-gap-x-s justify-center"
+  >
+    <span>&copy; {today.getFullYear()} PowerKids Kindergarten</span>
+    <span>
+      Designed with
+      <img src="/images/heart.svg" alt="heart logo" class="inline fl-h-xs" /> by
+      Chuang Caleb
+    </span>
   </div>
 </footer>

@@ -43,6 +43,9 @@
   html {
     scroll-padding-top: var(--fs-xl);
   }
+  u {
+    text-underline-offset: 0.15em;
+  }
 }
 
 @layer components {

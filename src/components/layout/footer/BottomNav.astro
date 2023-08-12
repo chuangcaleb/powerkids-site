@@ -8,16 +8,16 @@ import { LINKS } from "../nav/nav-links";
 ---
 
 <Section
-  class="flex flex-wrap fl-gap-y-xl fl-gap-x-2xl fl-pt-s fl-pb-xl border-t-[0.2em] fl-text-step-0 justify-stretch"
+  class="flex flex-wrap fl-gap-y-xl fl-gap-x-2xl fl-pt-s fl-pb-xl border-t-[0.2em] justify-stretch"
   contentWidth="unset"
-  noPaddingY
+  paddingY="unset"
 >
-  <div class="flex flex-col justify-stretch fl-gap-y-m md:max-w-[37ch]">
+  <div class="flex flex-col justify-stretch fl-gap-y-m md:max-w-[25ch]">
     <a
       href="/"
       class:list={cn(
         buttonVariants({ variant: "ghost", size: "unset" }),
-        "fl-h-3xl fl-p-3xs fl-gap-s w-max",
+        "fl-h-2xl fl-p-4xs fl-gap-s w-max",
       )}
     >
       <img
@@ -26,21 +26,23 @@ import { LINKS } from "../nav/nav-links";
         class="h-full"
         loading="lazy"
       />
-      <h3 class="fl-text-step-3 font-marker fl-mt-s w-full">
+      <h3 class="fl-text-step-2 font-marker fl-mt-xs w-full">
         <PowerKids />
       </h3>
     </a>
 
-    <ul class="fl-text-step-0 justify-stretch fl-gap-x-m flex flex-wrap">
+    <ul class="fl-text-step--1 justify-stretch fl-gap-x-s flex flex-wrap">
       {SCHOOLS_NAMELIST.map((name) => <li>{name}</li>)}
     </ul>
   </div>
 
-  <div class="flex flex-wrap fl-gap-2xl md:fl-mt-l justify-stretch">
+  <div
+    class="flex flex-wrap fl-gap-2xl md:fl-mt-l justify-stretch fl-text-step--1"
+  >
     {
       Object.entries(LINKS).map(([groupName, group]) => (
         <div class="fl-space-y-s">
-          <h3 class="font-bold font-marker fl-text-step-1">{groupName}</h3>
+          <h3 class="font-bold font-marker fl-text-step-0">{groupName}</h3>
           <ul class="fl-space-y-s">
             {group.map(({ title, href }) => (
               <li>
