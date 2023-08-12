@@ -1,17 +1,10 @@
 ---
 import Pill from "@/components/brand/pill";
+import Gallery from "@/components/common/Gallery.astro";
 import Document from "@/components/layout/Document.astro";
 import { PROGRAMS } from "@/components/layout/nav/nav-links";
 import Section from "@/components/layout/Section.astro";
 import { buttonVariants } from "@/components/ui/button";
-import { cardStyle } from "@/components/ui/card";
-import pkCloudinary, { CldImage } from "@/lib/cloudinary";
-import { cn } from "@/lib/utils";
-
-const morningPhotos = await pkCloudinary.api.resources({
-  type: "upload",
-  prefix: "powerkids/programs/morning",
-});
 
 const program = PROGRAMS.find((p) => p.title === "Morning School");
 ---
@@ -47,23 +40,7 @@ const program = PROGRAMS.find((p) => p.title === "Morning School");
       </div>
     </div>
   </Section>
-  <Section
-    class="fl-space-y-l columns-sm fl-gap-s"
-    contentWidth="xl"
-    paddingY="bottom"
-  >
-    {
-      morningPhotos.resources.map((image: CldImage) => (
-        <img
-          src={image.url}
-          alt=""
-          class={cn(cardStyle(), "fl-mb-s col-span-2")}
-          height={image.height}
-          width={image.width}
-          loading="lazy"
-          decoding="async"
-        />
-      ))
-    }
+  <Section contentWidth="xl" paddingY="bottom">
+    <Gallery prefixRoute="powerkids/programs/morning" />
   </Section>
 </Document>

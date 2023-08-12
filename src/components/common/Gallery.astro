@@ -1,0 +1,32 @@
+---
+import pkCloudinary, { CldImage } from "@/lib/cloudinary";
+import { cn } from "@/lib/utils";
+import { cardStyle } from "../ui/card";
+
+interface Props {
+  prefixRoute: string;
+}
+
+const { prefixRoute } = Astro.props;
+
+const photos = await pkCloudinary.api.resources({
+  type: "upload",
+  prefix: prefixRoute,
+});
+---
+
+<div class="fl-space-y-l columns-sm fl-gap-s">
+  {
+    photos.resources.map((image: CldImage) => (
+      <img
+        src={image.url}
+        alt=""
+        class={cn(cardStyle(), "fl-mb-s col-span-2")}
+        height={image.height}
+        width={image.width}
+        loading="lazy"
+        decoding="async"
+      />
+    ))
+  }
+</div>

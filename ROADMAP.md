@@ -15,6 +15,7 @@
 ## MVP 2
 
 - [ ] we're hiring
+- [ ] group links in individual pages
 - [ ] manually manage tailwind preflight
 - [ ] SEO
 - [ ] good images
