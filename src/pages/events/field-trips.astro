@@ -1,40 +1,55 @@
 ---
 import Gallery from "@/components/common/Gallery.astro";
-import Youtube from "@/components/common/Youtube.astro";
 import Document from "@/components/layout/Document.astro";
 import Section from "@/components/layout/Section.astro";
 import { Card } from "@/components/ui/card";
+
+const PLACES = [
+  "🚒 Fire Station",
+  "🐬 Aquaria",
+  "💇🏻‍♀️ Hair Saloon",
+  "🏦 Bank Negara",
+  "🏙️ Kidzania",
+  "🚜 EcoFarm",
+  "🔭 National Science Centre",
+  "🛒 Grocery Shopping",
+  "🐯 Zoo Negara",
+  "🗺️ ...Where Next ?",
+];
 ---
 
 <Document>
   <Section class="[text-wrap:balance] grid lg:grid-cols-2 fl-gap-l">
     <div class="fl-space-y-m">
       <div>
-        <h1 class="font-marker fl-text-step-4">Sports Day</h1>
+        <h1 class="font-marker fl-text-step-4">Field Trips</h1>
         <p class="fl-text-step-1 tracking-widest font-bold">
-          Dexterity, competition & teamwork
+          Real world makes real kids
         </p>
       </div>
       <div class="fl-space-y-s">
         <p>
-          Championship, sportsmanship, winning, competing, participation — a
-          family day-out.
+          Field trips help bring learning outside the classroom, giving children
+          a new perspective and boost cognitive development.
         </p>
         <p>
-          Numerous telematch games. Five schools. Three houses. One champion.
+          These trips offer diverse learning opportunities, improve health and
+          allow children to get authentic experiences.
         </p>
       </div>
     </div>
-
-    <Card className="max-w-screen-sm">
-      <Youtube
-        src="https://www.youtube.com/embed/vj-9e65wtPE"
-        class="h-full object-cover"
-      />
-    </Card>
+    <ul class="flex flex-wrap fl-gap-x-m fl-gap-y-xs">
+      {
+        PLACES.map((p) => (
+          <li>
+            <Card className="font-marker fl-py-xs fl-px-m">{p}</Card>
+          </li>
+        ))
+      }
+    </ul>
   </Section>
 
   <Section contentWidth="xl" paddingY="bottom">
-    <Gallery prefixRoute="powerkids/programs/field-trips" />
+    <Gallery prefixRoute="powerkids/events/field-trips" />
   </Section>
 </Document>

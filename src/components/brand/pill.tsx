@@ -3,7 +3,7 @@ import { Slot } from "@radix-ui/react-slot";
 import { VariantProps, cva } from "class-variance-authority";
 import React from "react";
 
-const pillVariants = cva("font-bold", {
+const pillVariants = cva("font-bold inline-block", {
   variants: {
     color: {
       default: "bg-primary/10 text-primary",
