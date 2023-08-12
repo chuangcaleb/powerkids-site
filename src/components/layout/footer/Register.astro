@@ -1,17 +1,22 @@
 ---
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { LucideExternalLink } from "lucide-react";
+import {
+  LucideCheckCircle,
+  LucideCircleDollarSign,
+  LucideExternalLink,
+  LucidePaperclip,
+} from "lucide-react";
 ---
 
 <div class="fl-space-y-m text-center max-w-screen-sm mx-auto" id="register">
   <h2 class="font-marker fl-text-step-4 font-bold">Register Today!</h2>
   <ol
-    class="list-decimal fl-text-step-1 [&>li]:fl-pl-m w-fit text-left mx-auto"
+    class="list-decimal fl-text-step-1 [&>li]:fl-ml-s [&>li]:fl-pl-xs w-fit text-left mx-auto [&_svg]:inline [&_svg]:mx-1 fl-space-y-xs"
   >
-    <li>Complete and sign the Registration Form</li>
-    <li>Attach with photocopy of birth certificate</li>
-    <li>Make full payment for registration</li>
+    <li><LucideCheckCircle /> Complete and sign the Registration Form</li>
+    <li><LucidePaperclip /> Attach with photocopy of birth certificate</li>
+    <li><LucideCircleDollarSign /> Make full payment for registration</li>
   </ol>
 
   <a
