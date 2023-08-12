@@ -14,6 +14,7 @@
 
 ## MVP 2
 
+- [ ] noindex nofollow
 - [ ] we're hiring
 - [ ] group links in individual pages
 - [ ] manually manage tailwind preflight
