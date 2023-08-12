@@ -89,10 +89,12 @@ export const PROGRAMS: ImageNavLink[] = [
     pill: "03:00PM - 06:00PM",
   },
 ];
-export const EVENTS: NavLink[] = [
+
+export const EVENTS: ImageNavLink[] = [
   {
     title: "Graduation",
     href: "/events/graduation",
+    image: "v1691851196/powerkids/events/graduation/graduation_y0hytv.jpg",
     children:
       "A stage-performance celebration of our children who've completed their pre-school learning, showcasing the discipline and training of our children over the years!",
     icon: <LucideGraduationCap />,
@@ -100,6 +102,7 @@ export const EVENTS: NavLink[] = [
   {
     title: "Sports Day",
     href: "/events/sports-day",
+    image: "v1691827903/powerkids/events/sports-day/Event_sports3_n8rzbf.jpg",
     children:
       "Championship, sportsmanship, winning, competing, participation — a family day-out.",
     icon: <LucideTrophy />,
@@ -107,6 +110,8 @@ export const EVENTS: NavLink[] = [
   {
     title: "Field Trips",
     href: "/events/field-trips",
+    image:
+      "v1691830563/powerkids/events/field-trips/field_trip_bird_e1csw1.jpg",
     children:
       "Learning beyond the classroom walls, bringing perspective to boost cognitive development.",
     icon: <LucideCamera />,
@@ -114,8 +119,10 @@ export const EVENTS: NavLink[] = [
   {
     title: "Community Service",
     href: "/events/community-service",
+    image:
+      "v1691832615/powerkids/events/community-service/Event_FSF2_quzj04.jpg",
     children:
-      "A portion of your child's monthly school fees is channelled to support FunGates SuperFlow Foundation.",
+      "A portion of your child's monthly school fees is channelled to support FunGates SuperFlow Foundation. See how we serve!",
     icon: <LucideHeartHandshake />,
   },
 ];
