@@ -1,11 +1,11 @@
 import {
+  LucideBookOpenCheck,
   LucideCamera,
   LucideGraduationCap,
   LucideHeartHandshake,
+  LucideHome,
+  LucideRocket,
   LucideSchool,
-  LucideSun,
-  LucideSunrise,
-  LucideSunset,
   LucideTarget,
   LucideTrophy,
   LucideUsers,
@@ -65,7 +65,7 @@ export const PROGRAMS: ImageNavLink[] = [
     href: "/programs/morning-school",
     children:
       "Essential early childhood education (ECE) provided for children from Ages 2-6!",
-    icon: <LucideSunrise />,
+    icon: <LucideBookOpenCheck />,
     image:
       "v1690805202/powerkids/programs/morning/IMG_20210116_0004_yowtwg.jpg",
     pill: "08:30AM - 12:00noon",
@@ -73,8 +73,9 @@ export const PROGRAMS: ImageNavLink[] = [
   {
     title: "After School Program",
     href: "/programs/after-school-program",
-    children: "Lunch, homework coaching, and a variety of enrichment classes!",
-    icon: <LucideSun />,
+    children:
+      "A variety of enrichment classes after lunch and homework coaching!",
+    icon: <LucideRocket />,
     image: "v1690805202/powerkids/programs/after/IMG_20210116_0001_qgyuoz.jpg",
     pill: "12:30PM - 03:00PM",
   },
@@ -84,7 +85,7 @@ export const PROGRAMS: ImageNavLink[] = [
     children:
       "Care and activities for your child, while they wait for you to finish your day's work!",
     image: "v1691417629/powerkids/programs/daycare/Prog_daycare2_tbpzb0.jpg",
-    icon: <LucideSunset />,
+    icon: <LucideHome />,
     pill: "03:00PM - 06:00PM",
   },
 ];
