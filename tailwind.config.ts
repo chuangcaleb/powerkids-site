@@ -19,7 +19,7 @@ const config = {
         minScale: 1.2,
         // maxScreen: theme("screens.3xl"),
         maxScreen: "1280px",
-        maxSize: 20,
+        maxSize: 19,
         maxScale: 1.37,
         // textSizes: ["xs", "sm", "base", "lg", "xl", "2xl", "3xl"],
       }),
