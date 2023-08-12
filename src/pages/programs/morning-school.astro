@@ -19,11 +19,16 @@ const program = PROGRAMS.find((p) => p.title === "Morning School");
 <Document>
   <Section contentWidth="lg">
     <div class="fl-space-y-l">
-      <div class="flex fl-gap-x-m flex-wrap">
-        <h1 class="fl-text-step-4 font-marker">Morning School</h1>
-        <Pill size="lg" className="my-auto" color="muted">
-          {program?.pill}
-        </Pill>
+      <div>
+        <div class="flex fl-gap-x-m flex-wrap">
+          <h1 class="fl-text-step-4 font-marker">Morning School</h1>
+          <Pill size="lg" className="my-auto" color="muted">
+            {program?.pill}
+          </Pill>
+        </div>
+        <p class="fl-text-step-1 tracking-widest font-bold">
+          Essential early childhood education
+        </p>
       </div>
       <div class="fl-space-y-s max-w-screen-md">
         <p>
