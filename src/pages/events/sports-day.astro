@@ -1,0 +1,62 @@
+---
+import Youtube from "@/components/common/Youtube.astro";
+import Document from "@/components/layout/Document.astro";
+import Section from "@/components/layout/Section.astro";
+import { Card, cardStyle } from "@/components/ui/card";
+import pkCloudinary, { CldImage } from "@/lib/cloudinary";
+import { cn } from "@/lib/utils";
+
+const sportsPhotos = await pkCloudinary.api.resources({
+  type: "upload",
+  prefix: "powerkids/events/sports-day",
+});
+---
+
+<Document>
+  <Section class="[text-wrap:balance] grid lg:grid-cols-2 fl-gap-l">
+    <div class="fl-space-y-m">
+      <div>
+        <h1 class="font-marker fl-text-step-4">Sports Day</h1>
+        <p class="fl-text-step-1 tracking-widest font-bold">
+          Dexterity, competition and teamwork
+        </p>
+      </div>
+      <div class="fl-space-y-s">
+        <p>
+          Championship, sportsmanship, winning, competing, participation — a
+          family day-out.
+        </p>
+        <p>
+          Numerous telematch games. Five schools. Three houses. One champion.
+        </p>
+      </div>
+    </div>
+
+    <Card className="max-w-screen-sm">
+      <Youtube
+        src="https://www.youtube.com/embed/vj-9e65wtPE"
+        class="h-full object-cover"
+      />
+    </Card>
+  </Section>
+
+  <Section
+    class="fl-space-y-l columns-sm fl-gap-s"
+    contentWidth="xl"
+    paddingY="bottom"
+  >
+    {
+      sportsPhotos.resources.map((image: CldImage) => (
+        <img
+          src={image.url}
+          alt=""
+          class={cn(cardStyle(), "fl-mb-s col-span-2")}
+          height={image.height}
+          width={image.width}
+          loading="lazy"
+          decoding="async"
+        />
+      ))
+    }
+  </Section>
+</Document>
