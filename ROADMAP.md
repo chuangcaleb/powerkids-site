@@ -14,6 +14,7 @@
 
 ## MVP 2
 
+- [ ] we're hiring
 - [ ] manually manage tailwind preflight
 - [ ] SEO
 - [ ] good images
