@@ -104,9 +104,15 @@ const ListItem = React.forwardRef<
           <div className="fl-space-s row-span-full">
             <div className="flex font-medium leading-normal">
               {title}
-              <Pill size="xs" color="muted" className="ml-auto self-center">
-                {pill}
-              </Pill>
+              {pill ? (
+                <Pill
+                  size="xs"
+                  color="muted"
+                  className="ml-auto self-center tracking-wider"
+                >
+                  {pill}
+                </Pill>
+              ) : null}
             </div>
             {children ? (
               <p className="line-clamp-2 leading-tight text-muted-foreground fl-text-step--1">
