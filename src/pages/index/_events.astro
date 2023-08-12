@@ -29,14 +29,16 @@ const gridItemClasses = ["", "", ""];
       <p
         class="flex fl-gap-x-2xs font-bold fl-text-step-1 tracking-widest flex-wrap"
       >
-        Experiences maketh a child
+        Experiences maketh your child
       </p>
     </div>
     {
       EVENTS.map((p, i) => (
         <Card className={cn(gridItemClasses[i])}>
           <CardHeader>
-            <CardTitle className="font-marker">{p.title}</CardTitle>
+            <CardTitle className="font-marker fl-text-step-3">
+              {p.title}
+            </CardTitle>
           </CardHeader>
           <CardContent className="fl-space-y-s">
             <p class="fl-text-step-0">{p.children}</p>
