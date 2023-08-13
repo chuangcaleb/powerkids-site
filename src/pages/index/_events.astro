@@ -14,14 +14,14 @@ import {
 import { cn } from "@/lib/utils";
 import { Cloudinary } from "astro-cloudinary-image";
 
-const gridItemClasses = ["", "", ""];
+const gridItemClasses = ["", "xl:col-start-1", "", ""];
 ---
 
 <Section class="fl-space-y-l" contentWidth="2xl">
   <Pill color="blue">Our Events</Pill>
   <div class="fl-gap-s grid md:grid-cols-2 xl:grid-cols-3">
     <div
-      class="flex flex-col items-start fl-space-y-xs max-xl:col-span-full fl-mb-l"
+      class="flex flex-col items-start fl-space-y-xs max-xl:col-span-full fl-mb-l fl-pr-s"
     >
       <h2 class="font-marker fl-text-step-4 xl:col-start-2 leading-tight">
         In and <u>outside of classrooms</u>
@@ -34,7 +34,7 @@ const gridItemClasses = ["", "", ""];
     </div>
     {
       EVENTS.map((p, i) => (
-        <Card className={cn(gridItemClasses[i])}>
+        <Card className={cn(gridItemClasses[i], "lg:row-span-2")}>
           <CardHeader>
             <CardTitle className="font-marker fl-text-step-3">
               {p.title}
