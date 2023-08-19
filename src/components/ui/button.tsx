@@ -25,7 +25,7 @@ const buttonVariants = cva(
         sm: "fl-py-3xs fl-px-s fl-text-step--1",
         default: "fl-py-3xs fl-px-l fl-text-step-0",
         lg: "fl-py-3xs fl-px-l fl-text-step-1",
-        icon: "fl-w-l",
+        icon: "fl-w-l justify-center",
         unset: "",
       },
       font: {

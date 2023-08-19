@@ -2,14 +2,19 @@
 import {
   LucideCalendar,
   LucideClock,
+  LucideFacebook,
+  LucideInstagram,
   LucideMail,
   LucidePhone,
+  LucideYoutube,
 } from "lucide-react";
 import { Card, CardDescription } from "../../ui/card";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 ---
 
 <Card
-  className="grid sm:grid-cols-2 fl-p-l fl-gap-y-l fl-gap-x-3xl grid-flow-row-dense [&_svg]:inline-block [&_svg]:mr-2 [&_svg]:mb-1 [&_svg]:fl-h-m"
+  className="grid sm:grid-cols-2 fl-p-l fl-gap-y-l fl-gap-x-3xl grid-flow-row-dense [&_svg]:inline-block [&_li_svg]:mr-2 [&_li_svg]:mb-1 [&_li_svg]:fl-h-m"
   id="contact"
 >
   <div class="col-span-full">
@@ -18,7 +23,9 @@ import { Card, CardDescription } from "../../ui/card";
     >
       Contact Us!
     </h2>
-    <CardDescription>Make an enquiry today!</CardDescription>
+    <CardDescription>
+      Please come and find out more! We'd love to hear from you!
+    </CardDescription>
   </div>
 
   <ul>
@@ -56,4 +63,35 @@ import { Card, CardDescription } from "../../ui/card";
       </a>
     </li>
   </ul>
+  <div
+    class="col-span-full text-center fl-space-x-s [&_svg]:fl-w-l [&_svg]:fl-h-l"
+  >
+    <a
+      href="https://www.facebook.com/PowerKidsChildcare"
+      class={cn(
+        buttonVariants({ size: "unset", variant: "outline" }),
+        "fl-p-xs",
+      )}
+    >
+      <LucideFacebook />
+    </a>
+    <a
+      href="https://www.instagram.com/powerkids_2001/"
+      class={cn(
+        buttonVariants({ size: "unset", variant: "outline" }),
+        "fl-p-xs",
+      )}
+    >
+      <LucideInstagram />
+    </a>
+    <a
+      href="https://www.youtube.com/channel/UCOjK8A2hTRbh1jg3hPE7uCw"
+      class={cn(
+        buttonVariants({ size: "unset", variant: "outline" }),
+        "fl-p-xs",
+      )}
+    >
+      <LucideYoutube />
+    </a>
+  </div>
 </Card>
