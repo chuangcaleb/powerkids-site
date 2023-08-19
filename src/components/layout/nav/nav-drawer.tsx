@@ -80,7 +80,7 @@ export default function PowerKidsNavDrawer() {
                 size: "unset",
                 font: "unset",
               }),
-              "p-3 leading-normal underline underline-offset-4 fl-text-step-0",
+              "p-3 leading-normal underline fl-text-step-0",
             )}
           >
             <LucideSchool />

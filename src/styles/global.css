@@ -43,7 +43,8 @@
   html {
     scroll-padding-top: var(--fs-xl);
   }
-  u {
+  u,
+  .underline {
     text-underline-offset: 0.15em;
   }
 }
@@ -80,5 +81,38 @@
     height: 1em;
     width: 1em;
     display: inline-block;
+  }
+
+  .red {
+    --highlight: var(--accent-red);
+  }
+  .blue {
+    --highlight: var(--accent-blue);
+  }
+  mark {
+    -webkit-animation: 1.5s highlight 0.2s 1 normal forwards;
+    animation: 1.5s highlight 0.2s 1 normal forwards;
+    background-color: none;
+    background: linear-gradient(
+      90deg,
+      hsl(var(--highlight)) 50%,
+      rgba(255, 255, 255, 0) 50%
+    );
+    background-size: 200% 100%;
+    background-position: 100% 0;
+    color: white;
+    @apply fl-px-2xs;
+  }
+
+  @-webkit-keyframes highlight {
+    to {
+      background-position: 0 0;
+    }
+  }
+
+  @keyframes highlight {
+    to {
+      background-position: 0 0;
+    }
   }
 }

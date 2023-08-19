@@ -18,7 +18,7 @@ const buttonVariants = cva(
         red: "bg-accent-red text-accent-red-foreground hover:bg-accent-red/60",
         blue: "bg-accent-blue text-accent-blue-foreground hover:bg-accent-blue/60",
         ghost: "border-0 hover:bg-accent hover:text-accent-foreground",
-        link: "border-0 text-primary underline-offset-4 max-md:underline hover:underline",
+        link: "border-0 text-primary max-md:underline hover:underline",
       },
       size: {
         sm: "fl-py-3xs fl-px-s fl-text-step--1",

@@ -18,8 +18,9 @@ import { buttonVariants } from "@/components/ui/button";
     <p class="fl-text-step-0 [text-wrap:balance] max-w-[50ch] mx-auto">
       First-Class 21st-Century <u class="whitespace-nowrap"
         >Kindergarten Education</u
-      >, based across five locations around Kuala Lumpur. Powered by the
-      FunGates curriculum since 2001.
+      >, based across <em>five</em> locations around Kuala Lumpur. Powered by
+      the
+      <em>FunGates</em> curriculum since 2001.
     </p>
     <div class="flex fl-gap-m max-md:justify-center flex-wrap">
       <a href="#register" class={buttonVariants({ variant: "red", size: "lg" })}
@@ -39,38 +40,3 @@ import { buttonVariants } from "@/components/ui/button";
     class="max-md:mx-auto md:fl-pl-l max-w-[49%] object-contain"
   />
 </Section>
-
-<style>
-  .red {
-    --highlight: var(--accent-red);
-  }
-  .blue {
-    --highlight: var(--accent-blue);
-  }
-  mark {
-    -webkit-animation: 1.5s highlight 0.2s 1 normal forwards;
-    animation: 1.5s highlight 0.2s 1 normal forwards;
-    background-color: none;
-    background: linear-gradient(
-      90deg,
-      hsl(var(--highlight)) 50%,
-      rgba(255, 255, 255, 0) 50%
-    );
-    background-size: 200% 100%;
-    background-position: 100% 0;
-    color: white;
-    @apply ml-1 fl-px-2xs;
-  }
-
-  @-webkit-keyframes highlight {
-    to {
-      background-position: 0 0;
-    }
-  }
-
-  @keyframes highlight {
-    to {
-      background-position: 0 0;
-    }
-  }
-</style>
