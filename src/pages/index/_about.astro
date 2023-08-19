@@ -32,10 +32,14 @@ const years = new Date().getFullYear() - 2001;
   </Card>
 </Section> -->
 <Section
-  class="grid md:grid-cols-2 fl-gap-l md:place-items-center"
-  contentWidth="2xl"
+  class="grid xl:grid-cols-2 fl-gap-l max-xl:place-items-center"
+  contentWidth="xl"
 >
-  <div class="fl-space-y-m max-w-prose md:order-1 [text-wrap:balance]">
+  <Youtube
+    src="https://www.youtube.com/embed/pWK_QZkIbQ0"
+    class={cn(cardStyle(), "h-full object-cover max-w-prose")}
+  />
+  <div class="fl-space-y-m max-w-prose order-1 [text-wrap:balance]">
     <div class="fl-space-y-s">
       <Pill>Who We Are</Pill>
       <h2 class="font-marker fl-text-step-4 leading-snug">
@@ -45,8 +49,4 @@ const years = new Date().getFullYear() - 2001;
     <IdentityStatement />
     <a class={cn(buttonVariants())} href="/about">read about us</a>
   </div>
-  <Youtube
-    src="https://www.youtube.com/embed/pWK_QZkIbQ0"
-    class={cn(cardStyle(), "h-full object-cover")}
-  />
 </Section>

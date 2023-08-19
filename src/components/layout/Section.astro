@@ -2,14 +2,14 @@
 import { cn } from "@/lib/utils";
 import type { HTMLAttributes } from "astro/types";
 interface Props extends HTMLAttributes<"section"> {
-  contentWidth?: "lg" | "xl" | "2xl" | "unset"; // default: max-w-xl
+  contentWidth?: "md" | "lg" | "xl" | "unset"; // default: max-w-xl
   // paddingX?: "always" | "none" | "mobile"; // default: (gutters only on) mobile
   // noPaddingY?: boolean;
   paddingY?: "top" | "bottom" | "both" | "unset";
   // variant?: "base" | "dark" | "secondary"; // default: base
 }
 const {
-  contentWidth = "xl",
+  contentWidth = "lg",
   // paddingX = "mobile",
   paddingY = "both",
   // variant = "base",
@@ -20,10 +20,10 @@ const {
 
 <section
   class={cn(
-    "fl-px-s fl-text-step-0",
-    contentWidth === "lg" && "max-w-screen-lg mx-auto",
-    contentWidth === "xl" && "max-w-screen-xl mx-auto",
-    contentWidth === "2xl" && "max-w-[1500px] mx-auto",
+    "fl-px-m md:fl-px-xs fl-text-step-0",
+    contentWidth === "md" && "max-w-screen-lg mx-auto",
+    contentWidth === "lg" && "max-w-screen-xl mx-auto",
+    contentWidth === "xl" && "max-w-[1500px] mx-auto",
     paddingY === "both" && "fl-py-2xl",
     paddingY === "top" && "fl-pt-2xl",
     paddingY === "bottom" && "fl-pb-2xl",

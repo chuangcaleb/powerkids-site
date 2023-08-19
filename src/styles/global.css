@@ -74,7 +74,7 @@
 @layer utilities {
   .pk-border {
     border-width: 0.2em;
-    box-shadow: 0.25em 0.25em 0px hsl(var(--border));
+    box-shadow: 6px 6px 0px hsl(var(--border));
   }
   .inline-icon {
     height: 1em;

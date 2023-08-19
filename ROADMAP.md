@@ -6,11 +6,12 @@
 - [x] custom font?
 - [x] better highlighting
 - [x] heading / footer
-- [ ] navigation / scaffolding pages
+- [x] navigation / scaffolding pages
 - [ ] image handling
 - [x] favicon
 - [x] shaving bundle
 - [x] deploying to cloudfare pages
+- [ ] package font
 
 ## MVP 2
 
@@ -18,6 +19,7 @@
 - [ ] we're hiring
 - [ ] group links in individual pages
 - [ ] manually manage tailwind preflight
+  - [ ] css marker and wrap balance to all headings
 - [ ] SEO
 - [ ] good images
 - [ ] form
@@ -28,6 +30,7 @@
 - [ ] don't use pure white?
 - [ ] alt tags
 - [ ] gmaps
+- [ ] focus for our schools nav bar
 
 ### Enhancements
 

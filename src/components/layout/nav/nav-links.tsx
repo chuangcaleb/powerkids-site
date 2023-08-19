@@ -122,7 +122,7 @@ export const EVENTS: ImageNavLink[] = [
     image:
       "v1691832615/powerkids/events/community-service/Event_FSF2_quzj04.jpg",
     children:
-      "A portion of your child's monthly school fees is channelled to support FunGates SuperFlow Foundation. See how we serve!",
+      "A portion of your child's monthly school fees is channelled to support FunGates SuperFlow Foundation. See how our teachers and students serve!",
     icon: <LucideHeartHandshake />,
   },
 ];

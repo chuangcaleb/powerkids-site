@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { cva } from "class-variance-authority";
 
 const cardTabHeaderStyle = cva(
-  "inline-block border-[0.1em] rounded-t-md border-b-0 fl-px-m",
+  "inline-block border-[0.1em] rounded-t-md border-b-0 fl-px-s [text-wrap:balance]",
 );
 
 const cardStyle = cva("pk-border rounded-lg bg-card text-card-foreground");

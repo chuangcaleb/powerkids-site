@@ -16,7 +16,7 @@ const config = {
         // utopia: (theme) => ({
         // minScreen: theme("screens.xs"),
         minSize: 16,
-        minScale: 1.27,
+        minScale: 1.25,
         // maxScreen: theme("screens.3xl"),
         maxScreen: "1280px",
         maxSize: 19,
@@ -36,7 +36,7 @@ const config = {
         },
       },
       screens: {
-        sm: "575px",
+        sm: "475px",
       },
     },
   },
