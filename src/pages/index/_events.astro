@@ -38,7 +38,9 @@ const gridItemClasses = ["", "xl:col-start-1", "", ""];
         <Card
           className={cn(
             gridItemClasses[i],
-            "lg:row-span-2 max-w-[50ch] md:mx-auto",
+            "lg:row-span-2 max-w-[50ch]",
+            i % 2 === 0 && "sm:max-md:fl-ml-m sm:max-md:mr-auto",
+            i % 2 === 1 && "sm:max-md:ml-auto sm:max-md:fl-mr-m",
           )}
         >
           <CardHeader>
