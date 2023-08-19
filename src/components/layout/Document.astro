@@ -8,16 +8,24 @@ interface Props {
   title?: string;
 }
 
-const { title = "PowerKids Kindergarten" } = Astro.props;
+const DEFAULT_TITLE = "PowerKids Kindergarten";
+
+let { title = DEFAULT_TITLE } = Astro.props;
+
+if (title !== DEFAULT_TITLE) {
+  title = title + " | " + DEFAULT_TITLE;
+}
 ---
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Astro description" />
+    <meta
+      name="description"
+      content="First-Class 21st-Century Kindergarten Education, based across five locations around Kuala Lumpur. Powered by the Fungates curriculum since 2001."
+    />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/Svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
 
     <link
