@@ -14,12 +14,17 @@ const PLACES = [
   "🔭 National Science Centre",
   "🛒 Grocery Shopping",
   "🐯 Zoo Negara",
+  "🍕 Pizza Hut",
+  "🦷 Dentist Clinic",
+  "🍫 Chocolate Factory",
   "🗺️ ...Where Next ?",
 ];
 ---
 
 <Document>
-  <Section class="[text-wrap:balance] grid lg:grid-cols-2 fl-gap-l">
+  <Section
+    class="[text-wrap:balance] grid lg:grid-cols-[minmax(200px,1fr),1fr] fl-gap-l"
+  >
     <div class="fl-space-y-m">
       <div>
         <h1 class="font-marker fl-text-step-4">Field Trips</h1>
