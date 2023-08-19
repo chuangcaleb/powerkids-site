@@ -1,9 +1,9 @@
 ---
-import { cn } from "@/lib/utils";
-import { Button, buttonVariants } from "../ui/button";
-import PowerKidsNavDrawer from "./nav/nav-drawer";
-import PowerKidsNavMenu from "./nav/nav-bar";
 import PowerKids from "@/components/brand/PowerKids.astro";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "../ui/button";
+import PowerKidsNavMenu from "./nav/nav-bar";
+import PowerKidsNavDrawer from "./nav/nav-drawer";
 ---
 
 <header class="border-b-[0.15em] sticky top-0 bg-background z-10">
@@ -23,9 +23,23 @@ import PowerKids from "@/components/brand/PowerKids.astro";
 
     <PowerKidsNavMenu client:visible />
     <PowerKidsNavDrawer client:visible />
-    <Button variant="red" className="ml-auto max-md:hidden" size="sm">
+    <a
+      href="#register"
+      class={cn(
+        buttonVariants({ variant: "red", size: "sm" }),
+        "ml-auto max-md:hidden",
+      )}
+    >
       register
-    </Button>
-    <Button variant="blue" className="max-md:hidden" size="sm">contact</Button>
+    </a>
+    <a
+      href="#contact"
+      class={cn(
+        buttonVariants({ size: "sm", variant: "blue" }),
+        "max-md:hidden",
+      )}
+    >
+      contact
+    </a>
   </nav>
 </header>

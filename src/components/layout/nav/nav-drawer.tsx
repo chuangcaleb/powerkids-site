@@ -7,15 +7,17 @@ import {
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { LucideArrowRight, LucideMenu, LucideSchool } from "lucide-react";
-import { ABOUT, PROGRAMS, type NavLink, EVENTS } from "./nav-links";
 import { cn } from "@/lib/utils";
+import * as SheetPrimitive from "@radix-ui/react-dialog";
+import { LucideArrowRight, LucideMenu, LucideSchool } from "lucide-react";
+import { ABOUT, EVENTS, PROGRAMS, type NavLink } from "./nav-links";
 
 function DrawerItem({
   title,
@@ -93,18 +95,22 @@ export default function PowerKidsNavDrawer() {
         </Accordion>
         <SheetFooter>
           <div className="flex w-full justify-around">
-            <a
-              href="/"
-              className={buttonVariants({ variant: "red", size: "lg" })}
-            >
-              register
-            </a>
-            <a
-              href="/"
-              className={buttonVariants({ size: "lg", variant: "blue" })}
-            >
-              contact
-            </a>
+            <SheetClose asChild>
+              <a
+                href="#register"
+                className={buttonVariants({ variant: "red", size: "lg" })}
+              >
+                register
+              </a>
+            </SheetClose>
+            <SheetPrimitive.Close asChild>
+              <a
+                href="#contact"
+                className={buttonVariants({ size: "lg", variant: "blue" })}
+              >
+                contact
+              </a>
+            </SheetPrimitive.Close>
           </div>
         </SheetFooter>
       </SheetContent>
