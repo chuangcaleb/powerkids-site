@@ -54,7 +54,7 @@ export default function PowerKidsNavDrawer() {
     <Sheet>
       <SheetTrigger asChild>
         <Button
-          className="absolute right-3 top-1 inline-flex fl-px-xs fl-py-2xs md:hidden"
+          className="absolute right-3 top-1 inline-flex fl-px-2xs fl-py-3xs md:hidden"
           variant="outline"
           size="unset"
           aria-label="Open Navigation Menu"
