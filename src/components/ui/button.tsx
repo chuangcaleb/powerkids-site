@@ -10,11 +10,12 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: "bg-primary text-primary-foreground hover:bg-primary/70",
-        destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline: "bg-background hover:bg-accent hover:text-accent-foreground",
-        secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/60",
+        // destructive:
+        //   "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+        outline:
+          "bg-background text-primary hover:bg-accent hover:text-accent-foreground",
+        // secondary:
+        //   "bg-secondary text-secondary-foreground hover:bg-secondary/60",
         red: "bg-accent-red text-accent-red-foreground hover:bg-accent-red/60",
         blue: "bg-accent-blue text-accent-blue-foreground hover:bg-accent-blue/60",
         ghost: "border-0 hover:bg-accent hover:text-accent-foreground",
@@ -39,7 +40,7 @@ const buttonVariants = cva(
     },
     compoundVariants: [
       {
-        variant: ["default", "red", "blue", "secondary", "outline"],
+        variant: ["default", "red", "blue", "outline"],
         class:
           "border-black hover:-translate-y-1 hover:translate-x-1 transition pk-border",
       },
