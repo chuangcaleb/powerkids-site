@@ -7,26 +7,28 @@ import {
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { LucideArrowRight, LucideMenu, LucideSchool } from "lucide-react";
-import { ABOUT, PROGRAMS, type NavGroup, EVENTS } from "./nav-links";
 import { cn } from "@/lib/utils";
+import * as SheetPrimitive from "@radix-ui/react-dialog";
+import { LucideArrowRight, LucideMenu, LucideSchool } from "lucide-react";
+import { ABOUT, EVENTS, PROGRAMS, type NavLink } from "./nav-links";
 
 function DrawerItem({
   title,
   navGroup,
 }: {
   title: string;
-  navGroup: NavGroup;
+  navGroup: NavLink[];
 }) {
   return (
     <AccordionItem value={title}>
-      <AccordionTrigger>{title}</AccordionTrigger>
+      <AccordionTrigger className="fl-text-step-0">{title}</AccordionTrigger>
       <AccordionContent>
         {navGroup.map((link) => (
           <a
@@ -34,7 +36,7 @@ function DrawerItem({
             key={link.title}
             className={cn(
               buttonVariants({ variant: "link", size: "unset", font: "unset" }),
-              "p-3 fl-text-step-1",
+              "p-3 fl-text-step-0",
             )}
           >
             {link.icon}
@@ -52,7 +54,7 @@ export default function PowerKidsNavDrawer() {
     <Sheet>
       <SheetTrigger asChild>
         <Button
-          className="absolute right-3 top-1 inline-flex fl-px-xs fl-py-2xs md:hidden"
+          className="absolute right-3 top-1 inline-flex fl-px-2xs fl-py-3xs md:hidden"
           variant="outline"
           size="unset"
           aria-label="Open Navigation Menu"
@@ -60,9 +62,9 @@ export default function PowerKidsNavDrawer() {
           <LucideMenu className="mr-2" /> Menu
         </Button>
       </SheetTrigger>
-      <SheetContent className="w-[min(100%,400px)] overflow-auto md:hidden [&__svg:first-child]:mr-2 [&_svg]:inline-block">
+      <SheetContent className="w-[min(100%,400px)] overflow-auto md:hidden [&_a_svg:first-child]:mr-2 [&_svg]:inline-block">
         <SheetHeader>
-          <SheetTitle className="inline-flex gap-x-3 fl-text-step-2">
+          <SheetTitle className="inline-flex gap-x-3 fl-text-step-1">
             <LucideMenu className="place-self-center" />
             Navigation Menu
           </SheetTitle>
@@ -80,7 +82,7 @@ export default function PowerKidsNavDrawer() {
                 size: "unset",
                 font: "unset",
               }),
-              "underline underline-offset-4 p-3 leading-normal fl-text-step-1",
+              "p-3 leading-normal underline fl-text-step-0",
             )}
           >
             <LucideSchool />
@@ -93,18 +95,22 @@ export default function PowerKidsNavDrawer() {
         </Accordion>
         <SheetFooter>
           <div className="flex w-full justify-around">
-            <a
-              href="/"
-              className={buttonVariants({ variant: "red", size: "xl" })}
-            >
-              register
-            </a>
-            <a
-              href="/"
-              className={buttonVariants({ size: "xl", variant: "blue" })}
-            >
-              contact
-            </a>
+            <SheetClose asChild>
+              <a
+                href="#register"
+                className={buttonVariants({ variant: "red", size: "lg" })}
+              >
+                register
+              </a>
+            </SheetClose>
+            <SheetPrimitive.Close asChild>
+              <a
+                href="#contact"
+                className={buttonVariants({ size: "lg", variant: "blue" })}
+              >
+                contact
+              </a>
+            </SheetPrimitive.Close>
           </div>
         </SheetFooter>
       </SheetContent>

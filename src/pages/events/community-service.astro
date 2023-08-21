@@ -1,0 +1,65 @@
+---
+import PowerKids from "@/components/brand/PowerKids.astro";
+import Gallery from "@/components/common/Gallery.astro";
+import Document from "@/components/layout/Document.astro";
+import Section from "@/components/layout/Section.astro";
+import { buttonVariants } from "@/components/ui/button";
+import { Card, cardStyle } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
+import { Cloudinary } from "astro-cloudinary-image";
+import { LucideArrowRight } from "lucide-react";
+---
+
+<Document title="Community Service">
+  <Section class="[text-wrap:balance] grid lg:grid-cols-2 fl-gap-l">
+    <div class="fl-space-y-m max-w-prose">
+      <h1 class="font-marker fl-text-step-4">Community Service</h1>
+      <Card className="fl-p-m flex fl-gap-x-s items-center">
+        <h2 class="fl-text-step-1">
+          <b
+            ><span style="color:red">Power</span><span style="color:Blue"
+              >Kids</span
+            ></b
+          > supports the work of
+          <br />
+          <a
+            href="http://www.fungatessuperflowfoundation.org"
+            class={cn(
+              buttonVariants({ variant: "link", size: "unset" }),
+              "fl-gap-x-2xs",
+            )}
+          >
+            FunGates Superflow Foundation<LucideArrowRight /></a
+          >
+        </h2>
+      </Card>
+      <div class="fl-space-y-s">
+        <p>
+          A portion of your child's monthly school fees is channelled to support
+          FunGates SuperFlow Foundation. <b>You</b> play a part in the community
+          work when you register your child with PowerKids.
+        </p>
+
+        <p class="fl-text-step-1">
+          At <b><PowerKids /></b>, we teach <strong>CARE</strong> by serving.
+        </p>
+
+        <p>
+          Our staff will get to serve in Love-On-Wheels (food distribution) and
+          in the Soup Kitchen. The 6-years-olds' also get to go on a field trip
+          to serve in the Soup Kitchen.
+        </p>
+      </div>
+    </div>
+    <Cloudinary
+      src="v1691833534/powerkids/events/pspkidsfoundation_orig_r8xclb.jpg"
+      alt="A booklet excerpt reading 'Thank you Fungates Superflow Foundation for the privilege to travel together on the journey of Community Transformation through your many social services.' from PowerKids"
+      errorImage=""
+      class:list={cn(cardStyle())}
+    />
+  </Section>
+
+  <Section contentWidth="lg" paddingY="bottom">
+    <Gallery prefixRoute="powerkids/events/community-service" />
+  </Section>
+</Document>

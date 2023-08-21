@@ -1,0 +1,60 @@
+---
+import Gallery from "@/components/common/Gallery.astro";
+import Document from "@/components/layout/Document.astro";
+import Section from "@/components/layout/Section.astro";
+import { Card } from "@/components/ui/card";
+
+const PLACES = [
+  "🚒 Fire Station",
+  "🐬 Aquaria",
+  "💇🏻‍♀️ Hair Saloon",
+  "🏦 Bank Negara",
+  "🏙️ Kidzania",
+  "🚜 EcoFarm",
+  "🔭 National Science Centre",
+  "🛒 Grocery Shopping",
+  "🐯 Zoo Negara",
+  "🍕 Pizza Hut",
+  "🦷 Dentist Clinic",
+  "🍫 Chocolate Factory",
+  "🗺️ ...Where Next ?",
+];
+---
+
+<Document title="Field Trips">
+  <Section
+    class="[text-wrap:balance] grid lg:grid-cols-[minmax(200px,1fr),1fr] fl-gap-l"
+  >
+    <div class="fl-space-y-m">
+      <div>
+        <h1 class="font-marker fl-text-step-4">Field Trips</h1>
+        <p class="fl-text-step-1 tracking-widest font-bold">
+          Real world makes real kids
+        </p>
+      </div>
+      <div class="fl-space-y-s">
+        <p>
+          Field trips help bring learning outside the classroom, giving children
+          a new perspective and boost cognitive development.
+        </p>
+        <p>
+          These trips offer diverse learning opportunities, improve health and
+          allow children to get authentic experiences.
+        </p>
+      </div>
+    </div>
+    <ul class="flex flex-wrap fl-gap-x-m fl-gap-y-xs">
+      {
+        PLACES.map((p) => (
+          <li>
+            <Card className="font-marker fl-py-xs fl-px-m">{p}</Card>
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+
+  <Section contentWidth="lg" paddingY="bottom">
+    <Gallery prefixRoute="powerkids/events/field-trips" />
+  </Section>
+</Document>

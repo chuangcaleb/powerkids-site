@@ -8,19 +8,19 @@ const config = {
 
   theme: {
     fontFamily: {
-      sans: ['"Helvetica"', "sans-serif"],
-      marker: ['"Marker Felt"', "sans-serif"],
+      sans: ['"PT Sans"', "sans-serif"],
+      marker: ['"Marker Felt"', '"Comic Sans MS"', "sans-serif"],
     },
     extend: {
       utopia: () => ({
         // utopia: (theme) => ({
         // minScreen: theme("screens.xs"),
-        minSize: 12,
-        minScale: 1.3,
+        minSize: 16,
+        minScale: 1.25,
         // maxScreen: theme("screens.3xl"),
         maxScreen: "1280px",
-        maxSize: 15,
-        maxScale: 1.45,
+        maxSize: 19,
+        maxScale: 1.37,
         // textSizes: ["xs", "sm", "base", "lg", "xl", "2xl", "3xl"],
       }),
       colors: {
@@ -36,7 +36,7 @@ const config = {
         },
       },
       screens: {
-        sm: "425px",
+        sm: "475px",
       },
     },
   },

@@ -1,0 +1,85 @@
+---
+import Pill from "@/components/brand/pill";
+import Document from "@/components/layout/Document.astro";
+import { PROGRAMS } from "@/components/layout/nav/nav-links";
+import Section from "@/components/layout/Section.astro";
+import { cardStyle } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
+import { Cloudinary } from "astro-cloudinary-image";
+
+const program = PROGRAMS.find((p) => p.title === "After School Program");
+---
+
+<Document title="After School Program">
+  <Section contentWidth="md">
+    <div class="fl-space-y-l">
+      <div>
+        <div class="flex fl-gap-x-m flex-wrap">
+          <h1 class="fl-text-step-4 font-marker">After School Program</h1>
+          <Pill size="lg" className="my-auto" color="muted">
+            {program?.pill}
+          </Pill>
+        </div>
+        <p class="fl-text-step-1 tracking-widest font-bold">
+          Experiences beyond traditional academics
+        </p>
+      </div>
+      <div class="fl-space-y-l">
+        <p>
+          After a tasty lunch and homework coaching, we have a variety of
+          <strong>enrichment classes</strong> prepared for the children!
+        </p>
+        <p>For example (and not limited to):</p>
+        <ul class="list-disc fl-pl-l">
+          <li>
+            <strong>Domestic Science</strong> for children to explore practical
+            kitchen skills,
+          </li>
+          <li>
+            <strong>Creative Art and Craft</strong> as a means of outwardly
+            expressing their inner thoughts and emotions,
+          </li>
+          <li>
+            <strong>Speech & Drama</strong> into the world of imagination and
+            stepping out to speak with <i>confidence</i>,
+          </li>
+          <li>
+            <strong>Information Communication Technology</strong> with hands-on
+            activities to train up relevant digital skills!
+          </li>
+        </ul>
+        <p>Take a look at one of our featured programs!</p>
+      </div>
+    </div>
+  </Section>
+  <Section
+    class="fl-space-y-l columns-lg fl-gap-s"
+    contentWidth="lg"
+    paddingY="bottom"
+  >
+    <Cloudinary
+      src="v1690987797/powerkids/programs/after/ASP_front.jpg"
+      alt=""
+      errorImage=""
+      class:list={cn(cardStyle())}
+    />
+    <Cloudinary
+      src="v1690987797/powerkids/programs/after/ASP_back.jpg"
+      alt=""
+      errorImage=""
+      class:list={cn(cardStyle())}
+    />
+    <Cloudinary
+      src="v1690987797/powerkids/programs/after/ASP_front_chinese.jpg"
+      alt=""
+      errorImage=""
+      class:list={cn(cardStyle())}
+    />
+    <Cloudinary
+      src="v1690987797/powerkids/programs/after/ASP_back_chinese.jpg"
+      alt=""
+      errorImage=""
+      class:list={cn(cardStyle())}
+    />
+  </Section>
+</Document>

@@ -1,0 +1,46 @@
+---
+import Pill from "@/components/brand/pill";
+import Document from "@/components/layout/Document.astro";
+import { PROGRAMS } from "@/components/layout/nav/nav-links";
+import Section from "@/components/layout/Section.astro";
+import { Cloudinary } from "astro-cloudinary-image";
+
+const program = PROGRAMS.find((p) => p.title === "Evening Daycare");
+---
+
+<Document title="Daycare">
+  <Section contentWidth="xl">
+    <div class="grid lg:grid-cols-2 fl-gap-l">
+      <div class="fl-space-y-m">
+        <div>
+          <div class="flex fl-gap-x-m flex-wrap">
+            <h1 class="fl-text-step-4 font-marker">Evening Daycare</h1>
+            <Pill size="lg" className="my-auto" color="muted">
+              {program?.pill}
+            </Pill>
+          </div>
+          <p class="fl-text-step-1 tracking-widest font-bold">
+            Chill with the after-hours crew
+          </p>
+        </div>
+        <div class="fl-space-y-s max-w-screen-md">
+          <p>
+            Care and activities for your child, while they wait for you to
+            finish your day's work!
+          </p>
+          <p>
+            After nap time, the kids will have many outlets for their youthful
+            energy in even more activities and games! You can trust after they
+            tell you about all the their stories and friends from their full-day
+            at school, that they will crash quickly at night!
+          </p>
+        </div>
+      </div>
+      <Cloudinary
+        src="v1691416565/powerkids/programs/daycare/daycare_qicl4q.png"
+        alt="Children and teachers during PowerKids' Evening Daycare program"
+        errorImage=""
+      />
+    </div>
+  </Section>
+</Document>

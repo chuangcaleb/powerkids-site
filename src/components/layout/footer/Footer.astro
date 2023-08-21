@@ -1,0 +1,26 @@
+---
+import Section from "../Section.astro";
+import BottomNav from "./BottomNav.astro";
+import ContactCard from "./ContactCard.astro";
+import Register from "./Register.astro";
+
+const today = new Date();
+---
+
+<footer>
+  <Register />
+  <Section contentWidth="md" id="contact">
+    <ContactCard />
+  </Section>
+  <BottomNav />
+  <div
+    class="col-span-full text-primary/30 text-center fl-text-step--1 flex flex-wrap fl-gap-x-m justify-center"
+  >
+    <span>&copy; {today.getFullYear()} PowerKids Kindergarten</span>
+    <span>
+      Designed with
+      <img src="/images/heart.svg" alt="heart logo" class="inline fl-h-xs" /> by
+      Chuang Caleb
+    </span>
+  </div>
+</footer>

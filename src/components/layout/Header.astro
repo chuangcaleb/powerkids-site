@@ -1,0 +1,45 @@
+---
+import PowerKids from "@/components/brand/PowerKids.astro";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "../ui/button";
+import PowerKidsNavMenu from "./nav/nav-bar";
+import PowerKidsNavDrawer from "./nav/nav-drawer";
+---
+
+<header class="border-b-[0.15em] sticky top-0 bg-background z-10">
+  <nav class="fl-py-3xs fl-px-xs gap-x-4 flex items-center">
+    <a
+      href="/"
+      class:list={cn(
+        buttonVariants({ variant: "ghost", size: "unset" }),
+        "fl-h-xl fl-px-3xs fl-gap-2xs",
+      )}
+    >
+      <img src="/images/logo.svg" alt="PowerKids Logo" class="h-full" />
+      <h1 class="fl-text-step-2 font-marker fl-mt-xs">
+        <PowerKids />
+      </h1>
+    </a>
+
+    <PowerKidsNavMenu client:visible />
+    <PowerKidsNavDrawer client:visible />
+    <a
+      href="#register"
+      class={cn(
+        buttonVariants({ variant: "red", size: "sm" }),
+        "ml-auto max-md:hidden",
+      )}
+    >
+      register
+    </a>
+    <a
+      href="#contact"
+      class={cn(
+        buttonVariants({ size: "sm", variant: "blue" }),
+        "max-md:hidden",
+      )}
+    >
+      contact
+    </a>
+  </nav>
+</header>

@@ -1,0 +1,46 @@
+---
+import Pill from "@/components/brand/pill";
+import Gallery from "@/components/common/Gallery.astro";
+import Document from "@/components/layout/Document.astro";
+import { PROGRAMS } from "@/components/layout/nav/nav-links";
+import Section from "@/components/layout/Section.astro";
+import { buttonVariants } from "@/components/ui/button";
+
+const program = PROGRAMS.find((p) => p.title === "Morning School");
+---
+
+<Document title="Morning School">
+  <Section contentWidth="md">
+    <div class="fl-space-y-l">
+      <div>
+        <div class="flex fl-gap-x-m flex-wrap">
+          <h1 class="fl-text-step-4 font-marker">Morning School</h1>
+          <Pill size="lg" className="my-auto" color="muted">
+            {program?.pill}
+          </Pill>
+        </div>
+        <p class="fl-text-step-1 tracking-widest font-bold">
+          Essential early childhood education
+        </p>
+      </div>
+      <div class="fl-space-y-s max-w-screen-md">
+        <p>
+          Essential early childhood education (ECE) provided for children from
+          Ages 2 to 6!
+        </p>
+        <p>
+          There will be emphasis on building social emotion to cognitive study
+          from very young age. PowerKids has a track record of strong academics
+          and good character transformation.
+        </p>
+        <div class="flex fl-gap-m flex-wrap">
+          <a href="/" class={buttonVariants({ variant: "red" })}>register</a>
+          <a href="/" class={buttonVariants({ variant: "blue" })}> contact</a>
+        </div>
+      </div>
+    </div>
+  </Section>
+  <Section contentWidth="lg" paddingY="bottom">
+    <Gallery prefixRoute="powerkids/programs/morning" />
+  </Section>
+</Document>

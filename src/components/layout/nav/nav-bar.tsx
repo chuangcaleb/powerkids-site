@@ -10,7 +10,9 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { LucideSchool } from "lucide-react";
-import { ABOUT, EVENTS, PROGRAMS } from "./nav-links";
+import { ABOUT, EVENTS, OUR_SCHOOLS, PROGRAMS } from "./nav-links";
+import { SCHOOLS_NAMELIST } from "@/pages/about/schools/schools";
+import Pill from "@/components/brand/pill";
 
 export default function PowerKidsNavMenu() {
   return (
@@ -24,16 +26,16 @@ export default function PowerKidsNavMenu() {
                 <NavigationMenuLink asChild>
                   <a
                     className="grid h-full w-full select-none grid-cols-[min-content_1fr] flex-col gap-x-4 gap-y-2 rounded-md bg-gradient-to-bl from-accent-blue/70 to-accent-red/80 p-4 text-primary-foreground no-underline outline-none hover:animate-pulse hover:from-accent-red/70 hover:to-accent-blue/80 focus:shadow-md lg:flex lg:justify-end"
-                    href="/"
+                    href={OUR_SCHOOLS.href}
                   >
                     <LucideSchool className="block h-10 w-10 max-lg:row-span-2" />
-                    <div className="text-lg font-medium">Our Schools</div>
-                    <ul className="text-primary-foreground/70 fl-text-step-0">
-                      <li>Sri Petaling</li>
-                      <li>Salak South Garden</li>
-                      <li>Bukit Jalil</li>
-                      <li>Puchong Utama</li>
-                      <li>Parkane OUG</li>
+                    <div className="text-lg font-medium">
+                      {OUR_SCHOOLS.title}
+                    </div>
+                    <ul className="text-primary-foreground/70 fl-text-step--1">
+                      {SCHOOLS_NAMELIST.map((name, i) => (
+                        <li key={i}>{name}</li>
+                      ))}
                     </ul>
                   </a>
                 </NavigationMenuLink>
@@ -99,17 +101,21 @@ const ListItem = React.forwardRef<
           {...props}
         >
           {icon}
-          <div className="row-span-full space-y-1">
+          <div className="fl-space-s row-span-full">
             <div className="flex font-medium leading-normal">
               {title}
               {pill ? (
-                <span className="ml-auto self-center rounded-sm bg-muted px-1 py-0.5 text-xs font-bold text-muted-foreground">
+                <Pill
+                  size="xs"
+                  color="muted"
+                  className="ml-auto self-center tracking-wider"
+                >
                   {pill}
-                </span>
+                </Pill>
               ) : null}
             </div>
             {children ? (
-              <p className="line-clamp-2 leading-tight text-muted-foreground fl-text-step-0">
+              <p className="line-clamp-2 leading-tight text-muted-foreground fl-text-step--1">
                 {children}
               </p>
             ) : null}

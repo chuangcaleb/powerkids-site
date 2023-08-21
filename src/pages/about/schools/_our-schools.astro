@@ -1,0 +1,64 @@
+---
+import Section from "@/components/layout/Section.astro";
+import { buttonVariants } from "@/components/ui/button";
+import { cardStyle } from "@/components/ui/card";
+import { Cloudinary } from "astro-cloudinary-image";
+import { LucidePhone, LucideSchool } from "lucide-react";
+import { SCHOOLS } from "./schools";
+import { cn } from "@/lib/utils";
+
+function stripNonNumeric(str: string) {
+  return str.replace(/\D/g, "");
+}
+---
+
+<Section id="our-schools" contentWidth="lg">
+  <div class="[text-wrap:balance] fl-space-y-2xl">
+    <h2 class="fl-text-step-4 font-marker text-center">
+      <LucideSchool className="inline-icon fl-mb-xs" />
+       Our Schools
+    </h2>
+
+    {
+      SCHOOLS.map((school) => (
+        <>
+          <hr />
+          <article class="flex max-md:flex-col fl-gap-y-l fl-gap-x-3xl md:items-center justify-between max-md:max-w-screen-sm max-lg:max-w-screen-md mx-auto">
+            <div class="fl-space-y-m whitespace-nowrap">
+              <h3 class="fl-text-step-3 font-marker">{school.name}</h3>
+              <div class="flex flex-wrap lg:flex-col fl-gap-l justify-between max-md:items-end">
+                <p>
+                  {school.address.map((a) => (
+                    <>
+                      {a}
+                      <br />
+                    </>
+                  ))}
+                </p>
+                <address class="[&>a]:block">
+                  {school.contacts.map((c) => (
+                    <a
+                      href={`tel:+6${stripNonNumeric(c)}`}
+                      class={buttonVariants({
+                        variant: "link",
+                        font: "unset",
+                        size: "unset",
+                      })}
+                    >
+                      <LucidePhone className="inline-block fl-h-m fl-mr-xs" />
+                      <span>{c}</span>
+                    </a>
+                  ))}
+                </address>
+              </div>
+            </div>
+
+            <div class={cn(cardStyle(), "max-w-screen-md")}>
+              <Cloudinary src={school.image} alt="" errorImage="" />
+            </div>
+          </article>
+        </>
+      ))
+    }
+  </div>
+</Section>

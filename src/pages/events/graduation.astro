@@ -1,0 +1,48 @@
+---
+import Youtube from "@/components/common/Youtube.astro";
+import Document from "@/components/layout/Document.astro";
+import Section from "@/components/layout/Section.astro";
+import { Card, cardTabHeaderStyle } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
+---
+
+<Document title="Graduation">
+  <Section class="fl-space-y-s [text-wrap:balance]">
+    <h1 class="font-marker fl-text-step-4">Graduation</h1>
+    <p>
+      Our Graduation is a celebration of our children who completed their
+      pre-school learning.
+    </p>
+    <p>
+      Here, we practice Graduation-Concerts, where <em>all</em> our students get
+      an opportunity to be involved in stage performance during the graduation
+      event. This is our showcase of discipline and training of children over
+      the years!
+    </p>
+  </Section>
+
+  <Section class="grid md:grid-cols-2 fl-gap-m" paddingY="bottom">
+    <div>
+      <h2 class={cn(cardTabHeaderStyle(), "fl-text-step-2 font-marker")}>
+        2020
+      </h2>
+      <Card className="rounded-tl-none">
+        <Youtube
+          src="https://www.youtube.com/embed/eyyBMt6-zIc"
+          class="h-full object-cover"
+        />
+      </Card>
+    </div>
+    <div>
+      <h2 class={cn(cardTabHeaderStyle(), "fl-text-step-2 font-marker")}>
+        2019
+      </h2>
+      <Card className="rounded-tl-none">
+        <Youtube
+          src="https://www.youtube.com/embed/7nphFvgTY2M"
+          class="h-full object-cover"
+        />
+      </Card>
+    </div>
+  </Section>
+</Document>

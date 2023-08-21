@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+  @font-face {
+    font-family: "Marker Felt";
+    src: font-url("/fonts/marker-felt.ttf") format("truetype");
+  }
   :root {
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
@@ -40,9 +44,79 @@
 
     --radius: 0.5rem;
   }
+  html {
+    scroll-padding-top: var(--fs-xl);
+  }
+  u,
+  .underline {
+    text-underline-offset: 0.15em;
+  }
 }
+
 @layer components {
-  .shadow-pk {
-    box-shadow: 0.25em 0.25em 0px hsl(var(--border));
+  hr {
+    border-width: 0.15em;
+    text-align: center;
+    overflow: visible;
+    font-size: var(--text-size-step-1);
+
+    /* ensure 1px gap between borders */
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    -ms-box-sizing: content-box;
+    -o-box-sizing: content-box;
+    box-sizing: content-box;
+  }
+  hr::after {
+    content: url("../images/heart.svg");
+    display: inline-block;
+    margin-top: -1.5em;
+    background-color: hsl(var(--background));
+    padding: 0 0.5em;
+  }
+}
+
+@layer utilities {
+  .pk-border {
+    border-width: 0.2em;
+    box-shadow: 6px 6px 0px hsl(var(--border));
+  }
+  .inline-icon {
+    height: 1em;
+    width: 1em;
+    display: inline-block;
+  }
+
+  .red {
+    --highlight: var(--accent-red);
+  }
+  .blue {
+    --highlight: var(--accent-blue);
+  }
+  mark {
+    -webkit-animation: 1.5s highlight 0.2s 1 normal forwards;
+    animation: 1.5s highlight 0.2s 1 normal forwards;
+    background-color: none;
+    background: linear-gradient(
+      90deg,
+      hsl(var(--highlight)) 50%,
+      rgba(255, 255, 255, 0) 50%
+    );
+    background-size: 200% 100%;
+    background-position: 100% 0;
+    color: white;
+    @apply fl-px-2xs;
+  }
+
+  @-webkit-keyframes highlight {
+    to {
+      background-position: 0 0;
+    }
+  }
+
+  @keyframes highlight {
+    to {
+      background-position: 0 0;
+    }
   }
 }

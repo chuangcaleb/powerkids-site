@@ -1,0 +1,40 @@
+---
+import Gallery from "@/components/common/Gallery.astro";
+import Youtube from "@/components/common/Youtube.astro";
+import Document from "@/components/layout/Document.astro";
+import Section from "@/components/layout/Section.astro";
+import { Card } from "@/components/ui/card";
+---
+
+<Document title="Sports Day">
+  <Section class="[text-wrap:balance] grid lg:grid-cols-2 fl-gap-l">
+    <div class="fl-space-y-m">
+      <div>
+        <h1 class="font-marker fl-text-step-4">Sports Day</h1>
+        <p class="fl-text-step-1 tracking-widest font-bold">
+          Dexterity, competition & teamwork
+        </p>
+      </div>
+      <div class="fl-space-y-s">
+        <p>
+          Championship, sportsmanship, winning, competing, participation — a
+          family day-out.
+        </p>
+        <p>
+          Numerous telematch games. Five schools. Three houses. One champion.
+        </p>
+      </div>
+    </div>
+
+    <Card className="max-w-screen-sm">
+      <Youtube
+        src="https://www.youtube.com/embed/vj-9e65wtPE"
+        class="h-full object-cover"
+      />
+    </Card>
+  </Section>
+
+  <Section contentWidth="lg" paddingY="bottom">
+    <Gallery prefixRoute="powerkids/events/sports-day" />
+  </Section>
+</Document>

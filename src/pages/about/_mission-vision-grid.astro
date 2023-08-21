@@ -1,0 +1,99 @@
+---
+import IdentityStatement from "@/components/brand/IdentityStatement.astro";
+import PowerKids from "@/components/brand/PowerKids.astro";
+import Section from "@/components/layout/Section.astro";
+import {
+  Card,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  cardStyle,
+} from "@/components/ui/card";
+import { cn } from "@/lib/utils";
+import { Cloudinary } from "astro-cloudinary-image";
+
+const years = new Date().getFullYear() - 2001;
+---
+
+<Section
+  class="grid sm:grid-cols-[1fr,min-content,30%] lg:grid-cols-10 fl-gap-m lg:fl-gap-x-l lg:grid-rows-[min-content_min-content_1fr_min-content]"
+  contentWidth="lg"
+>
+  <h1 class="font-marker fl-text-step-4 lg:col-span-6">Who We Are</h1>
+
+  <Cloudinary
+    src="v1690554655/powerkids/about/apple-girl.jpg"
+    alt="A PowerKids student offering an apple"
+    errorImage=""
+    class:list={cn(
+      cardStyle(),
+      "my-auto sm:row-start-3 lg:row-start-4 lg:col-start-6 lg:col-span-full",
+    )}
+  />
+
+  <div
+    class="sm:col-span-full fl-space-y-m text-justify max-w-prose lg:col-span-6 lg:row-span-2 fl-pb-m"
+  >
+    <IdentityStatement />
+    <p>
+      We've been around for <span class="font-bold underline"
+        >{years} years</span
+      >, powered by the <i>Fungates</i> system. Together with educational
+      policies from the <i>Ministry of Education Malaysia</i> and <i
+        >Jabatan Kebajikan Malaysia</i
+      >, we constantly keep up with the best practices to ensure our students
+      become competent learners to navigate the 21st-Century world.
+    </p>
+    <p>
+      <PowerKids class="fl-text-step-2 leading-none" />... Opening the Gates to
+      First-Class Fun Learning!
+    </p>
+  </div>
+
+  <Card className="sm:col-span-2 grid sm:place-content-center lg:col-span-4">
+    <CardHeader>
+      <CardTitle className="font-marker fl-text-step-2">Our Mission</CardTitle>
+    </CardHeader>
+    <CardFooter>
+      <p class="whitespace-nowrap">
+        To raise a new generation of <br /> 21st-Century children with <span
+          class="underline font-bold">heart</span
+        >.
+      </p>
+    </CardFooter>
+  </Card>
+
+  <Card className="sm:col-span-2 lg:col-span-5 grid lg:place-content-center">
+    <CardHeader>
+      <CardTitle className="font-marker fl-text-step-2">Our Vision</CardTitle>
+    </CardHeader>
+    <CardFooter>
+      <ul class="list-disc fl-ml-m">
+        <li>
+          <span class="fl-text-step-2 font-marker tracking-wider">A</span
+          >cademic Excellence
+        </li>
+        <li>
+          <span class="fl-text-step-2 font-marker tracking-wider">B</span
+          >uilding Character
+        </li>
+        <li class="whitespace-nowrap">
+          <span class="fl-text-step-2 font-marker tracking-wider">C</span
+          >ultivating Moral & Spiritual Values
+        </li>
+      </ul>
+    </CardFooter>
+  </Card>
+
+  <div
+    class="grid place-items-center max-sm:hidden lg:col-span-4 lg:row-start-1 lg:col-start-7 lg:row-span-2 fl-py-m"
+  >
+    <img
+      src="/images/logo.svg"
+      alt=""
+      class="rotate-12"
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+</Section>

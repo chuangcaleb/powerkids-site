@@ -1,0 +1,42 @@
+---
+import Section from "@/components/layout/Section.astro";
+import { buttonVariants } from "@/components/ui/button";
+---
+
+<Section
+  class="flex max-md:flex-col md:max-h-[700px] fl-gap-y-s md:fl-pt-m justify-evenly"
+  paddingY="unset"
+>
+  <div
+    class="max-md:fl-py-s md:my-auto fl-space-y-m max-md:text-center max-w-prose max-md:mx-auto md:fl-pb-l"
+  >
+    <h1 class="fl-text-step-5 font-marker leading-[1.075em]">
+      the <mark class="blue">Centre</mark><br />
+      <span class="tracking-tighter">with</span> a <mark class="red">Heart</mark
+      >
+    </h1>
+    <p class="fl-text-step-0 [text-wrap:balance] max-w-[50ch] mx-auto">
+      First-Class 21st-Century <u class="whitespace-nowrap"
+        >Kindergarten Education</u
+      >, based across <em>five</em> locations around Kuala Lumpur. Powered by
+      the
+      <em>FunGates</em> curriculum since 2001.
+    </p>
+    <div class="flex fl-gap-m max-md:justify-center flex-wrap">
+      <a href="#register" class={buttonVariants({ variant: "red", size: "lg" })}
+        >register</a
+      >
+      <a
+        href="#contact"
+        class={buttonVariants({ size: "lg", variant: "blue" })}
+      >
+        contact
+      </a>
+    </div>
+  </div>
+  <img
+    src="images/hero.jpg"
+    alt="hero"
+    class="max-md:mx-auto md:fl-pl-l max-w-[49%] object-contain"
+  />
+</Section>
