@@ -11,7 +11,7 @@
 - [x] favicon
 - [x] shaving bundle
 - [x] deploying to cloudfare pages
-- [ ] package font
+- [x] package font
 
 ## MVP 2
 

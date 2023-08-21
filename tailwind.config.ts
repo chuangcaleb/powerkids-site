@@ -9,7 +9,7 @@ const config = {
   theme: {
     fontFamily: {
       sans: ['"PT Sans"', "sans-serif"],
-      marker: ['"Marker Felt"', "sans-serif"],
+      marker: ['"Marker Felt"', '"Comic Sans MS"', "sans-serif"],
     },
     extend: {
       utopia: () => ({
