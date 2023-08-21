@@ -13,4 +13,5 @@ const { class: classes, src, title, ...attrs } = Astro.props;
   class={cn("w-full aspect-video", classes)}
   src={src + "?rel=0&modestbranding"}
   allowfullscreen
+  loading="lazy"
   {...attrs}></iframe>
