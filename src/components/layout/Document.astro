@@ -6,11 +6,13 @@ import Header from "./Header.astro";
 
 interface Props {
   title?: string;
+  excludeRegister?: boolean;
 }
 
 const DEFAULT_TITLE = "PowerKids Kindergarten: The Centre With A Heart";
 
 let { title = DEFAULT_TITLE } = Astro.props;
+const { excludeRegister } = Astro.props;
 
 if (title !== DEFAULT_TITLE) {
   title = title + " | " + DEFAULT_TITLE;
@@ -64,6 +66,6 @@ if (title !== DEFAULT_TITLE) {
     <main class="[&>section:first-of-type]:fl-pt-l">
       <slot />
     </main>
-    <Footer />
+    <Footer excludeRegister={excludeRegister} />
   </body>
 </html>

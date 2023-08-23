@@ -1,6 +1,7 @@
 import {
   LucideBookOpenCheck,
   LucideCamera,
+  LucideClipboardEdit,
   LucideGraduationCap,
   LucideHeartHandshake,
   LucideHome,
@@ -9,7 +10,6 @@ import {
   LucideTarget,
   LucideTrophy,
   LucideUsers,
-  LucideWarehouse,
 } from "lucide-react";
 
 function insert<T>(arr: T[], el: T, i: number) {
@@ -50,10 +50,10 @@ export const ABOUT: NavLink[] = [
     icon: <LucideUsers />,
   },
   {
-    title: "Our Facilities",
-    href: "/about#our-facilities",
-    children: "Modern apparatus and technology to inspire learning.",
-    icon: <LucideWarehouse />,
+    title: "We're Hiring!",
+    href: "/careers",
+    children: "Want to enter and be a part of the centre with a heart?",
+    icon: <LucideClipboardEdit />,
   },
 ];
 

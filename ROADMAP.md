@@ -16,9 +16,9 @@
 ## MVP 2
 
 - [x] <https://github.com/insin/astro-lazy-youtube-embed#readme>
-- [ ] robots on prod
-- [ ] noindex nofollow
-- [ ] we're hiring
+- [x] robots on prod
+- [x] noindex nofollow
+- [x] we're hiring
 - [ ] group links in individual pages
 - [ ] manually manage tailwind preflight
   - [ ] css marker and wrap balance to all headings

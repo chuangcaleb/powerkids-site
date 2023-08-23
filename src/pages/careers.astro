@@ -1,0 +1,81 @@
+---
+import IdentityStatement from "@/components/brand/IdentityStatement.astro";
+import Pill from "@/components/brand/pill";
+import Document from "@/components/layout/Document.astro";
+import Section from "@/components/layout/Section.astro";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  LucideAlarmCheck,
+  LucideBrainCircuit,
+  LucideHeartPulse,
+  LucideScrollText,
+  LucideTrees,
+} from "lucide-react";
+---
+
+<Document title="Careers" excludeRegister>
+  <Section class="fl-space-y-m">
+    <Pill>Careers</Pill>
+    <h1 class="fl-text-step-5 font-marker">
+      We Want <mark class="red">You</mark> !
+    </h1>
+    <div class="fl-space-y-xs max-w-prose">
+      <IdentityStatement />
+      <p>
+        Do you have that difference too? Check out any vacancies, and feel free
+        to just contact us any time through the channels below.
+      </p>
+    </div>
+    <h2 class="font-marker fl-text-step-3">Current Vacancies</h2>
+    <div class="grid lg:grid-cols-2">
+      <Card>
+        <CardHeader>
+          <CardTitle className="fl-text-step-3 font-marker">Teacher</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ul
+            class="sm:fl-pl-xs fl-space-y-2xs [&_svg]:mr-1 [&_svg]:inline-block"
+          >
+            <li>
+              <LucideScrollText />
+              <span>Minimum: <b>Diploma in ECE</b></span>
+            </li>
+            <li>
+              <LucideTrees />
+              <span><b>Experienced</b> working with young children</span>
+            </li>
+            <li>
+              <LucideAlarmCheck />
+              <span><b>Patient</b> with <b>energetic</b> disposition</span>
+            </li>
+            <li>
+              <LucideBrainCircuit />
+              <span><b>Creative</b> mindset</span>
+            </li>
+            <li>
+              <LucideHeartPulse />
+              <span>
+                Passionate for <b>shaping and inspiring</b>
+                 young minds
+              </span>
+            </li>
+          </ul>
+        </CardContent>
+      </Card>
+    </div>
+    <div class="text-center fl-space-y-2xs">
+      <p>
+        <b>Call</b>
+        <a href="tel:+60390564288">03 - 9056 4288</a> for an interview, or <b
+          >email</b
+        > your resume to <a href="mailto:powerkidschool@gmail.com"
+          >powerkidschool@gmail.com</a
+        >
+      </p>
+      <p>
+        Not 100% certain? Contact us anyways, and stand out from the others who
+        didn't!
+      </p>
+    </div>
+  </Section>
+</Document>
