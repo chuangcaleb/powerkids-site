@@ -1,6 +1,7 @@
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
+import compress from "astro-compress";
 import compressor from "astro-compressor";
 import robotsTxt from "astro-robots-txt";
 import { defineConfig } from "astro/config";
@@ -14,7 +15,7 @@ export default defineConfig({
     }),
     react(),
     robotsTxt(),
-    ...(import.meta.env.PROD ? [sitemap(),  compressor()] : []),
+    ...(import.meta.env.PROD ? [sitemap(), compress(), compressor()] : []),
   ],
   vite: {
     ssr: {
