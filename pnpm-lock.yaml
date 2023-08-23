@@ -41,6 +41,9 @@ dependencies:
   astro-compressor:
     specifier: ^0.4.0
     version: 0.4.0
+  astro-lazy-youtube-embed:
+    specifier: ^0.1.0
+    version: 0.1.0(astro@2.10.12)
   astro-robots-txt:
     specifier: ^0.5.0
     version: 0.5.0
@@ -1953,6 +1956,14 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /astro-lazy-youtube-embed@0.1.0(astro@2.10.12):
+    resolution: {integrity: sha512-Zy04qAdLOucdXzrcDUWVYjUc2Sb04O/GbmkAFubsJ6nGm1xPUcVce8rLe26tPvAiaIj6fPcPqmvUKrQiNwUZoA==}
+    peerDependencies:
+      astro: ^1.0.0 || ^2.0.0-beta
+    dependencies:
+      astro: 2.10.12(@types/node@20.5.1)
+    dev: false
 
   /astro-robots-txt@0.5.0:
     resolution: {integrity: sha512-MJDcxBDjEKSp7Uvw32cnmkPHlmjQ/pW5JwzMhKEegFRoGaiSh2i1kkh1QEhk1UpGnAsSondWCoIt2xpG8qjSgA==}

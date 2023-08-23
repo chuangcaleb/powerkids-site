@@ -15,6 +15,8 @@
 
 ## MVP 2
 
+- [ ] <https://github.com/insin/astro-lazy-youtube-embed#readme>
+- [ ] robots on prod
 - [ ] noindex nofollow
 - [ ] we're hiring
 - [ ] group links in individual pages

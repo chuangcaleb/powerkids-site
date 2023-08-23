@@ -1,9 +1,9 @@
 ---
 import Gallery from "@/components/common/Gallery.astro";
-import Youtube from "@/components/common/Youtube.astro";
 import Document from "@/components/layout/Document.astro";
 import Section from "@/components/layout/Section.astro";
 import { Card } from "@/components/ui/card";
+import { YouTube } from "astro-lazy-youtube-embed";
 ---
 
 <Document title="Sports Day">
@@ -27,10 +27,7 @@ import { Card } from "@/components/ui/card";
     </div>
 
     <Card className="max-w-screen-sm">
-      <Youtube
-        src="https://www.youtube.com/embed/vj-9e65wtPE"
-        class="h-full object-cover"
-      />
+      <YouTube videoId="vj-9e65wtPE" title="PowerKids Sports Day 2019" />
     </Card>
   </Section>
 
