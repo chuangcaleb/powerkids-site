@@ -68,7 +68,7 @@ export const PROGRAMS: ImageNavLink[] = [
     icon: <LucideBookOpenCheck />,
     image:
       "v1690805202/powerkids/programs/morning/IMG_20210116_0004_yowtwg.jpg",
-    pill: "08:30AM - 12:00noon",
+    pill: "08:30AM - 12:30noon",
   },
   {
     title: "After School Program",
