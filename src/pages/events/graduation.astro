@@ -1,9 +1,9 @@
 ---
-import Youtube from "@/components/common/Youtube.astro";
 import Document from "@/components/layout/Document.astro";
 import Section from "@/components/layout/Section.astro";
 import { Card, cardTabHeaderStyle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { YouTube } from "astro-lazy-youtube-embed";
 ---
 
 <Document title="Graduation">
@@ -27,10 +27,7 @@ import { cn } from "@/lib/utils";
         2020
       </h2>
       <Card className="rounded-tl-none">
-        <Youtube
-          src="https://www.youtube.com/embed/eyyBMt6-zIc"
-          class="h-full object-cover"
-        />
+        <YouTube videoId="eyyBMt6-zIc" title="PowerKids Graduation 2020" />
       </Card>
     </div>
     <div>
@@ -38,10 +35,7 @@ import { cn } from "@/lib/utils";
         2019
       </h2>
       <Card className="rounded-tl-none">
-        <Youtube
-          src="https://www.youtube.com/embed/7nphFvgTY2M"
-          class="h-full object-cover"
-        />
+        <YouTube videoId="7nphFvgTY2M" title="PowerKids Graduation 2019" />
       </Card>
     </div>
   </Section>

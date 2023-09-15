@@ -1,43 +1,23 @@
 ---
 import IdentityStatement from "@/components/brand/IdentityStatement.astro";
 import Pill from "@/components/brand/pill";
-import Youtube from "@/components/common/Youtube.astro";
 import Section from "@/components/layout/Section.astro";
 import { buttonVariants } from "@/components/ui/button";
 import { cardStyle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { YouTube } from "astro-lazy-youtube-embed";
 
 const years = new Date().getFullYear() - 2001;
 ---
 
-<!-- <Section class="fl-text-step-1">
-  <Card
-    className="fl-py-l col-span-full text-center flex flex-wrap fl-gap-x-3xl fl-gap-y-m justify-center items-center"
-  >
-    <div class="flex flex-wrap fl-gap-x-m justify-center">
-      <span>Sri Petaling</span>
-      <span>Salak South Garden</span>
-      <div class="inline whitespace-nowrap fl-space-x-m">
-        <span>Bukit Jalil</span>
-        <span>Puchong Utama</span>
-        <span> Parklane OUG</span>
-      </div>
-    </div>
-    <a
-      class={cn(buttonVariants({ variant: "link" }), "fl-gap-x-xs")}
-      href="/about#our-schools"
-    >
-      see our schools!<LucideArrowRight className="float-right" />
-    </a>
-  </Card>
-</Section> -->
 <Section
   class="grid xl:grid-cols-2 fl-gap-l max-xl:place-items-center"
   contentWidth="xl"
 >
-  <Youtube
-    src="https://www.youtube.com/embed/pWK_QZkIbQ0"
-    class={cn(cardStyle(), "h-full object-cover max-w-prose")}
+  <YouTube
+    videoId="pWK_QZkIbQ0"
+    title="Register Now with PowerKids!"
+    class={cn(cardStyle(), "max-w-prose")}
   />
   <div class="fl-space-y-m max-w-prose order-1 [text-wrap:balance]">
     <div class="fl-space-y-s">

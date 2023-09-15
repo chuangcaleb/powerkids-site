@@ -5,10 +5,16 @@ import ContactCard from "./ContactCard.astro";
 import Register from "./Register.astro";
 
 const today = new Date();
+interface Props {
+  title?: string;
+  excludeRegister?: boolean;
+}
+
+const { excludeRegister = false } = Astro.props;
 ---
 
 <footer>
-  <Register />
+  {!excludeRegister && <Register />}
   <Section contentWidth="md" id="contact">
     <ContactCard />
   </Section>
