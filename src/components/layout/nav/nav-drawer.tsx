@@ -17,7 +17,13 @@ import {
 import { cn } from "@/lib/utils";
 import * as SheetPrimitive from "@radix-ui/react-dialog";
 import { LucideArrowRight, LucideMenu, LucideSchool } from "lucide-react";
-import { ABOUT, EVENTS, PROGRAMS, type NavLink } from "./nav-links";
+import {
+  ABOUT,
+  EVENTS,
+  PROGRAMS,
+  type NavLink,
+  OUR_SCHOOLS,
+} from "./nav-links";
 
 function DrawerItem({
   title,
@@ -75,7 +81,7 @@ export default function PowerKidsNavDrawer() {
           className="grid gap-4 py-8 [&_a]:block"
         >
           <a
-            href="/"
+            href={OUR_SCHOOLS.href}
             className={cn(
               buttonVariants({
                 variant: "outline",
