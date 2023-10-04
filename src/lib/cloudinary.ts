@@ -4,6 +4,7 @@ export interface CldImage {
   url: string;
   height: number;
   width: number;
+  alt?: string;
 }
 
 cloudinary.v2.config({
@@ -13,5 +14,14 @@ cloudinary.v2.config({
   secure: true,
 });
 const pkCloudinary = cloudinary.v2;
+
+export async function getImageByPublicId(id: string): Promise<CldImage> {
+  try {
+    return await pkCloudinary.api.resource(id);
+  } catch (error) {
+    console.error(error);
+    return { url: "", height: 0, width: 0, alt: "" };
+  }
+}
 
 export default pkCloudinary;

@@ -1,15 +1,23 @@
 ---
+import PowerKids from "@/components/brand/PowerKids.astro";
 import Section from "@/components/layout/Section.astro";
 import { cardStyle, cardTabHeaderStyle } from "@/components/ui/card";
+import pkCloudinary from "@/lib/cloudinary";
 import { cn } from "@/lib/utils";
-import { Cloudinary } from "astro-cloudinary-image";
-import { TEAM } from "./_teams";
-import PowerKids from "@/components/brand/PowerKids.astro";
+import type { ResourceApiResponse } from "cloudinary";
+
+const { resources } = (await pkCloudinary.api.resources({
+  type: "upload",
+  prefix: "powerkids/about/team",
+})) as ResourceApiResponse;
+const sortedResources = resources.sort((a, b) =>
+  a.public_id.localeCompare(b.public_id),
+);
 ---
 
 <Section class="overflow-hidden fl-space-y-xl" id="our-team">
-  <div class="max-w-prose [text-wrap:balance] fl-space-y-m">
-    <h2 class="fl-text-step-4 font-marker whitespace-nowrap">
+  <div class="max-w-prose fl-space-y-m [text-wrap:balance]">
+    <h2 class="flex gap-x-4 whitespace-nowrap font-marker fl-text-step-4">
       Our Team
       <span class="text-primary/40">Team</span>
       <span class="text-primary/20">Team</span>
@@ -30,17 +38,17 @@ import PowerKids from "@/components/brand/PowerKids.astro";
       </i> for <i>guru-guru pra-sekolah</i>.
     </p>
   </div>
-  <div class="grid md:grid-cols-2 grid-rows-[1fr] fl-gap-l grid-flow-dense">
+  <div class="grid grid-flow-dense grid-rows-[1fr] fl-gap-l md:grid-cols-2">
     <div
-      class="md:col-start-2 max-lg:max-w-screen-sm grid place-items-center md:fl-px-s [text-wrap:balance]"
+      class="grid place-items-center [text-wrap:balance] max-lg:max-w-screen-sm md:col-start-2 md:fl-px-s"
     >
-      <p class="fl-text-step-1 md:text-center italic fl-my-m">
+      <p class="italic fl-text-step-1 fl-my-m md:text-center">
         <u>“Children First”</u> is our basis to all our decisions in managing
         children entrusted to our care.
       </p>
     </div>
     {
-      Object.entries(TEAM).map(([name, image]) => (
+      sortedResources.map(({ public_id: title, ...image }) => (
         <div
           class={cn(
             "row-span-2 max-lg:max-w-screen-sm",
@@ -49,14 +57,17 @@ import PowerKids from "@/components/brand/PowerKids.astro";
             // i === 1 && "mt-auto",
           )}
         >
-          <h3 class={cn(cardTabHeaderStyle(), "fl-text-step-2 font-marker")}>
-            {name}
+          <h3 class={cn(cardTabHeaderStyle(), "font-marker fl-text-step-2")}>
+            {title.substring(title.indexOf(" ") + 1)}
           </h3>
-          <Cloudinary
-            src={image}
-            alt=""
-            errorImage=""
+          <img
+            src={image.url}
+            alt={image.alt}
+            height={image.height}
+            width={image.width}
             class:list={cn(cardStyle(), "rounded-tl-none")}
+            loading="lazy"
+            decoding="async"
           />
         </div>
       ))

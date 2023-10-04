@@ -2,7 +2,7 @@ interface School {
   name: string;
   address: string[];
   contacts: string[];
-  image: string;
+  imageId: string;
 }
 
 export const SCHOOLS: School[] = [
@@ -15,13 +15,13 @@ export const SCHOOLS: School[] = [
       "57000 Kuala Lumpur",
     ],
     contacts: ["03 - 9056 4288", "010 - 221 2483"],
-    image: "v1690641775/powerkids/about/schools/sri-petaling.jpg",
+    imageId: "sri-petaling",
   },
   {
     name: "Salak South Garden",
     address: ["K45 Jalan Cahaya 4", "Salak South Garden", "57100 Kuala Lumpur"],
     contacts: ["03 - 9059 2979", "010 - 221 2482"],
-    image: "v1690641775/powerkids/about/schools/salak-south.jpg",
+    imageId: "salak-south-garden",
   },
   {
     name: "Bukit Jalil",
@@ -31,13 +31,13 @@ export const SCHOOLS: School[] = [
       "57000 Kuala Lumpur",
     ],
     contacts: ["012 - 231 2408", "03 - 9545 1455"],
-    image: "v1690641775/powerkids/about/schools/bukit-jalil.jpg",
+    imageId: "bukit-jalil",
   },
   {
     name: "Puchong Utama",
     address: ["No 1 Jalan PU 1/3A", "Taman Puchong Utama", "47140 Puchong"],
     contacts: ["03 - 8066 9363", "012 - 218 0240"],
-    image: "v1690641775/powerkids/about/schools/puchong.jpg",
+    imageId: "puchong",
   },
   {
     name: "Parklane OUG",
@@ -47,7 +47,7 @@ export const SCHOOLS: School[] = [
       "58200 Kuala Lumpur",
     ],
     contacts: ["012 - 386 1123", "03 - 7498 1905"],
-    image: "v1690641775/powerkids/about/schools/parklane.jpg",
+    imageId: "parklane",
   },
 ];
 

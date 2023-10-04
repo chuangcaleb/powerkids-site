@@ -15,13 +15,13 @@ const photos = await pkCloudinary.api.resources({
 });
 ---
 
-<div class="fl-space-y-l columns-sm fl-gap-s">
+<div class="columns-sm fl-gap-s fl-space-y-l">
   {
     photos.resources.map((image: CldImage) => (
       <img
         src={image.url}
         alt=""
-        class={cn(cardStyle(), "fl-mb-s col-span-2")}
+        class={cn(cardStyle(), "col-span-2 fl-mb-s")}
         height={image.height}
         width={image.width}
         loading="lazy"
