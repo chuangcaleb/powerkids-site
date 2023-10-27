@@ -66,8 +66,7 @@ export const PROGRAMS: ImageNavLink[] = [
     children:
       "Essential early childhood education (ECE) provided for children from Ages 2-6!",
     icon: <LucideBookOpenCheck />,
-    image:
-      "v1690805202/powerkids/programs/morning/IMG_20210116_0004_yowtwg.jpg",
+    image: "v1698409879/powerkids/index/program-morning.jpg",
     pill: "08:30AM - 12:30noon",
   },
   {
@@ -76,7 +75,7 @@ export const PROGRAMS: ImageNavLink[] = [
     children:
       "A variety of enrichment classes after lunch and homework coaching!",
     icon: <LucideRocket />,
-    image: "v1690805202/powerkids/programs/after/IMG_20210116_0001_qgyuoz.jpg",
+    image: "v1698409775/powerkids/index/program-after.jpg",
     pill: "12:30PM - 03:00PM",
   },
   {
@@ -84,7 +83,7 @@ export const PROGRAMS: ImageNavLink[] = [
     href: "/programs/daycare",
     children:
       "Care and activities for your child, while they wait for you to finish your day's work!",
-    image: "v1691417629/powerkids/programs/daycare/Prog_daycare2_tbpzb0.jpg",
+    image: "v1691417629/powerkids/index/daycare.jpg",
     icon: <LucideHome />,
     pill: "03:00PM - 06:00PM",
   },
@@ -94,7 +93,7 @@ export const EVENTS: ImageNavLink[] = [
   {
     title: "Graduation",
     href: "/events/graduation",
-    image: "v1691851196/powerkids/events/graduation/graduation_y0hytv.jpg",
+    image: "v1698409502/powerkids/index/graduation.jpg",
     children:
       "A stage-performance celebration of our children who've completed their pre-school learning, showcasing the discipline and training of our children over the years!",
     icon: <LucideGraduationCap />,
@@ -102,7 +101,7 @@ export const EVENTS: ImageNavLink[] = [
   {
     title: "Sports Day",
     href: "/events/sports-day",
-    image: "v1691827903/powerkids/events/sports-day/Event_sports3_n8rzbf.jpg",
+    image: "v1698409423/powerkids/index/sports-day.jpg",
     children:
       "Championship, sportsmanship, winning, competing, participation — a family day-out.",
     icon: <LucideTrophy />,
@@ -110,8 +109,7 @@ export const EVENTS: ImageNavLink[] = [
   {
     title: "Field Trips",
     href: "/events/field-trips",
-    image:
-      "v1691830563/powerkids/events/field-trips/field_trip_bird_e1csw1.jpg",
+    image: "v1698409581/powerkids/index/field-trip.jpg",
     children:
       "Learning beyond the classroom walls, bringing perspective to boost cognitive development.",
     icon: <LucideCamera />,
@@ -119,8 +117,7 @@ export const EVENTS: ImageNavLink[] = [
   {
     title: "Community Service",
     href: "/events/community-service",
-    image:
-      "v1691832615/powerkids/events/community-service/Event_FSF2_quzj04.jpg",
+    image: "v1698409504/powerkids/index/community-service.jpg",
     children:
       "A portion of your child's monthly school fees is channelled to support FunGates SuperFlow Foundation. See how our teachers and students serve!",
     icon: <LucideHeartHandshake />,

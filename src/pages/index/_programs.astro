@@ -23,19 +23,19 @@ const gridItemClasses = [
 ];
 ---
 
-<Section class="lg:fl-space-y-xl">
+<Section class="fl-space-y-m lg:fl-space-y-xl">
   <div class="flex flex-col fl-space-y-m md:items-center">
     <div class="fl-space-y-xs md:text-center">
       <Pill color="red">Our Programs</Pill>
       <h2
-        class="font-marker fl-text-step-4 xl:col-start-2 leading-snug [text-wrap:balance]"
+        class="font-marker leading-snug fl-text-step-4 [text-wrap:balance] xl:col-start-2"
       >
         <u>Fun learning</u> is our <mark class="red">serious</mark> business.
       </h2>
     </div>
 
     <p
-      class="flex fl-gap-x-2xs items-start font-bold fl-text-step-1 tracking-widest flex-wrap leading-tight"
+      class="flex flex-wrap items-start font-bold leading-tight tracking-widest fl-text-step-1 fl-gap-x-2xs"
     >
       <span>Play.</span>
       <span>Explore.</span>
@@ -43,9 +43,9 @@ const gridItemClasses = [
       <span>Collaborate.</span>
     </p>
   </div>
-  <div class="fl-gap-s xl:fl-gap-y-2xs grid md:grid-cols-2 xl:grid-cols-3">
+  <div class="grid fl-gap-s md:grid-cols-2 xl:grid-cols-3 xl:fl-gap-y-2xs">
     <p
-      class="md:text-center leading-tight fl-space-y-2xs md:max-xl:fl-py-xl fl-py-s tracking-wide [text-wrap:balance]"
+      class="leading-tight tracking-wide fl-py-s fl-space-y-2xs [text-wrap:balance] md:text-center md:max-xl:fl-py-xl"
     >
       <b>High-value</b> lessons and activities, with the <b>love and care</b> of
       our professional teachers, all throughout <b>the entire day</b>!
@@ -55,8 +55,8 @@ const gridItemClasses = [
         <Card
           className={cn(
             gridItemClasses[i],
-            "max-md:max-w-[50ch] xl:text-center h-min md:row-span-2",
-            i % 2 === 0 && "sm:max-md:fl-ml-m sm:max-md:mr-auto",
+            "h-min max-md:max-w-[50ch] md:row-span-2 xl:text-center",
+            i % 2 === 0 && "sm:max-md:mr-auto sm:max-md:fl-ml-m",
             i % 2 === 1 && "sm:max-md:ml-auto sm:max-md:fl-mr-m",
           )}
         >
