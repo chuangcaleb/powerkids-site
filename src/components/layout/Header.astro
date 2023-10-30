@@ -6,17 +6,17 @@ import PowerKidsNavMenu from "./nav/nav-bar";
 import PowerKidsNavDrawer from "./nav/nav-drawer";
 ---
 
-<header class="border-b-[0.15em] sticky top-0 bg-background z-10">
-  <nav class="fl-py-3xs fl-px-xs gap-x-4 flex items-center">
+<header class="sticky top-0 z-10 border-b-[0.15em] bg-background">
+  <nav class="flex items-center gap-x-4 fl-px-xs fl-py-3xs">
     <a
       href="/"
       class:list={cn(
         buttonVariants({ variant: "ghost", size: "unset" }),
-        "fl-h-xl fl-px-3xs fl-gap-2xs",
+        "fl-px-3xs fl-gap-2xs fl-h-xl",
       )}
     >
       <img src="/images/logo.svg" alt="PowerKids Logo" class="h-full" />
-      <h1 class="fl-text-step-2 font-marker fl-mt-xs">
+      <h1 class="font-marker fl-text-step-2 fl-mt-xs">
         <PowerKids />
       </h1>
     </a>

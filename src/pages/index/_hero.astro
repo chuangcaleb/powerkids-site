@@ -1,28 +1,30 @@
 ---
+import { Image } from "astro:assets";
+import heroImg from "@/assets/hero-2.png";
 import Section from "@/components/layout/Section.astro";
 import { buttonVariants } from "@/components/ui/button";
 ---
 
 <Section
-  class="flex max-md:flex-col md:max-h-[700px] fl-gap-y-s md:fl-pt-m justify-evenly"
+  class="flex justify-evenly fl-gap-y-s max-md:flex-col md:max-h-[700px] md:fl-pt-m"
   paddingY="unset"
 >
   <div
-    class="max-md:fl-py-s md:my-auto fl-space-y-m max-md:text-center max-w-prose max-md:mx-auto md:fl-pb-l"
+    class="max-w-prose fl-space-y-m max-md:mx-auto max-md:text-center max-md:fl-py-s md:my-auto md:fl-pb-l"
   >
-    <h1 class="fl-text-step-5 font-marker leading-[1.075em]">
+    <h1 class="font-marker leading-[1.075em] fl-text-step-5">
       the <mark class="blue">Centre</mark><br />
       <span class="tracking-tighter">with</span> a <mark class="red">Heart</mark
       >
     </h1>
-    <p class="fl-text-step-0 [text-wrap:balance] max-w-[50ch] mx-auto">
+    <p class="mx-auto max-w-[50ch] fl-text-step-0 [text-wrap:balance]">
       First-Class 21st-Century <u class="whitespace-nowrap"
         >Kindergarten Education</u
       >, based across <em>five</em> locations around Kuala Lumpur. Powered by
       the
       <em>FunGates</em> curriculum since 2001.
     </p>
-    <div class="flex fl-gap-m max-md:justify-center flex-wrap">
+    <div class="flex flex-wrap fl-gap-m max-md:justify-center">
       <a href="#register" class={buttonVariants({ variant: "red", size: "lg" })}
         >register</a
       >
@@ -34,9 +36,11 @@ import { buttonVariants } from "@/components/ui/button";
       </a>
     </div>
   </div>
-  <img
-    src="images/hero.jpg"
-    alt="hero"
-    class="max-md:mx-auto md:fl-pl-l max-w-[49%] object-contain"
+  <Image
+    src={heroImg}
+    densities={[1.5, 2]}
+    alt="Two PowerKids students on a toy telephone, with a speech bubble reading: Register now for 2024!"
+    loading="eager"
+    class="max-w-[80%] object-contain max-md:mx-auto md:fl-pl-l"
   />
 </Section>

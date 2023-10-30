@@ -20,13 +20,17 @@ const { excludeRegister = false } = Astro.props;
   </Section>
   <BottomNav />
   <div
-    class="col-span-full text-primary/30 text-center fl-text-step--1 flex flex-wrap fl-gap-x-m justify-center"
+    class="col-span-full flex flex-wrap justify-center text-center text-primary/30 fl-text-step--1 fl-gap-x-m"
   >
     <span>&copy; {today.getFullYear()} PowerKids Kindergarten</span>
     <span>
       Designed with
       <img src="/images/heart.svg" alt="heart logo" class="inline fl-h-xs" /> by
-      Chuang Caleb
+
+
+      <a href="https://chuangcaleb.com" class="underline hover:text-gray-800"
+        >Chuang Caleb</a
+      >
     </span>
   </div>
 </footer>
