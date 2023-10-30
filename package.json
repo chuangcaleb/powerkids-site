@@ -31,6 +31,7 @@
     "lucide-react": "^0.284.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "sharp": "^0.32.6",
     "tailwind-merge": "^1.14.0",
     "tailwind-utopia": "github:cwsdigital/tailwind-utopia",
     "tailwindcss": "^3.3.5",
