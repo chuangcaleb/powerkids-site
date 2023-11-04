@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import * as React from "react";
 
+import Pill from "@/components/brand/pill";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -9,10 +10,9 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import { SCHOOLS_NAMELIST } from "@/pages/about/schools/_schools";
 import { LucideSchool } from "lucide-react";
 import { ABOUT, EVENTS, OUR_SCHOOLS, PROGRAMS } from "./nav-links";
-import { SCHOOLS_NAMELIST } from "@/pages/about/schools/_schools";
-import Pill from "@/components/brand/pill";
 
 export default function PowerKidsNavMenu() {
   return (
@@ -66,16 +66,6 @@ export default function PowerKidsNavMenu() {
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
-        {/* <NavigationMenuItem className="flex-grow basis-full">
-          <NavigationMenuLink>
-            <Button variant="red">register</Button>
-          </NavigationMenuLink>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuLink>
-            <Button variant="blue">contact</Button>
-          </NavigationMenuLink>
-        </NavigationMenuItem> */}
       </NavigationMenuList>
     </NavigationMenu>
   );

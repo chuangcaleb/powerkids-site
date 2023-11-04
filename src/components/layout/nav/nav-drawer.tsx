@@ -20,10 +20,11 @@ import { LucideArrowRight, LucideMenu, LucideSchool } from "lucide-react";
 import {
   ABOUT,
   EVENTS,
+  OUR_SCHOOLS,
   PROGRAMS,
   type NavLink,
-  OUR_SCHOOLS,
 } from "./nav-links";
+import { LucidePhoneOutgoing } from "lucide-react";
 
 function DrawerItem({
   title,
@@ -58,9 +59,20 @@ function DrawerItem({
 export default function PowerKidsNavDrawer() {
   return (
     <Sheet>
+      <a
+        className={cn(
+          buttonVariants({
+            size: "unset",
+          }),
+          "p-3 bg-green-300 text-black fixed right-0 bottom-10 hover:bg-green-400 md:hidden",
+        )}
+        href="#contact"
+      >
+        <LucidePhoneOutgoing />
+      </a>
       <SheetTrigger asChild>
         <Button
-          className="absolute right-3 top-1 inline-flex fl-px-2xs fl-py-3xs md:hidden"
+          className="absolute right-3 top-1 fl-px-2xs fl-py-3xs md:hidden"
           variant="outline"
           size="unset"
           aria-label="Open Navigation Menu"

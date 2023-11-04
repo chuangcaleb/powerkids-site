@@ -46,6 +46,7 @@
   }
   html {
     scroll-padding-top: var(--fs-xl);
+    scroll-behavior: smooth;
   }
   u,
   .underline {
