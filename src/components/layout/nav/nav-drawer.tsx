@@ -67,6 +67,7 @@ export default function PowerKidsNavDrawer() {
           "p-3 bg-green-300 text-black fixed right-0 bottom-10 hover:bg-green-400 md:hidden",
         )}
         href="#contact"
+        aria-label='contact information and social links'
       >
         <LucidePhoneOutgoing />
       </a>
