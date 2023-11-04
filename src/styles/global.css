@@ -5,7 +5,7 @@
 @layer base {
   @font-face {
     font-family: "Marker Felt";
-    src: font-url("/fonts/marker-felt.ttf") format("truetype");
+    src: url("/fonts/marker-felt.ttf") format("truetype");
   }
   :root {
     --background: 0 0% 100%;
