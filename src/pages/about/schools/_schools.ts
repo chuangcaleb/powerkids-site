@@ -17,12 +17,12 @@ export const SCHOOLS: School[] = [
     contacts: ["03 - 9056 4288", "010 - 221 2483"],
     imageId: "sri-petaling",
   },
-  {
-    name: "Salak South Garden",
-    address: ["K45 Jalan Cahaya 4", "Salak South Garden", "57100 Kuala Lumpur"],
-    contacts: ["03 - 9059 2979", "010 - 221 2482"],
-    imageId: "salak-south-garden",
-  },
+  // {
+  //   name: "Salak South Garden",
+  //   address: ["K45 Jalan Cahaya 4", "Salak South Garden", "57100 Kuala Lumpur"],
+  //   contacts: ["03 - 9059 2979", "010 - 221 2482"],
+  //   imageId: "salak-south-garden",
+  // },
   {
     name: "Bukit Jalil",
     address: [

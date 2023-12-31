@@ -85,7 +85,7 @@ export const PROGRAMS: ImageNavLink[] = [
       "Care and activities for your child, while they wait for you to finish your day's work!",
     image: "v1691417629/powerkids/index/daycare.jpg",
     icon: <LucideHome />,
-    pill: "03:00PM - 06:00PM",
+    pill: "03:00PM - 07:00PM",
   },
 ];
 
