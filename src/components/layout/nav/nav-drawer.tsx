@@ -105,7 +105,7 @@ export default function PowerKidsNavDrawer() {
             )}
           >
             <LucideSchool />
-            Our Five Schools
+            Our Four Schools
             <LucideArrowRight className="float-right" />
           </a>
           <DrawerItem title="about" navGroup={ABOUT} />
