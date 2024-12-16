@@ -64,10 +64,10 @@ export default function PowerKidsNavDrawer() {
           buttonVariants({
             size: "unset",
           }),
-          "p-3 bg-green-300 text-black fixed right-0 bottom-10 hover:bg-green-400 md:hidden",
+          "fixed bottom-10 right-0 bg-green-300 p-3 text-black hover:bg-green-400 md:hidden",
         )}
         href="#contact"
-        aria-label='contact information and social links'
+        aria-label="contact information and social links"
       >
         <LucidePhoneOutgoing />
       </a>
@@ -105,7 +105,7 @@ export default function PowerKidsNavDrawer() {
             )}
           >
             <LucideSchool />
-            Our Four Schools
+            Our Schools
             <LucideArrowRight className="float-right" />
           </a>
           <DrawerItem title="about" navGroup={ABOUT} />
