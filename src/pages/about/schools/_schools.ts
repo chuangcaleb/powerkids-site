@@ -23,16 +23,16 @@ export const SCHOOLS: School[] = [
   //   contacts: ["03 - 9059 2979", "010 - 221 2482"],
   //   imageId: "salak-south-garden",
   // },
-  {
-    name: "Bukit Jalil",
-    address: [
-      "No 48 Jalan 17/155C",
-      "Bandar Bukit Jalil",
-      "57000 Kuala Lumpur",
-    ],
-    contacts: ["012 - 231 2408", "03 - 9545 1455"],
-    imageId: "bukit-jalil",
-  },
+  // {
+  //   name: "Bukit Jalil",
+  //   address: [
+  //     "No 48 Jalan 17/155C",
+  //     "Bandar Bukit Jalil",
+  //     "57000 Kuala Lumpur",
+  //   ],
+  //   contacts: ["012 - 231 2408", "03 - 9545 1455"],
+  //   imageId: "bukit-jalil",
+  // },
   {
     name: "Puchong Utama",
     address: ["No 1 Jalan PU 1/3A", "Taman Puchong Utama", "47140 Puchong"],

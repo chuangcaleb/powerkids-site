@@ -3,7 +3,7 @@
 ## MVP 1
 
 - [x] migrate red/blue from primary/secondary to accent red/blue
-- [x] custom font?
+- [x] custom font? <https://shantellsans.com/>
 - [x] better highlighting
 - [x] heading / footer
 - [x] navigation / scaffolding pages
