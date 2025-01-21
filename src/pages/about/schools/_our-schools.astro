@@ -22,7 +22,7 @@ function stripNonNumeric(str: string) {
     {
       SCHOOLS.map(async (school) => {
         const image = await getImageByPublicId(
-          `powerkids/about/schools/${school.imageId}`,
+          `powerkids/about/schools/${school.imageId}`
         );
         return (
           <>
