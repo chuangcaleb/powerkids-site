@@ -35,7 +35,11 @@ export const SCHOOLS: School[] = [
   // },
   {
     name: "Puchong Utama",
-    address: ["No 1 Jalan PU 1/3A", "Taman Puchong Utama", "47140 Puchong"],
+    address: [
+      "No 1, Jalan PU 3/1A",
+      "Taman Puchong Utama",
+      "47140 Puchong, Selangor",
+    ],
     contacts: ["03 - 8066 9363", "012 - 218 0240"],
     imageId: "puchong",
   },
