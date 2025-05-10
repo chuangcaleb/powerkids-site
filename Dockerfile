@@ -27,7 +27,11 @@ COPY . .
 
 # Set dummy secret during build and before runtime
 # This is needed to avoid the error "Error: Payload secret not set"
-ENV PAYLOAD_SECRET=dummy-secret
+ARG PAYLOAD_SECRET
+ENV PAYLOAD_SECRET=${PAYLOAD_SECRET}
+ARG MONGODB_URI
+ENV MONGODB_URI=${MONGODB_URI}
+
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
