@@ -9,6 +9,13 @@ FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
+# https://docs.railway.com/guides/dockerfiles#using-variables-at-build-time
+ARG PAYLOAD_SECRET
+ARG PREVIEW_SECRET
+ARG CRON_SECRET
+ARG NEXT_PUBLIC_SERVER_URL
+ARG MONGODB_URI
+
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 RUN \
@@ -24,14 +31,6 @@ FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-
-# Set dummy secret during build and before runtime
-# This is needed to avoid the error "Error: Payload secret not set"
-ARG PAYLOAD_SECRET
-ENV PAYLOAD_SECRET=${PAYLOAD_SECRET}
-ARG MONGODB_URI
-ENV MONGODB_URI=${MONGODB_URI}
-
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
