@@ -8,7 +8,6 @@ import {
 import path from 'path'
 import { fileURLToPath } from 'url'
 
-import fs from 'fs'
 import { anyone } from '../access/anyone'
 import { authenticated } from '../access/authenticated'
 
