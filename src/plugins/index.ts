@@ -1,7 +1,7 @@
-import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
 import { formBuilderPlugin } from '@payloadcms/plugin-form-builder'
 import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
+import { gcsStorage } from '@payloadcms/storage-gcs'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { searchPlugin } from '@payloadcms/plugin-search'
 import { Plugin } from 'payload'
@@ -90,5 +90,18 @@ export const plugins: Plugin[] = [
       },
     },
   }),
-  payloadCloudPlugin(),
+  gcsStorage({
+    enabled: process.env.NODE_ENV === 'production',
+    collections: {
+      media: true,
+    },
+    bucket: process.env.GCS_BUCKET ?? '',
+    options: {
+      credentials: {
+        project_id: process.env.GCS_PROJECT_ID,
+        client_email: process.env.GCS_CLIENT_EMAIL,
+        private_key: process.env.GCS_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+      },
+    },
+  }),
 ]
