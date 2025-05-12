@@ -34,7 +34,7 @@ ARG PAYLOAD_SECRET
 ARG PREVIEW_SECRET
 ARG CRON_SECRET
 ARG NEXT_PUBLIC_SERVER_URL
-ARG DATABASE_URI
+ARG PUBLIC_DATABASE_URI
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
