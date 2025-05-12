@@ -3,6 +3,8 @@
 
 FROM node:22.15.0-alpine AS base
 
+# ----------------------------------- deps ----------------------------------- #
+
 # Install dependencies only when needed
 FROM base AS deps
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
@@ -18,6 +20,7 @@ RUN \
   else echo "Lockfile not found." && exit 1; \
   fi
 
+# ---------------------------------- builder --------------------------------- #
 
 # Rebuild the source code only when needed
 FROM base AS builder
@@ -44,6 +47,8 @@ RUN \
   elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm run build; \
   else echo "Lockfile not found." && exit 1; \
   fi
+
+# ---------------------------------- runner ---------------------------------- #
 
 # Production image, copy all the files and run next
 FROM base AS runner

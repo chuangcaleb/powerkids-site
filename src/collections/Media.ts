@@ -8,11 +8,19 @@ import {
 import path from 'path'
 import { fileURLToPath } from 'url'
 
+import fs from 'fs'
 import { anyone } from '../access/anyone'
 import { authenticated } from '../access/authenticated'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
+
+const staticDir = path.resolve(dirname, process.env.UPLOAD_STATIC_DIR ?? '../../public/media')
+
+if (!fs.existsSync(staticDir)) {
+  fs.mkdirSync(staticDir, { recursive: true })
+  console.log(`Created upload directory at ${staticDir}`)
+}
 
 export const Media: CollectionConfig = {
   slug: 'media',
@@ -40,7 +48,7 @@ export const Media: CollectionConfig = {
   ],
   upload: {
     // Upload to the public/media directory in Next.js making them publicly accessible even outside of Payload
-    staticDir: path.resolve(dirname, process.env.UPLOAD_STATIC_DIR ?? '../../public/media'),
+    staticDir,
     adminThumbnail: 'thumbnail',
     focalPoint: true,
     imageSizes: [
