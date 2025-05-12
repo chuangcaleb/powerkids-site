@@ -319,3 +319,9 @@ You can also deploy your app manually, check out the [deployment documentation](
 ## Questions
 
 If you have any issues or questions, reach out to us on [Discord](https://discord.com/invite/payload) or start a [GitHub discussion](https://github.com/payloadcms/payload/discussions).
+
+- Railway
+  - pnpm signing; fix: set Dockerfile node version to 22
+  - Dockerfile build stage doesn't receive Railway secrets; fix: explictly declare ARG in Dockerfile
+  - Dockerfile build stage can't access private Railway mongo db; fix: use external mongo db zzz
+  - Dockerfile; fix: use output: 'standalone'` in your next.config.js file
