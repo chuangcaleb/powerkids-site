@@ -9,13 +9,6 @@ FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# https://docs.railway.com/guides/dockerfiles#using-variables-at-build-time
-ARG PAYLOAD_SECRET
-ARG PREVIEW_SECRET
-ARG CRON_SECRET
-ARG NEXT_PUBLIC_SERVER_URL
-ARG MONGODB_URI
-
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 RUN \
@@ -31,6 +24,14 @@ FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+
+# https://docs.railway.com/guides/dockerfiles#using-variables-at-build-time
+ARG PAYLOAD_SECRET
+ARG PREVIEW_SECRET
+ARG CRON_SECRET
+ARG NEXT_PUBLIC_SERVER_URL
+ARG MONGODB_URI
+RUN echo "RAILWAY_ENVIRONMENT: $RAILWAY_ENVIRONMENT" && echo "RAILWAY_SERVICE_NAME: $RAILWAY_SERVICE_NAME"
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
