@@ -31,7 +31,7 @@ ARG PREVIEW_SECRET
 ARG CRON_SECRET
 ARG NEXT_PUBLIC_SERVER_URL
 ARG MONGODB_URI
-RUN echo "RAILWAY_ENVIRONMENT: $RAILWAY_ENVIRONMENT" && echo "RAILWAY_SERVICE_NAME: $RAILWAY_SERVICE_NAME"
+RUN echo "RAILWAY_ENVIRONMENT: ${RAILWAY_ENVIRONMENT}" && echo "RAILWAY_SERVICE_NAME: ${RAILWAY_SERVICE_NAME}"
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
