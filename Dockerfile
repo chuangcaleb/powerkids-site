@@ -25,14 +25,13 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
+# Explictly set the environment variables to be used in the build stage
 # https://docs.railway.com/guides/dockerfiles#using-variables-at-build-time
 ARG PAYLOAD_SECRET
 ARG PREVIEW_SECRET
 ARG CRON_SECRET
 ARG NEXT_PUBLIC_SERVER_URL
-ARG MONGODB_URI
-RUN echo "RAILWAY_ENVIRONMENT_NAME: ${RAILWAY_ENVIRONMENT_NAME}" && echo "RAILWAY_SERVICE_NAME: ${RAILWAY_SERVICE_NAME}" && echo "NODE_ENV: ${NODE_ENV}"
-RUN printenv
+ARG DATABASE_URI
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
