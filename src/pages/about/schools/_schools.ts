@@ -14,7 +14,7 @@ export const SCHOOLS: School[] = [
       "Bandar Baru Sri Petaling",
       "57000 Kuala Lumpur",
     ],
-    contacts: ["03 - 9056 4288", "010 - 221 2483"],
+    contacts: ["03 - 9056 4288", "010 - 221 2482"],
     imageId: "sri-petaling",
   },
   // {
