@@ -1,54 +1,83 @@
-# Astro Starter Kit: Basics
+# PowerKids Site
 
+## Description
+
+This is the official website for PowerKids Kindergarten.
+
+## Features
+
+* Fast performance with Astro.js
+* Interactive components with Radix UI + React
+* Responsive design with Tailwind CSS, with utopia fluid typography/spacing
+* SEO friendly with sitemap and robots.txt generation
+* Image optimization with Cloudinary
+
+## Installation
+
+To get a local copy up and running, follow these simple steps.
+
+### Prerequisites
+
+* npm / pnpm
+* Node.js
+
+### Setup
+
+```bash
+# Clone the repo
+git clone https://github.com/chuangcaleb/powerkids-site.git
+# Install PNPM packages
+pnpm install
+# Start the development server
+pnpm dev
 ```
-npm create astro@latest -- --template basics
+
+## Usage
+
+```bash
+# To build the project for production:
+pnpm build
+# To preview the production build locally:
+pnpm preview
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+## File Structure
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+<details>
+<summary>Click to expand</summary>
 
-![basics](https://user-images.githubusercontent.com/4677417/186188965-73453154-fdec-4d6b-9c34-cb35c248ae5b.png)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
+```filetree
+.
+├── README.md
+├── ROADMAP.md
+├── astro.config.mjs
+├── components.json // shadcn components.json
+├── lib
+│   └── shadcn-plugin.ts
+├── notes.md
+├── package.json
+├── pnpm-lock.yaml
+├── public
+│   ├── favicon
+│   ├── fonts
+│   ├── images
+│   └── media
+├── src
+│   ├── assets // static assets
+│   ├── components
+│   │   ├── brand // brand-specific components
+│   │   ├── common
+│   │   ├── layout
+│   │   │   ├── footer
+│   │   │   └── nav
+│   │   └── ui // shadcn components
+│   ├── env.d.ts
+│   ├── lib // utility files for services not specific to the project
+│   │   ├── cloudinary.ts
+│   │   └── utils.ts
+│   ├── pages
+│   └── styles
+├── tailwind.config.ts
 ```
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:3000`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+</details>
