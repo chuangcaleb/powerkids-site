@@ -1,83 +1,76 @@
-# PowerKids Site
+# powerkids-site
 
-## Description
+Website for **PowerKids Kindergarten** — three schools across the Klang Valley, Malaysia. <https://powerkids.edu.my>
 
-This is the official website for PowerKids Kindergarten.
+This branch (`v4`) is a ground-up rebuild. Its purpose is to move every piece of content out of code and into a CMS, so school staff can edit copy, swap photos, add pages, and rearrange sections without a developer.
 
-## Features
+## Status
 
-* Fast performance with Astro.js
-* Interactive components with Radix UI + React
-* Responsive design with Tailwind CSS, with utopia fluid typography/spacing
-* SEO friendly with sitemap and robots.txt generation
-* Image optimization with Cloudinary
+**Phase 0 of 8** — archive and documentation. No application code yet. See [the phase list](#phases).
 
-## Installation
+## Stack
 
-To get a local copy up and running, follow these simple steps.
+| Layer | Choice |
+| --- | --- |
+| Framework | [Next.js](https://nextjs.org) (App Router), `>=16.2.2` |
+| CMS | [Payload](https://payloadcms.com) `>=3.73`, mounted in the same app |
+| Database | [Neon](https://neon.tech) Postgres |
+| Media | [Cloudflare R2](https://developers.cloudflare.com/r2/), S3-compatible adapter |
+| Hosting | [Vercel](https://vercel.com) |
+| Styling | Vanilla CSS — design tokens, CUBE-style composition primitives, CSS Modules |
+| Language | TypeScript, strict |
+| Packages | pnpm |
 
-### Prerequisites
+Payload does not support Next `15.5`–`16.1.x`. The version floor is a hard requirement.
 
-* npm / pnpm
-* Node.js
+## Getting started
 
-### Setup
+> Not yet available — Phase 1 sets this up.
 
 ```bash
-# Clone the repo
-git clone https://github.com/chuangcaleb/powerkids-site.git
-# Install PNPM packages
 pnpm install
-# Start the development server
+cp .env.example .env   # fill in your own credentials
 pnpm dev
 ```
 
-## Usage
+The public site runs at `/`, the admin panel at `/admin`.
 
-```bash
-# To build the project for production:
-pnpm build
-# To preview the production build locally:
-pnpm preview
-```
+## Documentation
 
-## File Structure
+Docs use progressive disclosure: start narrow, follow links only as far as your task needs.
 
-<details>
-<summary>Click to expand</summary>
+- **[AGENTS.md](AGENTS.md)** — conventions, non-negotiables, and a map of every other doc. Start here.
+- **DESIGN.md** — visual identity: tokens, type scale, invariants. *(Phase 2)*
+- **[docs/architecture/](docs/architecture/)** — system shape, content model, block catalogue
+- **[docs/design/](docs/design/)** — layout primitives, tokens, components
+- **[docs/workflows/](docs/workflows/)** — verify loop, how to add a block or page, how to edit content
+- **[docs/ops/](docs/ops/)** — environments, deploy, migrations
+- **[docs/decisions/](docs/decisions/)** — architecture decision records
+- **[docs/reference/](docs/reference/)** — audited v3 content and design, the migration source of truth
 
-```filetree
-.
-├── README.md
-├── ROADMAP.md
-├── astro.config.mjs
-├── components.json // shadcn components.json
-├── lib
-│   └── shadcn-plugin.ts
-├── notes.md
-├── package.json
-├── pnpm-lock.yaml
-├── public
-│   ├── favicon
-│   ├── fonts
-│   ├── images
-│   └── media
-├── src
-│   ├── assets // static assets
-│   ├── components
-│   │   ├── brand // brand-specific components
-│   │   ├── common
-│   │   ├── layout
-│   │   │   ├── footer
-│   │   │   └── nav
-│   │   └── ui // shadcn components
-│   ├── env.d.ts
-│   ├── lib // utility files for services not specific to the project
-│   │   ├── cloudinary.ts
-│   │   └── utils.ts
-│   ├── pages
-│   └── styles
-├── tailwind.config.ts
-```
+## Phases
 
-</details>
+| # | Phase | State |
+| --- | --- | --- |
+| 0 | Archive, extract, document skeleton | in progress |
+| 1 | Foundation — app, database, storage, CI, deploy | |
+| 2 | Design system — tokens, primitives, components | |
+| 3 | Content model — collections, globals, blocks | |
+| 4 | Rendering — layouts, pages, block renderers | |
+| 5 | Content migration — seed script | |
+| 6 | Launch — SEO, performance, accessibility, cutover | |
+| 7 | Forms — registration and careers *(deferred)* | |
+| 8 | Localisation — activate additional languages *(deferred)* | |
+
+## History
+
+| Ref | What |
+| --- | --- |
+| `main` | Currently the live v3 site |
+| `v3-final` (tag) | Exact state of the live site at the start of the rebuild |
+| `v3` (branch) | The Astro implementation — reference only, never copied |
+| `archive/v4-payload-template` | An abandoned 2025 attempt on the stock Payload starter |
+
+## Licence
+
+MIT
