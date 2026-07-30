@@ -24,7 +24,7 @@
     "generate:types": "payload generate:types",
     "generate:importmap": "payload generate:importmap",
     "migrate": "payload migrate",
-    "migrate:create": "payload migrate:create",
+    "migrate:create": "payload migrate:create && node scripts/fix-migration-imports.mjs",
     "prepare": "lefthook install"
   },
   "dependencies": {

@@ -1,5 +1,7 @@
 import type { CollectionConfig } from 'payload'
 
+import { hashedFilename } from '@/lib/media-filename'
+
 /** Quality 80 is the usual sweet spot: no visible artefacts, big size win. */
 const WEBP = { format: 'webp', options: { quality: 80 } } as const
 
@@ -23,6 +25,24 @@ export const Media: CollectionConfig = {
     create: ({ req }) => Boolean(req.user),
     update: ({ req }) => Boolean(req.user),
     delete: ({ req }) => Boolean(req.user),
+  },
+
+  hooks: {
+    // Rename every upload to include a hash of its content, before Payload
+    // derives the size variants' names from it.
+    //
+    // Media is served from a long-cached CDN domain. Without this, replacing a
+    // photo reuses the filename, the edge keeps serving the old bytes, and the
+    // editor sees their change do nothing. Content-addressed names make a
+    // replacement a different URL, so it appears immediately.
+    beforeOperation: [
+      ({ operation, req }) => {
+        if (operation !== 'create' && operation !== 'update') return
+        if (!req.file) return
+
+        req.file.name = hashedFilename(req.file.name, req.file.data)
+      },
+    ],
   },
   upload: {
     mimeTypes: ['image/*', 'application/pdf'],

@@ -20,21 +20,19 @@ pnpm verify
 
 Commit the migration file and the regenerated types together with the schema change. Migrations run automatically on deploy.
 
-### Fix the generated import first
+### The generated import is patched automatically
 
-Payload's generator emits this line at the top of every migration:
+Payload's generator emits this at the top of every migration:
 
 ```ts
 import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-postgres'
 ```
 
-`MigrateUpArgs` and `MigrateDownArgs` are **type-only** exports. As written, the import fails at runtime under ESM with `does not provide an export named 'MigrateDownArgs'`, and `pnpm migrate` crashes before applying anything. Change it to:
+`MigrateUpArgs` and `MigrateDownArgs` are **type-only** exports, so under ESM this fails at runtime with `does not provide an export named 'MigrateDownArgs'` and `pnpm migrate` dies before applying anything — an error that points at the module system rather than at the real cause.
 
-```ts
-import { type MigrateDownArgs, type MigrateUpArgs, sql } from '@payloadcms/db-postgres'
-```
+`pnpm migrate:create` therefore runs `scripts/fix-migration-imports.mjs` afterwards, which rewrites the line to use `import type`. Nothing to remember; it is not a manual step.
 
-Do this every time until a Payload release fixes the generator. It is the first thing to check when a fresh migration will not run.
+If you generate a migration by calling the Payload CLI directly, run the script yourself. Delete both once a Payload release fixes the generator.
 
 ## Writing them
 

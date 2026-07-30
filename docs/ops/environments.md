@@ -18,6 +18,18 @@
 
 Preview deployments share the dev database on purpose: previews are for reviewing code, and a shared scratch database keeps them cheap. Never point a preview at production data.
 
+### Media isolation
+
+**Local and Preview use a separate R2 bucket from Production, with an API token scoped to that bucket only.**
+
+The reason is narrow and specific: **R2 has no object versioning**. A deleted object is gone. The media in the production bucket is a kindergarten's photographs of graduations, sports days, and field trips — in many cases the only remaining copy. A preview deployment is a branch that may never merge, running code nobody has reviewed yet, and it must not be able to reach those files.
+
+Prefix separation inside one bucket (`dev/`, `prod/`) was considered and rejected. It costs the same and isolates nothing: the same credentials reach both prefixes, so the protection is a config string rather than an access boundary. Separate buckets plus separately scoped tokens means a misconfigured preview fails with a permissions error instead of deleting a photograph.
+
+Neither bucket costs anything at this scale — R2's free tier is far beyond what this site needs, and the dev bucket can serve from its plain `r2.dev` URL with no custom domain.
+
+Because filenames are content-addressed (see [Media serving and cache](#media-serving-and-cache)), promoting a file between buckets is a straight copy: the same bytes produce the same name.
+
 ## Services
 
 | Service       | Used for                            | Who owns access |
@@ -60,12 +72,16 @@ The consequence is that **every build needs every variable set to something**. C
 
 Uploads go to R2 through the S3 adapter and are served from `R2_PUBLIC_URL` directly, not proxied through the app. `next/image`'s allowlist is derived from that variable in `next.config.ts`, so a custom domain needs no separate config.
 
-**Cached for four hours.** The custom domain returns `cache-control: max-age=14400`. Deleting or replacing a file in the CMS takes effect in the database immediately, but the old image keeps being served from Cloudflare's edge until the TTL expires — verified during Phase 1 setup, where a deleted object still returned 200 from cache while a cache-busted request correctly returned 404.
+**Filenames carry a content hash**, e.g. `hero-4846c1b1.webp`. A `beforeOperation` hook on `media` renames every upload before Payload derives the size variants from it — see `src/lib/media-filename.ts`.
 
-This will confuse editors: they replace a photo, reload, and see the old one. Two mitigations, to decide before launch:
+This exists because the media domain caches for four hours (`cache-control: max-age=14400`). Without content-addressed names, replacing a photo reuses the filename, the edge keeps serving the old bytes, and the editor concludes the CMS is broken. With them, different content is a different URL: a replacement is visible immediately and the old object is deleted.
 
-- Uploading a _new_ file rather than replacing an existing one produces a new filename, so it appears instantly. This is the behaviour to teach in `docs/workflows/content-editing.md`.
-- A purge-on-publish hook could clear the cache for changed files. Costs an API call and a Cloudflare token; worth it only if replacing files turns out to be common.
+Verified in Phase 1: replacing a document's file produced a new URL that served instantly, while the previous URL returned 404 on a cache-busted request.
+
+Two consequences worth knowing:
+
+- **The cache TTL is now free to raise.** Content-addressed URLs are immutable by construction, so `max-age=31536000, immutable` is safe and strictly better for visitors. Not yet applied — it is a Cloudflare-side setting on the custom domain.
+- **Identical content uploaded twice still stores twice.** Payload requires unique filenames per document, so the second copy becomes `mary-2bb95600-1.webp`. The hash prevents stale caches, not duplicate storage.
 
 ## Known gaps
 
