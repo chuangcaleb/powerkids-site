@@ -1,0 +1,23 @@
+# Git hooks. Installed by `pnpm install` via the prepare script.
+#
+# Deliberately fast: the pre-commit hook formats and lints only what you
+# staged. The full verify loop (docs/workflows/verify-loop.md) runs before
+# push and in CI — a hook slow enough to be worth skipping gets skipped.
+
+pre-commit:
+  parallel: true
+  jobs:
+    - name: format
+      glob: '*.{ts,tsx,js,mjs,json,css,md,yml,yaml}'
+      run: pnpm prettier --write {staged_files}
+      stage_fixed: true
+
+    - name: lint
+      glob: '*.{ts,tsx,mjs}'
+      run: pnpm eslint --fix {staged_files}
+      stage_fixed: true
+
+pre-push:
+  jobs:
+    - name: verify
+      run: pnpm verify

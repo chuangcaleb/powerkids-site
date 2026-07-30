@@ -1,0 +1,7 @@
+.next/
+node_modules/
+_reference/
+pnpm-lock.yaml
+src/payload-types.ts
+src/migrations/
+src/app/(payload)/admin/importMap.js
