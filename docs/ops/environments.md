@@ -50,9 +50,11 @@ Every name below appears in `.env.example` with a comment. Values come from the 
 
 ## How variables are read
 
-`src/lib/env.ts` is the only module that touches `process.env` — a lint rule enforces this. It reads values lazily and throws an error naming the variable when one is missing, so a misconfiguration fails at boot rather than surfacing as `undefined` somewhere unrelated.
+`src/lib/env.ts` is the only module that touches `process.env` — a lint rule enforces this. It throws an error naming the variable when one is missing, rather than letting `undefined` flow into a connection string and fail somewhere unrelated.
 
-Builds must not require real credentials. CI builds with placeholder values, which is why validation is lazy rather than at import time.
+**This applies at build time too.** The Payload config calls `requireEnv` while being constructed, and Next constructs it during page-data collection, so a missing variable fails the build. That ordering is deliberate: a deploy that cannot work should fail at deploy, not at the first request that happens to need the variable.
+
+The consequence is that **every build needs every variable set to something**. CI sets deliberately fake values in `.github/workflows/verify.yml`; Vercel needs the real ones present for **both** Preview and Production, or the deployment fails at build.
 
 ## Media serving and cache
 

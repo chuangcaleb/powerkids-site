@@ -6,9 +6,15 @@
  * naming the variable, rather than as `undefined` flowing into a database URL
  * and failing somewhere unrelated three layers down.
  *
- * Validation is deliberately lazy. `next build` runs this file's importers at
- * build time, and the build must not require real credentials — so values are
- * read on first access, not on import.
+ * Validation is strict everywhere, including at build time. The Payload config
+ * calls `requireEnv` while it is being constructed, and Next constructs it
+ * during page-data collection — so a missing variable fails the build rather
+ * than the first request that happens to need it. That is the useful ordering:
+ * a deploy that cannot work should not become a deploy that half works.
+ *
+ * The cost is that any build needs every variable set to something. CI sets
+ * deliberately fake values (see .github/workflows/verify.yml); real values live
+ * only in `.env` and the Vercel dashboard.
  */
 
 type EnvKey =

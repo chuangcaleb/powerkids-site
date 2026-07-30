@@ -33,8 +33,18 @@ jobs:
       - run: pnpm test
       - run: pnpm build
         env:
-          # Build-time placeholders. The build must not require real
-          # credentials — anything that does belongs at request time.
-          DATABASE_URI: postgres://placeholder
+          # Every variable the Payload config reads must be present, because
+          # the config is constructed while Next collects page data. They are
+          # deliberately fake: the build must never reach a real service.
+          #
+          # Keep this list in sync with the EnvKey union in src/lib/env.ts. A
+          # variable added there without a placeholder here fails CI at the
+          # build step, which is the intended way to find out.
+          DATABASE_URI: postgres://placeholder:placeholder@localhost:5432/placeholder
           PAYLOAD_SECRET: placeholder-secret-for-ci-builds-only
           NEXT_PUBLIC_SERVER_URL: http://localhost:3000
+          S3_BUCKET: placeholder
+          S3_ACCESS_KEY_ID: placeholder
+          S3_SECRET_ACCESS_KEY: placeholder
+          S3_ENDPOINT: https://placeholder.r2.cloudflarestorage.com
+          R2_PUBLIC_URL: https://placeholder.example.com
