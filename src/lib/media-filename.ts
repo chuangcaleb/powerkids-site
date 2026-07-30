@@ -3,6 +3,18 @@ import { createHash } from 'node:crypto'
 /**
  * Append a short content hash to an uploaded filename.
  *
+ * Payload has no native equivalent — checked before writing this, against
+ * 3.86.0, which is the latest stable release:
+ *
+ *   - `upload.cacheTags` appends a cache tag only to the *admin panel's*
+ *     thumbnail requests, not to public URLs.
+ *   - `imageSize.generateImageName` renames size variants only, not the
+ *     original, and the variants already inherit the name set here.
+ *   - `getSafeFilename` / `incrementName` handle name collisions
+ *     (`file.jpg` → `file-1.jpg`), which is a different problem.
+ *
+ * Re-check on a Payload upgrade; delete this if a native option appears.
+ *
  * Media is served from a CDN-backed domain with a long cache lifetime, so a
  * file that keeps its name keeps its cached copy. An editor replacing a photo
  * would see no change for hours and reasonably conclude the CMS is broken.
