@@ -9,6 +9,7 @@
     "node": ">=22",
     "pnpm": ">=10"
   },
+  "packageManager": "pnpm@11.18.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
