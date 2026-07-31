@@ -18,7 +18,8 @@
     "incremental": true,
     "noEmit": true,
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@payload-config": ["./src/payload.config.ts"]
     },
     "plugins": [
       {

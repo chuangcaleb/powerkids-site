@@ -18,27 +18,36 @@ Nothing listed here may be hard-coded in a component. If a phone number, address
 ## Collections
 
 ### `pages`
+
 Editor-composed routes. The only collection with a block layout.
 
 `title`, `slug`, `layout` (blocks), `seo`, `publishedAt`, `_status`
-Drafts and version history enabled. Slug is unique and indexed.
+Drafts and version history enabled.
+
+**Use Payload's built-in `slugField()`** rather than a hand-written slug field. It already provides the unique index, generation from `title`, a checkbox letting an editor take manual control, and — importantly — it _stops_ regenerating once a document is published, so a later title edit cannot silently change a live URL and break inbound links. Reimplementing that behaviour correctly is more work than it looks.
+
+It is marked `@experimental` in Payload 3.86, so pin the Payload version deliberately and re-read its behaviour on upgrade. That risk is still smaller than maintaining our own.
 
 ### `media`
+
 Uploads, backed by R2. `alt` is **required** — no exceptions, no empty strings.
 
 `alt`, `caption`, focal point, generated sizes
 
 ### `schools`
+
 The physical branches. Three active; see the inventory for two inactive entries.
 
 `name`, `address` (multi-line), `phones` (array), `mapUrl`, `photo`, `principal` → `people`, `order`
 
 ### `programs`
+
 Daily offerings with fixed hours.
 
 `name`, `slug`, `hours`, `ageRange`, `strapline`, `summary`, `body`, `image`, `order`
 
 ### `events`
+
 Recurring activity types, not dated calendar entries.
 
 `name`, `slug`, `summary`, `body`, `gallery` → `media[]`, `videos` (array of embed id + label), `order`
@@ -46,11 +55,13 @@ Recurring activity types, not dated calendar entries.
 `videos` exists so the Graduation page's per-year entries stop being a developer task.
 
 ### `people`
+
 Principals, and the team section if it returns.
 
 `name`, `role`, `school` → `schools`, `bio`, `portrait`, `order`
 
 ### `users`
+
 Admin authentication. Roles: `admin` (full) and `editor` (content only, no user management).
 
 ---
@@ -58,14 +69,17 @@ Admin authentication. Roles: `admin` (full) and `editor` (content only, no user 
 ## Globals
 
 ### `site-settings`
+
 Brand name, tagline, founding year, email, phones, opening hours and days, social links, default share image.
 
 Founding year is stored so "{n} years & counting" stays computed rather than hard-coded.
 
 ### `navigation`
+
 `header` and `footer` link trees. Footer column headings are fields, not markup.
 
 ### `seo-defaults`
+
 Title template, default description, default OG image.
 
 ---
@@ -82,11 +96,11 @@ events ──many──► media (gallery)
 
 ## Access
 
-| Role | Read | Write |
-| --- | --- | --- |
-| Public | published only | none |
-| `editor` | all | all content collections |
-| `admin` | all | everything, incl. `users` |
+| Role     | Read           | Write                     |
+| -------- | -------------- | ------------------------- |
+| Public   | published only | none                      |
+| `editor` | all            | all content collections   |
+| `admin`  | all            | everything, incl. `users` |
 
 ## Ordering
 

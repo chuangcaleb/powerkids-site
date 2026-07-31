@@ -14,6 +14,28 @@ import tseslint from 'typescript-eslint'
  * time. If a rule below feels wrong, change it here deliberately rather than
  * adding inline disables.
  */
+/** Colours, spacing, and radii come from tokens. See docs/design/tokens.md. */
+const NO_RAW_COLOURS = [
+  {
+    selector: 'Literal[value=/#(?:[0-9a-fA-F]{3,4}){1,2}\\b/]',
+    message: 'No raw hex colours. Use a design token — see docs/design/tokens.md.',
+  },
+  {
+    selector: 'Literal[value=/\\b(?:rgb|hsl)a?\\(/]',
+    message: 'No raw colour functions. Use a design token — see docs/design/tokens.md.',
+  },
+]
+
+/**
+ * Catches `process.env.FOO` and `process.env[key]` alike — the selector matches
+ * the `process.env` member expression itself, so the access style after it does
+ * not matter.
+ */
+const NO_PROCESS_ENV = {
+  selector: "MemberExpression[object.name='process'][property.name='env']",
+  message: 'Read environment variables through src/lib/env.ts, not process.env directly.',
+}
+
 export default tseslint.config(
   {
     ignores: [
@@ -54,51 +76,24 @@ export default tseslint.config(
     },
   },
 
-  // Convention: no raw design values in application code.
-  // Colours, spacing, and radii come from tokens. See docs/design/tokens.md.
-  {
-    files: ['src/**/*.{ts,tsx}'],
-    rules: {
-      'no-restricted-syntax': [
-        'error',
-        {
-          selector: 'Literal[value=/#(?:[0-9a-fA-F]{3,4}){1,2}\\b/]',
-          message:
-            'No raw hex colours. Use a design token — see docs/design/tokens.md.',
-        },
-        {
-          selector: 'Literal[value=/\\b(?:rgb|hsl)a?\\(/]',
-          message:
-            'No raw colour functions. Use a design token — see docs/design/tokens.md.',
-        },
-      ],
-    },
-  },
-
-  // Convention: environment variables are read in exactly one place, so a
-  // missing variable fails loudly at boot instead of silently at request time.
+  // Convention rules. Flat config replaces a rule wholesale rather than
+  // merging it, so every selector for `no-restricted-syntax` that should apply
+  // to a given file has to be listed together in the block that wins.
   {
     files: ['src/**/*.{ts,tsx}'],
     ignores: ['src/lib/env.ts'],
     rules: {
-      'no-restricted-properties': [
-        'error',
-        {
-          object: 'process',
-          property: 'env',
-          message:
-            'Read environment variables through src/lib/env.ts, not process.env directly.',
-        },
-      ],
+      'no-restricted-syntax': ['error', ...NO_RAW_COLOURS, NO_PROCESS_ENV],
     },
   },
 
-  // Payload collection and block configs are data, not application logic.
-  // They legitimately contain long literal strings and generated shapes.
+  // Payload collection, global, and block configs are data, not application
+  // logic — they legitimately hold long literal strings. The environment rule
+  // still applies: config files have no business reading env vars directly.
   {
     files: ['src/collections/**', 'src/globals/**', 'src/blocks/**/config.ts'],
     rules: {
-      'no-restricted-syntax': 'off',
+      'no-restricted-syntax': ['error', NO_PROCESS_ENV],
     },
   },
 
