@@ -1,0 +1,9 @@
+/* WRAPPER — centred container, max width + gutters. See docs/design/layout-primitives.md. */
+
+.wrapper {
+  margin-inline: auto;
+  width: 100%;
+  max-width: var(--wrapper-max-width, 75rem);
+  padding-inline: var(--gutter, var(--space-m));
+  position: relative;
+}

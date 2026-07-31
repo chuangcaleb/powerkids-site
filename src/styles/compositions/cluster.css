@@ -1,0 +1,14 @@
+/* CLUSTER — consistent spacing, wraps as needed. See docs/design/layout-primitives.md. */
+
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+
+  --cluster-gap: var(--space-m);
+  --cluster-gap-x: var(--cluster-gap);
+  --cluster-gap-y: var(--cluster-gap);
+
+  gap: var(--cluster-gap-y) var(--cluster-gap-x);
+  justify-content: var(--cluster-align-x, flex-start);
+  align-items: var(--cluster-align-y, center);
+}

@@ -1,0 +1,11 @@
+/* GRID-AUTO — auto-fill grid, shared item minimum. See docs/design/layout-primitives.md. */
+
+.grid-auto {
+  display: grid;
+  grid-template-columns: repeat(
+    var(--grid-placement, auto-fill),
+    minmax(var(--grid-item-min, 16rem), 1fr)
+  );
+  gap: var(--grid-gap, var(--space-l));
+  align-items: var(--grid-align-items, stretch);
+}

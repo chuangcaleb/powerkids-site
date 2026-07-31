@@ -1,0 +1,43 @@
+/* FLOW — vertical rhythm between stacked children. See docs/design/layout-primitives.md. */
+
+[class*='flow'] {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+[class*='flow'] > * + * {
+  margin-block-start: var(--flow-space, var(--space-l));
+}
+
+.flow-3xs > * + * {
+  --flow-space: var(--space-3xs);
+}
+
+.flow-2xs > * + * {
+  --flow-space: var(--space-2xs);
+}
+
+.flow-xs > * + * {
+  --flow-space: var(--space-xs);
+}
+
+.flow-s > * + * {
+  --flow-space: var(--space-s);
+}
+
+.flow-m > * + * {
+  --flow-space: var(--space-m);
+}
+
+.flow-l > * + * {
+  --flow-space: var(--space-l);
+}
+
+.flow-xl > * + * {
+  --flow-space: var(--space-xl);
+}
+
+.flow-2xl > * + * {
+  --flow-space: var(--space-2xl);
+}

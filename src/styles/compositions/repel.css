@@ -1,0 +1,9 @@
+/* REPEL — pushes items to opposite edges, stacks when not. See docs/design/layout-primitives.md. */
+
+.repel {
+  display: flex;
+  flex-flow: var(--repel-direction, row) wrap;
+  justify-content: space-between;
+  align-items: var(--repel-y-alignment, center);
+  gap: var(--repel-gap, var(--space-m));
+}
