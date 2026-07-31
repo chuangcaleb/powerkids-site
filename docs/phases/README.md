@@ -12,7 +12,7 @@
 | #   | Phase                                        | State        | File                                                         |
 | --- | -------------------------------------------- | ------------ | ------------------------------------------------------------ |
 | 0   | Archive + docs skeleton                      | done         | —                                                            |
-| 1   | Foundation — app, DB, storage, CI            | **partial**  | [phase-1-foundation.md](phase-1-foundation.md)               |
+| 1   | Foundation — app, DB, storage, CI            | done         | [phase-1-foundation.md](phase-1-foundation.md)               |
 | 2   | Design system — tokens, primitives           | next         | [phase-2-design-system.md](phase-2-design-system.md)         |
 | 3   | Content model — collections, globals, blocks | blocked on 2 | [phase-3-content-model.md](phase-3-content-model.md)         |
 | 4   | Rendering — layouts, block renderers         | blocked on 3 | [phase-4-rendering.md](phase-4-rendering.md)                 |
@@ -21,7 +21,7 @@
 | 7   | Forms — registration, careers                | deferred     | [phase-7-forms.md](phase-7-forms.md)                         |
 | 8   | Localisation — activate `ms`                 | deferred     | [phase-8-localisation.md](phase-8-localisation.md)           |
 
-**Phase 1 not fully landed.** Read its file before touching anything — Payload code sits on unmerged branches, not `v4`.
+**Phase 1 done.** Phase 2 next.
 
 ---
 

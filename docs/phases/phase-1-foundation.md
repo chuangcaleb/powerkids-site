@@ -1,29 +1,14 @@
 # Phase 1 — Foundation
 
-**Status: built and verified, NOT fully merged to `v4`.** Read "Unmerged work" first.
+**Status: done.**
 
 **Goal:** running app — Next + Payload on Neon + R2, green verify loop, CI, deploy.
 
 ---
 
-## Unmerged work — resolve before Phase 2
+## History (resolved)
 
-Stacked PRs #4–#7 merged into each other's branches, not into `v4`. Only #4 (tooling) reached `v4`. Everything Payload sits elsewhere.
-
-| Ref                              | Holds                                                       |
-| -------------------------------- | ----------------------------------------------------------- |
-| `v4`                             | tooling only, plus owner's caveman doc compression          |
-| `origin/feat/payload-core`       | Payload config, users, media, migration                     |
-| `origin/chore/deploy-and-docs`   | above + deploy/env docs                                     |
-| `origin/rescue/phase-1-complete` | **everything**, incl. media filename hash + migration fixer |
-
-`rescue/phase-1-complete` = merge commit of PR #7. Was reachable from no remote branch; pushed to preserve it. Deepest and most complete ref.
-
-**Conflict warning:** owner compressed `docs/` to caveman style on `v4` _after_ branching. Same doc files edited on both sides. Expect conflicts in `docs/ops/environments.md`, `docs/ops/migrations.md`, `docs/architecture/*`. Take `v4`'s caveman prose, re-apply the _content_ from the branch (R2 traps, cache behaviour, migration import patch, media isolation).
-
-Owner also added to `v4` independently: `sync:dev-admin` script + password-manager-agnostic `powerkids dev admin` flow. Keep it.
-
-Suggested resolution: branch off `v4`, merge `rescue/phase-1-complete`, resolve doc conflicts by hand, verify, PR. Do **not** force-push `v4`.
+Stacked PRs #4–#7 landed on branches, not `v4` — rescued via `fix/recover-phase-1` → PR #10, now on `v4`. Doc conflicts resolved by hand (kept `v4` caveman prose, re-applied branch content). `sync:dev-admin` script + `powerkids dev admin` flow also on `v4`.
 
 ---
 
@@ -40,10 +25,11 @@ Verified: migration applies; `/admin` renders; first-user register + login; unau
 
 ## Outstanding
 
-- [ ] Land unmerged work on `v4` (above)
-- [ ] Open preview `/admin` in browser while signed into Vercel, confirm Payload panel renders. Preview sits behind Vercel Authentication — `curl` returns Vercel's login page, not ours. Only remaining Phase 1 check.
-- [ ] Optional: raise media cache to `max-age=31536000, immutable` — safe now filenames content-addressed. Cloudflare-side setting.
-- [ ] Optional: `bws` secret wiring (owner deferred)
+None. Preview `/admin` verified in browser, signed into Vercel — Payload panel renders.
+
+Deferred to later phases: R2 cache header tuning (`docs/phases/phase-6-launch.md`). `bws` secret wiring dropped — not in use.
+
+Phase 1 complete.
 
 ## Traps found here
 
@@ -53,4 +39,4 @@ Verified: migration applies; `/admin` renders; first-user register + login; unau
 - **R2 Secret Access Key = 64 lowercase hex.** The 53-char "Token value" on same Cloudflare page is a different credential; using it gives `SignatureDoesNotMatch`, which reads like a code bug.
 - **`s3Storage` collection key must be literal `media`.** Computed key `[Media.slug]` types as `string`, kills contextual typing.
 - **Build needs every env var.** Payload config constructed during page-data collection. CI sets fake values; Vercel needs real ones for Preview and Production.
-- **Stacked PRs merged bottom-up still lost work.** See above. Next time: merge one, confirm it landed on `v4`, then retarget the next by hand.
+- **Stacked PRs merged bottom-up still lost work.** Merge one, confirm it landed on `v4`, then retarget the next by hand.
