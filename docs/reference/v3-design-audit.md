@@ -60,7 +60,7 @@ The red is only safe as a large-text or filled-background colour. `DESIGN.md` mu
 | Display | `"Marker Felt", "Comic Sans MS", sans-serif` | **Shantell Sans**                       |
 | Body    | `"PT Sans", sans-serif`                      | undecided — v3 never actually loaded it |
 
-Marker Felt is applied via a `font-marker` class on every heading, the wordmark, pills, and card titles. Self-hosted as `marker-felt.ttf` and preloaded.
+Display is applied via a `font-marker` class on every heading, the wordmark, pills, and card titles.
 
 **Decided: v4 drops Marker Felt, uses [Shantell Sans](https://fonts.google.com/specimen/Shantell+Sans).**
 

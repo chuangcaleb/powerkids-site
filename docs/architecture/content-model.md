@@ -22,11 +22,8 @@ Nothing listed here hard-coded in component. Phone number, address, nav label, o
 Editor-composed routes. Only collection with block layout.
 
 `title`, `slug`, `layout` (blocks), `seo`, `publishedAt`, `_status`
-Drafts, version history enabled.
 
-**Use Payload's built-in `slugField()`** rather than hand-written slug field. Already provides unique index, generation from `title`, checkbox letting editor take manual control, and — importantly — _stops_ regenerating once document published, so later title edit can't silently change live URL and break inbound links. Reimplementing that behaviour correctly more work than it looks.
-
-Marked `@experimental` in Payload 3.86 — pin Payload version deliberately, re-read its behaviour on upgrade. Risk still smaller than maintaining own.
+Drafts, version history enabled. Slug unique, indexed.
 
 ### `media`
 

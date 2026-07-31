@@ -24,12 +24,6 @@ Preview deployments share dev database on purpose: previews for reviewing code, 
 
 **Local and Preview use separate R2 bucket from Production, with API token scoped to that bucket only.**
 
-Reason narrow, specific: **R2 has no object versioning**. Deleted object gone. Media in production bucket is kindergarten's photographs of graduations, sports days, field trips — in many cases only remaining copy. Preview deployment is branch that may never merge, running code nobody reviewed yet, must not reach those files.
-
-Prefix separation inside one bucket (`dev/`, `prod/`) considered, rejected. Costs same, isolates nothing: same credentials reach both prefixes, so protection is config string, not access boundary. Separate buckets plus separately scoped tokens means misconfigured preview fails with permissions error instead of deleting photograph.
-
-Neither bucket costs anything at this scale — R2 free tier far beyond what site needs, dev bucket can serve from plain `r2.dev` URL, no custom domain.
-
 Because filenames content-addressed (see [Media serving and cache](#media-serving-and-cache)), promoting file between buckets straight copy: same bytes produce same name.
 
 ## Services
@@ -45,18 +39,20 @@ Because filenames content-addressed (see [Media serving and cache](#media-servin
 
 Every name below appear in `.env.example` with comment. Values come from owner.
 
-| Name                     | Purpose                                                                         |
-| ------------------------ | ------------------------------------------------------------------------------- |
-| `DATABASE_URI`           | Neon connection string for this environment. Use pooled string.                 |
-| `PAYLOAD_SECRET`         | Signs auth tokens. Unique per environment; rotating log everyone out.           |
-| `NEXT_PUBLIC_SERVER_URL` | Public origin, used for absolute URLs and preview callbacks. No trailing slash. |
-| `S3_BUCKET`              | R2 bucket name                                                                  |
-| `S3_ACCESS_KEY_ID`       | R2 API token key, with Object Read & Write                                      |
-| `S3_SECRET_ACCESS_KEY`   | R2 API token secret                                                             |
-| `S3_ENDPOINT`            | Account-level endpoint: `https://<account-id>.r2.cloudflarestorage.com`         |
-| `R2_PUBLIC_URL`          | Public base URL media served from — `r2.dev` URL or custom domain               |
+| Name                     | Purpose                                                              |
+| ------------------------ | -------------------------------------------------------------------- |
+| `DATABASE_URI`           | Neon connection string for this environment                          |
+| `PAYLOAD_SECRET`         | Signs auth tokens. Unique per environment; rotating log everyone out |
+| `NEXT_PUBLIC_SERVER_URL` | Public origin, used for absolute URLs and preview callbacks          |
+| `S3_BUCKET`              | R2 bucket name                                                       |
+| `S3_ACCESS_KEY_ID`       | R2 access key                                                        |
+| `S3_SECRET_ACCESS_KEY`   | R2 secret                                                            |
+| `S3_ENDPOINT`            | R2 S3-compatible endpoint                                            |
+| `S3_REGION`              | `auto` for R2 — not bucket's location hint                           |
+| `R2_PUBLIC_URL`          | Public base URL media served from                                    |
+| `PREVIEW_SECRET`         | Guards draft-preview route                                           |
 
-No `S3_REGION` variable — deliberate. R2's region always literal `auto`, hard-coded in `src/lib/env.ts` where nobody can set it wrong. Was in table before; removed because setting bucket's location hint instead of `auto` produces confusing signature failure that reads like credentials problem, not a region problem.
+`S3_REGION` is `auto` for R2. Using location hint instead common, confusing failure.
 
 ### Two R2 traps
 
@@ -100,11 +96,13 @@ Local Payload admin needs one permanent login both owner and agents can use. Bit
 
 ## Known gaps
 
-**No email adapter.** Payload logs warning at boot, writes mail to console instead of sending it. Nothing depends on email yet, but **password resets will not reach anyone** until adapter configured — so first real admin accounts must have passwords set directly rather than through reset link. Resolve before handing accounts to school staff (Phase 6), or earlier if registration form lands first (Phase 7). Both want same adapter.
+**No email adapter.** Payload logs warning at boot, writes mail to console instead of sending it. Nothing depends on email yet, but **password resets will not reach anyone** until adapter configured — so first real admin accounts must have passwords set directly rather than through reset link. Resolve before handing accounts to school staff (Phase 6), or earlier if registration form lands first (Phase 7). Both want same adapter
 
 ## Adding a variable
 
 1. Add to `.env.example` with comment saying what for.
 2. Add row to table above.
 3. Add key to `EnvKey` union in `src/lib/env.ts`, read via `requireEnv`.
-4. Tell owner set in Vercel for both preview and production — missing production variable build failure, at worst moment.
+4. Read through typed config module, never `process.env` directly.
+
+Tell owner set in Vercel for both preview and production — missing production variable build failure, at worst moment.

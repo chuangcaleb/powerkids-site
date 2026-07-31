@@ -6,6 +6,8 @@ Router for automated contributors. Read fully; read linked docs only when task t
 
 **Current phase:** 1 — foundation. App shell, admin panel, database, media storage exist. Content model, blocks, rendering not yet built. Sections marked _(Phase N)_ describe target state, not yet true.
 
+**Starting a phase?** Read `docs/phases/README.md` for status, then **only your own phase file**. They are self-contained; reading all of them wastes context.
+
 ---
 
 ## Non-negotiables
@@ -49,6 +51,7 @@ Router for automated contributors. Read fully; read linked docs only when task t
 | Why past decision made                                 | `docs/decisions/`                     |
 | v3 content, verbatim                                   | `docs/reference/content-inventory.md` |
 | v3 design values, audited                              | `docs/reference/v3-design-audit.md`   |
+| Phase status, plans, pre/post requirements             | `docs/phases/README.md`               |
 
 ---
 

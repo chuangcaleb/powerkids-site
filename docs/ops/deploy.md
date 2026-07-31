@@ -40,7 +40,7 @@ Automated contributors never push to `main`. Owner merges.
 
 **Bad content** — Payload version history. Editors restore previous version of document themselves; no deploy involved.
 
-**Bad media** — deleting/replacing file takes effect in database immediately, but media domain caches four hours, so edge keeps serving old image. See [environments.md](environments.md#media-serving-and-cache).
+**Bad media** — deleting/replacing file takes effect in database immediately, but media domain caches four hours, so edge keeps serving old image. See [environments.md](environments.md#media-serving-and-cache)
 
 ## Launch cutover (Phase 6)
 
