@@ -22,7 +22,7 @@ Populates: globals first (`site-settings`, `navigation`, `seo-defaults`), then `
 
 **Media**: upload the sampled files from `_reference/media/` (gitignored). Every upload needs real `alt` — schema enforces it, so a lazy seed fails loudly. Galleries get 2–3 representative images only; real counts are noted in the inventory so an admin knows what remains to re-upload.
 
-**Idempotent.** Safe to re-run against a fresh Neon branch. This doubles as onboarding for any future developer.
+**Idempotent.** Find-by-unique-field (slug, or inventory ID stashed in spare field) then update, not blind `create` — re-run updates existing docs, doesn't duplicate. Local API runs as admin by default (no `overrideAccess` needed for trusted script), but pages need `draft: false` so seeded content actually publishes, not stuck as unpublished draft. Set `context: { disableRevalidate: true }` on seed writes so Phase 4's revalidation hook skips firing per-document during bulk run. Safe re-run against fresh Neon branch. Doubles as onboarding for any future developer.
 
 ## Post
 
@@ -48,6 +48,7 @@ pnpm migrate && pnpm seed && pnpm dev
 ## Traps
 
 - **Content has known defects.** The inventory flags them: "four locations" where three exist, a 2025-specific hero alt text, static year counts in principal bios that silently go stale, typos, a `http://` foundation link. Seeding them verbatim reproduces them. Owner decides fix-or-preserve per item.
+- **N+1 lookups when re-run.** Idempotency-check queries (find-by-slug before create) inside loop over dozens of docs = one query per item — fine for one-shot seed script, don't carry pattern into request-path code.
 - **Media filenames are content-hashed.** Re-running the seed with identical files produces identical names — that is intended. Payload still enforces unique filenames per document, so identical content across two documents becomes `-1`.
 - **Never seed production from a script run locally.** Seed a Neon branch, review, then decide. Production content is what school staff will have edited by then.
 - **Principal bios and quotes are personal statements.** Transcribe exactly; do not paraphrase or "improve" someone's words about their own career.

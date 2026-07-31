@@ -8,6 +8,7 @@ Project-specific collections and fields: see [content-model.md](../architecture/
 
 ```ts
 import type { CollectionConfig } from 'payload'
+import { slugField } from 'payload'
 
 export const Posts: CollectionConfig = {
   slug: 'posts',
@@ -22,8 +23,8 @@ export const Posts: CollectionConfig = {
   versions: { drafts: true }, // see Drafts & versions below
   fields: [
     { name: 'title', type: 'text', required: true, index: true },
-    // native slug type, not a hand-rolled `text` field — see fields.md
-    { name: 'slug', type: 'slug', useAsSlug: 'title' },
+    // built-in helper, not a hand-rolled `text` field — see fields.md
+    slugField(),
   ],
   defaultSort: '-createdAt',
   timestamps: true, // default true — adds/manages createdAt, updatedAt

@@ -16,7 +16,7 @@ Agent prepares. Owner switches DNS.
 
 ## Work
 
-**SEO** — `sitemap.xml`, `robots.txt`, canonical URLs, OG images. JSON-LD: `Organization`, plus `LocalBusiness` per school with address and phone.
+**SEO** — `sitemap.xml`, `robots.txt`, canonical URLs, OG images. JSON-LD: `Organization`, plus `LocalBusiness` per school with address and phone. Sitemap generation queries every published `pages`/`programs`/`events` doc — use `select` for just `slug`/`updatedAt`, `pagination: false`, not full-depth `find`.
 
 **Redirects** — every v3 URL resolves. Route map is in `docs/reference/content-inventory.md`. Includes the `/programs/daycare` slug mismatch and the `#our-schools` / `#our-team` anchors.
 

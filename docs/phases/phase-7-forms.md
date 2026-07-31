@@ -12,7 +12,7 @@
 - [ ] Phase 6 done — site live
 - [ ] **Email adapter working** (Resend or similar). A form nobody is notified about is worse than a Google Form link.
 - [ ] **Owner decides on data handling.** This collects children's names and dates of birth. Malaysian PDPA applies. Decide retention period, who may access submissions, and whether a privacy notice is needed before building anything that stores it.
-- [ ] ADR written for form-builder plugin vs hand-rolled server actions
+- [ ] ADR written for form-builder plugin vs hand-rolled server actions — plugin authoring/config out of scope in `docs/payload/`, pull `@payloadcms/plugin-form-builder` details from <https://payloadcms.com/docs/plugins/overview> rather than guess at API
 
 ## Work
 
@@ -22,7 +22,7 @@
 
 **Both** — Cloudflare Turnstile, rate limiting, server-side validation, email notification to the school, submissions stored in Payload so staff read them in the panel.
 
-**Uploads from the public** — a stricter path than admin uploads: size caps, MIME allow-list, never trust the extension.
+**Uploads from the public** — stricter path than admin uploads: size caps, MIME allow-list, never trust extension. Separate `upload`-type collection from `media`, `access.create` open (rate-limited) but `access.read` restricted to `admin` — public uploads readable-by-URL-guessing is the actual attack surface, not upload itself. Submission-received notification good fit for custom `Endpoint` (`advanced.md`) calling email adapter after `payload.create`, or `afterChange` hook if write always goes through Local API.
 
 ## Post
 

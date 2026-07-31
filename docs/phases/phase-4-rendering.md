@@ -21,6 +21,10 @@ Fully agentic per block. One PR per 2–3 blocks — "phase 4" is not reviewable
 
 **`RenderBlocks`** dispatcher — maps block `blockType` to server component. Unknown type renders nothing, never throws.
 
+**Page query tuned, not default-depth.** Server components call Local API direct, runs as admin by default — never forward resolved slug into query without public `_status: 'published'` filter (draft preview route only exception, via Next.js draft mode). Pick `depth` deliberate: blocks referencing `media`/`programs`/`events` typically need `depth: 1` to populate one level; raise further and it fans out extra queries per relationship. Use `select` on list-style queries (schools, programs, events collection routes) to skip unneeded fields.
+
+**Revalidation.** `pages` (and any global feeding layout) needs `afterChange` hook calling `revalidatePath`, guarded by `context.disableRevalidate` for seed writes, diffing `doc._status` vs `previousDoc._status` so unpublish also revalidates. Skip this, publishing in `/admin` won't update live route till next deploy.
+
 **One renderer per block**, `src/blocks/<name>/Component.tsx`. Server components. Layout from primitives, styling from co-located CSS Module reading tokens.
 
 **Images** — `next/image`, R2 host already allow-listed in `next.config.ts` from `R2_PUBLIC_URL`. Correct `sizes` per context; the three generated variants are 400 / 800 / 1600 wide.
@@ -57,6 +61,7 @@ pnpm dev
 
 - **Server components by default.** Content rendering ships no JavaScript. Reaching for `"use client"` to fix a layout problem means the wrong primitive was chosen.
 - **Gallery length is unknown.** v3 galleries were paginated Cloudinary fetches of unknown size; only 2–3 images per gallery get seeded. A layout that assumes a fixed count breaks the day an editor uploads 40.
+- **Depth explosion.** Page with several block types each referencing `media` and a relationship (`programs`, `events`, `schools`) compounds fast at `depth: 2+`. Default `depth: 1`, raise per-field only where render actually needs populated nested doc.
 - **Alt text exists — use it.** `media.alt` is `NOT NULL`. Never render an empty `alt` for a content image.
 - **v3 shipped brochure scans with no alt text.** Those pages carry information only in images. Either write real alt text or transcribe the content — see the inventory's open questions.
 - **Anchors must survive.** `#register`, `#contact` appear on every page; `/about#our-schools` is linked from nav. v3 used `#our-schools` twice on one page — give Principals its own id.

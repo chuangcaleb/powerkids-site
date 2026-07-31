@@ -20,6 +20,7 @@
 | 6   | Launch — SEO, a11y, cutover                  | blocked on 5 | [phase-6-launch.md](phase-6-launch.md)                       |
 | 7   | Forms — registration, careers                | deferred     | [phase-7-forms.md](phase-7-forms.md)                         |
 | 8   | Localisation — activate `ms`                 | deferred     | [phase-8-localisation.md](phase-8-localisation.md)           |
+| 9   | Media hygiene — unreferenced-media cleanup   | deferred     | [phase-9-media-hygiene.md](phase-9-media-hygiene.md)         |
 
 **Phase 1 done.** Phase 2 next.
 

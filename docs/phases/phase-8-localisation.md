@@ -14,7 +14,7 @@
 
 ## Work
 
-Payload localisation is already configured with `en` as the only active locale, so this is a config change rather than a migration of every text field. That was deliberate in Phase 1.
+Payload localisation is already configured with `en` as the only active locale, so this is a config change rather than a migration of every text field. That was deliberate in Phase 1. Localization config shape trimmed from `docs/payload/` as out of scope — pull `localization.locales`/field-level `localized` details from <https://payloadcms.com/docs/configuration/localization> rather than guess.
 
 - Add the locale to `localization.locales` in `src/payload.config.ts`
 - Locale routing in the App Router; `generateStaticParams` per locale

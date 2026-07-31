@@ -8,8 +8,7 @@ Fields actually in use: see [content-model.md](../architecture/content-model.md)
 
 | Type           | Use                                                | Gotcha                                                                                                   |
 | -------------- | -------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `text`         | short string                                       | for a URL slug use `type: 'slug'`, not `text`                                                            |
-| `slug`         | URL slug generated from another field              | native type, marked experimental upstream; `useAsSlug` names the source field                            |
+| `text`         | short string                                       | for a URL slug use `slugField()`, not a hand-rolled `text`                                               |
 | `textarea`     | long plain string                                  | no formatting; use `richText` for formatted copy                                                         |
 | `number`       | numeric value                                      | `min`/`max` validate but don't clamp input                                                               |
 | `checkbox`     | boolean                                            | value is `true`/`false`, never `undefined` after save                                                    |
@@ -48,16 +47,30 @@ const titleField: TextField = {
 ## Slug
 
 ```ts
-{ name: 'slug', type: 'slug', useAsSlug: 'title' }
+import { slugField } from 'payload'
+
+fields: [
+  // ...
+  slugField(),
+]
 ```
 
-Native field type — don't hand-roll one from `text`, and note that the removed
-`slugField()` helper is what older examples show. Defaults `required`, `unique`,
-`index` to `true` and renders in the sidebar. `useAsSlug` names the top-level field
-to generate from; `slugify` overrides the slugify function. Admin UI gives editors
-lock/unlock and regenerate. Upstream marks this field **experimental** — it may
-change in a future release, so check `docs/fields/slug.mdx` in the Payload repo
-before relying on options beyond the two above.
+`slugField()` — built-in **helper function**, not distinct field `type`. Returns small field set (`text` field named `slug` plus `generateSlug` checkbox) wired together: auto-generates from another field, unique + indexed, renders in sidebar, gives editors lock/unlock + regenerate in admin UI. Don't hand-roll from plain `text` field.
+
+Options, passed to `slugField(...)`:
+
+| Option          | Effect                                                              |
+| --------------- | ------------------------------------------------------------------- |
+| `name`          | slug field's own name, default `'slug'`                             |
+| `useAsSlug`     | top-level field to generate from, default `'title'`                 |
+| `checkboxName`  | name of `generateSlug` checkbox field, default `'generateSlug'`     |
+| `disableUnique` | drop unique index — use when adding compound unique index instead   |
+| `overrides`     | function receiving default fields, for granular per-field overrides |
+| `localized`     | localize slug + checkbox fields, default `false`                    |
+| `position`      | field position (e.g. `'sidebar'`)                                   |
+| `required`      | default `true`                                                      |
+
+Upstream marks **experimental** — may change or vanish in future release. Use at own risk; re-check `docs/fields/slug.mdx` in Payload repo on upgrade.
 
 ## Select
 
