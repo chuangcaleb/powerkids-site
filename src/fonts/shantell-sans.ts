@@ -1,8 +1,9 @@
 import localFont from 'next/font/local'
 
 /**
- * Trimmed to the weight axis only — no Bounce, no Informality, no Spacing.
- * See src/fonts/shantell-sans/NOTES.md for how it was generated.
+ * Bounce (BNCE) and Informality (INFM) axes are kept alongside weight, for
+ * future text animation — see src/fonts/shantell-sans/NOTES.md for why this
+ * isn't loaded via next/font/google despite it listing the same axes.
  */
 export const shantellSans = localFont({
   src: './shantell-sans/shantell-sans-variable.woff2',
