@@ -39,6 +39,7 @@ const NO_PROCESS_ENV = {
 export default tseslint.config(
   {
     ignores: [
+      '.claude/**',
       '.next/**',
       'node_modules/**',
       '_reference/**',
