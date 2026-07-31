@@ -490,16 +490,16 @@ Every v3 URL must resolve after launch.
 
 Collected from the **[DECIDE]** flags above. All are content or product calls for the owner; none block Phase 1.
 
-1. Three schools or four? Meta description, hero copy, and Sports Day copy all say four.
-2. Phone 3's `tel:` link is missing the country code.
-3. Restore the Our Team section, or drop it and remove the nav link?
-4. Hero alt text hard-codes "2025".
-5. Principal bios contain static year counts that will go stale.
-6. Fix the typos found in v3 copy, or preserve them verbatim?
-7. Canonical spelling: FunGates or Fungates?
-8. Keep the `/programs/daycare` slug or rename it?
-9. Brochure scans have no alt text; the information in them is image-only.
-10. Graduation videos stop at 2020 — should year entries be editor-managed?
-11. How do Cloudinary gallery originals get migrated, if at all?
-12. Footer nav column headings are currently raw group keys.
-13. Give Our Principals its own anchor id.
+1. Three schools or four? Meta description, hero copy, and Sports Day copy all say four. A: three schools.
+2. Phone 3's `tel:` link is missing the country code. A: append the 6
+3. Restore the Our Team section, or drop it and remove the nav link? A: remove nav link
+4. Hero alt text hard-codes "2025". A: replace with "Our school student in a superhero mask and striking a pose"
+5. Principal bios contain static year counts that will go stale. A: use live counts
+6. Fix the typos found in v3 copy, or preserve them verbatim? A: fix typos
+7. Canonical spelling: FunGates or Fungates? A: FunGates
+8. Keep the `/programs/daycare` slug or rename it? A: evening-daycare
+9. Brochure scans have no alt text; the information in them is image-only. A: remove brochure images from page, replace with placeholder body text
+10. Graduation videos stop at 2020 — should year entries be editor-managed? A:
+11. How do Cloudinary gallery originals get migrated, if at all? A: fill gallery with 2-3 placeholder images,
+12. Footer nav column headings are currently raw group keys. A: yeah use proper column
+13. Give Our Principals its own anchor id. A: yes
