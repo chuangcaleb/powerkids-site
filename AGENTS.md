@@ -4,7 +4,9 @@ Router for automated contributors. Read fully; read linked docs only when task t
 
 **Project:** `powerkids.edu.my` — website for PowerKids Kindergarten, Klang Valley, Malaysia. Branch (`v4`) from-scratch rebuild on Next.js + Payload CMS, replace v3 Astro site.
 
-**Current phase:** 0 — archive and documentation. No app code exists yet. Sections marked _(Phase N)_ describe target state, not yet true.
+**Current phase:** 1 — foundation, built but **not fully merged to `v4`**. Read `docs/phases/phase-1-foundation.md` before touching code. Sections marked _(Phase N)_ describe target state, not yet true.
+
+**Starting a phase?** Read `docs/phases/README.md` for status, then **only your own phase file**. They are self-contained; reading all of them wastes context.
 
 ---
 
@@ -49,6 +51,7 @@ Router for automated contributors. Read fully; read linked docs only when task t
 | Why past decision made                                 | `docs/decisions/`                     |
 | v3 content, verbatim                                   | `docs/reference/content-inventory.md` |
 | v3 design values, audited                              | `docs/reference/v3-design-audit.md`   |
+| Phase status, plans, pre/post requirements             | `docs/phases/README.md`               |
 
 ---
 
