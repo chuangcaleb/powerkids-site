@@ -1,0 +1,48 @@
+{
+  "extends": "stylelint-config-standard",
+  "plugins": ["stylelint-declaration-strict-value"],
+  "ignoreFiles": [
+    "src/styles/tokens/**",
+    "src/app/[(]payload[)]/**",
+    ".next/**",
+    "node_modules/**"
+  ],
+  "rules": {
+    "scale-unlimited/declaration-strict-value": [
+      [
+        "/color$/",
+        "border-color",
+        "background-color",
+        "fill",
+        "stroke",
+        "box-shadow",
+        "border-radius"
+      ],
+      {
+        "ignoreValues": ["inherit", "currentColor", "transparent", "none", "unset"],
+        "message": "No raw value. Use a design token from src/styles/tokens/ — see DESIGN.md."
+      }
+    ],
+    "color-no-hex": [
+      true,
+      {
+        "message": "No raw hex colours. Use a design token — see DESIGN.md."
+      }
+    ],
+    "color-hex-length": null,
+    "function-disallowed-list": [
+      ["rgb", "rgba", "hsl", "hsla"],
+      {
+        "message": "No raw colour functions. Use a design token — see DESIGN.md."
+      }
+    ],
+    "unit-disallowed-list": [
+      ["px"],
+      {
+        "message": "No raw px. Use a space/type/shape token — see DESIGN.md."
+      }
+    ],
+    "selector-class-pattern": null,
+    "custom-property-pattern": null
+  }
+}

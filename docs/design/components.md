@@ -9,21 +9,22 @@
 
 ## Planned inventory
 
-| Component              | Variants                                            |
-| ---------------------- | --------------------------------------------------- |
-| `Button`               | `red`, `blue`, `outline`, `ghost`, `link` × sizes   |
-| `Card`                 | default, tab-header                                 |
-| `Pill`                 | `default`, `muted`, `red`, `blue` × three sizes     |
-| `SuperHead`            | coloured lead-in above heading                      |
-| `Heading`              | levels, with display face                           |
-| `Mark`                 | animated highlight sweep, reduced-motion safe       |
-| `Divider`              | heart rule                                          |
-| `Image`                | Next `<Image>` wrapper, R2 handling, bordered frame |
-| `Accordion`            | client component                                    |
-| `NavBar` / `NavDrawer` | header nav, mobile drawer                           |
-| `VideoEmbed`           | lazy-loaded, click-to-play                          |
+| Component    | Variants                                            |
+| ------------ | --------------------------------------------------- |
+| `Button`     | `red`, `blue`, `outline`, `ghost`, `link` × sizes   |
+| `Card`       | default, tab-header                                 |
+| `Heading`    | levels, with display face                           |
+| `Mark`       | animated highlight sweep, reduced-motion safe       |
+| `Divider`    | rule variant, no motif (v3's heart rule dropped)    |
+| `Image`      | Next `<Image>` wrapper, R2 handling, bordered frame |
+| `Accordion`  | client component                                    |
+| `NavBar`     | desktop header nav — this phase                     |
+| `NavDrawer`  | mobile nav drawer — deferred to a later phase       |
+| `VideoEmbed` | lazy-loaded, click-to-play                          |
 
-Derived from v3 audit — see [../reference/v3-design-audit.md](../reference/v3-design-audit.md) for what each looked like, which worth keeping.
+`Pill`, `SuperHead`, and `cva` as a variant mechanism are deliberately not in this list — removed outright during the Phase 2 design revision, no replacement pattern. Headings stand alone; variants are CSS Module classes, never a variant library.
+
+Rest of the inventory derived from v3 audit — see [../reference/v3-design-audit.md](../reference/v3-design-audit.md) for what each looked like, which worth keeping.
 
 ---
 

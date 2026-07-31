@@ -1,0 +1,20 @@
+/*
+ * Fluid space scale, same Utopia mechanism as type.css (320px -> 1440px
+ * viewport). Tiers are multiples of the step-0 base (18px min / 21px max):
+ * 3xs .25x, 2xs .5x, xs .75x, s 1x, m 1.5x, l 2x, xl 3x, 2xl 4x, 3xl 6x, 4xl 8x.
+ * Primitives in src/styles/compositions/ consume these through their own
+ * custom properties (--flow-space, --cluster-gap, etc.) — components never
+ * set spacing directly.
+ */
+:root {
+  --space-3xs: clamp(0.2813rem, 0.2679rem + 0.067vw, 0.3281rem);
+  --space-2xs: clamp(0.5625rem, 0.5357rem + 0.1339vw, 0.6563rem);
+  --space-xs: clamp(0.8438rem, 0.8036rem + 0.2009vw, 0.9844rem);
+  --space-s: clamp(1.125rem, 1.0714rem + 0.2679vw, 1.3125rem);
+  --space-m: clamp(1.6875rem, 1.6071rem + 0.4018vw, 1.9688rem);
+  --space-l: clamp(2.25rem, 2.1429rem + 0.5357vw, 2.625rem);
+  --space-xl: clamp(3.375rem, 3.2143rem + 0.8036vw, 3.9375rem);
+  --space-2xl: clamp(4.5rem, 4.2857rem + 1.0714vw, 5.25rem);
+  --space-3xl: clamp(6.75rem, 6.4286rem + 1.6071vw, 7.875rem);
+  --space-4xl: clamp(9rem, 8.5714rem + 2.1429vw, 10.5rem);
+}

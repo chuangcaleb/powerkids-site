@@ -17,6 +17,11 @@ pre-commit:
       run: pnpm eslint --fix {staged_files}
       stage_fixed: true
 
+    - name: lint-css
+      glob: '*.css'
+      run: pnpm stylelint --fix {staged_files}
+      stage_fixed: true
+
 pre-push:
   jobs:
     - name: verify

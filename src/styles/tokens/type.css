@@ -1,0 +1,19 @@
+/*
+ * Fluid scale via Utopia (320px -> 1440px viewport, 18px/1.2 ratio min ->
+ * 21px/1.25 ratio max). Values are an entry point — see DESIGN.md's "Type"
+ * section for why the ratios are this close together, and tune here once
+ * real content is visible on the kitchen sink.
+ */
+:root {
+  --font-display: 'Shantell Sans', system-ui, sans-serif;
+  --font-body: system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', sans-serif;
+
+  --step--2: clamp(0.7813rem, 0.7645rem + 0.0839vw, 0.84rem);
+  --step--1: clamp(0.9375rem, 0.9054rem + 0.1607vw, 1.05rem);
+  --step-0: clamp(1.125rem, 1.0714rem + 0.2679vw, 1.3125rem);
+  --step-1: clamp(1.35rem, 1.267rem + 0.4152vw, 1.6406rem);
+  --step-2: clamp(1.62rem, 1.4969rem + 0.6154vw, 2.0508rem);
+  --step-3: clamp(1.944rem, 1.767rem + 0.885vw, 2.5635rem);
+  --step-4: clamp(2.3328rem, 2.0838rem + 1.2451vw, 3.2043rem);
+  --step-5: clamp(2.7994rem, 2.4548rem + 1.723vw, 4.0054rem);
+}

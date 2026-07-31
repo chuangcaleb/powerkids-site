@@ -1,0 +1,14 @@
+/*
+ * Rounded neo-brutalism's shape language: large radii, one hard offset
+ * shadow, no soft/blurred variants. See DESIGN.md invariants 5 and 9.
+ */
+:root {
+  --radius-s: 12px;
+  --radius-m: 18px;
+  --radius-l: 24px;
+
+  --border-width: 0.2em;
+
+  --shadow-offset: 5px;
+  --shadow-hard: var(--shadow-offset) var(--shadow-offset) 0 0 var(--shadow-colour);
+}
