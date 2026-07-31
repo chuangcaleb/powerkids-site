@@ -16,15 +16,19 @@ Numbered, `NNNN-kebab-title.md`, with these headings:
 **Date:** YYYY-MM-DD
 
 ## Context
+
 What forced a decision. Constraints, requirements, what was already true.
 
 ## Decision
+
 What was chosen, stated plainly.
 
 ## Consequences
+
 What this makes easy, what it makes hard, and what it costs.
 
 ## Alternatives considered
+
 Each option and the specific reason it lost.
 ```
 
@@ -32,8 +36,8 @@ Records are immutable. A decision that changes gets a **new** ADR that supersede
 
 ## Index
 
-| # | Title | Status |
-| --- | --- | --- |
-| [0001](0001-nextjs-payload-vercel.md) | Next.js + Payload on Vercel, Neon, and R2 | accepted |
-| [0002](0002-clean-rebuild-and-archival.md) | Clean rebuild with archived history | accepted |
-| [0003](0003-vanilla-css-with-primitives.md) | Vanilla CSS with layout primitives | accepted |
+| #                                           | Title                                     | Status   |
+| ------------------------------------------- | ----------------------------------------- | -------- |
+| [0001](0001-nextjs-payload-vercel.md)       | Next.js + Payload on Vercel, Neon, and R2 | accepted |
+| [0002](0002-clean-rebuild-and-archival.md)  | Clean rebuild with archived history       | accepted |
+| [0003](0003-vanilla-css-with-primitives.md) | Vanilla CSS with layout primitives        | accepted |

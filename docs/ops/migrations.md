@@ -1,15 +1,15 @@
 # Database Migrations
 
 **Purpose:** how schema changes reach each database safely.
-**Read this when:** you changed a collection, global, or block field.
+**Read this when:** you changed collection, global, or block field.
 
-> **Status: not yet configured.** Phase 1 establishes the migration setup.
+> **Status: not yet configured.** Phase 1 establish migration setup.
 
 ---
 
 ## The rule
 
-**Every schema change ships with a migration.** Payload can push schema automatically in development, but production runs migrations only. A field added without one works locally and fails on deploy.
+**Every schema change ships with migration.** Payload push schema auto in dev, but production run migrations only. Field added without one work locally, fail on deploy.
 
 ## Loop
 
@@ -20,20 +20,20 @@ pnpm generate:types                              # regenerate payload-types.ts
 pnpm verify
 ```
 
-Commit the migration file and the regenerated types together with the schema change. Migrations run automatically on deploy.
+Commit migration file and regenerated types together with schema change. Migrations run auto on deploy.
 
 ## Writing them
 
-- **Name them for what they do**: `add-school-map-url`, not `update-1`.
-- **Read the generated SQL before committing.** Renames in particular: Payload may emit a drop plus an add, which silently destroys data. Rewrite it as a real rename.
-- **Additive first.** To rename or remove a field with content in it: add the new field, backfill it, deploy, migrate the data, then drop the old one in a later change. Two deploys, no data loss.
-- **Test against a copy of production data**, not an empty database. Empty databases migrate cleanly no matter how wrong the migration is.
-- **Never edit a migration that has run** anywhere. Write a new one.
+- **Name for what they do**: `add-school-map-url`, not `update-1`.
+- **Read generated SQL before committing.** Renames especially: Payload may emit drop plus add, silently destroy data. Rewrite as real rename.
+- **Additive first.** To rename/remove field with content in it: add new field, backfill it, deploy, migrate data, then drop old one in later change. Two deploys, no data loss.
+- **Test against copy of production data**, not empty database. Empty databases migrate clean no matter how wrong migration is.
+- **Never edit migration that has run** anywhere. Write new one instead.
 
 ## Neon branching
 
-Neon branches are cheap copies of the database. Use one to rehearse a risky migration against real data, then throw it away. This is also how the seed script gets tested repeatedly from a clean state.
+Neon branches: cheap copies of database. Use one to rehearse risky migration against real data, then throw away. Same way seed script gets tested repeatedly from clean state.
 
 ## When it fails mid-deploy
 
-The database may be half-migrated. Do not retry blindly. Restore to the pre-deploy point, fix the migration, deploy again. See [deploy.md](deploy.md).
+Database may be half-migrated. Don't retry blindly. Restore to pre-deploy point, fix migration, deploy again. See [deploy.md](deploy.md).

@@ -1,38 +1,38 @@
-# Adding a Page
+# Adding Page
 
-**Purpose:** how new routes come into being — and why most of them need no code at all.
-**Read this when:** someone asks for a new page.
+**Purpose:** how new routes come into being — why most need no code at all.
+**Read when:** someone ask for new page.
 
-> **Status: not yet implemented.** Phase 4 delivers the catch-all route this depends on.
+> **Status: not yet implemented.** Phase 4 deliver catch-all route this depends on.
 
 ---
 
 ## Most pages need no developer
 
-That is the point of the rebuild. An editor creates a `pages` record in the admin panel, gives it a slug, stacks blocks, and publishes. The catch-all route resolves it. No deploy, no PR.
+Point of rebuild. Editor creates `pages` record in admin panel, gives slug, stacks blocks, publishes. Catch-all route resolves it. No deploy, no PR.
 
-If someone asks a developer for a "new page", the first question is whether it is really a new *kind* of page. Usually it isn't — point them at [content-editing.md](content-editing.md).
+Someone asks developer for "new page" — first question: is it really new _kind_ of page. Usually not — point them at [content-editing.md](content-editing.md).
 
-## A page needs code only when
+## Page needs code only when
 
-- It has behaviour no block can express (a form, a search, an interactive tool).
-- It is generated from a collection rather than authored — one route per program or event.
-- It needs route-level machinery: custom caching, a redirect, a feed, a non-HTML response.
+- Has behaviour no block can express (form, search, interactive tool).
+- Generated from collection rather than authored — one route per program or event.
+- Needs route-level machinery: custom caching, redirect, feed, non-HTML response.
 
-## Steps, when code is genuinely needed
+## Steps, when code genuinely needed
 
-1. **Confirm it isn't a blocks job.** Write down why, in the PR description.
-2. **Decide the URL.** Check [../reference/content-inventory.md](../reference/content-inventory.md) for an existing v3 route — if one exists, keep it or add a redirect.
-3. **Add the route** under `src/app/(site)/`.
-4. **Fetch content from the CMS.** Copy in JSX is a defect, including headings and empty states.
+1. **Confirm it isn't blocks job.** Write down why, in PR description.
+2. **Decide URL.** Check [../reference/content-inventory.md](../reference/content-inventory.md) for existing v3 route — if exists, keep it or add redirect.
+3. **Add route** under `src/app/(site)/`.
+4. **Fetch content from CMS.** Copy in JSX is defect, including headings and empty states.
 5. **Implement `generateMetadata`** — title, description, canonical, share image. Fall back to `seo-defaults`.
 6. **Add `generateStaticParams`** for collection-driven routes.
 7. **Handle not-found** properly, with `notFound()`.
-8. **Add it to the sitemap.**
-9. **Extend the Playwright smoke run.**
-10. **Update the route map** in the content inventory, and the architecture overview if the shape changed.
-11. **Run the verify loop**, then open a PR.
+8. **Add it to sitemap.**
+9. **Extend Playwright smoke run.**
+10. **Update route map** in content inventory, and architecture overview if shape changed.
+11. **Run verify loop**, then open PR.
 
 ## Redirects
 
-Any URL that ever shipped must keep resolving. Old paths are listed in the content inventory's route map; redirects live in the Next config and are covered by a launch check.
+Any URL that ever shipped must keep resolving. Old paths listed in content inventory's route map; redirects live in Next config, covered by launch check.
