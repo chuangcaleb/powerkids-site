@@ -26,6 +26,7 @@
     "migrate": "payload migrate",
     "migrate:create": "payload migrate:create && node scripts/fix-migration-imports.mjs",
     "sync:dev-admin": "bash scripts/sync-dev-admin.sh",
+    "seed:dev-admin": "payload run scripts/seed-admin.ts",
     "prepare": "lefthook install"
   },
   "dependencies": {

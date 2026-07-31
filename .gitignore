@@ -18,6 +18,9 @@ next-env.d.ts
 # Local reference material (v3 assets, scratch notes) — never committed
 _reference/
 
+# Agent-agnostic local state (any coding agent may use), never committed
+.agents/
+
 # Agent tooling — this repo is agent-neutral, so per-tool config stays local
 CLAUDE.md
 .claude/
@@ -41,4 +44,5 @@ playwright-report/
 test-results/
 .vercel/
 .turbo/
+
 TODO.md

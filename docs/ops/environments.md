@@ -85,14 +85,12 @@ Two consequences worth knowing:
 
 ## Dev admin account
 
-Local Payload admin needs one permanent login both owner and agents can use. Bitwarden item `powerkids-dev-admin` is source of truth.
+Local Payload admin needs one permanent login both owner and agents can use. A "powerkids dev admin" entry in your password manager of choice (1Password, Bitwarden, etc.) is source of truth — pick one, no specific manager required.
 
-- Sync locally: `bw unlock` to get session key, `export BW_SESSION=...`, then `pnpm sync:dev-admin` — writes `_reference/secrets/dev-admin.json` (gitignored, agent-readable, never named `.env*`).
-- Seed into Payload: `scripts/seed-admin.ts` reads that file, creates user if missing. Idempotent, guarded `NODE_ENV !== 'production'` — cannot run against prod.
-- Rotate password in Bitwarden first, rerun sync script, rerun seed script (updates existing user's password).
+- Sync locally: open your password manager yourself copy the fields, run `pnpm sync:dev-admin`, paste when prompted — writes `.agents/secrets/dev-admin.json` (gitignored, agent-readable, never named `.env*`, `chmod 600`). Deliberately manual: never shells out to a password manager's CLI, so no vault-wide session token ever exists in an agent-driven shell for an injected command to ride on.
+- Seed into Payload: `pnpm seed:dev-admin` reads that file, creates the user if missing or updates name/password if it exists. Guarded `NODE_ENV !== 'production'` — cannot run against prod.
+- Rotate the password in your password manager first, rerun sync script, rerun seed script.
 - Never reuse this password for preview or production admin accounts.
-
-> **Not yet implemented.** `scripts/sync-dev-admin.sh` and `scripts/seed-admin.ts` do not exist in the tree. Flow above is owner's intended design, recorded before it was built. `users` collection now exists, so it is unblocked.
 
 ## Known gaps
 

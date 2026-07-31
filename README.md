@@ -39,7 +39,14 @@ pnpm migrate
 pnpm dev
 ```
 
-Public site runs at [localhost:3000](http://localhost:3000), admin panel at [/admin](http://localhost:3000/admin). First visit to `/admin` prompts account creation.
+Public site runs at [localhost:3000](http://localhost:3000), admin panel at [/admin](http://localhost:3000/admin). Don't use `/admin`'s account-creation prompt — this project shares one permanent dev admin login instead. Set it up:
+
+```bash
+pnpm sync:dev-admin  # paste credentials from your password manager
+pnpm seed:dev-admin  # creates/updates the account in your local DB
+```
+
+See [docs/ops/environments.md](docs/ops/environments.md#dev-admin-account) for why and the full flow.
 
 **Every variable must be set before anything runs, including build** — Payload config reads them while Next collects page data. Missing one fails loudly, naming itself.
 

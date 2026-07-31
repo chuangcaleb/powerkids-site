@@ -21,7 +21,7 @@ Stacked PRs #4–#7 merged into each other's branches, not into `v4`. Only #4 (t
 
 **Conflict warning:** owner compressed `docs/` to caveman style on `v4` _after_ branching. Same doc files edited on both sides. Expect conflicts in `docs/ops/environments.md`, `docs/ops/migrations.md`, `docs/architecture/*`. Take `v4`'s caveman prose, re-apply the _content_ from the branch (R2 traps, cache behaviour, migration import patch, media isolation).
 
-Owner also added to `v4` independently: `sync:dev-admin` script + Bitwarden `powerkids-dev-admin` flow. Keep it.
+Owner also added to `v4` independently: `sync:dev-admin` script + password-manager-agnostic `powerkids dev admin` flow. Keep it.
 
 Suggested resolution: branch off `v4`, merge `rescue/phase-1-complete`, resolve doc conflicts by hand, verify, PR. Do **not** force-push `v4`.
 

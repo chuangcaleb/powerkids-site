@@ -1,28 +1,30 @@
 #!/usr/bin/env bash
-# Pulls the permanent dev admin credential from Bitwarden into a local,
-# gitignored cache so agents can read it without touching .env.
+# Writes the permanent dev admin credential into a local, gitignored cache
+# so agents can read it without touching .env.
 #
-# Source of truth: Bitwarden item named below. This script only mirrors it.
-# Rerun after rotating the password in Bitwarden.
+# Manual by design: does NOT call any password manager's CLI. A CLI unlock
+# typically exports a session token into the shell, which grants ANY command
+# run in that shell (including anything an agent gets tricked into running)
+# read access to the whole vault, not just this one item. Instead, open your
+# password manager yourself (app/browser/extension) and paste the fields
+# below.
+#
+# Source of truth: the "powerkids dev admin" entry in your password manager.
+# This script only mirrors it locally.
 set -euo pipefail
 
-ITEM_NAME="powerkids-dev-admin"
-OUT_FILE="_reference/secrets/dev-admin.json"
-
-if ! command -v bw >/dev/null 2>&1; then
-  echo "Bitwarden CLI not installed. Install: brew install bitwarden-cli" >&2
-  exit 1
-fi
-
-if [ -z "${BW_SESSION:-}" ]; then
-  echo "Vault locked. Run: export BW_SESSION=\$(bw unlock --raw)" >&2
-  exit 1
-fi
-
+OUT_FILE=".agents/secrets/dev-admin.json"
 mkdir -p "$(dirname "$OUT_FILE")"
 
-bw get item "$ITEM_NAME" | \
-  jq '{email: .login.username, password: .login.password}' \
+read -r -p "Dev admin name [Dev Admin]: " name
+name="${name:-Dev Admin}"
+read -r -p "Dev admin email: " email
+read -r -s -p "Dev admin password: " password
+echo
+
+jq -n --arg name "$name" --arg email "$email" --arg password "$password" \
+  '{name: $name, email: $email, password: $password}' \
   > "$OUT_FILE"
+chmod 600 "$OUT_FILE"
 
 echo "Wrote $OUT_FILE"
