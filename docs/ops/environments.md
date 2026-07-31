@@ -48,6 +48,15 @@ Every name below appear in `.env.example` with comment. Values come from owner.
 
 `S3_REGION` is `auto` for R2. Using location hint instead common, confusing failure.
 
+## Dev admin account
+
+Local Payload admin needs one permanent login both owner and agents can use. Bitwarden item `powerkids-dev-admin` is source of truth.
+
+- Sync locally: `bw unlock` to get session key, `export BW_SESSION=...`, then `pnpm sync:dev-admin` — writes `_reference/secrets/dev-admin.json` (gitignored, agent-readable, never named `.env*`).
+- Seed into Payload: `scripts/seed-admin.ts` reads that file, creates the user if missing. Idempotent, guarded `NODE_ENV !== 'production'` — cannot run against prod. _(Blocked on Users collection existing — Phase 1.)_
+- Rotate password in Bitwarden first, rerun sync script, rerun seed script (updates existing user's password).
+- Never reuse this password for preview or production admin accounts.
+
 ## Adding a variable
 
 1. Add to `.env.example` with comment saying what for.
