@@ -8,3 +8,5 @@ allowBuilds:
   lefthook: true
   # Native resolver used by eslint-plugin-import.
   unrs-resolver: true
+  # Pulled in by Payload's build pipeline.
+  esbuild: true

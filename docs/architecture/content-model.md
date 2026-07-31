@@ -22,6 +22,7 @@ Nothing listed here hard-coded in component. Phone number, address, nav label, o
 Editor-composed routes. Only collection with block layout.
 
 `title`, `slug`, `layout` (blocks), `seo`, `publishedAt`, `_status`
+
 Drafts, version history enabled. Slug unique, indexed.
 
 ### `media`

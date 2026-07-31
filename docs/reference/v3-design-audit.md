@@ -55,16 +55,20 @@ The red is only safe as a large-text or filled-background colour. `DESIGN.md` mu
 
 ## Typography
 
-| Role    | Stack                                        |
-| ------- | -------------------------------------------- |
-| Display | `"Marker Felt", "Comic Sans MS", sans-serif` |
-| Body    | `"PT Sans", sans-serif`                      |
+| Role    | v3 stack                                     | v4                                      |
+| ------- | -------------------------------------------- | --------------------------------------- |
+| Display | `"Marker Felt", "Comic Sans MS", sans-serif` | **Shantell Sans**                       |
+| Body    | `"PT Sans", sans-serif`                      | undecided — v3 never actually loaded it |
 
-Marker Felt is applied via a `font-marker` class on every heading, the wordmark, pills, and card titles. Self-hosted as `marker-felt.ttf` and preloaded.
+Display is applied via a `font-marker` class on every heading, the wordmark, pills, and card titles.
 
-⚠️ **Licensing risk.** Marker Felt is an Apple system font, bundled with macOS/iOS, and redistributing the `.ttf` from a web server is very likely outside its licence. The fallback (`Comic Sans MS`) is a Microsoft font with the same problem, and neither is available to Linux or Android visitors — a large share of Malaysian mobile traffic has been seeing the generic sans fallback all along. **Resolve in Phase 2**: source a licensed marker/handwriting webfont with a real open licence. Candidates worth evaluating: _Patrick Hand_, _Gochi Hand_, _Caveat_, _Architects Daughter_ (all SIL OFL, on Google Fonts).
+**Decided: v4 drops Marker Felt, uses [Shantell Sans](https://fonts.google.com/specimen/Shantell+Sans).**
 
-PT Sans is referenced but never loaded — no `@font-face`, no font CDN link. v3 has been silently rendering body copy in each device's default sans. **Load it properly in v4, or pick a different body face on purpose.**
+Marker Felt Apple system font, bundled macOS/iOS; self-hosting `.ttf` outside its licence. Fallback `Comic Sans MS` Microsoft font, same problem — neither exists Linux or Android, so much Malaysian mobile traffic seeing generic sans fallback all along.
+
+Shantell Sans: SIL OFL, variable (weight + "Bounce" axis), keeps hand-drawn marker character. Do NOT reintroduce Marker Felt or Comic Sans MS anywhere, including as fallback.
+
+PT Sans is referenced but never loaded — no `@font-face`, no font CDN link. v3 has been silently rendering body copy in each device's default sans. **Load it properly in v4, or pick a different body face on purpose.** Body font still undecided — display face settled, body isn't.
 
 ### Fluid scale
 
@@ -160,7 +164,7 @@ Radix is genuinely needed only for the mobile nav drawer and the accordion. Ever
 **Keep:**
 
 - Red/blue dual accent and the `Power`/`Kids` wordmark split
-- Marker display face (with a properly licensed font)
+- Marker display face — as Shantell Sans, not Marker Felt
 - Hard offset shadow + thick black border
 - Heart rule divider
 - Highlight sweep on `<mark>`, gated on `prefers-reduced-motion`
@@ -170,7 +174,7 @@ Radix is genuinely needed only for the mobile nav drawer and the accordion. Ever
 **Fix:**
 
 - Red's contrast ratio for body-sized text
-- Font licensing and the never-loaded body font
+- The never-loaded body font — pick one deliberately and load it (display face settled: Shantell Sans)
 - The `#e20000` / `#e60000` mismatch
 - Missing reduced-motion guards
 

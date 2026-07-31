@@ -3,24 +3,36 @@
 **Purpose:** how schema changes reach each database safely.
 **Read this when:** you changed collection, global, or block field.
 
-> **Status: not yet configured.** Phase 1 establish migration setup.
-
 ---
 
 ## The rule
 
-**Every schema change ships with migration.** Payload push schema auto in dev, but production run migrations only. Field added without one work locally, fail on deploy.
+**Every schema change ships with migration.** Payload push schema auto in dev (`push: !isProduction` in `src/payload.config.ts`), but production run migrations only. Field added without one work locally, fail on deploy.
 
 ## Loop
 
 ```bash
-pnpm payload migrate:create <descriptive-name>   # after changing the schema
-pnpm payload migrate                             # apply locally
-pnpm generate:types                              # regenerate payload-types.ts
+pnpm migrate:create <descriptive-name>   # after changing the schema
+pnpm migrate                             # apply locally
+pnpm generate:types                      # regenerate payload-types.ts
 pnpm verify
 ```
 
 Commit migration file and regenerated types together with schema change. Migrations run auto on deploy.
+
+### Generated import gets patched auto
+
+Payload's generator emits this at top of every migration:
+
+```ts
+import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-postgres'
+```
+
+`MigrateUpArgs` and `MigrateDownArgs` are **type-only** exports, so under ESM this fails at runtime with `does not provide an export named 'MigrateDownArgs'` and `pnpm migrate` dies before applying anything — error points at module system, not real cause.
+
+`pnpm migrate:create` therefore runs `scripts/fix-migration-imports.mjs` after, rewriting line to `import type`. Nothing to remember; not manual step.
+
+If you generate migration by calling Payload CLI directly, run script yourself. Delete both once Payload release fixes generator.
 
 ## Writing them
 

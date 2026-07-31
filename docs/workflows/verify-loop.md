@@ -26,7 +26,7 @@ Stop at first failure, fix it. Don't commit around red step. Don't disable rule 
 
 ## Also required
 
-- **Schema changes** need `pnpm generate:types` + migration. See [../ops/migrations.md](../ops/migrations.md).
+- **Schema changes** need `pnpm generate:types` + migration. See [../ops/migrations.md](../ops/migrations.md). Adding admin component also needs `pnpm generate:importmap`.
 - **New pure functions** in `src/lib/` need unit test, same change.
 - **Visual changes** need look at rendered result at 320px, 768px, 1440px. Green checks don't prove layout right.
 - **New or changed blocks** need [../architecture/blocks.md](../architecture/blocks.md) updated, same commit.
