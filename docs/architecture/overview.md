@@ -1,15 +1,15 @@
 # Architecture Overview
 
-**Purpose:** how the system fits together — one app, where requests go, where data lives.
-**Read this when:** you are new to the repo, or a change crosses more than one directory.
+**Purpose:** how system fit together — one app, requests go where, data live where.
+**Read this when:** new to repo, or change cross more than one directory.
 
-> **Status: not yet implemented.** This describes the target built in Phase 1 and Phase 4. Nothing below exists yet.
+> **Status: not yet implemented.** Describe target built Phase 1 and Phase 4. Nothing below exist yet.
 
 ---
 
 ## Shape
 
-One Next.js application serves both the public site and the CMS admin panel. Payload mounts into the App Router as a route group, so there is one deploy, one build, one set of TypeScript types shared end to end.
+One Next.js app serve both public site and CMS admin panel. Payload mount into App Router as route group — one deploy, one build, one set TypeScript types shared end to end.
 
 ```
 Visitor ──► Vercel ──► Next.js App Router
@@ -21,14 +21,14 @@ Visitor ──► Vercel ──► Next.js App Router
                    (content)          (media originals + sizes)
 ```
 
-Editors and visitors hit the same deployment. There is no separate CMS service to run, monitor, or keep in sync.
+Editors and visitors hit same deployment. No separate CMS service to run, monitor, keep in sync.
 
 ## Rendering
 
-- **Server components by default.** Content rendering never ships JavaScript. `"use client"` requires a stated reason.
-- **Pages are data.** A route resolves a `pages` record by slug, then walks its `layout` array and renders one component per block.
-- **Cache on tags, revalidate on publish.** Payload hooks revalidate the affected paths when a document is published.
-- **Drafts** render through Next's draft mode; Payload's live preview points at the same routes.
+- **Server components default.** Content rendering never ship JavaScript. `"use client"` need stated reason.
+- **Pages are data.** Route resolve `pages` record by slug, walk `layout` array, render one component per block.
+- **Cache on tags, revalidate on publish.** Payload hooks revalidate affected paths on document publish.
+- **Drafts** render through Next's draft mode; Payload's live preview point at same routes.
 
 ## Directory map
 
@@ -53,10 +53,10 @@ docs/                see AGENTS.md for the map
 
 ## Boundaries
 
-- **`src/lib/` is pure.** No React, no Payload imports, no environment access. Everything in it is unit-testable in isolation.
-- **Blocks own their schema and their renderer**, side by side. A block is one directory you can read in full.
-- **Collections never import components.** Schema and presentation stay separate; the renderer maps over data.
-- **Nothing reads `process.env` outside a typed config module.**
+- **`src/lib/` pure.** No React, no Payload imports, no environment access. Everything unit-testable isolation.
+- **Blocks own schema and renderer**, side by side. Block = one directory readable in full.
+- **Collections never import components.** Schema and presentation stay separate; renderer map over data.
+- **Nothing read `process.env` outside typed config module.**
 
 ## Related
 

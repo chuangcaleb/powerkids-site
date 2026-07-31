@@ -17,7 +17,7 @@ Copy is reproduced as written, including its inconsistencies. Rewriting is a con
 - Display name: **PowerKids** — always one word, rendered as `Power` (red) + `Kids` (blue)
 - Tagline: **the Centre with a Heart** (`Centre` highlighted blue, `Heart` highlighted red)
 - Founded: **2001**. Year count is computed live (`currentYear - 2001`), rendered as "{n} years & counting!"
-- Curriculum: **FunGates** (also written *Fungates* in places — **[DECIDE]** canonical casing)
+- Curriculum: **FunGates** (also written _Fungates_ in places — **[DECIDE]** canonical casing)
 - Charity affiliation: **FunGates Superflow Foundation** — <http://www.fungatessuperflowfoundation.org>
 
 ### Default metadata
@@ -28,18 +28,18 @@ Copy is reproduced as written, including its inconsistencies. Rewriting is a con
 - `theme-color`: `#ffffff`; Safari pinned-tab colour: `#e20000`
 - App name (iOS/Windows tiles): `PowerKids`
 
-**[DECIDE]** The description says *four* locations; only **three** schools are active in the data (two are commented out — see [Schools](#schools)). Either the copy or the school list is wrong.
+**[DECIDE]** The description says _four_ locations; only **three** schools are active in the data (two are commented out — see [Schools](#schools)). Either the copy or the school list is wrong.
 
 ### Contact (global)
 
-| Field | Value |
-| --- | --- |
-| Opening hours | `8:30am - 5:00pm` |
-| Opening days | `Monday - Friday` |
-| Email | `powerkidschool@gmail.com` |
-| Phone 1 | `010 - 221 2482` → `tel:+60102212482` |
-| Phone 2 | `03 - 9056 4288` → `tel:+60390564288` |
-| Phone 3 | `010 - 221 2483` → `tel:+0102212483` ⚠️ |
+| Field         | Value                                   |
+| ------------- | --------------------------------------- |
+| Opening hours | `8:30am - 5:00pm`                       |
+| Opening days  | `Monday - Friday`                       |
+| Email         | `powerkidschool@gmail.com`              |
+| Phone 1       | `010 - 221 2482` → `tel:+60102212482`   |
+| Phone 2       | `03 - 9056 4288` → `tel:+60390564288`   |
+| Phone 3       | `010 - 221 2483` → `tel:+0102212483` ⚠️ |
 
 ⚠️ Phone 3's `tel:` href is malformed in v3 (`+0102212483` — missing the `6` country code). Correct value is almost certainly `+60102212483`. **[DECIDE]** confirm before seeding.
 
@@ -48,11 +48,11 @@ Contact section blurb: `Please come and find out more! We'd love to hear from yo
 
 ### Social links
 
-| Platform | URL |
-| --- | --- |
-| Facebook | <https://www.facebook.com/PowerKidsChildcare> |
-| Instagram | <https://www.instagram.com/powerkids_2001/> |
-| YouTube | <https://www.youtube.com/channel/UCOjK8A2hTRbh1jg3hPE7uCw> |
+| Platform  | URL                                                        |
+| --------- | ---------------------------------------------------------- |
+| Facebook  | <https://www.facebook.com/PowerKidsChildcare>              |
+| Instagram | <https://www.instagram.com/powerkids_2001/>                |
+| YouTube   | <https://www.youtube.com/channel/UCOjK8A2hTRbh1jg3hPE7uCw> |
 
 Each link has an aria-label of the form `{Platform} profile for PowerKids Kindergarten`.
 
@@ -66,6 +66,7 @@ Each link has an aria-label of the form `{Platform} profile for PowerKids Kinder
 Heading: `Register Today!`
 
 Ordered steps:
+
 1. `Sign the Registration Form`
 2. `Attach photocopy of birth cert.`
 3. `Email proof of full payment`
@@ -83,34 +84,34 @@ Header and footer are generated from one source with three groups.
 
 ### Group: about
 
-| Label | Href | Description |
-| --- | --- | --- |
-| Who We Are | `/about` | To raise a new generation of 21st-Century Children with heart. |
-| Our Schools | `/about#our-schools` | *(none)* |
-| Our Team | `/about#our-team` | Trained & qualified teachers who are passionate and dynamic. |
-| We're Hiring! | `/careers` | Want to enter and be a part of the centre with a heart? |
+| Label         | Href                 | Description                                                    |
+| ------------- | -------------------- | -------------------------------------------------------------- |
+| Who We Are    | `/about`             | To raise a new generation of 21st-Century Children with heart. |
+| Our Schools   | `/about#our-schools` | _(none)_                                                       |
+| Our Team      | `/about#our-team`    | Trained & qualified teachers who are passionate and dynamic.   |
+| We're Hiring! | `/careers`           | Want to enter and be a part of the centre with a heart?        |
 
-⚠️ `#our-schools` is used as the anchor id by **two** sections in v3 — Our Schools *and* Our Principals. Duplicate ids; the link resolves to whichever renders first. **[DECIDE]** give Principals its own anchor.
+⚠️ `#our-schools` is used as the anchor id by **two** sections in v3 — Our Schools _and_ Our Principals. Duplicate ids; the link resolves to whichever renders first. **[DECIDE]** give Principals its own anchor.
 ⚠️ `Our Team` is linked in the nav but the section is **commented out** on the About page, so the anchor goes nowhere.
 
 ### Group: programs
 
-| Label | Href | Hours | Description |
-| --- | --- | --- | --- |
-| Morning School | `/programs/morning-school` | `08:30AM - 12:30noon` | Essential early childhood education (ECE) provided for children from Ages 2-6! |
-| After School Program | `/programs/after-school-program` | `12:30PM - 03:00PM` | A variety of enrichment classes after lunch and homework coaching! |
-| Evening Daycare | `/programs/daycare` | `03:00PM - 07:00PM` | Care and activities for your child, while they wait for you to finish your day's work! |
+| Label                | Href                             | Hours                 | Description                                                                            |
+| -------------------- | -------------------------------- | --------------------- | -------------------------------------------------------------------------------------- |
+| Morning School       | `/programs/morning-school`       | `08:30AM - 12:30noon` | Essential early childhood education (ECE) provided for children from Ages 2-6!         |
+| After School Program | `/programs/after-school-program` | `12:30PM - 03:00PM`   | A variety of enrichment classes after lunch and homework coaching!                     |
+| Evening Daycare      | `/programs/daycare`              | `03:00PM - 07:00PM`   | Care and activities for your child, while they wait for you to finish your day's work! |
 
 Note the route is `/programs/daycare` while the label is "Evening Daycare". **[DECIDE]** keep the slug (needs a redirect either way) or align it.
 
 ### Group: events
 
-| Label | Href | Description |
-| --- | --- | --- |
-| Graduation | `/events/graduation` | A stage-performance celebration of our children who've completed their pre-school learning, showcasing the discipline and training of our children over the years! |
-| Sports Day | `/events/sports-day` | Championship, sportsmanship, winning, competing, participation — a family day-out. |
-| Field Trips | `/events/field-trips` | Learning beyond the classroom walls, bringing perspective to boost cognitive development. |
-| Community Service | `/events/community-service` | A portion of your child's monthly school fees is channelled to support FunGates SuperFlow Foundation. See how our teachers and students serve! |
+| Label             | Href                        | Description                                                                                                                                                        |
+| ----------------- | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Graduation        | `/events/graduation`        | A stage-performance celebration of our children who've completed their pre-school learning, showcasing the discipline and training of our children over the years! |
+| Sports Day        | `/events/sports-day`        | Championship, sportsmanship, winning, competing, participation — a family day-out.                                                                                 |
+| Field Trips       | `/events/field-trips`       | Learning beyond the classroom walls, bringing perspective to boost cognitive development.                                                                          |
+| Community Service | `/events/community-service` | A portion of your child's monthly school fees is channelled to support FunGates SuperFlow Foundation. See how our teachers and students serve!                     |
 
 ### Footer structure
 
@@ -124,32 +125,38 @@ Right columns: one column per nav group, heading = group key (`about`, `programs
 Three active. Ordered as listed.
 
 ### Sri Petaling
+
 ```
 2, Jalan 5/149B
 Taman Sri Endah
 Bandar Baru Sri Petaling
 57000 Kuala Lumpur
 ```
+
 Contacts: `03 - 9056 4288`, `010 - 221 2482`
 Principal: Ms. Wan Hong
 Image id: `powerkids/about/schools/sri-petaling`
 
 ### Puchong Utama
+
 ```
 No 1, Jalan PU 3/1A
 Taman Puchong Utama
 47140 Puchong, Selangor
 ```
+
 Contacts: `03 - 8066 9363`, `012 - 218 0240`
 Principal: Uncle Chun Hoe
 Image id: `powerkids/about/schools/puchong`
 
 ### Parklane OUG
+
 ```
 D1-1-11 Jalan 1/152
 Taman OUG Parklane
 58200 Kuala Lumpur
 ```
+
 Contacts: `012 - 386 1123`, `03 - 7498 1905`
 Principal: Ms. Mary
 Image id: `powerkids/about/schools/parklane`
@@ -170,7 +177,7 @@ Section order: Hero → rule → About → rule → Programs → rule → Events
 ### Hero
 
 - H1: `the Centre with a Heart` — `Centre` marked blue, `Heart` marked red, line break before "with a"
-- Body: `First-Class 21st-Century Kindergarten Education, based across four locations around Kuala Lumpur. Powered by the FunGates curriculum since 2001.` — *Kindergarten Education* underlined, *four* and *FunGates* italic
+- Body: `First-Class 21st-Century Kindergarten Education, based across four locations around Kuala Lumpur. Powered by the FunGates curriculum since 2001.` — _Kindergarten Education_ underlined, _four_ and _FunGates_ italic
 - CTAs: `register` (red) → `#register`; `contact` (blue) → `#contact`
 - Image: `hero.jpg`, alt: `Two PowerKids students on a toy telephone, with a speech bubble reading: Register now for 2025!`
 
@@ -179,20 +186,21 @@ Section order: Hero → rule → About → rule → Programs → rule → Events
 ### Who We Are
 
 - Eyebrow pill: `Who We Are`
-- H2: `{n} years & counting!` — computed from 2001, *{n} years* underlined
+- H2: `{n} years & counting!` — computed from 2001, _{n} years_ underlined
 - Body: the shared **Identity Statement** (below)
 - CTA: `read about us` → `/about`
 - Media: YouTube `pWK_QZkIbQ0`, title `Register Now with PowerKids!`
 
 **Identity Statement** (reused on Home, About, and Careers):
-> **PowerKids** *is* the Kindergarten **Centre** with a **Heart**
+
+> **PowerKids** _is_ the Kindergarten **Centre** with a **Heart**
 >
-> We believe that we have that *difference*, that *secret ingredient*, that will propel the next generation to *stand up* and *stand out* from the crowd.
+> We believe that we have that _difference_, that _secret ingredient_, that will propel the next generation to _stand up_ and _stand out_ from the crowd.
 
 ### Our Programs
 
 - Eyebrow pill: `Our Programs` (red)
-- H2: `Fun learning is our serious business.` — *Fun learning* underlined, *serious* marked red
+- H2: `Fun learning is our serious business.` — _Fun learning_ underlined, _serious_ marked red
 - Keyword row: `Play.` `Explore.` `Grow.` `Collaborate.`
 - Intro: `High-value lessons and activities, with the love and care of our professional teachers, all throughout the entire day!`
 - Then the three program cards (title, hours pill with clock icon, image, description, `more!` link)
@@ -200,7 +208,7 @@ Section order: Hero → rule → About → rule → Programs → rule → Events
 ### Our Events
 
 - Eyebrow pill: `Our Events` (blue)
-- H2: `In and outside of classrooms!` — *and* underlined, *outside* marked blue
+- H2: `In and outside of classrooms!` — _and_ underlined, _outside_ marked blue
 - Strapline: `Experiences maketh thy child.`
 - Then the four event cards (title, description, image, `more!` link)
 
@@ -220,9 +228,11 @@ Sections: Mission/Vision grid → Our Schools → Our Principals. (Our Team exis
 - Decoration: rotated logo
 
 **Our Mission** card:
+
 > To raise a new generation of 21st-Century children with **heart**.
 
 **Our Vision** card — an acrostic; the first letter of each item is set large:
+
 > - **A**cademic Excellence
 > - **B**uilding Character
 > - **C**ultivating Moral & Spiritual Values
@@ -238,6 +248,7 @@ Sections: Mission/Vision grid → Our Schools → Our Principals. (Our Team exis
 - Anchor is **also** `#our-schools` — see nav warning above.
 
 **Uncle Peck Guan — Founder**
+
 > If a child can't read, we TEACH him to read.
 >
 > If a child can't do Math problems, we TEACH him how to do Math problems.
@@ -247,6 +258,7 @@ Sections: Mission/Vision grid → Our Schools → Our Principals. (Our Team exis
 > ...but NOT in PowerKids: "The Centre with a Heart" ~ because Love Never Fails – we make a Difference.
 
 **Ms. Wan Hong — Principal of PowerKids Sri Petaling**
+
 > The future of the world is in my classroom today." - Ivan John Fitzwater.
 >
 > I am truly honored to be a teacher— a role that allows me to shape the minds and hearts of tomorrow. To be entrusted with the incredible responsibility of nurturing the future leaders, thinkers, and changemakers of the world.
@@ -256,6 +268,7 @@ Sections: Mission/Vision grid → Our Schools → Our Principals. (Our Team exis
 ⚠️ Two typos in the original: an unmatched closing quote before `- Ivan John Fitzwater`, and `environment where. every student`. **[DECIDE]** fix on migration (recommended) or preserve.
 
 **Ms. Mary — Principal of PowerKids Parklane**
+
 > Ms. Mary Chan is a dedicated educator with 25 years of teaching experience, specializing in nurturing young minds. She holds a Diploma in Early Childhood Education and has completed the KAAK course, equipping her with advanced skills in child development and education.
 >
 > Additionally, she is certified in First Aid, ensuring a safe and secure environment for the children under her care. Ms. Mary is known for her loving and caring nature, fostering a positive and supportive atmosphere.
@@ -263,6 +276,7 @@ Sections: Mission/Vision grid → Our Schools → Our Principals. (Our Team exis
 > Her exceptional ability to handle children with patience and understanding makes her a cherished and trusted teacher among parents and students alike.
 
 **Uncle Chun Hoe — Principal of PowerKids Puchong Utama**
+
 > I have been an educator for 23 years and hold a Diploma in Early Childhood Education. I believe every child is unique and learns at their own pace. At our kindergarten, we focus on providing a safe, warm environment where children can explore, play, and have fun.
 >
 > Robert John Meehan: "Every child has a different learning style and pace. Each child is unique, not only capable of learning but capable of succeeding."
@@ -288,12 +302,13 @@ Principal bios are hard-coded prose of varying length and voice. Note the year c
 ## Page: Careers (`/careers`)
 
 - Eyebrow: `Career Opportunities` (red)
-- H1: `We Want You !` — *You* marked red
+- H1: `We Want You !` — _You_ marked red
 - Identity Statement
 - Body: `Do you have that difference too? Check out any vacancies, and feel free to just contact us any time through the channels below.`
 - H2: `Current Vacancies`
 
 **Vacancy card — Teacher**
+
 - Minimum: **Diploma in ECE**
 - **Experienced** working with young children
 - **Patient** with **energetic** disposition
@@ -301,6 +316,7 @@ Principal bios are hard-coded prose of varying length and voice. Note the year c
 - Passionate for **shaping and inspiring** young minds
 
 Closing:
+
 - `Call 03 - 9056 4288 for an interview, or email your resume to powerkidschool@gmail.com`
 - `Not 100% certain? Contact us anyways, and stand out from the others who didn't!`
 
@@ -328,7 +344,7 @@ This page omits the Register section.
 - List:
   - **Domestic Science** for children to explore practical kitchen skills,
   - **Creative Art and Craft** as a means of outwardly expressing their inner thoughts and emotions,
-  - **Speech & Drama** into the world of imagination and stepping out to speak with *confidence*,
+  - **Speech & Drama** into the world of imagination and stepping out to speak with _confidence_,
   - **Information Communication Technology** with hands-on activities to train up relevant digital skills!
 - Closing: `Take a look at one of our featured programs!`
 - Four brochure scans (English front/back, Chinese front/back), all with **empty alt text** — ⚠️ accessibility defect; brochures carry real information. **[DECIDE]** write alt text or transcribe the brochure content into the page.
@@ -406,13 +422,13 @@ This page omits the Register section.
 
 ### Brand assets — copied to `_reference/media/` (gitignored), reusable as-is
 
-| File | Use |
-| --- | --- |
-| `public/images/logo.svg` | Wordmark logo |
-| `public/images/heart.svg` | Section rule ornament, footer credit |
-| `public/images/blob.svg` | Register section background |
+| File                           | Use                                                        |
+| ------------------------------ | ---------------------------------------------------------- |
+| `public/images/logo.svg`       | Wordmark logo                                              |
+| `public/images/heart.svg`      | Section rule ornament, footer credit                       |
+| `public/images/blob.svg`       | Register section background                                |
 | `public/fonts/marker-felt.ttf` | Display typeface (see the design audit for licensing risk) |
-| `public/favicon/*` | Full favicon set, incl. `site.webmanifest` |
+| `public/favicon/*`             | Full favicon set, incl. `site.webmanifest`                 |
 
 ### Bundled photos — in `_reference/media/assets/`
 
@@ -422,25 +438,25 @@ This page omits the Register section.
 
 v3 fetched these at build time through the Cloudinary Admin API. **Counts are unknown without API credentials** — galleries were paginated and fetched recursively, so any of these prefixes may hold dozens of images.
 
-| Prefix / public id | Where used | Count |
-| --- | --- | --- |
-| `powerkids/index/program-morning.jpg` | Home program card | 1 |
-| `powerkids/index/program-after.jpg` | Home program card | 1 |
-| `powerkids/index/daycare.jpg` | Home program card | 1 |
-| `powerkids/index/graduation.jpg` | Home event card | 1 |
-| `powerkids/index/sports-day.jpg` | Home event card | 1 |
-| `powerkids/index/field-trip.jpg` | Home event card | 1 |
-| `powerkids/index/community-service.jpg` | Home event card | 1 |
-| `powerkids/about/apple-girl.jpg` | About hero image | 1 |
-| `powerkids/about/schools/{sri-petaling,puchong,parklane}` | School photos | 3 |
-| `powerkids/programs/after/ASP_*.jpg` | Brochure scans | 4 |
-| `powerkids/programs/daycare/daycare_qicl4q.png` | Daycare photo | 1 |
-| `powerkids/events/pspkidsfoundation_orig_r8xclb.jpg` | Foundation booklet | 1 |
-| `powerkids/programs/morning` | Gallery | **unknown** |
-| `powerkids/events/sports-day` | Gallery | **unknown** |
-| `powerkids/events/field-trips` | Gallery | **unknown** |
-| `powerkids/events/community-service` | Gallery | **unknown** |
-| `powerkids/about/team` | Team photo grid (section disabled) | **unknown** |
+| Prefix / public id                                        | Where used                         | Count       |
+| --------------------------------------------------------- | ---------------------------------- | ----------- |
+| `powerkids/index/program-morning.jpg`                     | Home program card                  | 1           |
+| `powerkids/index/program-after.jpg`                       | Home program card                  | 1           |
+| `powerkids/index/daycare.jpg`                             | Home program card                  | 1           |
+| `powerkids/index/graduation.jpg`                          | Home event card                    | 1           |
+| `powerkids/index/sports-day.jpg`                          | Home event card                    | 1           |
+| `powerkids/index/field-trip.jpg`                          | Home event card                    | 1           |
+| `powerkids/index/community-service.jpg`                   | Home event card                    | 1           |
+| `powerkids/about/apple-girl.jpg`                          | About hero image                   | 1           |
+| `powerkids/about/schools/{sri-petaling,puchong,parklane}` | School photos                      | 3           |
+| `powerkids/programs/after/ASP_*.jpg`                      | Brochure scans                     | 4           |
+| `powerkids/programs/daycare/daycare_qicl4q.png`           | Daycare photo                      | 1           |
+| `powerkids/events/pspkidsfoundation_orig_r8xclb.jpg`      | Foundation booklet                 | 1           |
+| `powerkids/programs/morning`                              | Gallery                            | **unknown** |
+| `powerkids/events/sports-day`                             | Gallery                            | **unknown** |
+| `powerkids/events/field-trips`                            | Gallery                            | **unknown** |
+| `powerkids/events/community-service`                      | Gallery                            | **unknown** |
+| `powerkids/about/team`                                    | Team photo grid (section disabled) | **unknown** |
 
 **Migration rule for galleries:** seed 2–3 representative images per gallery only. Galleries are editor-managed content; bulk re-upload is an admin task after launch, not a migration task. No layout may assume a fixed image count — a gallery of 1 and a gallery of 40 must both look right.
 
@@ -452,21 +468,21 @@ v3 fetched these at build time through the Cloudinary Admin API. **Counts are un
 
 Every v3 URL must resolve after launch.
 
-| v3 route | v4 plan |
-| --- | --- |
-| `/` | Page `home` |
-| `/about` | Page `about` |
-| `/careers` | Page `careers` |
-| `/programs/morning-school` | Program page |
-| `/programs/after-school-program` | Program page |
-| `/programs/daycare` | Program page (slug mismatch — see above) |
-| `/events/graduation` | Event page |
-| `/events/sports-day` | Event page |
-| `/events/field-trips` | Event page |
-| `/events/community-service` | Event page |
-| `/about#our-schools` | Anchor must survive |
-| `/about#our-team` | Currently dead — fix or remove |
-| `#register`, `#contact` | Global sections, present on every page |
+| v3 route                         | v4 plan                                  |
+| -------------------------------- | ---------------------------------------- |
+| `/`                              | Page `home`                              |
+| `/about`                         | Page `about`                             |
+| `/careers`                       | Page `careers`                           |
+| `/programs/morning-school`       | Program page                             |
+| `/programs/after-school-program` | Program page                             |
+| `/programs/daycare`              | Program page (slug mismatch — see above) |
+| `/events/graduation`             | Event page                               |
+| `/events/sports-day`             | Event page                               |
+| `/events/field-trips`            | Event page                               |
+| `/events/community-service`      | Event page                               |
+| `/about#our-schools`             | Anchor must survive                      |
+| `/about#our-team`                | Currently dead — fix or remove           |
+| `#register`, `#contact`          | Global sections, present on every page   |
 
 ---
 
