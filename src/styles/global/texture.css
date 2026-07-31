@@ -1,0 +1,11 @@
+/*
+ * Crayon/craft-table dot-grid texture. A static radial-gradient tile — no
+ * image asset, scales to any viewport. See DESIGN.md's "Character" section.
+ */
+body {
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--colour-black) 10%, transparent) 0.0625rem,
+    transparent 0.0625rem
+  );
+  background-size: 1.5rem 1.5rem;
+}

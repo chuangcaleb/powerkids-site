@@ -5,7 +5,8 @@
  * real content is visible on the kitchen sink.
  */
 :root {
-  --font-display: 'Shantell Sans', system-ui, sans-serif;
+  /* --font-shantell-sans is supplied at runtime by next/font/local — see src/fonts/shantell-sans.ts. */
+  --font-display: var(--font-shantell-sans), system-ui, sans-serif;
   --font-body: system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', sans-serif;
 
   --step--2: clamp(0.7813rem, 0.7645rem + 0.0839vw, 0.84rem);
