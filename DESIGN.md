@@ -85,7 +85,7 @@ v3 carried a full shadcn neutral ramp (`--muted-foreground`, `--ring`, `--destru
 
 Two families: Shantell Sans for display (headings, wordmark), system stack for body.
 
-- Shantell Sans self-hosted as a trimmed variable font — weight axis only, "Bounce" axis dropped, Latin subset. Never Marker Felt, never Comic Sans MS, including as a fallback.
+- Shantell Sans self-hosted as a trimmed variable font — weight, Bounce, and Informality axes kept (for future text animation), Spacing kept too since dropping it barely changes file size, italic dropped (separate upstream file, no current use case), Latin subset. Never Marker Felt, never Comic Sans MS, including as a fallback.
 - Body uses the platform's own default sans, Roboto excluded, so Android falls to a narrower system alternative: `system-ui, -apple-system, "Segoe UI", "Helvetica Neue", sans-serif`.
 - Fluid scale via Utopia: 320px viewport → 18px base at 1.2 ratio, up to 1440px viewport → 21px base at 1.25 ratio. Steps `-2` through `5`. Ratios stay close together deliberately — a wider gap (e.g. 1.333) inverts the scale at step `-2` (max ends up smaller than min), since it compounds over more steps than the max side's larger multiplier can outrun. These are entry values — first thing to tune once real content renders on the kitchen sink, not a measured final.
 
