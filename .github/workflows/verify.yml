@@ -1,0 +1,40 @@
+name: verify
+
+on:
+  pull_request:
+  push:
+    branches: [v4, main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      # The same loop documented in docs/workflows/verify-loop.md, run as
+      # separate steps so a failure names itself in the job summary.
+      - run: pnpm lint
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm build
+        env:
+          # Build-time placeholders. The build must not require real
+          # credentials — anything that does belongs at request time.
+          DATABASE_URI: postgres://placeholder
+          PAYLOAD_SECRET: placeholder-secret-for-ci-builds-only
+          NEXT_PUBLIC_SERVER_URL: http://localhost:3000

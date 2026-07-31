@@ -1,0 +1,10 @@
+# Dependencies allowed to run install scripts. Everything else is blocked by
+# default — an install script is arbitrary code execution, so each one is an
+# explicit decision.
+allowBuilds:
+  # Image processing. Payload uses it to generate image sizes at upload.
+  sharp: true
+  # Git hooks. Its install script is what wires .git/hooks up.
+  lefthook: true
+  # Native resolver used by eslint-plugin-import.
+  unrs-resolver: true
