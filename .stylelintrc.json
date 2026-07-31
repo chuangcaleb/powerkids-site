@@ -43,6 +43,7 @@
       }
     ],
     "selector-class-pattern": null,
-    "custom-property-pattern": null
+    "custom-property-pattern": null,
+    "property-no-unknown": [true, { "ignoreProperties": ["composes"] }]
   }
 }

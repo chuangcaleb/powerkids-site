@@ -11,6 +11,10 @@
 
   --shadow-offset: 5px;
   --shadow-hard: var(--shadow-offset) var(--shadow-offset) 0 0 var(--shadow-colour);
+  /* Button hover-lift / press interaction — see DESIGN.md's Motion section. */
+  --shadow-hard-lift: calc(var(--shadow-offset) * 1.2) calc(var(--shadow-offset) * 1.2) 0
+    0 var(--shadow-colour);
+  --shadow-hard-flat: 0 0 0 0 var(--shadow-colour);
 
   --focus-offset: 3px;
 }

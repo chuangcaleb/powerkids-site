@@ -3,24 +3,24 @@
 **Purpose:** shared UI inventory — what exist, what variants, what not build twice.
 **Read this when:** need button, card, heading, or about create new shared component.
 
-> **Status: not yet implemented.** Phase 2 build these, render all on kitchen-sink route.
+> **Status: partially implemented.** Built so far: `Button`, `Card`, `Heading`, `Mark`, `Divider`, `Image`. Still to come: `Accordion`, `NavBar`, `NavDrawer`, `VideoEmbed`. None rendered on a kitchen sink yet — that route ships in a later Phase 2 PR.
 
 ---
 
 ## Planned inventory
 
-| Component    | Variants                                            |
-| ------------ | --------------------------------------------------- |
-| `Button`     | `red`, `blue`, `outline`, `ghost`, `link` × sizes   |
-| `Card`       | default, tab-header                                 |
-| `Heading`    | levels, with display face                           |
-| `Mark`       | animated highlight sweep, reduced-motion safe       |
-| `Divider`    | rule variant, no motif (v3's heart rule dropped)    |
-| `Image`      | Next `<Image>` wrapper, R2 handling, bordered frame |
-| `Accordion`  | client component                                    |
-| `NavBar`     | desktop header nav — this phase                     |
-| `NavDrawer`  | mobile nav drawer — deferred to a later phase       |
-| `VideoEmbed` | lazy-loaded, click-to-play                          |
+| Component    | Variants                                            | Status  |
+| ------------ | --------------------------------------------------- | ------- |
+| `Button`     | `red`, `blue`, `outline`, `ghost`, `link` × sizes   | built   |
+| `Card`       | default, tab-header                                 | built   |
+| `Heading`    | levels, with display face                           | built   |
+| `Mark`       | animated highlight sweep, reduced-motion safe       | built   |
+| `Divider`    | rule variant, no motif (v3's heart rule dropped)    | built   |
+| `Image`      | Next `<Image>` wrapper, R2 handling, bordered frame | built   |
+| `Accordion`  | client component                                    | planned |
+| `NavBar`     | desktop header nav — this phase                     | planned |
+| `NavDrawer`  | mobile nav drawer — deferred to a later phase       | planned |
+| `VideoEmbed` | lazy-loaded, click-to-play                          | planned |
 
 `Pill`, `SuperHead`, and `cva` as a variant mechanism are deliberately not in this list — removed outright during the Phase 2 design revision, no replacement pattern. Headings stand alone; variants are CSS Module classes, never a variant library.
 
