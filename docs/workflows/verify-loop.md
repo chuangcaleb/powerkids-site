@@ -1,9 +1,9 @@
 # Verify Loop
 
-**Purpose:** the exact checks that must pass before any commit.
-**Read this when:** before every commit. No exceptions.
+**Purpose:** exact checks pass before commit.
+**Read when:** before every commit. No exceptions.
 
-> **Status: not yet implemented.** Phase 1 wires these scripts, the pre-commit hook, and CI.
+> **Status: not yet implemented.** Phase 1 wires scripts, pre-commit hook, CI.
 
 ---
 
@@ -13,24 +13,24 @@
 pnpm verify
 ```
 
-Which runs, in order:
+Runs, in order:
 
-| Step | Command | Catches |
-| --- | --- | --- |
-| 1 | `pnpm lint` | Style and correctness rules. `pnpm format` auto-fixes. |
-| 2 | `pnpm typecheck` | Type errors, including generated Payload types being stale. |
-| 3 | `pnpm test` | Unit tests. |
-| 4 | `pnpm build` | Build-time failures the other three miss. |
+| Step | Command          | Catches                                             |
+| ---- | ---------------- | --------------------------------------------------- |
+| 1    | `pnpm lint`      | Style, correctness rules. `pnpm format` auto-fixes. |
+| 2    | `pnpm typecheck` | Type errors, incl. stale generated Payload types.   |
+| 3    | `pnpm test`      | Unit tests.                                         |
+| 4    | `pnpm build`     | Build-time failures other three miss.               |
 
-Stop at the first failure and fix it. Do not commit around a red step, and do not disable a rule to make one pass — if a rule is wrong, change it deliberately in its own commit with a reason.
+Stop at first failure, fix it. Don't commit around red step. Don't disable rule to pass — rule wrong? Change deliberately, own commit, with reason.
 
 ## Also required
 
-- **Schema changes** need `pnpm generate:types` and a migration. See [../ops/migrations.md](../ops/migrations.md).
-- **New pure functions** in `src/lib/` need a unit test in the same change.
-- **Visual changes** need a look at the rendered result at 320px, 768px, and 1440px. Green checks do not prove a layout is right.
-- **New or changed blocks** need [../architecture/blocks.md](../architecture/blocks.md) updated in the same commit.
+- **Schema changes** need `pnpm generate:types` + migration. See [../ops/migrations.md](../ops/migrations.md).
+- **New pure functions** in `src/lib/` need unit test, same change.
+- **Visual changes** need look at rendered result at 320px, 768px, 1440px. Green checks don't prove layout right.
+- **New or changed blocks** need [../architecture/blocks.md](../architecture/blocks.md) updated, same commit.
 
 ## CI
 
-The same loop runs on every pull request. A red pipeline blocks merge.
+Same loop runs every pull request. Red pipeline blocks merge.
