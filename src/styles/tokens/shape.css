@@ -11,4 +11,6 @@
 
   --shadow-offset: 5px;
   --shadow-hard: var(--shadow-offset) var(--shadow-offset) 0 0 var(--shadow-colour);
+
+  --focus-offset: 3px;
 }
