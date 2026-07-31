@@ -4,7 +4,7 @@ Router for automated contributors. Read fully; read linked docs only when task t
 
 **Project:** `powerkids.edu.my` — website for PowerKids Kindergarten, Klang Valley, Malaysia. Branch (`v4`) from-scratch rebuild on Next.js + Payload CMS, replace v3 Astro site.
 
-**Current phase:** 0 — archive and documentation. No app code exists yet. Sections marked _(Phase N)_ describe target state, not yet true.
+**Current phase:** 1 — foundation. App shell, admin panel, database, media storage exist. Content model, blocks, rendering not yet built. Sections marked _(Phase N)_ describe target state, not yet true.
 
 ---
 
@@ -75,6 +75,7 @@ Next.js floor hard requirement, not preference: Payload doesn't support Next `15
 - **Server components default.** Add `"use client"` only when component genuinely need interactivity, say why in comment.
 - **No CSS framework.** Compose layout from primitives in `src/styles/compositions/`; scope component styles with CSS Modules. Layout need media query — check primitive first.
 - **No magic values.** Colours, spacing, type sizes, radii come from tokens. Raw hex/px value in component = review finding.
+- **Prefer framework's own primitive over hand-written one.** Before writing helper, check whether Payload or Next already provides it — Payload especially ships things easy to miss (`slugField`, `imageSizes`, `formatOptions`, access-control helpers). Built-in handled edge cases you haven't thought of yet, one less thing to maintain. If you do write own, say in comment what you checked and why it didn't fit, so next person can re-evaluate on upgrade instead of assuming oversight.
 - **kebab-case filenames.** Named exports preferred.
 - **Every uploaded image needs `alt`.** Enforced at schema level; don't work around it.
 - **Blocks closed set.** Editors choose from catalogue in `docs/architecture/blocks.md`. Adding one deliberate change with documented workflow, not convenience.

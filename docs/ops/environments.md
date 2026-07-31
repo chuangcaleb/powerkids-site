@@ -3,7 +3,7 @@
 **Purpose:** which services exist, what each environment point at, what every env var for.
 **Read this when:** setup local, add var, debug config diff between environments.
 
-> **Status: not yet provisioned.** Phase 1 create these resources.
+> **Status: pipeline live.** Environments below are provisioned and in use.
 
 **Never commit real values, never read `.env`.** File document variable _names and purposes only_. Automated contributors may update `.env.example`; only owner fill `.env` and Vercel dashboard.
 
@@ -20,6 +20,18 @@
 
 Preview deployments share dev database on purpose: previews for reviewing code, shared scratch database keep cheap. Never point preview at production data.
 
+### Media isolation
+
+**Local and Preview use separate R2 bucket from Production, with API token scoped to that bucket only.**
+
+Reason narrow, specific: **R2 has no object versioning**. Deleted object gone. Media in production bucket is kindergarten's photographs of graduations, sports days, field trips — in many cases only remaining copy. Preview deployment is branch that may never merge, running code nobody reviewed yet, must not reach those files.
+
+Prefix separation inside one bucket (`dev/`, `prod/`) considered, rejected. Costs same, isolates nothing: same credentials reach both prefixes, so protection is config string, not access boundary. Separate buckets plus separately scoped tokens means misconfigured preview fails with permissions error instead of deleting photograph.
+
+Neither bucket costs anything at this scale — R2 free tier far beyond what site needs, dev bucket can serve from plain `r2.dev` URL, no custom domain.
+
+Because filenames content-addressed (see [Media serving and cache](#media-serving-and-cache)), promoting file between buckets straight copy: same bytes produce same name.
+
 ## Services
 
 | Service       | Used for                            | Who owns access |
@@ -33,24 +45,66 @@ Preview deployments share dev database on purpose: previews for reviewing code, 
 
 Every name below appear in `.env.example` with comment. Values come from owner.
 
-| Name                     | Purpose                                                              |
-| ------------------------ | -------------------------------------------------------------------- |
-| `DATABASE_URI`           | Neon connection string for this environment                          |
-| `PAYLOAD_SECRET`         | Signs auth tokens. Unique per environment; rotating log everyone out |
-| `NEXT_PUBLIC_SERVER_URL` | Public origin, used for absolute URLs and preview callbacks          |
-| `S3_BUCKET`              | R2 bucket name                                                       |
-| `S3_ACCESS_KEY_ID`       | R2 access key                                                        |
-| `S3_SECRET_ACCESS_KEY`   | R2 secret                                                            |
-| `S3_ENDPOINT`            | R2 S3-compatible endpoint                                            |
-| `S3_REGION`              | `auto` for R2 — not bucket's location hint                           |
-| `R2_PUBLIC_URL`          | Public base URL media served from                                    |
-| `PREVIEW_SECRET`         | Guards draft-preview route                                           |
+| Name                     | Purpose                                                                         |
+| ------------------------ | ------------------------------------------------------------------------------- |
+| `DATABASE_URI`           | Neon connection string for this environment. Use pooled string.                 |
+| `PAYLOAD_SECRET`         | Signs auth tokens. Unique per environment; rotating log everyone out.           |
+| `NEXT_PUBLIC_SERVER_URL` | Public origin, used for absolute URLs and preview callbacks. No trailing slash. |
+| `S3_BUCKET`              | R2 bucket name                                                                  |
+| `S3_ACCESS_KEY_ID`       | R2 API token key, with Object Read & Write                                      |
+| `S3_SECRET_ACCESS_KEY`   | R2 API token secret                                                             |
+| `S3_ENDPOINT`            | Account-level endpoint: `https://<account-id>.r2.cloudflarestorage.com`         |
+| `R2_PUBLIC_URL`          | Public base URL media served from — `r2.dev` URL or custom domain               |
 
-`S3_REGION` is `auto` for R2. Using location hint instead common, confusing failure.
+No `S3_REGION` variable — deliberate. R2's region always literal `auto`, hard-coded in `src/lib/env.ts` where nobody can set it wrong. Was in table before; removed because setting bucket's location hint instead of `auto` produces confusing signature failure that reads like credentials problem, not a region problem.
+
+### Two R2 traps
+
+**Endpoint is not public URL.** `S3_ENDPOINT` is account-level write endpoint (no bucket path); `R2_PUBLIC_URL` is separate public read URL. Swap them: uploads appear to work, images break.
+
+**R2 Secret Access Key is 64 lowercase hex.** Same Cloudflare page also shows ~53-char "Token value" — different credential. Using it produces `SignatureDoesNotMatch`, misleadingly reads like code bug, not wrong-credential problem.
+
+## How variables are read
+
+`src/lib/env.ts` only module touching `process.env` — lint rule enforces. Throws error naming variable when missing, rather than letting `undefined` flow into connection string and fail somewhere unrelated.
+
+**Applies at build time too.** Payload config calls `requireEnv` while being constructed, Next constructs it during page-data collection, so missing variable fails build. Ordering deliberate: deploy that cannot work should fail at deploy, not at first request that happens to need variable.
+
+Consequence: **every build needs every variable set to something**. CI sets deliberately fake values in `.github/workflows/verify.yml`; Vercel needs real ones present for **both** Preview and Production, or deployment fails at build.
+
+## Media serving and cache
+
+Uploads go to R2 through S3 adapter, served from `R2_PUBLIC_URL` directly, not proxied through app. `next/image`'s allowlist derived from that variable in `next.config.ts`, so custom domain needs no separate config.
+
+**Filenames carry content hash**, e.g. `hero-4846c1b1.webp`. `beforeOperation` hook on `media` renames every upload before Payload derives size variants from it — see `src/lib/media-filename.ts`.
+
+Exists because media domain caches four hours (`cache-control: max-age=14400`). Without content-addressed names, replacing photo reuses filename, edge keeps serving old bytes, editor concludes CMS broken. With them, different content is different URL: replacement visible immediately, old object deleted.
+
+Verified in Phase 1: replacing document's file produced new URL that served instantly, while previous URL returned 404 on cache-busted request.
+
+Two consequences worth knowing:
+
+- **Cache TTL now free to raise.** Content-addressed URLs immutable by construction, so `max-age=31536000, immutable` safe, strictly better for visitors. Not yet applied — Cloudflare-side setting on custom domain.
+- **Identical content uploaded twice still stores twice.** Payload requires unique filenames per document, so second copy becomes e.g. `mary-2bb95600-1.webp`. Hash prevents stale caches, not duplicate storage.
+
+## Dev admin account
+
+Local Payload admin needs one permanent login both owner and agents can use. Bitwarden item `powerkids-dev-admin` is source of truth.
+
+- Sync locally: `bw unlock` to get session key, `export BW_SESSION=...`, then `pnpm sync:dev-admin` — writes `_reference/secrets/dev-admin.json` (gitignored, agent-readable, never named `.env*`).
+- Seed into Payload: `scripts/seed-admin.ts` reads that file, creates user if missing. Idempotent, guarded `NODE_ENV !== 'production'` — cannot run against prod.
+- Rotate password in Bitwarden first, rerun sync script, rerun seed script (updates existing user's password).
+- Never reuse this password for preview or production admin accounts.
+
+> **Not yet implemented.** `scripts/sync-dev-admin.sh` and `scripts/seed-admin.ts` do not exist in the tree. Flow above is owner's intended design, recorded before it was built. `users` collection now exists, so it is unblocked.
+
+## Known gaps
+
+**No email adapter.** Payload logs warning at boot, writes mail to console instead of sending it. Nothing depends on email yet, but **password resets will not reach anyone** until adapter configured — so first real admin accounts must have passwords set directly rather than through reset link. Resolve before handing accounts to school staff (Phase 6), or earlier if registration form lands first (Phase 7). Both want same adapter.
 
 ## Adding a variable
 
 1. Add to `.env.example` with comment saying what for.
 2. Add row to table above.
-3. Read through typed config module, never `process.env` directly.
+3. Add key to `EnvKey` union in `src/lib/env.ts`, read via `requireEnv`.
 4. Tell owner set in Vercel for both preview and production — missing production variable build failure, at worst moment.
