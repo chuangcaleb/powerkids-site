@@ -10,7 +10,7 @@ export async function Header() {
 
   return (
     <NavBar
-      logo={siteSettings.tagline}
+      logo={siteSettings.name}
       links={(navigation.header ?? []).map((link) => ({
         href: link.url,
         label: link.label,

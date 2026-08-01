@@ -1242,7 +1242,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface SiteSetting {
   id: number;
-  tagline: string;
+  name: string;
   /**
    * Used to compute "{n} years & counting" — do not hard-code the count anywhere.
    */
@@ -1329,7 +1329,7 @@ export interface SeoDefault {
  * via the `definition` "site-settings_select".
  */
 export interface SiteSettingsSelect<T extends boolean = true> {
-  tagline?: T;
+  name?: T;
   foundedYear?: T;
   email?: T;
   phones?:

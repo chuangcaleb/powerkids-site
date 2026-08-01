@@ -6,7 +6,8 @@ import { revalidateLayout } from './hooks/revalidate-layout'
 
 /**
  * Brand-wide facts referenced across the site. Founding year is stored, not
- * hard-coded, so "{n} years & counting" stays a computed value.
+ * hard-coded, so "{n} years & counting" stays a computed value. `name` is the
+ * site name shown in the header, linking back to the index page.
  */
 export const SiteSettings: GlobalConfig = {
   slug: 'site-settings',
@@ -22,7 +23,7 @@ export const SiteSettings: GlobalConfig = {
   },
   fields: [
     {
-      name: 'tagline',
+      name: 'name',
       type: 'text',
       required: true,
     },

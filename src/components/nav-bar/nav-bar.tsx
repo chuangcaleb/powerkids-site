@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import Link from 'next/link'
 import { cx } from '@/lib/cx'
 import styles from './nav-bar.module.css'
 
@@ -17,7 +18,9 @@ export function NavBar({ logo, links }: NavBarProps) {
   return (
     <header className={styles.header}>
       <div className={cx('wrapper', 'repel', styles.inner)}>
-        <div className={styles.logo}>{logo}</div>
+        <Link href="/" className={styles.logo}>
+          {logo}
+        </Link>
         <ul role="list" className={cx('cluster', styles.links)}>
           {links.map((link) => (
             <li key={link.href}>

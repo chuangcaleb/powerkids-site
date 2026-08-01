@@ -42,7 +42,7 @@ await payload.updateGlobal({
   slug: 'site-settings',
   context: { disableRevalidate: true },
   data: {
-    tagline: 'The Centre With A Heart',
+    name: 'The Centre With A Heart',
     foundedYear: 1998,
     email: 'info@powerkids.example',
     phones: [{ number: '+60 12-345 6789', href: 'tel:+60123456789' }],
