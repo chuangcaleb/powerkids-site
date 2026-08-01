@@ -50,7 +50,7 @@ export const Events: CollectionConfig = {
       admin: {
         description:
           'One entry per year. Add a new one each occurrence — this replaced a hard-coded, developer-maintained list.',
-        components: { RowLabel: '@/components/row-label#RowLabel' },
+        components: { RowLabel: '@/admin/components/row-label#RowLabel' },
       },
       fields: [
         {

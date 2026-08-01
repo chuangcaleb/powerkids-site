@@ -7,7 +7,7 @@ const linkFields = [
   { name: 'url', type: 'text', required: true },
 ] as const
 
-const rowLabel = { RowLabel: '@/components/row-label#RowLabel' } as const
+const rowLabel = { RowLabel: '@/admin/components/row-label#RowLabel' } as const
 
 /** Header and footer link trees. Footer column headings are fields, not markup. */
 export const Navigation: GlobalConfig = {

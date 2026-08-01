@@ -40,7 +40,7 @@ export const SiteSettings: GlobalConfig = {
       type: 'array',
       minRows: 1,
       admin: {
-        components: { RowLabel: '@/components/row-label#RowLabel' },
+        components: { RowLabel: '@/admin/components/row-label#RowLabel' },
       },
       fields: [
         { name: 'number', type: 'text', required: true },

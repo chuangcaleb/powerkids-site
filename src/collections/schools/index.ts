@@ -42,7 +42,7 @@ export const Schools: CollectionConfig = {
       type: 'array',
       minRows: 1,
       admin: {
-        components: { RowLabel: '@/components/row-label#RowLabel' },
+        components: { RowLabel: '@/admin/components/row-label#RowLabel' },
       },
       fields: [
         {
