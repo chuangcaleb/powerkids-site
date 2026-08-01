@@ -29,7 +29,7 @@ export const Programs: CollectionConfig = {
       type: 'text',
       required: true,
     },
-    slugField(),
+    slugField({ fieldToUse: 'name' }),
     {
       name: 'hours',
       type: 'text',

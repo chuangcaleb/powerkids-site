@@ -29,7 +29,7 @@ export const Events: CollectionConfig = {
       type: 'text',
       required: true,
     },
-    slugField(),
+    slugField({ fieldToUse: 'name' }),
     {
       name: 'summary',
       type: 'textarea',

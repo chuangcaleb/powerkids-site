@@ -28,7 +28,7 @@ export const Schools: CollectionConfig = {
       type: 'text',
       required: true,
     },
-    slugField(),
+    slugField({ fieldToUse: 'name' }),
     {
       name: 'address',
       type: 'textarea',
