@@ -8934,12 +8934,6 @@
           "primaryKey": true,
           "notNull": true
         },
-        "tagline": {
-          "name": "tagline",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": true
-        },
         "founded_year": {
           "name": "founded_year",
           "type": "numeric",
@@ -8981,6 +8975,12 @@
           "type": "timestamp(3) with time zone",
           "primaryKey": false,
           "notNull": false
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
         }
       },
       "indexes": {
