@@ -3,6 +3,7 @@ import type { Block } from 'payload'
 /** Accordion. Primitive: `flow`. */
 export const Faq: Block = {
   slug: 'faq',
+  interfaceName: 'FaqBlock',
   labels: { singular: 'FAQ', plural: 'FAQ Blocks' },
   fields: [
     {

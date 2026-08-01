@@ -3,6 +3,7 @@ import type { Block } from 'payload'
 /** Full-width call to action. Primitives: `wrapper`, `repel`. */
 export const CtaBanner: Block = {
   slug: 'cta-banner',
+  interfaceName: 'CtaBannerBlock',
   labels: { singular: 'CTA Banner', plural: 'CTA Banner Blocks' },
   fields: [
     {

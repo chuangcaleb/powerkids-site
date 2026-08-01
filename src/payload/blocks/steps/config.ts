@@ -3,6 +3,7 @@ import type { Block } from 'payload'
 /** Numbered process — the registration steps on v3. Primitive: `flow`. */
 export const Steps: Block = {
   slug: 'steps',
+  interfaceName: 'StepsBlock',
   labels: { singular: 'Steps', plural: 'Steps Blocks' },
   fields: [
     {

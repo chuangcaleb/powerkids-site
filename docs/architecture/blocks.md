@@ -44,6 +44,7 @@ Before adding one, check existing block with new variant wouldn't do. Two blocks
 5. **Server component unless interactivity unavoidable.** Only `faq` and `video` expected need client JS.
 6. **No content defaults pretending to be design.** If field optional, block must render sensibly without it.
 7. **Every block documented here same change that adds it.**
+8. **`interfaceName` set on every block config.** Without it `generate:types` emits an anonymous inline type per usage site instead of one named type — e.g. `ProseBlock`, `CardGridBlock`.
 
 ---
 

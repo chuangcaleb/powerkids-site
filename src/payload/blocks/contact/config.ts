@@ -6,6 +6,7 @@ import type { Block } from 'payload'
  */
 export const Contact: Block = {
   slug: 'contact',
+  interfaceName: 'ContactBlock',
   labels: { singular: 'Contact', plural: 'Contact Blocks' },
   fields: [
     {

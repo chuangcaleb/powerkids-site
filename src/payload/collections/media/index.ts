@@ -4,6 +4,8 @@ import { anyone } from '@/payload/access/anyone'
 import { authenticated } from '@/payload/access/authenticated'
 import { hashedFilename } from '@/lib/media-filename'
 
+import { flagDuplicate } from './hooks/flag-duplicate'
+
 /** Quality 80 is the usual sweet spot: no visible artefacts, big size win. */
 const WEBP = { format: 'webp', options: { quality: 80 } } as const
 
@@ -25,6 +27,7 @@ export const Media: CollectionConfig = {
   admin: {
     group: 'Content',
     description: 'Photos and files used across the site.',
+    defaultColumns: ['filename', 'alt', 'possibleDuplicateOf'],
   },
   folders: true,
   access: {
@@ -49,6 +52,7 @@ export const Media: CollectionConfig = {
 
         req.file.name = hashedFilename(req.file.name, req.file.data)
       },
+      flagDuplicate,
     ],
   },
   upload: {
@@ -89,6 +93,22 @@ export const Media: CollectionConfig = {
       type: 'text',
       admin: {
         description: 'Optional. Shown beneath the image where a block supports it.',
+      },
+    },
+    {
+      name: 'checksum',
+      type: 'text',
+      index: true,
+      admin: { hidden: true },
+    },
+    {
+      name: 'possibleDuplicateOf',
+      type: 'relationship',
+      relationTo: 'media',
+      admin: {
+        readOnly: true,
+        description:
+          "Set automatically when an upload matches an existing file's content. Reuse the linked doc instead of this one if it really is the same photo.",
       },
     },
   ],

@@ -3,6 +3,7 @@ import type { Block } from 'payload'
 /** Cards — manual, or auto-populated from programs/events. Primitive: `grid-auto`. */
 export const CardGrid: Block = {
   slug: 'card-grid',
+  interfaceName: 'CardGridBlock',
   labels: { singular: 'Card Grid', plural: 'Card Grid Blocks' },
   fields: [
     {

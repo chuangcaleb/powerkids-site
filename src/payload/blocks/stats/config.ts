@@ -3,6 +3,7 @@ import type { Block } from 'payload'
 /** Large numbers with labels ("{n} years"). Primitive: `grid-auto`. */
 export const Stats: Block = {
   slug: 'stats',
+  interfaceName: 'StatsBlock',
   labels: { singular: 'Stats', plural: 'Stats Blocks' },
   fields: [
     {

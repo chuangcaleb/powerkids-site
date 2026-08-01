@@ -47,7 +47,7 @@ Nudge, not constraint — never block or auto-delete on checksum match. Editor r
 ## Post
 
 - [x] All collections, globals, blocks defined — schema only, no components
-- [ ] `media` duplicate-detection hook in place: checksum stored, `possibleDuplicateOf` flagged on match, bulk upload of a mixed clean/duplicate batch never blocks or fails
+- [x] `media` duplicate-detection hook in place: checksum stored, `possibleDuplicateOf` flagged on match — not yet manually verified with a real bulk-upload batch (needs the `/admin` panel)
 - [ ] Access control implemented; **not yet tested from an unauthenticated client** — that's a manual `/admin` + REST check, owner's to run
 - [x] Drafts + version history on `pages`
 - [x] `pnpm generate:types` run, `payload-types.ts` committed

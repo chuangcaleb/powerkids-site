@@ -7,6 +7,7 @@ import type { Block } from 'payload'
  */
 export const SchoolsBlock: Block = {
   slug: 'schools',
+  interfaceName: 'SchoolsBlock',
   labels: { singular: 'Schools', plural: 'Schools Blocks' },
   fields: [
     {

@@ -37,7 +37,7 @@ Drafts, version history enabled (`maxPerDoc: 20`). Slug unique, indexed, via Pay
 
 Uploads, backed by R2. `alt` **required** — no exceptions, no empty strings.
 
-`alt`, `caption`, focal point, generated sizes, folder-organised (Payload's built-in folders feature)
+`alt`, `caption`, focal point, generated sizes, folder-organised (Payload's built-in folders feature). `checksum` (hidden, sha256 of upload content) and `possibleDuplicateOf` (relationship, read-only) flag re-uploads of an existing file — non-blocking, see `src/payload/collections/media/hooks/flag-duplicate.ts`.
 
 ### `schools`
 

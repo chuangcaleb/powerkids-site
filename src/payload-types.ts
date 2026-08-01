@@ -187,6 +187,11 @@ export interface Media {
    * Optional. Shown beneath the image where a block supports it.
    */
   caption?: string | null;
+  checksum?: string | null;
+  /**
+   * Set automatically when an upload matches an existing file's content. Reuse the linked doc instead of this one if it really is the same photo.
+   */
+  possibleDuplicateOf?: (number | null) | Media;
   folder?: (number | null) | FolderInterface;
   updatedAt: string;
   createdAt: string;
@@ -273,193 +278,17 @@ export interface Page {
     media?: (number | null) | Media;
   };
   layout: (
-    | {
-        content: {
-          root: {
-            type: string;
-            children: {
-              type: any;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        };
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'prose';
-      }
-    | {
-        media: number | Media;
-        content: {
-          root: {
-            type: string;
-            children: {
-              type: any;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        };
-        /**
-         * Which side the image sits on at wide viewports. Stacks on narrow ones.
-         */
-        mediaSide?: ('left' | 'right') | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'media-text';
-      }
-    | {
-        heading?: string | null;
-        /**
-         * Auto-populated cards stay in sync as programs/events are added or removed. Manual cards give full control over copy per card.
-         */
-        source: 'manual' | 'programs' | 'events';
-        cards?:
-          | {
-              heading: string;
-              body?: string | null;
-              image?: (number | null) | Media;
-              /**
-               * Optional — makes the card a link.
-               */
-              url?: string | null;
-              id?: string | null;
-            }[]
-          | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'card-grid';
-      }
-    | {
-        heading: string;
-        steps?:
-          | {
-              label: string;
-              id?: string | null;
-            }[]
-          | null;
-        /**
-         * Optional call-to-action link shown after the steps.
-         */
-        cta?: {
-          label?: string | null;
-          url?: string | null;
-        };
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'steps';
-      }
-    | {
-        heading?: string | null;
-        stats?:
-          | {
-              /**
-               * Compute this stat as "{n} years & counting" from site-settings.foundedYear instead of a fixed value.
-               */
-              useFoundedYear?: boolean | null;
-              /**
-               * e.g. "500+".
-               */
-              value?: string | null;
-              label: string;
-              id?: string | null;
-            }[]
-          | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'stats';
-      }
-    | {
-        heading?: string | null;
-        source: 'manual' | 'event';
-        images?: (number | Media)[] | null;
-        /**
-         * Renders that event's own gallery field.
-         */
-        event?: (number | null) | Event;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'gallery';
-      }
-    | {
-        heading: string;
-        body?: string | null;
-        cta: {
-          label: string;
-          url: string;
-        };
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'cta-banner';
-      }
-    | {
-        heading?: string | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'schools';
-      }
-    | {
-        heading?: string | null;
-        items?:
-          | {
-              question: string;
-              answer: {
-                root: {
-                  type: string;
-                  children: {
-                    type: any;
-                    version: number;
-                    [k: string]: unknown;
-                  }[];
-                  direction: ('ltr' | 'rtl') | null;
-                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                  indent: number;
-                  version: number;
-                };
-                [k: string]: unknown;
-              };
-              id?: string | null;
-            }[]
-          | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'faq';
-      }
-    | {
-        heading?: string | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'contact';
-      }
-    | {
-        heading?: string | null;
-        source: 'manual' | 'event';
-        /**
-         * Video platform embed/video ID.
-         */
-        embedId?: string | null;
-        /**
-         * Shown before the editor presses play.
-         */
-        poster?: (number | null) | Media;
-        /**
-         * Each entry in that event's `videos` array becomes one tab.
-         */
-        event?: (number | null) | Event;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'video';
-      }
+    | ProseBlock
+    | MediaTextBlock
+    | CardGridBlock
+    | StepsBlock
+    | StatsBlock
+    | GalleryBlock
+    | CtaBannerBlock
+    | SchoolsBlock
+    | FaqBlock
+    | ContactBlock
+    | VideoBlock
   )[];
   meta?: {
     title?: string | null;
@@ -478,6 +307,148 @@ export interface Page {
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProseBlock".
+ */
+export interface ProseBlock {
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'prose';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MediaTextBlock".
+ */
+export interface MediaTextBlock {
+  media: number | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  /**
+   * Which side the image sits on at wide viewports. Stacks on narrow ones.
+   */
+  mediaSide?: ('left' | 'right') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'media-text';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CardGridBlock".
+ */
+export interface CardGridBlock {
+  heading?: string | null;
+  /**
+   * Auto-populated cards stay in sync as programs/events are added or removed. Manual cards give full control over copy per card.
+   */
+  source: 'manual' | 'programs' | 'events';
+  cards?:
+    | {
+        heading: string;
+        body?: string | null;
+        image?: (number | null) | Media;
+        /**
+         * Optional — makes the card a link.
+         */
+        url?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'card-grid';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StepsBlock".
+ */
+export interface StepsBlock {
+  heading: string;
+  steps?:
+    | {
+        label: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Optional call-to-action link shown after the steps.
+   */
+  cta?: {
+    label?: string | null;
+    url?: string | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'steps';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StatsBlock".
+ */
+export interface StatsBlock {
+  heading?: string | null;
+  stats?:
+    | {
+        /**
+         * Compute this stat as "{n} years & counting" from site-settings.foundedYear instead of a fixed value.
+         */
+        useFoundedYear?: boolean | null;
+        /**
+         * e.g. "500+".
+         */
+        value?: string | null;
+        label: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'stats';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GalleryBlock".
+ */
+export interface GalleryBlock {
+  heading?: string | null;
+  source: 'manual' | 'event';
+  images?: (number | Media)[] | null;
+  /**
+   * Renders that event's own gallery field.
+   */
+  event?: (number | null) | Event;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'gallery';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -531,6 +502,95 @@ export interface Event {
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CtaBannerBlock".
+ */
+export interface CtaBannerBlock {
+  heading: string;
+  body?: string | null;
+  cta: {
+    label: string;
+    url: string;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'cta-banner';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SchoolsBlock".
+ */
+export interface SchoolsBlock {
+  heading?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'schools';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FaqBlock".
+ */
+export interface FaqBlock {
+  heading?: string | null;
+  items?:
+    | {
+        question: string;
+        answer: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'faq';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactBlock".
+ */
+export interface ContactBlock {
+  heading?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contact';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "VideoBlock".
+ */
+export interface VideoBlock {
+  heading?: string | null;
+  source: 'manual' | 'event';
+  /**
+   * Video platform embed/video ID.
+   */
+  embedId?: string | null;
+  /**
+   * Shown before the editor presses play.
+   */
+  poster?: (number | null) | Media;
+  /**
+   * Each entry in that event's `videos` array becomes one tab.
+   */
+  event?: (number | null) | Event;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'video';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -792,6 +852,8 @@ export interface UsersSelect<T extends boolean = true> {
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
   caption?: T;
+  checksum?: T;
+  possibleDuplicateOf?: T;
   folder?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -863,136 +925,17 @@ export interface PagesSelect<T extends boolean = true> {
   layout?:
     | T
     | {
-        prose?:
-          | T
-          | {
-              content?: T;
-              id?: T;
-              blockName?: T;
-            };
-        'media-text'?:
-          | T
-          | {
-              media?: T;
-              content?: T;
-              mediaSide?: T;
-              id?: T;
-              blockName?: T;
-            };
-        'card-grid'?:
-          | T
-          | {
-              heading?: T;
-              source?: T;
-              cards?:
-                | T
-                | {
-                    heading?: T;
-                    body?: T;
-                    image?: T;
-                    url?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        steps?:
-          | T
-          | {
-              heading?: T;
-              steps?:
-                | T
-                | {
-                    label?: T;
-                    id?: T;
-                  };
-              cta?:
-                | T
-                | {
-                    label?: T;
-                    url?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        stats?:
-          | T
-          | {
-              heading?: T;
-              stats?:
-                | T
-                | {
-                    useFoundedYear?: T;
-                    value?: T;
-                    label?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        gallery?:
-          | T
-          | {
-              heading?: T;
-              source?: T;
-              images?: T;
-              event?: T;
-              id?: T;
-              blockName?: T;
-            };
-        'cta-banner'?:
-          | T
-          | {
-              heading?: T;
-              body?: T;
-              cta?:
-                | T
-                | {
-                    label?: T;
-                    url?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        schools?:
-          | T
-          | {
-              heading?: T;
-              id?: T;
-              blockName?: T;
-            };
-        faq?:
-          | T
-          | {
-              heading?: T;
-              items?:
-                | T
-                | {
-                    question?: T;
-                    answer?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        contact?:
-          | T
-          | {
-              heading?: T;
-              id?: T;
-              blockName?: T;
-            };
-        video?:
-          | T
-          | {
-              heading?: T;
-              source?: T;
-              embedId?: T;
-              poster?: T;
-              event?: T;
-              id?: T;
-              blockName?: T;
-            };
+        prose?: T | ProseBlockSelect<T>;
+        'media-text'?: T | MediaTextBlockSelect<T>;
+        'card-grid'?: T | CardGridBlockSelect<T>;
+        steps?: T | StepsBlockSelect<T>;
+        stats?: T | StatsBlockSelect<T>;
+        gallery?: T | GalleryBlockSelect<T>;
+        'cta-banner'?: T | CtaBannerBlockSelect<T>;
+        schools?: T | SchoolsBlockSelect<T>;
+        faq?: T | FaqBlockSelect<T>;
+        contact?: T | ContactBlockSelect<T>;
+        video?: T | VideoBlockSelect<T>;
       };
   meta?:
     | T
@@ -1007,6 +950,158 @@ export interface PagesSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProseBlock_select".
+ */
+export interface ProseBlockSelect<T extends boolean = true> {
+  content?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MediaTextBlock_select".
+ */
+export interface MediaTextBlockSelect<T extends boolean = true> {
+  media?: T;
+  content?: T;
+  mediaSide?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CardGridBlock_select".
+ */
+export interface CardGridBlockSelect<T extends boolean = true> {
+  heading?: T;
+  source?: T;
+  cards?:
+    | T
+    | {
+        heading?: T;
+        body?: T;
+        image?: T;
+        url?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StepsBlock_select".
+ */
+export interface StepsBlockSelect<T extends boolean = true> {
+  heading?: T;
+  steps?:
+    | T
+    | {
+        label?: T;
+        id?: T;
+      };
+  cta?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StatsBlock_select".
+ */
+export interface StatsBlockSelect<T extends boolean = true> {
+  heading?: T;
+  stats?:
+    | T
+    | {
+        useFoundedYear?: T;
+        value?: T;
+        label?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GalleryBlock_select".
+ */
+export interface GalleryBlockSelect<T extends boolean = true> {
+  heading?: T;
+  source?: T;
+  images?: T;
+  event?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CtaBannerBlock_select".
+ */
+export interface CtaBannerBlockSelect<T extends boolean = true> {
+  heading?: T;
+  body?: T;
+  cta?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SchoolsBlock_select".
+ */
+export interface SchoolsBlockSelect<T extends boolean = true> {
+  heading?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FaqBlock_select".
+ */
+export interface FaqBlockSelect<T extends boolean = true> {
+  heading?: T;
+  items?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactBlock_select".
+ */
+export interface ContactBlockSelect<T extends boolean = true> {
+  heading?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "VideoBlock_select".
+ */
+export interface VideoBlockSelect<T extends boolean = true> {
+  heading?: T;
+  source?: T;
+  embedId?: T;
+  poster?: T;
+  event?: T;
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

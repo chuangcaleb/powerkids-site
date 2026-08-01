@@ -3,6 +3,7 @@ import type { Block } from 'payload'
 /** Image beside text, side selectable. Primitive: `switcher`. */
 export const MediaText: Block = {
   slug: 'media-text',
+  interfaceName: 'MediaTextBlock',
   labels: { singular: 'Media + Text', plural: 'Media + Text Blocks' },
   fields: [
     {

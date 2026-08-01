@@ -7,6 +7,7 @@ import type { Block } from 'payload'
  */
 export const VideoBlock: Block = {
   slug: 'video',
+  interfaceName: 'VideoBlock',
   labels: { singular: 'Video', plural: 'Video Blocks' },
   fields: [
     {

@@ -3,6 +3,7 @@ import type { Block } from 'payload'
 /** Photo grid, any number of images. Primitive: `grid-auto`. */
 export const Gallery: Block = {
   slug: 'gallery',
+  interfaceName: 'GalleryBlock',
   labels: { singular: 'Gallery', plural: 'Gallery Blocks' },
   fields: [
     {
