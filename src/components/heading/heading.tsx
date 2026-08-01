@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { cx } from '@/lib/cx'
 import styles from './heading.module.css'
 
 type Level = 1 | 2 | 3 | 4 | 5 | 6
@@ -19,9 +20,7 @@ export function Heading({
   className,
 }: HeadingProps) {
   const Tag = `h${level}` as const
-  const classes = [styles.heading, styles[`size${visualLevel}`], className]
-    .filter(Boolean)
-    .join(' ')
+  const classes = cx(styles.heading, styles[`size${visualLevel}`], className)
 
   return <Tag className={classes}>{children}</Tag>
 }

@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { cx } from '@/lib/cx'
 import styles from './card.module.css'
 
 export type CardProps = {
@@ -10,7 +11,7 @@ export type CardProps = {
 
 export function Card({ children, tabHeader, className }: CardProps) {
   return (
-    <div className={[styles.wrapper, className].filter(Boolean).join(' ')}>
+    <div className={cx(styles.wrapper, className)}>
       {tabHeader ? <div className={styles.tabHeader}>{tabHeader}</div> : null}
       <div className={tabHeader ? styles.bodyWithTab : styles.body}>{children}</div>
     </div>

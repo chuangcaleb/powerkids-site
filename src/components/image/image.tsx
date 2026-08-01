@@ -1,4 +1,5 @@
 import NextImage from 'next/image'
+import { cx } from '@/lib/cx'
 import styles from './image.module.css'
 
 export type ImageProps = {
@@ -25,7 +26,7 @@ export function Image({
       alt={alt}
       width={width}
       height={height}
-      className={[styles.image, className].filter(Boolean).join(' ')}
+      className={cx(styles.image, className)}
     />
   )
 

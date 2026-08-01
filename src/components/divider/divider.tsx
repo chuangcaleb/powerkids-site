@@ -1,3 +1,4 @@
+import { cx } from '@/lib/cx'
 import styles from './divider.module.css'
 
 export type DividerProps = {
@@ -5,5 +6,5 @@ export type DividerProps = {
 }
 
 export function Divider({ className }: DividerProps) {
-  return <hr className={[styles.divider, className].filter(Boolean).join(' ')} />
+  return <hr className={cx(styles.divider, className)} />
 }

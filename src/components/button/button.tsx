@@ -1,4 +1,5 @@
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from 'react'
+import { cx } from '@/lib/cx'
 import styles from './button.module.css'
 
 type Variant = 'red' | 'blue' | 'outline' | 'ghost' | 'link'
@@ -30,9 +31,7 @@ export function Button({
   children,
   ...rest
 }: ButtonProps) {
-  const classes = [styles.button, styles[variant], styles[size], className]
-    .filter(Boolean)
-    .join(' ')
+  const classes = cx(styles.button, styles[variant], styles[size], className)
 
   if ('href' in rest && rest.href !== undefined) {
     return (
