@@ -22,7 +22,7 @@ export const Users: CollectionConfig = {
     create: admin,
     delete: admin,
     read: authenticated,
-    update: ({ req, id }) => req.user?.role === 'admin' || req.user?.id === id,
+    update: (access) => admin(access) || access.req.user?.id === access.id,
   },
   fields: [
     {
