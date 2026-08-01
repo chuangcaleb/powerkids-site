@@ -1,9 +1,13 @@
 import type { GlobalConfig } from 'payload'
 
+import { authenticated } from '@/access/authenticated'
+
 const linkFields = [
   { name: 'label', type: 'text', required: true },
   { name: 'url', type: 'text', required: true },
 ] as const
+
+const rowLabel = { RowLabel: '@/components/row-label#RowLabel' } as const
 
 /** Header and footer link trees. Footer column headings are fields, not markup. */
 export const Navigation: GlobalConfig = {
@@ -13,12 +17,13 @@ export const Navigation: GlobalConfig = {
   },
   access: {
     read: () => true,
-    update: ({ req }) => Boolean(req.user),
+    update: authenticated,
   },
   fields: [
     {
       name: 'header',
       type: 'array',
+      admin: { components: rowLabel },
       fields: [...linkFields],
     },
     {
@@ -26,12 +31,14 @@ export const Navigation: GlobalConfig = {
       type: 'array',
       admin: {
         description: 'Each column has a heading and its own list of links.',
+        components: rowLabel,
       },
       fields: [
         { name: 'heading', type: 'text', required: true },
         {
           name: 'links',
           type: 'array',
+          admin: { components: rowLabel },
           fields: [...linkFields],
         },
       ],

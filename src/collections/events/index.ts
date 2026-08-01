@@ -1,6 +1,9 @@
 import type { CollectionConfig } from 'payload'
 import { slugField } from 'payload'
 
+import { authenticated } from '@/access/authenticated'
+import { authenticatedOrPublished } from '@/access/authenticated-or-published'
+
 /**
  * Recurring school activity types — Graduation, Sports Day, Field Trips,
  * Community Service. Not a dated calendar entry: one document per activity
@@ -14,10 +17,10 @@ export const Events: CollectionConfig = {
     group: 'Content',
   },
   access: {
-    read: ({ req }) => Boolean(req.user) || { _status: { equals: 'published' } },
-    create: ({ req }) => Boolean(req.user),
-    update: ({ req }) => Boolean(req.user),
-    delete: ({ req }) => Boolean(req.user),
+    read: authenticatedOrPublished,
+    create: authenticated,
+    update: authenticated,
+    delete: authenticated,
   },
   versions: { drafts: true },
   fields: [
@@ -45,7 +48,9 @@ export const Events: CollectionConfig = {
       name: 'videos',
       type: 'array',
       admin: {
-        description: 'One entry per year. Add a new one each occurrence.',
+        description:
+          'One entry per year. Add a new one each occurrence — this replaced a hard-coded, developer-maintained list.',
+        components: { RowLabel: '@/components/row-label#RowLabel' },
       },
       fields: [
         {

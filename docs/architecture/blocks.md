@@ -13,24 +13,25 @@ Editors get freedom of _arrangement_, not freedom of _design_. Fixed catalogue m
 
 Before adding one, check existing block with new variant wouldn't do. Two blocks differ only in alignment = one block with alignment field.
 
+**Hero is not in this catalogue.** Every page has exactly one, always present, independent of `layout` — `src/collections/pages/hero.ts`. Pulled out of the closed set deliberately: unlike the 11 below, editors don't choose whether a page has a hero, only its content and impact level. Catalogue was 12 blocks through end of Phase 2 planning; this is the one deviation, decided when Pages itself was built (Phase 3).
+
 ---
 
 ## Catalogue
 
-| Block        | Purpose                                                | Primitives                    |
-| ------------ | ------------------------------------------------------ | ----------------------------- |
-| `hero`       | Page opener: heading, subheading, image, CTAs          | `wrapper`, `flow`, `switcher` |
-| `prose`      | Rich text at reading width                             | `flow`                        |
-| `media-text` | Image beside text, side selectable                     | `switcher`                    |
-| `card-grid`  | Cards — manual, or auto-populated from programs/events | `grid-auto`                   |
-| `steps`      | Numbered process (the registration steps)              | `flow`                        |
-| `stats`      | Large numbers with labels ("{n} years")                | `grid-auto`                   |
-| `gallery`    | Photo grid, any number of images                       | `grid-auto`                   |
-| `cta-banner` | Full-width call to action                              | `wrapper`, `repel`            |
-| `schools`    | Renders the `schools` collection                       | `grid-auto`, `switcher`       |
-| `faq`        | Accordion                                              | `flow`                        |
-| `contact`    | Hours, email, phones, socials — all from globals       | `switcher`                    |
-| `video`      | Embedded video with a tab heading                      | `flow`                        |
+| Block        | Purpose                                                | Primitives              |
+| ------------ | ------------------------------------------------------ | ----------------------- |
+| `prose`      | Rich text at reading width                             | `flow`                  |
+| `media-text` | Image beside text, side selectable                     | `switcher`              |
+| `card-grid`  | Cards — manual, or auto-populated from programs/events | `grid-auto`             |
+| `steps`      | Numbered process (the registration steps)              | `flow`                  |
+| `stats`      | Large numbers with labels ("{n} years")                | `grid-auto`             |
+| `gallery`    | Photo grid, any number of images                       | `grid-auto`             |
+| `cta-banner` | Full-width call to action                              | `wrapper`, `repel`      |
+| `schools`    | Renders the `schools` collection                       | `grid-auto`, `switcher` |
+| `faq`        | Accordion                                              | `flow`                  |
+| `contact`    | Hours, email, phones, socials — all from globals       | `switcher`              |
+| `video`      | Embedded video with a tab heading                      | `flow`                  |
 
 ---
 

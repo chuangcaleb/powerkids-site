@@ -1,5 +1,8 @@
 import type { CollectionConfig } from 'payload'
 
+import { authenticated } from '@/access/authenticated'
+import { authenticatedOrPublished } from '@/access/authenticated-or-published'
+
 /**
  * Principals and (if the section returns) team members. Bio content only —
  * rendering decisions belong to whichever block references this collection.
@@ -12,10 +15,10 @@ export const People: CollectionConfig = {
     group: 'Content',
   },
   access: {
-    read: ({ req }) => Boolean(req.user) || { _status: { equals: 'published' } },
-    create: ({ req }) => Boolean(req.user),
-    update: ({ req }) => Boolean(req.user),
-    delete: ({ req }) => Boolean(req.user),
+    read: authenticatedOrPublished,
+    create: authenticated,
+    update: authenticated,
+    delete: authenticated,
   },
   versions: { drafts: true },
   fields: [

@@ -1,5 +1,7 @@
 import type { CollectionConfig } from 'payload'
 
+import { authenticated } from '@/access/authenticated'
+
 /**
  * Admin panel accounts. Two roles, and the distinction is deliberate:
  * `editor` covers everyone at the school who updates content, `admin` adds
@@ -18,7 +20,7 @@ export const Users: CollectionConfig = {
     // "last edited by" shows a name rather than an id.
     create: ({ req }) => req.user?.role === 'admin',
     delete: ({ req }) => req.user?.role === 'admin',
-    read: ({ req }) => Boolean(req.user),
+    read: authenticated,
     update: ({ req, id }) => req.user?.role === 'admin' || req.user?.id === id,
   },
   fields: [

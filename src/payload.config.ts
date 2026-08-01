@@ -2,6 +2,8 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import { postgresAdapter } from '@payloadcms/db-postgres'
+import { seoPlugin } from '@payloadcms/plugin-seo'
+import type { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { s3Storage } from '@payloadcms/storage-s3'
 import { buildConfig } from 'payload'
@@ -18,6 +20,18 @@ import { Navigation } from '@/globals/navigation'
 import { SeoDefaults } from '@/globals/seo-defaults'
 import { SiteSettings } from '@/globals/site-settings'
 import { S3_REGION, isProduction, requireEnv } from '@/lib/env'
+import { getServerUrl } from '@/lib/get-server-url'
+import type { Page } from '@/payload-types'
+
+const TITLE_SUFFIX = 'PowerKids Kindergarten: The Centre With A Heart'
+
+const generateTitle: GenerateTitle<Page> = ({ doc }) =>
+  doc?.title ? `${doc.title} | ${TITLE_SUFFIX}` : TITLE_SUFFIX
+
+const generateURL: GenerateURL<Page> = ({ doc }) => {
+  const base = getServerUrl()
+  return doc?.slug && doc.slug !== 'home' ? `${base}/${doc.slug}` : base
+}
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -32,6 +46,8 @@ export default buildConfig({
   collections: [Users, Media, Pages, Schools, Programs, Events, People],
 
   globals: [SiteSettings, Navigation, SeoDefaults],
+
+  folders: {},
 
   editor: lexicalEditor(),
 
@@ -65,6 +81,8 @@ export default buildConfig({
         },
       },
     }),
+
+    seoPlugin({ generateTitle, generateURL }),
   ],
 
   // Localisation is configured now with English as the only active locale, so

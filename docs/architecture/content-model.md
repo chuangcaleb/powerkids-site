@@ -15,21 +15,29 @@ Nothing listed here hard-coded in component. Phone number, address, nav label, o
 
 ---
 
+## Conventions
+
+- **File structure:** `src/collections/<slug>/index.ts`, with `hooks/` alongside for anything more than a one-line access check.
+- **Access:** shared utilities in `src/access/` (`authenticated`, `authenticatedOrPublished`, `anyone`) — collections compose these rather than repeating inline role checks. `users` keeps bespoke logic (self-vs-admin) since it doesn't fit either utility.
+- **Row labels:** array-field rows use the shared `src/components/row-label.tsx` client component (`admin.components.RowLabel`) instead of one bespoke label component per field.
+
+---
+
 ## Collections
 
 ### `pages`
 
 Editor-composed routes. Only collection with block layout.
 
-`title`, `slug`, `seo` (group: title/description/image). `layout` (blocks) lands with the block catalogue itself — see [blocks.md](blocks.md).
+`title`, `hero` (group — always present, not a block, see [blocks.md](blocks.md)), `meta` (SEO tab, via `@payloadcms/plugin-seo`'s field set), `publishedAt`, `slug`. `layout` (the 11-block set) lands with the block catalogue itself.
 
-Drafts, version history enabled (`maxPerDoc: 20`). Slug unique, indexed, via Payload's `slugField()`.
+Drafts, version history enabled (`maxPerDoc: 20`). Slug unique, indexed, via Payload's `slugField()`. `afterChange`/`afterDelete` hooks revalidate the page's Next.js path on publish/unpublish/delete.
 
 ### `media`
 
 Uploads, backed by R2. `alt` **required** — no exceptions, no empty strings.
 
-`alt`, `caption`, focal point, generated sizes
+`alt`, `caption`, focal point, generated sizes, folder-organised (Payload's built-in folders feature)
 
 ### `schools`
 

@@ -1,6 +1,9 @@
 import type { CollectionConfig } from 'payload'
 import { slugField } from 'payload'
 
+import { authenticated } from '@/access/authenticated'
+import { authenticatedOrPublished } from '@/access/authenticated-or-published'
+
 /**
  * Physical branches. Three active — see docs/reference/content-inventory.md
  * for the two inactive entries and why they're not migrated.
@@ -13,10 +16,10 @@ export const Schools: CollectionConfig = {
     group: 'Content',
   },
   access: {
-    read: ({ req }) => Boolean(req.user) || { _status: { equals: 'published' } },
-    create: ({ req }) => Boolean(req.user),
-    update: ({ req }) => Boolean(req.user),
-    delete: ({ req }) => Boolean(req.user),
+    read: authenticatedOrPublished,
+    create: authenticated,
+    update: authenticated,
+    delete: authenticated,
   },
   versions: { drafts: true },
   fields: [
@@ -38,6 +41,9 @@ export const Schools: CollectionConfig = {
       name: 'phones',
       type: 'array',
       minRows: 1,
+      admin: {
+        components: { RowLabel: '@/components/row-label#RowLabel' },
+      },
       fields: [
         {
           name: 'number',

@@ -1,6 +1,9 @@
 import type { CollectionConfig } from 'payload'
 import { slugField } from 'payload'
 
+import { authenticated } from '@/access/authenticated'
+import { authenticatedOrPublished } from '@/access/authenticated-or-published'
+
 /**
  * Daily offerings with fixed hours — Morning School, After School Program,
  * Evening Daycare. Not a "class" or "course": every program runs every day
@@ -14,10 +17,10 @@ export const Programs: CollectionConfig = {
     group: 'Content',
   },
   access: {
-    read: ({ req }) => Boolean(req.user) || { _status: { equals: 'published' } },
-    create: ({ req }) => Boolean(req.user),
-    update: ({ req }) => Boolean(req.user),
-    delete: ({ req }) => Boolean(req.user),
+    read: authenticatedOrPublished,
+    create: authenticated,
+    update: authenticated,
+    delete: authenticated,
   },
   versions: { drafts: true },
   fields: [

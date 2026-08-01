@@ -1,5 +1,7 @@
 import type { GlobalConfig } from 'payload'
 
+import { authenticated } from '@/access/authenticated'
+
 /**
  * Brand-wide facts referenced across the site. Founding year is stored, not
  * hard-coded, so "{n} years & counting" stays a computed value.
@@ -11,7 +13,7 @@ export const SiteSettings: GlobalConfig = {
   },
   access: {
     read: () => true,
-    update: ({ req }) => Boolean(req.user),
+    update: authenticated,
   },
   fields: [
     {
@@ -37,6 +39,9 @@ export const SiteSettings: GlobalConfig = {
       name: 'phones',
       type: 'array',
       minRows: 1,
+      admin: {
+        components: { RowLabel: '@/components/row-label#RowLabel' },
+      },
       fields: [
         { name: 'number', type: 'text', required: true },
         {
