@@ -5,6 +5,7 @@ import * as migration_20260801_025747 from './20260801_025747'
 import * as migration_20260801_033322 from './20260801_033322'
 import * as migration_20260801_084504_rename_site_settings_tagline_to_name from './20260801_084504_rename_site_settings_tagline_to_name'
 import * as migration_20260801_085558_remove_navigation_header from './20260801_085558_remove_navigation_header'
+import * as migration_20260801_094156_add_content_block from './20260801_094156_add_content_block'
 
 export const migrations = [
   {
@@ -41,5 +42,10 @@ export const migrations = [
     up: migration_20260801_085558_remove_navigation_header.up,
     down: migration_20260801_085558_remove_navigation_header.down,
     name: '20260801_085558_remove_navigation_header',
+  },
+  {
+    up: migration_20260801_094156_add_content_block.up,
+    down: migration_20260801_094156_add_content_block.down,
+    name: '20260801_094156_add_content_block',
   },
 ]
