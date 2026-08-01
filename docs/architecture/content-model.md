@@ -3,7 +3,7 @@
 **Purpose:** every collection and global, what it hold, how they relate.
 **Read when:** adding/changing field, writing query, seeding data.
 
-> **Status: draft.** Phase 3 finalise, update doc to match shipped schema. Field lists below intent, not yet implementation.
+> **Status: shipped** for collections and globals below — see `src/collections/`, `src/globals/`. Blocks (the `pages.layout` field itself) land in a follow-up branch; this doc's block section stays draft until then.
 
 Source content for every entity: [../reference/content-inventory.md](../reference/content-inventory.md).
 
@@ -21,9 +21,9 @@ Nothing listed here hard-coded in component. Phone number, address, nav label, o
 
 Editor-composed routes. Only collection with block layout.
 
-`title`, `slug`, `layout` (blocks), `seo`, `publishedAt`, `_status`
+`title`, `slug`, `seo` (group: title/description/image). `layout` (blocks) lands with the block catalogue itself — see [blocks.md](blocks.md).
 
-Drafts, version history enabled. Slug unique, indexed.
+Drafts, version history enabled (`maxPerDoc: 20`). Slug unique, indexed, via Payload's `slugField()`.
 
 ### `media`
 
@@ -35,13 +35,15 @@ Uploads, backed by R2. `alt` **required** — no exceptions, no empty strings.
 
 Physical branches. Three active; see inventory for two inactive entries.
 
-`name`, `address` (multi-line), `phones` (array), `mapUrl`, `photo`, `principal` → `people`, `order`
+`name`, `slug`, `address` (multi-line), `phones` (array of `number`/`href`), `mapUrl`, `photo`, `principal` → `people`, `order`
 
 ### `programs`
 
 Daily offerings, fixed hours.
 
 `name`, `slug`, `hours`, `ageRange`, `strapline`, `summary`, `body`, `image`, `order`
+
+`ageRange` and `strapline` are optional.
 
 ### `events`
 
@@ -67,17 +69,19 @@ Admin auth. Roles: `admin` (full) and `editor` (content only, no user management
 
 ### `site-settings`
 
-Brand name, tagline, founding year, email, phones, opening hours/days, social links, default share image.
+`tagline`, `foundedYear`, `email`, `phones` (array), `openingHours`, `openingDays`, `socials` (array), `defaultShareImage`.
+
+Brand name (`PowerKids`, "Power" red + "Kids" blue) is a fixed display convention, not a CMS field — see `DESIGN.md`.
 
 Founding year stored so "{n} years & counting" stay computed, not hard-coded.
 
 ### `navigation`
 
-`header`, `footer` link trees. Footer column headings are fields, not markup.
+`header` (array of `label`/`url`), `footerColumns` (array of `heading` + `links` array). Column headings are fields, not markup.
 
 ### `seo-defaults`
 
-Title template, default description, default OG image.
+`titleTemplate` (`{title}` placeholder), `defaultDescription`, `defaultImage`.
 
 ---
 

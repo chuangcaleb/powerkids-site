@@ -7,8 +7,16 @@ import { s3Storage } from '@payloadcms/storage-s3'
 import { buildConfig } from 'payload'
 import sharp from 'sharp'
 
+import { Events } from '@/collections/events'
 import { Media } from '@/collections/media'
+import { Pages } from '@/collections/pages'
+import { People } from '@/collections/people'
+import { Programs } from '@/collections/programs'
+import { Schools } from '@/collections/schools'
 import { Users } from '@/collections/users'
+import { Navigation } from '@/globals/navigation'
+import { SeoDefaults } from '@/globals/seo-defaults'
+import { SiteSettings } from '@/globals/site-settings'
 import { S3_REGION, isProduction, requireEnv } from '@/lib/env'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -21,7 +29,9 @@ export default buildConfig({
     },
   },
 
-  collections: [Users, Media],
+  collections: [Users, Media, Pages, Schools, Programs, Events, People],
+
+  globals: [SiteSettings, Navigation, SeoDefaults],
 
   editor: lexicalEditor(),
 
