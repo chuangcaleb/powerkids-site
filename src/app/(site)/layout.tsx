@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from 'next'
+import { draftMode } from 'next/headers'
 import type { ReactNode } from 'react'
+import { AdminBar } from '@/components/admin-bar/admin-bar'
 import { Footer } from '@/components/footer/footer'
 import { Header } from '@/components/header/header'
 import { shantellSans } from '@/styles/fonts/shantell-sans'
@@ -21,10 +23,13 @@ export const viewport: Viewport = {
   initialScale: 1,
 }
 
-export default function SiteLayout({ children }: { children: ReactNode }) {
+export default async function SiteLayout({ children }: { children: ReactNode }) {
+  const { isEnabled: preview } = await draftMode()
+
   return (
     <html lang="en" className={shantellSans.variable}>
       <body className="flow">
+        <AdminBar preview={preview} />
         <Header />
         {children}
         <Footer />

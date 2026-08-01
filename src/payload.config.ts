@@ -41,6 +41,10 @@ export default buildConfig({
     meta: {
       titleSuffix: '— PowerKids',
     },
+    livePreview: {
+      url: requireEnv('NEXT_PUBLIC_SERVER_URL'),
+      collections: ['pages'],
+    },
   },
 
   collections: [Users, Media, Pages, Schools, Programs, Events, People],

@@ -31,7 +31,9 @@
     "prepare": "lefthook install"
   },
   "dependencies": {
+    "@payloadcms/admin-bar": "3.86.0",
     "@payloadcms/db-postgres": "3.86.0",
+    "@payloadcms/live-preview-react": "3.86.0",
     "@payloadcms/next": "3.86.0",
     "@payloadcms/plugin-seo": "3.86.0",
     "@payloadcms/richtext-lexical": "3.86.0",

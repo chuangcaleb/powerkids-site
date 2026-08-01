@@ -1,12 +1,14 @@
-import type { Metadata } from 'next'
-import { notFound } from 'next/navigation'
+import { getServerUrl } from '@/lib/get-server-url'
+import { getPayloadClient } from '@/lib/payload'
+import type { Media } from '@/payload-types'
 import { RenderBlocks } from '@/payload/blocks/render-blocks'
 import { getPage } from '@/payload/collections/pages/get-page'
-import { getSeoDefaults } from '@/payload/globals/get-seo-defaults'
-import { getPayloadClient } from '@/lib/payload'
-import { getServerUrl } from '@/lib/get-server-url'
+import { LivePreviewListener } from '@/payload/collections/pages/live-preview-listener'
 import { Hero } from '@/payload/collections/pages/render-hero'
-import type { Media } from '@/payload-types'
+import { getSeoDefaults } from '@/payload/globals/get-seo-defaults'
+import type { Metadata } from 'next'
+import { draftMode } from 'next/headers'
+import { notFound } from 'next/navigation'
 
 type Props = { params: Promise<{ slug?: string[] }> }
 
@@ -59,10 +61,15 @@ export default async function Page({ params }: Props) {
 
   if (!page) notFound()
 
+  const { isEnabled: draft } = await draftMode()
+
   return (
-    <main className="flow-2xl">
-      <Hero hero={page.hero} />
-      <RenderBlocks layout={page.layout} />
-    </main>
+    <>
+      {draft && <LivePreviewListener />}
+      <main className="flow-2xl">
+        <Hero hero={page.hero} />
+        <RenderBlocks layout={page.layout} />
+      </main>
+    </>
   )
 }

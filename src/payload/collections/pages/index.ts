@@ -11,7 +11,6 @@ import {
 import { authenticated } from '@/payload/access/authenticated'
 import { authenticatedOrPublished } from '@/payload/access/authenticated-or-published'
 import { requireEnv } from '@/lib/env'
-import { getServerUrl } from '@/lib/get-server-url'
 import { CardGrid } from '@/payload/blocks/card-grid/config'
 import { Contact } from '@/payload/blocks/contact/config'
 import { Content } from '@/payload/blocks/content/config'
@@ -29,6 +28,26 @@ import { hero } from './hero'
 import { populatePublishedAt } from './hooks/populate-published-at'
 import { revalidateDelete, revalidatePage } from './hooks/revalidate-page'
 
+/**
+ * Shared by the "Preview" button and the Live Preview iframe — both must
+ * enable draft mode via `/preview`, not link straight to the page path.
+ * Relative, no origin, matching the template's `generatePreviewPath`: an
+ * absolute URL built from `NEXT_PUBLIC_SERVER_URL` silently breaks the
+ * moment the admin panel is actually served from a different host/port
+ * than that env var declares (auto-bumped dev port, different hostname,
+ * a proxy) — the iframe's real origin and the postMessage origin check in
+ * `RefreshRouteOnSave` stop matching, and updates drop with no error. A
+ * relative path always resolves against whatever origin is actually
+ * serving the admin panel.
+ */
+function previewUrl(slug: unknown) {
+  const params = new URLSearchParams({
+    secret: requireEnv('PREVIEW_SECRET'),
+    slug: typeof slug === 'string' ? slug : '',
+  })
+  return `/preview?${params.toString()}`
+}
+
 /** Editor-composed routes. `layout` is the closed 12-block set — hero is not one of them, see ./hero.ts. */
 export const Pages: CollectionConfig = {
   slug: 'pages',
@@ -42,15 +61,27 @@ export const Pages: CollectionConfig = {
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', '_status'],
     group: 'Content',
-    preview: (doc) =>
-      `${getServerUrl()}/preview?secret=${requireEnv('PREVIEW_SECRET')}&slug=${doc?.slug ?? ''}`,
+    // Both the "Preview" button and the Live Preview iframe route through
+    // `/preview` — that route is what calls `draftMode().enable()`. Pointing
+    // `livePreview.url` straight at the page path (as it used to) skips that
+    // call entirely, so the page always rendered published data and
+    // `LivePreviewListener` (gated on `draft`) never mounted — live preview
+    // looked "not updating" because it was silently serving the published page.
+    preview: (doc) => previewUrl(doc?.slug),
     livePreview: {
-      url: ({ data }) =>
-        `${getServerUrl()}/${data.slug === 'index' ? '' : (data.slug ?? '')}`,
+      url: ({ data }) => previewUrl(data?.slug),
     },
   },
+  // Server-side Live Preview (`RefreshRouteOnSave`) only refreshes the
+  // iframe on an actual save — draft save, autosave, or publish — never on
+  // a bare keystroke (that's client-side Live Preview's `useLivePreview`
+  // hook, which tracks form state directly; see docs/live-preview/server).
+  // Without autosave, "Live Preview isn't updating" looks identical to a
+  // wiring bug: nothing ever fires the save that would trigger a refresh.
+  // 375ms matches the interval the official docs use to make this feel
+  // responsive.
   versions: {
-    drafts: true,
+    drafts: { autosave: true },
     maxPerDoc: 20,
   },
   fields: [

@@ -6,6 +6,8 @@ import * as migration_20260801_033322 from './20260801_033322'
 import * as migration_20260801_084504_rename_site_settings_tagline_to_name from './20260801_084504_rename_site_settings_tagline_to_name'
 import * as migration_20260801_085558_remove_navigation_header from './20260801_085558_remove_navigation_header'
 import * as migration_20260801_094156_add_content_block from './20260801_094156_add_content_block'
+import * as migration_20260801_104018_rename_content_column_variant_card_to_image from './20260801_104018_rename_content_column_variant_card_to_image'
+import * as migration_20260801_111554_add_pages_autosave from './20260801_111554_add_pages_autosave'
 
 export const migrations = [
   {
@@ -47,5 +49,15 @@ export const migrations = [
     up: migration_20260801_094156_add_content_block.up,
     down: migration_20260801_094156_add_content_block.down,
     name: '20260801_094156_add_content_block',
+  },
+  {
+    up: migration_20260801_104018_rename_content_column_variant_card_to_image.up,
+    down: migration_20260801_104018_rename_content_column_variant_card_to_image.down,
+    name: '20260801_104018_rename_content_column_variant_card_to_image',
+  },
+  {
+    up: migration_20260801_111554_add_pages_autosave.up,
+    down: migration_20260801_111554_add_pages_autosave.down,
+    name: '20260801_111554_add_pages_autosave',
   },
 ]
