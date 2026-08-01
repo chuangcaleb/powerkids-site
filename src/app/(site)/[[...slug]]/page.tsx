@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { RenderBlocks } from '@/payload/blocks/render-blocks'
 import { getPage } from '@/payload/collections/pages/get-page'
 import { getSeoDefaults } from '@/payload/globals/get-seo-defaults'
+import { getPayloadClient } from '@/lib/payload'
 import { getServerUrl } from '@/lib/get-server-url'
 import { Hero } from '@/payload/collections/pages/render-hero'
 import type { Media } from '@/payload-types'
@@ -13,11 +14,20 @@ function slugFromParams(slug: string[] | undefined) {
   return slug?.length ? slug.join('/') : 'home'
 }
 
-// No generateStaticParams: it would query Postgres during `next build`, and
-// CI intentionally builds against fake placeholder env vars so the build
-// never reaches a real service (see docs/ops/environments.md). Pages render
-// dynamically on first request and are cached until a `pages` publish
-// revalidates them — see revalidate-page.ts.
+export async function generateStaticParams() {
+  const payload = await getPayloadClient()
+  const { docs } = await payload.find({
+    collection: 'pages',
+    where: { _status: { equals: 'published' } },
+    limit: 0,
+    select: { slug: true },
+    overrideAccess: false,
+  })
+
+  return docs
+    .filter((doc) => doc.slug !== 'home')
+    .map((doc) => ({ slug: doc.slug.split('/') }))
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params

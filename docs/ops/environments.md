@@ -68,6 +68,8 @@ Every name below appear in `.env.example` with comment. Values come from owner.
 
 Consequence: **every build needs every variable set to something**. CI sets deliberately fake values in `.github/workflows/verify.yml`; Vercel needs real ones present for **both** Preview and Production, or deployment fails at build.
 
+**CI's build never touches a real database, even with `generateStaticParams`.** Pages that call the Payload Local API at build time (SSG) need a working `DATABASE_URI` — real on Vercel, but CI's is a placeholder. CI runs `pnpm build:compile` (`next build --experimental-build-mode compile`) instead of plain `pnpm build`: it compiles and type-checks every route without running static generation, so no DB connection is needed. Vercel's actual Preview/Production builds use plain `pnpm build` with a real `DATABASE_URI` and do the full static generation there. See [Payload: Building without a DB connection](https://payloadcms.com/docs/production/building-without-a-db-connection).
+
 ## Media serving and cache
 
 Uploads go to R2 through S3 adapter, served from `R2_PUBLIC_URL` directly, not proxied through app. `next/image`'s allowlist derived from that variable in `next.config.ts`, so custom domain needs no separate config.

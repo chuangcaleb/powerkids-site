@@ -3,13 +3,16 @@ import { notFound } from 'next/navigation'
 import { Heading } from '@/components/heading/heading'
 import { Media } from '@/components/media/media'
 import { RichText } from '@/components/rich-text/rich-text'
-import { getEventBySlug } from '@/payload/collections/events/get-events'
+import { getEventBySlug, getEvents } from '@/payload/collections/events/get-events'
 import { VideoTabs } from '@/payload/blocks/video/video-tabs'
 import type { Media as MediaDoc } from '@/payload-types'
 
 type Props = { params: Promise<{ slug: string }> }
 
-// No generateStaticParams — see the same note in src/app/(site)/[[...slug]]/page.tsx.
+export async function generateStaticParams() {
+  const events = await getEvents()
+  return events.map((event) => ({ slug: event.slug }))
+}
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
