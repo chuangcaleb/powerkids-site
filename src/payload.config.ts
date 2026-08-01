@@ -4,7 +4,6 @@ import { fileURLToPath } from 'node:url'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import type { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { s3Storage } from '@payloadcms/storage-s3'
 import { buildConfig } from 'payload'
 import sharp from 'sharp'
@@ -16,6 +15,7 @@ import { People } from '@/payload/collections/people'
 import { Programs } from '@/payload/collections/programs'
 import { Schools } from '@/payload/collections/schools'
 import { Users } from '@/payload/collections/users'
+import { defaultLexical } from '@/payload/fields/default-lexical'
 import { Navigation } from '@/payload/globals/navigation'
 import { SeoDefaults } from '@/payload/globals/seo-defaults'
 import { SiteSettings } from '@/payload/globals/site-settings'
@@ -49,7 +49,7 @@ export default buildConfig({
 
   folders: {},
 
-  editor: lexicalEditor(),
+  editor: defaultLexical,
 
   db: postgresAdapter({
     pool: { connectionString: requireEnv('DATABASE_URI') },
