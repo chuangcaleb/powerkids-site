@@ -8,10 +8,10 @@ Cheap to change now, expensive once content exists — every later change is a m
 
 ## Pre
 
-- [ ] Phase 2 done — tokens and primitives exist, so block fields can be specified against real layout vocabulary
-- [ ] Read `docs/architecture/content-model.md` (draft schema) and `docs/architecture/blocks.md` (catalogue)
-- [ ] Read `docs/reference/content-inventory.md` — every field here exists to hold specific v3 content; check the source before inventing fields
-- [ ] **Owner answers open content questions** in that inventory's "Open questions". Several change schema: whether Our Team returns (`people` collection scope), whether Graduation videos become editor-managed (`events.videos`), whether principal bios store `yearsExperience` or prose, three schools or four
+- [x] Phase 2 done — tokens and primitives exist, so block fields can be specified against real layout vocabulary
+- [x] Read `docs/architecture/content-model.md` (draft schema) and `docs/architecture/blocks.md` (catalogue)
+- [x] Read `docs/reference/content-inventory.md` — every field here exists to hold specific v3 content; check the source before inventing fields
+- [x] **Owner answers open content questions** in that inventory's "Open questions". Three schools, Our Team dropped (nav link only, no `people` collection), Graduation videos editor-managed (repeatable field on `events`), FunGates canonical casing, `evening-daycare` slug — all 13 answered
 
 ## Work
 

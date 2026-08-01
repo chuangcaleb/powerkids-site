@@ -499,7 +499,7 @@ Collected from the **[DECIDE]** flags above. All are content or product calls fo
 7. Canonical spelling: FunGates or Fungates? A: FunGates
 8. Keep the `/programs/daycare` slug or rename it? A: evening-daycare
 9. Brochure scans have no alt text; the information in them is image-only. A: remove brochure images from page, replace with placeholder body text
-10. Graduation videos stop at 2020 — should year entries be editor-managed? A:
+10. Graduation videos stop at 2020 — should year entries be editor-managed? A: yes, repeatable field on `events`
 11. How do Cloudinary gallery originals get migrated, if at all? A: fill gallery with 2-3 placeholder images,
 12. Footer nav column headings are currently raw group keys. A: yeah use proper column
 13. Give Our Principals its own anchor id. A: yes

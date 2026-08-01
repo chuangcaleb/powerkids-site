@@ -26,7 +26,7 @@ Before adding one, check existing block with new variant wouldn't do. Two blocks
 | `steps`      | Numbered process (the registration steps)              | `flow`                        |
 | `stats`      | Large numbers with labels ("{n} years")                | `grid-auto`                   |
 | `gallery`    | Photo grid, any number of images                       | `grid-auto`                   |
-| `cta-banner` | Full-width call to action over the blob motif          | `wrapper`, `repel`            |
+| `cta-banner` | Full-width call to action                              | `wrapper`, `repel`            |
 | `schools`    | Renders the `schools` collection                       | `grid-auto`, `switcher`       |
 | `faq`        | Accordion                                              | `flow`                        |
 | `contact`    | Hours, email, phones, socials — all from globals       | `switcher`                    |
