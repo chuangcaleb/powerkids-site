@@ -13,18 +13,27 @@ type Props = { preview?: boolean }
  * Site-wide editor toolbar: shows only once `PayloadAdminBar` confirms an
  * authenticated session (via `onAuthChange`), independent of draft mode —
  * an editor browsing the published site while logged in still gets edit/
- * create links. Matches the official website template's `AdminBar`
- * component as closely as this project's stack allows (CSS Modules
- * instead of Tailwind, one collection instead of three) — no iframe
- * detection, same as upstream.
+ * create links. Otherwise matches the official website template's
+ * `AdminBar` as closely as this project's stack allows (CSS Modules
+ * instead of Tailwind, one collection instead of three).
+ *
+ * Suppressed inside the CMS's own Live Preview iframe (`window.self !==
+ * window.top`) — the template doesn't handle this, but the editor there is
+ * already looking at the doc one frame out, so the bar is redundant chrome
+ * eating iframe height. Read directly during render, not stashed in state
+ * via an effect — it can't change after mount, so there's nothing to
+ * synchronize.
  */
 export function AdminBar({ preview }: Props) {
   const router = useRouter()
   const [show, setShow] = useState(false)
+  const isEmbedded = typeof window !== 'undefined' && window.self !== window.top
 
   const onAuthChange = useCallback((user: PayloadMeUser) => {
     setShow(Boolean(user?.id))
   }, [])
+
+  if (isEmbedded) return null
 
   const adminBarProps: PayloadAdminBarProps = {
     cmsURL: getClientSideUrl(),
