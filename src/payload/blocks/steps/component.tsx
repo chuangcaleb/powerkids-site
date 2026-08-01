@@ -6,7 +6,7 @@ export function Steps({ heading, steps, cta }: StepsBlock) {
   return (
     <section className="wrapper flow" id="register">
       <Heading level={2}>{heading}</Heading>
-      <ol className="flow">
+      <ol>
         {(steps ?? []).map((step, index) => (
           <li key={step.id ?? index}>{step.label}</li>
         ))}

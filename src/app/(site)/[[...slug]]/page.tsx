@@ -60,7 +60,7 @@ export default async function Page({ params }: Props) {
   if (!page) notFound()
 
   return (
-    <main>
+    <main className="flow-2xl">
       <Hero hero={page.hero} />
       <RenderBlocks layout={page.layout} />
     </main>

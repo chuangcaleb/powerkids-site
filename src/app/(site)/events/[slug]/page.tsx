@@ -48,8 +48,12 @@ export default async function EventPage({ params }: Props) {
       ) : null}
       {images.length ? (
         <div className="grid-auto">
-          {images.map((image) => (
-            <Media key={image.id} doc={image} sizes="(min-width: 768px) 25vw, 50vw" />
+          {images.map((image, index) => (
+            <Media
+              key={`${image.id}-${index}`}
+              doc={image}
+              sizes="(min-width: 768px) 25vw, 50vw"
+            />
           ))}
         </div>
       ) : null}

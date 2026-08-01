@@ -1,0 +1,6 @@
+:root {
+  --max-page: 100ch;
+  --max-prose: 65ch;
+  --max-heading: 45ch;
+  --gutter: var(--space-m);
+}

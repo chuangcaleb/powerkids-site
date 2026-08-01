@@ -24,7 +24,7 @@ export const viewport: Viewport = {
 export default function SiteLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={shantellSans.variable}>
-      <body>
+      <body className="flow">
         <Header />
         {children}
         <Footer />

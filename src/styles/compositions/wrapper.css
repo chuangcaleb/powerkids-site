@@ -3,7 +3,7 @@
 .wrapper {
   margin-inline: auto;
   width: 100%;
-  max-width: var(--wrapper-max-width, 75rem);
+  max-width: var(--wrapper-max-width, var(--max-page));
   padding-inline: var(--gutter, var(--space-m));
   position: relative;
 }
