@@ -42,7 +42,7 @@ export const Content: Block = {
               options: [
                 { label: 'Align: Start', value: 'align-start' },
                 { label: 'Align: Center', value: 'align-center' },
-                { label: 'Card', value: 'card' },
+                { label: 'Image', value: 'image' },
               ],
             },
           ],
@@ -59,12 +59,18 @@ export const Content: Block = {
             ],
           }),
           label: false,
+          admin: {
+            condition: (_data, siblingData) => siblingData?.variant !== 'image',
+          },
         },
         {
           name: 'media',
           type: 'upload',
           relationTo: 'media',
-          label: 'Image (optional)',
+          label: 'Image',
+          admin: {
+            condition: (_data, siblingData) => siblingData?.variant === 'image',
+          },
         },
         {
           name: 'enableLink',

@@ -341,7 +341,7 @@ export interface ContentBlock {
   columns?:
     | {
         size?: ('full' | 'oneHalfWide' | 'oneThird' | 'twoThirds' | 'oneHalfNarrow') | null;
-        variant?: ('align-start' | 'align-center' | 'card') | null;
+        variant?: ('align-start' | 'align-center' | 'image') | null;
         richText?: {
           root: {
             type: string;

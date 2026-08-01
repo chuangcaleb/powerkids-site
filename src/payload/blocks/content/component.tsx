@@ -1,4 +1,3 @@
-import { Card } from '@/components/card/card'
 import { CMSLink } from '@/components/cms-link/cms-link'
 import { Media } from '@/components/media/media'
 import { RichText } from '@/components/rich-text/rich-text'
@@ -7,17 +6,6 @@ import type { ContentBlock } from '@/payload-types'
 import styles from './content.module.css'
 
 type Column = NonNullable<ContentBlock['columns']>[number]
-
-/** Root has no text, or a single empty paragraph — Lexical's baseline "nothing typed" shape. */
-function isEmptyRichText(data: Column['richText']): boolean {
-  const children = data?.root?.children
-  if (!children || children.length === 0) return true
-  if (children.length === 1) {
-    const onlyChild = children[0] as { children?: unknown[] }
-    if (!onlyChild.children || onlyChild.children.length === 0) return true
-  }
-  return false
-}
 
 const sizeStyles: Record<NonNullable<Column['size']>, string> = {
   full: cx(styles.col),
@@ -34,37 +22,20 @@ export function Content({ columns }: ContentBlock) {
         {(columns ?? []).map((column, index) => {
           const { size, variant, richText, media, enableLink, link } = column
           const hasMedia = typeof media === 'object' && media !== null
-          const empty = isEmptyRichText(richText)
           const showLink = Boolean(enableLink && link)
           const spanClass = sizeStyles[size ?? 'full']
-
-          if (variant === 'card') {
-            return (
-              <Card key={column.id ?? index} className={spanClass}>
-                <div className={styles.cardText}>
-                  {!empty ? <RichText data={richText!} /> : null}
-                  {showLink && link ? <CMSLink link={link} /> : null}
-                </div>
-                {hasMedia ? (
-                  <Media
-                    doc={media}
-                    sizes="(min-width: 1024px) 33vw, 100vw"
-                    className={styles.cardMedia}
-                  />
-                ) : null}
-              </Card>
-            )
-          }
 
           return (
             <div
               key={column.id ?? index}
               className={cx(spanClass, variant === 'align-center' && styles.alignCenter)}
             >
-              {!empty ? (
-                <RichText data={richText!} />
-              ) : hasMedia ? (
-                <Media doc={media} sizes="(min-width: 1024px) 33vw, 100vw" />
+              {variant === 'image' ? (
+                hasMedia ? (
+                  <Media doc={media} sizes="(min-width: 1024px) 33vw, 100vw" />
+                ) : null
+              ) : richText ? (
+                <RichText data={richText} />
               ) : null}
               {showLink && link ? <CMSLink link={link} /> : null}
             </div>
