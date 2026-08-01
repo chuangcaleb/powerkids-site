@@ -27,6 +27,7 @@ type EnvKey =
   | 'S3_ENDPOINT'
   | 'R2_PUBLIC_URL'
   | 'PREVIEW_SECRET'
+  | 'VERCEL_URL'
 
 /** Read a required variable, or throw naming it. */
 export function requireEnv(key: EnvKey): string {
