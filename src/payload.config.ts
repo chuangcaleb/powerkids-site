@@ -30,7 +30,7 @@ const generateTitle: GenerateTitle<Page> = ({ doc }) =>
 
 const generateURL: GenerateURL<Page> = ({ doc }) => {
   const base = getServerUrl()
-  return doc?.slug && doc.slug !== 'home' ? `${base}/${doc.slug}` : base
+  return doc?.slug && doc.slug !== 'index' ? `${base}/${doc.slug}` : base
 }
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))

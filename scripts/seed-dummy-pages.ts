@@ -320,7 +320,7 @@ await payload.create({
   context: { disableRevalidate: true },
   data: {
     title: 'Home',
-    slug: 'home',
+    slug: 'index',
     _status: 'published',
     hero: {
       type: 'highImpact',

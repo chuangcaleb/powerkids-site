@@ -25,5 +25,5 @@ export async function GET(request: NextRequest) {
   const draft = await draftMode()
   draft.enable()
 
-  redirect(slug === 'home' ? '/' : `/${slug}`)
+  redirect(slug === 'index' ? '/' : `/${slug}`)
 }

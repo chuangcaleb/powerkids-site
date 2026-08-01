@@ -3,7 +3,7 @@ import { revalidatePath } from 'next/cache'
 
 import type { Page } from '@/payload-types'
 
-const pathFor = (slug: string | undefined) => (slug === 'home' ? '/' : `/${slug}`)
+const pathFor = (slug: string | undefined) => (slug === 'index' ? '/' : `/${slug}`)
 
 export const revalidatePage: CollectionAfterChangeHook<Page> = ({
   doc,

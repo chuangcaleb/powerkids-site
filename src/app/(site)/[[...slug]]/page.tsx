@@ -11,7 +11,7 @@ import type { Media } from '@/payload-types'
 type Props = { params: Promise<{ slug?: string[] }> }
 
 function slugFromParams(slug: string[] | undefined) {
-  return slug?.length ? slug.join('/') : 'home'
+  return slug?.length ? slug.join('/') : 'index'
 }
 
 export async function generateStaticParams() {
@@ -25,7 +25,7 @@ export async function generateStaticParams() {
   })
 
   return docs
-    .filter((doc) => doc.slug !== 'home')
+    .filter((doc) => doc.slug !== 'index')
     .map((doc) => ({ slug: doc.slug.split('/') }))
 }
 
@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title,
       description,
-      url: `${getServerUrl()}/${page.slug === 'home' ? '' : page.slug}`,
+      url: `${getServerUrl()}/${page.slug === 'index' ? '' : page.slug}`,
       images: imageUrl ? [{ url: imageUrl }] : undefined,
     },
   }

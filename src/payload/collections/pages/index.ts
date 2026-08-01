@@ -45,7 +45,7 @@ export const Pages: CollectionConfig = {
       `${getServerUrl()}/preview?secret=${requireEnv('PREVIEW_SECRET')}&slug=${doc?.slug ?? ''}`,
     livePreview: {
       url: ({ data }) =>
-        `${getServerUrl()}/${data.slug === 'home' ? '' : (data.slug ?? '')}`,
+        `${getServerUrl()}/${data.slug === 'index' ? '' : (data.slug ?? '')}`,
     },
   },
   versions: {
