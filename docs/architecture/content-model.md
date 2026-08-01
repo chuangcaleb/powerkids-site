@@ -18,7 +18,7 @@ Nothing listed here hard-coded in component. Phone number, address, nav label, o
 ## Conventions
 
 - **File structure:** `src/collections/<slug>/index.ts`, with `hooks/` alongside for anything more than a one-line access check.
-- **Access:** shared utilities in `src/access/` (`authenticated`, `authenticatedOrPublished`, `anyone`) — collections compose these rather than repeating inline role checks. `users` keeps bespoke logic (self-vs-admin) since it doesn't fit either utility.
+- **Access:** shared utilities in `src/access/` (`authenticated`, `authenticatedOrPublished`, `anyone`, `admin`/`adminFieldAccess`) — collections compose these rather than repeating inline role checks. `users`' `update` stays inline (self-or-admin) since that compound check doesn't fit any single utility.
 - **Row labels:** array-field rows use the shared `src/admin/components/row-label.tsx` client component (`admin.components.RowLabel`) instead of one bespoke label component per field. Lives under `src/admin/`, not `src/components/` — it's a CMS-only admin-panel component, not a front-end one.
 
 ---

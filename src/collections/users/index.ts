@@ -1,5 +1,6 @@
 import type { CollectionConfig } from 'payload'
 
+import { admin, adminFieldAccess } from '@/access/admin'
 import { authenticated } from '@/access/authenticated'
 
 /**
@@ -18,8 +19,8 @@ export const Users: CollectionConfig = {
   access: {
     // Only admins manage accounts. Editors can still read the list so that
     // "last edited by" shows a name rather than an id.
-    create: ({ req }) => req.user?.role === 'admin',
-    delete: ({ req }) => req.user?.role === 'admin',
+    create: admin,
+    delete: admin,
     read: authenticated,
     update: ({ req, id }) => req.user?.role === 'admin' || req.user?.id === id,
   },
@@ -43,7 +44,7 @@ export const Users: CollectionConfig = {
       ],
       access: {
         // A user must not be able to promote themselves.
-        update: ({ req }) => req.user?.role === 'admin',
+        update: adminFieldAccess,
       },
     },
   ],
