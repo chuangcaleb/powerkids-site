@@ -8,37 +8,37 @@ Owner tweaks most here. Highest-drift phase — agents invent colours and one-of
 
 ## Pre
 
-- [ ] Phase 1 landed on `v4` — app boots, `/admin` works. See [phase-1-foundation.md](phase-1-foundation.md).
-- [ ] **Owner decides body font.** Display font settled: **Shantell Sans** (SIL OFL, variable, has Bounce axis). Body font open — v3 declared PT Sans but never loaded it, so nobody has seen the intended pairing.
-- [ ] **Owner confirms accent red.** v3 `#e60000` fails WCAG AA at body size (4.0:1 on white; needs 4.5:1). Roughly `#cc0000` reaches 5.3:1 and keeps character. Decision changes every token derived from it.
-- [ ] Read `docs/reference/v3-design-audit.md` — full audit of what v3 used, contrast maths, motifs worth keeping.
+- [x] Phase 1 landed on `v4` — app boots, `/admin` works. See [phase-1-foundation.md](phase-1-foundation.md).
+- [x] **Owner decided body font.** System stack (`system-ui, -apple-system, "Segoe UI", "Helvetica Neue", sans-serif`), Roboto excluded — not a webfont, no licensing question. Display face: **Shantell Sans**, self-hosted, `wght`/`BNCE`/`INFM`/`SPAC` axes kept variable (italic dropped) — see `src/fonts/shantell-sans/NOTES.md`.
+- [x] **Owner confirmed accent red.** `#cc0000` (5.3:1 on the warm-cream background, not white — see `DESIGN.md`).
+- [x] Read `docs/reference/v3-design-audit.md` — full audit of what v3 used, contrast maths, motifs worth keeping.
 
 ## Work
 
 **`DESIGN.md`** — frontmatter of token values + prose invariants. Same shape as `chuangcaleb.com`'s. Invariants are the reviewable rules: which colours may touch body text, no soft shadows, motion gated.
 
-**`src/styles/tokens/`** — token values as CSS custom properties. Fluid type + space via Utopia (v3 used min 16px / 1.25 ratio, max 19px / 1.37 at 1280px — reasonable start). Semantic aliases over raw palette; components use aliases only.
+**`src/styles/tokens/`** — token values as CSS custom properties. Fluid type + space via Utopia — shipped with fresh values (320–1440px viewport, 18px/1.2 ratio min → 21px/1.25 ratio max), not v3's numbers; see `DESIGN.md`'s Type section for why the ratios stay close together. Semantic aliases over raw palette; components use aliases only.
 
 **`src/styles/compositions/`** — port 7 primitives: `flow` `cluster` `grid-auto` `wrapper` `sidebar` `switcher` `repel`. Source to adapt: `/Users/chuangcaleb/Documents/dev/web/chuangcaleb.com/src/styles/compositions/`. Copy mechanics, **not** aesthetics — that project is quiet/editorial/soft-shadow, PowerKids is loud/marker/hard-offset-shadow. Catalogue doc: `docs/design/layout-primitives.md`.
 
 **`src/styles/global/`** — reset, base typography, font loading.
 
-**Component layer** — CSS Modules, one directory each. Inventory in `docs/design/components.md`: Button, Card, Pill, SuperHead, Heading, Mark, Divider, Image, Accordion, NavBar/NavDrawer, VideoEmbed.
+**Component layer** — CSS Modules, one directory each. Inventory in `docs/design/components.md`: Button, Card, Heading, Mark, Divider, Image, Accordion, NavBar, VideoEmbed. `NavDrawer` deferred to a later phase. `Pill`, `SuperHead`, and `cva` as a variant mechanism were dropped during the Phase 2 design revision — no replacement pattern.
 
-**Motifs to preserve** (brand equity, not decoration): heart rule divider, `<mark>` highlight sweep, hard offset shadow + thick border, `Power` red / `Kids` blue wordmark split, register blob.
+**Motifs:** none of v3's carry over — no heart rule, no register blob, no rotated logo. The revised direction (rounded neo-brutalism) keeps only the hard offset shadow + thick border and the `<mark>` sweep mechanic, the latter generalised into an interactive highlighter-band state for link/nav hover as well. See `DESIGN.md`'s "Character" section.
 
-**`/dev/kitchen-sink`** — every token, primitive, component variant on one page. Excluded from production build and sitemap.
+**`/dev/kitchen-sink`** — every token, primitive, component variant on one page. 404s at request time in production rather than being excluded at build time — see the route file's own comment for why that's the simpler equivalent here.
 
 ## Post
 
-- [ ] `DESIGN.md` written — values + invariants, no undocumented magic numbers
-- [ ] `docs/design/tokens.md`, `components.md`, `layout-primitives.md` match what shipped
-- [ ] All 7 primitives ported, each tunable by custom properties
-- [ ] Component inventory built, variants rendered on kitchen sink
-- [ ] Fonts loaded and licensed — Shantell Sans, no Marker Felt or Comic Sans MS anywhere including fallbacks
-- [ ] Every animation gated on `prefers-reduced-motion`
-- [ ] Contrast: chosen accents pass AA at their intended sizes
-- [ ] `pnpm verify` green
+- [x] `DESIGN.md` written — values + invariants, no undocumented magic numbers
+- [x] `docs/design/tokens.md`, `components.md`, `layout-primitives.md` match what shipped
+- [x] All 7 primitives ported, each tunable by custom properties
+- [x] Component inventory built, variants rendered on kitchen sink (`NavDrawer` deferred, not part of this inventory)
+- [x] Fonts loaded and licensed — Shantell Sans, no Marker Felt or Comic Sans MS anywhere including fallbacks
+- [x] Every animation gated on `prefers-reduced-motion`
+- [x] Contrast: chosen accents pass AA at their intended sizes — ratios recorded in `DESIGN.md` invariant 4
+- [x] `pnpm verify` green
 
 ## Verify
 
@@ -47,10 +47,10 @@ pnpm verify
 pnpm dev   # then open /dev/kitchen-sink
 ```
 
-- Kitchen sink at 320 / 768 / 1440 px — no horizontal scroll at any width
+- Kitchen sink at 320 / 768 / 1440 px — no horizontal scroll at any width. Verified.
 - Toggle OS reduced-motion, reload — no sweep animation
-- Contrast-check every text/background pair actually used, not just tokens in isolation
-- Keyboard through accordion and nav drawer
+- Contrast-check every text/background pair actually used, not just tokens in isolation. Verified, see `DESIGN.md` invariant 4.
+- Keyboard through accordion (arrow/home/end between triggers, verified) and NavBar (standard anchor tab order). Nav drawer deferred with `NavDrawer`.
 
 ## Traps
 
