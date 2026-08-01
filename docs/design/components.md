@@ -3,24 +3,24 @@
 **Purpose:** shared UI inventory — what exist, what variants, what not build twice.
 **Read this when:** need button, card, heading, or about create new shared component.
 
-> **Status: partially implemented.** Built so far: `Button`, `Card`, `Heading`, `Mark`, `Divider`, `Image`. Still to come: `Accordion`, `NavBar`, `NavDrawer`, `VideoEmbed`. None rendered on a kitchen sink yet — that route ships in a later Phase 2 PR.
+> **Status: nearly complete.** Built: `Button`, `Card`, `Heading`, `Mark`, `Divider`, `Image`, `Accordion`, `NavBar`, `VideoEmbed` — all rendered on `/dev/kitchen-sink`. Still to come: `NavDrawer`, deliberately deferred to a later phase.
 
 ---
 
 ## Planned inventory
 
-| Component    | Variants                                            | Status  |
-| ------------ | --------------------------------------------------- | ------- |
-| `Button`     | `red`, `blue`, `outline`, `ghost`, `link` × sizes   | built   |
-| `Card`       | default, tab-header                                 | built   |
-| `Heading`    | levels, with display face                           | built   |
-| `Mark`       | animated highlight sweep, reduced-motion safe       | built   |
-| `Divider`    | rule variant, no motif (v3's heart rule dropped)    | built   |
-| `Image`      | Next `<Image>` wrapper, R2 handling, bordered frame | built   |
-| `Accordion`  | client component                                    | planned |
-| `NavBar`     | desktop header nav — this phase                     | planned |
-| `NavDrawer`  | mobile nav drawer — deferred to a later phase       | planned |
-| `VideoEmbed` | lazy-loaded, click-to-play                          | planned |
+| Component    | Variants                                            | Status   |
+| ------------ | --------------------------------------------------- | -------- |
+| `Button`     | `red`, `blue`, `outline`, `ghost`, `link` × sizes   | built    |
+| `Card`       | default, tab-header                                 | built    |
+| `Heading`    | levels, with display face                           | built    |
+| `Mark`       | animated highlight sweep, reduced-motion safe       | built    |
+| `Divider`    | rule variant, no motif (v3's heart rule dropped)    | built    |
+| `Image`      | Next `<Image>` wrapper, R2 handling, bordered frame | built    |
+| `Accordion`  | client component, keyboard-navigable                | built    |
+| `NavBar`     | desktop header nav                                  | built    |
+| `VideoEmbed` | lazy-loaded, click-to-play facade                   | built    |
+| `NavDrawer`  | mobile nav drawer — deferred to a later phase       | deferred |
 
 `Pill`, `SuperHead`, and `cva` as a variant mechanism are deliberately not in this list — removed outright during the Phase 2 design revision, no replacement pattern. Headings stand alone; variants are CSS Module classes, never a variant library.
 
