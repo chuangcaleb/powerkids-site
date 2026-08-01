@@ -4,6 +4,8 @@ import { slugField } from 'payload'
 import { authenticated } from '@/payload/access/authenticated'
 import { authenticatedOrPublished } from '@/payload/access/authenticated-or-published'
 
+import { revalidateProgram, revalidateProgramDelete } from './hooks/revalidate-program'
+
 /**
  * Daily offerings with fixed hours — Morning School, After School Program,
  * Evening Daycare. Not a "class" or "course": every program runs every day
@@ -23,6 +25,10 @@ export const Programs: CollectionConfig = {
     delete: authenticated,
   },
   versions: { drafts: true },
+  hooks: {
+    afterChange: [revalidateProgram],
+    afterDelete: [revalidateProgramDelete],
+  },
   fields: [
     {
       name: 'name',

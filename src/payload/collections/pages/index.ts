@@ -10,6 +10,8 @@ import {
 
 import { authenticated } from '@/payload/access/authenticated'
 import { authenticatedOrPublished } from '@/payload/access/authenticated-or-published'
+import { requireEnv } from '@/lib/env'
+import { getServerUrl } from '@/lib/get-server-url'
 import { CardGrid } from '@/payload/blocks/card-grid/config'
 import { Contact } from '@/payload/blocks/contact/config'
 import { CtaBanner } from '@/payload/blocks/cta-banner/config'
@@ -39,6 +41,12 @@ export const Pages: CollectionConfig = {
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', '_status'],
     group: 'Content',
+    preview: (doc) =>
+      `${getServerUrl()}/preview?secret=${requireEnv('PREVIEW_SECRET')}&slug=${doc?.slug ?? ''}`,
+    livePreview: {
+      url: ({ data }) =>
+        `${getServerUrl()}/${data.slug === 'home' ? '' : (data.slug ?? '')}`,
+    },
   },
   versions: {
     drafts: true,

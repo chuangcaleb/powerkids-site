@@ -38,16 +38,44 @@ const media = await payload.create({
   filePath: PLACEHOLDER_IMAGE,
 })
 
+await payload.updateGlobal({
+  slug: 'site-settings',
+  context: { disableRevalidate: true },
+  data: {
+    tagline: 'The Centre With A Heart',
+    foundedYear: 1998,
+    email: 'info@powerkids.example',
+    phones: [{ number: '+60 12-345 6789', href: 'tel:+60123456789' }],
+    openingHours: '8:30am - 5:00pm',
+    openingDays: 'Monday - Friday',
+  },
+})
+
+await payload.updateGlobal({
+  slug: 'navigation',
+  context: { disableRevalidate: true },
+  data: {
+    header: [{ label: 'Kitchen Sink', url: '/kitchen-sink' }],
+    footerColumns: [
+      {
+        heading: 'Explore',
+        links: [{ label: 'Kitchen Sink', url: '/kitchen-sink' }],
+      },
+    ],
+  },
+})
+
 const existingSchools = await payload.find({ collection: 'schools', limit: 1 })
 if (existingSchools.totalDocs === 0) {
   await payload.create({
     collection: 'schools',
-    draft: false,
+    context: { disableRevalidate: true },
     data: {
       name: 'Kitchen Sink Demo School',
       slug: 'kitchen-sink-demo-school',
       address: '1 Demo Street, Test City',
       phones: [{ number: '+60 12-345 6789', href: 'tel:+60123456789' }],
+      _status: 'published',
     },
   })
 }

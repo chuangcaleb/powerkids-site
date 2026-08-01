@@ -2,6 +2,8 @@ import type { GlobalConfig } from 'payload'
 
 import { authenticated } from '@/payload/access/authenticated'
 
+import { revalidateLayout } from './hooks/revalidate-layout'
+
 const linkFields = [
   { name: 'label', type: 'text', required: true },
   { name: 'url', type: 'text', required: true },
@@ -18,6 +20,9 @@ export const Navigation: GlobalConfig = {
   access: {
     read: () => true,
     update: authenticated,
+  },
+  hooks: {
+    afterChange: [revalidateLayout],
   },
   fields: [
     {

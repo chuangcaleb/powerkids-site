@@ -2,16 +2,16 @@
 
 **Goal:** public site renders CMS content. Layouts, catch-all route, one renderer per block.
 
-Fully agentic per block. One PR per 2–3 blocks — "phase 4" is not reviewable.
+Fully agentic per block. Doc recommends one PR per 2–3 blocks ("phase 4" is not reviewable as one unit) — owner opted for a single PR instead, styling left boilerplate, visual/breakpoint QA deferred.
 
 ---
 
 ## Pre
 
-- [ ] Phase 3 done — schema stable, `payload-types.ts` generated, editor can compose a page in `/admin`
-- [ ] Phase 2 done — tokens, primitives, components exist. Blocks are assembled from these, never from raw CSS
-- [ ] Seed or hand-create one page containing every block, to render against
-- [ ] Read `docs/architecture/blocks.md` for the per-block field contracts
+- [x] Phase 3 done — schema stable, `payload-types.ts` generated, editor can compose a page in `/admin`
+- [x] Phase 2 done — tokens, primitives, components exist. Blocks are assembled from these, never from raw CSS
+- [x] Seed or hand-create one page containing every block, to render against — `scripts/seed-kitchen-sink-page.ts` (Local API, throwaway, not the Phase 5 seed script)
+- [x] Read `docs/architecture/blocks.md` for the per-block field contracts
 
 ## Work
 
@@ -35,14 +35,14 @@ Fully agentic per block. One PR per 2–3 blocks — "phase 4" is not reviewable
 
 ## Post
 
-- [ ] Every block renders correctly at 320 / 768 / 1440 px
-- [ ] Every block survives minimal content (no image, no heading) and extreme content (20 gallery items, 90-char heading)
-- [ ] No client JS except `faq` and `video`; any `"use client"` carries a comment saying why
-- [ ] Header, footer, contact read from globals — zero hard-coded content
-- [ ] Draft preview works from the admin panel
-- [ ] Lighthouse accessibility 100
-- [ ] `docs/architecture/blocks.md` per-block notes filled in
-- [ ] `pnpm verify` green
+- [ ] Every block renders correctly at 320 / 768 / 1440 px — **not yet checked**; styling was deliberately left boilerplate this pass, visual/breakpoint pass deferred
+- [ ] Every block survives minimal content (no image, no heading) and extreme content (20 gallery items, 90-char heading) — **not yet checked**
+- [x] No client JS except `faq` and `video`; any `"use client"` carries a comment saying why — `Accordion` (faq) and `VideoEmbed`/`VideoTabs` (video) only
+- [x] Header, footer, contact read from globals — zero hard-coded content
+- [x] Draft preview works — verified via the `/preview` route directly (secret-gated, enables Next draft mode, redirects); **not yet clicked through from the `/admin` panel UI itself**
+- [ ] Lighthouse accessibility 100 — **not yet run**
+- [x] `docs/architecture/blocks.md` per-block notes filled in
+- [x] `pnpm verify` green (both against a real dev DB and CI's fake-env build)
 
 ## Verify
 

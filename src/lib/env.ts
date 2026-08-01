@@ -26,6 +26,7 @@ type EnvKey =
   | 'S3_SECRET_ACCESS_KEY'
   | 'S3_ENDPOINT'
   | 'R2_PUBLIC_URL'
+  | 'PREVIEW_SECRET'
 
 /** Read a required variable, or throw naming it. */
 export function requireEnv(key: EnvKey): string {

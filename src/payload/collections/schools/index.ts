@@ -4,6 +4,8 @@ import { slugField } from 'payload'
 import { authenticated } from '@/payload/access/authenticated'
 import { authenticatedOrPublished } from '@/payload/access/authenticated-or-published'
 
+import { revalidateSchool, revalidateSchoolDelete } from './hooks/revalidate-schools'
+
 /**
  * Physical branches. Three active — see docs/reference/content-inventory.md
  * for the two inactive entries and why they're not migrated.
@@ -22,6 +24,10 @@ export const Schools: CollectionConfig = {
     delete: authenticated,
   },
   versions: { drafts: true },
+  hooks: {
+    afterChange: [revalidateSchool],
+    afterDelete: [revalidateSchoolDelete],
+  },
   fields: [
     {
       name: 'name',

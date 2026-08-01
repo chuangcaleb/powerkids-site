@@ -4,6 +4,8 @@ import { slugField } from 'payload'
 import { authenticated } from '@/payload/access/authenticated'
 import { authenticatedOrPublished } from '@/payload/access/authenticated-or-published'
 
+import { revalidateEvent, revalidateEventDelete } from './hooks/revalidate-event'
+
 /**
  * Recurring school activity types — Graduation, Sports Day, Field Trips,
  * Community Service. Not a dated calendar entry: one document per activity
@@ -23,6 +25,10 @@ export const Events: CollectionConfig = {
     delete: authenticated,
   },
   versions: { drafts: true },
+  hooks: {
+    afterChange: [revalidateEvent],
+    afterDelete: [revalidateEventDelete],
+  },
   fields: [
     {
       name: 'name',

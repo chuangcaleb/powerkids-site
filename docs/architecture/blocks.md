@@ -3,7 +3,7 @@
 **Purpose:** closed set of layout blocks editor can place on page, plus rules each follow.
 **Read this when:** building block renderer, changing block's fields, or deciding new content need new block.
 
-> **Status: schemas shipped** (`src/payload/blocks/<name>/config.ts`), wired into `pages.layout`. Renderers are Phase 4 — doc updates same change as those land.
+> **Status: schemas and renderers shipped.** `src/payload/blocks/<name>/config.ts` (schema) and `src/payload/blocks/<name>/component.tsx` (renderer) for all 11, dispatched by `src/payload/blocks/render-blocks.tsx`. Styling is intentionally boilerplate — layout/logic only, visual polish deferred.
 
 ---
 
