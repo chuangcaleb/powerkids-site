@@ -7,7 +7,7 @@
 
 ## The rule
 
-**Every schema change ships with migration.** Payload push schema auto in dev (`push: !isProduction` in `src/payload.config.ts`), but production run migrations only. Field added without one work locally, fail on deploy.
+**Every schema change ships with migration — dev included.** `push` is `false` unconditionally in `src/payload.config.ts`. It used to be `!isProduction`, so dev auto-pushed schema on every boot — but drizzle-kit push resolves structural diffs (blocks/arrays/relationships, enum edits, type changes) by dropping and recreating the table instead of altering it, silently, since a dev server has no TTY to prompt on. That wiped real dev data on restart. Migrations are the only schema path now, in every environment.
 
 ## Loop
 
@@ -17,6 +17,8 @@ pnpm migrate                             # apply locally
 pnpm generate:types                      # regenerate payload-types.ts
 pnpm verify
 ```
+
+Run `pnpm migrate` after pulling anyone else's schema change too, before starting `pnpm dev` — nothing applies it for you automatically anymore.
 
 Commit migration file and regenerated types together with schema change. Migrations run auto on deploy.
 
