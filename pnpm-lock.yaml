@@ -72,6 +72,9 @@ importers:
       lefthook:
         specifier: ^2.1.10
         version: 2.1.10
+      lorem-ipsum:
+        specifier: ^3.0.0
+        version: 3.0.0
       prettier:
         specifier: ^3.9.6
         version: 3.9.6
@@ -3299,6 +3302,10 @@ packages:
 
   loose-envify@1.4.0:
     resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==}
+    hasBin: true
+
+  lorem-ipsum@3.0.0:
+    resolution: {integrity: sha512-FYUViKFk1p8OJWrDFtpyvCW1l92E7vWA3g/tmpvdrLmyoLti9aqD7/xeSEXu/e2oi/zG/TL8I9eZsrh+t1NWbw==}
     hasBin: true
 
   lru-cache@5.1.1:
@@ -7937,6 +7944,8 @@ snapshots:
   loose-envify@1.4.0:
     dependencies:
       js-tokens: 4.0.0
+
+  lorem-ipsum@3.0.0: {}
 
   lru-cache@5.1.1:
     dependencies:
