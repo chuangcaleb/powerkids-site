@@ -21,7 +21,7 @@ Cheap to change now, expensive once content exists — every later change is a m
 
 Founding year stored, not hard-coded — "{n} years & counting" stays computed.
 
-**Blocks**, closed set of 11: `prose` `media-text` `card-grid` `steps` `stats` `gallery` `cta-banner` `schools` `faq` `contact` `video`. One directory each: `src/blocks/<name>/config.ts`. `hero` is not one of these — every page has exactly one, as its own always-present field (`src/collections/pages/hero.ts`), independent of `layout`. See `docs/architecture/blocks.md`.
+**Blocks**, closed set of 11: `prose` `media-text` `card-grid` `steps` `stats` `gallery` `cta-banner` `schools` `faq` `contact` `video`. One directory each: `src/payload/blocks/<name>/config.ts`. `hero` is not one of these — every page has exactly one, as its own always-present field (`src/payload/collections/pages/hero.ts`), independent of `layout`. See `docs/architecture/blocks.md`.
 
 **Use Payload's `slugField()`**, not a hand-written slug. It gives unique index, generation from title, manual-override checkbox, and stops regenerating after publish so a title edit cannot silently break a live URL. Marked `@experimental` in 3.86 — re-read on upgrade.
 

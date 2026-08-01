@@ -3,7 +3,7 @@
 **Purpose:** every collection and global, what it hold, how they relate.
 **Read when:** adding/changing field, writing query, seeding data.
 
-> **Status: shipped** — collections, globals, and the block catalogue (schemas only) all match `src/collections/`, `src/globals/`, `src/blocks/`. See [blocks.md](blocks.md) for the per-block field list.
+> **Status: shipped** — collections, globals, and the block catalogue (schemas only) all match `src/payload/collections/`, `src/payload/globals/`, `src/payload/blocks/`. See [blocks.md](blocks.md) for the per-block field list.
 
 Source content for every entity: [../reference/content-inventory.md](../reference/content-inventory.md).
 
@@ -17,9 +17,9 @@ Nothing listed here hard-coded in component. Phone number, address, nav label, o
 
 ## Conventions
 
-- **File structure:** `src/collections/<slug>/index.ts`, with `hooks/` alongside for anything more than a one-line access check.
-- **Access:** shared utilities in `src/access/` (`authenticated`, `authenticatedOrPublished`, `anyone`, `admin`/`adminFieldAccess`) — collections compose these rather than repeating inline role checks. `users`' `update` stays inline (self-or-admin) since that compound check doesn't fit any single utility.
-- **Row labels:** array-field rows use the shared `src/admin/components/row-label.tsx` client component (`admin.components.RowLabel`) instead of one bespoke label component per field.
+- **File structure:** `src/payload/collections/<slug>/index.ts`, with `hooks/` alongside for anything more than a one-line access check.
+- **Access:** shared utilities in `src/payload/access/` (`authenticated`, `authenticatedOrPublished`, `anyone`, `admin`/`adminFieldAccess`) — collections compose these rather than repeating inline role checks. `users`' `update` stays inline (self-or-admin) since that compound check doesn't fit any single utility.
+- **Row labels:** array-field rows use the shared `src/payload/admin/components/row-label.tsx` client component (`admin.components.RowLabel`) instead of one bespoke label component per field.
 
 ---
 

@@ -35,7 +35,7 @@ Rest of the inventory derived from v3 audit — see [../reference/v3-design-audi
 - Server component unless need state or event handlers.
 - Component appear once, one page — not shared UI. Keep beside block that use it.
 - Anything render content take it as props. Components never fetch, never contain copy.
-- CMS-only admin-panel components go under `src/admin/`, not `src/components/`.
+- CMS-only admin-panel components go under `src/payload/admin/`, not `src/components/`.
 
 ## Kitchen sink
 

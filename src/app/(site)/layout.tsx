@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import type { ReactNode } from 'react'
-import { shantellSans } from '@/fonts/shantell-sans'
+import { shantellSans } from '@/styles/fonts/shantell-sans'
 import '@/styles/tokens/index.css'
 import '@/styles/compositions/index.css'
 import '@/styles/global/index.css'

@@ -22,11 +22,11 @@ All three clear, proceed. New blocks need owner sign-off — change product, not
 ## Steps
 
 1. **Agree the fields.** Write into [../architecture/blocks.md](../architecture/blocks.md) first. Doc is the spec.
-2. **Create `src/blocks/<name>/config.ts`.** Payload block config: `slug`, admin `labels`, and a `description` written for a non-technical editor. Every field gets label and, where not obvious, description.
+2. **Create `src/payload/blocks/<name>/config.ts`.** Payload block config: `slug`, admin `labels`, and a `description` written for a non-technical editor. Every field gets label and, where not obvious, description.
 3. **Register it** on `pages.layout` field.
 4. **Generate types**: `pnpm generate:types`.
 5. **Create a migration.** See [../ops/migrations.md](../ops/migrations.md).
-6. **Build `src/blocks/<name>/Component.tsx`.** Server component. Layout from primitives, styling from tokens via co-located CSS Module. No raw values.
+6. **Build `src/payload/blocks/<name>/Component.tsx`.** Server component. Layout from primitives, styling from tokens via co-located CSS Module. No raw values.
 7. **Register the renderer** in block dispatcher.
 8. **Handle empty and extreme cases.** No image, no heading, one item, twenty items, 90-character heading.
 9. **Add it to kitchen sink** — visible in isolation.

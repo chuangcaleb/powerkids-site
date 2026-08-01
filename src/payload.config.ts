@@ -9,16 +9,16 @@ import { s3Storage } from '@payloadcms/storage-s3'
 import { buildConfig } from 'payload'
 import sharp from 'sharp'
 
-import { Events } from '@/collections/events'
-import { Media } from '@/collections/media'
-import { Pages } from '@/collections/pages'
-import { People } from '@/collections/people'
-import { Programs } from '@/collections/programs'
-import { Schools } from '@/collections/schools'
-import { Users } from '@/collections/users'
-import { Navigation } from '@/globals/navigation'
-import { SeoDefaults } from '@/globals/seo-defaults'
-import { SiteSettings } from '@/globals/site-settings'
+import { Events } from '@/payload/collections/events'
+import { Media } from '@/payload/collections/media'
+import { Pages } from '@/payload/collections/pages'
+import { People } from '@/payload/collections/people'
+import { Programs } from '@/payload/collections/programs'
+import { Schools } from '@/payload/collections/schools'
+import { Users } from '@/payload/collections/users'
+import { Navigation } from '@/payload/globals/navigation'
+import { SeoDefaults } from '@/payload/globals/seo-defaults'
+import { SiteSettings } from '@/payload/globals/site-settings'
 import { S3_REGION, isProduction, requireEnv } from '@/lib/env'
 import { getServerUrl } from '@/lib/get-server-url'
 import type { Page } from '@/payload-types'
@@ -57,6 +57,9 @@ export default buildConfig({
     // automatically so iterating on fields does not need a migration each
     // time — see docs/ops/migrations.md.
     push: !isProduction,
+    // Defaults to `<config dir>/migrations`; migrations live under
+    // src/payload/ with the rest of the Payload-only code.
+    migrationDir: path.resolve(dirname, 'payload/migrations'),
   }),
 
   plugins: [

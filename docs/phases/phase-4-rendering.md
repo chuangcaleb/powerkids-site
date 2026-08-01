@@ -21,7 +21,7 @@ Fully agentic per block. One PR per 2–3 blocks — "phase 4" is not reviewable
 
 **`RenderBlocks`** dispatcher — maps block `blockType` to server component. Unknown type renders nothing, never throws.
 
-**One renderer per block**, `src/blocks/<name>/Component.tsx`. Server components. Layout from primitives, styling from co-located CSS Module reading tokens.
+**One renderer per block**, `src/payload/blocks/<name>/Component.tsx`. Server components. Layout from primitives, styling from co-located CSS Module reading tokens.
 
 **Images** — `next/image`, R2 host already allow-listed in `next.config.ts` from `R2_PUBLIC_URL`. Correct `sizes` per context; the three generated variants are 400 / 800 / 1600 wide.
 

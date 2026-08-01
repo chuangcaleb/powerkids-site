@@ -9,7 +9,7 @@ Owner tweaks most here. Highest-drift phase — agents invent colours and one-of
 ## Pre
 
 - [x] Phase 1 landed on `v4` — app boots, `/admin` works. See [phase-1-foundation.md](phase-1-foundation.md).
-- [x] **Owner decided body font.** System stack (`system-ui, -apple-system, "Segoe UI", "Helvetica Neue", sans-serif`), Roboto excluded — not a webfont, no licensing question. Display face: **Shantell Sans**, self-hosted, `wght`/`BNCE`/`INFM`/`SPAC` axes kept variable (italic dropped) — see `src/fonts/shantell-sans/NOTES.md`.
+- [x] **Owner decided body font.** System stack (`system-ui, -apple-system, "Segoe UI", "Helvetica Neue", sans-serif`), Roboto excluded — not a webfont, no licensing question. Display face: **Shantell Sans**, self-hosted, `wght`/`BNCE`/`INFM`/`SPAC` axes kept variable (italic dropped) — see `src/styles/fonts/shantell-sans/NOTES.md`.
 - [x] **Owner confirmed accent red.** `#cc0000` (5.3:1 on the warm-cream background, not white — see `DESIGN.md`).
 - [x] Read `docs/reference/v3-design-audit.md` — full audit of what v3 used, contrast maths, motifs worth keeping.
 

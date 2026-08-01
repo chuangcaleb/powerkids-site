@@ -20,7 +20,7 @@
 import { readdir, readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 
-const MIGRATIONS_DIR = path.join(process.cwd(), 'src/migrations')
+const MIGRATIONS_DIR = path.join(process.cwd(), 'src/payload/migrations')
 
 const BROKEN =
   /^import \{ MigrateUpArgs, MigrateDownArgs, sql \} from '@payloadcms\/db-postgres'$/m
@@ -40,7 +40,7 @@ for (const file of migrations) {
   if (!BROKEN.test(source)) continue
 
   await writeFile(filePath, source.replace(BROKEN, FIXED))
-  console.log(`fixed type-only import: src/migrations/${file}`)
+  console.log(`fixed type-only import: src/payload/migrations/${file}`)
   fixed += 1
 }
 
