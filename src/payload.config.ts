@@ -19,7 +19,7 @@ import { Users } from '@/payload/collections/users'
 import { Navigation } from '@/payload/globals/navigation'
 import { SeoDefaults } from '@/payload/globals/seo-defaults'
 import { SiteSettings } from '@/payload/globals/site-settings'
-import { S3_REGION, isProduction, requireEnv } from '@/lib/env'
+import { S3_REGION, requireEnv } from '@/lib/env'
 import { getServerUrl } from '@/lib/get-server-url'
 import type { Page } from '@/payload-types'
 
@@ -53,10 +53,14 @@ export default buildConfig({
 
   db: postgresAdapter({
     pool: { connectionString: requireEnv('DATABASE_URI') },
-    // Production applies committed migrations only. Dev pushes schema
-    // automatically so iterating on fields does not need a migration each
-    // time — see docs/ops/migrations.md.
-    push: !isProduction,
+    // Push mode reconciles schema by diffing live tables against the
+    // collection config. For structural changes (blocks/arrays/relationships,
+    // enum edits, type changes) it resolves the diff by dropping and
+    // recreating the table instead of altering it — silently, no prompt,
+    // since dev runs non-interactively. That destroys real dev data. Always
+    // false: every schema change goes through a reviewed migration, in dev
+    // too — see docs/ops/migrations.md.
+    push: false,
     // Defaults to `<config dir>/migrations`; migrations live under
     // src/payload/ with the rest of the Payload-only code.
     migrationDir: path.resolve(dirname, 'payload/migrations'),
