@@ -59,24 +59,6 @@ Router for automated contributors. Read fully; read linked docs only when task t
 
 ---
 
-## Stack
-
-| Layer            | Choice                                                    |
-| ---------------- | --------------------------------------------------------- |
-| Framework        | Next.js (App Router), `>=16.2.2`                          |
-| CMS              | Payload `>=3.73`, mounted same app                        |
-| Database         | Neon Postgres via `@payloadcms/db-postgres`               |
-| Media            | Cloudflare R2 via `@payloadcms/storage-s3`                |
-| Image processing | `sharp`, Node runtime                                     |
-| Hosting          | Vercel                                                    |
-| Styling          | Vanilla CSS — tokens, composition primitives, CSS Modules |
-| Language         | TypeScript, `strict`                                      |
-| Packages         | pnpm                                                      |
-
-Next.js floor hard requirement, not preference: Payload doesn't support Next `15.5`–`16.1.x`.
-
----
-
 ## Implementation conventions
 
 - **Server components default.** Add `"use client"` only when component genuinely needs interactivity, say why in comment.
