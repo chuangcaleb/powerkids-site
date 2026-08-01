@@ -27,8 +27,8 @@
 
 ## How phase works
 
-1. Agent proposes plan for phase. Owner approves. **Gate.**
-2. Work lands as PRs, one per coherent unit. Owner merges. Never push `main`.
+1. Agent proposes plan for phase, stating branch/PR-unit split and where review checkpoints will land. Owner approves. **Gate.**
+2. Work lands as PRs. Default one branch per large coherent unit; group small units together rather than branching per sub-step. Review happens at natural checkpoints (end of a logical chunk), not after every commit. Owner merges. Never push `main`.
 3. Phase done only when its **Post** checklist all true — including docs.
 
 Each phase file has same shape:

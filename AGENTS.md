@@ -23,10 +23,14 @@ Router for automated contributors. Read fully; read linked docs only when task t
 
 ## Working agreement
 
-- **Plan gate per phase, PR per feature.** Propose plan, get approval before starting phase. Within phase, one PR per coherent unit — "add hero + prose blocks", not "phase 4".
+- **Plan gate per phase, PR per feature — "feature" sized by judgment, not a fixed unit count.** Propose plan, get approval before starting phase. State the branch/PR split and where review checkpoints will land as part of that plan. Default: one branch per large coherent unit; group small units together (especially frontend work you're confident in) rather than branching per sub-step (tokens, then primitives, then styles, ...). Some phases need several branches, some need just one — that's a per-phase call, not a fixed rule. Cut branches at whatever granularity you stated, else git ceremony (ancestor-check, fast-forward, push) repeats with no review benefit.
 - **Conventional commits**: `feat:`, `fix:`, `chore:`, `docs:`, `refactor:`, `test:`. Branch names descriptive: `feat/hero-block`, `fix/footer-nav-order`.
-- **Verify before every commit** — see `docs/workflows/verify-loop.md`. _(Phase 1)_
+- **Verify before every commit** — see `docs/workflows/verify-loop.md`. _(Phase 1)_ Mid-edit, run targeted lint/typecheck on touched files, not full `pnpm verify` — save that for pre-push checkpoints.
 - **Small, obvious changes**: execute directly. Architectural: propose first.
+- **Review checkpoint = natural checkpoint, not every commit.** Stop and ask for review at end of a logical chunk of work, or wherever you'd otherwise pause to ask "continue?" — not after each individual commit.
+- **Library claims a feature central to the plan → prove it empirically first.** One cheap test (curl the API, inspect the built output, read the actual served file) beats a full implementation cycle discovered wrong only after the fact.
+- **Unusual git op (refspec push, force flag, history rewrite) → flag to user before attempting**, not after a permission denial.
+- **Shared branch, concurrent worktrees possible → `git worktree list` once before the op**, not re-discovered per retry.
 
 ---
 

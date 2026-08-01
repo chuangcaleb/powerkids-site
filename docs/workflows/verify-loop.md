@@ -24,6 +24,8 @@ Runs, in order:
 
 Stop at first failure, fix it. Don't commit around red step. Don't disable rule to pass — rule wrong? Change deliberately, own commit, with reason.
 
+**Mid-edit, don't run full `pnpm verify`.** Scope check to what changed: `pnpm stylelint <file>`, `pnpm eslint <file>`, `pnpm tsc --noEmit`. Full loop is for pre-push checkpoints (lefthook already runs it there) and CI — running it after every small edit repeats the other three steps for no new signal.
+
 ## Also required
 
 - **Schema changes** need `pnpm generate:types` + migration. See [../ops/migrations.md](../ops/migrations.md). Adding admin component also needs `pnpm generate:importmap`.
