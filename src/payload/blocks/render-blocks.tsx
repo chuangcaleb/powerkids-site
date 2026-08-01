@@ -13,38 +13,35 @@ import { Stats } from './stats/component'
 import { Steps } from './steps/component'
 import { VideoBlock } from './video/component'
 
-type LayoutBlock = Page['layout'][number]
+const blockComponents = {
+  'card-grid': CardGrid,
+  contact: Contact,
+  content: Content,
+  'cta-banner': CtaBanner,
+  faq: Faq,
+  gallery: Gallery,
+  'media-text': MediaText,
+  prose: Prose,
+  schools: SchoolsBlock,
+  stats: Stats,
+  steps: Steps,
+  video: VideoBlock,
+}
 
 /** Dispatches one `pages.layout` entry to its block component. Unknown type renders nothing, never throws. */
-function renderBlock(block: LayoutBlock) {
-  switch (block.blockType) {
-    case 'prose':
-      return <Prose {...block} />
-    case 'content':
-      return <Content {...block} />
-    case 'media-text':
-      return <MediaText {...block} />
-    case 'card-grid':
-      return <CardGrid {...block} />
-    case 'steps':
-      return <Steps {...block} />
-    case 'stats':
-      return <Stats {...block} />
-    case 'gallery':
-      return <Gallery {...block} />
-    case 'cta-banner':
-      return <CtaBanner {...block} />
-    case 'schools':
-      return <SchoolsBlock {...block} />
-    case 'faq':
-      return <Faq {...block} />
-    case 'contact':
-      return <Contact {...block} />
-    case 'video':
-      return <VideoBlock {...block} />
-    default:
-      return null
+function renderBlock(block: Page['layout'][number]) {
+  const { blockType } = block
+
+  if (blockType && blockType in blockComponents) {
+    const Block = blockComponents[blockType as keyof typeof blockComponents]
+
+    if (Block) {
+      // @ts-expect-error mismatch between generic block union and each component's specific props
+      return <Block {...block} />
+    }
   }
+
+  return null
 }
 
 export function RenderBlocks({ layout }: { layout: Page['layout'] }) {
