@@ -8,10 +8,10 @@ Cheap to change now, expensive once content exists — every later change is a m
 
 ## Pre
 
-- [ ] Phase 2 done — tokens and primitives exist, so block fields can be specified against real layout vocabulary
-- [ ] Read `docs/architecture/content-model.md` (draft schema) and `docs/architecture/blocks.md` (catalogue)
-- [ ] Read `docs/reference/content-inventory.md` — every field here exists to hold specific v3 content; check the source before inventing fields
-- [ ] **Owner answers open content questions** in that inventory's "Open questions". Several change schema: whether Our Team returns (`people` collection scope), whether Graduation videos become editor-managed (`events.videos`), whether principal bios store `yearsExperience` or prose, three schools or four
+- [x] Phase 2 done — tokens and primitives exist, so block fields can be specified against real layout vocabulary
+- [x] Read `docs/architecture/content-model.md` (draft schema) and `docs/architecture/blocks.md` (catalogue)
+- [x] Read `docs/reference/content-inventory.md` — every field here exists to hold specific v3 content; check the source before inventing fields
+- [x] **Owner answers open content questions** in that inventory's "Open questions". Three schools, Our Team dropped (nav link only, no `people` collection), Graduation videos editor-managed (repeatable field on `events`), FunGates canonical casing, `evening-daycare` slug — all 13 answered
 
 ## Work
 
@@ -21,7 +21,7 @@ Cheap to change now, expensive once content exists — every later change is a m
 
 Founding year stored, not hard-coded — "{n} years & counting" stays computed.
 
-**Blocks**, closed set of 12: `hero` `prose` `media-text` `card-grid` `steps` `stats` `gallery` `cta-banner` `schools` `faq` `contact` `video`. One directory each: `src/blocks/<name>/config.ts`.
+**Blocks**, closed set of 11: `prose` `media-text` `card-grid` `steps` `stats` `gallery` `cta-banner` `schools` `faq` `contact` `video`. One directory each: `src/payload/blocks/<name>/config.ts`. `hero` is not one of these — every page has exactly one, as its own always-present field (`src/payload/collections/pages/hero.ts`), independent of `layout`. See `docs/architecture/blocks.md`.
 
 **Use built-in `slugField()` helper**, imported from `payload`, not hand-written `text` field. Returns wired field set — auto-generate from another field (`useAsSlug`, default `'title'`), unique + indexed, admin lock/unlock + regenerate. Marked **experimental** upstream, may change or vanish, use at own risk — re-check `docs/fields/slug.mdx` in Payload repo on upgrade.
 
@@ -46,14 +46,14 @@ Nudge, not constraint — never block or auto-delete on checksum match. Editor r
 
 ## Post
 
-- [ ] All collections, globals, blocks defined — schema only, no components
+- [x] All collections, globals, blocks defined — schema only, no components
 - [ ] `media` duplicate-detection hook in place: checksum stored, `possibleDuplicateOf` flagged on match, bulk upload of a mixed clean/duplicate batch never blocks or fails
-- [ ] Access control implemented and tested from an unauthenticated client
-- [ ] Drafts + version history on `pages`
-- [ ] `pnpm generate:types` run, `payload-types.ts` committed
-- [ ] Migration created, applied, committed
-- [ ] `docs/architecture/content-model.md` and `blocks.md` updated to match shipped schema
-- [ ] `pnpm verify` green
+- [ ] Access control implemented; **not yet tested from an unauthenticated client** — that's a manual `/admin` + REST check, owner's to run
+- [x] Drafts + version history on `pages`
+- [x] `pnpm generate:types` run, `payload-types.ts` committed
+- [x] Migration created, applied, committed
+- [x] `docs/architecture/content-model.md` and `blocks.md` updated to match shipped schema
+- [x] `pnpm verify` green
 
 ## Verify
 
@@ -78,6 +78,6 @@ Front end renders nothing yet. That is correct.
 - **Migration import is patched automatically** by `pnpm migrate:create`. If you call the Payload CLI directly, run `scripts/fix-migration-imports.mjs` yourself.
 - **Test migrations against a Neon branch with data**, not an empty database. Empty databases migrate cleanly no matter how wrong the migration is.
 - **Renames drop and re-add.** Read generated SQL before committing. To rename a field with content: add new, backfill, deploy, migrate data, drop old — two deploys, no loss.
-- **Don't over-block.** Twelve blocks is already near the limit an editor will read. Two blocks differing only by alignment are one block with an alignment field.
+- **Don't over-block.** Eleven blocks is already near the limit an editor will read. Two blocks differing only by alignment are one block with an alignment field.
 - **Schema is not layout.** A block's fields describe content; how it looks is Phase 4's problem.
 - **`req.file` shape varies by upload path.** Multipart form upload (admin UI) and Local API `create` with base64/buffer `file` option both populate `req.file`, but seed script calling `payload.create` with file path needs read+pass buffer itself — checksum hook must not assume one shape without testing both paths.

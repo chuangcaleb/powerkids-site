@@ -1,0 +1,46 @@
+.frame {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: var(--border-width) solid var(--border-strong);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-hard);
+  overflow: hidden;
+}
+
+.iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.poster {
+  background-color: var(--text-muted);
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  padding: 0;
+}
+
+.playIcon {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: var(--space-2xl);
+  height: var(--space-2xl);
+  background-color: var(--accent-red);
+  border: var(--border-width) solid var(--border-strong);
+  border-radius: 50%;
+}
+
+.playIcon::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  border-style: solid;
+  border-width: var(--space-3xs) 0 var(--space-3xs) var(--space-2xs);
+  border-color: transparent transparent transparent var(--text-on-accent);
+}

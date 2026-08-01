@@ -3,6 +3,14 @@
 # Deliberately fast: the pre-commit hook formats and lints only what you
 # staged. The full verify loop (docs/workflows/verify-loop.md) runs before
 # push and in CI — a hook slow enough to be worth skipping gets skipped.
+#
+# output: drops lefthook's decorative meta banner (logo/version box) from
+# every hook run — pure noise in tool output, no info lost.
+output:
+  - execution
+  - execution_out
+  - failure
+  - summary
 
 pre-commit:
   parallel: true
@@ -15,6 +23,11 @@ pre-commit:
     - name: lint
       glob: '*.{ts,tsx,mjs}'
       run: pnpm eslint --fix {staged_files}
+      stage_fixed: true
+
+    - name: lint-css
+      glob: '*.css'
+      run: pnpm stylelint --fix {staged_files}
       stage_fixed: true
 
 pre-push:

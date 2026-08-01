@@ -2,14 +2,36 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import { postgresAdapter } from '@payloadcms/db-postgres'
+import { seoPlugin } from '@payloadcms/plugin-seo'
+import type { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { s3Storage } from '@payloadcms/storage-s3'
 import { buildConfig } from 'payload'
 import sharp from 'sharp'
 
-import { Media } from '@/collections/media'
-import { Users } from '@/collections/users'
+import { Events } from '@/payload/collections/events'
+import { Media } from '@/payload/collections/media'
+import { Pages } from '@/payload/collections/pages'
+import { People } from '@/payload/collections/people'
+import { Programs } from '@/payload/collections/programs'
+import { Schools } from '@/payload/collections/schools'
+import { Users } from '@/payload/collections/users'
+import { Navigation } from '@/payload/globals/navigation'
+import { SeoDefaults } from '@/payload/globals/seo-defaults'
+import { SiteSettings } from '@/payload/globals/site-settings'
 import { S3_REGION, isProduction, requireEnv } from '@/lib/env'
+import { getServerUrl } from '@/lib/get-server-url'
+import type { Page } from '@/payload-types'
+
+const TITLE_SUFFIX = 'PowerKids Kindergarten: The Centre With A Heart'
+
+const generateTitle: GenerateTitle<Page> = ({ doc }) =>
+  doc?.title ? `${doc.title} | ${TITLE_SUFFIX}` : TITLE_SUFFIX
+
+const generateURL: GenerateURL<Page> = ({ doc }) => {
+  const base = getServerUrl()
+  return doc?.slug && doc.slug !== 'home' ? `${base}/${doc.slug}` : base
+}
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -21,7 +43,11 @@ export default buildConfig({
     },
   },
 
-  collections: [Users, Media],
+  collections: [Users, Media, Pages, Schools, Programs, Events, People],
+
+  globals: [SiteSettings, Navigation, SeoDefaults],
+
+  folders: {},
 
   editor: lexicalEditor(),
 
@@ -31,6 +57,9 @@ export default buildConfig({
     // automatically so iterating on fields does not need a migration each
     // time — see docs/ops/migrations.md.
     push: !isProduction,
+    // Defaults to `<config dir>/migrations`; migrations live under
+    // src/payload/ with the rest of the Payload-only code.
+    migrationDir: path.resolve(dirname, 'payload/migrations'),
   }),
 
   plugins: [
@@ -55,6 +84,8 @@ export default buildConfig({
         },
       },
     }),
+
+    seoPlugin({ generateTitle, generateURL }),
   ],
 
   // Localisation is configured now with English as the only active locale, so

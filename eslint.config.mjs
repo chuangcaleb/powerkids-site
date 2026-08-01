@@ -39,13 +39,14 @@ const NO_PROCESS_ENV = {
 export default tseslint.config(
   {
     ignores: [
+      '.claude/**',
       '.next/**',
       'node_modules/**',
       '_reference/**',
       'next-env.d.ts',
       'src/app/(payload)/admin/importMap.js',
       'src/payload-types.ts',
-      'src/migrations/**',
+      'src/payload/migrations/**',
     ],
   },
 
@@ -91,7 +92,11 @@ export default tseslint.config(
   // logic — they legitimately hold long literal strings. The environment rule
   // still applies: config files have no business reading env vars directly.
   {
-    files: ['src/collections/**', 'src/globals/**', 'src/blocks/**/config.ts'],
+    files: [
+      'src/payload/collections/**',
+      'src/payload/globals/**',
+      'src/payload/blocks/**/config.ts',
+    ],
     rules: {
       'no-restricted-syntax': ['error', NO_PROCESS_ENV],
     },

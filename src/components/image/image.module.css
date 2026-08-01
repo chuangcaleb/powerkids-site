@@ -1,0 +1,14 @@
+.image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.frame {
+  display: inline-block;
+  border: var(--border-width) solid var(--border-strong);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-hard);
+  overflow: hidden;
+  line-height: 0;
+}

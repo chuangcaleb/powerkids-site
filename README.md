@@ -92,12 +92,10 @@ Docs use progressive disclosure: start narrow, follow links only as far as your 
 
 ## History
 
-| Ref                           | What                                                |
-| ----------------------------- | --------------------------------------------------- |
-| `main`                        | Currently live v3 site                              |
-| `v3-final` (tag)              | Exact state of live site at start of rebuild        |
-| `v3` (branch)                 | Astro implementation — reference only, never copied |
-| `archive/v4-payload-template` | Abandoned 2025 attempt on stock Payload starter     |
+| Ref              | What                                         |
+| ---------------- | -------------------------------------------- |
+| `main`           | Currently live v3 site                       |
+| `v3-final` (tag) | Exact state of live site at start of rebuild |
 
 ## Licence
 

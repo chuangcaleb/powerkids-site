@@ -1,0 +1,32 @@
+.swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3xs);
+}
+
+.swatchFill {
+  width: var(--space-3xl);
+  height: var(--space-3xl);
+  border: var(--border-width) solid var(--border-strong);
+  border-radius: var(--radius-s);
+}
+
+.spaceRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-s);
+}
+
+.spaceBar {
+  height: var(--space-s);
+  background-color: var(--accent-red);
+  border-radius: var(--radius-s);
+}
+
+.box {
+  border: var(--border-width) solid var(--border-strong);
+  border-radius: var(--radius-s);
+  padding: var(--space-s);
+  background-color: var(--accent-blue-fill);
+}

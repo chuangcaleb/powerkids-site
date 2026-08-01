@@ -1,0 +1,32 @@
+/*
+ * Values and invariants: DESIGN.md. This file is the CSS implementation of
+ * those decisions — do not add a colour here that DESIGN.md doesn't already
+ * name.
+ */
+:root {
+  /* Base palette. Components reach for the semantic aliases below, not these. */
+  --colour-cream: #fffcf5;
+  --colour-ink: #1a1a1a;
+  --colour-charcoal: #44403c;
+  --colour-muted: #8a8681;
+  --colour-black: #000000;
+  --colour-white: #ffffff;
+  --colour-red: #cc0000;
+  --colour-blue: #0000eb;
+  --colour-red-tint: color-mix(in srgb, var(--colour-red) 12%, var(--colour-cream));
+  --colour-blue-tint: color-mix(in srgb, var(--colour-blue) 12%, var(--colour-cream));
+
+  /* Semantic aliases. Components use these. */
+  --bg-surface: var(--colour-cream);
+  --text-strong: var(--colour-ink);
+  --text-body: var(--colour-charcoal);
+  --text-muted: var(--colour-muted);
+  --text-on-accent: var(--colour-white);
+  --border-strong: var(--colour-black);
+  --shadow-colour: var(--colour-black);
+
+  --accent-red: var(--colour-red);
+  --accent-blue: var(--colour-blue);
+  --accent-red-fill: var(--colour-red-tint);
+  --accent-blue-fill: var(--colour-blue-tint);
+}

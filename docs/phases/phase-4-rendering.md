@@ -23,9 +23,9 @@ Fully agentic per block. One PR per 2–3 blocks — "phase 4" is not reviewable
 
 **Page query tuned, not default-depth.** Server components call Local API direct, runs as admin by default — never forward resolved slug into query without public `_status: 'published'` filter (draft preview route only exception, via Next.js draft mode). Pick `depth` deliberate: blocks referencing `media`/`programs`/`events` typically need `depth: 1` to populate one level; raise further and it fans out extra queries per relationship. Use `select` on list-style queries (schools, programs, events collection routes) to skip unneeded fields.
 
-**Revalidation.** `pages` (and any global feeding layout) needs `afterChange` hook calling `revalidatePath`, guarded by `context.disableRevalidate` for seed writes, diffing `doc._status` vs `previousDoc._status` so unpublish also revalidates. Skip this, publishing in `/admin` won't update live route till next deploy.
+**Revalidation.** `pages` (and any global feeding layout) needs `afterChange` hook calling `revalidatePath`, guarded by `context.disableRevalidate` for seed writes, diffing `doc._status` vs `previousDoc._status` so unpublish also revalidates. Skip this, publishing in `/admin` won't update live route till next deploy. `pages` already has this — see `src/payload/collections/pages/hooks/revalidate-page.ts`; globals feeding layout (`site-settings`, `navigation`) still need their own.
 
-**One renderer per block**, `src/blocks/<name>/Component.tsx`. Server components. Layout from primitives, styling from co-located CSS Module reading tokens.
+**One renderer per block**, `src/payload/blocks/<name>/Component.tsx`. Server components. Layout from primitives, styling from co-located CSS Module reading tokens.
 
 **Images** — `next/image`, R2 host already allow-listed in `next.config.ts` from `R2_PUBLIC_URL`. Correct `sizes` per context; the three generated variants are 400 / 800 / 1600 wide.
 

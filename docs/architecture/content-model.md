@@ -3,7 +3,7 @@
 **Purpose:** every collection and global, what it hold, how they relate.
 **Read when:** adding/changing field, writing query, seeding data.
 
-> **Status: draft.** Phase 3 finalise, update doc to match shipped schema. Field lists below intent, not yet implementation.
+> **Status: shipped** — collections, globals, and the block catalogue (schemas only) all match `src/payload/collections/`, `src/payload/globals/`, `src/payload/blocks/`. See [blocks.md](blocks.md) for the per-block field list.
 
 Source content for every entity: [../reference/content-inventory.md](../reference/content-inventory.md).
 
@@ -15,33 +15,43 @@ Nothing listed here hard-coded in component. Phone number, address, nav label, o
 
 ---
 
+## Conventions
+
+- **File structure:** `src/payload/collections/<slug>/index.ts`, with `hooks/` alongside for anything more than a one-line access check.
+- **Access:** shared utilities in `src/payload/access/` (`authenticated`, `authenticatedOrPublished`, `anyone`, `admin`/`adminFieldAccess`) — collections compose these rather than repeating inline role checks. `users`' `update` stays inline (self-or-admin) since that compound check doesn't fit any single utility.
+- **Row labels:** array-field rows use the shared `src/payload/admin/components/row-label.tsx` client component (`admin.components.RowLabel`) instead of one bespoke label component per field.
+
+---
+
 ## Collections
 
 ### `pages`
 
 Editor-composed routes. Only collection with block layout.
 
-`title`, `slug`, `layout` (blocks), `seo`, `publishedAt`, `_status`
+`title`, `hero` (group — always present, not a block, see [blocks.md](blocks.md)), `layout` (the 11-block set), `meta` (SEO tab, via `@payloadcms/plugin-seo`'s field set), `publishedAt`, `slug`.
 
-Drafts, version history enabled. Slug unique, indexed.
+Drafts, version history enabled (`maxPerDoc: 20`). Slug unique, indexed, via Payload's `slugField()`. `afterChange`/`afterDelete` hooks revalidate the page's Next.js path on publish/unpublish/delete.
 
 ### `media`
 
 Uploads, backed by R2. `alt` **required** — no exceptions, no empty strings.
 
-`alt`, `caption`, focal point, generated sizes
+`alt`, `caption`, focal point, generated sizes, folder-organised (Payload's built-in folders feature)
 
 ### `schools`
 
 Physical branches. Three active; see inventory for two inactive entries.
 
-`name`, `address` (multi-line), `phones` (array), `mapUrl`, `photo`, `principal` → `people`, `order`
+`name`, `slug`, `address` (multi-line), `phones` (array of `number`/`href`), `mapUrl`, `photo`, `principal` → `people`, `order`
 
 ### `programs`
 
 Daily offerings, fixed hours.
 
 `name`, `slug`, `hours`, `ageRange`, `strapline`, `summary`, `body`, `image`, `order`
+
+`ageRange` and `strapline` are optional.
 
 ### `events`
 
@@ -67,17 +77,19 @@ Admin auth. Roles: `admin` (full) and `editor` (content only, no user management
 
 ### `site-settings`
 
-Brand name, tagline, founding year, email, phones, opening hours/days, social links, default share image.
+`tagline`, `foundedYear`, `email`, `phones` (array), `openingHours`, `openingDays`, `socials` (array), `defaultShareImage`.
+
+Brand name (`PowerKids`, "Power" red + "Kids" blue) is a fixed display convention, not a CMS field — see `DESIGN.md`.
 
 Founding year stored so "{n} years & counting" stay computed, not hard-coded.
 
 ### `navigation`
 
-`header`, `footer` link trees. Footer column headings are fields, not markup.
+`header` (array of `label`/`url`), `footerColumns` (array of `heading` + `links` array). Column headings are fields, not markup.
 
 ### `seo-defaults`
 
-Title template, default description, default OG image.
+`titleTemplate` (`{title}` placeholder), `defaultDescription`, `defaultImage`.
 
 ---
 

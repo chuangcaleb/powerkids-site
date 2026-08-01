@@ -1,0 +1,19 @@
+/*
+ * Durations from DESIGN.md. Easings are this file's own addition (not yet in
+ * DESIGN.md) — --ease-playful gives buttons a slight springy overshoot for
+ * the hover-lift/press interaction; --ease-standard is a plain deceleration
+ * for the accordion and highlighter-band sweep, where overshoot would look
+ * like a glitch rather than a bounce. Flag on the kitchen sink if either
+ * reads wrong once you see it move — these are a first guess, not measured.
+ *
+ * Every consumer of these tokens must wrap the animation in
+ * `@media (prefers-reduced-motion: no-preference)` — see DESIGN.md invariant 7.
+ */
+:root {
+  --duration-fast: 150ms;
+  --duration-base: 300ms;
+  --duration-sweep: 600ms;
+
+  --ease-playful: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+}

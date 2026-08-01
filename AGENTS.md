@@ -4,17 +4,17 @@ Router for automated contributors. Read fully; read linked docs only when task t
 
 **Project:** `powerkids.edu.my` — website for PowerKids Kindergarten, Klang Valley, Malaysia. Branch (`v4`) from-scratch rebuild on Next.js + Payload CMS, replace v3 Astro site.
 
-**Current phase:** 1 done, moving to 2 — design system. App shell, admin panel, database, media storage exist and merged to `v4`. Content model, blocks, rendering not yet built. Sections marked _(Phase N)_ describe target state, not yet true.
+**Current phase:** 1 done, moving to 2 — design system. App shell, admin panel, database, media storage exist, merged to `v4`. Content model, blocks, rendering not built yet. Sections marked _(Phase N)_ describe target state, not yet true.
 
-**Starting a phase?** Read `docs/phases/README.md` for status, then **only your own phase file**. They are self-contained; reading all of them wastes context.
+**Starting a phase?** Read `docs/phases/README.md` for status, then **only your own phase file**. Self-contained; reading all wastes context.
 
 ---
 
 ## Non-negotiables
 
-1. **Never copy v3 code.** Old implementation lives on `v3` branch and `v3-final` tag. Read for content/design intent (`git show v3-final:<path>`); reimplement from scratch. Same applies to `archive/v4-payload-template`, abandoned starter-template attempt.
+1. **Never copy v3 code.** Old implementation lives on `v3` branch and `v3-final` tag. Read for content/design intent (`git show v3-final:<path>`); reimplement from scratch. Same for `archive/v4-payload-template`, abandoned starter-template attempt.
 2. **Content is data, never markup.** Navigation, social links, contact details, opening hours, school addresses, programs, events — CMS records. Typing phone number into component: stop.
-3. **Docs ship with code that changes them.** Change adding block without updating `docs/architecture/blocks.md` incomplete, rejected in review.
+3. **Docs ship with code that changes them.** Block change without `docs/architecture/blocks.md` update: incomplete, rejected in review.
 4. **Repo tool-neutral.** Write for any coding agent. Never name AI vendors, products, models in tracked files, commit messages, PR titles/bodies. No co-author or "generated with" trailers. Per-tool config files gitignored — keep that way.
 5. **Never read `.env`.** Secrets owner's responsibility. Write/update `.env.example` with key names + comments only.
 6. **Never push to `main`.** Work feature branch off `v4`, open PR, owner merges.
@@ -23,10 +23,14 @@ Router for automated contributors. Read fully; read linked docs only when task t
 
 ## Working agreement
 
-- **Plan gate per phase, PR per feature.** Propose plan, get approval before starting phase. Within phase, one PR per coherent unit — "add hero + prose blocks", not "phase 4".
+- **Plan gate per phase, PR per feature — "feature" sized by judgment, not fixed unit count.** Propose plan, get approval before starting phase. State branch/PR split and review checkpoint locations in plan. Default: one branch per large coherent unit; group small units together (especially frontend work you're confident in) rather than branching per sub-step (tokens, then primitives, then styles, ...). Some phases need several branches, some just one — per-phase call, not fixed rule. Cut branches at stated granularity, else git ceremony (ancestor-check, fast-forward, push) repeats with no review benefit.
 - **Conventional commits**: `feat:`, `fix:`, `chore:`, `docs:`, `refactor:`, `test:`. Branch names descriptive: `feat/hero-block`, `fix/footer-nav-order`.
-- **Verify before every commit** — see `docs/workflows/verify-loop.md`. _(Phase 1)_
+- **Verify before every commit** — see `docs/workflows/verify-loop.md`. _(Phase 1)_ Mid-edit, run targeted lint/typecheck on touched files, not full `pnpm verify` — save that for pre-push checkpoints.
 - **Small, obvious changes**: execute directly. Architectural: propose first.
+- **Review checkpoint = natural checkpoint, not every commit.** Stop, ask review at end of logical work chunk, or wherever you'd otherwise pause to ask "continue?" — not after each commit.
+- **Library claims feature central to plan → prove empirically first.** One cheap test (curl API, inspect built output, read served file) beats full implementation cycle discovered wrong after fact.
+- **Unusual git op (refspec push, force flag, history rewrite) → flag to user before attempting**, not after permission denial.
+- **Shared branch, concurrent worktrees possible → `git worktree list` once before op**, not re-discovered per retry.
 
 ---
 
@@ -55,39 +59,21 @@ Router for automated contributors. Read fully; read linked docs only when task t
 
 ---
 
-## Stack
-
-| Layer            | Choice                                                    |
-| ---------------- | --------------------------------------------------------- |
-| Framework        | Next.js (App Router), `>=16.2.2`                          |
-| CMS              | Payload `>=3.73`, mounted same app                        |
-| Database         | Neon Postgres via `@payloadcms/db-postgres`               |
-| Media            | Cloudflare R2 via `@payloadcms/storage-s3`                |
-| Image processing | `sharp`, Node runtime                                     |
-| Hosting          | Vercel                                                    |
-| Styling          | Vanilla CSS — tokens, composition primitives, CSS Modules |
-| Language         | TypeScript, `strict`                                      |
-| Packages         | pnpm                                                      |
-
-Next.js floor hard requirement, not preference: Payload doesn't support Next `15.5`–`16.1.x`.
-
----
-
 ## Implementation conventions
 
-- **Server components default.** Add `"use client"` only when component genuinely need interactivity, say why in comment.
-- **No CSS framework.** Compose layout from primitives in `src/styles/compositions/`; scope component styles with CSS Modules. Layout need media query — check primitive first.
+- **Server components default.** Add `"use client"` only when component genuinely needs interactivity, say why in comment.
+- **No CSS framework.** Compose layout from primitives in `src/styles/compositions/`; scope component styles with CSS Modules. Layout needs media query — check primitive first.
 - **No magic values.** Colours, spacing, type sizes, radii come from tokens. Raw hex/px value in component = review finding.
-- **Prefer framework's own primitive over hand-written one.** Before writing helper, check whether Payload or Next already provides it — Payload especially ships things easy to miss (`slugField()`, `imageSizes`, `formatOptions`, access-control helpers). Built-in handled edge cases you haven't thought of yet, one less thing to maintain. If you do write own, say in comment what you checked and why it didn't fit, so next person can re-evaluate on upgrade instead of assuming oversight.
+- **Prefer framework's own primitive over hand-written one.** Before writing helper, check whether Payload or Next already provides it — Payload especially ships things easy to miss (`slugField()`, `imageSizes`, `formatOptions`, access-control helpers). Built-in handles edge cases you haven't thought of yet, one less thing to maintain. If you do write own, say in comment what you checked and why it didn't fit, so next person can re-evaluate on upgrade instead of assuming oversight.
 - **kebab-case filenames.** Named exports preferred.
 - **Every uploaded image needs `alt`.** Enforced at schema level; don't work around it.
-- **Blocks closed set.** Editors choose from catalogue in `docs/architecture/blocks.md`. Adding one deliberate change with documented workflow, not convenience.
+- **Blocks closed set.** Editors choose from catalogue in `docs/architecture/blocks.md`. Adding one: deliberate change with documented workflow, not convenience.
 
 ---
 
 ## Domain vocabulary
 
-Use these words precisely; they CMS's terms too.
+Use these words precisely; they're CMS's terms too.
 
 - **School** — one of physical branches (Sri Petaling, Puchong Utama, Parklane OUG). Not "location", not "centre", not "branch".
 - **Program** — daily offering with fixed hours (Morning School, After School Program, Evening Daycare). Not "class", not "course".

@@ -1,0 +1,40 @@
+.mark {
+  background-color: transparent;
+  background-image: linear-gradient(to right, var(--fill-colour) 50%, transparent 50%);
+  background-size: 200% 100%;
+  background-position: 0% 0;
+  color: var(--text-on-accent);
+  padding-inline: 0.15em;
+  border-radius: var(--radius-s);
+}
+
+.red {
+  --fill-colour: var(--accent-red);
+}
+
+.blue {
+  --fill-colour: var(--accent-blue);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .mark {
+    background-position: 100% 0;
+    color: var(--text-strong);
+    animation:
+      sweep-bg var(--duration-sweep) var(--ease-standard) forwards,
+      sweep-text var(--duration-sweep) var(--ease-standard) forwards;
+  }
+
+  @keyframes sweep-bg {
+    to {
+      background-position: 0% 0;
+    }
+  }
+
+  @keyframes sweep-text {
+    50%,
+    100% {
+      color: var(--text-on-accent);
+    }
+  }
+}
