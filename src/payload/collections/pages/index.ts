@@ -14,6 +14,7 @@ import { requireEnv } from '@/lib/env'
 import { getServerUrl } from '@/lib/get-server-url'
 import { CardGrid } from '@/payload/blocks/card-grid/config'
 import { Contact } from '@/payload/blocks/contact/config'
+import { Content } from '@/payload/blocks/content/config'
 import { CtaBanner } from '@/payload/blocks/cta-banner/config'
 import { Faq } from '@/payload/blocks/faq/config'
 import { Gallery } from '@/payload/blocks/gallery/config'
@@ -28,7 +29,7 @@ import { hero } from './hero'
 import { populatePublishedAt } from './hooks/populate-published-at'
 import { revalidateDelete, revalidatePage } from './hooks/revalidate-page'
 
-/** Editor-composed routes. `layout` is the closed 11-block set — hero is not one of them, see ./hero.ts. */
+/** Editor-composed routes. `layout` is the closed 12-block set — hero is not one of them, see ./hero.ts. */
 export const Pages: CollectionConfig = {
   slug: 'pages',
   access: {
@@ -71,6 +72,7 @@ export const Pages: CollectionConfig = {
               admin: { initCollapsed: true },
               blocks: [
                 Prose,
+                Content,
                 MediaText,
                 CardGrid,
                 Steps,

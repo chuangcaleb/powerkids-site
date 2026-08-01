@@ -2,6 +2,7 @@ import type { Page } from '@/payload-types'
 
 import { CardGrid } from './card-grid/component'
 import { Contact } from './contact/component'
+import { Content } from './content/component'
 import { CtaBanner } from './cta-banner/component'
 import { Faq } from './faq/component'
 import { Gallery } from './gallery/component'
@@ -19,6 +20,8 @@ function renderBlock(block: LayoutBlock) {
   switch (block.blockType) {
     case 'prose':
       return <Prose {...block} />
+    case 'content':
+      return <Content {...block} />
     case 'media-text':
       return <MediaText {...block} />
     case 'card-grid':

@@ -279,6 +279,7 @@ export interface Page {
   };
   layout: (
     | ProseBlock
+    | ContentBlock
     | MediaTextBlock
     | CardGridBlock
     | StepsBlock
@@ -331,6 +332,50 @@ export interface ProseBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'prose';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentBlock".
+ */
+export interface ContentBlock {
+  columns?:
+    | {
+        size?: ('full' | 'oneHalfWide' | 'oneThird' | 'twoThirds' | 'oneHalfNarrow') | null;
+        variant?: ('align-start' | 'align-center' | 'card') | null;
+        richText?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        media?: (number | null) | Media;
+        enableLink?: boolean | null;
+        link?: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?: (number | null) | Page;
+          url?: string | null;
+          label: string;
+          /**
+           * Choose how the link should be rendered.
+           */
+          appearance?: ('default' | 'outline') | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'content';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -926,6 +971,7 @@ export interface PagesSelect<T extends boolean = true> {
     | T
     | {
         prose?: T | ProseBlockSelect<T>;
+        content?: T | ContentBlockSelect<T>;
         'media-text'?: T | MediaTextBlockSelect<T>;
         'card-grid'?: T | CardGridBlockSelect<T>;
         steps?: T | StepsBlockSelect<T>;
@@ -957,6 +1003,34 @@ export interface PagesSelect<T extends boolean = true> {
  */
 export interface ProseBlockSelect<T extends boolean = true> {
   content?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContentBlock_select".
+ */
+export interface ContentBlockSelect<T extends boolean = true> {
+  columns?:
+    | T
+    | {
+        size?: T;
+        variant?: T;
+        richText?: T;
+        media?: T;
+        enableLink?: T;
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+              appearance?: T;
+            };
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }

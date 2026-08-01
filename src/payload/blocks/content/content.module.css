@@ -1,0 +1,55 @@
+/*
+ * CONTENT — fixed 12-column responsive spans. No existing primitive covers
+ * this arrangement (grid-auto is auto-fill/equal-width only, switcher caps at
+ * two items) — see docs/design/layout-primitives.md. Kept local to this block.
+ */
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-l);
+}
+
+@media (width >= 48rem) {
+  .grid {
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+  /* Full width until `lg`, except `oneHalfWide` which pairs up from `md`. */
+  .col {
+    grid-column: span 12;
+  }
+
+  .oneHalfWide {
+    grid-column: span 6;
+  }
+}
+
+@media (width >= 64rem) {
+  .oneThird {
+    grid-column: span 4;
+  }
+
+  .twoThirds {
+    grid-column: span 8;
+  }
+
+  .oneHalfNarrow {
+    grid-column: span 6;
+  }
+}
+
+.alignCenter {
+  text-align: center;
+}
+
+.cardText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+}
+
+.cardMedia {
+  border-bottom-left-radius: var(--radius-m);
+  border-bottom-right-radius: var(--radius-m);
+}
