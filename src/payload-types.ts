@@ -1283,13 +1283,6 @@ export interface SiteSetting {
  */
 export interface Navigation {
   id: number;
-  header?:
-    | {
-        label: string;
-        url: string;
-        id?: string | null;
-      }[]
-    | null;
   /**
    * Each column has a heading and its own list of links.
    */
@@ -1358,13 +1351,6 @@ export interface SiteSettingsSelect<T extends boolean = true> {
  * via the `definition` "navigation_select".
  */
 export interface NavigationSelect<T extends boolean = true> {
-  header?:
-    | T
-    | {
-        label?: T;
-        url?: T;
-        id?: T;
-      };
   footerColumns?:
     | T
     | {

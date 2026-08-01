@@ -11,7 +11,10 @@ const linkFields = [
 
 const rowLabel = { RowLabel: '@/payload/admin/components/row-label#RowLabel' } as const
 
-/** Header and footer link trees. Footer column headings are fields, not markup. */
+/**
+ * Footer link tree. Footer column headings are fields, not markup. Header
+ * nav will be reintroduced later with a standard nested nav structure.
+ */
 export const Navigation: GlobalConfig = {
   slug: 'navigation',
   admin: {
@@ -25,12 +28,6 @@ export const Navigation: GlobalConfig = {
     afterChange: [revalidateLayout],
   },
   fields: [
-    {
-      name: 'header',
-      type: 'array',
-      admin: { components: rowLabel },
-      fields: [...linkFields],
-    },
     {
       name: 'footerColumns',
       type: 'array',

@@ -155,15 +155,7 @@ export default function KitchenSinkPage() {
 
       <section className="flow">
         <Heading level={2}>NavBar</Heading>
-        <NavBar
-          logo={<span>PowerKids</span>}
-          links={[
-            { href: '#schools', label: 'Schools' },
-            { href: '#programs', label: 'Programs' },
-            { href: '#events', label: 'Events' },
-            { href: '#register', label: 'Register' },
-          ]}
-        />
+        <NavBar logo={<span>PowerKids</span>} />
       </section>
 
       <section className="flow">

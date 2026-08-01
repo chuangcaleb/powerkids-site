@@ -81,18 +81,6 @@ await payload.updateGlobal({
   slug: 'navigation',
   context: { disableRevalidate: true },
   data: {
-    header: [
-      { label: 'Who We Are', url: '/about' },
-      { label: 'Our Schools', url: '/about#our-schools' },
-      { label: "We're Hiring!", url: '/careers' },
-      { label: 'Morning School', url: '/programs/morning-school' },
-      { label: 'After School Program', url: '/programs/after-school-program' },
-      { label: 'Evening Daycare', url: '/programs/evening-daycare' },
-      { label: 'Graduation', url: '/events/graduation' },
-      { label: 'Sports Day', url: '/events/sports-day' },
-      { label: 'Field Trips', url: '/events/field-trips' },
-      { label: 'Community Service', url: '/events/community-service' },
-    ],
     footerColumns: [
       {
         heading: 'About',

@@ -55,7 +55,6 @@ await payload.updateGlobal({
   slug: 'navigation',
   context: { disableRevalidate: true },
   data: {
-    header: [{ label: 'Kitchen Sink', url: '/kitchen-sink' }],
     footerColumns: [
       {
         heading: 'Explore',
