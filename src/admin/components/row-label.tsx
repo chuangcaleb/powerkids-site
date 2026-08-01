@@ -8,21 +8,27 @@ type RowData = {
   name?: string
   number?: string
   heading?: string
+  question?: string
   link?: { label?: string }
 }
 
 /**
  * Generic row label for admin array fields. Tries the field names that
- * actually occur in this schema (label, name, number, heading, link.label)
- * rather than being written per-field like the reference implementation —
- * one component covers schools.phones, site-settings.phones,
- * navigation.header/footerColumns, and events.videos.
+ * actually occur in this schema (label, name, number, heading, question,
+ * link.label) rather than being written per-field like the reference
+ * implementation — one component covers every row-array field in the
+ * collections and blocks.
  */
 export const RowLabel: React.FC<RowLabelProps> = () => {
   const { data, rowNumber } = useRowLabel<RowData>()
 
   const label =
-    data?.label ?? data?.name ?? data?.number ?? data?.heading ?? data?.link?.label
+    data?.label ??
+    data?.name ??
+    data?.number ??
+    data?.heading ??
+    data?.question ??
+    data?.link?.label
   const index = rowNumber !== undefined ? rowNumber + 1 : ''
 
   return <div>{label ? `${index}: ${label}` : 'Row'}</div>

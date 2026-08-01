@@ -35,13 +35,13 @@ Founding year stored, not hard-coded — "{n} years & counting" stays computed.
 
 ## Post
 
-- [ ] All collections, globals, blocks defined — schema only, no components
-- [ ] Access control implemented and tested from an unauthenticated client
-- [ ] Drafts + version history on `pages`
-- [ ] `pnpm generate:types` run, `payload-types.ts` committed
-- [ ] Migration created, applied, committed
-- [ ] `docs/architecture/content-model.md` and `blocks.md` updated to match shipped schema
-- [ ] `pnpm verify` green
+- [x] All collections, globals, blocks defined — schema only, no components
+- [ ] Access control implemented; **not yet tested from an unauthenticated client** — that's a manual `/admin` + REST check, owner's to run
+- [x] Drafts + version history on `pages`
+- [x] `pnpm generate:types` run, `payload-types.ts` committed
+- [x] Migration created, applied, committed
+- [x] `docs/architecture/content-model.md` and `blocks.md` updated to match shipped schema
+- [x] `pnpm verify` green
 
 ## Verify
 
@@ -63,5 +63,5 @@ Front end renders nothing yet. That is correct.
 - **Migration import is patched automatically** by `pnpm migrate:create`. If you call the Payload CLI directly, run `scripts/fix-migration-imports.mjs` yourself.
 - **Test migrations against a Neon branch with data**, not an empty database. Empty databases migrate cleanly no matter how wrong the migration is.
 - **Renames drop and re-add.** Read generated SQL before committing. To rename a field with content: add new, backfill, deploy, migrate data, drop old — two deploys, no loss.
-- **Don't over-block.** Twelve blocks is already near the limit an editor will read. Two blocks differing only by alignment are one block with an alignment field.
+- **Don't over-block.** Eleven blocks is already near the limit an editor will read. Two blocks differing only by alignment are one block with an alignment field.
 - **Schema is not layout.** A block's fields describe content; how it looks is Phase 4's problem.

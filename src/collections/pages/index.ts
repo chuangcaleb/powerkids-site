@@ -10,17 +10,23 @@ import {
 
 import { authenticated } from '@/access/authenticated'
 import { authenticatedOrPublished } from '@/access/authenticated-or-published'
+import { CardGrid } from '@/blocks/card-grid/config'
+import { Contact } from '@/blocks/contact/config'
+import { CtaBanner } from '@/blocks/cta-banner/config'
+import { Faq } from '@/blocks/faq/config'
+import { Gallery } from '@/blocks/gallery/config'
+import { MediaText } from '@/blocks/media-text/config'
+import { Prose } from '@/blocks/prose/config'
+import { SchoolsBlock } from '@/blocks/schools/config'
+import { Stats } from '@/blocks/stats/config'
+import { Steps } from '@/blocks/steps/config'
+import { VideoBlock } from '@/blocks/video/config'
 
 import { hero } from './hero'
 import { populatePublishedAt } from './hooks/populate-published-at'
 import { revalidateDelete, revalidatePage } from './hooks/revalidate-page'
 
-/**
- * Editor-composed routes. `layout` (the closed 11-block set — hero is not
- * one of them, see ./hero.ts) lands in a follow-up branch alongside the
- * block catalogue itself; this collection ships with Hero + SEO tabs only
- * until then.
- */
+/** Editor-composed routes. `layout` is the closed 11-block set — hero is not one of them, see ./hero.ts. */
 export const Pages: CollectionConfig = {
   slug: 'pages',
   access: {
@@ -48,6 +54,30 @@ export const Pages: CollectionConfig = {
       type: 'tabs',
       tabs: [
         { fields: [hero], label: 'Hero' },
+        {
+          fields: [
+            {
+              name: 'layout',
+              type: 'blocks',
+              required: true,
+              admin: { initCollapsed: true },
+              blocks: [
+                Prose,
+                MediaText,
+                CardGrid,
+                Steps,
+                Stats,
+                Gallery,
+                CtaBanner,
+                SchoolsBlock,
+                Faq,
+                Contact,
+                VideoBlock,
+              ],
+            },
+          ],
+          label: 'Content',
+        },
         {
           name: 'meta',
           label: 'SEO',

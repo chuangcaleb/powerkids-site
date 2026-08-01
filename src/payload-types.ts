@@ -272,6 +272,195 @@ export interface Page {
       | null;
     media?: (number | null) | Media;
   };
+  layout: (
+    | {
+        content: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'prose';
+      }
+    | {
+        media: number | Media;
+        content: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        /**
+         * Which side the image sits on at wide viewports. Stacks on narrow ones.
+         */
+        mediaSide?: ('left' | 'right') | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'media-text';
+      }
+    | {
+        heading?: string | null;
+        /**
+         * Auto-populated cards stay in sync as programs/events are added or removed. Manual cards give full control over copy per card.
+         */
+        source: 'manual' | 'programs' | 'events';
+        cards?:
+          | {
+              heading: string;
+              body?: string | null;
+              image?: (number | null) | Media;
+              /**
+               * Optional — makes the card a link.
+               */
+              url?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'card-grid';
+      }
+    | {
+        heading: string;
+        steps?:
+          | {
+              label: string;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Optional call-to-action link shown after the steps.
+         */
+        cta?: {
+          label?: string | null;
+          url?: string | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'steps';
+      }
+    | {
+        heading?: string | null;
+        stats?:
+          | {
+              /**
+               * Compute this stat as "{n} years & counting" from site-settings.foundedYear instead of a fixed value.
+               */
+              useFoundedYear?: boolean | null;
+              /**
+               * e.g. "500+".
+               */
+              value?: string | null;
+              label: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'stats';
+      }
+    | {
+        heading?: string | null;
+        source: 'manual' | 'event';
+        images?: (number | Media)[] | null;
+        /**
+         * Renders that event's own gallery field.
+         */
+        event?: (number | null) | Event;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'gallery';
+      }
+    | {
+        heading: string;
+        body?: string | null;
+        cta: {
+          label: string;
+          url: string;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'cta-banner';
+      }
+    | {
+        heading?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'schools';
+      }
+    | {
+        heading?: string | null;
+        items?:
+          | {
+              question: string;
+              answer: {
+                root: {
+                  type: string;
+                  children: {
+                    type: any;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              };
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'faq';
+      }
+    | {
+        heading?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'contact';
+      }
+    | {
+        heading?: string | null;
+        source: 'manual' | 'event';
+        /**
+         * Video platform embed/video ID.
+         */
+        embedId?: string | null;
+        /**
+         * Shown before the editor presses play.
+         */
+        poster?: (number | null) | Media;
+        /**
+         * Each entry in that event's `videos` array becomes one tab.
+         */
+        event?: (number | null) | Event;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'video';
+      }
+  )[];
   meta?: {
     title?: string | null;
     /**
@@ -286,6 +475,59 @@ export interface Page {
    */
   generateSlug?: boolean | null;
   slug: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events".
+ */
+export interface Event {
+  id: number;
+  name: string;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  summary?: string | null;
+  body?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  gallery?: (number | Media)[] | null;
+  /**
+   * One entry per year. Add a new one each occurrence — this replaced a hard-coded, developer-maintained list.
+   */
+  videos?:
+    | {
+        /**
+         * e.g. "Graduation 2026".
+         */
+        label: string;
+        /**
+         * Video platform embed/video ID.
+         */
+        embedId: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Controls listing order. Lower shows first.
+   */
+  order?: number | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -413,59 +655,6 @@ export interface Program {
     [k: string]: unknown;
   } | null;
   image?: (number | null) | Media;
-  /**
-   * Controls listing order. Lower shows first.
-   */
-  order?: number | null;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "events".
- */
-export interface Event {
-  id: number;
-  name: string;
-  /**
-   * When enabled, the slug will auto-generate from the title field on save and autosave.
-   */
-  generateSlug?: boolean | null;
-  slug: string;
-  summary?: string | null;
-  body?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  gallery?: (number | Media)[] | null;
-  /**
-   * One entry per year. Add a new one each occurrence — this replaced a hard-coded, developer-maintained list.
-   */
-  videos?:
-    | {
-        /**
-         * e.g. "Graduation 2026".
-         */
-        label: string;
-        /**
-         * Video platform embed/video ID.
-         */
-        embedId: string;
-        id?: string | null;
-      }[]
-    | null;
   /**
    * Controls listing order. Lower shows first.
    */
@@ -670,6 +859,140 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
             };
         media?: T;
+      };
+  layout?:
+    | T
+    | {
+        prose?:
+          | T
+          | {
+              content?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'media-text'?:
+          | T
+          | {
+              media?: T;
+              content?: T;
+              mediaSide?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'card-grid'?:
+          | T
+          | {
+              heading?: T;
+              source?: T;
+              cards?:
+                | T
+                | {
+                    heading?: T;
+                    body?: T;
+                    image?: T;
+                    url?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        steps?:
+          | T
+          | {
+              heading?: T;
+              steps?:
+                | T
+                | {
+                    label?: T;
+                    id?: T;
+                  };
+              cta?:
+                | T
+                | {
+                    label?: T;
+                    url?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        stats?:
+          | T
+          | {
+              heading?: T;
+              stats?:
+                | T
+                | {
+                    useFoundedYear?: T;
+                    value?: T;
+                    label?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        gallery?:
+          | T
+          | {
+              heading?: T;
+              source?: T;
+              images?: T;
+              event?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'cta-banner'?:
+          | T
+          | {
+              heading?: T;
+              body?: T;
+              cta?:
+                | T
+                | {
+                    label?: T;
+                    url?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        schools?:
+          | T
+          | {
+              heading?: T;
+              id?: T;
+              blockName?: T;
+            };
+        faq?:
+          | T
+          | {
+              heading?: T;
+              items?:
+                | T
+                | {
+                    question?: T;
+                    answer?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        contact?:
+          | T
+          | {
+              heading?: T;
+              id?: T;
+              blockName?: T;
+            };
+        video?:
+          | T
+          | {
+              heading?: T;
+              source?: T;
+              embedId?: T;
+              poster?: T;
+              event?: T;
+              id?: T;
+              blockName?: T;
+            };
       };
   meta?:
     | T

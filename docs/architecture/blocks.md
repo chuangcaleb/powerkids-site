@@ -3,7 +3,7 @@
 **Purpose:** closed set of layout blocks editor can place on page, plus rules each follow.
 **Read this when:** building block renderer, changing block's fields, or deciding new content need new block.
 
-> **Status: draft.** Phase 3 implement schemas, Phase 4 renderers. Doc update same change as either.
+> **Status: schemas shipped** (`src/blocks/<name>/config.ts`), wired into `pages.layout`. Renderers are Phase 4 — doc updates same change as those land.
 
 ---
 
@@ -49,4 +49,46 @@ Before adding one, check existing block with new variant wouldn't do. Two blocks
 
 ## Per-block notes
 
-Filled in as each block lands. Each entry get: fields, variants, editor guidance, content-inventory sections it serves.
+### `prose`
+
+`content` (richText). No variants.
+
+### `media-text`
+
+`media`, `content` (richText), `mediaSide` (left/right, default left).
+
+### `card-grid`
+
+`heading`, `source` (manual / programs / events), `cards` (manual only: heading, body, image, optional `url`). Auto-populated sources stay in sync as programs/events change; manual gives per-card copy control. Serves content-inventory's Our Programs / Our Events home-page sections.
+
+### `steps`
+
+`heading`, `steps` (array of `label`), optional `cta` (label + url). Serves the Registration section (every page except Careers).
+
+### `stats`
+
+`heading`, `stats` array — each entry either a fixed `value` + `label`, or `useFoundedYear` checked to compute "{n} years & counting" from `site-settings.foundedYear` live instead of a stored number.
+
+### `gallery`
+
+`heading`, `source` (manual / event), `images` (manual) or `event` relationship (renders that event's own `gallery` field).
+
+### `cta-banner`
+
+`heading`, `body`, `cta` (label + url).
+
+### `schools`
+
+`heading` only — renders the `schools` collection in full, no per-instance content fields.
+
+### `faq`
+
+`heading`, `items` array (`question`, `answer` richText). Renders via the `Accordion` component (`src/components/accordion`).
+
+### `contact`
+
+`heading` only — all content from `site-settings`/`navigation` globals.
+
+### `video`
+
+`heading`, `source` (manual / event). Manual: `embedId` + `poster` upload. Event: `event` relationship, each of that event's `videos` entries becomes one tab. Renders via `VideoEmbed` (`src/components/video-embed`).

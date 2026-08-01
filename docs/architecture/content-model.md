@@ -3,7 +3,7 @@
 **Purpose:** every collection and global, what it hold, how they relate.
 **Read when:** adding/changing field, writing query, seeding data.
 
-> **Status: shipped** for collections and globals below — see `src/collections/`, `src/globals/`. Blocks (the `pages.layout` field itself) land in a follow-up branch; this doc's block section stays draft until then.
+> **Status: shipped** — collections, globals, and the block catalogue (schemas only) all match `src/collections/`, `src/globals/`, `src/blocks/`. See [blocks.md](blocks.md) for the per-block field list.
 
 Source content for every entity: [../reference/content-inventory.md](../reference/content-inventory.md).
 
@@ -29,7 +29,7 @@ Nothing listed here hard-coded in component. Phone number, address, nav label, o
 
 Editor-composed routes. Only collection with block layout.
 
-`title`, `hero` (group — always present, not a block, see [blocks.md](blocks.md)), `meta` (SEO tab, via `@payloadcms/plugin-seo`'s field set), `publishedAt`, `slug`. `layout` (the 11-block set) lands with the block catalogue itself.
+`title`, `hero` (group — always present, not a block, see [blocks.md](blocks.md)), `layout` (the 11-block set), `meta` (SEO tab, via `@payloadcms/plugin-seo`'s field set), `publishedAt`, `slug`.
 
 Drafts, version history enabled (`maxPerDoc: 20`). Slug unique, indexed, via Payload's `slugField()`. `afterChange`/`afterDelete` hooks revalidate the page's Next.js path on publish/unpublish/delete.
 
