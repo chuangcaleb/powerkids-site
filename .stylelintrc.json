@@ -19,7 +19,14 @@
         "border-radius"
       ],
       {
-        "ignoreValues": ["inherit", "currentColor", "transparent", "none", "unset"],
+        "ignoreValues": [
+          "inherit",
+          "currentColor",
+          "transparent",
+          "none",
+          "unset",
+          "50%"
+        ],
         "message": "No raw value. Use a design token from src/styles/tokens/ — see DESIGN.md."
       }
     ],
