@@ -1,9 +1,9 @@
 # Content Model
 
-**Purpose:** every collection and global, what it hold, how they relate.
-**Read when:** adding/changing field, writing query, seeding data.
+**Purpose:** the rules governing collections and globals — not their field lists.
+**Read when:** adding/changing a field, writing a query, seeding data.
 
-> **Status: shipped** — collections, globals, and the block catalogue (schemas only) all match `src/payload/collections/`, `src/payload/globals/`, `src/payload/blocks/`. See [blocks.md](blocks.md) for the per-block field list.
+**The model itself lives in code:** `src/payload/collections/` and `src/payload/globals/`. Read those for current fields, types, and access. This doc holds only what the schema can't say.
 
 Source content for every entity: [../reference/content-inventory.md](../reference/content-inventory.md).
 
@@ -11,7 +11,7 @@ Source content for every entity: [../reference/content-inventory.md](../referenc
 
 ## Rule
 
-Nothing listed here hard-coded in component. Phone number, address, nav label, opening time in JSX = defect.
+Nothing in the CMS is hard-coded in a component. Phone number, address, nav label, opening time in JSX = defect. This is the reason the content model exists; every collection below traces back to it.
 
 ---
 
@@ -20,78 +20,23 @@ Nothing listed here hard-coded in component. Phone number, address, nav label, o
 - **File structure:** `src/payload/collections/<slug>/index.ts`, with `hooks/` alongside for anything more than a one-line access check.
 - **Access:** shared utilities in `src/payload/access/` (`authenticated`, `authenticatedOrPublished`, `anyone`, `admin`/`adminFieldAccess`) — collections compose these rather than repeating inline role checks. `users`' `update` stays inline (self-or-admin) since that compound check doesn't fit any single utility.
 - **Row labels:** array-field rows use the shared `src/payload/admin/components/row-label.tsx` client component (`admin.components.RowLabel`) instead of one bespoke label component per field.
+- **Ordering:** collections rendered as lists carry an explicit `order` field. Never rely on creation order or alphabetical sort for editor-visible sequence.
+- **Uploads:** `alt` is required — no exceptions, no empty strings.
 
----
+## Roles
 
-## Collections
+Two roles, `admin` and `editor`. Public reads see published documents only; `editor` writes content collections; `admin` additionally manages `users`.
 
-### `pages`
+## Design decisions behind the schema
 
-Editor-composed routes. Only collection with block layout.
+Things a reader would otherwise mistake for arbitrary:
 
-`title`, `hero` (group — always present, not a block, see [blocks.md](blocks.md)), `layout` (the 11-block set), `meta` (SEO tab, via `@payloadcms/plugin-seo`'s field set), `publishedAt`, `slug`.
-
-Drafts, version history enabled (`maxPerDoc: 20`). Slug unique, indexed, via Payload's `slugField()`. `afterChange`/`afterDelete` hooks revalidate the page's Next.js path on publish/unpublish/delete.
-
-### `media`
-
-Uploads, backed by R2. `alt` **required** — no exceptions, no empty strings.
-
-`alt`, `caption`, focal point, generated sizes, folder-organised (Payload's built-in folders feature). `checksum` (hidden, sha256 of upload content) and `possibleDuplicateOf` (relationship, read-only) flag re-uploads of an existing file — non-blocking, see `src/payload/collections/media/hooks/flag-duplicate.ts`.
-
-### `schools`
-
-Physical branches. Three active; see inventory for two inactive entries.
-
-`name`, `slug`, `address` (multi-line), `phones` (array of `number`/`href`), `mapUrl`, `photo`, `principal` → `people`, `order`
-
-### `programs`
-
-Daily offerings, fixed hours.
-
-`name`, `slug`, `hours`, `ageRange`, `strapline`, `summary`, `body`, `image`, `order`
-
-`ageRange` and `strapline` are optional.
-
-### `events`
-
-Recurring activity types, not dated calendar entries.
-
-`name`, `slug`, `summary`, `body`, `gallery` → `media[]`, `videos` (array of embed id + label), `order`
-
-`videos` field exists so Graduation page's per-year entries stop being developer task.
-
-### `people`
-
-Principals, team section if it returns.
-
-`name`, `role`, `school` → `schools`, `bio`, `portrait`, `order`
-
-### `users`
-
-Admin auth. Roles: `admin` (full) and `editor` (content only, no user management).
-
----
-
-## Globals
-
-### `site-settings`
-
-`tagline`, `foundedYear`, `email`, `phones` (array), `openingHours`, `openingDays`, `socials` (array), `defaultShareImage`.
-
-Brand name (`PowerKids`, "Power" red + "Kids" blue) is a fixed display convention, not a CMS field — see `DESIGN.md`.
-
-Founding year stored so "{n} years & counting" stay computed, not hard-coded.
-
-### `navigation`
-
-`header` (array of `label`/`url`), `footerColumns` (array of `heading` + `links` array). Column headings are fields, not markup.
-
-### `seo-defaults`
-
-`titleTemplate` (`{title}` placeholder), `defaultDescription`, `defaultImage`.
-
----
+- **`pages` is the only collection with a block layout.** Everything else is structured data that blocks render. Adding `layout` to another collection means rethinking this boundary, not copying a field.
+- **Media carries `checksum` + `possibleDuplicateOf`** to flag re-uploads of a file already present. Non-blocking by design — the editor decides, the system only warns. See `src/payload/collections/media/hooks/flag-duplicate.ts`.
+- **Founding year is stored, elapsed years are computed.** Same reasoning as any other derived value: store the fact, derive the display.
+- **Brand name is not a CMS field.** `PowerKids` with "Power" red and "Kids" blue is a fixed display convention — see `DESIGN.md`.
+- **Footer column headings are fields, not markup.** Staff reorganise the footer without a deploy.
+- **Two schools are inactive, not deleted.** See the inventory for which and why.
 
 ## Relationships
 
@@ -102,15 +47,3 @@ schools ──one──► people (principal)
 people ──one──► schools
 events ──many──► media (gallery)
 ```
-
-## Access
-
-| Role     | Read           | Write                     |
-| -------- | -------------- | ------------------------- |
-| Public   | published only | none                      |
-| `editor` | all            | all content collections   |
-| `admin`  | all            | everything, incl. `users` |
-
-## Ordering
-
-Collections rendered as lists carry explicit `order` field. Never rely on creation order or alphabetical sort for editor-visible sequence.

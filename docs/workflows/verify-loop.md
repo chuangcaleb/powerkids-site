@@ -3,8 +3,6 @@
 **Purpose:** exact checks pass before commit.
 **Read when:** before every commit. No exceptions.
 
-> **Status: not yet implemented.** Phase 1 wires scripts, pre-commit hook, CI.
-
 ---
 
 ## The loop
@@ -24,7 +22,7 @@ Runs, in order:
 
 Stop at first failure, fix it. Don't commit around red step. Don't disable rule to pass — rule wrong? Change deliberately, own commit, with reason.
 
-**Mid-edit, don't run full `pnpm verify`.** Scope check to what changed: `pnpm stylelint <file>`, `pnpm eslint <file>`, `pnpm tsc --noEmit`. Full loop is for pre-push checkpoints (lefthook already runs it there) and CI — running it after every small edit repeats the other three steps for no new signal.
+**Mid-edit, don't run full `pnpm verify`.** Scope the check to what changed — run `eslint`/`stylelint`/`tsc` against the touched files directly (`pnpm exec eslint <file>`); there are no per-tool package scripts. Full loop is for pre-push checkpoints (lefthook already runs it there) and CI — running it after every small edit repeats the other three steps for no new signal.
 
 ## Also required
 
