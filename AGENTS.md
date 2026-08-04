@@ -37,26 +37,26 @@ Router for automated contributors. Read fully; read linked docs only when task t
 
 ## Where things are
 
-| Need                                                   | Read                                  |
-| ------------------------------------------------------ | ------------------------------------- |
-| Visual identity, tokens, invariants                    | `DESIGN.md`                           |
-| Layout primitives (`flow`, `cluster`, `wrapper`, …)    | `docs/design/layout-primitives.md`    |
-| What token means what                                  | `docs/design/tokens.md`               |
-| Component inventory                                    | `docs/design/components.md`           |
-| System shape, rendering strategy, directory map        | `docs/architecture/overview.md`       |
-| Collections, globals, field definitions                | `docs/architecture/content-model.md`  |
-| Block catalogue and per-block editor rules             | `docs/architecture/blocks.md`         |
-| Payload API — fields, hooks, access, queries, adapters | `docs/payload/README.md`              |
-| Commands to run before committing                      | `docs/workflows/verify-loop.md`       |
-| How to add a block, end to end                         | `docs/workflows/adding-a-block.md`    |
-| How to add a page                                      | `docs/workflows/adding-a-page.md`     |
-| Env vars and service bindings                          | `docs/ops/environments.md`            |
-| Deploy and rollback                                    | `docs/ops/deploy.md`                  |
-| Database migrations                                    | `docs/ops/migrations.md`              |
-| Why past decision made                                 | `docs/decisions/`                     |
-| v3 content, verbatim                                   | `docs/reference/content-inventory.md` |
-| v3 design values, audited                              | `docs/reference/v3-design-audit.md`   |
-| Phase status, plans, pre/post requirements             | `docs/phases/README.md`               |
+| Need                                                | Read                                  |
+| --------------------------------------------------- | ------------------------------------- |
+| Visual identity, tokens, invariants                 | `DESIGN.md`                           |
+| Layout primitives (`flow`, `cluster`, `wrapper`, …) | `docs/design/layout-primitives.md`    |
+| What token means what                               | `docs/design/tokens.md`               |
+| Component inventory                                 | `docs/design/components.md`           |
+| System shape, rendering strategy, directory map     | `docs/architecture/overview.md`       |
+| Collections, globals, field definitions             | `docs/architecture/content-model.md`  |
+| Block catalogue and per-block editor rules          | `docs/architecture/blocks.md`         |
+| Payload rules and gotchas                           | `docs/payload.md`                     |
+| Commands to run before committing                   | `docs/workflows/verify-loop.md`       |
+| How to add a block, end to end                      | `docs/workflows/adding-a-block.md`    |
+| How to add a page                                   | `docs/workflows/adding-a-page.md`     |
+| Env vars and service bindings                       | `docs/ops/environments.md`            |
+| Deploy and rollback                                 | `docs/ops/deploy.md`                  |
+| Database migrations                                 | `docs/ops/migrations.md`              |
+| Why past decision made                              | `docs/decisions/`                     |
+| v3 content, verbatim                                | `docs/reference/content-inventory.md` |
+| v3 design values, audited                           | `docs/reference/v3-design-audit.md`   |
+| Phase status, plans, pre/post requirements          | `docs/phases/README.md`               |
 
 ---
 
