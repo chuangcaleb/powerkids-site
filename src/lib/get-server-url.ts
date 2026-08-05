@@ -1,4 +1,4 @@
-import { optionalEnv, requireEnv } from '@/lib/env'
+import { optionalEnv } from '@/lib/env'
 
 /**
  * Canonical site origin, no trailing slash. Used for absolute URLs (SEO, previews).
@@ -9,7 +9,11 @@ import { optionalEnv, requireEnv } from '@/lib/env'
  * `NEXT_PUBLIC_SERVER_URL` explicitly to the real domain.
  */
 export function getServerUrl(): string {
+  const nextPublicServerUrl = optionalEnv('NEXT_PUBLIC_SERVER_URL', '')
+  if (nextPublicServerUrl) return `https://${nextPublicServerUrl}`.replace(/\/$/, '')
+
   const vercelUrl = optionalEnv('VERCEL_URL', '')
   if (vercelUrl) return `https://${vercelUrl}`.replace(/\/$/, '')
-  return requireEnv('NEXT_PUBLIC_SERVER_URL').replace(/\/$/, '')
+
+  return 'http://localhost:3000'
 }

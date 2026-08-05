@@ -42,7 +42,7 @@ export default buildConfig({
       titleSuffix: '— PowerKids',
     },
     livePreview: {
-      url: requireEnv('NEXT_PUBLIC_SERVER_URL'),
+      url: getServerUrl(),
       collections: ['pages'],
     },
   },
