@@ -3,7 +3,7 @@
 **Purpose:** rules for shared UI — what counts as shared, how variants work.
 **Read this when:** about to create a new shared component, or unsure whether something belongs in `src/components/`.
 
-**The inventory lives in code:** `src/components/`, one directory per component, and every one of them renders on `/dev/kitchen-sink`. Read that page or that directory for what exists; this doc does not restate it.
+**The inventory lives in code:** `src/components/`, one directory per component. Read that directory for what exists; this doc does not restate it.
 
 ---
 
@@ -28,4 +28,6 @@ Rest of the inventory derives from the v3 audit — see [../reference/v3-design-
 
 ## Kitchen sink
 
-`/dev/kitchen-sink` renders every token, primitive, and component variant on one page. Keep it current — it's how visual regressions get caught before a reviewer sees them. It `notFound()`s in production and stays out of the sitemap.
+`/dev/kitchen-sink` renders tokens, primitives, and component variants on one page. Keep it current — it's how visual regressions get caught before a reviewer sees them. It `notFound()`s in production and stays out of the sitemap.
+
+It covers the presentational components. Layout shells (header, footer, admin bar) and CMS plumbing (`cms-link`, `media`, `rich-text`) aren't on it — they only make sense against real content, so verify those on a real page instead.
