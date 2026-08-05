@@ -1,5 +1,7 @@
 # Phase 3 — Content Model
 
+> **Archived — historical record, not current spec.** See [README.md](README.md).
+
 **Goal:** every collection, global, and block **schema**. No renderers.
 
 Cheap to change now, expensive once content exists — every later change is a migration against real editor data. Spend real review time here.

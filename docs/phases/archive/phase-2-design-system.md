@@ -1,5 +1,7 @@
 # Phase 2 — Design System
 
+> **Archived — historical record, not current spec.** See [README.md](README.md).
+
 **Goal:** tokens, layout primitives, and component layer, all rendered on one kitchen-sink page.
 
 Owner tweaks most here. Highest-drift phase — agents invent colours and one-off spacing. `DESIGN.md` invariants exist to make that a reviewable violation, not a matter of taste.
@@ -19,7 +21,7 @@ Owner tweaks most here. Highest-drift phase — agents invent colours and one-of
 
 **`src/styles/tokens/`** — token values as CSS custom properties. Fluid type + space via Utopia — shipped with fresh values (320–1440px viewport, 18px/1.2 ratio min → 21px/1.25 ratio max), not v3's numbers; see `DESIGN.md`'s Type section for why the ratios stay close together. Semantic aliases over raw palette; components use aliases only.
 
-**`src/styles/compositions/`** — port 7 primitives: `flow` `cluster` `grid-auto` `wrapper` `sidebar` `switcher` `repel`. Source to adapt: `/Users/chuangcaleb/Documents/dev/web/chuangcaleb.com/src/styles/compositions/`. Copy mechanics, **not** aesthetics — that project is quiet/editorial/soft-shadow, PowerKids is loud/marker/hard-offset-shadow. Catalogue doc: `docs/design/layout-primitives.md`.
+**`src/styles/compositions/`** — port 7 primitives: `flow` `cluster` `grid-auto` `wrapper` `sidebar` `switcher` `repel`. Source to adapt: the `chuangcaleb.com` repo's own `src/styles/compositions/`. Copy mechanics, **not** aesthetics — that project is quiet/editorial/soft-shadow, PowerKids is loud/marker/hard-offset-shadow. Catalogue doc: `docs/design/layout-primitives.md`.
 
 **`src/styles/global/`** — reset, base typography, font loading.
 

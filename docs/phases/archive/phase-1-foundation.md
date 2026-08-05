@@ -1,5 +1,7 @@
 # Phase 1 — Foundation
 
+> **Archived — historical record, not current spec.** See [README.md](README.md).
+
 **Status: done.**
 
 **Goal:** running app — Next + Payload on Neon + R2, green verify loop, CI, deploy.

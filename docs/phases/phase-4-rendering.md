@@ -10,8 +10,8 @@ Fully agentic per block. Doc recommends one PR per 2–3 blocks ("phase 4" is no
 
 - [x] Phase 3 done — schema stable, `payload-types.ts` generated, editor can compose a page in `/admin`
 - [x] Phase 2 done — tokens, primitives, components exist. Blocks are assembled from these, never from raw CSS
-- [x] Seed or hand-create one page containing every block, to render against — `scripts/seed-kitchen-sink-page.ts` (Local API, throwaway, not the Phase 5 seed script)
-- [x] Read `docs/architecture/blocks.md` for the per-block field contracts
+- [x] Seed or hand-create one page containing every block, to render against — `scripts/seed-kitchen-sink-page.ts` and `scripts/seed-dummy-pages.ts` (Local API, throwaway, not the Phase 5 seed script)
+- [x] Read `docs/architecture/blocks.md` for the rules every block follows; field contracts live in each block's `config.ts`
 
 ## Work
 
@@ -23,9 +23,9 @@ Fully agentic per block. Doc recommends one PR per 2–3 blocks ("phase 4" is no
 
 **Page query tuned, not default-depth.** Server components call Local API direct, runs as admin by default — never forward resolved slug into query without public `_status: 'published'` filter (draft preview route only exception, via Next.js draft mode). Pick `depth` deliberate: blocks referencing `media`/`programs`/`events` typically need `depth: 1` to populate one level; raise further and it fans out extra queries per relationship. Use `select` on list-style queries (schools, programs, events collection routes) to skip unneeded fields.
 
-**Revalidation.** `pages` (and any global feeding layout) needs `afterChange` hook calling `revalidatePath`, guarded by `context.disableRevalidate` for seed writes, diffing `doc._status` vs `previousDoc._status` so unpublish also revalidates. Skip this, publishing in `/admin` won't update live route till next deploy. `pages` already has this — see `src/payload/collections/pages/hooks/revalidate-page.ts`; globals feeding layout (`site-settings`, `navigation`) still need their own.
+**Revalidation.** `pages` (and any global feeding layout) needs `afterChange` hook calling `revalidatePath`, guarded by `context.disableRevalidate` for seed writes, diffing `doc._status` vs `previousDoc._status` so unpublish also revalidates. Skip this, publishing in `/admin` won't update live route till next deploy. Wired: `src/payload/collections/pages/hooks/revalidate-page.ts` for pages, `src/payload/globals/hooks/revalidate-layout.ts` for the globals feeding layout.
 
-**One renderer per block**, `src/payload/blocks/<name>/Component.tsx`. Server components. Layout from primitives, styling from co-located CSS Module reading tokens.
+**One renderer per block**, `src/payload/blocks/<name>/component.tsx`. Server components. Layout from primitives, styling from co-located CSS Module reading tokens.
 
 **Images** — `next/image`, R2 host already allow-listed in `next.config.ts` from `R2_PUBLIC_URL`. Correct `sizes` per context; the three generated variants are 400 / 800 / 1600 wide.
 
@@ -41,7 +41,7 @@ Fully agentic per block. Doc recommends one PR per 2–3 blocks ("phase 4" is no
 - [x] Header, footer, contact read from globals — zero hard-coded content
 - [x] Draft preview works — verified via the `/preview` route directly (secret-gated, enables Next draft mode, redirects); **not yet clicked through from the `/admin` panel UI itself**
 - [ ] Lighthouse accessibility 100 — **not yet run**
-- [x] `docs/architecture/blocks.md` per-block notes filled in
+- [x] `docs/architecture/blocks.md` reflects the shipped rules
 - [x] `pnpm verify` green (both against a real dev DB and CI's fake-env build)
 
 ## Verify
