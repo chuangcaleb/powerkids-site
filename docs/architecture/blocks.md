@@ -1,4 +1,4 @@
-# Block Catalogue
+# Blocks
 
 **Purpose:** why the block set is closed, and rules every block follows.
 **Read this when:** building a block renderer, changing a block's fields, or deciding whether new content needs a new block.
