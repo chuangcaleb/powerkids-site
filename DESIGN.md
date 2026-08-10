@@ -132,7 +132,7 @@ Tiers are multiples of the step-0 base (17px min / 20px max): `3xs` .25x, `2xs` 
 
 - `--duration-fast: 150ms` — button hover-lift
 - `--duration-base: 300ms` — accordion expand, general transitions
-- `--duration-sweep: 600ms` — `Mark`'s highlighter-band sweep, pending replacement with a hand-drawn double underline
+- `--duration-sweep: 600ms` — `Mark`'s double-underline draw-in
 - All wrapped in `@media (prefers-reduced-motion: no-preference)`; the no-motion path is the default, not an override.
 
 ## Doodle layer
