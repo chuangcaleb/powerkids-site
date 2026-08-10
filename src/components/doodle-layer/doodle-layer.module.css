@@ -1,0 +1,73 @@
+.zone {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: clip;
+  pointer-events: none;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+}
+
+/* `animation-range: entry` is checked alongside `animation-timeline: view()`
+ * to exclude browsers with partial support — see modern-web-guidance's
+ * parallax-scroll-effects guide. Decorative only, so no JS fallback:
+ * unsupported browsers (Firefox) just get static doodles, no scroll
+ * listener ever runs. */
+@supports (animation-timeline: view()) and (animation-range: entry) {
+  .zone {
+    view-timeline: --doodle-zone;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .layer {
+      animation: doodle-parallax linear both;
+      animation-timeline: --doodle-zone;
+      animation-range: entry 0% exit 100%;
+    }
+  }
+
+  .layer[data-depth='0'] {
+    --depth-travel: calc(var(--doodle-travel) * 0.3);
+  }
+
+  .layer[data-depth='1'] {
+    --depth-travel: calc(var(--doodle-travel) * 0.6);
+  }
+
+  .layer[data-depth='2'] {
+    --depth-travel: var(--doodle-travel);
+  }
+
+  @keyframes doodle-parallax {
+    from {
+      transform: translateY(calc(var(--depth-travel) * -1));
+    }
+
+    to {
+      transform: translateY(var(--depth-travel));
+    }
+  }
+}
+
+.mark {
+  position: absolute;
+  width: calc(
+    var(--doodle-size-min) + var(--doodle-t) *
+      (var(--doodle-size-max) - var(--doodle-size-min))
+  );
+  height: calc(
+    var(--doodle-size-min) + var(--doodle-t) *
+      (var(--doodle-size-max) - var(--doodle-size-min))
+  );
+  color: var(--text-strong);
+  opacity: var(--doodle-opacity);
+}
+
+.mark svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}

@@ -30,3 +30,11 @@
   padding: var(--space-s);
   background-color: var(--accent-blue-fill);
 }
+
+.doodleDemo {
+  position: relative;
+  min-height: 16rem;
+  border: var(--border-width) solid var(--border-strong);
+  border-radius: var(--radius-m);
+  overflow: clip;
+}

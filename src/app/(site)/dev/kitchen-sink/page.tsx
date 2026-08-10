@@ -3,6 +3,7 @@ import { Accordion } from '@/components/accordion/accordion'
 import { Button } from '@/components/button/button'
 import { Card } from '@/components/card/card'
 import { Divider } from '@/components/divider/divider'
+import { DoodleLayer } from '@/components/doodle-layer/doodle-layer'
 import { Heading } from '@/components/heading/heading'
 import { Mark } from '@/components/mark/mark'
 import { NavBar } from '@/components/nav-bar/nav-bar'
@@ -159,6 +160,13 @@ export default function KitchenSinkPage() {
           <Pill variant="blue">Blue</Pill>
           <Pill variant="amber">Amber</Pill>
           <Pill href="#">Link pill</Pill>
+        </div>
+      </section>
+
+      <section className="flow">
+        <Heading level={2}>DoodleLayer</Heading>
+        <div className={styles.doodleDemo}>
+          <DoodleLayer zoneId="kitchen-sink-doodle-demo" density={14} />
         </div>
       </section>
 
