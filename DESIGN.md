@@ -16,7 +16,7 @@ color:
   amberTint: '#fdeeda'
 type:
   display: 'Bricolage Grotesque'
-  body: 'Bricolage Grotesque'
+  body: 'Archivo'
   width: 90
   minViewport: 320
   maxViewport: 1440
@@ -107,10 +107,11 @@ v3 carried a full shadcn neutral ramp (`--muted-foreground`, `--ring`, `--destru
 
 ## Type
 
-One family, Bricolage Grotesque, for everything — display and body alike. No second webfont.
+Two families: Bricolage Grotesque for display (`--font-display`, headings + anything using the `.disp`/`.wm`-equivalent treatment), Archivo for body (`--font-body`, running copy and UI chrome — nav, pills, labels). `Button` is display-face text, not body — see `docs/design/components.md`.
 
-- Self-hosted as a partial variable font: `wdth` pinned to a fixed **90** (narrow) at build time, not a runtime knob; `opsz` and `wght` stay variable. Latin subset, no italic. Build command: `src/styles/fonts/bricolage-grotesque/NOTES.md`.
-- `font-optical-sizing: auto` set globally, so `opsz` tracks each element's actual rendered size instead of a hand-set value per component.
+- Bricolage Grotesque self-hosted as a partial variable font: `wdth` pinned to a fixed **90** (narrow) at build time, not a runtime knob; `opsz` and `wght` stay variable. Latin subset, no italic. Build command: `src/styles/fonts/bricolage-grotesque/NOTES.md`.
+- Archivo loaded via `next/font/google` (self-hosted at build time, no runtime request) — no axis worth pinning, so no manual pipeline. Weights `400`–`700`.
+- `font-optical-sizing: auto` set globally for Bricolage's `opsz` axis; harmless no-op on Archivo.
 - Two regimes in the fluid scale, both via Utopia (320px → 1440px viewport): caption through h5/h4 (steps `-2` to `2`) compound from a tight ratio (17px/1.2 min → 20px/1.25 max); h3/h2/h1 (steps `3`–`5`) are explicit hand-picked pairs instead — `28px→48px`, `34px→62px`, `40px→90px` — since a single ratio compounded that far inverts at one end.
 - Entry values — first thing to tune once real content renders on the kitchen sink, not a measured final.
 

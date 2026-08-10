@@ -4,6 +4,8 @@ import type { ReactNode } from 'react'
 import { AdminBar } from '@/components/admin-bar/admin-bar'
 import { Footer } from '@/components/footer/footer'
 import { Header } from '@/components/header/header'
+import { cx } from '@/lib/cx'
+import { archivo } from '@/styles/fonts/archivo'
 import { bricolageGrotesque } from '@/styles/fonts/bricolage-grotesque'
 import '@/styles/tokens/index.css'
 import '@/styles/compositions/index.css'
@@ -27,7 +29,7 @@ export default async function SiteLayout({ children }: { children: ReactNode }) 
   const { isEnabled: preview } = await draftMode()
 
   return (
-    <html lang="en" className={bricolageGrotesque.variable}>
+    <html lang="en" className={cx(bricolageGrotesque.variable, archivo.variable)}>
       <body className="flow">
         <AdminBar preview={preview} />
         <Header />

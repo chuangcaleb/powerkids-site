@@ -7,11 +7,11 @@ without adding a runtime knob nobody asked for.
 Upstream axes: `opsz` (12–96), `wdth` (75–100), `wght` (200–800). Shipped file pins `wdth` to a
 fixed **90** (narrow, per design decision — not a tunable) and keeps `opsz` and `wght` variable.
 `opsz` stays variable so `font-optical-sizing: auto` can pick the right cut per rendered size
-(small pill/button text vs a 90px hero heading) without a hand-set knob. `wght` stays variable
+(small button text vs a 90px hero heading) without a hand-set knob. `wght` stays variable
 for any future weight animation.
 
-One family, one file, used for both display and body — the design direction (see `DESIGN.md`)
-deliberately drops the second webfont the previous direction used for body text.
+Display face only — `--font-display`. Body/UI text (`--font-body`) is Archivo,
+`src/styles/fonts/archivo.ts`; see `DESIGN.md`'s Type section for the split.
 
 Regenerate (manual, no build script — this file is committed as-is):
 

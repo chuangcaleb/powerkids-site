@@ -2,9 +2,10 @@
  * Values and invariants: DESIGN.md. Intent: docs/design/tokens.md.
  */
 :root {
-  /* --font-bricolage-grotesque supplied at runtime by next/font/local — see src/styles/fonts/bricolage-grotesque.ts. */
+  /* --font-bricolage-grotesque supplied by next/font/local — src/styles/fonts/bricolage-grotesque.ts.
+   * --font-archivo supplied by next/font/google — src/styles/fonts/archivo.ts. */
   --font-display: var(--font-bricolage-grotesque), system-ui, sans-serif;
-  --font-body: var(--font-bricolage-grotesque), system-ui, sans-serif;
+  --font-body: var(--font-archivo), system-ui, sans-serif;
 
   --step--2: clamp(0.7378rem, 0.7201rem + 0.0888vw, 0.8rem);
   --step--1: clamp(0.8854rem, 0.8527rem + 0.1637vw, 1rem);
