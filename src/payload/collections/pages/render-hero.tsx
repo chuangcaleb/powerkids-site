@@ -1,9 +1,39 @@
+import type { ReactNode } from 'react'
 import { Button } from '@/components/button/button'
+import { DoodleLayer } from '@/components/doodle-layer/doodle-layer'
 import { Heading } from '@/components/heading/heading'
+import { Mark } from '@/components/mark/mark'
 import { Media } from '@/components/media/media'
+import { cx } from '@/lib/cx'
 import type { Page } from '@/payload-types'
+import styles from './render-hero.module.css'
 
 export type HeroProps = { hero: Page['hero'] }
+
+/**
+ * D-09: `Centre` and `Heart` get the tilted marker highlight anywhere they
+ * appear in the hero headline. `hero.heading` is a plain `text` field (no
+ * richText), so this matches whole words in the string rather than needing a
+ * schema change — it's a fixed design rule (carries the v3 wordmark logic
+ * forward), not per-page markup an editor authors, so it doesn't conflict
+ * with "content is data, never markup".
+ */
+const HIGHLIGHT_WORDS: Record<string, 'red' | 'blue'> = {
+  centre: 'blue',
+  heart: 'red',
+}
+
+function highlightHeading(text: string): ReactNode[] {
+  return text.split(/(\b\w+\b)/).map((part, index) => {
+    const color = HIGHLIGHT_WORDS[part.toLowerCase()]
+    if (!color) return part
+    return (
+      <Mark key={index} color={color}>
+        {part}
+      </Mark>
+    )
+  })
+}
 
 /** Every page's always-present opener. Not one of the 11 `layout` blocks — see docs/architecture/blocks.md. */
 export function Hero({ hero }: HeroProps) {
@@ -15,19 +45,43 @@ export function Hero({ hero }: HeroProps) {
       : null
 
   return (
-    <section className="wrapper flow">
-      {hero.heading ? <Heading level={1}>{hero.heading}</Heading> : null}
-      {hero.subheading ? <p>{hero.subheading}</p> : null}
-      {hero.ctas?.length ? (
-        <div className="cluster">
-          {hero.ctas.map((cta) => (
-            <Button key={cta.id ?? cta.url} href={cta.url}>
-              {cta.label}
-            </Button>
-          ))}
+    <section className={styles.hero}>
+      <DoodleLayer zoneId="hero" density={7} />
+      <div className={cx('wrapper', 'switcher', styles.content)}>
+        <div className={cx('flow', styles.copy)}>
+          {hero.heading ? (
+            <Heading level={1}>{highlightHeading(hero.heading)}</Heading>
+          ) : null}
+          {hero.subheading ? <p>{hero.subheading}</p> : null}
+          {hero.ctas?.length ? (
+            <div className="cluster">
+              {hero.ctas.map((cta, index) => (
+                <Button
+                  key={cta.id ?? cta.url}
+                  href={cta.url}
+                  variant={index === 0 ? 'red' : 'outline'}
+                >
+                  {cta.label}
+                </Button>
+              ))}
+            </div>
+          ) : null}
         </div>
-      ) : null}
-      {media ? <Media doc={media} priority sizes="100vw" /> : null}
+        {media ? (
+          <div className={styles.media}>
+            <figure className={styles.polaroid}>
+              <span className={styles.tape} aria-hidden="true" />
+              <Media
+                doc={media}
+                priority
+                sizes="(min-width: 40rem) 45vw, 100vw"
+                className={styles.photo}
+              />
+              <figcaption className={styles.caption}>{media.alt}</figcaption>
+            </figure>
+          </div>
+        ) : null}
+      </div>
     </section>
   )
 }

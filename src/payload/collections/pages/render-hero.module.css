@@ -1,0 +1,78 @@
+/* D-06: half-text/half-image split, via .switcher — collapses without a
+ * media query (F-03). D-07: image column is a taped polaroid. K-06's hero
+ * ground (solid `--bg-sun` + dot texture) is panel3.html's round-6 default
+ * (`class="hero g-dots"`) and D-15 already ruled out the notebook-rules
+ * alternative for a hero, so this is the settled choice, not a guess.
+ * Contrast checked in 09-contrast-audit.md: ink/black on sun is 11.99–13.64:1. */
+.hero {
+  position: relative;
+  overflow: clip;
+  background-color: var(--bg-sun);
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--colour-black) 9%, transparent) 0.125rem,
+    transparent 0.1375rem
+  );
+  background-size: 1.125rem 1.125rem;
+  border-bottom: var(--border-width) solid var(--border-strong);
+}
+
+/* Content sits above the DoodleLayer (z-index: 0) and the background. */
+.content {
+  position: relative;
+  z-index: 1;
+  padding-block: var(--space-xl);
+}
+
+.copy {
+  min-width: 0;
+}
+
+.media {
+  display: flex;
+  justify-content: center;
+}
+
+/* Taped polaroid: white frame, hard offset shadow, tilted (D-07/D-01). */
+.polaroid {
+  position: relative;
+  display: inline-block;
+  max-width: 28.75rem; /* panel3.html: `.hero .pol{ max-width:460px }` */
+  width: 100%;
+  background-color: var(--bg-surface);
+  border: var(--border-width) solid var(--border-strong);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-hard);
+  padding: var(--space-s);
+  padding-bottom: var(--space-m);
+
+  /* No rotation token exists yet (only colour/spacing/type/radii are tokenised
+   * so far) — fixed tilt angle, matches baseline config's tilt:5 direction. */
+  transform: rotate(-3deg);
+}
+
+.photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-s);
+}
+
+/* Tape strip overlapping the top edge. */
+.tape {
+  position: absolute;
+  top: calc(var(--space-2xs) * -1);
+  left: 50%;
+  width: var(--space-xl);
+  height: var(--space-s);
+  background-color: var(--accent-amber-fill);
+  border: var(--stroke-width) solid var(--border-strong);
+  transform: translateX(-50%) rotate(-4deg);
+}
+
+/* Caption = the image's own alt text (D-07), not decorative. */
+.caption {
+  margin-top: var(--space-2xs);
+  color: var(--text-body);
+  font-size: var(--step--1);
+  text-align: center;
+}
