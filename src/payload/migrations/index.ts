@@ -8,6 +8,7 @@ import * as migration_20260801_085558_remove_navigation_header from './20260801_
 import * as migration_20260801_094156_add_content_block from './20260801_094156_add_content_block'
 import * as migration_20260801_104018_rename_content_column_variant_card_to_image from './20260801_104018_rename_content_column_variant_card_to_image'
 import * as migration_20260801_111554_add_pages_autosave from './20260801_111554_add_pages_autosave'
+import * as migration_20260810_135829 from './20260810_135829'
 
 export const migrations = [
   {
@@ -59,5 +60,10 @@ export const migrations = [
     up: migration_20260801_111554_add_pages_autosave.up,
     down: migration_20260801_111554_add_pages_autosave.down,
     name: '20260801_111554_add_pages_autosave',
+  },
+  {
+    up: migration_20260810_135829.up,
+    down: migration_20260810_135829.down,
+    name: '20260810_135829',
   },
 ]

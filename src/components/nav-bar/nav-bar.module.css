@@ -11,3 +11,13 @@
   font-family: var(--font-display);
   font-size: var(--step-1);
 }
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-s);
+}
+
+.link {
+  font-family: var(--font-body);
+}

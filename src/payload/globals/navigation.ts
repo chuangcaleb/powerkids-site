@@ -12,8 +12,11 @@ const linkFields = [
 const rowLabel = { RowLabel: '@/payload/admin/components/row-label#RowLabel' } as const
 
 /**
- * Footer link tree. Footer column headings are fields, not markup. Header
- * nav will be reintroduced later with a standard nested nav structure.
+ * Header and footer link trees. Header nav is flat (D-04/K-04 resolved to a
+ * plain underline style, not dropdowns) — the homepage is a single scrolling
+ * page (see docs/reference/content-inventory.md §Navigation), so header
+ * links are anchors/routes, capped small. Footer link groups are the only
+ * nesting; footer column headings are fields, not markup.
  */
 export const Navigation: GlobalConfig = {
   slug: 'navigation',
@@ -28,6 +31,16 @@ export const Navigation: GlobalConfig = {
     afterChange: [revalidateLayout],
   },
   fields: [
+    {
+      name: 'headerLinks',
+      type: 'array',
+      maxRows: 7,
+      admin: {
+        description: 'Flat top-level nav — no dropdowns.',
+        components: rowLabel,
+      },
+      fields: [...linkFields],
+    },
     {
       name: 'footerColumns',
       type: 'array',
