@@ -1,5 +1,12 @@
 /* Base typography — see DESIGN.md's Type/Colour sections for the token values. */
 
+html {
+  /* Lets the variable font's opsz axis track each element's actual rendered
+   * size, so small pill/button text and a 90px hero heading each get the
+   * right optical cut without a hand-set value. */
+  font-optical-sizing: auto;
+}
+
 body {
   background-color: var(--bg-surface);
   color: var(--text-body);

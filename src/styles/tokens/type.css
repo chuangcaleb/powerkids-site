@@ -5,9 +5,10 @@
  * real content is visible on the kitchen sink.
  */
 :root {
-  /* --font-shantell-sans is supplied at runtime by next/font/local — see src/fonts/shantell-sans.ts. */
-  --font-display: var(--font-shantell-sans), system-ui, sans-serif;
-  --font-body: system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', sans-serif;
+  /* --font-bricolage-grotesque is supplied at runtime by next/font/local — see src/styles/fonts/bricolage-grotesque.ts.
+   * One family for everything, display and body alike — DESIGN.md rules against a second webfont. */
+  --font-display: var(--font-bricolage-grotesque), system-ui, sans-serif;
+  --font-body: var(--font-bricolage-grotesque), system-ui, sans-serif;
 
   --step--2: clamp(0.7813rem, 0.7645rem + 0.0839vw, 0.84rem);
   --step--1: clamp(0.9375rem, 0.9054rem + 0.1607vw, 1.05rem);

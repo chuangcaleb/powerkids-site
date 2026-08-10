@@ -4,7 +4,7 @@ import type { ReactNode } from 'react'
 import { AdminBar } from '@/components/admin-bar/admin-bar'
 import { Footer } from '@/components/footer/footer'
 import { Header } from '@/components/header/header'
-import { shantellSans } from '@/styles/fonts/shantell-sans'
+import { bricolageGrotesque } from '@/styles/fonts/bricolage-grotesque'
 import '@/styles/tokens/index.css'
 import '@/styles/compositions/index.css'
 import '@/styles/global/index.css'
@@ -27,7 +27,7 @@ export default async function SiteLayout({ children }: { children: ReactNode }) 
   const { isEnabled: preview } = await draftMode()
 
   return (
-    <html lang="en" className={shantellSans.variable}>
+    <html lang="en" className={bricolageGrotesque.variable}>
       <body className="flow">
         <AdminBar preview={preview} />
         <Header />
