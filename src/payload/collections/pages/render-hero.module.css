@@ -1,0 +1,119 @@
+/* D-06: half-text/half-image split, via .switcher — collapses without a
+ * media query (F-03). D-07: image column is a taped polaroid. K-06's hero
+ * ground (solid `--bg-sun` + dot texture) is panel3.html's round-6 default
+ * (`class="hero g-dots"`) and D-15 already ruled out the notebook-rules
+ * alternative for a hero, so this is the settled choice, not a guess.
+ * Contrast checked in 09-contrast-audit.md: ink/black on sun is 11.99–13.64:1. */
+.hero {
+  position: relative;
+  overflow: clip;
+  background-color: var(--bg-sun);
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--colour-black) 9%, transparent) 0.125rem,
+    transparent 0.1375rem
+  );
+  background-size: 1.125rem 1.125rem;
+  border-bottom: var(--border-width) solid var(--border-strong);
+}
+
+/* Content sits above the DoodleLayer (z-index: 0) and the background. */
+.content {
+  position: relative;
+  z-index: 1;
+  padding-block: var(--space-2xl);
+}
+
+.copy {
+  min-width: 0;
+  text-wrap: balance;
+  font-size: var(--step-1);
+}
+
+.media {
+  display: flex;
+  justify-content: center;
+}
+
+/* Taped polaroid: white frame, hard offset shadow, tilted (D-07/D-01). */
+.polaroid {
+  position: relative;
+  display: inline-block;
+  max-width: 28.75rem; /* panel3.html: `.hero .pol{ max-width:460px }` */
+  width: 100%;
+
+  /* var(--colour-white), matching framed-rows' polaroid — not var(--bg-surface)
+   * (--colour-cream), which panel3.html's `.pol{ background:#fff }` isn't. */
+  background-color: var(--colour-white);
+  border: var(--border-width) solid var(--border-strong);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-hard);
+  padding: var(--space-s);
+  padding-bottom: var(--space-m);
+
+  /* No rotation token exists yet (only colour/spacing/type/radii are tokenised
+   * so far) — fixed tilt angle, matches baseline config's tilt:5 direction. */
+  transform: rotate(-3deg);
+}
+
+.photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-s);
+}
+
+/* Tape strip overlapping the top edge. panel3.html's tape is translucent
+ * white (`#ffffffb0`), not solid amber — matches framed-rows.module.css's
+ * `.tape` treatment (same proto pattern, independently implemented there). */
+.tape {
+  position: absolute;
+  top: calc(var(--space-2xs) * -1);
+  left: 50%;
+  width: var(--space-xl);
+  height: var(--space-s);
+  background-color: color-mix(in srgb, var(--colour-white) 69%, transparent);
+  border-width: 0.125rem;
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--border-strong) 15%, transparent);
+  transform: translateX(-50%) rotate(-4deg);
+}
+
+/*
+ * Headline highlight: panel3.html's `.hl` marker box, not `Mark`'s
+ * double-underline (that's for general heading emphasis elsewhere — see
+ * render-hero.tsx's comment / 06-baseline-config.md).
+ * --radius-s (0.75rem = 12px) is the closest shape token to panel3.html's
+ * literal 12px. --shadow-hard-pill (3px offset) is the closest shadow token
+ * to the proto's 4px — --shadow-hard's 9px offset is sized for larger
+ * elements (buttons, polaroid), too heavy for an inline text box.
+ */
+.highlight {
+  display: inline-block;
+  color: var(--text-on-accent);
+
+  /* Fine-grained box padding — no space token this small exists yet (same
+   * "no token" situation as .polaroid's fixed rotation below). Matches
+   * panel3.html's `.hl{ padding:1px .13em }`. */
+  padding: 0.06em 0.13em;
+  border: var(--border-width) solid var(--border-strong);
+  border-radius: var(--radius-s);
+  box-shadow: var(--shadow-hard-pill);
+}
+
+.highlightBlue {
+  background-color: var(--accent-blue);
+  transform: rotate(-2.4deg);
+}
+
+.highlightRed {
+  background-color: var(--accent-red);
+  transform: rotate(2deg);
+}
+
+/* Caption = the image's own alt text (D-07), not decorative. */
+.caption {
+  margin-top: var(--space-2xs);
+  color: var(--text-body);
+  font-size: var(--step--1);
+  text-align: center;
+}
