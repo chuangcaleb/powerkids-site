@@ -15,4 +15,7 @@
   --step-3: clamp(1.75rem, 1.3929rem + 1.7857vw, 3rem);
   --step-4: clamp(2.125rem, 1.625rem + 2.5vw, 3.875rem);
   --step-5: clamp(2.5rem, 1.6071rem + 4.4643vw, 5.625rem);
+
+  /* Footer outline wordmark only — bigger than any heading step on purpose. */
+  --size-wordmark: clamp(3.5rem, 3rem + 8vw, 8rem);
 }

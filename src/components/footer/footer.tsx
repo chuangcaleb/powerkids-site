@@ -1,5 +1,6 @@
 import { getNavigation } from '@/payload/globals/get-navigation'
 import { getSiteSettings } from '@/payload/globals/get-site-settings'
+import styles from './footer.module.css'
 
 export async function Footer() {
   const [navigation, siteSettings] = await Promise.all([
@@ -9,6 +10,10 @@ export async function Footer() {
 
   return (
     <footer className="wrapper">
+      {/* Brand lockup, not site-settings content — hardcoded per owner call. */}
+      <p className={styles.wordmark} aria-hidden="true">
+        Power<span>Kids</span>
+      </p>
       <div className="switcher">
         {(navigation.footerColumns ?? []).map((column) => (
           <div key={column.id ?? column.heading} className="flow-2xs">
