@@ -166,7 +166,7 @@ export default function KitchenSinkPage() {
       <section className="flow">
         <Heading level={2}>DoodleLayer</Heading>
         <div className={styles.doodleDemo}>
-          <DoodleLayer zoneId="kitchen-sink-doodle-demo" density={14} />
+          <DoodleLayer zoneId="kitchen-sink-doodle-demo" />
         </div>
       </section>
 
