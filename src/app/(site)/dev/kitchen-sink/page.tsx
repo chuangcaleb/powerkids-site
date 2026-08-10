@@ -19,8 +19,10 @@ const COLOURS = [
   { name: '--border-strong', var: '--border-strong' },
   { name: '--accent-red', var: '--accent-red' },
   { name: '--accent-blue', var: '--accent-blue' },
+  { name: '--accent-amber', var: '--accent-amber' },
   { name: '--accent-red-fill', var: '--accent-red-fill' },
   { name: '--accent-blue-fill', var: '--accent-blue-fill' },
+  { name: '--accent-amber-fill', var: '--accent-amber-fill' },
 ]
 
 const TYPE_STEPS = [-2, -1, 0, 1, 2, 3, 4, 5]
