@@ -94,7 +94,7 @@
   /* Fine-grained box padding — no space token this small exists yet (same
    * "no token" situation as .polaroid's fixed rotation below). Matches
    * panel3.html's `.hl{ padding:1px .13em }`. */
-  padding: 0.06em 0.13em;
+  padding: 0 0.13em;
   border: var(--border-width) solid var(--border-strong);
   border-radius: var(--radius-s);
   box-shadow: var(--shadow-hard-pill);

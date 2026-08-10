@@ -18,7 +18,7 @@
     0 var(--shadow-colour);
   --shadow-hard-flat: 0 0 0 0 var(--shadow-colour);
 
-  --pill-shadow-offset: 0.1875rem;
+  --pill-shadow-offset: 0.3rem;
   --shadow-hard-pill: var(--pill-shadow-offset) var(--pill-shadow-offset) 0 0
     var(--shadow-colour);
 
