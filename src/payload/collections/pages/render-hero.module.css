@@ -40,7 +40,10 @@
   display: inline-block;
   max-width: 28.75rem; /* panel3.html: `.hero .pol{ max-width:460px }` */
   width: 100%;
-  background-color: var(--bg-surface);
+
+  /* var(--colour-white), matching framed-rows' polaroid — not var(--bg-surface)
+   * (--colour-cream), which panel3.html's `.pol{ background:#fff }` isn't. */
+  background-color: var(--colour-white);
   border: var(--border-width) solid var(--border-strong);
   border-radius: var(--radius-m);
   box-shadow: var(--shadow-hard);
@@ -59,16 +62,52 @@
   border-radius: var(--radius-s);
 }
 
-/* Tape strip overlapping the top edge. */
+/* Tape strip overlapping the top edge. panel3.html's tape is translucent
+ * white (`#ffffffb0`), not solid amber — matches framed-rows.module.css's
+ * `.tape` treatment (same proto pattern, independently implemented there). */
 .tape {
   position: absolute;
   top: calc(var(--space-2xs) * -1);
   left: 50%;
   width: var(--space-xl);
   height: var(--space-s);
-  background-color: var(--accent-amber-fill);
-  border: var(--stroke-width) solid var(--border-strong);
+  background-color: color-mix(in srgb, var(--colour-white) 69%, transparent);
+  border-width: 0.125rem;
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--border-strong) 15%, transparent);
   transform: translateX(-50%) rotate(-4deg);
+}
+
+/*
+ * Headline highlight: panel3.html's `.hl` marker box, not `Mark`'s
+ * double-underline (that's for general heading emphasis elsewhere — see
+ * render-hero.tsx's comment / 06-baseline-config.md).
+ * --radius-s (0.75rem = 12px) is the closest shape token to panel3.html's
+ * literal 12px. --shadow-hard-pill (3px offset) is the closest shadow token
+ * to the proto's 4px — --shadow-hard's 9px offset is sized for larger
+ * elements (buttons, polaroid), too heavy for an inline text box.
+ */
+.highlight {
+  display: inline-block;
+  color: var(--text-on-accent);
+
+  /* Fine-grained box padding — no space token this small exists yet (same
+   * "no token" situation as .polaroid's fixed rotation below). Matches
+   * panel3.html's `.hl{ padding:1px .13em }`. */
+  padding: 0.06em 0.13em;
+  border: var(--border-width) solid var(--border-strong);
+  border-radius: var(--radius-s);
+  box-shadow: var(--shadow-hard-pill);
+}
+
+.highlightBlue {
+  background-color: var(--accent-blue);
+  transform: rotate(-2.4deg);
+}
+
+.highlightRed {
+  background-color: var(--accent-red);
+  transform: rotate(2deg);
 }
 
 /* Caption = the image's own alt text (D-07), not decorative. */
