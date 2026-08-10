@@ -1,9 +1,11 @@
 /* WRAPPER — centred container, max width + gutters. See docs/design/layout-primitives.md. */
 
 .wrapper {
+  --wrapper-max-width: var(--max-page);
+
   margin-inline: auto;
   width: 100%;
-  max-width: var(--wrapper-max-width, var(--max-page));
+  max-width: var(--wrapper-max-width);
   padding-inline: var(--gutter, var(--space-m));
   position: relative;
 }

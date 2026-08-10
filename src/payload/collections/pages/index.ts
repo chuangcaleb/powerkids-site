@@ -16,6 +16,7 @@ import { Contact } from '@/payload/blocks/contact/config'
 import { Content } from '@/payload/blocks/content/config'
 import { CtaBanner } from '@/payload/blocks/cta-banner/config'
 import { Faq } from '@/payload/blocks/faq/config'
+import { FramedRowsBlock } from '@/payload/blocks/framed-rows/config'
 import { Gallery } from '@/payload/blocks/gallery/config'
 import { MediaText } from '@/payload/blocks/media-text/config'
 import { Prose } from '@/payload/blocks/prose/config'
@@ -48,7 +49,7 @@ function previewUrl(slug: unknown) {
   return `/preview?${params.toString()}`
 }
 
-/** Editor-composed routes. `layout` is the closed 12-block set — hero is not one of them, see ./hero.ts. */
+/** Editor-composed routes. `layout` is the closed 13-block set — hero is not one of them, see ./hero.ts. */
 export const Pages: CollectionConfig = {
   slug: 'pages',
   access: {
@@ -111,6 +112,7 @@ export const Pages: CollectionConfig = {
                 Gallery,
                 CtaBanner,
                 SchoolsBlock,
+                FramedRowsBlock,
                 Faq,
                 Contact,
                 VideoBlock,

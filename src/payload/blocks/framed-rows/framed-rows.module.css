@@ -1,0 +1,120 @@
+/* .section {
+  padding-inline: calc(var(--gutter) * 0.5);
+} */
+
+.band {
+  border: var(--border-width) solid var(--border-strong);
+  border-radius: var(--radius-l);
+  box-shadow: var(--shadow-hard);
+  overflow: hidden;
+  margin-inline: calc(var(--gutter) * -0.5);
+}
+
+.row {
+  padding-block: var(--space-xl);
+
+  /* padding-inline: var(--space-xl); */
+  border-top: var(--border-width) solid var(--border-strong);
+}
+
+.row:first-child {
+  border-top: none;
+}
+
+.accentA {
+  background-color: var(--accent-red-fill);
+
+  --row-accent: var(--accent-red);
+}
+
+.accentB {
+  background-color: var(--accent-blue-fill);
+
+  --row-accent: var(--accent-blue);
+}
+
+.accentC {
+  background-color: var(--accent-amber-fill);
+
+  --row-accent: var(--accent-amber);
+}
+
+.switcher {
+  --switcher-gap: var(--space-2xl);
+
+  align-items: center;
+}
+
+.reverse {
+  flex-direction: row-reverse;
+}
+
+.content {
+  --flow-space: var(--space-2xs);
+}
+
+.timeStack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3xs);
+  color: var(--row-accent);
+}
+
+.timeStack svg {
+  width: 2.5em;
+  height: 2.5em;
+}
+
+.hours {
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  font-size: var(--step-2);
+  line-height: 1;
+  letter-spacing: var(--tracking-display);
+}
+
+.media {
+  max-width: 20rem;
+  margin-inline: auto;
+}
+
+/* Tilt is the agreed source of playfulness (D-12) — position-based, never authored in the CMS. */
+.tiltPos {
+  transform: rotate(5deg);
+}
+
+.tiltNeg {
+  transform: rotate(-5deg);
+}
+
+/* Polaroid frame — proto/panel3.html .pol: white card, extra bottom padding
+   for the caption strip (unused here, but the proportion is the point),
+   piece of "tape" hanging off the top edge. */
+.polaroid {
+  position: relative;
+  margin: 0;
+  background-color: var(--colour-white);
+  border: var(--border-width) solid var(--border-strong);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-hard);
+  padding: var(--space-xs) var(--space-xs) var(--space-xl);
+}
+
+.photo {
+  overflow: hidden;
+  border-radius: var(--radius-s);
+}
+
+.tape {
+  position: absolute;
+  top: -0.875rem;
+  left: 50%;
+  width: 6.25rem;
+  height: 1.625rem;
+  background-color: color-mix(in srgb, var(--colour-white) 69%, transparent);
+  border-width: 0.125rem;
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--border-strong) 15%, transparent);
+  transform: translateX(-50%) rotate(-4deg);
+}

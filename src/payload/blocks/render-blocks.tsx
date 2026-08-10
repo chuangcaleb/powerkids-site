@@ -5,6 +5,7 @@ import { Contact } from './contact/component'
 import { Content } from './content/component'
 import { CtaBanner } from './cta-banner/component'
 import { Faq } from './faq/component'
+import { FramedRows } from './framed-rows/component'
 import { Gallery } from './gallery/component'
 import { MediaText } from './media-text/component'
 import { Prose } from './prose/component'
@@ -19,6 +20,7 @@ const blockComponents = {
   content: Content,
   'cta-banner': CtaBanner,
   faq: Faq,
+  'framed-rows': FramedRows,
   gallery: Gallery,
   'media-text': MediaText,
   prose: Prose,

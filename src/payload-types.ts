@@ -287,6 +287,7 @@ export interface Page {
     | GalleryBlock
     | CtaBannerBlock
     | SchoolsBlock
+    | FramedRowsBlock
     | FaqBlock
     | ContactBlock
     | VideoBlock
@@ -575,6 +576,16 @@ export interface SchoolsBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FramedRowsBlock".
+ */
+export interface FramedRowsBlock {
+  heading?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'framed-rows';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "FaqBlock".
  */
 export interface FaqBlock {
@@ -760,6 +771,28 @@ export interface Program {
     [k: string]: unknown;
   } | null;
   image?: (number | null) | Media;
+  /**
+   * Icon shown above the hours in the Framed Rows block.
+   */
+  icon?:
+    | (
+        | 'sunrise'
+        | 'sun'
+        | 'sunset'
+        | 'star'
+        | 'cloud'
+        | 'sparkles'
+        | 'smile'
+        | 'feather'
+        | 'music'
+        | 'rocket'
+        | 'palette'
+        | 'pen-line'
+        | 'zap'
+        | 'rainbow'
+        | 'flower'
+      )
+    | null;
   /**
    * Controls listing order. Lower shows first.
    */
@@ -979,6 +1012,7 @@ export interface PagesSelect<T extends boolean = true> {
         gallery?: T | GalleryBlockSelect<T>;
         'cta-banner'?: T | CtaBannerBlockSelect<T>;
         schools?: T | SchoolsBlockSelect<T>;
+        'framed-rows'?: T | FramedRowsBlockSelect<T>;
         faq?: T | FaqBlockSelect<T>;
         contact?: T | ContactBlockSelect<T>;
         video?: T | VideoBlockSelect<T>;
@@ -1141,6 +1175,15 @@ export interface SchoolsBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FramedRowsBlock_select".
+ */
+export interface FramedRowsBlockSelect<T extends boolean = true> {
+  heading?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "FaqBlock_select".
  */
 export interface FaqBlockSelect<T extends boolean = true> {
@@ -1215,6 +1258,7 @@ export interface ProgramsSelect<T extends boolean = true> {
   summary?: T;
   body?: T;
   image?: T;
+  icon?: T;
   order?: T;
   updatedAt?: T;
   createdAt?: T;

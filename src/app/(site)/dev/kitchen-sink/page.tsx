@@ -11,6 +11,7 @@ import { Pill } from '@/components/pill/pill'
 import { VideoEmbed } from '@/components/video-embed/video-embed'
 import { cx } from '@/lib/cx'
 import { isProduction } from '@/lib/env'
+import { FramedRows } from '@/payload/blocks/framed-rows/component'
 import styles from './kitchen-sink.module.css'
 
 const COLOURS = [
@@ -51,10 +52,12 @@ export default function KitchenSinkPage() {
   if (isProduction) notFound()
 
   return (
-    <main className="wrapper flow-2xl">
-      <Heading level={1}>Kitchen sink</Heading>
+    <main className="flow-2xl">
+      <div className="wrapper">
+        <Heading level={1}>Kitchen sink</Heading>
+      </div>
 
-      <section className="flow">
+      <section className="flow wrapper">
         <Heading level={2}>Colour</Heading>
         <div className="cluster">
           {COLOURS.map((colour) => (
@@ -69,7 +72,7 @@ export default function KitchenSinkPage() {
         </div>
       </section>
 
-      <section className="flow">
+      <section className="flow wrapper">
         <Heading level={2}>Type scale</Heading>
         <div className="flow-s">
           {TYPE_STEPS.map((step) => (
@@ -80,7 +83,7 @@ export default function KitchenSinkPage() {
         </div>
       </section>
 
-      <section className="flow">
+      <section className="flow wrapper">
         <Heading level={2}>Space scale</Heading>
         <div className="flow-2xs">
           {SPACE_STEPS.map((step) => (
@@ -97,7 +100,7 @@ export default function KitchenSinkPage() {
 
       <Divider />
 
-      <section className="flow">
+      <section className="flow wrapper">
         <Heading level={2}>Button</Heading>
         <div className="cluster">
           <Button variant="red">Red</Button>
@@ -119,7 +122,7 @@ export default function KitchenSinkPage() {
         </div>
       </section>
 
-      <section className="flow">
+      <section className="flow wrapper">
         <Heading level={2}>Card</Heading>
         <div className="cluster">
           <Card>
@@ -132,7 +135,7 @@ export default function KitchenSinkPage() {
         </div>
       </section>
 
-      <section className="flow">
+      <section className="flow wrapper">
         <Heading level={2}>Heading</Heading>
         <div className="flow-s">
           <Heading level={1}>Level 1</Heading>
@@ -144,7 +147,7 @@ export default function KitchenSinkPage() {
         </div>
       </section>
 
-      <section className="flow">
+      <section className="flow wrapper">
         <Heading level={2}>Mark</Heading>
         <p>
           Double underline in <Mark color="red">red</Mark> and{' '}
@@ -152,7 +155,7 @@ export default function KitchenSinkPage() {
         </p>
       </section>
 
-      <section className="flow">
+      <section className="flow wrapper">
         <Heading level={2}>Pill</Heading>
         <div className="cluster">
           <Pill>Neutral</Pill>
@@ -163,19 +166,19 @@ export default function KitchenSinkPage() {
         </div>
       </section>
 
-      <section className="flow">
+      <section className="flow wrapper">
         <Heading level={2}>DoodleLayer</Heading>
         <div className={styles.doodleDemo}>
           <DoodleLayer zoneId="kitchen-sink-doodle-demo" />
         </div>
       </section>
 
-      <section className="flow">
+      <section className="flow wrapper">
         <Heading level={2}>Accordion</Heading>
         <Accordion items={ACCORDION_ITEMS} />
       </section>
 
-      <section className="flow">
+      <section className="flow wrapper">
         <Heading level={2}>NavBar</Heading>
         <NavBar
           logo={<span>PowerKids</span>}
@@ -188,7 +191,7 @@ export default function KitchenSinkPage() {
         />
       </section>
 
-      <section className="flow">
+      <section className="flow wrapper">
         <Heading level={2}>VideoEmbed</Heading>
         <div style={{ maxWidth: '32rem' }}>
           <VideoEmbed
@@ -200,6 +203,13 @@ export default function KitchenSinkPage() {
       </section>
 
       <section className="flow">
+        <div className="wrapper">
+          <Heading level={2}>FramedRows block</Heading>
+        </div>
+        <FramedRows heading="Our Programs" blockType="framed-rows" />
+      </section>
+
+      <section className="flow wrapper">
         <Heading level={2}>Layout primitives</Heading>
         <div className="flow-s">
           <p>

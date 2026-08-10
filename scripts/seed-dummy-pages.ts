@@ -208,6 +208,7 @@ const programSeeds = [
     strapline: loremSentence(),
     summary: loremSentence(),
     body: richText(loremParagraph()),
+    icon: 'sunrise' as const,
   },
   {
     name: 'After School Program',
@@ -217,6 +218,7 @@ const programSeeds = [
     strapline: loremSentence(),
     summary: loremSentence(),
     body: richText(loremParagraph(), loremParagraph()),
+    icon: 'sun' as const,
   },
   {
     name: 'Evening Daycare',
@@ -226,6 +228,7 @@ const programSeeds = [
     strapline: loremSentence(),
     summary: loremSentence(),
     body: richText(loremParagraph()),
+    icon: 'sunset' as const,
   },
 ]
 
@@ -242,6 +245,7 @@ for (const [index, seed] of programSeeds.entries()) {
       summary: seed.summary,
       body: seed.body,
       image: media.id,
+      icon: seed.icon,
       order: index,
       _status: 'published',
     },

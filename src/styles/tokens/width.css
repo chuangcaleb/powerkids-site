@@ -1,4 +1,5 @@
 :root {
+  --max-bleed: 120ch;
   --max-page: 105ch;
   --max-prose: 65ch;
   --max-heading: 45ch;

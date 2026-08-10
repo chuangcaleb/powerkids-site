@@ -9,6 +9,10 @@ import * as migration_20260801_094156_add_content_block from './20260801_094156_
 import * as migration_20260801_104018_rename_content_column_variant_card_to_image from './20260801_104018_rename_content_column_variant_card_to_image'
 import * as migration_20260801_111554_add_pages_autosave from './20260801_111554_add_pages_autosave'
 import * as migration_20260810_135829 from './20260810_135829'
+import * as migration_20260810_141308_add_programs_icon from './20260810_141308_add_programs_icon'
+import * as migration_20260810_143644_add_programs_showcase_block from './20260810_143644_add_programs_showcase_block'
+import * as migration_20260810_144801_rename_programs_showcase_to_framed_rows from './20260810_144801_rename_programs_showcase_to_framed_rows'
+import * as migration_20260810_150409_add_sunrise_sunset_icon_options from './20260810_150409_add_sunrise_sunset_icon_options'
 
 export const migrations = [
   {
@@ -65,5 +69,25 @@ export const migrations = [
     up: migration_20260810_135829.up,
     down: migration_20260810_135829.down,
     name: '20260810_135829',
+  },
+  {
+    up: migration_20260810_141308_add_programs_icon.up,
+    down: migration_20260810_141308_add_programs_icon.down,
+    name: '20260810_141308_add_programs_icon',
+  },
+  {
+    up: migration_20260810_143644_add_programs_showcase_block.up,
+    down: migration_20260810_143644_add_programs_showcase_block.down,
+    name: '20260810_143644_add_programs_showcase_block',
+  },
+  {
+    up: migration_20260810_144801_rename_programs_showcase_to_framed_rows.up,
+    down: migration_20260810_144801_rename_programs_showcase_to_framed_rows.down,
+    name: '20260810_144801_rename_programs_showcase_to_framed_rows',
+  },
+  {
+    up: migration_20260810_150409_add_sunrise_sunset_icon_options.up,
+    down: migration_20260810_150409_add_sunrise_sunset_icon_options.down,
+    name: '20260810_150409_add_sunrise_sunset_icon_options',
   },
 ]
