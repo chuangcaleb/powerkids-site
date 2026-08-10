@@ -27,7 +27,7 @@ const HIGHLIGHT_WORDS: Record<string, 'red' | 'blue'> = {
   heart: 'red',
 }
 
-const HIGHLIGHT_CLASS: Record<'red' | 'blue', string> = {
+const HIGHLIGHT_CLASS: Record<'red' | 'blue', string | undefined> = {
   blue: styles.highlightBlue,
   red: styles.highlightRed,
 }
