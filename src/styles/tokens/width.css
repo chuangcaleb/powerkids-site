@@ -2,5 +2,5 @@
   --max-page: 105ch;
   --max-prose: 65ch;
   --max-heading: 45ch;
-  --gutter: var(--space-m);
+  --gutter: var(--space-s);
 }

@@ -9,7 +9,7 @@ export async function Footer() {
   ])
 
   return (
-    <footer className="wrapper">
+    <footer className="wrapper flow">
       {/* Brand lockup, not site-settings content — hardcoded per owner call. */}
       <p className={styles.wordmark} aria-hidden="true">
         Power<span>Kids</span>
