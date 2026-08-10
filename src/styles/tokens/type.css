@@ -7,6 +7,13 @@
   --font-display: var(--font-bricolage-grotesque), system-ui, sans-serif;
   --font-body: var(--font-archivo), system-ui, sans-serif;
 
+  /* Bricolage's wdth axis is pinned in the font file itself (already maxed
+   * at 100 — see src/styles/fonts/bricolage-grotesque/NOTES.md), so this is
+   * the one live knob for perceived width. Tune here only. */
+  --tracking-display: -0.02em;
+  --weight-display: 800;
+  --opsz-display: 36;
+
   --step--2: clamp(0.7378rem, 0.7201rem + 0.0888vw, 0.8rem);
   --step--1: clamp(0.8854rem, 0.8527rem + 0.1637vw, 1rem);
   --step-0: clamp(1.0625rem, 1.0089rem + 0.2679vw, 1.25rem);

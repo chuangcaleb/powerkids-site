@@ -2,8 +2,9 @@
 
 html {
   /* Lets the variable font's opsz axis track each element's actual rendered
-   * size, so small pill/button text and a 90px hero heading each get the
-   * right optical cut without a hand-set value. */
+   * size without a hand-set value. Headings override with a fixed opsz below
+   * (matches the reference proto's pinned cut); this stays the default for
+   * everything else. */
   font-optical-sizing: auto;
 }
 
@@ -22,6 +23,9 @@ h5,
 h6 {
   color: var(--text-strong);
   font-family: var(--font-display);
+  font-variation-settings: 'opsz' var(--opsz-display);
+  font-weight: var(--weight-display);
+  letter-spacing: var(--tracking-display);
   line-height: 1.15;
 }
 
