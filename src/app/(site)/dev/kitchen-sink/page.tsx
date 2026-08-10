@@ -6,6 +6,7 @@ import { Divider } from '@/components/divider/divider'
 import { Heading } from '@/components/heading/heading'
 import { Mark } from '@/components/mark/mark'
 import { NavBar } from '@/components/nav-bar/nav-bar'
+import { Pill } from '@/components/pill/pill'
 import { VideoEmbed } from '@/components/video-embed/video-embed'
 import { cx } from '@/lib/cx'
 import { isProduction } from '@/lib/env'
@@ -145,9 +146,20 @@ export default function KitchenSinkPage() {
       <section className="flow">
         <Heading level={2}>Mark</Heading>
         <p>
-          Highlight sweep in <Mark color="red">red</Mark> and{' '}
+          Double underline in <Mark color="red">red</Mark> and{' '}
           <Mark color="blue">blue</Mark>.
         </p>
+      </section>
+
+      <section className="flow">
+        <Heading level={2}>Pill</Heading>
+        <div className="cluster">
+          <Pill>Neutral</Pill>
+          <Pill variant="red">Red</Pill>
+          <Pill variant="blue">Blue</Pill>
+          <Pill variant="amber">Amber</Pill>
+          <Pill href="#">Link pill</Pill>
+        </div>
       </section>
 
       <section className="flow">

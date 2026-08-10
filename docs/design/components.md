@@ -21,8 +21,10 @@
 Don't reintroduce these — each was removed during the Phase 2 design revision with no replacement pattern:
 
 - **`cva` or any variant library.** Variants are CSS Module classes.
-- **`Pill`, `SuperHead`.** Headings stand alone.
+- **`SuperHead`.** Headings stand alone.
 - **v3's heart-motif rule.** The divider is a plain rule.
+
+`Pill` was on this list too, but came back in Phase 4 as a real shape-language component — see `DESIGN.md` invariant 9. Distinct from `Button`: pill is always fully round and always shadowed; button is only slightly rounded. `Button` reads `--font-display`; `Pill` reads `--font-body`.
 
 Rest of the inventory derives from the v3 audit — see [../reference/v3-design-audit.md](../reference/v3-design-audit.md) for what each looked like and which were worth keeping.
 
