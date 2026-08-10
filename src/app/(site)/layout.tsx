@@ -30,7 +30,7 @@ export default async function SiteLayout({ children }: { children: ReactNode }) 
 
   return (
     <html lang="en" className={cx(bricolageGrotesque.variable, archivo.variable)}>
-      <body className="flow">
+      <body>
         <AdminBar preview={preview} />
         <Header />
         {children}

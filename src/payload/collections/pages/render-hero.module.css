@@ -20,11 +20,13 @@
 .content {
   position: relative;
   z-index: 1;
-  padding-block: var(--space-xl);
+  padding-block: var(--space-2xl);
 }
 
 .copy {
   min-width: 0;
+  text-wrap: balance;
+  font-size: var(--step-1);
 }
 
 .media {
