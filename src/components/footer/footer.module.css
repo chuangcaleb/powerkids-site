@@ -1,9 +1,10 @@
 .wordmark {
   font-family: var(--font-display);
+  font-variation-settings: 'opsz' var(--opsz-display);
   font-size: var(--size-wordmark);
-  font-weight: 800;
+  font-weight: var(--weight-display);
   line-height: 1;
-  letter-spacing: -0.03em;
+  letter-spacing: var(--tracking-display);
   color: transparent;
   -webkit-text-stroke: var(--stroke-width) var(--accent-red);
   margin: 0;
