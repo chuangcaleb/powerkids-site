@@ -22,7 +22,7 @@ export function NavBar({ logo, links }: NavBarProps) {
         <Link href="/" className={styles.logo}>
           {logo}
         </Link>
-        <nav className={styles.nav}>
+        <nav className={cx('cluster', styles.nav)}>
           {links.map((link) => (
             <a key={link.id ?? link.url} href={link.url} className={styles.link}>
               {link.label}

@@ -1,6 +1,6 @@
 .root {
-  display: flex;
-  flex-direction: column;
+  --flow-space: 0;
+
   align-items: flex-start;
 }
 

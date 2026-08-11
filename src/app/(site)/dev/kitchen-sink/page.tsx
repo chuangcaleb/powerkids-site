@@ -61,7 +61,7 @@ export default function KitchenSinkPage() {
         <Heading level={2}>Colour</Heading>
         <div className="cluster">
           {COLOURS.map((colour) => (
-            <div key={colour.name} className={styles.swatch}>
+            <div key={colour.name} className={cx('flow-3xs', styles.swatch)}>
               <div
                 className={styles.swatchFill}
                 style={{ backgroundColor: `var(${colour.var})` }}
@@ -87,7 +87,7 @@ export default function KitchenSinkPage() {
         <Heading level={2}>Space scale</Heading>
         <div className="flow-2xs">
           {SPACE_STEPS.map((step) => (
-            <div key={step} className={styles.spaceRow}>
+            <div key={step} className={cx('cluster', styles.spaceRow)}>
               <code>{step}</code>
               <div
                 className={styles.spaceBar}
