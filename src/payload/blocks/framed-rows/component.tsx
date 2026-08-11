@@ -59,12 +59,14 @@ export async function FramedRows({ heading }: FramedRowsBlockType) {
         } as CSSProperties
       }
     >
-      {heading ? (
-        <div className="wrapper">
-          <Heading level={2}>{heading}</Heading>
-        </div>
-      ) : null}
       <div className={styles.band}>
+        {heading ? (
+          <div className={cx(styles.row)}>
+            <div className="wrapper">
+              <Heading level={2}>{heading}</Heading>
+            </div>
+          </div>
+        ) : null}
         {programs.map((program, index) => {
           const Icon = program.icon ? ICONS[program.icon as keyof typeof ICONS] : null
           const image = typeof program.image === 'object' ? program.image : null
