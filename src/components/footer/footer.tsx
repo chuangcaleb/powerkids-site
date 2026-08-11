@@ -1,3 +1,4 @@
+import { cx } from '@/lib/cx'
 import { getNavigation } from '@/payload/globals/get-navigation'
 import { getSiteSettings } from '@/payload/globals/get-site-settings'
 import styles from './footer.module.css'
@@ -9,7 +10,7 @@ export async function Footer() {
   ])
 
   return (
-    <footer className="wrapper flow">
+    <footer className={cx('wrapper', 'flow', styles.footer)}>
       {/* Brand lockup, not site-settings content — hardcoded per owner call. */}
       <p className={styles.wordmark} aria-hidden="true">
         Power<span>Kids</span>
@@ -28,6 +29,7 @@ export async function Footer() {
           </div>
         ))}
         <div className="flow-2xs">
+          <h2>Contact</h2>
           <a href={`mailto:${siteSettings.email}`}>{siteSettings.email}</a>
           {siteSettings.phones?.map((phone) => (
             <a key={phone.id ?? phone.href} href={`tel:${phone.href}`}>
@@ -35,6 +37,23 @@ export async function Footer() {
             </a>
           ))}
         </div>
+        <div className="flow-2xs">
+          <h2>Opening Hours</h2>
+          <p>{siteSettings.openingDays}</p>
+          <p>{siteSettings.openingHours}</p>
+        </div>
+        {siteSettings.socials?.length ? (
+          <div className="flow-2xs">
+            <h2>Follow Us</h2>
+            <ul role="list" className="cluster">
+              {siteSettings.socials.map((social) => (
+                <li key={social.id ?? social.url}>
+                  <a href={social.url}>{social.platform}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
       </div>
     </footer>
   )

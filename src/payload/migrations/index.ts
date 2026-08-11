@@ -13,6 +13,7 @@ import * as migration_20260810_141308_add_programs_icon from './20260810_141308_
 import * as migration_20260810_143644_add_programs_showcase_block from './20260810_143644_add_programs_showcase_block'
 import * as migration_20260810_144801_rename_programs_showcase_to_framed_rows from './20260810_144801_rename_programs_showcase_to_framed_rows'
 import * as migration_20260810_150409_add_sunrise_sunset_icon_options from './20260810_150409_add_sunrise_sunset_icon_options'
+import * as migration_20260811_224500_add_site_settings_footer_reel from './20260811_224500_add_site_settings_footer_reel'
 
 export const migrations = [
   {
@@ -89,5 +90,10 @@ export const migrations = [
     up: migration_20260810_150409_add_sunrise_sunset_icon_options.up,
     down: migration_20260810_150409_add_sunrise_sunset_icon_options.down,
     name: '20260810_150409_add_sunrise_sunset_icon_options',
+  },
+  {
+    up: migration_20260811_224500_add_site_settings_footer_reel.up,
+    down: migration_20260811_224500_add_site_settings_footer_reel.down,
+    name: '20260811_224500_add_site_settings_footer_reel',
   },
 ]

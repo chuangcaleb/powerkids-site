@@ -145,7 +145,6 @@ const page = await payload.create({
           { question: 'Question two?', answer: richText('Answer two.') },
         ],
       },
-      { blockType: 'contact', heading: 'Contact Us' },
       {
         blockType: 'video',
         heading: 'Video',

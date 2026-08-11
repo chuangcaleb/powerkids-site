@@ -15,15 +15,21 @@
   --colour-red-tint: #ffe6e4;
   --colour-blue-tint: #e4e7ff;
   --colour-amber-tint: #fdeeda;
+  --colour-parchment: #cfc4bb;
+  --colour-cta-red: #d42a2a;
 
   /* Semantic aliases. Components use these. */
   --bg-surface: var(--colour-cream);
   --bg-sun: #ffc929;
   --bg-contact: #2435c6;
+  --bg-inverse: var(--colour-black);
+  --bg-cta: var(--colour-cta-red);
   --text-strong: var(--colour-ink);
   --text-body: var(--colour-charcoal);
   --text-muted: var(--colour-muted);
   --text-on-accent: var(--colour-white);
+  --text-on-inverse: var(--colour-parchment);
+  --text-on-cta: var(--colour-white);
   --border-strong: var(--colour-black);
   --shadow-colour: var(--colour-black);
 

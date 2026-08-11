@@ -1,3 +1,12 @@
+.footer {
+  background-color: var(--bg-inverse);
+  color: var(--text-on-inverse);
+}
+
+.footer h2 {
+  color: var(--text-on-inverse);
+}
+
 .wordmark {
   font-family: var(--font-display);
   font-variation-settings: 'opsz' var(--opsz-display);

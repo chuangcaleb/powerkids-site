@@ -14,7 +14,7 @@ export type NavBarProps = {
   links: NavLink[]
 }
 
-/** Site header. Nav link visual treatment (underline hover mark) lands in a later pass. */
+/** Site header. */
 export function NavBar({ logo, links }: NavBarProps) {
   return (
     <header className={styles.header}>

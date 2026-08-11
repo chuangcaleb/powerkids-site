@@ -1,0 +1,45 @@
+.section {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--bg-cta);
+  color: var(--text-on-cta);
+  border: var(--border-width) solid var(--border-strong);
+  box-shadow: var(--shadow-hard);
+}
+
+.section h2 {
+  color: var(--text-on-cta);
+}
+
+.rays {
+  position: absolute;
+  inset: -25%;
+  z-index: 1;
+  background-image: repeating-conic-gradient(
+    from 0deg at 50% 118%,
+    color-mix(in srgb, var(--colour-white) 8%, transparent) 0deg 6deg,
+    transparent 6deg 12deg
+  );
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .rays {
+    animation: cta-drift 11s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes cta-drift {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(1.625rem, 1.125rem);
+  }
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+}

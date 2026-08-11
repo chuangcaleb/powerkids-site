@@ -88,5 +88,15 @@ export const SiteSettings: GlobalConfig = {
       type: 'upload',
       relationTo: 'media',
     },
+    {
+      name: 'footerReel',
+      type: 'upload',
+      relationTo: 'media',
+      hasMany: true,
+      admin: {
+        description:
+          'Photos for the polaroid reel straddling the footer edge. Renders nothing when empty.',
+      },
+    },
   ],
 }

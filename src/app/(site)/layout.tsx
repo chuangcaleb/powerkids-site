@@ -4,7 +4,10 @@ import type { ReactNode } from 'react'
 import { AdminBar } from '@/components/admin-bar/admin-bar'
 import { Footer } from '@/components/footer/footer'
 import { Header } from '@/components/header/header'
+import { PolaroidReel } from '@/components/polaroid-reel/polaroid-reel'
 import { cx } from '@/lib/cx'
+import { getSiteSettings } from '@/payload/globals/get-site-settings'
+import type { Media } from '@/payload-types'
 import { archivo } from '@/styles/fonts/archivo'
 import { bricolageGrotesque } from '@/styles/fonts/bricolage-grotesque'
 import '@/styles/tokens/index.css'
@@ -26,7 +29,13 @@ export const viewport: Viewport = {
 }
 
 export default async function SiteLayout({ children }: { children: ReactNode }) {
-  const { isEnabled: preview } = await draftMode()
+  const [{ isEnabled: preview }, siteSettings] = await Promise.all([
+    draftMode(),
+    getSiteSettings(),
+  ])
+  const footerReelPhotos = (siteSettings.footerReel ?? []).filter(
+    (photo): photo is Media => typeof photo === 'object',
+  )
 
   return (
     <html lang="en" className={cx(bricolageGrotesque.variable, archivo.variable)}>
@@ -34,6 +43,7 @@ export default async function SiteLayout({ children }: { children: ReactNode }) 
         <AdminBar preview={preview} />
         <Header />
         {children}
+        <PolaroidReel photos={footerReelPhotos} />
         <Footer />
       </body>
     </html>

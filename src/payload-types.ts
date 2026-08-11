@@ -1392,6 +1392,10 @@ export interface SiteSetting {
       }[]
     | null;
   defaultShareImage?: (number | null) | Media;
+  /**
+   * Photos for the polaroid reel straddling the footer edge. Renders nothing when empty.
+   */
+  footerReel?: (number | Media)[] | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1470,6 +1474,7 @@ export interface SiteSettingsSelect<T extends boolean = true> {
         id?: T;
       };
   defaultShareImage?: T;
+  footerReel?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

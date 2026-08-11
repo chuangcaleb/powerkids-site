@@ -17,5 +17,23 @@
 }
 
 .link {
+  position: relative;
   font-family: var(--font-body);
+  text-decoration: none;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(var(--accent-red), var(--accent-red));
+  background-size: 0% var(--stroke-width);
+  background-position: 0 100%;
+  padding-bottom: var(--space-3xs);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .link {
+    transition: background-size var(--duration-base) var(--ease-standard);
+  }
+}
+
+.link:hover,
+.link:focus-visible {
+  background-size: 100% var(--stroke-width);
 }

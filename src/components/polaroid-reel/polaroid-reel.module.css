@@ -1,0 +1,29 @@
+.reel {
+  position: relative;
+  z-index: 3;
+  background: linear-gradient(var(--bg-surface) 0% 50%, var(--bg-inverse) 50% 100%);
+}
+
+.strip {
+  display: flex;
+  gap: var(--space-s);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  list-style: none;
+  margin: 0;
+  padding: 0 var(--space-m) var(--space-l);
+  scrollbar-width: none;
+}
+
+.strip::-webkit-scrollbar {
+  display: none;
+}
+
+.item {
+  flex: 0 0 17.5rem;
+  scroll-snap-align: start;
+}
+
+.polaroid {
+  width: 100%;
+}

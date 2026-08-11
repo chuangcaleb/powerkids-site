@@ -404,7 +404,6 @@ await payload.create({
         ],
         cta: { label: 'Open our form', url: '#register' },
       },
-      { blockType: 'contact', heading: 'Contact Us!' },
     ],
   },
 })
@@ -473,7 +472,6 @@ await payload.create({
           },
         ],
       },
-      { blockType: 'contact', heading: 'Contact Us!' },
     ],
   },
 })
