@@ -1,7 +1,7 @@
 .wordmark {
   font-family: var(--font-display);
   font-variation-settings: 'opsz' var(--opsz-display);
-  font-size: var(--size-wordmark);
+  font-size: var(--step-wordmark);
   font-weight: var(--weight-display);
   line-height: 1;
   letter-spacing: var(--tracking-display);

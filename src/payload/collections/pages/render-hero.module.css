@@ -1,4 +1,4 @@
-/* D-06: half-text/half-image split, via .switcher — collapses without a
+/* D-06: half-text/half-image split, via .sidebar — collapses without a
  * media query (F-03). D-07: image column is a taped polaroid. K-06's hero
  * ground (solid `--bg-sun` + dot texture) is panel3.html's round-6 default
  * (`class="hero g-dots"`) and D-15 already ruled out the notebook-rules
@@ -20,18 +20,24 @@
 .content {
   position: relative;
   z-index: 1;
-  padding-block: var(--space-2xl);
+  padding-block: var(--space-xl);
+  min-height: 70vh;
+
+  --sidebar-size: var(--max-heading);
+  --sidebar-gap: var(--space-2xl);
+  --sidebar-wrap-at: 50%;
+  --sidebar-align: center;
 }
 
 .copy {
-  min-width: 0;
   text-wrap: balance;
+  color: var(--text-strong);
   font-size: var(--step-1);
 }
 
-.media {
-  display: flex;
-  justify-content: center;
+.copy h1 {
+  line-height: 1;
+  font-size: var(--step-hero);
 }
 
 /* Taped polaroid: white frame, hard offset shadow, tilted (D-07/D-01). */
@@ -67,10 +73,10 @@
  * `.tape` treatment (same proto pattern, independently implemented there). */
 .tape {
   position: absolute;
-  top: calc(var(--space-2xs) * -1);
+  top: calc(var(--space-m) * -1);
   left: 50%;
-  width: var(--space-xl);
-  height: var(--space-s);
+  width: var(--space-3xl);
+  height: var(--space-l);
   background-color: color-mix(in srgb, var(--colour-white) 69%, transparent);
   border-width: 0.125rem;
   border-style: solid;
@@ -78,22 +84,9 @@
   transform: translateX(-50%) rotate(-4deg);
 }
 
-/*
- * Headline highlight: panel3.html's `.hl` marker box, not `Mark`'s
- * double-underline (that's for general heading emphasis elsewhere — see
- * render-hero.tsx's comment / 06-baseline-config.md).
- * --radius-s (0.75rem = 12px) is the closest shape token to panel3.html's
- * literal 12px. --shadow-hard-pill (3px offset) is the closest shadow token
- * to the proto's 4px — --shadow-hard's 9px offset is sized for larger
- * elements (buttons, polaroid), too heavy for an inline text box.
- */
 .highlight {
   display: inline-block;
   color: var(--text-on-accent);
-
-  /* Fine-grained box padding — no space token this small exists yet (same
-   * "no token" situation as .polaroid's fixed rotation below). Matches
-   * panel3.html's `.hl{ padding:1px .13em }`. */
   padding: 0 0.13em;
   border: var(--border-width) solid var(--border-strong);
   border-radius: var(--radius-s);

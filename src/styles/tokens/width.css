@@ -1,7 +1,7 @@
 :root {
   --max-bleed: 120ch;
-  --max-page: 105ch;
+  --max-page: 100ch;
   --max-prose: 65ch;
-  --max-heading: 45ch;
+  --max-heading: 40ch;
   --gutter: var(--space-s);
 }

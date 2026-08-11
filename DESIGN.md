@@ -117,7 +117,6 @@ Two families: Bricolage Grotesque for display (`--font-display`, headings + anyt
 - `font-optical-sizing: auto` set globally for Bricolage's `opsz` axis; harmless no-op on Archivo.
 - Two regimes in the fluid scale, both via Utopia (320px → 1440px viewport): caption through h5/h4 (steps `-2` to `2`) compound from a tight ratio (17px/1.2 min → 20px/1.25 max); h3/h2/h1 (steps `3`–`5`) are explicit hand-picked pairs instead — `28px→48px`, `34px→62px`, `40px→90px` — since a single ratio compounded that far inverts at one end.
 - Entry values — first thing to tune once real content renders on the kitchen sink, not a measured final.
-- `--size-wordmark: clamp(3.5rem, 3rem + 8vw, 8rem)` — outside the h1–h5 scale on purpose, sized for the footer's outline wordmark only.
 
 ## Space
 

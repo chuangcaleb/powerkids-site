@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import type { CSSProperties, ReactNode } from 'react'
 import { Button } from '@/components/button/button'
 import { DoodleLayer } from '@/components/doodle-layer/doodle-layer'
 import { Heading } from '@/components/heading/heading'
@@ -56,14 +56,17 @@ export function Hero({ hero }: HeroProps) {
   return (
     <section className={styles.hero}>
       <DoodleLayer zoneId="hero" density={7} />
-      <div className={cx('wrapper', 'switcher', styles.content)}>
-        <div className={cx('flow-m', styles.copy)}>
+      <div className={cx('wrapper', styles.content)}>
+        <div className={cx('flow', styles.copy)}>
           {hero.heading ? (
             <Heading level={1}>{highlightHeading(hero.heading)}</Heading>
           ) : null}
           {hero.subheading ? <p>{hero.subheading}</p> : null}
           {hero.ctas?.length ? (
-            <div className="cluster">
+            <div
+              className="cluster"
+              style={{ '--cluster-gap': 'var(--space-s)' } as CSSProperties}
+            >
               {hero.ctas.map((cta, index) => (
                 <Button
                   key={cta.id ?? cta.url}
@@ -77,7 +80,7 @@ export function Hero({ hero }: HeroProps) {
           ) : null}
         </div>
         {media ? (
-          <div className={styles.media}>
+          <div className={cx('sidebar', styles.media)}>
             <figure className={styles.polaroid}>
               <span className={styles.tape} aria-hidden="true" />
               <Media
