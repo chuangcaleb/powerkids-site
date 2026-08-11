@@ -1,8 +1,6 @@
 import { Card } from '@/components/card/card'
 import { Heading } from '@/components/heading/heading'
 import { Media } from '@/components/media/media'
-import { getEvents } from '@/payload/collections/events/get-events'
-import { getPrograms } from '@/payload/collections/programs/get-programs'
 import type { CardGridBlock, Media as MediaDoc } from '@/payload-types'
 
 type CardItem = {
@@ -13,30 +11,7 @@ type CardItem = {
   url?: string | null
 }
 
-async function resolveCards(block: CardGridBlock): Promise<CardItem[]> {
-  if (block.source === 'programs') {
-    const programs = await getPrograms()
-    return programs.map((program) => ({
-      id: program.id,
-      heading: program.name,
-      body: program.strapline ?? program.summary,
-      image: typeof program.image === 'object' ? program.image : null,
-      url: `/programs/${program.slug}`,
-    }))
-  }
-
-  if (block.source === 'events') {
-    const events = await getEvents()
-    return events.map((event) => ({
-      id: event.id,
-      heading: event.name,
-      body: event.summary,
-      image:
-        event.gallery?.find((doc): doc is MediaDoc => typeof doc === 'object') ?? null,
-      url: `/events/${event.slug}`,
-    }))
-  }
-
+function resolveCards(block: CardGridBlock): CardItem[] {
   return (block.cards ?? []).map((card) => ({
     id: card.id ?? card.heading,
     heading: card.heading,
@@ -46,8 +21,8 @@ async function resolveCards(block: CardGridBlock): Promise<CardItem[]> {
   }))
 }
 
-export async function CardGrid(block: CardGridBlock) {
-  const cards = await resolveCards(block)
+export function CardGrid(block: CardGridBlock) {
+  const cards = resolveCards(block)
 
   return (
     <section className="wrapper flow">

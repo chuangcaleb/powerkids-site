@@ -11,25 +11,9 @@ export const CardGrid: Block = {
       type: 'text',
     },
     {
-      name: 'source',
-      type: 'select',
-      required: true,
-      defaultValue: 'manual',
-      options: [
-        { label: 'Manual cards', value: 'manual' },
-        { label: 'All programs', value: 'programs' },
-        { label: 'All events', value: 'events' },
-      ],
-      admin: {
-        description:
-          'Auto-populated cards stay in sync as programs/events are added or removed. Manual cards give full control over copy per card.',
-      },
-    },
-    {
       name: 'cards',
       type: 'array',
       admin: {
-        condition: (_, { source } = {}) => source === 'manual',
         components: { RowLabel: '@/payload/admin/components/row-label#RowLabel' },
       },
       fields: [

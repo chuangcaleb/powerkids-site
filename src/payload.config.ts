@@ -8,11 +8,10 @@ import { s3Storage } from '@payloadcms/storage-s3'
 import { buildConfig } from 'payload'
 import sharp from 'sharp'
 
-import { Events } from '@/payload/collections/events'
 import { Media } from '@/payload/collections/media'
+import { MediaTags } from '@/payload/collections/media-tags'
 import { Pages } from '@/payload/collections/pages'
 import { People } from '@/payload/collections/people'
-import { Programs } from '@/payload/collections/programs'
 import { Schools } from '@/payload/collections/schools'
 import { Users } from '@/payload/collections/users'
 import { defaultLexical } from '@/payload/fields/default-lexical'
@@ -47,7 +46,7 @@ export default buildConfig({
     },
   },
 
-  collections: [Users, Media, Pages, Schools, Programs, Events, People],
+  collections: [Users, Media, MediaTags, Pages, Schools, People],
 
   globals: [SiteSettings, Navigation, SeoDefaults],
 

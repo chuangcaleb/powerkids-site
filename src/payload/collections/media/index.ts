@@ -111,5 +111,11 @@ export const Media: CollectionConfig = {
           "Set automatically when an upload matches an existing file's content. Reuse the linked doc instead of this one if it really is the same photo.",
       },
     },
+    {
+      name: 'tags',
+      type: 'relationship',
+      relationTo: 'media-tags',
+      hasMany: true,
+    },
   ],
 }

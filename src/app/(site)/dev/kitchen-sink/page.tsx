@@ -206,7 +206,40 @@ export default function KitchenSinkPage() {
         <div className="wrapper">
           <Heading level={2}>FramedRows block</Heading>
         </div>
-        <FramedRows heading="Our Programs" blockType="framed-rows" />
+        <FramedRows
+          heading="Our Programs"
+          blockType="framed-rows"
+          rows={[
+            {
+              title: 'Morning School',
+              body: 'Structured play and early literacy before the school day begins.',
+              eyebrow: '7:30am - 1:00pm',
+              icon: 'sunrise',
+              image: null,
+            },
+            {
+              title: 'After School Program',
+              body: 'Homework support, enrichment activities, and a hot meal.',
+              eyebrow: '1:00pm - 6:00pm',
+              icon: 'sun',
+              image: null,
+            },
+            {
+              title: 'Evening Daycare',
+              body: 'A calm, supervised space for kids whose parents work late.',
+              eyebrow: '6:00pm - 9:00pm',
+              icon: 'sunset',
+              image: null,
+            },
+            {
+              title: 'Holiday Camp',
+              body: 'Themed weeks of activities during school breaks.',
+              eyebrow: 'School holidays',
+              icon: 'rocket',
+              image: null,
+            },
+          ]}
+        />
       </section>
 
       <section className="flow wrapper">

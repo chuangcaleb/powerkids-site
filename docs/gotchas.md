@@ -13,3 +13,5 @@
 - **`src/app/(payload)/` is a generated integration shape**, excluded from lint and formatting. Regenerate, never hand-edit. Same for `src/payload-types.ts`.
 - **Adding an admin component needs `pnpm generate:importmap`**, not just `generate:types`.
 - **`pnpm migrate:create` patches migration imports automatically.** Calling the Payload CLI directly means running `scripts/fix-migration-imports.mjs` yourself.
+- **`pnpm migrate:create`'s enum create-vs-rename prompt can't run non-interactively** (raw-mode TUI, no TTY in an agent shell). Introspect the live schema instead (`payload.db.drizzle.execute(...)` via a throwaway `pnpm payload run` script) and hand-write the migration — see `20260811_230000_drop_programs_events_authored_blocks.ts` for the pattern.
+- **`pnpm payload run scripts/seed-admin.ts` gets you admin login credentials on dev** — no other way to see them.

@@ -1,9 +1,8 @@
 import type { Block } from 'payload'
 
 /**
- * Embedded video with a tab heading — either one manual video, or an
- * event's own `videos` array rendered as tabs (e.g. Graduation, one tab
- * per year). Primitive: `flow`.
+ * Embedded video(s) rendered as tabs — one entry, or several (e.g.
+ * Graduation, one tab per year). Primitive: `flow`.
  */
 export const VideoBlock: Block = {
   slug: 'video',
@@ -15,40 +14,38 @@ export const VideoBlock: Block = {
       type: 'text',
     },
     {
-      name: 'source',
-      type: 'select',
-      required: true,
-      defaultValue: 'manual',
-      options: [
-        { label: 'Manual video', value: 'manual' },
-        { label: "An event's videos, as tabs", value: 'event' },
-      ],
-    },
-    {
-      name: 'embedId',
+      name: 'subheading',
       type: 'text',
-      admin: {
-        condition: (_, { source } = {}) => source === 'manual',
-        description: 'Video platform embed/video ID.',
-      },
     },
     {
       name: 'poster',
       type: 'upload',
       relationTo: 'media',
       admin: {
-        condition: (_, { source } = {}) => source === 'manual',
         description: 'Shown before the editor presses play.',
       },
     },
     {
-      name: 'event',
-      type: 'relationship',
-      relationTo: 'events',
+      name: 'videos',
+      type: 'array',
       admin: {
-        condition: (_, { source } = {}) => source === 'event',
-        description: "Each entry in that event's `videos` array becomes one tab.",
+        description: 'One tab per entry.',
+        components: { RowLabel: '@/payload/admin/components/row-label#RowLabel' },
       },
+      fields: [
+        {
+          name: 'label',
+          type: 'text',
+          required: true,
+          admin: { description: 'e.g. "Graduation 2026".' },
+        },
+        {
+          name: 'embedId',
+          type: 'text',
+          required: true,
+          admin: { description: 'Video platform embed/video ID.' },
+        },
+      ],
     },
   ],
 }

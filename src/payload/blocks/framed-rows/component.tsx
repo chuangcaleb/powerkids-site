@@ -19,7 +19,6 @@ import {
 import { Heading } from '@/components/heading/heading'
 import { Polaroid } from '@/components/polaroid/polaroid'
 import { cx } from '@/lib/cx'
-import { getPrograms } from '@/payload/collections/programs/get-programs'
 import type { FramedRowsBlock as FramedRowsBlockType } from '@/payload-types'
 import styles from './framed-rows.module.css'
 
@@ -41,14 +40,11 @@ const ICONS = {
   flower: Flower,
 }
 
-/** Position, not the CMS, decides colour and tilt — D-11/06-baseline-config.md#3. Peers, capped at 3. */
+/** Position, not the CMS, decides colour and tilt — D-11/06-baseline-config.md#3. */
 const ACCENTS = [styles.accentA, styles.accentB, styles.accentC]
-const MAX_PROGRAMS = 3
 
-export async function FramedRows({ heading }: FramedRowsBlockType) {
-  const programs = (await getPrograms()).slice(0, MAX_PROGRAMS)
-
-  if (programs.length === 0) return null
+export function FramedRows({ heading, rows }: FramedRowsBlockType) {
+  if (!rows || rows.length === 0) return null
 
   return (
     <section
@@ -67,16 +63,12 @@ export async function FramedRows({ heading }: FramedRowsBlockType) {
             </div>
           </div>
         ) : null}
-        {programs.map((program, index) => {
-          const Icon = program.icon ? ICONS[program.icon as keyof typeof ICONS] : null
-          const image = typeof program.image === 'object' ? program.image : null
-          const body = program.strapline ?? program.summary
+        {rows.map((row, index) => {
+          const Icon = row.icon ? ICONS[row.icon as keyof typeof ICONS] : null
+          const image = typeof row.image === 'object' ? row.image : null
 
           return (
-            <div
-              key={program.id}
-              className={cx(styles.row, ACCENTS[index % ACCENTS.length])}
-            >
+            <div key={row.id} className={cx(styles.row, ACCENTS[index % ACCENTS.length])}>
               <div
                 className={cx(
                   'switcher',
@@ -88,10 +80,12 @@ export async function FramedRows({ heading }: FramedRowsBlockType) {
                 <div className={cx('flow', 'flow-2xs', styles.content)}>
                   <div className={cx('flow', styles.timeStack)}>
                     {Icon ? <Icon aria-hidden="true" strokeWidth={2.2} /> : null}
-                    <span className={styles.hours}>{program.hours}</span>
+                    {row.eyebrow ? (
+                      <span className={styles.hours}>{row.eyebrow}</span>
+                    ) : null}
                   </div>
-                  <Heading level={3}>{program.name}</Heading>
-                  {body ? <p>{body}</p> : null}
+                  <Heading level={3}>{row.title}</Heading>
+                  {row.body ? <p>{row.body}</p> : null}
                 </div>
                 {image ? (
                   <Polaroid

@@ -1,10 +1,10 @@
 /**
  * Realistic dummy content for visual styling review — home, about, careers
- * pages, all 3 programs, all 4 events, 3 schools, 4 people. Structure
- * (names, slugs, hours, addresses, phone numbers) mirrors
- * docs/reference/content-inventory.md; all prose/body copy is generated
- * lorem ipsum (via the `lorem-ipsum` package), not hand-written. One
- * placeholder image reused everywhere a media/upload field is needed.
+ * pages, 3 schools, 4 people. Structure (names, slugs, addresses, phone
+ * numbers) mirrors docs/reference/content-inventory.md; all prose/body copy
+ * is generated lorem ipsum (via the `lorem-ipsum` package), not
+ * hand-written. One placeholder image reused everywhere a media/upload
+ * field is needed.
  *
  *   pnpm payload run scripts/seed-dummy-pages.ts
  */
@@ -88,23 +88,6 @@ await payload.updateGlobal({
           { label: 'Who We Are', url: '/about' },
           { label: 'Our Schools', url: '/about#our-schools' },
           { label: "We're Hiring!", url: '/careers' },
-        ],
-      },
-      {
-        heading: 'Programs',
-        links: [
-          { label: 'Morning School', url: '/programs/morning-school' },
-          { label: 'After School Program', url: '/programs/after-school-program' },
-          { label: 'Evening Daycare', url: '/programs/evening-daycare' },
-        ],
-      },
-      {
-        heading: 'Events',
-        links: [
-          { label: 'Graduation', url: '/events/graduation' },
-          { label: 'Sports Day', url: '/events/sports-day' },
-          { label: 'Field Trips', url: '/events/field-trips' },
-          { label: 'Community Service', url: '/events/community-service' },
         ],
       },
     ],
@@ -197,114 +180,6 @@ await payload.create({
   },
 })
 
-// --- Programs ----------------------------------------------------------
-
-const programSeeds = [
-  {
-    name: 'Morning School',
-    slug: 'morning-school',
-    hours: '08:30AM - 12:30noon',
-    ageRange: 'Ages 2 - 6',
-    strapline: loremSentence(),
-    summary: loremSentence(),
-    body: richText(loremParagraph()),
-    icon: 'sunrise' as const,
-  },
-  {
-    name: 'After School Program',
-    slug: 'after-school-program',
-    hours: '12:30PM - 03:00PM',
-    ageRange: '',
-    strapline: loremSentence(),
-    summary: loremSentence(),
-    body: richText(loremParagraph(), loremParagraph()),
-    icon: 'sun' as const,
-  },
-  {
-    name: 'Evening Daycare',
-    slug: 'evening-daycare',
-    hours: '03:00PM - 07:00PM',
-    ageRange: '',
-    strapline: loremSentence(),
-    summary: loremSentence(),
-    body: richText(loremParagraph()),
-    icon: 'sunset' as const,
-  },
-]
-
-for (const [index, seed] of programSeeds.entries()) {
-  await payload.create({
-    collection: 'programs',
-    context: { disableRevalidate: true },
-    data: {
-      name: seed.name,
-      slug: seed.slug,
-      hours: seed.hours,
-      ageRange: seed.ageRange || undefined,
-      strapline: seed.strapline,
-      summary: seed.summary,
-      body: seed.body,
-      image: media.id,
-      icon: seed.icon,
-      order: index,
-      _status: 'published',
-    },
-  })
-}
-
-// --- Events --------------------------------------------------------------
-
-const eventSeeds = [
-  {
-    name: 'Graduation',
-    slug: 'graduation',
-    summary: loremSentence(),
-    body: richText(loremParagraph()),
-    videos: [
-      { label: 'Graduation 2020', embedId: 'eyyBMt6-zIc' },
-      { label: 'Graduation 2019', embedId: '7nphFvgTY2M' },
-    ],
-  },
-  {
-    name: 'Sports Day',
-    slug: 'sports-day',
-    summary: loremSentence(),
-    body: richText(loremParagraph()),
-    videos: [{ label: 'Sports Day 2019', embedId: 'vj-9e65wtPE' }],
-  },
-  {
-    name: 'Field Trips',
-    slug: 'field-trips',
-    summary: loremSentence(),
-    body: richText(loremParagraph(), loremParagraph()),
-    videos: [],
-  },
-  {
-    name: 'Community Service',
-    slug: 'community-service',
-    summary: loremSentence(),
-    body: richText(loremParagraph(), loremParagraph()),
-    videos: [],
-  },
-]
-
-for (const [index, seed] of eventSeeds.entries()) {
-  await payload.create({
-    collection: 'events',
-    context: { disableRevalidate: true },
-    data: {
-      name: seed.name,
-      slug: seed.slug,
-      summary: seed.summary,
-      body: seed.body,
-      gallery: [media.id, media.id, media.id],
-      videos: seed.videos,
-      order: index,
-      _status: 'published',
-    },
-  })
-}
-
 // --- Pages -----------------------------------------------------------------
 
 await payload.create({
@@ -332,57 +207,20 @@ await payload.create({
       {
         blockType: 'card-grid',
         heading: 'Our Programs',
-        source: 'manual',
         cards: [
-          {
-            heading: 'Morning School',
-            body: loremSentence(),
-            image: media.id,
-            url: '/programs/morning-school',
-          },
-          {
-            heading: 'After School Program',
-            body: loremSentence(),
-            image: media.id,
-            url: '/programs/after-school-program',
-          },
-          {
-            heading: 'Evening Daycare',
-            body: loremSentence(),
-            image: media.id,
-            url: '/programs/evening-daycare',
-          },
+          { heading: 'Morning School', body: loremSentence(), image: media.id },
+          { heading: 'After School Program', body: loremSentence(), image: media.id },
+          { heading: 'Evening Daycare', body: loremSentence(), image: media.id },
         ],
       },
       {
         blockType: 'card-grid',
         heading: 'Our Events',
-        source: 'manual',
         cards: [
-          {
-            heading: 'Graduation',
-            body: loremSentence(),
-            image: media.id,
-            url: '/events/graduation',
-          },
-          {
-            heading: 'Sports Day',
-            body: loremSentence(),
-            image: media.id,
-            url: '/events/sports-day',
-          },
-          {
-            heading: 'Field Trips',
-            body: loremSentence(),
-            image: media.id,
-            url: '/events/field-trips',
-          },
-          {
-            heading: 'Community Service',
-            body: loremSentence(),
-            image: media.id,
-            url: '/events/community-service',
-          },
+          { heading: 'Graduation', body: loremSentence(), image: media.id },
+          { heading: 'Sports Day', body: loremSentence(), image: media.id },
+          { heading: 'Field Trips', body: loremSentence(), image: media.id },
+          { heading: 'Community Service', body: loremSentence(), image: media.id },
         ],
       },
       {
@@ -428,7 +266,6 @@ await payload.create({
       {
         blockType: 'card-grid',
         heading: 'Our Mission & Vision',
-        source: 'manual',
         cards: [
           {
             heading: 'Our Mission',
@@ -496,7 +333,6 @@ await payload.create({
       {
         blockType: 'card-grid',
         heading: 'Current Vacancies',
-        source: 'manual',
         cards: [
           {
             heading: 'Teacher',
@@ -515,7 +351,5 @@ await payload.create({
   },
 })
 
-console.log(
-  `Seeded 3 pages, ${programSeeds.length} programs, ${eventSeeds.length} events, ${schoolIds.length} schools, 4 people.`,
-)
+console.log(`Seeded 3 pages, ${schoolIds.length} schools, 4 people.`)
 process.exit(0)

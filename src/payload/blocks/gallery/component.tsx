@@ -1,14 +1,28 @@
 import { Heading } from '@/components/heading/heading'
 import { Media } from '@/components/media/media'
-import { getEventById } from '@/payload/collections/events/get-events'
+import { getPayloadClient } from '@/lib/payload'
 import type { GalleryBlock, Media as MediaDoc } from '@/payload-types'
 
+const SORT: Record<NonNullable<GalleryBlock['sort']>, string> = {
+  newest: '-createdAt',
+  oldest: 'createdAt',
+  filename: 'filename',
+}
+
 async function resolveImages(block: GalleryBlock): Promise<MediaDoc[]> {
-  if (block.source === 'event') {
-    if (!block.event) return []
-    const eventId = typeof block.event === 'object' ? block.event.id : block.event
-    const event = await getEventById(eventId)
-    return (event.gallery ?? []).filter((doc): doc is MediaDoc => typeof doc === 'object')
+  if (block.mode === 'tag') {
+    if (!block.tag) return []
+    const tagId = typeof block.tag === 'object' ? block.tag.id : block.tag
+    const payload = await getPayloadClient()
+    const result = await payload.find({
+      collection: 'media',
+      where: { tags: { contains: tagId } },
+      sort: SORT[block.sort ?? 'newest'],
+      depth: 0,
+      limit: 100,
+      overrideAccess: false,
+    })
+    return result.docs
   }
 
   return (block.images ?? []).filter((doc): doc is MediaDoc => typeof doc === 'object')
@@ -20,6 +34,7 @@ export async function Gallery(block: GalleryBlock) {
   return (
     <section className="wrapper flow">
       {block.heading ? <Heading level={2}>{block.heading}</Heading> : null}
+      {block.subheading ? <p>{block.subheading}</p> : null}
       <div className="grid-auto">
         {images.map((image, index) => (
           // Index in the key too: an editor can legitimately place the same

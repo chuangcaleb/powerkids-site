@@ -1,14 +1,12 @@
 import type { Block } from 'payload'
 
 /**
- * Renders the `programs` collection as three tilted, alternating rows inside
- * a bordered band — no per-instance content fields, per the "no content
- * defaults pretending to be design" rule (see `schools` block). Colour and
- * tilt are assigned by position, not authored in the CMS. Capped at 3 items
- * (D-11: the three programs are peers, no size hierarchy). Named for the
- * visual pattern, not the content — the "framed band" layout from
+ * Alternating, tilted rows inside a bordered band — no per-instance content
+ * defaults pretending to be design (see `schools` block). Colour and tilt
+ * are assigned by position, not authored in the CMS. Named for the visual
+ * pattern, not the content — the "framed band" layout from
  * `04-open-knobs.md` K-07 — since a block name is part of the closed set the
- * owner reviews, not a description of today's only consumer.
+ * owner reviews, not a description of any one page's content.
  */
 export const FramedRowsBlock: Block = {
   slug: 'framed-rows',
@@ -18,6 +16,49 @@ export const FramedRowsBlock: Block = {
     {
       name: 'heading',
       type: 'text',
+    },
+    {
+      name: 'rows',
+      type: 'array',
+      admin: {
+        components: { RowLabel: '@/payload/admin/components/row-label#RowLabel' },
+      },
+      fields: [
+        { name: 'title', type: 'text', required: true },
+        { name: 'body', type: 'textarea' },
+        { name: 'image', type: 'upload', relationTo: 'media' },
+        {
+          name: 'icon',
+          type: 'select',
+          admin: {
+            description: 'Icon shown above the eyebrow.',
+          },
+          options: [
+            'sunrise',
+            'sun',
+            'sunset',
+            'star',
+            'cloud',
+            'sparkles',
+            'smile',
+            'feather',
+            'music',
+            'rocket',
+            'palette',
+            'pen-line',
+            'zap',
+            'rainbow',
+            'flower',
+          ],
+        },
+        {
+          name: 'eyebrow',
+          type: 'text',
+          admin: {
+            description: 'Short label shown above the title, e.g. hours or a tagline.',
+          },
+        },
+      ],
     },
   ],
 }

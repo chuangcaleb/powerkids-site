@@ -69,10 +69,9 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    'media-tags': MediaTag;
     pages: Page;
     schools: School;
-    programs: Program;
-    events: Event;
     people: Person;
     'payload-kv': PayloadKv;
     'payload-folders': FolderInterface;
@@ -88,10 +87,9 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    'media-tags': MediaTagsSelect<false> | MediaTagsSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     schools: SchoolsSelect<false> | SchoolsSelect<true>;
-    programs: ProgramsSelect<false> | ProgramsSelect<true>;
-    events: EventsSelect<false> | EventsSelect<true>;
     people: PeopleSelect<false> | PeopleSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-folders': PayloadFoldersSelect<false> | PayloadFoldersSelect<true>;
@@ -192,6 +190,7 @@ export interface Media {
    * Set automatically when an upload matches an existing file's content. Reuse the linked doc instead of this one if it really is the same photo.
    */
   possibleDuplicateOf?: (number | null) | Media;
+  tags?: (number | MediaTag)[] | null;
   folder?: (number | null) | FolderInterface;
   updatedAt: string;
   createdAt: string;
@@ -230,6 +229,21 @@ export interface Media {
       filename?: string | null;
     };
   };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media-tags".
+ */
+export interface MediaTag {
+  id: number;
+  name: string;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -413,10 +427,6 @@ export interface MediaTextBlock {
  */
 export interface CardGridBlock {
   heading?: string | null;
-  /**
-   * Auto-populated cards stay in sync as programs/events are added or removed. Manual cards give full control over copy per card.
-   */
-  source: 'manual' | 'programs' | 'events';
   cards?:
     | {
         heading: string;
@@ -486,68 +496,20 @@ export interface StatsBlock {
  */
 export interface GalleryBlock {
   heading?: string | null;
-  source: 'manual' | 'event';
-  images?: (number | Media)[] | null;
+  subheading?: string | null;
+  mode: 'manual' | 'tag';
   /**
-   * Renders that event's own gallery field.
+   * Drag to reorder.
    */
-  event?: (number | null) | Event;
+  images?: (number | Media)[] | null;
+  tag?: (number | null) | MediaTag;
+  /**
+   * No per-image ordering in tag mode — pick a sort instead.
+   */
+  sort?: ('newest' | 'oldest' | 'filename') | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'gallery';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "events".
- */
-export interface Event {
-  id: number;
-  name: string;
-  /**
-   * When enabled, the slug will auto-generate from the title field on save and autosave.
-   */
-  generateSlug?: boolean | null;
-  slug: string;
-  summary?: string | null;
-  body?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  gallery?: (number | Media)[] | null;
-  /**
-   * One entry per year. Add a new one each occurrence — this replaced a hard-coded, developer-maintained list.
-   */
-  videos?:
-    | {
-        /**
-         * e.g. "Graduation 2026".
-         */
-        label: string;
-        /**
-         * Video platform embed/video ID.
-         */
-        embedId: string;
-        id?: string | null;
-      }[]
-    | null;
-  /**
-   * Controls listing order. Lower shows first.
-   */
-  order?: number | null;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -580,6 +542,40 @@ export interface SchoolsBlock {
  */
 export interface FramedRowsBlock {
   heading?: string | null;
+  rows?:
+    | {
+        title: string;
+        body?: string | null;
+        image?: (number | null) | Media;
+        /**
+         * Icon shown above the eyebrow.
+         */
+        icon?:
+          | (
+              | 'sunrise'
+              | 'sun'
+              | 'sunset'
+              | 'star'
+              | 'cloud'
+              | 'sparkles'
+              | 'smile'
+              | 'feather'
+              | 'music'
+              | 'rocket'
+              | 'palette'
+              | 'pen-line'
+              | 'zap'
+              | 'rainbow'
+              | 'flower'
+            )
+          | null;
+        /**
+         * Short label shown above the title, e.g. hours or a tagline.
+         */
+        eyebrow?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'framed-rows';
@@ -631,19 +627,27 @@ export interface ContactBlock {
  */
 export interface VideoBlock {
   heading?: string | null;
-  source: 'manual' | 'event';
-  /**
-   * Video platform embed/video ID.
-   */
-  embedId?: string | null;
+  subheading?: string | null;
   /**
    * Shown before the editor presses play.
    */
   poster?: (number | null) | Media;
   /**
-   * Each entry in that event's `videos` array becomes one tab.
+   * One tab per entry.
    */
-  event?: (number | null) | Event;
+  videos?:
+    | {
+        /**
+         * e.g. "Graduation 2026".
+         */
+        label: string;
+        /**
+         * Video platform embed/video ID.
+         */
+        embedId: string;
+        id?: string | null;
+      }[]
+    | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'video';
@@ -732,77 +736,6 @@ export interface Person {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "programs".
- */
-export interface Program {
-  id: number;
-  name: string;
-  /**
-   * When enabled, the slug will auto-generate from the title field on save and autosave.
-   */
-  generateSlug?: boolean | null;
-  slug: string;
-  /**
-   * e.g. "7:30am - 1:00pm".
-   */
-  hours: string;
-  /**
-   * e.g. "3 - 6 years". Leave empty if not age-restricted.
-   */
-  ageRange?: string | null;
-  /**
-   * Short one-liner shown in card/list views.
-   */
-  strapline?: string | null;
-  summary?: string | null;
-  body?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  image?: (number | null) | Media;
-  /**
-   * Icon shown above the hours in the Framed Rows block.
-   */
-  icon?:
-    | (
-        | 'sunrise'
-        | 'sun'
-        | 'sunset'
-        | 'star'
-        | 'cloud'
-        | 'sparkles'
-        | 'smile'
-        | 'feather'
-        | 'music'
-        | 'rocket'
-        | 'palette'
-        | 'pen-line'
-        | 'zap'
-        | 'rainbow'
-        | 'flower'
-      )
-    | null;
-  /**
-   * Controls listing order. Lower shows first.
-   */
-  order?: number | null;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -834,20 +767,16 @@ export interface PayloadLockedDocument {
         value: number | Media;
       } | null)
     | ({
+        relationTo: 'media-tags';
+        value: number | MediaTag;
+      } | null)
+    | ({
         relationTo: 'pages';
         value: number | Page;
       } | null)
     | ({
         relationTo: 'schools';
         value: number | School;
-      } | null)
-    | ({
-        relationTo: 'programs';
-        value: number | Program;
-      } | null)
-    | ({
-        relationTo: 'events';
-        value: number | Event;
       } | null)
     | ({
         relationTo: 'people';
@@ -932,6 +861,7 @@ export interface MediaSelect<T extends boolean = true> {
   caption?: T;
   checksum?: T;
   possibleDuplicateOf?: T;
+  tags?: T;
   folder?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -978,6 +908,17 @@ export interface MediaSelect<T extends boolean = true> {
               filename?: T;
             };
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media-tags_select".
+ */
+export interface MediaTagsSelect<T extends boolean = true> {
+  name?: T;
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1085,7 +1026,6 @@ export interface MediaTextBlockSelect<T extends boolean = true> {
  */
 export interface CardGridBlockSelect<T extends boolean = true> {
   heading?: T;
-  source?: T;
   cards?:
     | T
     | {
@@ -1142,9 +1082,11 @@ export interface StatsBlockSelect<T extends boolean = true> {
  */
 export interface GalleryBlockSelect<T extends boolean = true> {
   heading?: T;
-  source?: T;
+  subheading?: T;
+  mode?: T;
   images?: T;
-  event?: T;
+  tag?: T;
+  sort?: T;
   id?: T;
   blockName?: T;
 }
@@ -1179,6 +1121,16 @@ export interface SchoolsBlockSelect<T extends boolean = true> {
  */
 export interface FramedRowsBlockSelect<T extends boolean = true> {
   heading?: T;
+  rows?:
+    | T
+    | {
+        title?: T;
+        body?: T;
+        image?: T;
+        icon?: T;
+        eyebrow?: T;
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -1213,10 +1165,15 @@ export interface ContactBlockSelect<T extends boolean = true> {
  */
 export interface VideoBlockSelect<T extends boolean = true> {
   heading?: T;
-  source?: T;
-  embedId?: T;
+  subheading?: T;
   poster?: T;
-  event?: T;
+  videos?:
+    | T
+    | {
+        label?: T;
+        embedId?: T;
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -1239,49 +1196,6 @@ export interface SchoolsSelect<T extends boolean = true> {
   mapUrl?: T;
   photo?: T;
   principal?: T;
-  order?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "programs_select".
- */
-export interface ProgramsSelect<T extends boolean = true> {
-  name?: T;
-  generateSlug?: T;
-  slug?: T;
-  hours?: T;
-  ageRange?: T;
-  strapline?: T;
-  summary?: T;
-  body?: T;
-  image?: T;
-  icon?: T;
-  order?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "events_select".
- */
-export interface EventsSelect<T extends boolean = true> {
-  name?: T;
-  generateSlug?: T;
-  slug?: T;
-  summary?: T;
-  body?: T;
-  gallery?: T;
-  videos?:
-    | T
-    | {
-        label?: T;
-        embedId?: T;
-        id?: T;
-      };
   order?: T;
   updatedAt?: T;
   createdAt?: T;

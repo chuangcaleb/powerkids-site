@@ -14,6 +14,7 @@ import * as migration_20260810_143644_add_programs_showcase_block from './202608
 import * as migration_20260810_144801_rename_programs_showcase_to_framed_rows from './20260810_144801_rename_programs_showcase_to_framed_rows'
 import * as migration_20260810_150409_add_sunrise_sunset_icon_options from './20260810_150409_add_sunrise_sunset_icon_options'
 import * as migration_20260811_224500_add_site_settings_footer_reel from './20260811_224500_add_site_settings_footer_reel'
+import * as migration_20260811_230000_drop_programs_events_authored_blocks from './20260811_230000_drop_programs_events_authored_blocks'
 
 export const migrations = [
   {
@@ -95,5 +96,10 @@ export const migrations = [
     up: migration_20260811_224500_add_site_settings_footer_reel.up,
     down: migration_20260811_224500_add_site_settings_footer_reel.down,
     name: '20260811_224500_add_site_settings_footer_reel',
+  },
+  {
+    up: migration_20260811_230000_drop_programs_events_authored_blocks.up,
+    down: migration_20260811_230000_drop_programs_events_authored_blocks.down,
+    name: '20260811_230000_drop_programs_events_authored_blocks',
   },
 ]
