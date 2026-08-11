@@ -2,7 +2,7 @@ import type { CSSProperties, ReactNode } from 'react'
 import { Button } from '@/components/button/button'
 import { DoodleLayer } from '@/components/doodle-layer/doodle-layer'
 import { Heading } from '@/components/heading/heading'
-import { Media } from '@/components/media/media'
+import { Polaroid } from '@/components/polaroid/polaroid'
 import { cx } from '@/lib/cx'
 import type { Page } from '@/payload-types'
 import styles from './render-hero.module.css'
@@ -80,17 +80,15 @@ export function Hero({ hero }: HeroProps) {
           ) : null}
         </div>
         {media ? (
-          <div className={cx('sidebar', styles.media)}>
-            <figure className={styles.polaroid}>
-              <span className={styles.tape} aria-hidden="true" />
-              <Media
-                doc={media}
-                priority
-                sizes="(min-width: 40rem) 45vw, 100vw"
-                className={styles.photo}
-              />
-              <figcaption className={styles.caption}>{media.alt}</figcaption>
-            </figure>
+          <div className="sidebar">
+            <Polaroid
+              doc={media}
+              caption={media.alt}
+              priority
+              sizes="(min-width: 40rem) 45vw, 100vw"
+              tilt={-3}
+              className={styles.polaroid}
+            />
           </div>
         ) : null}
       </div>

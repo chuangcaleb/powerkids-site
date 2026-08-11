@@ -1,0 +1,45 @@
+/* Taped polaroid: white frame, hard offset shadow. Large tape (D-07/D-01
+ * from the hero, since consolidated here). Sizing is set by the caller via
+ * `className`; tilt is the `tilt` prop, feeding --polaroid-tilt here — one
+ * place owns `transform: rotate`, callers never redeclare it. */
+.polaroid {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  width: 100%;
+  background-color: var(--colour-white);
+  border: var(--border-width) solid var(--border-strong);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-hard);
+  padding: var(--space-s);
+  padding-bottom: var(--space-m);
+  transform: rotate(var(--polaroid-tilt, 0deg));
+}
+
+.photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-s);
+}
+
+/* Tape strip overlapping the top edge. Translucent white, not solid amber. */
+.tape {
+  position: absolute;
+  top: calc(var(--space-m) * -1);
+  left: 50%;
+  width: var(--space-3xl);
+  height: var(--space-l);
+  background-color: color-mix(in srgb, var(--colour-white) 69%, transparent);
+  border-width: 0.125rem;
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--border-strong) 15%, transparent);
+  transform: translateX(-50%) rotate(-4deg);
+}
+
+.caption {
+  margin-top: var(--space-2xs);
+  color: var(--text-body);
+  font-size: var(--step--1);
+  text-align: center;
+}

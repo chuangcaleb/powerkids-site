@@ -40,48 +40,10 @@
   font-size: var(--step-hero);
 }
 
-/* Taped polaroid: white frame, hard offset shadow, tilted (D-07/D-01). */
+/* D-07/D-01: hero's polaroid is `Polaroid` (src/components/polaroid), sized
+ * for this layout via `className` — tilt goes through its `tilt` prop instead. */
 .polaroid {
-  position: relative;
-  display: inline-block;
   max-width: 28.75rem; /* panel3.html: `.hero .pol{ max-width:460px }` */
-  width: 100%;
-
-  /* var(--colour-white), matching framed-rows' polaroid — not var(--bg-surface)
-   * (--colour-cream), which panel3.html's `.pol{ background:#fff }` isn't. */
-  background-color: var(--colour-white);
-  border: var(--border-width) solid var(--border-strong);
-  border-radius: var(--radius-m);
-  box-shadow: var(--shadow-hard);
-  padding: var(--space-s);
-  padding-bottom: var(--space-m);
-
-  /* No rotation token exists yet (only colour/spacing/type/radii are tokenised
-   * so far) — fixed tilt angle, matches baseline config's tilt:5 direction. */
-  transform: rotate(-3deg);
-}
-
-.photo {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: var(--radius-s);
-}
-
-/* Tape strip overlapping the top edge. panel3.html's tape is translucent
- * white (`#ffffffb0`), not solid amber — matches framed-rows.module.css's
- * `.tape` treatment (same proto pattern, independently implemented there). */
-.tape {
-  position: absolute;
-  top: calc(var(--space-m) * -1);
-  left: 50%;
-  width: var(--space-3xl);
-  height: var(--space-l);
-  background-color: color-mix(in srgb, var(--colour-white) 69%, transparent);
-  border-width: 0.125rem;
-  border-style: solid;
-  border-color: color-mix(in srgb, var(--border-strong) 15%, transparent);
-  transform: translateX(-50%) rotate(-4deg);
 }
 
 .highlight {
@@ -101,12 +63,4 @@
 .highlightRed {
   background-color: var(--accent-red);
   transform: rotate(2deg);
-}
-
-/* Caption = the image's own alt text (D-07), not decorative. */
-.caption {
-  margin-top: var(--space-2xs);
-  color: var(--text-body);
-  font-size: var(--step--1);
-  text-align: center;
 }

@@ -17,7 +17,7 @@ import {
   Zap,
 } from 'lucide-react'
 import { Heading } from '@/components/heading/heading'
-import { Media } from '@/components/media/media'
+import { Polaroid } from '@/components/polaroid/polaroid'
 import { cx } from '@/lib/cx'
 import { getPrograms } from '@/payload/collections/programs/get-programs'
 import type { FramedRowsBlock as FramedRowsBlockType } from '@/payload-types'
@@ -93,21 +93,14 @@ export async function FramedRows({ heading }: FramedRowsBlockType) {
                   <Heading level={3}>{program.name}</Heading>
                   {body ? <p>{body}</p> : null}
                 </div>
-                <div
-                  className={cx(
-                    styles.media,
-                    index % 2 === 1 ? styles.tiltNeg : styles.tiltPos,
-                  )}
-                >
-                  {image ? (
-                    <figure className={styles.polaroid}>
-                      <span className={styles.tape} aria-hidden="true" />
-                      <div className={styles.photo}>
-                        <Media doc={image} sizes="(min-width: 768px) 33vw, 100vw" />
-                      </div>
-                    </figure>
-                  ) : null}
-                </div>
+                {image ? (
+                  <Polaroid
+                    doc={image}
+                    sizes="(min-width: 768px) 33vw, 100vw"
+                    tilt={index % 2 === 1 ? -5 : 5}
+                    className={styles.media}
+                  />
+                ) : null}
               </div>
             </div>
           )
