@@ -207,12 +207,12 @@ export default function KitchenSinkPage() {
           <Heading level={2}>FramedRows block</Heading>
         </div>
         <FramedRows
-          heading="Our Programs"
+          heading="Fun learning is our serious business."
           blockType="framed-rows"
           rows={[
             {
               title: 'Morning School',
-              body: 'Structured play and early literacy before the school day begins.',
+              body: 'Essential early childhood education for children from Ages 2–6 — play, phonics, numbers, and a lot of singing.',
               eyebrow: '7:30am - 1:00pm',
               icon: 'sunrise',
               image: null,
