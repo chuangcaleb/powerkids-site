@@ -18,6 +18,8 @@ import {
 } from 'lucide-react'
 import { Heading } from '@/components/heading/heading'
 import { Polaroid } from '@/components/polaroid/polaroid'
+import { RichText } from '@/components/rich-text/rich-text'
+import { SectionHeader } from '@/components/section-header/section-header'
 import { cx } from '@/lib/cx'
 import type { FramedRowsBlock as FramedRowsBlockType } from '@/payload-types'
 import styles from './framed-rows.module.css'
@@ -43,7 +45,7 @@ const ICONS = {
 /** Position, not the CMS, decides colour and tilt — D-11/06-baseline-config.md#3. */
 const ACCENTS = [styles.accentA, styles.accentB, styles.accentC]
 
-export function FramedRows({ heading, rows }: FramedRowsBlockType) {
+export function FramedRows({ header, rows }: FramedRowsBlockType) {
   if (!rows || rows.length === 0) return null
 
   return (
@@ -56,10 +58,10 @@ export function FramedRows({ heading, rows }: FramedRowsBlockType) {
       }
     >
       <div className={styles.band}>
-        {heading ? (
+        {header?.eyebrow || header?.heading || header?.lead ? (
           <div className={cx(styles.row)}>
             <div className="wrapper">
-              <Heading level={2}>{heading}</Heading>
+              <SectionHeader header={header} />
             </div>
           </div>
         ) : null}
@@ -85,7 +87,7 @@ export function FramedRows({ heading, rows }: FramedRowsBlockType) {
                     ) : null}
                   </div>
                   <Heading level={3}>{row.title}</Heading>
-                  {row.body ? <p>{row.body}</p> : null}
+                  {row.body ? <RichText data={row.body} /> : null}
                 </div>
                 {image ? (
                   <Polaroid

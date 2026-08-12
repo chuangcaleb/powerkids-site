@@ -1,19 +1,12 @@
 import type { Block } from 'payload'
+import { withHeaderTabs } from '@/payload/fields/header'
 
 /** Photo grid, any number of images — curated manually, or every Media doc carrying a tag. Primitive: `grid-auto`. */
 export const Gallery: Block = {
   slug: 'gallery',
   interfaceName: 'GalleryBlock',
   labels: { singular: 'Gallery', plural: 'Gallery Blocks' },
-  fields: [
-    {
-      name: 'heading',
-      type: 'text',
-    },
-    {
-      name: 'subheading',
-      type: 'text',
-    },
+  fields: withHeaderTabs([
     {
       name: 'mode',
       type: 'select',
@@ -56,5 +49,5 @@ export const Gallery: Block = {
         description: 'No per-image ordering in tag mode — pick a sort instead.',
       },
     },
-  ],
+  ]),
 }

@@ -1,12 +1,12 @@
 import { Accordion } from '@/components/accordion/accordion'
-import { Heading } from '@/components/heading/heading'
 import { RichText } from '@/components/rich-text/rich-text'
+import { SectionHeader } from '@/components/section-header/section-header'
 import type { FaqBlock as FaqBlockType } from '@/payload-types'
 
-export function Faq({ heading, items }: FaqBlockType) {
+export function Faq({ header, items }: FaqBlockType) {
   return (
     <section className="wrapper flow">
-      {heading ? <Heading level={2}>{heading}</Heading> : null}
+      <SectionHeader header={header} />
       <Accordion
         items={(items ?? []).map((item, index) => ({
           id: String(item.id ?? index),

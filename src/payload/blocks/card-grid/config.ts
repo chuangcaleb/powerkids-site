@@ -1,15 +1,12 @@
 import type { Block } from 'payload'
+import { withHeaderTabs } from '@/payload/fields/header'
 
 /** Cards — manual, or auto-populated from programs/events. Primitive: `grid-auto`. */
 export const CardGrid: Block = {
   slug: 'card-grid',
   interfaceName: 'CardGridBlock',
   labels: { singular: 'Card Grid', plural: 'Card Grid Blocks' },
-  fields: [
-    {
-      name: 'heading',
-      type: 'text',
-    },
+  fields: withHeaderTabs([
     {
       name: 'cards',
       type: 'array',
@@ -27,5 +24,5 @@ export const CardGrid: Block = {
         },
       ],
     },
-  ],
+  ]),
 }

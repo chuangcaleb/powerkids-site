@@ -1,6 +1,7 @@
 import { Card } from '@/components/card/card'
 import { Heading } from '@/components/heading/heading'
 import { Media } from '@/components/media/media'
+import { SectionHeader } from '@/components/section-header/section-header'
 import type { CardGridBlock, Media as MediaDoc } from '@/payload-types'
 
 type CardItem = {
@@ -26,7 +27,7 @@ export function CardGrid(block: CardGridBlock) {
 
   return (
     <section className="wrapper flow">
-      {block.heading ? <Heading level={2}>{block.heading}</Heading> : null}
+      <SectionHeader header={block.header} />
       <div className="grid-auto">
         {cards.map((card, index) => (
           <Card key={`${card.id}-${index}`}>

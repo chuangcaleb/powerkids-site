@@ -1,5 +1,5 @@
-import { Heading } from '@/components/heading/heading'
 import { Media } from '@/components/media/media'
+import { SectionHeader } from '@/components/section-header/section-header'
 import { getPayloadClient } from '@/lib/payload'
 import type { GalleryBlock, Media as MediaDoc } from '@/payload-types'
 
@@ -33,8 +33,7 @@ export async function Gallery(block: GalleryBlock) {
 
   return (
     <section className="wrapper flow">
-      {block.heading ? <Heading level={2}>{block.heading}</Heading> : null}
-      {block.subheading ? <p>{block.subheading}</p> : null}
+      <SectionHeader header={block.header} />
       <div className="grid-auto">
         {images.map((image, index) => (
           // Index in the key too: an editor can legitimately place the same

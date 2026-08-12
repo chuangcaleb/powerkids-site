@@ -1,4 +1,5 @@
 import type { Block } from 'payload'
+import { withHeaderTabs } from '@/payload/fields/header'
 
 /**
  * Alternating, tilted rows inside a bordered band — no per-instance content
@@ -12,11 +13,7 @@ export const FramedRowsBlock: Block = {
   slug: 'framed-rows',
   interfaceName: 'FramedRowsBlock',
   labels: { singular: 'Framed Rows', plural: 'Framed Rows Blocks' },
-  fields: [
-    {
-      name: 'heading',
-      type: 'text',
-    },
+  fields: withHeaderTabs([
     {
       name: 'rows',
       type: 'array',
@@ -25,7 +22,7 @@ export const FramedRowsBlock: Block = {
       },
       fields: [
         { name: 'title', type: 'text', required: true },
-        { name: 'body', type: 'textarea' },
+        { name: 'body', type: 'richText' },
         { name: 'image', type: 'upload', relationTo: 'media' },
         {
           name: 'icon',
@@ -60,5 +57,5 @@ export const FramedRowsBlock: Block = {
         },
       ],
     },
-  ],
+  ]),
 }

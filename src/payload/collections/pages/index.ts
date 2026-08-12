@@ -19,11 +19,8 @@ import { Faq } from '@/payload/blocks/faq/config'
 import { FramedRowsBlock } from '@/payload/blocks/framed-rows/config'
 import { Gallery } from '@/payload/blocks/gallery/config'
 import { MediaText } from '@/payload/blocks/media-text/config'
-import { Prose } from '@/payload/blocks/prose/config'
 import { SchoolsBlock } from '@/payload/blocks/schools/config'
-import { Stats } from '@/payload/blocks/stats/config'
 import { Steps } from '@/payload/blocks/steps/config'
-import { VideoBlock } from '@/payload/blocks/video/config'
 
 import { hero } from './hero'
 import { populatePublishedAt } from './hooks/populate-published-at'
@@ -49,7 +46,7 @@ function previewUrl(slug: unknown) {
   return `/preview?${params.toString()}`
 }
 
-/** Editor-composed routes. `layout` is the closed 13-block set — hero is not one of them, see ./hero.ts. */
+/** Editor-composed routes. `layout` is the closed set — hero is not one of them, see ./hero.ts. */
 export const Pages: CollectionConfig = {
   slug: 'pages',
   access: {
@@ -103,19 +100,16 @@ export const Pages: CollectionConfig = {
               required: true,
               admin: { initCollapsed: true },
               blocks: [
-                Prose,
                 Content,
                 MediaText,
                 CardGrid,
                 Steps,
-                Stats,
                 Gallery,
                 CtaBanner,
                 SchoolsBlock,
                 FramedRowsBlock,
                 Faq,
                 Contact,
-                VideoBlock,
               ],
             },
           ],

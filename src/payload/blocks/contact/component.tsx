@@ -1,13 +1,13 @@
-import { Heading } from '@/components/heading/heading'
+import { SectionHeader } from '@/components/section-header/section-header'
 import { getSiteSettings } from '@/payload/globals/get-site-settings'
 import type { ContactBlock } from '@/payload-types'
 
-export async function Contact({ heading }: ContactBlock) {
+export async function Contact({ header }: ContactBlock) {
   const siteSettings = await getSiteSettings()
 
   return (
     <section className="wrapper flow" id="contact">
-      {heading ? <Heading level={2}>{heading}</Heading> : null}
+      <SectionHeader header={header} />
       <div className="switcher">
         <div className="flow-2xs">
           <p>{siteSettings.openingDays}</p>

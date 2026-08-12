@@ -1,16 +1,13 @@
 import { Button } from '@/components/button/button'
-import { Heading } from '@/components/heading/heading'
+import { RichText } from '@/components/rich-text/rich-text'
+import { SectionHeader } from '@/components/section-header/section-header'
 import type { StepsBlock } from '@/payload-types'
 
-export function Steps({ heading, steps, cta }: StepsBlock) {
+export function Steps({ header, body, cta }: StepsBlock) {
   return (
     <section className="wrapper flow" id="register">
-      <Heading level={2}>{heading}</Heading>
-      <ol>
-        {(steps ?? []).map((step, index) => (
-          <li key={step.id ?? index}>{step.label}</li>
-        ))}
-      </ol>
+      <SectionHeader header={header} />
+      <RichText data={body} />
       {cta?.label && cta.url ? <Button href={cta.url}>{cta.label}</Button> : null}
     </section>
   )

@@ -14,6 +14,19 @@ import { isProduction } from '@/lib/env'
 import { FramedRows } from '@/payload/blocks/framed-rows/component'
 import styles from './kitchen-sink.module.css'
 
+const richText = (text: string) => ({
+  root: {
+    type: 'root',
+    children: [
+      { type: 'paragraph', children: [{ type: 'text', text, version: 1 }], version: 1 },
+    ],
+    direction: 'ltr' as const,
+    format: '' as const,
+    indent: 0,
+    version: 1,
+  },
+})
+
 const COLOURS = [
   { name: '--bg-surface', var: '--bg-surface' },
   { name: '--text-strong', var: '--text-strong' },
@@ -207,33 +220,39 @@ export default function KitchenSinkPage() {
           <Heading level={2}>FramedRows block</Heading>
         </div>
         <FramedRows
-          heading="Fun learning is our serious business."
+          header={{
+            heading: richText('Fun learning is our serious business.'),
+          }}
           blockType="framed-rows"
           rows={[
             {
               title: 'Morning School',
-              body: 'Essential early childhood education for children from Ages 2–6 — play, phonics, numbers, and a lot of singing.',
+              body: richText(
+                'Essential early childhood education for children from Ages 2–6 — play, phonics, numbers, and a lot of singing.',
+              ),
               eyebrow: '7:30am - 1:00pm',
               icon: 'sunrise',
               image: null,
             },
             {
               title: 'After School Program',
-              body: 'Homework support, enrichment activities, and a hot meal.',
+              body: richText('Homework support, enrichment activities, and a hot meal.'),
               eyebrow: '1:00pm - 6:00pm',
               icon: 'sun',
               image: null,
             },
             {
               title: 'Evening Daycare',
-              body: 'A calm, supervised space for kids whose parents work late.',
+              body: richText(
+                'A calm, supervised space for kids whose parents work late.',
+              ),
               eyebrow: '6:00pm - 9:00pm',
               icon: 'sunset',
               image: null,
             },
             {
               title: 'Holiday Camp',
-              body: 'Themed weeks of activities during school breaks.',
+              body: richText('Themed weeks of activities during school breaks.'),
               eyebrow: 'School holidays',
               icon: 'rocket',
               image: null,

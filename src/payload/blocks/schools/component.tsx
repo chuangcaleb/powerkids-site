@@ -1,15 +1,16 @@
 import { Card } from '@/components/card/card'
 import { Heading } from '@/components/heading/heading'
 import { Media } from '@/components/media/media'
+import { SectionHeader } from '@/components/section-header/section-header'
 import { getSchools } from '@/payload/collections/schools/get-schools'
 import type { SchoolsBlock as SchoolsBlockType } from '@/payload-types'
 
-export async function SchoolsBlock({ heading }: SchoolsBlockType) {
+export async function SchoolsBlock({ header }: SchoolsBlockType) {
   const schools = await getSchools()
 
   return (
     <section className="wrapper flow">
-      {heading ? <Heading level={2}>{heading}</Heading> : null}
+      <SectionHeader header={header} />
       <div className="grid-auto">
         {schools.map((school) => (
           <Card key={school.id}>

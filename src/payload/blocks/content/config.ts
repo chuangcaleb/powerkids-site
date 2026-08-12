@@ -1,18 +1,14 @@
-import type { Block } from 'payload'
-import {
-  FixedToolbarFeature,
-  HeadingFeature,
-  InlineToolbarFeature,
-  lexicalEditor,
-} from '@payloadcms/richtext-lexical'
 import { link } from '@/fields/link'
+import { withHeaderTabs } from '@/payload/fields/header'
+import { HeadingFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
+import type { Block } from 'payload'
 
 /** Flexible multi-column rich text/media/link layout. Bespoke grid — no primitive covers fixed 12-col spans, see content.module.css. */
 export const Content: Block = {
   slug: 'content',
   interfaceName: 'ContentBlock',
   labels: { singular: 'Content', plural: 'Content Blocks' },
-  fields: [
+  fields: withHeaderTabs([
     {
       name: 'columns',
       type: 'array',
@@ -54,8 +50,6 @@ export const Content: Block = {
             features: ({ rootFeatures }) => [
               ...rootFeatures,
               HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
-              FixedToolbarFeature(),
-              InlineToolbarFeature(),
             ],
           }),
           label: false,
@@ -85,5 +79,5 @@ export const Content: Block = {
         }),
       ],
     },
-  ],
+  ]),
 }

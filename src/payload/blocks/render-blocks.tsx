@@ -8,11 +8,8 @@ import { Faq } from './faq/component'
 import { FramedRows } from './framed-rows/component'
 import { Gallery } from './gallery/component'
 import { MediaText } from './media-text/component'
-import { Prose } from './prose/component'
 import { SchoolsBlock } from './schools/component'
-import { Stats } from './stats/component'
 import { Steps } from './steps/component'
-import { VideoBlock } from './video/component'
 
 const blockComponents = {
   'card-grid': CardGrid,
@@ -23,11 +20,8 @@ const blockComponents = {
   'framed-rows': FramedRows,
   gallery: Gallery,
   'media-text': MediaText,
-  prose: Prose,
   schools: SchoolsBlock,
-  stats: Stats,
   steps: Steps,
-  video: VideoBlock,
 }
 
 /** Dispatches one `pages.layout` entry to its block component. Unknown type renders nothing, never throws. */

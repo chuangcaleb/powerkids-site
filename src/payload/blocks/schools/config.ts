@@ -1,4 +1,5 @@
 import type { Block } from 'payload'
+import { headerField } from '@/payload/fields/header'
 
 /**
  * Renders the `schools` collection in full — no per-instance content
@@ -9,10 +10,5 @@ export const SchoolsBlock: Block = {
   slug: 'schools',
   interfaceName: 'SchoolsBlock',
   labels: { singular: 'Schools', plural: 'Schools Blocks' },
-  fields: [
-    {
-      name: 'heading',
-      type: 'text',
-    },
-  ],
+  fields: [headerField()],
 }

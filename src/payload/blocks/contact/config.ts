@@ -1,4 +1,5 @@
 import type { Block } from 'payload'
+import { headerField } from '@/payload/fields/header'
 
 /**
  * Hours, email, phones, socials — all from `site-settings`/`navigation`
@@ -8,10 +9,5 @@ export const Contact: Block = {
   slug: 'contact',
   interfaceName: 'ContactBlock',
   labels: { singular: 'Contact', plural: 'Contact Blocks' },
-  fields: [
-    {
-      name: 'heading',
-      type: 'text',
-    },
-  ],
+  fields: [headerField()],
 }

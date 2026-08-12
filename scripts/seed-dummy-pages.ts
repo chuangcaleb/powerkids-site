@@ -43,6 +43,31 @@ const richText = (...paragraphs: string[]) => ({
   },
 })
 
+const richTextOrderedList = (...items: string[]) => ({
+  root: {
+    type: 'root',
+    children: [
+      {
+        type: 'list',
+        tag: 'ol',
+        listType: 'number',
+        start: 1,
+        children: items.map((text, index) => ({
+          type: 'listitem',
+          value: index + 1,
+          children: [{ type: 'text', text, version: 1 }],
+          version: 1,
+        })),
+        version: 1,
+      },
+    ],
+    direction: 'ltr' as const,
+    format: '' as const,
+    indent: 0,
+    version: 1,
+  },
+})
+
 const payload = await getPayload({ config })
 
 const media = await payload.create({
@@ -201,12 +226,8 @@ await payload.create({
     },
     layout: [
       {
-        blockType: 'prose',
-        content: richText(loremParagraph(), loremParagraph()),
-      },
-      {
         blockType: 'card-grid',
-        heading: 'Our Programs',
+        header: { heading: richText('Our Programs') },
         cards: [
           { heading: 'Morning School', body: loremSentence(), image: media.id },
           { heading: 'After School Program', body: loremSentence(), image: media.id },
@@ -215,7 +236,7 @@ await payload.create({
       },
       {
         blockType: 'card-grid',
-        heading: 'Our Events',
+        header: { heading: richText('Our Events') },
         cards: [
           { heading: 'Graduation', body: loremSentence(), image: media.id },
           { heading: 'Sports Day', body: loremSentence(), image: media.id },
@@ -224,22 +245,13 @@ await payload.create({
         ],
       },
       {
-        blockType: 'stats',
-        heading: 'Fun learning is our serious business.',
-        stats: [
-          { useFoundedYear: true, label: 'Years & counting' },
-          { useFoundedYear: false, value: '3', label: 'Schools' },
-          { useFoundedYear: false, value: '4', label: 'Signature Events' },
-        ],
-      },
-      {
         blockType: 'steps',
-        heading: 'Register Today!',
-        steps: [
-          { label: 'Sign the Registration Form' },
-          { label: 'Attach photocopy of birth cert.' },
-          { label: 'Email proof of full payment' },
-        ],
+        header: { heading: richText('Register Today!') },
+        body: richTextOrderedList(
+          'Sign the Registration Form',
+          'Attach photocopy of birth cert.',
+          'Email proof of full payment',
+        ),
         cta: { label: 'Open our form', url: '#register' },
       },
     ],
@@ -260,12 +272,8 @@ await payload.create({
     },
     layout: [
       {
-        blockType: 'prose',
-        content: richText(loremParagraph(), loremParagraph()),
-      },
-      {
         blockType: 'card-grid',
-        heading: 'Our Mission & Vision',
+        header: { heading: richText('Our Mission & Vision') },
         cards: [
           {
             heading: 'Our Mission',
@@ -279,7 +287,7 @@ await payload.create({
           },
         ],
       },
-      { blockType: 'schools', heading: 'Our Schools' },
+      { blockType: 'schools', header: { heading: richText('Our Schools') } },
       {
         blockType: 'media-text',
         media: media.id,
@@ -297,7 +305,7 @@ await payload.create({
       },
       {
         blockType: 'faq',
-        heading: 'Frequently Asked Questions',
+        header: { heading: richText('Frequently Asked Questions') },
         items: [
           {
             question: `${loremSentence().replace(/\.$/, '')}?`,
@@ -327,12 +335,8 @@ await payload.create({
     },
     layout: [
       {
-        blockType: 'prose',
-        content: richText(loremParagraph()),
-      },
-      {
         blockType: 'card-grid',
-        heading: 'Current Vacancies',
+        header: { heading: richText('Current Vacancies') },
         cards: [
           {
             heading: 'Teacher',
@@ -343,7 +347,7 @@ await payload.create({
       },
       {
         blockType: 'cta-banner',
-        heading: 'Not 100% certain?',
+        header: { heading: richText('Not 100% certain?') },
         body: loremSentence(),
         cta: { label: 'Call for an interview', url: 'tel:+60390564288' },
       },

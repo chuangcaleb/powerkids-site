@@ -1,6 +1,7 @@
 import { CMSLink } from '@/components/cms-link/cms-link'
 import { Media } from '@/components/media/media'
 import { RichText } from '@/components/rich-text/rich-text'
+import { SectionHeader } from '@/components/section-header/section-header'
 import { cx } from '@/lib/cx'
 import type { ContentBlock } from '@/payload-types'
 import styles from './content.module.css'
@@ -15,9 +16,10 @@ const sizeStyles: Record<NonNullable<Column['size']>, string> = {
   oneHalfNarrow: cx(styles.col, styles.oneHalfNarrow),
 }
 
-export function Content({ columns }: ContentBlock) {
+export function Content({ header, columns }: ContentBlock) {
   return (
     <section className="wrapper flow">
+      <SectionHeader header={header} />
       <div className={styles.grid}>
         {(columns ?? []).map((column, index) => {
           const { size, variant, richText, media, enableLink, link } = column
