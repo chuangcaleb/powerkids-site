@@ -69,4 +69,18 @@ small {
 
 a {
   color: inherit;
+  text-decoration-line: underline;
+  text-decoration-thickness: 0.0625rem;
+  text-underline-offset: 0.15em;
+  transition: text-decoration-thickness var(--duration-base) var(--ease-standard);
+}
+
+a:hover,
+a:focus-visible {
+  text-decoration-thickness: 0.125rem;
+}
+
+a:focus-visible {
+  outline: 0.125rem solid currentcolor;
+  outline-offset: var(--focus-offset);
 }
