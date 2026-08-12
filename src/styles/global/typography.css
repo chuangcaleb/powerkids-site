@@ -27,6 +27,15 @@ h6 {
   font-weight: var(--weight-display);
   letter-spacing: var(--tracking-display);
   line-height: 1.15;
+  max-width: var(--max-heading);
+}
+
+p,
+ul:not([role='list']),
+ol:not([role='list']),
+dl,
+blockquote {
+  max-width: var(--max-prose);
 }
 
 h1 {

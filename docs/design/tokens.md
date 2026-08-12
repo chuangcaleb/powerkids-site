@@ -39,6 +39,8 @@ Verified pairs (contrast ratio, 4.5:1 floor): ink-on-cream 18.05:1, charcoal-on-
 
 **Motion.** `--duration-fast/base/sweep` for the button hover-lift/press, accordion, and (pending replacement) `Mark`'s highlighter sweep; `--ease-playful` (springy overshoot, buttons) and `--ease-standard` (plain deceleration, sweep/accordion) are `motion.css`'s own addition, not yet named in `DESIGN.md` — first thing to eyeball on the kitchen sink. Every consumer gates on `prefers-reduced-motion`, no exceptions.
 
+**Width.** `--max-bleed` is the widest permitted measure, for rare full-bleed exceptions. `--max-page` bounds page-level layout (`wrapper.css`'s `--wrapper-max-width`). `--max-heading` and `--max-prose` are the defaults for text content, applied globally and directly in `typography.css`: `h1`–`h6` get `--max-heading`, `p`/`ul`/`ol`/`dl`/`blockquote` get `--max-prose` — no wrapper class required. `ul`/`ol` carrying `role="list"` (the existing `reset.css` marker for UI lists, not prose) are excluded, so nav/card/footer lists stay unconstrained while lexical-authored lists (which never carry that attribute) are capped. A consumer that needs full width overrides `max-width` in its own CSS module; no opt-out utility exists on purpose.
+
 **Doodle.** `--doodle-opacity/size-min/size-max/travel` are the pure-presentation knobs for a decorative background-mark layer, not yet built. Density stays a component prop, not a token, since it has a layout cost (drives how many marks get generated) rather than just a paint cost.
 
 ---

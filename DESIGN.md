@@ -54,6 +54,11 @@ doodle:
   sizeMin: '20px'
   sizeMax: '100px'
   travel: '170px'
+width:
+  maxBleed: '120ch'
+  maxPage: '100ch'
+  maxProse: '65ch'
+  maxHeading: '40ch'
 ---
 
 # Design
@@ -138,6 +143,14 @@ Tiers are multiples of the step-0 base (17px min / 20px max): `3xs` .25x, `2xs` 
 - `--duration-base: 300ms` — accordion expand, general transitions
 - `--duration-sweep: 600ms` — `Mark`'s double-underline draw-in
 - All wrapped in `@media (prefers-reduced-motion: no-preference)`; the no-motion path is the default, not an override.
+
+## Width
+
+- `--max-bleed: 120ch` — widest permitted measure, rare full-bleed exceptions.
+- `--max-page: 100ch` — page-level layout cap, consumed by `wrapper.css`'s `--wrapper-max-width`.
+- `--max-prose: 65ch` — default reading measure for paragraph/list/blockquote text.
+- `--max-heading: 40ch` — default reading measure for headings.
+- `--gutter: var(--space-s)` — alias, not a new value; inline padding for wrapper/bleed compositions.
 
 ## Doodle layer
 
