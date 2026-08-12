@@ -3,6 +3,6 @@
   --max-page: 100ch;
   --max-prose: 65ch;
   --max-lead: 55ch;
-  --max-heading: 18ch;
+  --max-heading: 24ch;
   --gutter: var(--space-s);
 }

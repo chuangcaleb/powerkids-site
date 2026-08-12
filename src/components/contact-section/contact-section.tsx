@@ -5,7 +5,7 @@ import {
   SiYoutube,
 } from '@icons-pack/react-simple-icons'
 import { Clock, Mail, Phone, Share2 } from 'lucide-react'
-import type { ComponentType } from 'react'
+import type { ComponentType, CSSProperties } from 'react'
 import { DoodleLayer } from '@/components/doodle-layer/doodle-layer'
 import { SectionHeader } from '@/components/section-header/section-header'
 import { cx } from '@/lib/cx'
@@ -36,7 +36,7 @@ export async function ContactSection() {
   return (
     <section className={styles.section}>
       <DoodleLayer zoneId="contact" density={30} icons={DOODLE_ICONS} />
-      <div className={cx('wrapper flow', styles.content)}>
+      <div className={cx('wrapper flow-xl', styles.content)}>
         <SectionHeader header={header} />
         <div className={cx('grid-auto', styles.grid)}>
           <div className="flow-2xs">
@@ -67,9 +67,9 @@ export async function ContactSection() {
           {siteSettings.socials?.length ? (
             <div className="flow-2xs">
               <h3 className={styles.label}>
-                <Share2 size={18} aria-hidden="true" /> Follow along
+                <Share2 size={18} aria-hidden="true" /> Social Links
               </h3>
-              <ul role="list" className="cluster">
+              <ul role="list" className="flow-2xs">
                 {siteSettings.socials.map((social) => {
                   const Icon:
                     | ComponentType<{
@@ -81,7 +81,11 @@ export async function ContactSection() {
                   if (!Icon) return null
                   return (
                     <li key={social.id ?? social.url}>
-                      <a href={social.url} className={styles.social}>
+                      <a
+                        href={social.url}
+                        className={cx('cluster', styles.social)}
+                        style={{ '--cluster-gap': 'var(--space-2xs)' } as CSSProperties}
+                      >
                         <Icon size={20} title="" aria-hidden={true} />
                         {social.platform}
                       </a>
