@@ -1,0 +1,22 @@
+.section {
+  background-color: var(--bg-contact);
+  color: var(--text-on-contact);
+  border-block-end: var(--border-width) solid var(--border-strong);
+}
+
+.content {
+  padding-block: var(--space-2xl);
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3xs);
+  font-family: var(--font-body);
+  font-size: var(--step--1);
+  font-weight: var(--weight-display);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-on-contact);
+  opacity: 0.7;
+}

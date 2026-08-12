@@ -35,6 +35,7 @@
   --text-on-accent: var(--colour-white);
   --text-on-inverse: var(--colour-parchment);
   --text-on-cta: var(--colour-white);
+  --text-on-contact: var(--colour-white);
   --border-strong: var(--colour-black);
   --shadow-colour: var(--colour-black);
 
