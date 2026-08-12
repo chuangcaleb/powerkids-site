@@ -23,14 +23,13 @@
   padding-block: var(--space-xl);
   min-height: 70vh;
 
-  --sidebar-size: var(--max-heading);
-  --sidebar-gap: var(--space-2xl);
-  --sidebar-wrap-at: 50%;
+  --sidebar-size: 43%;
+  --sidebar-gap: var(--space-xl);
+  --sidebar-wrap-at: 51%;
   --sidebar-align: center;
 }
 
 .copy {
-  text-wrap: balance;
   color: var(--text-strong);
   font-size: var(--step-1);
 }
@@ -43,7 +42,7 @@
 /* D-07/D-01: hero's polaroid is `Polaroid` (src/components/polaroid), sized
  * for this layout via `className` — tilt goes through its `tilt` prop instead. */
 .polaroid {
-  max-width: 28.75rem; /* panel3.html: `.hero .pol{ max-width:460px }` */
+  max-width: var(--max-lead);
 }
 
 .highlight {

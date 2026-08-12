@@ -23,7 +23,7 @@
   --step-4: clamp(2.125rem, 1.625rem + 2.5vw, 3.875rem);
   --step-5: clamp(2.5rem, 1.6071rem + 4.4643vw, 5.625rem);
 
-  /* Footer outline wordmark only — bigger than any heading step on purpose. */
+  /* Custom fluid scales */
+  --step-hero: clamp(3.5rem, 1rem + 9vw, 5.7rem);
   --step-wordmark: clamp(3.5rem, 2.8rem + 7vw, 15rem);
-  --step-hero: clamp(3.5rem, 1.8rem + 4.2vw, 8rem);
 }
