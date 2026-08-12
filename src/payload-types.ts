@@ -105,11 +105,13 @@ export interface Config {
     'site-settings': SiteSetting;
     navigation: Navigation;
     'seo-defaults': SeoDefault;
+    cta: Cta;
   };
   globalsSelect: {
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
     navigation: NavigationSelect<false> | NavigationSelect<true>;
     'seo-defaults': SeoDefaultsSelect<false> | SeoDefaultsSelect<true>;
+    cta: CtaSelect<false> | CtaSelect<true>;
   };
   locale: 'en';
   widgets: {
@@ -1670,6 +1672,106 @@ export interface SeoDefault {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cta".
+ */
+export interface Cta {
+  id: number;
+  registration: {
+    header: {
+      /**
+       * Rendered as a pill.
+       */
+      eyebrow?: string | null;
+      /**
+       * Pill + emphasis color.
+       */
+      accent?: ('neutral' | 'red' | 'blue') | null;
+      heading: {
+        root: {
+          type: string;
+          children: {
+            type: any;
+            version: number;
+            [k: string]: unknown;
+          }[];
+          direction: ('ltr' | 'rtl') | null;
+          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+          indent: number;
+          version: number;
+        };
+        [k: string]: unknown;
+      };
+      lead?: {
+        root: {
+          type: string;
+          children: {
+            type: any;
+            version: number;
+            [k: string]: unknown;
+          }[];
+          direction: ('ltr' | 'rtl') | null;
+          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+          indent: number;
+          version: number;
+        };
+        [k: string]: unknown;
+      } | null;
+    };
+    /**
+     * Optional call-to-action button.
+     */
+    button?: {
+      label?: string | null;
+      url?: string | null;
+    };
+  };
+  contact: {
+    header: {
+      /**
+       * Rendered as a pill.
+       */
+      eyebrow?: string | null;
+      /**
+       * Pill + emphasis color.
+       */
+      accent?: ('neutral' | 'red' | 'blue') | null;
+      heading: {
+        root: {
+          type: string;
+          children: {
+            type: any;
+            version: number;
+            [k: string]: unknown;
+          }[];
+          direction: ('ltr' | 'rtl') | null;
+          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+          indent: number;
+          version: number;
+        };
+        [k: string]: unknown;
+      };
+      lead?: {
+        root: {
+          type: string;
+          children: {
+            type: any;
+            version: number;
+            [k: string]: unknown;
+          }[];
+          direction: ('ltr' | 'rtl') | null;
+          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+          indent: number;
+          version: number;
+        };
+        [k: string]: unknown;
+      } | null;
+    };
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "site-settings_select".
  */
 export interface SiteSettingsSelect<T extends boolean = true> {
@@ -1734,6 +1836,45 @@ export interface SeoDefaultsSelect<T extends boolean = true> {
   titleTemplate?: T;
   defaultDescription?: T;
   defaultImage?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cta_select".
+ */
+export interface CtaSelect<T extends boolean = true> {
+  registration?:
+    | T
+    | {
+        header?:
+          | T
+          | {
+              eyebrow?: T;
+              accent?: T;
+              heading?: T;
+              lead?: T;
+            };
+        button?:
+          | T
+          | {
+              label?: T;
+              url?: T;
+            };
+      };
+  contact?:
+    | T
+    | {
+        header?:
+          | T
+          | {
+              eyebrow?: T;
+              accent?: T;
+              heading?: T;
+              lead?: T;
+            };
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

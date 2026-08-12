@@ -15,6 +15,7 @@ import { People } from '@/payload/collections/people'
 import { Schools } from '@/payload/collections/schools'
 import { Users } from '@/payload/collections/users'
 import { defaultLexical } from '@/payload/fields/default-lexical'
+import { Cta } from '@/payload/globals/cta'
 import { Navigation } from '@/payload/globals/navigation'
 import { SeoDefaults } from '@/payload/globals/seo-defaults'
 import { SiteSettings } from '@/payload/globals/site-settings'
@@ -48,7 +49,7 @@ export default buildConfig({
 
   collections: [Users, Media, MediaTags, Pages, Schools, People],
 
-  globals: [SiteSettings, Navigation, SeoDefaults],
+  globals: [SiteSettings, Navigation, SeoDefaults, Cta],
 
   folders: {},
 
