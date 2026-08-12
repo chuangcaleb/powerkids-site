@@ -12,7 +12,7 @@
 
 1. **Never copy v3 code.** Old implementation on `v3` branch / `v3-final` tag. Read for content and design intent (`git show v3-final:<path>`); reimplement from scratch. Same for `archive/v4-payload-template`, an abandoned starter-template attempt.
 2. **Content is data, never markup.** Navigation, social links, contact details, opening hours, school addresses, programs, events — CMS records.
-3. **Code declares what exists; docs say why and which.** Never write a doc that restates code: no field lists, no block/component inventories, no directory maps — every such list this repo held went stale. Rules, rationale, and pick-guides for closed hand-authored sets (layout primitives, token groups) belong in docs; their values do not.
+3. **Code declares what exists; docs say why and which.** Never write a doc that restates code: no counters, no field lists, no block/component inventories, no directory maps. Rules, rationale, and pick-guides for closed hand-authored sets (layout primitives, token groups) belong in docs; their values do not. Code is single source of truth.
 4. **Never read `.env`.** Secrets are the owner's business. Maintain `.env.example` with key names + comments only.
 
 ---
