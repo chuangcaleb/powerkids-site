@@ -1,27 +1,21 @@
 import type { Page } from '@/payload-types'
 
 import { CardGrid } from './card-grid/component'
-import { Contact } from './contact/component'
 import { Content } from './content/component'
-import { CtaBanner } from './cta-banner/component'
 import { Faq } from './faq/component'
 import { FramedRows } from './framed-rows/component'
 import { Gallery } from './gallery/component'
 import { MediaText } from './media-text/component'
 import { SchoolsBlock } from './schools/component'
-import { Steps } from './steps/component'
 
 const blockComponents = {
   'card-grid': CardGrid,
-  contact: Contact,
   content: Content,
-  'cta-banner': CtaBanner,
   faq: Faq,
   'framed-rows': FramedRows,
   gallery: Gallery,
   'media-text': MediaText,
   schools: SchoolsBlock,
-  steps: Steps,
 }
 
 /** Dispatches one `pages.layout` entry to its block component. Unknown type renders nothing, never throws. */

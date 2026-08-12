@@ -22,6 +22,7 @@ import * as migration_20260812_123000_rename_header_subheading_to_lead from './2
 import * as migration_20260812_130000_framed_rows_body_richtext from './20260812_130000_framed_rows_body_richtext'
 import * as migration_20260812_132906_drop_site_settings_name from './20260812_132906_drop_site_settings_name'
 import * as migration_20260812_154503_add_cta_global from './20260812_154503_add_cta_global'
+import * as migration_20260812_160707_drop_steps_contact_cta_banner_blocks from './20260812_160707_drop_steps_contact_cta_banner_blocks'
 
 export const migrations = [
   {
@@ -143,5 +144,10 @@ export const migrations = [
     up: migration_20260812_154503_add_cta_global.up,
     down: migration_20260812_154503_add_cta_global.down,
     name: '20260812_154503_add_cta_global',
+  },
+  {
+    up: migration_20260812_160707_drop_steps_contact_cta_banner_blocks.up,
+    down: migration_20260812_160707_drop_steps_contact_cta_banner_blocks.down,
+    name: '20260812_160707_drop_steps_contact_cta_banner_blocks',
   },
 ]

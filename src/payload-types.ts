@@ -293,18 +293,7 @@ export interface Page {
       | null;
     media?: (number | null) | Media;
   };
-  layout: (
-    | ContentBlock
-    | MediaTextBlock
-    | CardGridBlock
-    | StepsBlock
-    | GalleryBlock
-    | CtaBannerBlock
-    | SchoolsBlock
-    | FramedRowsBlock
-    | FaqBlock
-    | ContactBlock
-  )[];
+  layout: (ContentBlock | MediaTextBlock | CardGridBlock | GalleryBlock | SchoolsBlock | FramedRowsBlock | FaqBlock)[];
   meta?: {
     title?: string | null;
     /**
@@ -499,80 +488,6 @@ export interface CardGridBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "StepsBlock".
- */
-export interface StepsBlock {
-  /**
-   * Author as a numbered or bulleted list.
-   */
-  body: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  /**
-   * Optional call-to-action link shown after the steps.
-   */
-  cta?: {
-    label?: string | null;
-    url?: string | null;
-  };
-  header: {
-    /**
-     * Rendered as a pill.
-     */
-    eyebrow?: string | null;
-    /**
-     * Pill + emphasis color.
-     */
-    accent?: ('neutral' | 'red' | 'blue') | null;
-    heading: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    };
-    lead?: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
-  };
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'steps';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "GalleryBlock".
  */
 export interface GalleryBlock {
@@ -629,60 +544,6 @@ export interface GalleryBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'gallery';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CtaBannerBlock".
- */
-export interface CtaBannerBlock {
-  body?: string | null;
-  cta: {
-    label: string;
-    url: string;
-  };
-  header: {
-    /**
-     * Rendered as a pill.
-     */
-    eyebrow?: string | null;
-    /**
-     * Pill + emphasis color.
-     */
-    accent?: ('neutral' | 'red' | 'blue') | null;
-    heading: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    };
-    lead?: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
-  };
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'cta-banner';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -899,55 +760,6 @@ export interface FaqBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'faq';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ContactBlock".
- */
-export interface ContactBlock {
-  header?: {
-    /**
-     * Rendered as a pill.
-     */
-    eyebrow?: string | null;
-    /**
-     * Pill + emphasis color.
-     */
-    accent?: ('neutral' | 'red' | 'blue') | null;
-    heading?: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
-    lead?: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
-  };
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'contact';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1244,13 +1056,10 @@ export interface PagesSelect<T extends boolean = true> {
         content?: T | ContentBlockSelect<T>;
         'media-text'?: T | MediaTextBlockSelect<T>;
         'card-grid'?: T | CardGridBlockSelect<T>;
-        steps?: T | StepsBlockSelect<T>;
         gallery?: T | GalleryBlockSelect<T>;
-        'cta-banner'?: T | CtaBannerBlockSelect<T>;
         schools?: T | SchoolsBlockSelect<T>;
         'framed-rows'?: T | FramedRowsBlockSelect<T>;
         faq?: T | FaqBlockSelect<T>;
-        contact?: T | ContactBlockSelect<T>;
       };
   meta?:
     | T
@@ -1340,29 +1149,6 @@ export interface CardGridBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "StepsBlock_select".
- */
-export interface StepsBlockSelect<T extends boolean = true> {
-  body?: T;
-  cta?:
-    | T
-    | {
-        label?: T;
-        url?: T;
-      };
-  header?:
-    | T
-    | {
-        eyebrow?: T;
-        accent?: T;
-        heading?: T;
-        lead?: T;
-      };
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "GalleryBlock_select".
  */
 export interface GalleryBlockSelect<T extends boolean = true> {
@@ -1370,29 +1156,6 @@ export interface GalleryBlockSelect<T extends boolean = true> {
   images?: T;
   tag?: T;
   sort?: T;
-  header?:
-    | T
-    | {
-        eyebrow?: T;
-        accent?: T;
-        heading?: T;
-        lead?: T;
-      };
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CtaBannerBlock_select".
- */
-export interface CtaBannerBlockSelect<T extends boolean = true> {
-  body?: T;
-  cta?:
-    | T
-    | {
-        label?: T;
-        url?: T;
-      };
   header?:
     | T
     | {
@@ -1458,22 +1221,6 @@ export interface FaqBlockSelect<T extends boolean = true> {
         answer?: T;
         id?: T;
       };
-  header?:
-    | T
-    | {
-        eyebrow?: T;
-        accent?: T;
-        heading?: T;
-        lead?: T;
-      };
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ContactBlock_select".
- */
-export interface ContactBlockSelect<T extends boolean = true> {
   header?:
     | T
     | {

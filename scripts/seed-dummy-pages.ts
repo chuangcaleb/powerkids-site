@@ -43,31 +43,6 @@ const richText = (...paragraphs: string[]) => ({
   },
 })
 
-const richTextOrderedList = (...items: string[]) => ({
-  root: {
-    type: 'root',
-    children: [
-      {
-        type: 'list',
-        tag: 'ol',
-        listType: 'number',
-        start: 1,
-        children: items.map((text, index) => ({
-          type: 'listitem',
-          value: index + 1,
-          children: [{ type: 'text', text, version: 1 }],
-          version: 1,
-        })),
-        version: 1,
-      },
-    ],
-    direction: 'ltr' as const,
-    format: '' as const,
-    indent: 0,
-    version: 1,
-  },
-})
-
 const payload = await getPayload({ config })
 
 const media = await payload.create({
@@ -98,6 +73,30 @@ await payload.updateGlobal({
       },
     ],
     defaultShareImage: media.id,
+  },
+})
+
+await payload.updateGlobal({
+  slug: 'cta',
+  context: { disableRevalidate: true },
+  data: {
+    registration: {
+      header: {
+        eyebrow: 'Register today!',
+        accent: 'neutral',
+        heading: richText('Three steps and your child has a place'),
+        lead: richText("We'll walk you through all of it."),
+      },
+      button: { label: 'Open our form', url: '#register' },
+    },
+    contact: {
+      header: {
+        eyebrow: 'Come and find out more!',
+        accent: 'neutral',
+        heading: richText("We'd love to hear from you"),
+        lead: richText('Call any school directly, or drop us an email.'),
+      },
+    },
   },
 })
 
@@ -243,16 +242,6 @@ await payload.create({
           { heading: 'Community Service', body: loremSentence(), image: media.id },
         ],
       },
-      {
-        blockType: 'steps',
-        header: { heading: richText('Register Today!') },
-        body: richTextOrderedList(
-          'Sign the Registration Form',
-          'Attach photocopy of birth cert.',
-          'Email proof of full payment',
-        ),
-        cta: { label: 'Open our form', url: '#register' },
-      },
     ],
   },
 })
@@ -343,12 +332,6 @@ await payload.create({
             image: media.id,
           },
         ],
-      },
-      {
-        blockType: 'cta-banner',
-        header: { heading: richText('Not 100% certain?') },
-        body: loremSentence(),
-        cta: { label: 'Call for an interview', url: 'tel:+60390564288' },
       },
     ],
   },

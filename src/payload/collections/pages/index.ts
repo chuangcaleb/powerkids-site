@@ -12,15 +12,12 @@ import { authenticated } from '@/payload/access/authenticated'
 import { authenticatedOrPublished } from '@/payload/access/authenticated-or-published'
 import { requireEnv } from '@/lib/env'
 import { CardGrid } from '@/payload/blocks/card-grid/config'
-import { Contact } from '@/payload/blocks/contact/config'
 import { Content } from '@/payload/blocks/content/config'
-import { CtaBanner } from '@/payload/blocks/cta-banner/config'
 import { Faq } from '@/payload/blocks/faq/config'
 import { FramedRowsBlock } from '@/payload/blocks/framed-rows/config'
 import { Gallery } from '@/payload/blocks/gallery/config'
 import { MediaText } from '@/payload/blocks/media-text/config'
 import { SchoolsBlock } from '@/payload/blocks/schools/config'
-import { Steps } from '@/payload/blocks/steps/config'
 
 import { hero } from './hero'
 import { populatePublishedAt } from './hooks/populate-published-at'
@@ -103,13 +100,10 @@ export const Pages: CollectionConfig = {
                 Content,
                 MediaText,
                 CardGrid,
-                Steps,
                 Gallery,
-                CtaBanner,
                 SchoolsBlock,
                 FramedRowsBlock,
                 Faq,
-                Contact,
               ],
             },
           ],
