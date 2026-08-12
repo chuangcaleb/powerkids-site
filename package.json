@@ -31,6 +31,7 @@
     "prepare": "lefthook install"
   },
   "dependencies": {
+    "@icons-pack/react-simple-icons": "^13.13.0",
     "@payloadcms/admin-bar": "3.86.0",
     "@payloadcms/db-postgres": "3.86.0",
     "@payloadcms/live-preview-react": "3.86.0",
