@@ -67,7 +67,7 @@ small {
   color: var(--text-muted);
 }
 
-a {
+a:not([class]) {
   color: inherit;
   text-decoration-line: underline;
   text-decoration-thickness: 0.0625rem;
@@ -75,12 +75,12 @@ a {
   transition: text-decoration-thickness var(--duration-base) var(--ease-standard);
 }
 
-a:hover,
-a:focus-visible {
+a:not([class]):hover,
+a:not([class]):focus-visible {
   text-decoration-thickness: 0.125rem;
 }
 
-a:focus-visible {
+a:not([class]):focus-visible {
   outline: 0.125rem solid currentcolor;
   outline-offset: var(--focus-offset);
 }
