@@ -1,0 +1,9 @@
+.section {
+  background-color: var(--bg-cta);
+  color: var(--text-on-cta);
+  border-block: var(--border-width) solid var(--border-strong);
+}
+
+.content {
+  padding-block: var(--space-2xl);
+}
