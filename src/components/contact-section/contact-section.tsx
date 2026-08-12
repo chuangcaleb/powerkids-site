@@ -6,6 +6,7 @@ import {
 } from '@icons-pack/react-simple-icons'
 import { Clock, Mail, Phone, Share2 } from 'lucide-react'
 import type { ComponentType } from 'react'
+import { DoodleLayer } from '@/components/doodle-layer/doodle-layer'
 import { SectionHeader } from '@/components/section-header/section-header'
 import { cx } from '@/lib/cx'
 import { getCta } from '@/payload/globals/get-cta'
@@ -13,9 +14,14 @@ import { getSiteSettings } from '@/payload/globals/get-site-settings'
 import type { SiteSetting } from '@/payload-types'
 import styles from './contact-section.module.css'
 
+const DOODLE_ICONS = [Mail, Phone, Clock, Share2]
+
 type SocialPlatform = NonNullable<SiteSetting['socials']>[number]['platform']
 
-const socialIcons: Record<SocialPlatform, ComponentType<{ size?: number }>> = {
+const socialIcons: Record<
+  SocialPlatform,
+  ComponentType<{ size?: number; title?: string; 'aria-hidden'?: boolean }>
+> = {
   facebook: SiFacebook,
   instagram: SiInstagram,
   youtube: SiYoutube,
@@ -29,6 +35,7 @@ export async function ContactSection() {
 
   return (
     <section className={styles.section}>
+      <DoodleLayer zoneId="contact" density={6} icons={DOODLE_ICONS} />
       <div className={cx('wrapper flow', styles.content)}>
         <SectionHeader header={header} />
         <div className={cx('grid-auto', styles.grid)}>
@@ -64,13 +71,19 @@ export async function ContactSection() {
               </h3>
               <ul role="list" className="cluster">
                 {siteSettings.socials.map((social) => {
-                  const Icon: ComponentType<{ size?: number }> | undefined =
-                    socialIcons[social.platform]
+                  const Icon:
+                    | ComponentType<{
+                        size?: number
+                        title?: string
+                        'aria-hidden'?: boolean
+                      }>
+                    | undefined = socialIcons[social.platform]
                   if (!Icon) return null
                   return (
                     <li key={social.id ?? social.url}>
-                      <a href={social.url} aria-label={social.platform}>
-                        <Icon size={22} />
+                      <a href={social.url} className={styles.social}>
+                        <Icon size={20} title="" aria-hidden={true} />
+                        {social.platform}
                       </a>
                     </li>
                   )

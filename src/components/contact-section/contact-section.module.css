@@ -1,10 +1,20 @@
 .section {
+  position: relative;
+  overflow: clip;
   background-color: var(--bg-contact);
   color: var(--text-on-contact);
   border-block-end: var(--border-width) solid var(--border-strong);
+
+  --doodle-color: var(--text-on-contact);
+}
+
+.section h2 {
+  color: var(--text-on-contact);
 }
 
 .content {
+  position: relative;
+  z-index: 1;
   padding-block: var(--space-2xl);
 }
 
@@ -19,4 +29,31 @@
   text-transform: uppercase;
   color: var(--text-on-contact);
   opacity: 0.7;
+}
+
+/* Fits all four columns on one row at typical desktop widths (no media
+   query — grid-auto's auto-fill still wraps naturally on narrow viewports). */
+.grid {
+  --grid-item-min: 13rem;
+}
+
+.social {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3xs);
+  text-transform: capitalize;
+  text-decoration-line: underline;
+  text-decoration-thickness: 0.0625rem;
+  text-underline-offset: 0.15em;
+  transition: text-decoration-thickness var(--duration-base) var(--ease-standard);
+}
+
+.social:hover,
+.social:focus-visible {
+  text-decoration-thickness: 0.125rem;
+}
+
+.social:focus-visible {
+  outline: 0.125rem solid currentcolor;
+  outline-offset: var(--focus-offset);
 }

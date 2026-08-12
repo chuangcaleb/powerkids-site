@@ -1,4 +1,5 @@
 .footer {
+  padding-block: var(--space-2xl);
   background-color: var(--bg-inverse);
   color: var(--text-on-inverse);
 }

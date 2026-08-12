@@ -1,9 +1,19 @@
 .section {
+  position: relative;
+  overflow: clip;
   background-color: var(--bg-cta);
   color: var(--text-on-cta);
   border-block: var(--border-width) solid var(--border-strong);
+
+  --doodle-color: var(--text-on-cta);
+}
+
+.section h2 {
+  color: var(--text-on-cta);
 }
 
 .content {
+  position: relative;
+  z-index: 1;
   padding-block: var(--space-2xl);
 }

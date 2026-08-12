@@ -1,7 +1,7 @@
 .reel {
   position: relative;
   z-index: 3;
-  background: linear-gradient(var(--bg-surface) 0% 50%, var(--bg-inverse) 50% 100%);
+  background: linear-gradient(var(--bg-cta) 0% 50%, var(--bg-contact) 50% 100%);
 }
 
 .strip {
@@ -11,7 +11,7 @@
   scroll-snap-type: x mandatory;
   list-style: none;
   margin: 0;
-  padding: 0 var(--space-m) var(--space-l);
+  padding: var(--space-l) var(--space-m);
   scrollbar-width: none;
 }
 

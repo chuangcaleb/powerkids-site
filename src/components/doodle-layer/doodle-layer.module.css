@@ -62,7 +62,7 @@
     var(--doodle-size-min) + var(--doodle-t) *
       (var(--doodle-size-max) - var(--doodle-size-min))
   );
-  color: var(--text-strong);
+  color: var(--doodle-color, var(--text-strong));
   opacity: var(--doodle-opacity);
 }
 

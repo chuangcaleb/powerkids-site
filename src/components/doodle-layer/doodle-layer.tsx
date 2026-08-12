@@ -1,4 +1,4 @@
-import type { CSSProperties } from 'react'
+import type { ComponentType, CSSProperties } from 'react'
 import {
   Cloud,
   Feather,
@@ -18,7 +18,7 @@ import { createSeededRandom } from '@/lib/seeded-random'
 import styles from './doodle-layer.module.css'
 
 /** lucide-react — line icons at the same 24x24/stroke shape the prototype's hand-rolled paths used. */
-const ICONS = [
+const DEFAULT_ICONS = [
   Star,
   Sun,
   Cloud,
@@ -42,6 +42,8 @@ export type DoodleLayerProps = {
   zoneId: string
   /** Marks generated for this zone, hard-capped so no zone runs away with node count. */
   density?: number
+  /** Icon set to draw from — defaults to the full decorative set. */
+  icons?: ComponentType<{ size?: string | number; strokeWidth?: number }>[]
 }
 
 /**
@@ -56,7 +58,11 @@ export type DoodleLayerProps = {
  * never a transform per mark — animating ~100+ individual nodes blew up the
  * compositor in prototyping. See DESIGN.md's Doodle layer section.
  */
-export function DoodleLayer({ zoneId, density = 10 }: DoodleLayerProps) {
+export function DoodleLayer({
+  zoneId,
+  density = 10,
+  icons = DEFAULT_ICONS,
+}: DoodleLayerProps) {
   const count = Math.min(density, MAX_MARKS)
   const random = createSeededRandom(zoneId)
 
@@ -82,7 +88,7 @@ export function DoodleLayer({ zoneId, density = 10 }: DoodleLayerProps) {
       id: index,
       depth,
       t,
-      Icon: ICONS[Math.floor(random() * ICONS.length)] ?? Star,
+      Icon: icons[Math.floor(random() * icons.length)] ?? Star,
       left,
       top,
       rotate: random() * 70 - 35,
