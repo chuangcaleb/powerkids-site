@@ -15,7 +15,7 @@ export async function RegistrationSection() {
 
   return (
     <section className={styles.section}>
-      <DoodleLayer zoneId="registration" density={6} icons={DOODLE_ICONS} />
+      <DoodleLayer zoneId="registration" density={30} icons={DOODLE_ICONS} />
       <div className={cx('wrapper flow', styles.content)}>
         <SectionHeader header={header} />
         {button?.label && button.url ? (

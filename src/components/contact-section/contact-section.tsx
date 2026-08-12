@@ -35,7 +35,7 @@ export async function ContactSection() {
 
   return (
     <section className={styles.section}>
-      <DoodleLayer zoneId="contact" density={6} icons={DOODLE_ICONS} />
+      <DoodleLayer zoneId="contact" density={30} icons={DOODLE_ICONS} />
       <div className={cx('wrapper flow', styles.content)}>
         <SectionHeader header={header} />
         <div className={cx('grid-auto', styles.grid)}>

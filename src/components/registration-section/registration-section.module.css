@@ -3,7 +3,7 @@
   overflow: clip;
   background-color: var(--bg-cta);
   color: var(--text-on-cta);
-  border-block: var(--border-width) solid var(--border-strong);
+  border-block-start: var(--border-width) solid var(--border-strong);
 
   --doodle-color: var(--text-on-cta);
 }
