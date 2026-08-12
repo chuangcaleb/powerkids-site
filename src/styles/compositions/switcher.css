@@ -5,14 +5,14 @@
   flex-wrap: wrap;
   gap: var(--switcher-gap, var(--space-l));
   align-items: var(--switcher-vertical-alignment, flex-start);
-  justify-content: space-between;
+  justify-content: var(--switcher-justify, space-between);
 }
 
-.switcher > * {
+:where(.switcher > *) {
   flex-grow: 1;
   flex-basis: calc((var(--switcher-inline-at, 40rem) - 100%) * 999);
 }
 
-.switcher > :nth-child(n + 3) {
+:where(.switcher > :nth-child(n + 3)) {
   flex-basis: 100%;
 }

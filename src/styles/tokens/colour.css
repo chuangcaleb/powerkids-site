@@ -9,8 +9,13 @@
   --colour-muted: #8a8681;
   --colour-black: #000000;
   --colour-white: #ffffff;
-  --colour-red: #cc2828;
-  --colour-blue: #1f30cf;
+  /* Bolder than v3's #cc2828 — brightened just enough to clear 4.5:1 against
+   * both white and black (needed now the mascot icon's stroke sits on the
+   * footer's black bg). Same hue/saturation family as the original, not a
+   * desaturated compromise. This is also the accent a future CTA fill will
+   * use. See DESIGN.md's contrast rule. */
+  --colour-red: #e12c2c;
+  --colour-blue: #2434e8;
   --colour-amber: #a15d0c;
   --colour-red-tint: #ffe6e4;
   --colour-blue-tint: #e4e7ff;

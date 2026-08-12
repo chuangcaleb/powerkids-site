@@ -424,7 +424,7 @@ This page omits the Register section.
 
 | File                           | Use                                                        |
 | ------------------------------ | ---------------------------------------------------------- |
-| `public/images/logo.svg`       | Wordmark logo                                              |
+| `public/images/logo.svg`       | Superseded — mascot icon now lives here                    |
 | `public/images/heart.svg`      | Section rule ornament, footer credit                       |
 | `public/images/blob.svg`       | Register section background                                |
 | `public/fonts/marker-felt.ttf` | Display typeface (see the design audit for licensing risk) |

@@ -80,7 +80,6 @@ await payload.updateGlobal({
   slug: 'site-settings',
   context: { disableRevalidate: true },
   data: {
-    name: 'the Centre with a Heart',
     foundedYear: 2001,
     email: 'powerkidschool@gmail.com',
     phones: [

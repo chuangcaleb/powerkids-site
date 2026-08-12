@@ -1,7 +1,9 @@
-import type { ReactNode } from 'react'
 import Link from 'next/link'
 import { cx } from '@/lib/cx'
+import { Logo } from '@/components/logo/logo'
+import { Wordmark } from '@/components/wordmark/wordmark'
 import styles from './nav-bar.module.css'
+import type { CSSProperties } from 'react'
 
 export type NavLink = {
   id?: string | null
@@ -10,17 +12,21 @@ export type NavLink = {
 }
 
 export type NavBarProps = {
-  logo: ReactNode
   links: NavLink[]
 }
 
 /** Site header. */
-export function NavBar({ logo, links }: NavBarProps) {
+export function NavBar({ links }: NavBarProps) {
   return (
     <header className={styles.header}>
       <div className={cx('wrapper', 'repel', styles.inner)}>
-        <Link href="/" className={styles.logo}>
-          {logo}
+        <Link
+          href="/"
+          className={cx('cluster', styles.brand)}
+          style={{ '--cluster-gap': 'var(--space-xs)' } as CSSProperties}
+        >
+          <Logo className={styles.icon} />
+          <Wordmark className={styles.wordmark} />
         </Link>
         <nav className={cx('cluster', styles.nav)}>
           {links.map((link) => (

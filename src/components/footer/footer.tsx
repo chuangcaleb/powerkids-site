@@ -1,4 +1,6 @@
 import { cx } from '@/lib/cx'
+import { Logo } from '@/components/logo/logo'
+import { Wordmark } from '@/components/wordmark/wordmark'
 import { getNavigation } from '@/payload/globals/get-navigation'
 import { getSiteSettings } from '@/payload/globals/get-site-settings'
 import styles from './footer.module.css'
@@ -12,9 +14,10 @@ export async function Footer() {
   return (
     <footer className={cx('flow', styles.footer)}>
       <div className="wrapper">
-        <p className={styles.wordmark} aria-hidden="true">
-          Power<span>Kids</span>
-        </p>
+        <div className={cx('switcher', styles.brand)} aria-hidden="true">
+          <Logo className={styles.icon} />
+          <Wordmark variant="stroke" className={styles.wordmark} />
+        </div>
         <div className="switcher">
           {(navigation.footerColumns ?? []).map((column) => (
             <div key={column.id ?? column.heading} className="flow-2xs">

@@ -7,18 +7,19 @@
   color: var(--text-on-inverse);
 }
 
-.wordmark {
-  font-family: var(--font-display);
-  font-variation-settings: 'opsz' var(--opsz-display);
-  font-size: var(--step-wordmark);
-  font-weight: var(--weight-display);
-  line-height: 1;
-  letter-spacing: var(--tracking-display);
-  color: transparent;
-  -webkit-text-stroke: var(--stroke-width) var(--accent-red);
-  margin: 0;
+.brand {
+  --switcher-gap: var(--space-m);
+  --switcher-inline-at: 60rem;
+  --switcher-justify: flex-start;
 }
 
-.wordmark span {
-  -webkit-text-stroke-color: var(--accent-blue);
+.icon {
+  flex: none;
+  width: var(--step-wordmark);
+  height: var(--step-wordmark);
+  color: var(--colour-white);
+}
+
+.wordmark {
+  font-size: var(--step-wordmark);
 }
