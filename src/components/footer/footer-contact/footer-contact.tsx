@@ -12,7 +12,7 @@ import { cx } from '@/lib/cx'
 import { getCta } from '@/payload/globals/get-cta'
 import { getSiteSettings } from '@/payload/globals/get-site-settings'
 import type { SiteSetting } from '@/payload-types'
-import styles from './contact-section.module.css'
+import styles from './footer-contact.module.css'
 
 const DOODLE_ICONS = [Mail, Phone, Clock, Share2]
 
@@ -28,25 +28,27 @@ const socialIcons: Record<
   tiktok: SiTiktok,
 }
 
-/** Blue contact facts landing at the end of every page, after the polaroid reel. */
-export async function ContactSection() {
+/** Blue contact-facts band inside the footer. */
+export async function FooterContact() {
   const [cta, siteSettings] = await Promise.all([getCta(), getSiteSettings()])
   const { header } = cta.contact
 
   return (
-    <section className={styles.section}>
+    <div className={styles.contact}>
       <DoodleLayer zoneId="contact" density={30} icons={DOODLE_ICONS} />
-      <div className={cx('wrapper flow-xl', styles.content)}>
+      <div className={cx('wrapper flow-2xl', styles.content)}>
         <SectionHeader header={header} />
         <div className={cx('grid-auto', styles.grid)}>
-          <div className="flow-2xs">
+          <div className="flow-xs">
             <h3 className={styles.label}>
               <Clock size={18} aria-hidden="true" /> Opening hours
             </h3>
-            <p>{siteSettings.openingDays}</p>
-            <p>{siteSettings.openingHours}</p>
+            <div className="flow-2xs">
+              <p>{siteSettings.openingDays}</p>
+              <p>{siteSettings.openingHours}</p>
+            </div>
           </div>
-          <div className="flow-2xs">
+          <div className="flow-xs">
             <h3 className={styles.label}>
               <Phone size={18} aria-hidden="true" /> Call us
             </h3>
@@ -58,14 +60,14 @@ export async function ContactSection() {
               ))}
             </ul>
           </div>
-          <div className="flow-2xs">
+          <div className="flow-xs">
             <h3 className={styles.label}>
               <Mail size={18} aria-hidden="true" /> Email
             </h3>
             <a href={`mailto:${siteSettings.email}`}>{siteSettings.email}</a>
           </div>
           {siteSettings.socials?.length ? (
-            <div className="flow-2xs">
+            <div className="flow-xs">
               <h3 className={styles.label}>
                 <Share2 size={18} aria-hidden="true" /> Social Links
               </h3>
@@ -97,6 +99,6 @@ export async function ContactSection() {
           ) : null}
         </div>
       </div>
-    </section>
+    </div>
   )
 }

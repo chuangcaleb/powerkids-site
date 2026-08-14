@@ -51,6 +51,8 @@
 
 .content {
   --flow-space: var(--space-2xs);
+
+  max-width: var(--max-lead);
 }
 
 .timeStack {

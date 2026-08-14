@@ -32,11 +32,15 @@
 .copy {
   color: var(--text-strong);
   font-size: var(--step-1);
-}
 
-.copy h1 {
-  line-height: 1;
-  font-size: var(--step-hero);
+  p {
+    max-width: var(--max-lead);
+  }
+
+  h1 {
+    line-height: 1;
+    font-size: var(--step-hero);
+  }
 }
 
 /* D-07/D-01: hero's polaroid is `Polaroid` (src/components/polaroid), sized

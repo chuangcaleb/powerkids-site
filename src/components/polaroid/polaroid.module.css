@@ -11,8 +11,8 @@
   border: var(--border-width) solid var(--border-strong);
   border-radius: var(--radius-m);
   box-shadow: var(--shadow-hard);
-  padding: var(--space-s);
-  padding-bottom: var(--space-m);
+  padding: var(--space-2xs);
+  padding-bottom: var(--space-s);
   transform: rotate(var(--polaroid-tilt, 0deg));
 }
 
@@ -40,6 +40,8 @@
 .caption {
   margin-top: var(--space-2xs);
   color: var(--text-body);
+  font-family: var(--font-display);
+  font-weight: 600;
   font-size: var(--step--1);
   text-align: center;
 }

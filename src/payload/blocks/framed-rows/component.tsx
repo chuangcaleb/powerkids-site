@@ -79,7 +79,7 @@ export function FramedRows({ header, rows }: FramedRowsBlockType) {
                   index % 2 === 1 && styles.reverse,
                 )}
               >
-                <div className={cx('flow', 'flow-2xs', styles.content)}>
+                <div className={cx('flow', styles.content)}>
                   <div className={cx('flow', styles.timeStack)}>
                     {Icon ? <Icon aria-hidden="true" strokeWidth={2.2} /> : null}
                     {row.eyebrow ? (

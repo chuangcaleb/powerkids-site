@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from 'next'
 import { draftMode } from 'next/headers'
 import type { ReactNode } from 'react'
 import { AdminBar } from '@/components/admin-bar/admin-bar'
-import { ContactSection } from '@/components/contact-section/contact-section'
 import { Footer } from '@/components/footer/footer'
 import { Header } from '@/components/header/header'
 import { PolaroidReel } from '@/components/polaroid-reel/polaroid-reel'
@@ -47,7 +46,6 @@ export default async function SiteLayout({ children }: { children: ReactNode }) 
         {children}
         <RegistrationSection />
         <PolaroidReel photos={footerReelPhotos} />
-        <ContactSection />
         <Footer />
       </body>
     </html>

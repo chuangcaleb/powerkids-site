@@ -1,4 +1,4 @@
-.section {
+.contact {
   position: relative;
   overflow: clip;
   background-color: var(--bg-contact);
@@ -8,7 +8,7 @@
   --doodle-color: var(--text-on-contact);
 }
 
-.section h2 {
+.contact h2 {
   color: var(--text-on-contact);
 }
 

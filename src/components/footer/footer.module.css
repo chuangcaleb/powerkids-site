@@ -1,26 +1,14 @@
-.footer {
-  padding-block: var(--space-2xl);
+.bottom {
+  padding-block: var(--space-s);
   background-color: var(--bg-inverse);
   color: var(--text-on-inverse);
+  border-block-start: var(--border-width) solid var(--border-strong);
+
+  & span {
+    font-size: var(--step--1);
+  }
 }
 
-.footer h2 {
-  color: var(--text-on-inverse);
-}
-
-.brand {
-  --switcher-gap: var(--space-m);
-  --switcher-inline-at: 60rem;
-  --switcher-justify: flex-start;
-}
-
-.icon {
-  flex: none;
-  width: var(--step-wordmark);
-  height: var(--step-wordmark);
-  color: var(--colour-white);
-}
-
-.wordmark {
-  font-size: var(--step-wordmark);
+.bottom a {
+  color: inherit;
 }

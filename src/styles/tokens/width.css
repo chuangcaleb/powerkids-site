@@ -2,7 +2,7 @@
   --max-bleed: 120ch;
   --max-page: 100ch;
   --max-prose: 65ch;
-  --max-lead: 55ch;
+  --max-lead: 44ch;
   --max-heading: 24ch;
   --gutter: var(--space-s);
 }

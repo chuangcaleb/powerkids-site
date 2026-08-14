@@ -12,6 +12,8 @@ export type PolaroidProps = {
   sizes?: string
   /** Degrees to rotate the card, e.g. -3 or 5. Omit for no tilt. */
   tilt?: number
+  /** Omit the tape strip, e.g. for reels where cards scroll under the edge. */
+  noTape?: boolean
   /** Sizing is a layout concern — set it here, not in this component. */
   className?: string
 }
@@ -23,6 +25,7 @@ export function Polaroid({
   priority,
   sizes,
   tilt,
+  noTape,
   className,
 }: PolaroidProps) {
   return (
@@ -30,7 +33,7 @@ export function Polaroid({
       className={cx(styles.polaroid, className)}
       style={tilt ? ({ '--polaroid-tilt': `${tilt}deg` } as CSSProperties) : undefined}
     >
-      <span className={styles.tape} aria-hidden="true" />
+      {!noTape ? <span className={styles.tape} aria-hidden="true" /> : null}
       <Media doc={doc} priority={priority} sizes={sizes} className={styles.photo} />
       {caption ? <figcaption className={styles.caption}>{caption}</figcaption> : null}
     </figure>
