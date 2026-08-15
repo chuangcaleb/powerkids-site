@@ -23,6 +23,7 @@ import * as migration_20260812_130000_framed_rows_body_richtext from './20260812
 import * as migration_20260812_132906_drop_site_settings_name from './20260812_132906_drop_site_settings_name'
 import * as migration_20260812_154503_add_cta_global from './20260812_154503_add_cta_global'
 import * as migration_20260812_160707_drop_steps_contact_cta_banner_blocks from './20260812_160707_drop_steps_contact_cta_banner_blocks'
+import * as migration_20260815_145533_add_scrapbook_block from './20260815_145533_add_scrapbook_block'
 
 export const migrations = [
   {
@@ -149,5 +150,10 @@ export const migrations = [
     up: migration_20260812_160707_drop_steps_contact_cta_banner_blocks.up,
     down: migration_20260812_160707_drop_steps_contact_cta_banner_blocks.down,
     name: '20260812_160707_drop_steps_contact_cta_banner_blocks',
+  },
+  {
+    up: migration_20260815_145533_add_scrapbook_block.up,
+    down: migration_20260815_145533_add_scrapbook_block.down,
+    name: '20260815_145533_add_scrapbook_block',
   },
 ]

@@ -19,6 +19,8 @@ const headingLexical = lexicalEditor({
 type HeaderFieldOptions = {
   /** Match the block's existing heading requiredness — defaults to optional. */
   headingRequired?: boolean
+  /** Suppress the eyebrow input, e.g. for a repeated sub-item where a pill per row would be noise. Defaults to shown. */
+  showEyebrow?: boolean
 }
 
 /**
@@ -26,38 +28,45 @@ type HeaderFieldOptions = {
  * block still composes its own markup (heading level, layout) — this only
  * standardizes the authored fields and their lexical feature sets.
  */
-export function headerField({ headingRequired = false }: HeaderFieldOptions = {}): Field {
+export function headerField({
+  headingRequired = false,
+  showEyebrow = true,
+}: HeaderFieldOptions = {}): Field {
+  const accentField: Field = {
+    name: 'accent',
+    type: 'select',
+    defaultValue: 'neutral',
+    options: [
+      { label: 'Neutral', value: 'neutral' },
+      { label: 'Red', value: 'red' },
+      { label: 'Blue', value: 'blue' },
+    ],
+    admin: {
+      width: showEyebrow ? '50%' : undefined,
+      description: 'Pill + emphasis color.',
+    },
+  }
+
   return {
     name: 'header',
     type: 'group',
     fields: [
-      {
-        type: 'row',
-        fields: [
-          {
-            name: 'eyebrow',
-            type: 'text',
-            admin: {
-              width: '50%',
-              description: 'Rendered as a pill.',
-            },
-          },
-          {
-            name: 'accent',
-            type: 'select',
-            defaultValue: 'neutral',
-            options: [
-              { label: 'Neutral', value: 'neutral' },
-              { label: 'Red', value: 'red' },
-              { label: 'Blue', value: 'blue' },
+      showEyebrow
+        ? {
+            type: 'row',
+            fields: [
+              {
+                name: 'eyebrow',
+                type: 'text',
+                admin: {
+                  width: '50%',
+                  description: 'Rendered as a pill.',
+                },
+              },
+              accentField,
             ],
-            admin: {
-              width: '50%',
-              description: 'Pill + emphasis color.',
-            },
-          },
-        ],
-      },
+          }
+        : accentField,
       {
         name: 'heading',
         type: 'richText',
