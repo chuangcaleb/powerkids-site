@@ -47,6 +47,10 @@ export function AdminBar({ preview }: Props) {
       })
     },
     preview,
+    // Package default is `position: fixed`, which overlaps the header. Static
+    // positioning puts it in normal flow, so it stacks above the header and
+    // pushes the page down instead.
+    style: { position: 'static' },
   }
 
   return (
