@@ -16,7 +16,6 @@
 }
 
 .heading {
-  /* font-family: var(--font-body); */
   font-size: var(--step--1);
   font-weight: var(--weight-display);
   letter-spacing: 0.12em;
