@@ -71,8 +71,3 @@
   line-height: 1;
   letter-spacing: var(--tracking-display);
 }
-
-.media {
-  max-width: 20rem;
-  margin-inline: auto;
-}
