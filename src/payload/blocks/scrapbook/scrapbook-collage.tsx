@@ -34,7 +34,7 @@ export type CollageItem = {
   photos: { id: string; doc: MediaDoc; aspectRatio: number }[]
 }
 
-type Mode = 'stacked' | 'collage' | 'reel'
+type Mode = 'noJs' | 'collage' | 'reel'
 
 // Tuning knobs
 const MIN_PHOTO_HEIGHT_REM = 13.5 // 216px — shortest a lane-count derivation will allow before backing off to fewer, wider lanes
@@ -43,7 +43,10 @@ const MAX_LANES = 6 // hard ceiling on lane count, regardless of how narrow that
 const MIN_LANES_FOR_COLLAGE = 2 // fewer than this and the collage reads as a single column — reel wins instead
 // Below this viewport width the reel wins outright, even if the lane math
 // alone would still allow 2 lanes — matches the prototype's `reelBelow`.
-const REEL_BELOW_PX = 850
+// Also hand-mirrored as `53.125rem` in scrapbook.module.css (CSS media
+// queries can't read a JS constant) — see reel-breakpoint.test.ts, which
+// fails if the two ever drift apart.
+export const REEL_BELOW_PX = 850
 const TEXT_SPAN_LANES = 2 // how many lanes a text block occupies
 const TILT_DEG = 7 // max rotation applied to a photo, scaled by its per-cell random tilt in [-1, 1]
 const JITTER_REM = 0.4375 // ~7px — max random offset applied to a cell's position in any direction
@@ -80,7 +83,7 @@ export function ScrapbookCollage({
   const containerRef = useRef<HTMLDivElement>(null)
   const cellRefs = useRef(new Map<string, HTMLDivElement>())
   const padRefs = useRef(new Map<string, HTMLDivElement>())
-  const [mode, setMode] = useState<Mode>('stacked')
+  const [mode, setMode] = useState<Mode>('noJs')
   const [lanes, setLanes] = useState(1)
 
   const cells = useMemo(
@@ -290,7 +293,7 @@ export function ScrapbookCollage({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mode, lanes, cells])
 
-  if (mode === 'stacked') return <StackedList items={items} containerRef={containerRef} />
+  if (mode === 'noJs') return <NoJsFallback items={items} containerRef={containerRef} />
   if (mode === 'reel') return <ReelList items={items} containerRef={containerRef} />
 
   return (
@@ -419,7 +422,7 @@ function ItemText({ item }: { item: CollageItem }) {
  * and photo cell in source order, with `grid-auto-flow: dense` doing the
  * backfilling a JS packer would otherwise do.
  */
-function StackedList({
+function NoJsFallback({
   items,
   containerRef,
 }: {

@@ -25,6 +25,7 @@ import * as migration_20260812_154503_add_cta_global from './20260812_154503_add
 import * as migration_20260812_160707_drop_steps_contact_cta_banner_blocks from './20260812_160707_drop_steps_contact_cta_banner_blocks'
 import * as migration_20260815_145533_add_scrapbook_block from './20260815_145533_add_scrapbook_block'
 import * as migration_20260816_081710_add_scrapbook_seed from './20260816_081710_add_scrapbook_seed'
+import * as migration_20260816_091026_drop_site_settings_footer_reel from './20260816_091026_drop_site_settings_footer_reel'
 
 export const migrations = [
   {
@@ -161,5 +162,10 @@ export const migrations = [
     up: migration_20260816_081710_add_scrapbook_seed.up,
     down: migration_20260816_081710_add_scrapbook_seed.down,
     name: '20260816_081710_add_scrapbook_seed',
+  },
+  {
+    up: migration_20260816_091026_drop_site_settings_footer_reel.up,
+    down: migration_20260816_091026_drop_site_settings_footer_reel.down,
+    name: '20260816_091026_drop_site_settings_footer_reel',
   },
 ]
