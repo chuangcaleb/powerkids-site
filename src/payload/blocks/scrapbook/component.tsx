@@ -48,7 +48,7 @@ export function Scrapbook({ header, items, id, seed: storedSeed }: ScrapbookBloc
 
   return (
     <section className={styles.scrapbook}>
-      <div className={styles.texture} aria-hidden="true" />
+      <div className={cx('dot-grid', styles.texture)} aria-hidden="true" />
       {/*
         Reused unmodified: no negative-space rejection step. The prototype
         added one (marks re-rolled until they miss the packed cells), but

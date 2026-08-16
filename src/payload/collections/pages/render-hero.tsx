@@ -54,7 +54,7 @@ export function Hero({ hero }: HeroProps) {
       : null
 
   return (
-    <section className={styles.hero}>
+    <section className={cx('dot-grid', styles.hero)}>
       <DoodleLayer zoneId="hero" density={7} />
       <div className={cx('wrapper', styles.content)}>
         <div className={cx('flow', styles.copy)}>

@@ -8,12 +8,12 @@
   position: relative;
   overflow: clip;
   background-color: var(--bg-sun);
-  background-image: radial-gradient(
-    color-mix(in srgb, var(--colour-black) 9%, transparent) 0.125rem,
-    transparent 0.1375rem
-  );
-  background-size: 1.125rem 1.125rem;
   border-bottom: var(--border-width) solid var(--border-strong);
+
+  --dot-grid-colour: color-mix(in srgb, var(--colour-black) 9%, transparent);
+  --dot-grid-radius: 0.125rem;
+  --dot-grid-fade: 0.1375rem;
+  --dot-grid-size: 1.125rem;
 }
 
 /* Content sits above the DoodleLayer (z-index: 0) and the background. */

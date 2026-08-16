@@ -1,0 +1,13 @@
+/* DOT-GRID — radial-gradient dot texture, tileable, no image asset.
+ * Colour/size/dot-radius are overridable per usage via custom properties;
+ * defaults match the original body-wide texture. See DESIGN.md's
+ * "Character" section. */
+
+.dot-grid {
+  background-image: radial-gradient(
+    var(--dot-grid-colour, color-mix(in srgb, var(--colour-black) 10%, transparent))
+      var(--dot-grid-radius, 0.0625rem),
+    transparent var(--dot-grid-fade, 0.0625rem)
+  );
+  background-size: var(--dot-grid-size, 1.5rem) var(--dot-grid-size, 1.5rem);
+}
