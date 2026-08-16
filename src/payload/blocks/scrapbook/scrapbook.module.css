@@ -9,14 +9,13 @@
   position: relative;
   overflow-x: clip;
   isolation: isolate;
-  padding-block: var(--space-xl) var(--space-2xl);
+  padding-block: var(--space-2xl);
 }
 
 .header {
   position: relative;
   z-index: 3;
   margin-block-end: var(--space-2xl);
-  text-align: center;
 }
 
 /* Dot-grid: a visible reference grid is what makes a photo's tilt read as
@@ -41,12 +40,12 @@
   z-index: 1;
   margin-inline: auto;
   max-width: var(--max-bleed);
-  padding-inline: var(--gutter);
+  padding-inline: calc(var(--gutter) / 2);
 
   /* Read back by the packer as the row unit for converting pixel heights to
    * grid rows — one owner, declared here, never assumed in JS. */
   --row-unit: 0.5rem;
-  --gap: var(--space-m);
+  --gap: var(--space-l);
 }
 
 .collageGrid {
@@ -70,7 +69,7 @@
 }
 
 .pad {
-  padding-block: calc(var(--gap) / 2);
+  padding-block: var(--space-xl);
 }
 
 .tf {
@@ -82,7 +81,7 @@
 }
 
 .itemText {
-  max-width: 38ch;
+  max-width: var(--max-lead);
 }
 
 .itemLead {
@@ -135,13 +134,6 @@
   margin-block-start: var(--space-2xl);
 }
 
-.stackedPhotos {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-m);
-  margin-block-start: var(--space-m);
-}
-
 .stackedPhoto {
   flex: 1 1 16rem;
   max-width: 20rem;
@@ -159,8 +151,4 @@
 
 .reelItem + .reelItem {
   margin-block-start: var(--space-xl);
-}
-
-.reelItem > .itemText {
-  padding-inline: var(--gutter);
 }

@@ -36,9 +36,7 @@ export type CollageItem = {
 
 type Mode = 'stacked' | 'collage' | 'reel'
 
-// Settled visual defaults from the design prototype (/tmp/scrapbook-prototype.html,
-// KNOB_DEFS) — fixed here rather than exposed as CMS knobs, since they were
-// tuning controls for the design pass, not an editorial decision per instance.
+// Tuning knobs
 const MIN_PHOTO_HEIGHT_REM = 12.1875 // 195px
 const MAX_PHOTO_HEIGHT_REM = 25.9375 // 415px
 const MAX_LANES = 6
@@ -47,7 +45,7 @@ const MIN_LANES_FOR_COLLAGE = 2
 // alone would still allow 2 lanes — matches the prototype's `reelBelow`.
 const REEL_BELOW_PX = 850
 const TEXT_SPAN_LANES = 2
-const TILT_DEG = 5
+const TILT_DEG = 7
 const JITTER_REM = 0.4375 // ~7px
 const TEXT_JITTER_SCALE = 0.5
 const SETTLE_TILT_SCALE = 7
@@ -356,7 +354,7 @@ function ItemText({ item }: { item: CollageItem }) {
   const button = item.button
 
   return (
-    <div className={cx('flow-xs', styles.itemText)}>
+    <div className={cx('flow-s', styles.itemText)}>
       {heading ? (
         <Heading level={3}>
           <HeaderRichText data={heading} accent={accent} />
@@ -390,7 +388,7 @@ function StackedList({
         {items.map((item) => (
           <li key={item.id} className={styles.stackedItem}>
             <ItemText item={item} />
-            <div className={styles.stackedPhotos}>
+            <div className={cx('cluster', styles.stackedPhotos)}>
               {item.photos.map((photo, index) => (
                 <Polaroid
                   key={photo.id}
