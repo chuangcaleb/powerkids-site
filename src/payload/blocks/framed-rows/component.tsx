@@ -79,14 +79,16 @@ export function FramedRows({ header, rows }: FramedRowsBlockType) {
                   index % 2 === 1 && styles.reverse,
                 )}
               >
-                <div className={cx('flow', styles.content)}>
-                  <div className={cx('flow', styles.timeStack)}>
-                    {Icon ? <Icon aria-hidden="true" strokeWidth={2.2} /> : null}
-                    {row.eyebrow ? (
-                      <span className={styles.hours}>{row.eyebrow}</span>
-                    ) : null}
+                <div className="flow-m">
+                  <div className="flow-xs">
+                    <div className={cx('flow-2xs', styles.timeStack)}>
+                      {Icon ? <Icon aria-hidden="true" strokeWidth={2.2} /> : null}
+                      {row.eyebrow ? (
+                        <span className={styles.hours}>{row.eyebrow}</span>
+                      ) : null}
+                    </div>
+                    <Heading level={3}>{row.title}</Heading>
                   </div>
-                  <Heading level={3}>{row.title}</Heading>
                   {row.body ? <RichText data={row.body} /> : null}
                 </div>
                 {image ? (

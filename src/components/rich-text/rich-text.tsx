@@ -12,5 +12,5 @@ export type RichTextProps = {
 
 /** Renders a Payload lexical richText field. Layout comes from the `flow` composition. */
 export function RichText({ data, className }: RichTextProps) {
-  return <LexicalRichText data={data} className={cx('flow-m', className)} />
+  return <LexicalRichText data={data} className={cx('flow-s', className)} />
 }

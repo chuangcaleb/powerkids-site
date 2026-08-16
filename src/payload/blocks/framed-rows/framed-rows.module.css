@@ -49,12 +49,6 @@
   flex-direction: row-reverse;
 }
 
-.content {
-  --flow-space: var(--space-2xs);
-
-  max-width: var(--max-lead);
-}
-
 .timeStack {
   color: var(--row-accent);
 }
