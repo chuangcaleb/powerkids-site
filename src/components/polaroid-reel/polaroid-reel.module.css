@@ -1,9 +1,3 @@
-.reel {
-  position: relative;
-  z-index: 3;
-  background: linear-gradient(var(--bg-cta) 0% 50%, var(--bg-contact) 50% 100%);
-}
-
 .strip {
   display: flex;
   gap: var(--space-s);
