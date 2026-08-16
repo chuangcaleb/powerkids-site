@@ -6,6 +6,7 @@ import { Faq } from './faq/component'
 import { FramedRows } from './framed-rows/component'
 import { Gallery } from './gallery/component'
 import { MediaText } from './media-text/component'
+import { Scrapbook } from './scrapbook/component'
 import { SchoolsBlock } from './schools/component'
 
 const blockComponents = {
@@ -15,6 +16,7 @@ const blockComponents = {
   'framed-rows': FramedRows,
   gallery: Gallery,
   'media-text': MediaText,
+  scrapbook: Scrapbook,
   schools: SchoolsBlock,
 }
 

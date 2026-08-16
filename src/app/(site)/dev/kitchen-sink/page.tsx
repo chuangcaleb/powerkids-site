@@ -12,6 +12,8 @@ import { VideoEmbed } from '@/components/video-embed/video-embed'
 import { cx } from '@/lib/cx'
 import { isProduction } from '@/lib/env'
 import { FramedRows } from '@/payload/blocks/framed-rows/component'
+import { Scrapbook } from '@/payload/blocks/scrapbook/component'
+import type { Media } from '@/payload-types'
 import styles from './kitchen-sink.module.css'
 
 const richText = (text: string) => ({
@@ -43,6 +45,20 @@ const COLOURS = [
 
 const TYPE_STEPS = [-2, -1, 0, 1, 2, 3, 4, 5]
 const SPACE_STEPS = ['3xs', '2xs', 'xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl']
+
+/** Inline SVG, so the demo needs no remote image domain — `next/image` skips the loader entirely for `data:` sources. */
+function samplePhoto(id: number, width: number, height: number, fill: string): Media {
+  const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='${width}' height='${height}'%3E%3Crect width='${width}' height='${height}' fill='${fill}'/%3E%3C/svg%3E`
+  return {
+    id,
+    alt: 'Decorative placeholder photo',
+    url: `data:image/svg+xml,${svg}`,
+    width,
+    height,
+    updatedAt: '2026-01-01T00:00:00.000Z',
+    createdAt: '2026-01-01T00:00:00.000Z',
+  }
+}
 
 const ACCORDION_ITEMS = [
   {
@@ -255,6 +271,50 @@ export default function KitchenSinkPage() {
               eyebrow: 'School holidays',
               icon: 'rocket',
               image: null,
+            },
+          ]}
+        />
+      </section>
+
+      <section className="flow">
+        <div className="wrapper">
+          <Heading level={2}>Scrapbook block</Heading>
+        </div>
+        <Scrapbook
+          id="kitchen-sink-scrapbook"
+          blockType="scrapbook"
+          header={{
+            heading: richText("What we've been up to"),
+            lead: richText('Camps, showcases and the odd messy afternoon.'),
+          }}
+          items={[
+            {
+              id: 'camp',
+              header: { heading: richText('Holiday Robotics Camp') },
+              button: { label: 'See the camp', url: '#' },
+              media: [
+                samplePhoto(1, 960, 540, '%232434e8'),
+                samplePhoto(2, 800, 600, '%23e12c2c'),
+                samplePhoto(3, 900, 600, '%23fdeeda'),
+                samplePhoto(4, 960, 540, '%234c433a'),
+                samplePhoto(5, 600, 800, '%232434e8'),
+              ],
+            },
+            {
+              id: 'showcase',
+              header: { heading: richText('Year-End Showcase') },
+              button: { label: 'Watch highlights', url: '#' },
+              media: [
+                samplePhoto(6, 800, 600, '%23e12c2c'),
+                samplePhoto(7, 960, 540, '%23fdeeda'),
+                samplePhoto(8, 900, 600, '%234c433a'),
+              ],
+            },
+            // Extreme case: a single photo, to check the packer and reel both hold with one item.
+            {
+              id: 'reading-corner',
+              header: { heading: richText('Reading Corner') },
+              media: [samplePhoto(9, 700, 700, '%232434e8')],
             },
           ]}
         />

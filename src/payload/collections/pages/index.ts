@@ -17,6 +17,7 @@ import { Faq } from '@/payload/blocks/faq/config'
 import { FramedRowsBlock } from '@/payload/blocks/framed-rows/config'
 import { Gallery } from '@/payload/blocks/gallery/config'
 import { MediaText } from '@/payload/blocks/media-text/config'
+import { ScrapbookBlock } from '@/payload/blocks/scrapbook/config'
 import { SchoolsBlock } from '@/payload/blocks/schools/config'
 
 import { hero } from './hero'
@@ -103,6 +104,7 @@ export const Pages: CollectionConfig = {
                 Gallery,
                 SchoolsBlock,
                 FramedRowsBlock,
+                ScrapbookBlock,
                 Faq,
               ],
             },

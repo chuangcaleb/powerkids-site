@@ -1,0 +1,221 @@
+/*
+ * Full bleed by markup position: this block's own root section lives outside
+ * any `.wrapper`, so it reaches the viewport edge without a negative-margin
+ * trick (`margin-inline: calc(50% - 50vw)` misaligns the moment anything
+ * makes the wrapper's centre differ from the viewport's). Only the header
+ * re-enters a `.wrapper` below.
+ */
+.scrapbook {
+  position: relative;
+  overflow-x: clip;
+  isolation: isolate;
+  padding-block: var(--space-2xl);
+}
+
+.header {
+  position: relative;
+  z-index: 3;
+  margin-block-end: var(--space-2xl);
+}
+
+/* Dot-grid: a visible reference grid is what makes a photo's tilt read as
+ * intentional rather than accidental — the one texture kept from the
+ * prototype's comparison of grain/rule/dots/graph/kraft/sheet. */
+.texture {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: radial-gradient(
+    circle at center,
+    color-mix(in srgb, var(--text-strong) 44%, transparent) 0.08rem,
+    transparent 0.09rem
+  );
+  background-size: 1.5rem 1.5rem;
+  opacity: 0.5;
+}
+
+.collage {
+  position: relative;
+  z-index: 1;
+  margin-inline: auto;
+  max-width: var(--max-bleed);
+  padding-inline: calc(var(--gutter) / 2);
+
+  /* Read back by the packer as the row unit for converting pixel heights to
+   * grid rows — one owner, declared here, never assumed in JS. */
+  --row-unit: 0.5rem;
+  --gap: var(--space-l);
+}
+
+.collageGrid {
+  display: grid;
+  grid-template-columns: repeat(var(--lanes, 1), minmax(0, 1fr));
+  grid-auto-rows: var(--row-unit);
+  gap: 0 var(--gap);
+}
+
+.cell {
+  position: relative;
+  align-self: start;
+}
+
+.cell.cellText {
+  z-index: 3;
+}
+
+.cell.cellPhoto {
+  z-index: 1;
+}
+
+.pad {
+  padding-block: var(--space-xl);
+}
+
+.tf {
+  transform: translate(var(--jx, 0), var(--jy, 0));
+}
+
+.settle {
+  transform-origin: center;
+}
+
+.itemText {
+  max-width: var(--max-lead);
+
+  /* Set by the packer only when this text cell doesn't start in the grid's
+   * first lane (possible once lane count exceeds the text's own 2-lane
+   * span) — otherwise it reads as floating, unaligned with the photos
+   * either side of it. */
+  padding-inline-start: calc(var(--text-lane-offset, 0) * var(--space-2xl));
+}
+
+.itemLead {
+  margin: 0;
+}
+
+.itemButton {
+  /* `.itemText` is a `flow` (flex column, `align-items: stretch` by
+   * default) — without this the button stretches to the column's full
+   * width instead of sizing to its label. */
+  align-self: flex-start;
+}
+
+.photoFrame {
+  max-inline-size: var(--photo-max-w, none);
+}
+
+.cellPhoto .tf {
+  /* A little overlap between neighbouring photos is intended — scale, not
+   * a larger box, so the packer's own height measurement (`.pad`'s
+   * offsetHeight, taken above this transform) is unaffected. `--photo-scale`
+   * is per-cell and random (see MIN_PHOTO_SCALE/MAX_PHOTO_SCALE), so photos
+   * don't all bleed by the same identical amount. */
+  transform: translate(var(--jx, 0), var(--jy, 0)) scale(var(--photo-scale, 1));
+}
+
+/* Rise + fade on scroll entry — the tape-safe settle option (a `rotate`
+ * variant contradicts the tape's "stuck to a page" read, so it isn't
+ * offered here). Respects reduced motion; unsupported browsers just show
+ * the photo in place, no scroll listener ever runs. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .cellPhoto .settle {
+      animation: scrapbook-settle linear both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 26%;
+    }
+  }
+}
+
+@keyframes scrapbook-settle {
+  from {
+    transform: translateY(1.375rem) scale(0.97);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/*
+ * No-JS fallback and initial SSR paint: three pure-CSS tiers, switched only
+ * by `@media` since nothing here can measure anything. Narrow reuses the
+ * exact same markup/classes as the JS 'reel' mode below (`.reelList`,
+ * `PolaroidReel` is already pure HTML/CSS, nothing to "fall back" from).
+ * Medium/wide are a flat CSS grid — one text cell (2-column span) plus one
+ * cell per photo, in source order — where `grid-auto-flow: dense` does the
+ * backfilling a JS packer would otherwise do. Both tiers always render;
+ * `display: none` on the inactive one keeps the switch CSS-only, and browsers
+ * skip fetching images inside a `display: none` ancestor.
+ */
+.noJsReel {
+  display: block;
+}
+
+.noJsGrid {
+  display: none;
+}
+
+@media (width >= 53.125rem) {
+  .noJsReel {
+    display: none;
+  }
+
+  .noJsGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-flow: dense;
+    gap: var(--gap);
+  }
+}
+
+/* Matches the JS collage's own MAX_LANES-driven feel at wide viewports —
+ * three columns is where a 2-column text span leaves a real gap for
+ * `dense` to backfill with a photo, rather than already filling the row. */
+@media (width >= 75rem) {
+  .noJsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.noJsText {
+  grid-column: span 2;
+
+  /* `dense` can seat this beside a taller photo, stretching the row past the
+   * text's own height (grid items stretch to their row by default) — center
+   * within that extra space instead of pinning to the top. */
+  display: flex;
+  align-items: center;
+}
+
+/*
+ * Reel: a separate DOM tree from the collage, never a restyled version of
+ * it — `PolaroidReel` already is the scroll-snap strip this needs.
+ */
+.reelList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.reelItem + .reelItem {
+  margin-block-start: var(--space-xl);
+}
+
+.reelItem > .itemText {
+  padding-inline: var(--gutter);
+}
+
+/* Below the reel breakpoint (matches `REEL_BELOW_PX` in
+ * scrapbook-collage.tsx) the text sits full-bleed like the reel strip below
+ * it, rather than keeping the desktop gutter meant for wider reel
+ * occurrences (a portrait-heavy photo set can force reel even on a wide
+ * screen — see recomputeMode's comment). */
+@media (width <= 53.125rem) {
+  .reelItem > .itemText {
+    padding-inline: 0;
+  }
+}

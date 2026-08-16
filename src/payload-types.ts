@@ -293,7 +293,16 @@ export interface Page {
       | null;
     media?: (number | null) | Media;
   };
-  layout: (ContentBlock | MediaTextBlock | CardGridBlock | GalleryBlock | SchoolsBlock | FramedRowsBlock | FaqBlock)[];
+  layout: (
+    | ContentBlock
+    | MediaTextBlock
+    | CardGridBlock
+    | GalleryBlock
+    | SchoolsBlock
+    | FramedRowsBlock
+    | ScrapbookBlock
+    | FaqBlock
+  )[];
   meta?: {
     title?: string | null;
     /**
@@ -693,6 +702,109 @@ export interface FramedRowsBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ScrapbookBlock".
+ */
+export interface ScrapbookBlock {
+  items: {
+    header?: {
+      /**
+       * Pill + emphasis color.
+       */
+      accent?: ('neutral' | 'red' | 'blue') | null;
+      heading?: {
+        root: {
+          type: string;
+          children: {
+            type: any;
+            version: number;
+            [k: string]: unknown;
+          }[];
+          direction: ('ltr' | 'rtl') | null;
+          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+          indent: number;
+          version: number;
+        };
+        [k: string]: unknown;
+      } | null;
+      lead?: {
+        root: {
+          type: string;
+          children: {
+            type: any;
+            version: number;
+            [k: string]: unknown;
+          }[];
+          direction: ('ltr' | 'rtl') | null;
+          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+          indent: number;
+          version: number;
+        };
+        [k: string]: unknown;
+      } | null;
+    };
+    /**
+     * Photos for this item. Drag to reorder.
+     */
+    media: (number | Media)[];
+    /**
+     * Optional call-to-action button.
+     */
+    button?: {
+      label?: string | null;
+      url?: string | null;
+    };
+    id?: string | null;
+  }[];
+  /**
+   * Seeds the collage’s random arrangement (stagger, jitter, tilt, photo sizes). Shuffle to preview a different roll, then save to keep it — otherwise the layout is stable per page, not re-rolled on every visit.
+   */
+  seed?: string | null;
+  header?: {
+    /**
+     * Rendered as a pill.
+     */
+    eyebrow?: string | null;
+    /**
+     * Pill + emphasis color.
+     */
+    accent?: ('neutral' | 'red' | 'blue') | null;
+    heading?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    lead?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'scrapbook';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "FaqBlock".
  */
 export interface FaqBlock {
@@ -1059,6 +1171,7 @@ export interface PagesSelect<T extends boolean = true> {
         gallery?: T | GalleryBlockSelect<T>;
         schools?: T | SchoolsBlockSelect<T>;
         'framed-rows'?: T | FramedRowsBlockSelect<T>;
+        scrapbook?: T | ScrapbookBlockSelect<T>;
         faq?: T | FaqBlockSelect<T>;
       };
   meta?:
@@ -1198,6 +1311,42 @@ export interface FramedRowsBlockSelect<T extends boolean = true> {
         eyebrow?: T;
         id?: T;
       };
+  header?:
+    | T
+    | {
+        eyebrow?: T;
+        accent?: T;
+        heading?: T;
+        lead?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ScrapbookBlock_select".
+ */
+export interface ScrapbookBlockSelect<T extends boolean = true> {
+  items?:
+    | T
+    | {
+        header?:
+          | T
+          | {
+              accent?: T;
+              heading?: T;
+              lead?: T;
+            };
+        media?: T;
+        button?:
+          | T
+          | {
+              label?: T;
+              url?: T;
+            };
+        id?: T;
+      };
+  seed?: T;
   header?:
     | T
     | {
@@ -1360,10 +1509,6 @@ export interface SiteSetting {
       }[]
     | null;
   defaultShareImage?: (number | null) | Media;
-  /**
-   * Photos for the polaroid reel straddling the footer edge. Renders nothing when empty.
-   */
-  footerReel?: (number | Media)[] | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1541,7 +1686,6 @@ export interface SiteSettingsSelect<T extends boolean = true> {
         id?: T;
       };
   defaultShareImage?: T;
-  footerReel?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
