@@ -52,10 +52,10 @@ const TILT_DEG = 7 // max rotation applied to a photo, scaled by its per-cell ra
 const JITTER_REM = 0.4375 // ~7px — max random offset applied to a cell's position in any direction
 const TEXT_JITTER_SCALE = 0.5 // text jitters less than photos, so it stays legible and doesn't wander from its column
 const SETTLE_TILT_SCALE = 7 // starting tilt (degrees) a photo animates in from on scroll entry, scaled by the same per-cell tilt value as TILT_DEG
-const STAGGER_MAX_ROWS = 20 // max random per-lane row offset that gives the collage its staggered (not razor-aligned) top edge
+const STAGGER_MAX_ROWS = 40 // max random per-lane row offset that gives the collage its staggered (not razor-aligned) top edge
 const VSCATTER_MAX_ROWS = 14 // max extra vertical scatter applied on top of a photo's packed position, for texture beyond the lane stagger alone
 const MIN_PHOTO_SCALE = 1 // smallest a photo can render at — never shrinks below its packed box
-const MAX_PHOTO_SCALE = 1.15 // largest a photo can render at — the "bleed" ceiling; higher starts reading as a layout bug rather than intentional overlap
+const MAX_PHOTO_SCALE = 1.2 // largest a photo can render at — the "bleed" ceiling; higher starts reading as a layout bug rather than intentional overlap
 // next/image `sizes` hint for the JS collage — an approximation (lane count
 // is the real breakpoint there), not tied to any CSS media query.
 const COLLAGE_IMG_HINT_BREAKPOINT_REM = 60
