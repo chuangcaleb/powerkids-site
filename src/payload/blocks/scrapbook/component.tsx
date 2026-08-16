@@ -53,7 +53,7 @@ export function Scrapbook({ header, items, id }: ScrapbookBlockType) {
         low-opacity photo under this layer is a minor cosmetic miss, not a
         hydration bug, so the simpler, safer component wins here.
       */}
-      <DoodleLayer zoneId={`${seed}-doodles`} density={16} />
+      <DoodleLayer zoneId={`${seed}-doodles`} density={40} />
       <div className={cx('wrapper', styles.header)}>
         <SectionHeader header={header} />
       </div>

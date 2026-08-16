@@ -24,6 +24,7 @@ export type TextCell = {
 export type PhotoCell = {
   kind: 'photo'
   itemIndex: number
+  photoIndex: number
   photoId: string
   order: number
   aspectRatio: number
@@ -50,10 +51,11 @@ export function buildCells(items: ScrapbookItem[], seed: string): ScrapbookCell[
   items.forEach((item, itemIndex) => {
     cells.push({ kind: 'text', itemIndex, order: itemIndex, jitterY: random() * 2 - 1 })
 
-    for (const photo of item.photos) {
+    item.photos.forEach((photo, photoIndex) => {
       cells.push({
         kind: 'photo',
         itemIndex,
+        photoIndex,
         photoId: photo.id,
         order: itemIndex + (random() - 0.5) * INTERLEAVE_SPREAD,
         aspectRatio: photo.aspectRatio,
@@ -62,7 +64,7 @@ export function buildCells(items: ScrapbookItem[], seed: string): ScrapbookCell[
         jitterY: random() * 2 - 1,
         lead: random(),
       })
-    }
+    })
   })
 
   return cells.sort((a, b) => a.order - b.order)

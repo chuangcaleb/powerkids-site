@@ -89,7 +89,9 @@ export function ScrapbookCollage({
   )
 
   const cellKey = (cell: (typeof cells)[number]) =>
-    cell.kind === 'text' ? `text-${cell.itemIndex}` : cell.photoId
+    cell.kind === 'text'
+      ? `text-${cell.itemIndex}`
+      : `photo-${cell.itemIndex}-${cell.photoIndex}`
 
   const photosByItem = useMemo(
     () => items.map((item) => new Map(item.photos.map((p) => [p.id, p]))),
@@ -151,9 +153,13 @@ export function ScrapbookCollage({
     if (!container) return
     const ro = new ResizeObserver(recomputeMode)
     ro.observe(container)
-    return () => ro.disconnect()
+    window.addEventListener('resize', recomputeMode)
+    return () => {
+      ro.disconnect()
+      window.removeEventListener('resize', recomputeMode)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [items])
+  }, [items, mode])
 
   /**
    * Packs once the collage's own cells exist in the DOM. Reads real
