@@ -32,6 +32,7 @@ export type PhotoCell = {
   jitterX: number
   jitterY: number
   lead: number
+  upscale: number
 }
 
 export type ScrapbookCell = TextCell | PhotoCell
@@ -41,8 +42,8 @@ export type ScrapbookCell = TextCell | PhotoCell
  * per-item container for photos to be trapped inside, so the packer (which
  * visits cells strictly in this order) can place an item's photos in a tight
  * band around its own text block without ever grouping them into a rigid
- * sub-grid. `tilt`/`jitterX`/`jitterY`/`lead` are normalized to [-1, 1] or
- * [0, 1) — the renderer scales them to actual units.
+ * sub-grid. `tilt`/`jitterX`/`jitterY`/`lead`/`upscale` are normalized to
+ * [-1, 1] or [0, 1) — the renderer scales them to actual units.
  */
 export function buildCells(items: ScrapbookItem[], seed: string): ScrapbookCell[] {
   const random = createSeededRandom(seed)
@@ -63,6 +64,7 @@ export function buildCells(items: ScrapbookItem[], seed: string): ScrapbookCell[
         jitterX: random() * 2 - 1,
         jitterY: random() * 2 - 1,
         lead: random(),
+        upscale: random(),
       })
     })
   })

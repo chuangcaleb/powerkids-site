@@ -37,20 +37,22 @@ export type CollageItem = {
 type Mode = 'stacked' | 'collage' | 'reel'
 
 // Tuning knobs
-const MIN_PHOTO_HEIGHT_REM = 12.1875 // 195px
-const MAX_PHOTO_HEIGHT_REM = 25.9375 // 415px
-const MAX_LANES = 6
-const MIN_LANES_FOR_COLLAGE = 2
+const MIN_PHOTO_HEIGHT_REM = 13.5 // 216px — shortest a lane-count derivation will allow before backing off to fewer, wider lanes
+const MAX_PHOTO_HEIGHT_REM = 28.75 // 460px — tallest before a photo's frame width gets capped instead of growing further
+const MAX_LANES = 6 // hard ceiling on lane count, regardless of how narrow that makes each one
+const MIN_LANES_FOR_COLLAGE = 2 // fewer than this and the collage reads as a single column — reel wins instead
 // Below this viewport width the reel wins outright, even if the lane math
 // alone would still allow 2 lanes — matches the prototype's `reelBelow`.
 const REEL_BELOW_PX = 850
-const TEXT_SPAN_LANES = 2
-const TILT_DEG = 7
-const JITTER_REM = 0.4375 // ~7px
-const TEXT_JITTER_SCALE = 0.5
-const SETTLE_TILT_SCALE = 7
-const STAGGER_MAX_ROWS = 20
-const VSCATTER_MAX_ROWS = 14
+const TEXT_SPAN_LANES = 2 // how many lanes a text block occupies
+const TILT_DEG = 7 // max rotation applied to a photo, scaled by its per-cell random tilt in [-1, 1]
+const JITTER_REM = 0.4375 // ~7px — max random offset applied to a cell's position in any direction
+const TEXT_JITTER_SCALE = 0.5 // text jitters less than photos, so it stays legible and doesn't wander from its column
+const SETTLE_TILT_SCALE = 7 // starting tilt (degrees) a photo animates in from on scroll entry, scaled by the same per-cell tilt value as TILT_DEG
+const STAGGER_MAX_ROWS = 20 // max random per-lane row offset that gives the collage its staggered (not razor-aligned) top edge
+const VSCATTER_MAX_ROWS = 14 // max extra vertical scatter applied on top of a photo's packed position, for texture beyond the lane stagger alone
+const MIN_PHOTO_SCALE = 1 // smallest a photo can render at — never shrinks below its packed box
+const MAX_PHOTO_SCALE = 1.15 // largest a photo can render at — the "bleed" ceiling; higher starts reading as a layout bug rather than intentional overlap
 
 function remToPx(rem: number) {
   if (typeof document === 'undefined') return rem * 16
@@ -238,17 +240,32 @@ export function ScrapbookCollage({
         }
       })
 
+      // Relative stagger between lanes, not an absolute offset: subtracting
+      // the minimum keeps at least one lane starting at row 0, so the whole
+      // collage doesn't sit behind a common empty band before any content —
+      // only the *difference* between lanes is the intended stagger.
       const stagger = createSeededRandom(`${seed}-stagger-${layout.lanes}`)
-      const initialHeights = Array.from({ length: layout.lanes }, () =>
+      const rawHeights = Array.from({ length: layout.lanes }, () =>
         Math.round(stagger() * STAGGER_MAX_ROWS),
       )
+      const baseline = Math.min(...rawHeights)
+      const initialHeights = rawHeights.map((h) => h - baseline)
 
+      const textKeys = new Set(
+        packCells.filter((c) => c.kind === 'text').map((c) => c.id),
+      )
       const placed = packLanes(packCells, layout.lanes, initialHeights)
       for (const cell of placed) {
         const el = cellRefs.current.get(cell.id)
         if (!el) continue
         el.style.gridColumn = `${cell.columnStart} / span ${cell.span}`
         el.style.gridRow = `${cell.rowStart} / span ${cell.rows}`
+        // Extra inset for a text block that doesn't start in the first lane
+        // — at higher lane counts it can land mid-grid, and the base gutter
+        // alone reads as misaligned floating against the photos either side.
+        if (textKeys.has(cell.id)) {
+          el.style.setProperty('--text-lane-offset', cell.columnStart > 1 ? '1' : '0')
+        }
       }
     }
 
@@ -322,6 +339,10 @@ export function ScrapbookCollage({
                   {
                     '--jx': `${(cell.jitterX * JITTER_REM).toFixed(3)}rem`,
                     '--jy': `${(cell.jitterY * JITTER_REM).toFixed(3)}rem`,
+                    '--photo-scale': (
+                      MIN_PHOTO_SCALE +
+                      cell.upscale * (MAX_PHOTO_SCALE - MIN_PHOTO_SCALE)
+                    ).toFixed(3),
                   } as CSSProperties
                 }
               >
@@ -366,7 +387,7 @@ function ItemText({ item }: { item: CollageItem }) {
         </p>
       ) : null}
       {button?.label && button.url ? (
-        <Button href={button.url} size="sm">
+        <Button href={button.url} size="sm" className={styles.itemButton}>
           {button.label}
         </Button>
       ) : null}
@@ -386,7 +407,7 @@ function StackedList({
     <div ref={containerRef} className={styles.collage}>
       <ul role="list" className={styles.stackedList}>
         {items.map((item) => (
-          <li key={item.id} className={styles.stackedItem}>
+          <li key={item.id} className={cx('flow-l', styles.stackedItem)}>
             <ItemText item={item} />
             <div className={cx('cluster', styles.stackedPhotos)}>
               {item.photos.map((photo, index) => (

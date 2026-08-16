@@ -82,14 +82,36 @@
 
 .itemText {
   max-width: var(--max-lead);
+
+  /* Set by the packer only when this text cell doesn't start in the grid's
+   * first lane (possible once lane count exceeds the text's own 2-lane
+   * span) — otherwise it reads as floating, unaligned with the photos
+   * either side of it. */
+  padding-inline-start: calc(var(--text-lane-offset, 0) * var(--space-2xl));
 }
 
 .itemLead {
   margin: 0;
 }
 
+.itemButton {
+  /* `.itemText` is a `flow` (flex column, `align-items: stretch` by
+   * default) — without this the button stretches to the column's full
+   * width instead of sizing to its label. */
+  align-self: flex-start;
+}
+
 .photoFrame {
   max-inline-size: var(--photo-max-w, none);
+}
+
+.cellPhoto .tf {
+  /* A little overlap between neighbouring photos is intended — scale, not
+   * a larger box, so the packer's own height measurement (`.pad`'s
+   * offsetHeight, taken above this transform) is unaffected. `--photo-scale`
+   * is per-cell and random (see MIN_PHOTO_SCALE/MAX_PHOTO_SCALE), so photos
+   * don't all bleed by the same identical amount. */
+  transform: translate(var(--jx, 0), var(--jy, 0)) scale(var(--photo-scale, 1));
 }
 
 /* Rise + fade on scroll entry — the tape-safe settle option (a `rotate`
@@ -151,4 +173,19 @@
 
 .reelItem + .reelItem {
   margin-block-start: var(--space-xl);
+}
+
+.reelItem > .itemText {
+  padding-inline: var(--gutter);
+}
+
+/* Below the reel breakpoint (matches `REEL_BELOW_PX` in
+ * scrapbook-collage.tsx) the text sits full-bleed like the reel strip below
+ * it, rather than keeping the desktop gutter meant for wider reel
+ * occurrences (a portrait-heavy photo set can force reel even on a wide
+ * screen — see recomputeMode's comment). */
+@media (width <= 53.125rem) {
+  .reelItem > .itemText {
+    padding-inline: 0;
+  }
 }
