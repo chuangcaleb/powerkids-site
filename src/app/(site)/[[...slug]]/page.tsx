@@ -66,7 +66,7 @@ export default async function Page({ params }: Props) {
   return (
     <>
       {draft && <LivePreviewListener />}
-      <main className="flow-2xl">
+      <main>
         <Hero hero={page.hero} />
         <RenderBlocks layout={page.layout} />
       </main>

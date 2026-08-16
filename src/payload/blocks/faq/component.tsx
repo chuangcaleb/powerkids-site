@@ -5,7 +5,7 @@ import type { FaqBlock as FaqBlockType } from '@/payload-types'
 
 export function Faq({ header, items }: FaqBlockType) {
   return (
-    <section className="wrapper flow">
+    <section className="wrapper flow region">
       <SectionHeader header={header} />
       <Accordion
         items={(items ?? []).map((item, index) => ({

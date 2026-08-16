@@ -17,6 +17,7 @@ CUBE-CSS-style compositions, adapted from Every Layout. Each solves a single arr
 | `.cluster`   | Consistent spacing, wraps as needed, items vary in size | Tag groups, nav links, button rows                             |
 | `.grid-auto` | Auto-fill grid, items share a minimum width             | Card grids, gallery thumbnails, school lists, stat rows        |
 | `.wrapper`   | Centred container, max width + gutters                  | One per page section, to constrain content                     |
+| `.region`    | Standard vertical padding for a page section            | Any section root, instead of ad hoc `padding-block`            |
 | `.sidebar`   | Sidebar + main, collapses to stack                      | Fixed-width side beside flexible main                          |
 | `.switcher`  | **Two** items side by side, stack when narrow           | Image-and-text pairs, heading-and-byline                       |
 | `.repel`     | Items pushed to opposite edges, stack when no room      | Nav bars, card footers, left-thing-and-right-thing             |
@@ -32,6 +33,7 @@ CUBE-CSS-style compositions, adapted from Every Layout. Each solves a single arr
 - Tune with custom properties set on the element or its parent. Defaults cover most cases.
 - Nest freely — `.grid-auto` inside `.wrapper` inside `.flow` is the expected shape.
 - Use `.flow` instead of `margin-bottom` on components.
+- Use `.region` for a section's own top/bottom padding instead of relying on page-level margin between siblings.
 - Reach for a primitive first. None fit? Say why in a comment before writing bespoke layout.
 
 ## Don't

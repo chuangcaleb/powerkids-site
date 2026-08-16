@@ -9,7 +9,6 @@
   position: relative;
   overflow-x: clip;
   isolation: isolate;
-  padding-block: var(--space-xl);
 }
 
 /* Dot-grid: a visible reference grid is what makes a photo's tilt read as

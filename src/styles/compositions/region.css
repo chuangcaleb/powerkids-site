@@ -1,0 +1,21 @@
+/* REGION — standard vertical padding for a page section. See docs/design/layout-primitives.md. */
+
+[class*='region'] {
+  padding-block: var(--region-space, var(--space-2xl));
+}
+
+.region-l {
+  --region-space: var(--space-l);
+}
+
+.region-xl {
+  --region-space: var(--space-xl);
+}
+
+.region-2xl {
+  --region-space: var(--space-2xl);
+}
+
+.region-3xl {
+  --region-space: var(--space-3xl);
+}

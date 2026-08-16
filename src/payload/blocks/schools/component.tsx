@@ -9,7 +9,7 @@ export async function SchoolsBlock({ header }: SchoolsBlockType) {
   const schools = await getSchools()
 
   return (
-    <section className="wrapper flow">
+    <section className="wrapper flow region">
       <SectionHeader header={header} />
       <div className="grid-auto">
         {schools.map((school) => (

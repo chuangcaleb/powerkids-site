@@ -20,7 +20,6 @@
 .content {
   position: relative;
   z-index: 1;
-  padding-block: var(--space-xl);
   min-height: 70vh;
 
   --sidebar-size: 43%;
