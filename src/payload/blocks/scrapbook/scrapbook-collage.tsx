@@ -53,6 +53,13 @@ const STAGGER_MAX_ROWS = 20 // max random per-lane row offset that gives the col
 const VSCATTER_MAX_ROWS = 14 // max extra vertical scatter applied on top of a photo's packed position, for texture beyond the lane stagger alone
 const MIN_PHOTO_SCALE = 1 // smallest a photo can render at — never shrinks below its packed box
 const MAX_PHOTO_SCALE = 1.15 // largest a photo can render at — the "bleed" ceiling; higher starts reading as a layout bug rather than intentional overlap
+// next/image `sizes` hint for the JS collage — an approximation (lane count
+// is the real breakpoint there), not tied to any CSS media query.
+const COLLAGE_IMG_HINT_BREAKPOINT_REM = 60
+// Matches scrapbook.module.css's `@media (width >= 75rem)` 3-column
+// threshold for the no-JS grid — the one JS/CSS breakpoint pair that's
+// actually the same value, unlike the hint above.
+const WIDE_GRID_BREAKPOINT_REM = 75
 
 function remToPx(rem: number) {
   if (typeof document === 'undefined') return rem * 16
@@ -130,12 +137,20 @@ export function ScrapbookCollage({
   }
 
   /**
+   * Reel wins below `REEL_BELOW_PX` *or* when the lane math alone can't form
+   * at least two lanes — either condition alone can miss a case the other
+   * catches (e.g. a portrait-heavy photo set can still derive 2 lanes on a
+   * narrow phone). Shared by the mode decision and the packer below so they
+   * can never disagree about which one currently applies.
+   */
+  function shouldUseReel(layout: { lanes: number }) {
+    return window.innerWidth < REEL_BELOW_PX || layout.lanes < MIN_LANES_FOR_COLLAGE
+  }
+
+  /**
    * Decide stacked/reel/collage from the container's measured width. Never a
    * media query — see displayMode() in the prototype for the bug this
-   * avoids. Reel wins below `REEL_BELOW_PX` *or* when the lane math alone
-   * can't form at least two lanes — either condition alone can miss a case
-   * the other catches (e.g. a portrait-heavy photo set can still derive 2
-   * lanes on a narrow phone).
+   * avoids.
    */
   function recomputeMode() {
     const container = containerRef.current
@@ -143,8 +158,7 @@ export function ScrapbookCollage({
 
     const { layout } = measureLaneLayout(container)
     setLanes(layout.lanes)
-    const tooNarrow = window.innerWidth < REEL_BELOW_PX
-    setMode(tooNarrow || layout.lanes < MIN_LANES_FOR_COLLAGE ? 'reel' : 'collage')
+    setMode(shouldUseReel(layout) ? 'reel' : 'collage')
   }
 
   useEffect(() => {
@@ -179,7 +193,7 @@ export function ScrapbookCollage({
       const rowUnitRem = parseFloat(cs.getPropertyValue('--row-unit')) || 0.5
       const rowUnitPx = remToPx(rowUnitRem)
 
-      if (window.innerWidth < REEL_BELOW_PX || layout.lanes < MIN_LANES_FOR_COLLAGE) {
+      if (shouldUseReel(layout)) {
         setMode('reel')
         return
       }
@@ -358,7 +372,7 @@ export function ScrapbookCollage({
                     doc={photosByItem[cell.itemIndex]!.get(cell.photoId)!.doc}
                     tilt={cell.tilt * TILT_DEG}
                     className={styles.photoFrame}
-                    sizes={`(min-width: 60rem) ${Math.round(100 / lanes)}vw, 50vw`}
+                    sizes={`(min-width: ${COLLAGE_IMG_HINT_BREAKPOINT_REM}rem) ${Math.round(100 / lanes)}vw, 50vw`}
                   />
                 </div>
               </div>
@@ -432,7 +446,7 @@ function StackedList({
               key={photo.id}
               doc={photo.doc}
               tilt={index % 2 === 0 ? -4 : 3}
-              sizes="(min-width: 75rem) 33vw, 50vw"
+              sizes={`(min-width: ${WIDE_GRID_BREAKPOINT_REM}rem) 33vw, 50vw`}
             />
           )),
         ])}

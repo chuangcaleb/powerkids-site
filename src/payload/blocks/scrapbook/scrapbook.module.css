@@ -183,6 +183,12 @@
 
 .noJsText {
   grid-column: span 2;
+
+  /* `dense` can seat this beside a taller photo, stretching the row past the
+   * text's own height (grid items stretch to their row by default) — center
+   * within that extra space instead of pinning to the top. */
+  display: flex;
+  align-items: center;
 }
 
 /*
