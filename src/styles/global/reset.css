@@ -14,6 +14,14 @@ html {
   /* stylelint-disable-next-line property-no-vendor-prefix -- iOS Safari needs the prefixed form */
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+
+  /* Reserve the scrollbar gutter unconditionally so viewport width never
+   * shifts when a scrollbar appears/disappears — width-driven layout (e.g.
+   * the scrapbook block's reel/collage decision) reads window.innerWidth
+   * and would otherwise feed back into its own measurement: switching mode
+   * changes page height, which toggles the scrollbar, which changes width,
+   * which can flip mode again. */
+  scrollbar-gutter: stable;
 }
 
 body {

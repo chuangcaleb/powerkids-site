@@ -6,7 +6,7 @@
 // rather than a media query — see lane-layout.ts and packer.ts for why.
 
 import type { CSSProperties, RefObject } from 'react'
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { Button } from '@/components/button/button'
 import { Heading } from '@/components/heading/heading'
 import { Polaroid } from '@/components/polaroid/polaroid'
@@ -73,6 +73,17 @@ function pxToRem(px: number) {
   return px / remToPx(1)
 }
 
+/**
+ * Reel wins below `REEL_BELOW_PX` *or* when the lane math alone can't form
+ * at least two lanes — either condition alone can miss a case the other
+ * catches (e.g. a portrait-heavy photo set can still derive 2 lanes on a
+ * narrow phone). Shared by the mode decision and the packer below so they
+ * can never disagree about which one currently applies.
+ */
+function shouldUseReel(layout: { lanes: number }) {
+  return window.innerWidth < REEL_BELOW_PX || layout.lanes < MIN_LANES_FOR_COLLAGE
+}
+
 export function ScrapbookCollage({
   items,
   seed,
@@ -121,48 +132,40 @@ export function ScrapbookCollage({
    * swallowed the width). Both measurements exclude the container's own
    * inline padding, so they always agree.
    */
-  function measureLaneLayout(container: HTMLDivElement) {
-    const cs = getComputedStyle(container)
-    const gap = parseFloat(cs.columnGap) || 0
-    const width =
-      container.clientWidth -
-      parseFloat(cs.paddingLeft || '0') -
-      parseFloat(cs.paddingRight || '0')
-    const layout = deriveLaneLayout({
-      containerWidth: width,
-      gap,
-      aspectRatio: medianRatio,
-      minPhotoHeight: remToPx(MIN_PHOTO_HEIGHT_REM),
-      maxPhotoHeight: remToPx(MAX_PHOTO_HEIGHT_REM),
-      maxLanes: MAX_LANES,
-    })
-    return { layout, gap, cs }
-  }
-
-  /**
-   * Reel wins below `REEL_BELOW_PX` *or* when the lane math alone can't form
-   * at least two lanes — either condition alone can miss a case the other
-   * catches (e.g. a portrait-heavy photo set can still derive 2 lanes on a
-   * narrow phone). Shared by the mode decision and the packer below so they
-   * can never disagree about which one currently applies.
-   */
-  function shouldUseReel(layout: { lanes: number }) {
-    return window.innerWidth < REEL_BELOW_PX || layout.lanes < MIN_LANES_FOR_COLLAGE
-  }
+  const measureLaneLayout = useCallback(
+    (container: HTMLDivElement) => {
+      const cs = getComputedStyle(container)
+      const gap = parseFloat(cs.columnGap) || 0
+      const width =
+        container.clientWidth -
+        parseFloat(cs.paddingLeft || '0') -
+        parseFloat(cs.paddingRight || '0')
+      const layout = deriveLaneLayout({
+        containerWidth: width,
+        gap,
+        aspectRatio: medianRatio,
+        minPhotoHeight: remToPx(MIN_PHOTO_HEIGHT_REM),
+        maxPhotoHeight: remToPx(MAX_PHOTO_HEIGHT_REM),
+        maxLanes: MAX_LANES,
+      })
+      return { layout, gap, cs }
+    },
+    [medianRatio],
+  )
 
   /**
    * Decide stacked/reel/collage from the container's measured width. Never a
    * media query — see displayMode() in the prototype for the bug this
    * avoids.
    */
-  function recomputeMode() {
+  const recomputeMode = useCallback(() => {
     const container = containerRef.current
     if (!container || !container.clientWidth) return
 
     const { layout } = measureLaneLayout(container)
     setLanes(layout.lanes)
     setMode(shouldUseReel(layout) ? 'reel' : 'collage')
-  }
+  }, [measureLaneLayout])
 
   useEffect(() => {
     recomputeMode()
@@ -175,8 +178,7 @@ export function ScrapbookCollage({
       ro.disconnect()
       window.removeEventListener('resize', recomputeMode)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [items, mode])
+  }, [recomputeMode])
 
   /**
    * Packs once the collage's own cells exist in the DOM. Reads real
