@@ -10,6 +10,7 @@ import { archivo } from '@/styles/fonts/archivo'
 import { bricolageGrotesque } from '@/styles/fonts/bricolage-grotesque'
 import '@/styles/tokens/index.css'
 import '@/styles/compositions/index.css'
+import '@/styles/utilities/index.css'
 import '@/styles/global/index.css'
 
 /**
