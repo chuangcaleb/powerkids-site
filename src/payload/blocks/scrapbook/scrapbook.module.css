@@ -141,24 +141,48 @@
 }
 
 /*
- * No-JS fallback and initial SSR render. Tilt is pure CSS (nth-child
- * alternation), so the scrapbook's character survives with JS off — there's
- * no honest JS-free way to measure heights for the collage, so this is the
- * fallback, not an approximation of it.
+ * No-JS fallback and initial SSR paint: three pure-CSS tiers, switched only
+ * by `@media` since nothing here can measure anything. Narrow reuses the
+ * exact same markup/classes as the JS 'reel' mode below (`.reelList`,
+ * `PolaroidReel` is already pure HTML/CSS, nothing to "fall back" from).
+ * Medium/wide are a flat CSS grid — one text cell (2-column span) plus one
+ * cell per photo, in source order — where `grid-auto-flow: dense` does the
+ * backfilling a JS packer would otherwise do. Both tiers always render;
+ * `display: none` on the inactive one keeps the switch CSS-only, and browsers
+ * skip fetching images inside a `display: none` ancestor.
  */
-.stackedList {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.noJsReel {
+  display: block;
 }
 
-.stackedItem + .stackedItem {
-  margin-block-start: var(--space-2xl);
+.noJsGrid {
+  display: none;
 }
 
-.stackedPhoto {
-  flex: 1 1 16rem;
-  max-width: 20rem;
+@media (width >= 53.125rem) {
+  .noJsReel {
+    display: none;
+  }
+
+  .noJsGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-flow: dense;
+    gap: var(--gap);
+  }
+}
+
+/* Matches the JS collage's own MAX_LANES-driven feel at wide viewports —
+ * three columns is where a 2-column text span leaves a real gap for
+ * `dense` to backfill with a photo, rather than already filling the row. */
+@media (width >= 75rem) {
+  .noJsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.noJsText {
+  grid-column: span 2;
 }
 
 /*

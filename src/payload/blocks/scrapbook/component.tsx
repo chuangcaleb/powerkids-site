@@ -16,7 +16,7 @@ import styles from './scrapbook.module.css'
  * only resolves CMS data into plain props and renders the section shell
  * (doodles, texture, header) that's the same regardless of mode.
  */
-export function Scrapbook({ header, items, id }: ScrapbookBlockType) {
+export function Scrapbook({ header, items, id, seed: storedSeed }: ScrapbookBlockType) {
   const resolvedItems: CollageItem[] = (items ?? [])
     .map((item) => ({
       id: item.id ?? '',
@@ -39,7 +39,12 @@ export function Scrapbook({ header, items, id }: ScrapbookBlockType) {
 
   if (resolvedItems.length === 0) return null
 
-  const seed = `scrapbook-${id ?? 'preview'}`
+  // Editor-controlled via the "Shuffle layout" button (see seed-field.tsx),
+  // stored on the block rather than left implicit — otherwise the only way
+  // to change the arrangement would be to edit content and re-trigger a
+  // build, and the id-derived fallback would silently reshuffle any time the
+  // block's id itself changes (e.g. duplicating the block).
+  const seed = storedSeed || `scrapbook-${id ?? 'preview'}`
 
   return (
     <section className={styles.scrapbook}>

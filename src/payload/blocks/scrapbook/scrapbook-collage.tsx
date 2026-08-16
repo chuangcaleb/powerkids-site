@@ -395,7 +395,16 @@ function ItemText({ item }: { item: CollageItem }) {
   )
 }
 
-/** No-JS fallback and initial SSR render: pure CSS tilt, no measurement of any kind. */
+/**
+ * No-JS fallback and initial SSR paint — a pure-CSS three-tier responsive
+ * layout, not an approximation of the JS collage. Both tiers below always
+ * render; `@media` (in scrapbook.module.css) shows exactly one, so the
+ * switch itself needs no JS. Narrow reuses the same reel markup/classes as
+ * the JS 'reel' mode (`PolaroidReel` is already pure HTML/CSS scroll-snap —
+ * nothing to fall back from). Medium/wide are one flat grid of every text
+ * and photo cell in source order, with `grid-auto-flow: dense` doing the
+ * backfilling a JS packer would otherwise do.
+ */
 function StackedList({
   items,
   containerRef,
@@ -405,24 +414,29 @@ function StackedList({
 }) {
   return (
     <div ref={containerRef} className={styles.collage}>
-      <ul role="list" className={styles.stackedList}>
+      <ul role="list" className={cx(styles.reelList, styles.noJsReel)}>
         {items.map((item) => (
-          <li key={item.id} className={cx('flow-l', styles.stackedItem)}>
+          <li key={item.id} className={styles.reelItem}>
             <ItemText item={item} />
-            <div className={cx('cluster', styles.stackedPhotos)}>
-              {item.photos.map((photo, index) => (
-                <Polaroid
-                  key={photo.id}
-                  doc={photo.doc}
-                  tilt={index % 2 === 0 ? -4 : 3}
-                  className={styles.stackedPhoto}
-                  sizes="80vw"
-                />
-              ))}
-            </div>
+            <PolaroidReel photos={item.photos.map((p) => p.doc)} />
           </li>
         ))}
       </ul>
+      <div className={styles.noJsGrid}>
+        {items.flatMap((item) => [
+          <div key={`text-${item.id}`} className={styles.noJsText}>
+            <ItemText item={item} />
+          </div>,
+          ...item.photos.map((photo, index) => (
+            <Polaroid
+              key={photo.id}
+              doc={photo.doc}
+              tilt={index % 2 === 0 ? -4 : 3}
+              sizes="(min-width: 75rem) 33vw, 50vw"
+            />
+          )),
+        ])}
+      </div>
     </div>
   )
 }
