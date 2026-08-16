@@ -38,7 +38,7 @@ type Mode = 'stacked' | 'collage' | 'reel'
 
 // Tuning knobs
 const MIN_PHOTO_HEIGHT_REM = 13.5 // 216px — shortest a lane-count derivation will allow before backing off to fewer, wider lanes
-const MAX_PHOTO_HEIGHT_REM = 28.75 // 460px — tallest before a photo's frame width gets capped instead of growing further
+const MAX_PHOTO_HEIGHT_REM = 23 // tallest before a photo's frame width gets capped instead of growing further
 const MAX_LANES = 6 // hard ceiling on lane count, regardless of how narrow that makes each one
 const MIN_LANES_FOR_COLLAGE = 2 // fewer than this and the collage reads as a single column — reel wins instead
 // Below this viewport width the reel wins outright, even if the lane math

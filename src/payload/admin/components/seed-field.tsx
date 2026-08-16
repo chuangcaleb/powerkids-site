@@ -20,15 +20,12 @@ export const SeedField: TextFieldClientComponent = (props) => {
   const { setValue } = useField<string>({ path })
 
   return (
-    <div
-      className="field-type text"
-      style={{ display: 'flex', alignItems: 'flex-end', gap: '1rem' }}
-    >
+    <div className="field-type text">
       <div style={{ flexGrow: 1 }}>
         <TextField {...props} />
       </div>
       <Button buttonStyle="secondary" size="small" onClick={() => setValue(randomSeed())}>
-        Shuffle layout
+        Shuffle
       </Button>
     </div>
   )
