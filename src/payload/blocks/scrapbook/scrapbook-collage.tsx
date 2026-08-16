@@ -167,6 +167,10 @@ export function ScrapbookCollage({
     setMode(shouldUseReel(layout) ? 'reel' : 'collage')
   }, [measureLaneLayout])
 
+  // Re-subscribes on every mode change: each mode renders its own DOM tree
+  // (noJs / reel / collage), so the node `containerRef` points at is replaced
+  // — an observer bound once at mount would keep watching a detached node and
+  // only the window listener would still fire.
   useEffect(() => {
     recomputeMode()
     const container = containerRef.current
@@ -178,7 +182,7 @@ export function ScrapbookCollage({
       ro.disconnect()
       window.removeEventListener('resize', recomputeMode)
     }
-  }, [recomputeMode])
+  }, [recomputeMode, mode])
 
   /**
    * Packs once the collage's own cells exist in the DOM. Reads real
