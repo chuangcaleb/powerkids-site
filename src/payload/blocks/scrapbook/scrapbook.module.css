@@ -9,13 +9,7 @@
   position: relative;
   overflow-x: clip;
   isolation: isolate;
-  padding-block: var(--space-2xl);
-}
-
-.header {
-  position: relative;
-  z-index: 3;
-  margin-block-end: var(--space-2xl);
+  padding-block: var(--space-xl);
 }
 
 /* Dot-grid: a visible reference grid is what makes a photo's tilt read as

@@ -432,21 +432,21 @@ function NoJsFallback({
   return (
     <div ref={containerRef} className={styles.collage}>
       <ul role="list" className={cx(styles.reelList, styles.noJsReel)}>
-        {items.map((item) => (
-          <li key={item.id} className={styles.reelItem}>
+        {items.map((item, itemIndex) => (
+          <li key={`${item.id}-${itemIndex}`} className={styles.reelItem}>
             <ItemText item={item} />
             <PolaroidReel photos={item.photos.map((p) => p.doc)} />
           </li>
         ))}
       </ul>
       <div className={styles.noJsGrid}>
-        {items.flatMap((item) => [
-          <div key={`text-${item.id}`} className={styles.noJsText}>
+        {items.flatMap((item, itemIndex) => [
+          <div key={`text-${itemIndex}`} className={styles.noJsText}>
             <ItemText item={item} />
           </div>,
           ...item.photos.map((photo, index) => (
             <Polaroid
-              key={photo.id}
+              key={`${itemIndex}-${index}`}
               doc={photo.doc}
               tilt={index % 2 === 0 ? -4 : 3}
               sizes={`(min-width: ${WIDE_GRID_BREAKPOINT_REM}rem) 33vw, 50vw`}
@@ -469,8 +469,8 @@ function ReelList({
   return (
     <div ref={containerRef} className={styles.collage}>
       <ul role="list" className={styles.reelList}>
-        {items.map((item) => (
-          <li key={item.id} className={styles.reelItem}>
+        {items.map((item, itemIndex) => (
+          <li key={`${item.id}-${itemIndex}`} className={styles.reelItem}>
             <ItemText item={item} />
             <PolaroidReel photos={item.photos.map((p) => p.doc)} />
           </li>

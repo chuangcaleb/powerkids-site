@@ -47,7 +47,7 @@ export function Scrapbook({ header, items, id, seed: storedSeed }: ScrapbookBloc
   const seed = storedSeed || `scrapbook-${id ?? 'preview'}`
 
   return (
-    <section className={styles.scrapbook}>
+    <section className={cx('flow', styles.scrapbook)}>
       <div className={cx('dot-grid', styles.texture)} aria-hidden="true" />
       {/*
         Reused unmodified: no negative-space rejection step. The prototype
@@ -59,7 +59,7 @@ export function Scrapbook({ header, items, id, seed: storedSeed }: ScrapbookBloc
         hydration bug, so the simpler, safer component wins here.
       */}
       <DoodleLayer zoneId={`${seed}-doodles`} density={80} />
-      <div className={cx('wrapper', styles.header)}>
+      <div className={cx('wrapper flow', styles.header)}>
         <SectionHeader header={header} />
       </div>
       <ScrapbookCollage items={resolvedItems} seed={seed} />
