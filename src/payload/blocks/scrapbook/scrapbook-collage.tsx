@@ -5,12 +5,10 @@
 // the reel/stacked fallback decision is derived from that same measurement
 // rather than a media query — see lane-layout.ts and packer.ts for why.
 
-import type { CSSProperties, RefObject } from 'react'
-import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { Button } from '@/components/button/button'
 import { Heading } from '@/components/heading/heading'
-import { Polaroid } from '@/components/polaroid/polaroid'
 import { PolaroidReel } from '@/components/polaroid-reel/polaroid-reel'
+import { Polaroid } from '@/components/polaroid/polaroid'
 import {
   HeaderRichText,
   type HeaderRichTextProps,
@@ -18,6 +16,8 @@ import {
 import { cx } from '@/lib/cx'
 import { createSeededRandom } from '@/lib/seeded-random'
 import type { Media as MediaDoc } from '@/payload-types'
+import type { CSSProperties, RefObject } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { buildCells } from './cells'
 import { deriveLaneLayout, medianAspectRatio, photoBox } from './lane-layout'
 import { packLanes, type PackCell } from './packer'
@@ -274,21 +274,12 @@ export function ScrapbookCollage({
       const baseline = Math.min(...rawHeights)
       const initialHeights = rawHeights.map((h) => h - baseline)
 
-      const textKeys = new Set(
-        packCells.filter((c) => c.kind === 'text').map((c) => c.id),
-      )
       const placed = packLanes(packCells, layout.lanes, initialHeights)
       for (const cell of placed) {
         const el = cellRefs.current.get(cell.id)
         if (!el) continue
         el.style.gridColumn = `${cell.columnStart} / span ${cell.span}`
         el.style.gridRow = `${cell.rowStart} / span ${cell.rows}`
-        // Extra inset for a text block that doesn't start in the first lane
-        // — at higher lane counts it can land mid-grid, and the base gutter
-        // alone reads as misaligned floating against the photos either side.
-        if (textKeys.has(cell.id)) {
-          el.style.setProperty('--text-lane-offset', cell.columnStart > 1 ? '1' : '0')
-        }
       }
     }
 

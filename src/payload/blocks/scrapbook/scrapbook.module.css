@@ -40,7 +40,7 @@
   width: 100%;
   margin-inline: auto;
   max-width: var(--max-bleed);
-  padding-inline: calc(var(--gutter) / 2);
+  padding-inline: var(--gutter);
 
   /* Read back by the packer as the row unit for converting pixel heights to
    * grid rows — one owner, declared here, never assumed in JS. */
@@ -69,7 +69,7 @@
 }
 
 .pad {
-  padding-block: var(--space-xl);
+  padding-block: var(--space-2xl);
 }
 
 .tf {
@@ -87,7 +87,7 @@
    * first lane (possible once lane count exceeds the text's own 2-lane
    * span) — otherwise it reads as floating, unaligned with the photos
    * either side of it. */
-  padding-inline-start: calc(var(--text-lane-offset, 0) * var(--space-2xl));
+  padding-inline-start: var(--space-2xl);
 }
 
 .itemLead {
