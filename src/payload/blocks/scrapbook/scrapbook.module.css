@@ -30,6 +30,14 @@
 .collage {
   position: relative;
   z-index: 1;
+
+  /* The parent section is a `flow` (flex column). `margin-inline: auto` is a
+   * cross-axis auto margin, which cancels the flex item's default stretch —
+   * without an explicit width the collage would size to its own content, and
+   * the packer would then derive its lane count from a width the content
+   * itself produced. That feeds back: a 1-lane grid measures narrow, derives
+   * 1 lane, and falls to reel forever. */
+  width: 100%;
   margin-inline: auto;
   max-width: var(--max-bleed);
   padding-inline: calc(var(--gutter) / 2);
