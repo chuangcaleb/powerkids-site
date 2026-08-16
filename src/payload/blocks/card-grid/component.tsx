@@ -26,7 +26,7 @@ export function CardGrid(block: CardGridBlock) {
   const cards = resolveCards(block)
 
   return (
-    <section className="wrapper flow">
+    <section className="wrapper flow region">
       <SectionHeader header={block.header} />
       <div className="grid-auto">
         {cards.map((card, index) => (

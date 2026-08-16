@@ -18,7 +18,7 @@ const sizeStyles: Record<NonNullable<Column['size']>, string> = {
 
 export function Content({ header, columns }: ContentBlock) {
   return (
-    <section className="wrapper flow">
+    <section className="wrapper flow region">
       <SectionHeader header={header} />
       <div className={styles.grid}>
         {(columns ?? []).map((column, index) => {

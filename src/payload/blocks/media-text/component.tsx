@@ -9,7 +9,7 @@ export function MediaText({ media, content, mediaSide }: MediaTextBlock) {
   const mediaDoc = typeof media === 'object' ? media : null
 
   return (
-    <section className="wrapper">
+    <section className="wrapper region">
       <div
         className={cx('switcher', styles.switcher, side === 'right' && styles.reverse)}
       >

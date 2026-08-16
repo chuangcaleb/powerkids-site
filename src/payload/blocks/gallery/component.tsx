@@ -32,7 +32,7 @@ export async function Gallery(block: GalleryBlock) {
   const images = await resolveImages(block)
 
   return (
-    <section className="wrapper flow">
+    <section className="wrapper flow region">
       <SectionHeader header={block.header} />
       <div className="grid-auto">
         {images.map((image, index) => (

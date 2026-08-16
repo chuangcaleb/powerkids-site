@@ -47,7 +47,7 @@ export function Scrapbook({ header, items, id, seed: storedSeed }: ScrapbookBloc
   const seed = storedSeed || `scrapbook-${id ?? 'preview'}`
 
   return (
-    <section className={cx('flow', styles.scrapbook)}>
+    <section className={cx('flow', 'region', styles.scrapbook)}>
       <div className={cx('dot-grid', styles.texture)} aria-hidden="true" />
       {/*
         Reused unmodified: no negative-space rejection step. The prototype

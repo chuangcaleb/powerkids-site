@@ -50,7 +50,7 @@ export function FramedRows({ header, rows }: FramedRowsBlockType) {
 
   return (
     <section
-      className="wrapper flow"
+      className="wrapper flow region"
       style={
         {
           '--wrapper-max-width': 'var(--max-bleed)',
