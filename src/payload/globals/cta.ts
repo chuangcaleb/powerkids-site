@@ -28,7 +28,7 @@ export const Cta: GlobalConfig = {
       name: 'footerSticker',
       type: 'text',
       admin: {
-        description: 'Text on the folded sticker above the footer CTA.',
+        description: 'Sticker text, above the footer CTA.',
       },
     },
     {

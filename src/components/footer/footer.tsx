@@ -20,7 +20,7 @@ export async function Footer() {
           above="var(--bg-surface)"
           below="var(--seam-cream-closing)"
         >
-          <Sticker>{cta.footerSticker || 'Sign up today!'}</Sticker>
+          {cta.footerSticker && <Sticker>{cta.footerSticker}</Sticker>}
         </SectionSeam>
 
         <div className={styles.closing}>
