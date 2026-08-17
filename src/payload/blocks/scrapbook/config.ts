@@ -31,33 +31,48 @@ export const ScrapbookBlock: Block = {
         components: { RowLabel: '@/payload/admin/components/row-label#RowLabel' },
       },
       fields: [
-        // Eyebrow suppressed: a pill per item, repeated up to six times, is
-        // noise the section-level header already covers.
-        headerField({ showEyebrow: false }),
         {
-          name: 'media',
-          type: 'upload',
-          relationTo: 'media',
-          hasMany: true,
-          required: true,
-          minRows: 1,
-          maxRows: 8,
-          admin: {
-            description: 'Photos for this item. Drag to reorder.',
-          },
-        },
-        buttonField(),
-        {
-          name: 'doodleIcons',
-          type: 'select',
-          hasMany: true,
-          admin: {
-            description:
-              "Decorative doodles scattered around this item's text. Leave empty to skip.",
-          },
-          // Shared with `ICON_MAP` in doodle-layer.tsx — `satisfies` there is
-          // a type error if the two ever drift apart.
-          options: [...DOODLE_ICON_NAMES],
+          type: 'tabs',
+          tabs: [
+            {
+              label: 'Content',
+              fields: [
+                // Eyebrow suppressed: a pill per item, repeated up to six
+                // times, is noise the section-level header already covers.
+                headerField({ showEyebrow: false }),
+                buttonField(),
+              ],
+            },
+            {
+              label: 'Media',
+              fields: [
+                {
+                  name: 'media',
+                  type: 'upload',
+                  relationTo: 'media',
+                  hasMany: true,
+                  required: true,
+                  minRows: 1,
+                  maxRows: 8,
+                  admin: {
+                    description: 'Photos for this item. Drag to reorder.',
+                  },
+                },
+                {
+                  name: 'doodleIcons',
+                  type: 'select',
+                  hasMany: true,
+                  admin: {
+                    description:
+                      "Decorative doodles scattered around this item's text. Leave empty to skip.",
+                  },
+                  // Shared with `ICON_MAP` in doodle-layer.tsx — `satisfies`
+                  // there is a type error if the two ever drift apart.
+                  options: [...DOODLE_ICON_NAMES],
+                },
+              ],
+            },
+          ],
         },
       ],
     },

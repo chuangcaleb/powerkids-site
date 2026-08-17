@@ -743,16 +743,16 @@ export interface ScrapbookBlock {
       } | null;
     };
     /**
-     * Photos for this item. Drag to reorder.
-     */
-    media: (number | Media)[];
-    /**
      * Optional call-to-action button.
      */
     button?: {
       label?: string | null;
       url?: string | null;
     };
+    /**
+     * Photos for this item. Drag to reorder.
+     */
+    media: (number | Media)[];
     /**
      * Decorative doodles scattered around this item's text. Leave empty to skip.
      */
@@ -1357,13 +1357,13 @@ export interface ScrapbookBlockSelect<T extends boolean = true> {
               heading?: T;
               lead?: T;
             };
-        media?: T;
         button?:
           | T
           | {
               label?: T;
               url?: T;
             };
+        media?: T;
         doodleIcons?: T;
         id?: T;
       };
