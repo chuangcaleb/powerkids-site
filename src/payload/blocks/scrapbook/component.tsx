@@ -25,6 +25,7 @@ export function Scrapbook({ header, items, id, seed: storedSeed }: ScrapbookBloc
         accent: item.header?.accent ?? 'neutral',
       },
       button: item.button,
+      doodleIcons: item.doodleIcons ?? [],
       photos: (item.media ?? [])
         .filter((media): media is MediaDoc => typeof media === 'object')
         .filter((doc) => doc.width && doc.height)

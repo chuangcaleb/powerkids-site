@@ -5,9 +5,14 @@
  * makes the wrapper's centre differ from the viewport's). Only the header
  * re-enters a `.wrapper` below.
  */
+
+/* No `overflow-x: clip` here (removed) — `.cellDoodle`'s negative-margin
+ * overshoot needs to actually escape this section, not just its own cell.
+ * The horizontal-scrollbar guard that clip used to provide now lives
+ * globally on `html` in reset.css instead, so it doesn't also clip the
+ * overshoot it exists to allow. */
 .scrapbook {
   position: relative;
-  overflow-x: clip;
   isolation: isolate;
 }
 
@@ -61,8 +66,16 @@
   align-self: start;
 }
 
-.cell.cellText {
-  z-index: 3;
+/* Sibling of `.pad`, not a descendant: skips the text's own jitter transform
+ * and stays put while the text settles. No z-index of its own — falls into
+ * the same z-index:auto tier as everything else here, which paints below
+ * `.cellPhoto`'s explicit `z-index: 1` and below `.pad`'s `z-index: 3` (see
+ * `.cellText > .pad` below). */
+.cellDoodle {
+  position: absolute;
+  inset: 0;
+
+  --doodle-overshoot: var(--space-3xl);
 }
 
 .cell.cellPhoto {
@@ -71,6 +84,15 @@
 
 .pad {
   padding-block: var(--space-2xl);
+}
+
+/* Was on `.cell.cellText` itself — moved onto `.pad` alone so `.cellDoodle`
+ * doesn't inherit the same stacking context and get trapped above
+ * `.cellPhoto`. Text still wins over photos; the doodle layer (z-index:
+ * auto) now loses to both. */
+.cellText > .pad {
+  position: relative;
+  z-index: 3;
 }
 
 .tf {

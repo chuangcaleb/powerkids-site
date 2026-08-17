@@ -6,6 +6,13 @@
   pointer-events: none;
 }
 
+/* Overshoots the host box on every side instead of clipping to it — for a
+ * host too small to hold a doodle cluster on its own (e.g. a text cell). */
+.zone[data-fit='spill'] {
+  inset: calc(var(--doodle-overshoot, var(--space-xl)) * -1);
+  overflow: visible;
+}
+
 .layer {
   position: absolute;
   inset: 0;
@@ -17,12 +24,12 @@
  * unsupported browsers (Firefox) just get static doodles, no scroll
  * listener ever runs. */
 @supports (animation-timeline: view()) and (animation-range: entry) {
-  .zone {
+  .zone[data-parallax='true'] {
     view-timeline: --doodle-zone;
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    .layer {
+    .zone[data-parallax='true'] .layer {
       animation: doodle-parallax linear both;
       animation-timeline: --doodle-zone;
       animation-range: entry 0% exit 100%;

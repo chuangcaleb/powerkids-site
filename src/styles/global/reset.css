@@ -22,6 +22,15 @@ html {
    * changes page height, which toggles the scrollbar, which changes width,
    * which can flip mode again. */
   scrollbar-gutter: stable;
+
+  /* Global safety net for decorative bleed (photo scale, doodle-layer
+   * overshoot) that's meant to spill past its own component's edges but
+   * never past the viewport — hiding here instead of per-component keeps
+   * those effects free to escape section/cell boundaries. `clip` doesn't
+   * reliably suppress viewport-level horizontal scroll on the root element
+   * the way it does on an ordinary block, so `hidden` (the standard
+   * root-level fix) wins here specifically. */
+  overflow-x: hidden;
 }
 
 body {
