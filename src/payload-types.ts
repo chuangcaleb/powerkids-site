@@ -1590,7 +1590,7 @@ export interface SeoDefault {
 export interface Cta {
   id: number;
   /**
-   * Text on the folded sticker above the footer CTA.
+   * Sticker text, above the footer CTA.
    */
   footerSticker?: string | null;
   registration: {
