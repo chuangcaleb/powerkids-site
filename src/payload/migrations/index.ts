@@ -27,6 +27,7 @@ import * as migration_20260815_145533_add_scrapbook_block from './20260815_14553
 import * as migration_20260816_081710_add_scrapbook_seed from './20260816_081710_add_scrapbook_seed'
 import * as migration_20260816_091026_drop_site_settings_footer_reel from './20260816_091026_drop_site_settings_footer_reel'
 import * as migration_20260817_130357 from './20260817_130357'
+import * as migration_20260817_143448 from './20260817_143448'
 
 export const migrations = [
   {
@@ -173,5 +174,10 @@ export const migrations = [
     up: migration_20260817_130357.up,
     down: migration_20260817_130357.down,
     name: '20260817_130357',
+  },
+  {
+    up: migration_20260817_143448.up,
+    down: migration_20260817_143448.down,
+    name: '20260817_143448',
   },
 ]
