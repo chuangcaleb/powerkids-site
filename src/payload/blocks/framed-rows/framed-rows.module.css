@@ -12,13 +12,6 @@
 
 .row {
   padding-block: var(--space-2xl);
-
-  /* padding-inline: var(--space-xl); */
-  border-top: var(--border-width) solid var(--border-strong);
-}
-
-.row:first-child {
-  border-top: none;
 }
 
 .accentA {

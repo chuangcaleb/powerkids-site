@@ -8,15 +8,17 @@ import styles from './registration-section.module.css'
 
 const DOODLE_ICONS = [PenLine, Feather, Star, Rocket, Sparkles]
 
-/** Red registration CTA landing at the end of every page. */
-export async function RegistrationSection() {
+export type RegistrationSectionProps = { className?: string }
+
+/** Red registration CTA, side by side with `FooterContact` inside `Footer`. */
+export async function RegistrationSection({ className }: RegistrationSectionProps) {
   const cta = await getCta()
   const { header, button } = cta.registration
 
   return (
-    <section className={styles.section}>
+    <section className={cx('region', styles.section, className)}>
       <DoodleLayer zoneId="registration" density={30} icons={DOODLE_ICONS} />
-      <div className={cx('wrapper flow', styles.content)}>
+      <div className={cx('flow', 'wrapper', styles.content)}>
         <SectionHeader header={header} />
         {button?.label && button.url ? (
           <Button href={button.url} variant="outline">

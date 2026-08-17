@@ -1,0 +1,22 @@
+.sticker {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  translate: -50% -50%;
+  rotate: var(--sticker-rotate, -7deg);
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  font-size: var(--step-2);
+  line-height: 1;
+  color: var(--text-strong);
+  background-color: var(--bg-sun);
+  border: var(--border-width) solid var(--border-strong);
+  box-shadow: var(--shadow-hard);
+  white-space: nowrap;
+  text-align: center;
+  padding: 0.55em 1.3em;
+  border-radius: var(--radius-pill);
+}

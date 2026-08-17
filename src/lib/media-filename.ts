@@ -4,7 +4,7 @@ import { createHash } from 'node:crypto'
  * Append a short content hash to an uploaded filename.
  *
  * Payload has no native equivalent — checked before writing this, against
- * 3.86.0, which is the latest stable release:
+ * 3.88.0, which is the latest stable release:
  *
  *   - `upload.cacheTags` appends a cache tag only to the *admin panel's*
  *     thumbnail requests, not to public URLs.
@@ -15,9 +15,8 @@ import { createHash } from 'node:crypto'
  *
  * Re-check on a Payload upgrade; delete this if a native option appears.
  *
- * Media is served from a CDN-backed domain with a long cache lifetime, so a
- * file that keeps its name keeps its cached copy. An editor replacing a photo
- * would see no change for hours and reasonably conclude the CMS is broken.
+ * Why content-addressed names at all (long CDN cache, stale replacements):
+ * docs/ops/environments.md § Media serving and cache.
  *
  * Hashing the *content* rather than using a random suffix means:
  *   - different content always gets a different URL, so replacements appear

@@ -24,6 +24,8 @@
   --dot-grid-colour: color-mix(in srgb, var(--text-strong) 44%, transparent);
   --dot-grid-radius: 0.08rem;
   --dot-grid-fade: 0.09rem;
+  --dot-grid-edge-fade: var(--space-3xl);
+  --dot-grid-bg-color: var(--bg-surface);
 }
 
 .collage {
@@ -158,6 +160,7 @@
   display: none;
 }
 
+/* 53.125rem mirrors `REEL_BELOW_PX` — see it, and reel-breakpoint.test.ts. */
 @media (width >= 53.125rem) {
   .noJsReel {
     display: none;
@@ -190,10 +193,6 @@
   align-items: center;
 }
 
-/*
- * Reel: a separate DOM tree from the collage, never a restyled version of
- * it — `PolaroidReel` already is the scroll-snap strip this needs.
- */
 .reelList {
   list-style: none;
   margin: 0;
@@ -208,11 +207,10 @@
   padding-inline: var(--gutter);
 }
 
-/* Below the reel breakpoint (matches `REEL_BELOW_PX` in
- * scrapbook-collage.tsx) the text sits full-bleed like the reel strip below
- * it, rather than keeping the desktop gutter meant for wider reel
- * occurrences (a portrait-heavy photo set can force reel even on a wide
- * screen — see recomputeMode's comment). */
+/* 53.125rem mirrors `REEL_BELOW_PX` — see it for the contract, and
+ * reel-breakpoint.test.ts, which fails if the two drift. Below it the text
+ * sits full-bleed like the reel strip, rather than keeping the gutter meant
+ * for wide-viewport reel occurrences. */
 @media (width <= 53.125rem) {
   .reelItem > .itemText {
     padding-inline: 0;

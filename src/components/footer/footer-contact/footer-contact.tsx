@@ -28,15 +28,17 @@ const socialIcons: Record<
   tiktok: SiTiktok,
 }
 
+export type FooterContactProps = { className?: string }
+
 /** Blue contact-facts band inside the footer. */
-export async function FooterContact() {
+export async function FooterContact({ className }: FooterContactProps) {
   const [cta, siteSettings] = await Promise.all([getCta(), getSiteSettings()])
   const { header } = cta.contact
 
   return (
-    <div className={styles.contact}>
+    <div className={cx('region', styles.contact, className)}>
       <DoodleLayer zoneId="contact" density={30} icons={DOODLE_ICONS} />
-      <div className={cx('wrapper flow-2xl', styles.content)}>
+      <div className={cx('flow-2xl', 'wrapper', styles.content)}>
         <SectionHeader header={header} />
         <div className={cx('grid-auto', styles.grid)}>
           <div className="flow-xs">

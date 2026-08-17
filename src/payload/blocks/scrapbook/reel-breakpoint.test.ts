@@ -4,12 +4,9 @@ import { describe, expect, it } from 'vitest'
 import { REEL_BELOW_PX } from './scrapbook-collage'
 
 /**
- * scrapbook.module.css can't read REEL_BELOW_PX (CSS media queries can't
- * consume a JS constant), so the breakpoint is hand-mirrored there in rem —
- * both `@media (width >= …)` (shows the no-JS grid) and `@media (width <=
- * …)` (zeroes the reel's text padding). This guards the one thing that
- * matters: if REEL_BELOW_PX changes, this fails until both CSS queries are
- * updated to match, instead of the two silently drifting apart.
+ * Guards the hand-mirrored copies of `REEL_BELOW_PX` in scrapbook.module.css
+ * (see the constant for why CSS can't read it): if the constant changes, this
+ * fails until both `@media` queries are updated, instead of drifting silently.
  */
 describe('reel breakpoint stays in sync with scrapbook.module.css', () => {
   it('CSS media queries use the rem-equivalent of REEL_BELOW_PX', () => {

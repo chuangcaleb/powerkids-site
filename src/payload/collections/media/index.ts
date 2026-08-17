@@ -38,13 +38,8 @@ export const Media: CollectionConfig = {
   },
 
   hooks: {
-    // Rename every upload to include a hash of its content, before Payload
-    // derives the size variants' names from it.
-    //
-    // Media is served from a long-cached CDN domain. Without this, replacing a
-    // photo reuses the filename, the edge keeps serving the old bytes, and the
-    // editor sees their change do nothing. Content-addressed names make a
-    // replacement a different URL, so it appears immediately.
+    // Content-hash the name before Payload derives the size variants' names
+    // from it — rationale in `hashedFilename`.
     beforeOperation: [
       ({ operation, req }) => {
         if (operation !== 'create' && operation !== 'update') return

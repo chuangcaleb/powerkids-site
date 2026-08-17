@@ -1,3 +1,25 @@
+.footer {
+  margin-block-start: var(--space-xl);
+}
+
+/* CTA + Contact always stack — each keeps its own colour, so the seams above
+   and below the split only ever touch one colour each. */
+.closingWrap {
+  --seam-cream-closing: var(--bg-cta);
+  --seam-closing-nav: var(--bg-contact);
+}
+
+.closing {
+  display: flex;
+  flex-direction: column;
+}
+
+.cta,
+.contact {
+  --closing-outer-pad: var(--gutter);
+  --closing-inner-pad: var(--gutter);
+}
+
 .bottom {
   padding-block: var(--space-s);
   background-color: var(--bg-inverse);

@@ -3,7 +3,9 @@
   overflow: clip;
   background-color: var(--bg-contact);
   color: var(--text-on-contact);
-  border-block-end: var(--border-width) solid var(--border-strong);
+  border-block-start: var(--border-width) solid var(--border-strong);
+  padding-inline: var(--closing-inner-pad, var(--space-2xl))
+    var(--closing-outer-pad, var(--gutter));
 
   --doodle-color: var(--text-on-contact);
 }
@@ -15,7 +17,6 @@
 .content {
   position: relative;
   z-index: 1;
-  padding-block: var(--space-xl) var(--space-2xl);
 }
 
 .label {
@@ -31,10 +32,14 @@
   opacity: 0.7;
 }
 
-/* Fits all four columns on one row at typical desktop widths (no media
-   query — grid-auto's auto-fill still wraps naturally on narrow viewports). */
+/* Caps at two columns: each track is forced to at least half the container,
+   so auto-fill can never place a third. One line, no media query — halved
+   further by grid-auto's own wrap once a track can't fit even that. */
 .grid {
-  --grid-item-min: 13rem;
+  --grid-item-min: max(
+    var(--max-heading),
+    calc((100% - var(--grid-gap, var(--space-l))) / 2)
+  );
 }
 
 .social {

@@ -4,7 +4,6 @@ import type { ReactNode } from 'react'
 import { AdminBar } from '@/components/admin-bar/admin-bar'
 import { Footer } from '@/components/footer/footer'
 import { Header } from '@/components/header/header'
-import { RegistrationSection } from '@/components/registration-section/registration-section'
 import { cx } from '@/lib/cx'
 import { archivo } from '@/styles/fonts/archivo'
 import { bricolageGrotesque } from '@/styles/fonts/bricolage-grotesque'
@@ -36,7 +35,6 @@ export default async function SiteLayout({ children }: { children: ReactNode }) 
         <AdminBar preview={preview} />
         <Header />
         {children}
-        <RegistrationSection />
         <Footer />
       </body>
     </html>

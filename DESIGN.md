@@ -152,6 +152,17 @@ Tiers are multiples of the step-0 base (17px min / 20px max): `3xs` .25x, `2xs` 
 - `--max-heading: 40ch` — default reading measure for headings.
 - `--gutter: var(--space-s)` — alias, not a new value; inline padding for wrapper/bleed compositions.
 
+## Section seams
+
+Shaped cuts between full-bleed colour bands — `SectionSeam`, `src/components/section-seam/`. Four rules govern where one is allowed and how it may look:
+
+- **A seam's job is momentum toward the CTA**, texture second. Seams get louder toward the bottom of the page.
+- **Vocabulary is cut paper, not web-divider stock.** Every seam keeps the black rule at full weight (invariant: no blurred shadow, borders pure black); only its _path_ changes.
+- **Not every boundary gets one.** Treat the hero's bottom edge and the coloured seams in the closing run. Same-background neighbours get spacing, not a shape.
+- **Static.** No scroll-reactive seams, no motion of any kind.
+
+Which shape suits which job: `docs/design/section-seams.md`.
+
 ## Doodle layer
 
 Decorative background marks — `DoodleLayer`, `src/components/doodle-layer/`. `--doodle-opacity: 0.07`, `--doodle-size-min: 20px`, `--doodle-size-max: 100px`, `--doodle-travel: 170px` (parallax distance). Density is a component prop, not a token — it has a layout cost, not just a paint cost. Placement is a PRNG seeded on the zone id, never `Math.random`; parallax is pure CSS (`animation-timeline: view()`), no scroll listener. Implementation notes: `docs/phases/phase-4-rendering.md`.
@@ -162,5 +173,6 @@ Decorative background marks — `DoodleLayer`, `src/components/doodle-layer/`. `
 
 - What each token is _for_: `docs/design/tokens.md`
 - Layout primitives: `docs/design/layout-primitives.md`
+- Seam shape pick-guide: `docs/design/section-seams.md`
 - Component inventory: `docs/design/components.md`
 - What v3 used and why it changed: `docs/reference/v3-design-audit.md`

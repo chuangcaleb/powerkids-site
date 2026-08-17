@@ -410,14 +410,9 @@ function ItemText({ item }: { item: CollageItem }) {
 }
 
 /**
- * No-JS fallback and initial SSR paint — a pure-CSS three-tier responsive
- * layout, not an approximation of the JS collage. Both tiers below always
- * render; `@media` (in scrapbook.module.css) shows exactly one, so the
- * switch itself needs no JS. Narrow reuses the same reel markup/classes as
- * the JS 'reel' mode (`PolaroidReel` is already pure HTML/CSS scroll-snap —
- * nothing to fall back from). Medium/wide are one flat grid of every text
- * and photo cell in source order, with `grid-auto-flow: dense` doing the
- * backfilling a JS packer would otherwise do.
+ * No-JS fallback and initial SSR paint. Renders both tiers unconditionally —
+ * the pure-CSS `@media` switch that picks one, and why it isn't an
+ * approximation of the JS collage, lives in scrapbook.module.css.
  */
 function NoJsFallback({
   items,

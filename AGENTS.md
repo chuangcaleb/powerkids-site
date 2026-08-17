@@ -33,30 +33,31 @@ CMS uses these words too. Use them exactly.
 
 Load-on-demand. Open a doc **when** its trigger fires, not to browse.
 
-| Read                                                                       | When                                                                    |
-| -------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| [docs/conventions.md](docs/conventions.md)                                 | Writing or reviewing any code in `src/`                                 |
-| [docs/gotchas.md](docs/gotchas.md)                                         | Anything touching build, migrations, generated files, or tests          |
-| [docs/workflows/git.md](docs/workflows/git.md)                             | Branching, committing, opening a PR, or any non-trivial git op          |
-| [docs/workflows/verify-loop.md](docs/workflows/verify-loop.md)             | Before every commit and before every push                               |
-| [DESIGN.md](DESIGN.md)                                                     | Writing any CSS, or choosing a colour, shadow, or motion behaviour      |
-| [docs/design/layout-primitives.md](docs/design/layout-primitives.md)       | Writing layout — before reaching for grid, flex, or a media query       |
-| [docs/design/tokens.md](docs/design/tokens.md)                             | Unsure which token means what, or tempted to add a new one              |
-| [docs/design/components.md](docs/design/components.md)                     | About to create a new shared component                                  |
-| [docs/architecture/overview.md](docs/architecture/overview.md)             | Change crosses more than one directory, or you're new to the repo       |
-| [docs/architecture/content-model.md](docs/architecture/content-model.md)   | Adding or changing a collection/global field, or seeding data           |
-| [docs/architecture/blocks.md](docs/architecture/blocks.md)                 | Adding, changing, or deciding against a block                           |
-| [docs/payload.md](docs/payload.md)                                         | Any task touching `src/payload/`                                        |
-| [docs/workflows/adding-a-block.md](docs/workflows/adding-a-block.md)       | A content need no existing block covers                                 |
-| [docs/workflows/adding-a-page.md](docs/workflows/adding-a-page.md)         | Someone asks for a new page — usually the answer is "no code needed"    |
-| [docs/workflows/content-editing.md](docs/workflows/content-editing.md)     | Editing content as an editor would, or writing editor-facing guidance   |
-| [docs/ops/environments.md](docs/ops/environments.md)                       | Touching env vars, R2, Neon, or anything that differs per environment   |
-| [docs/ops/migrations.md](docs/ops/migrations.md)                           | Schema changed — always, no exceptions                                  |
-| [docs/ops/deploy.md](docs/ops/deploy.md)                                   | Deploying or rolling back                                               |
-| [docs/decisions/](docs/decisions/)                                         | About to redo or reverse a past architectural decision                  |
-| [docs/reference/content-inventory.md](docs/reference/content-inventory.md) | Need real v3 copy, a route that must keep resolving, or an owner ruling |
-| [docs/reference/v3-design-audit.md](docs/reference/v3-design-audit.md)     | Deciding whether a v3 visual element carries over                       |
-| [docs/phases/README.md](docs/phases/README.md)                             | Starting a phase, or need to know what phase the repo is in             |
+| Read                                                                         | When                                                                    |
+| ---------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| [docs/conventions.md](docs/conventions.md)                                   | Writing or reviewing any code in `src/`                                 |
+| [docs/gotchas.md](docs/gotchas.md)                                           | Anything touching build, migrations, generated files, or tests          |
+| [docs/workflows/git.md](docs/workflows/git.md)                               | Branching, committing, opening a PR, or any non-trivial git op          |
+| [docs/workflows/verify-loop.md](docs/workflows/verify-loop.md)               | Before every commit and before every push                               |
+| [docs/workflows/upgrading-packages.md](docs/workflows/upgrading-packages.md) | Asked to bump/upgrade dependencies, or `pnpm outdated` comes up         |
+| [DESIGN.md](DESIGN.md)                                                       | Writing any CSS, or choosing a colour, shadow, or motion behaviour      |
+| [docs/design/layout-primitives.md](docs/design/layout-primitives.md)         | Writing layout — before reaching for grid, flex, or a media query       |
+| [docs/design/tokens.md](docs/design/tokens.md)                               | Unsure which token means what, or tempted to add a new one              |
+| [docs/design/components.md](docs/design/components.md)                       | About to create a new shared component                                  |
+| [docs/architecture/overview.md](docs/architecture/overview.md)               | Change crosses more than one directory, or you're new to the repo       |
+| [docs/architecture/content-model.md](docs/architecture/content-model.md)     | Adding or changing a collection/global field, or seeding data           |
+| [docs/architecture/blocks.md](docs/architecture/blocks.md)                   | Adding, changing, or deciding against a block                           |
+| [docs/payload.md](docs/payload.md)                                           | Any task touching `src/payload/`                                        |
+| [docs/workflows/adding-a-block.md](docs/workflows/adding-a-block.md)         | A content need no existing block covers                                 |
+| [docs/workflows/adding-a-page.md](docs/workflows/adding-a-page.md)           | Someone asks for a new page — usually the answer is "no code needed"    |
+| [docs/workflows/content-editing.md](docs/workflows/content-editing.md)       | Editing content as an editor would, or writing editor-facing guidance   |
+| [docs/ops/environments.md](docs/ops/environments.md)                         | Touching env vars, R2, Neon, or anything that differs per environment   |
+| [docs/ops/migrations.md](docs/ops/migrations.md)                             | Schema changed — always, no exceptions                                  |
+| [docs/ops/deploy.md](docs/ops/deploy.md)                                     | Deploying or rolling back                                               |
+| [docs/decisions/](docs/decisions/)                                           | About to redo or reverse a past architectural decision                  |
+| [docs/reference/content-inventory.md](docs/reference/content-inventory.md)   | Need real v3 copy, a route that must keep resolving, or an owner ruling |
+| [docs/reference/v3-design-audit.md](docs/reference/v3-design-audit.md)       | Deciding whether a v3 visual element carries over                       |
+| [docs/phases/README.md](docs/phases/README.md)                               | Starting a phase, or need to know what phase the repo is in             |
 
 ---
 

@@ -54,9 +54,10 @@ export function Hero({ hero }: HeroProps) {
       : null
 
   return (
-    <section className={cx('dot-grid', styles.hero)}>
+    <section className={styles.hero}>
+      <div className={cx('dot-grid-edge-fade', styles.texture)} aria-hidden="true" />
       <DoodleLayer zoneId="hero" density={7} />
-      <div className={cx('wrapper', 'region-xl', styles.content)}>
+      <div className={cx('wrapper', 'region-2xl', styles.content)}>
         <div className={cx('flow', styles.copy)}>
           {hero.heading ? (
             <Heading level={1}>{highlightHeading(hero.heading)}</Heading>

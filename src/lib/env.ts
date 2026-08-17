@@ -1,20 +1,10 @@
 /**
- * Typed, validated environment access.
+ * Typed, validated environment access — the only module allowed to touch
+ * `process.env` (lint-enforced). Validation is strict at build time too, which
+ * means every build needs every variable set to something.
  *
- * Every other module imports from here. The lint config forbids `process.env`
- * elsewhere, so a missing or misspelled variable surfaces as a startup error
- * naming the variable, rather than as `undefined` flowing into a database URL
- * and failing somewhere unrelated three layers down.
- *
- * Validation is strict everywhere, including at build time. The Payload config
- * calls `requireEnv` while it is being constructed, and Next constructs it
- * during page-data collection — so a missing variable fails the build rather
- * than the first request that happens to need it. That is the useful ordering:
- * a deploy that cannot work should not become a deploy that half works.
- *
- * The cost is that any build needs every variable set to something. CI sets
- * deliberately fake values (see .github/workflows/verify.yml); real values live
- * only in `.env` and the Vercel dashboard.
+ * Why that ordering, and how CI/Vercel satisfy it:
+ * docs/ops/environments.md § How variables are read.
  */
 
 type EnvKey =
@@ -49,10 +39,9 @@ export function optionalEnv(key: EnvKey, fallback: string): string {
 }
 
 /**
- * R2 is S3-compatible but not S3. Its region is always the literal string
- * `auto` — passing the bucket's location hint instead produces signature
- * errors that read like a credentials problem. Hard-coded so it cannot be
- * misconfigured.
+ * R2's region is always the literal `auto`, so it is a constant, not a
+ * variable — hard-coded here so it cannot be misconfigured. See
+ * docs/ops/environments.md § Three R2 traps.
  */
 export const S3_REGION = 'auto'
 

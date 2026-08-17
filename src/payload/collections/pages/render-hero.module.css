@@ -8,12 +8,22 @@
   position: relative;
   overflow: clip;
   background-color: var(--bg-sun);
-  border-bottom: var(--border-width) solid var(--border-strong);
+}
+
+/* Dot field lives on its own layer, not the section's own background — a
+ * mask (for the edge fade) clips the whole element it's on, and the section
+ * also carries real heading/body text that must never fade near the edges. */
+.texture {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
 
   --dot-grid-colour: color-mix(in srgb, var(--colour-black) 9%, transparent);
   --dot-grid-radius: 0.125rem;
   --dot-grid-fade: 0.1375rem;
   --dot-grid-size: 1.125rem;
+  --dot-grid-bg-color: var(--bg-sun);
 }
 
 /* Content sits above the DoodleLayer (z-index: 0) and the background. */

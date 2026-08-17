@@ -1,5 +1,3 @@
 .divider {
-  border: none;
-  border-top: var(--border-width) solid var(--border-strong);
   margin-block: var(--space-l);
 }
