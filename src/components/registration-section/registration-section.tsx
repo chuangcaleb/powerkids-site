@@ -18,13 +18,15 @@ export async function RegistrationSection({ className }: RegistrationSectionProp
   return (
     <section className={cx('region', styles.section, className)}>
       <DoodleLayer zoneId="registration" density={30} icons={DOODLE_ICONS} />
-      <div className={cx('flow', 'wrapper', styles.content)}>
-        <SectionHeader header={header} />
-        {button?.label && button.url ? (
-          <Button href={button.url} variant="outline">
-            {button.label}
-          </Button>
-        ) : null}
+      <div className={cx('wrapper ', styles.content)}>
+        <div className="flow max-prose">
+          <SectionHeader header={header} />
+          {button?.label && button.url ? (
+            <Button href={button.url} variant="outline">
+              {button.label}
+            </Button>
+          ) : null}
+        </div>
       </div>
     </section>
   )
