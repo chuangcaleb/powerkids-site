@@ -1589,6 +1589,10 @@ export interface SeoDefault {
  */
 export interface Cta {
   id: number;
+  /**
+   * Text on the folded sticker above the footer CTA.
+   */
+  footerSticker?: string | null;
   registration: {
     header: {
       /**
@@ -1757,6 +1761,7 @@ export interface SeoDefaultsSelect<T extends boolean = true> {
  * via the `definition` "cta_select".
  */
 export interface CtaSelect<T extends boolean = true> {
+  footerSticker?: T;
   registration?:
     | T
     | {

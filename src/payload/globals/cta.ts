@@ -25,6 +25,13 @@ export const Cta: GlobalConfig = {
   },
   fields: [
     {
+      name: 'footerSticker',
+      type: 'text',
+      admin: {
+        description: 'Sticker text, above the footer CTA.',
+      },
+    },
+    {
       name: 'registration',
       type: 'group',
       fields: [headerField({ headingRequired: true }), buttonField()],
