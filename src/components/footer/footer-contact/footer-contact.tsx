@@ -38,7 +38,7 @@ export async function FooterContact({ className }: FooterContactProps) {
   return (
     <div className={cx('region', styles.contact, className)}>
       <DoodleLayer zoneId="contact" density={30} icons={DOODLE_ICONS} />
-      <div className={cx('flow-2xl', 'wrapper', styles.content)}>
+      <div className={cx('flow-2xl wrapper', styles.content)}>
         <SectionHeader header={header} />
         <div className={cx('grid-auto', styles.grid)}>
           <div className="flow-xs">

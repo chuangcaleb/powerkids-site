@@ -1,4 +1,3 @@
-import { DoodleLayer } from '@/components/doodle-layer/doodle-layer'
 import { SectionHeader } from '@/components/section-header/section-header'
 import { cx } from '@/lib/cx'
 import type {
@@ -49,16 +48,6 @@ export function Scrapbook({ header, items, id, seed: storedSeed }: ScrapbookBloc
   return (
     <section className={cx('flow', 'region', styles.scrapbook)}>
       <div className={cx('dot-grid-edge-fade', styles.texture)} aria-hidden="true" />
-      {/*
-        Reused unmodified: no negative-space rejection step. The prototype
-        added one (marks re-rolled until they miss the packed cells), but
-        that needs real layout rects at render time, which is exactly what
-        DoodleLayer's own placement deliberately avoids (see its comment) to
-        keep server and client output identical. A stray mark landing on a
-        low-opacity photo under this layer is a minor cosmetic miss, not a
-        hydration bug, so the simpler, safer component wins here.
-      */}
-      <DoodleLayer zoneId={`${seed}-doodles`} density={80} />
       <div className={cx('wrapper flow', styles.header)}>
         <SectionHeader header={header} />
       </div>

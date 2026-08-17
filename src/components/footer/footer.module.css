@@ -14,12 +14,6 @@
   flex-direction: column;
 }
 
-.cta,
-.contact {
-  --closing-outer-pad: var(--gutter);
-  --closing-inner-pad: var(--gutter);
-}
-
 .bottom {
   padding-block: var(--space-s);
   background-color: var(--bg-inverse);

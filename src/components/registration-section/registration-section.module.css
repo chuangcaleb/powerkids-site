@@ -6,8 +6,6 @@
   justify-content: center;
   background-color: var(--bg-cta);
   color: var(--text-on-cta);
-  padding-inline: var(--closing-outer-pad, var(--gutter))
-    var(--closing-inner-pad, var(--space-2xl));
 
   --doodle-color: var(--text-on-cta);
 }

@@ -4,8 +4,6 @@
   background-color: var(--bg-contact);
   color: var(--text-on-contact);
   border-block-start: var(--border-width) solid var(--border-strong);
-  padding-inline: var(--closing-inner-pad, var(--space-2xl))
-    var(--closing-outer-pad, var(--gutter));
 
   --doodle-color: var(--text-on-contact);
 }
