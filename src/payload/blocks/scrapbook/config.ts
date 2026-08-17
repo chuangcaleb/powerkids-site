@@ -28,7 +28,9 @@ export const ScrapbookBlock: Block = {
       // adding a 7th item is very likely reaching for a new instance instead.
       maxRows: 6,
       admin: {
-        components: { RowLabel: '@/payload/admin/components/row-label#RowLabel' },
+        components: {
+          RowLabel: '@/payload/admin/components/scrapbook-row-label#ScrapbookRowLabel',
+        },
       },
       fields: [
         // Eyebrow suppressed: a pill per item, repeated up to six times, is
