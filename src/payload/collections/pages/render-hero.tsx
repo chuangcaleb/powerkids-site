@@ -88,7 +88,7 @@ export function Hero({ hero }: HeroProps) {
               priority
               sizes="(min-width: 40rem) 45vw, 100vw"
               tilt={-3}
-              className={styles.polaroid}
+              className="max-lead"
             />
           </div>
         ) : null}

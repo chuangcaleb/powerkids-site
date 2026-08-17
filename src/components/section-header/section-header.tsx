@@ -43,7 +43,7 @@ export function SectionHeader({ header, level = 2, visualLevel }: SectionHeaderP
       ) : null}
       {lead ? (
         <p
-          className={styles.lead}
+          className={`${styles.lead} max-lead`}
           style={{ '--flow-space': 'var(--space-m)' } as CSSProperties}
         >
           <HeaderRichText data={lead} accent={accent} />

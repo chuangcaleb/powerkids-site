@@ -82,8 +82,6 @@
 }
 
 .itemText {
-  max-width: var(--max-lead);
-
   /* Set by the packer only when this text cell doesn't start in the grid's
    * first lane (possible once lane count exceeds the text's own 2-lane
    * span) — otherwise it reads as floating, unaligned with the photos

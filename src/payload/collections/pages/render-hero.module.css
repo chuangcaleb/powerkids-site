@@ -52,12 +52,6 @@
   }
 }
 
-/* D-07/D-01: hero's polaroid is `Polaroid` (src/components/polaroid), sized
- * for this layout via `className` — tilt goes through its `tilt` prop instead. */
-.polaroid {
-  max-width: var(--max-lead);
-}
-
 .highlight {
   display: inline-block;
   color: var(--text-on-accent);
