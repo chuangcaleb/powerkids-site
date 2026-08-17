@@ -753,6 +753,26 @@ export interface ScrapbookBlock {
       label?: string | null;
       url?: string | null;
     };
+    /**
+     * Decorative doodles scattered around this item's text. Leave empty to skip.
+     */
+    doodleIcons?:
+      | (
+          | 'star'
+          | 'sun'
+          | 'cloud'
+          | 'sparkles'
+          | 'smile'
+          | 'feather'
+          | 'music'
+          | 'rocket'
+          | 'palette'
+          | 'pen-line'
+          | 'zap'
+          | 'rainbow'
+          | 'flower'
+        )[]
+      | null;
     id?: string | null;
   }[];
   /**
@@ -1344,6 +1364,7 @@ export interface ScrapbookBlockSelect<T extends boolean = true> {
               label?: T;
               url?: T;
             };
+        doodleIcons?: T;
         id?: T;
       };
   seed?: T;

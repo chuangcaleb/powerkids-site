@@ -6,6 +6,7 @@
 // rather than a media query — see lane-layout.ts and packer.ts for why.
 
 import { Button } from '@/components/button/button'
+import { DoodleLayer, ICON_MAP } from '@/components/doodle-layer/doodle-layer'
 import { Heading } from '@/components/heading/heading'
 import { PolaroidReel } from '@/components/polaroid-reel/polaroid-reel'
 import { Polaroid } from '@/components/polaroid/polaroid'
@@ -31,6 +32,7 @@ export type CollageItem = {
     accent?: 'neutral' | 'red' | 'blue' | null
   }
   button?: { label?: string | null; url?: string | null } | null
+  doodleIcons: string[]
   photos: { id: string; doc: MediaDoc; aspectRatio: number }[]
 }
 
@@ -53,6 +55,7 @@ const JITTER_REM = 0.4375 // ~7px — max random offset applied to a cell's posi
 const TEXT_JITTER_SCALE = 0.5 // text jitters less than photos, so it stays legible and doesn't wander from its column
 const SETTLE_TILT_SCALE = 7 // starting tilt (degrees) a photo animates in from on scroll entry, scaled by the same per-cell tilt value as TILT_DEG
 const STAGGER_MAX_ROWS = 40 // max random per-lane row offset that gives the collage its staggered (not razor-aligned) top edge
+const TEXT_DOODLE_DENSITY = 14 // marks in a text cell's doodle layer — tuned live at /dev/doodle-tuner
 const VSCATTER_MAX_ROWS = 14 // max extra vertical scatter applied on top of a photo's packed position, for texture beyond the lane stagger alone
 const MIN_PHOTO_SCALE = 1 // smallest a photo can render at — never shrinks below its packed box
 const MAX_PHOTO_SCALE = 1.2 // largest a photo can render at — the "bleed" ceiling; higher starts reading as a layout bug rather than intentional overlap
@@ -304,6 +307,10 @@ export function ScrapbookCollage({
           return null
 
         if (cell.kind === 'text') {
+          const icons = item.doodleIcons
+            .map((name) => ICON_MAP[name as keyof typeof ICON_MAP])
+            .filter(Boolean)
+
           return (
             <div
               key={key}
@@ -312,6 +319,17 @@ export function ScrapbookCollage({
                 if (el) cellRefs.current.set(key, el)
               }}
             >
+              {icons.length > 0 ? (
+                <div className={styles.cellDoodle}>
+                  <DoodleLayer
+                    zoneId={`${seed}-doodle-${item.id}`}
+                    icons={icons}
+                    density={TEXT_DOODLE_DENSITY}
+                    fit="spill"
+                    parallax
+                  />
+                </div>
+              ) : null}
               <div
                 className={styles.pad}
                 ref={(el) => {

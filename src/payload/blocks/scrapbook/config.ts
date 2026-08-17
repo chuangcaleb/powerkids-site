@@ -1,4 +1,5 @@
 import type { Block } from 'payload'
+import { DOODLE_ICON_NAMES } from '@/lib/doodle-icon-names'
 import { buttonField } from '@/payload/fields/button'
 import { headerField, withHeaderTabs } from '@/payload/fields/header'
 
@@ -46,6 +47,18 @@ export const ScrapbookBlock: Block = {
           },
         },
         buttonField(),
+        {
+          name: 'doodleIcons',
+          type: 'select',
+          hasMany: true,
+          admin: {
+            description:
+              "Decorative doodles scattered around this item's text. Leave empty to skip.",
+          },
+          // Shared with `ICON_MAP` in doodle-layer.tsx — `satisfies` there is
+          // a type error if the two ever drift apart.
+          options: [...DOODLE_ICON_NAMES],
+        },
       ],
     },
     {

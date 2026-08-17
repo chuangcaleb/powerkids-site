@@ -14,6 +14,7 @@ import {
   Sun,
   Zap,
 } from 'lucide-react'
+import type { DoodleIconName } from '@/lib/doodle-icon-names'
 import { createSeededRandom } from '@/lib/seeded-random'
 import styles from './doodle-layer.module.css'
 
@@ -34,6 +35,32 @@ const DEFAULT_ICONS = [
   Flower,
 ]
 
+/**
+ * Keyed the same way as framed-rows' `ICONS` map, so a Payload `select`
+ * field's string value can resolve straight to a component. `satisfies`
+ * against `DoodleIconName` (from `@/lib/doodle-icon-names`, also consumed by
+ * a field's `options`) means adding/renaming an icon in one place without
+ * the other is a type error here, not a silent runtime drift.
+ */
+export const ICON_MAP = {
+  star: Star,
+  sun: Sun,
+  cloud: Cloud,
+  sparkles: Sparkles,
+  smile: Smile,
+  feather: Feather,
+  music: Music,
+  rocket: Rocket,
+  palette: Palette,
+  'pen-line': PenLine,
+  zap: Zap,
+  rainbow: Rainbow,
+  flower: Flower,
+} satisfies Record<
+  DoodleIconName,
+  ComponentType<{ size?: string | number; strokeWidth?: number }>
+>
+
 const DEPTH_COUNT = 3
 const MAX_MARKS = 18
 
@@ -44,6 +71,15 @@ export type DoodleLayerProps = {
   density?: number
   /** Icon set to draw from — defaults to the full decorative set. */
   icons?: ComponentType<{ size?: string | number; strokeWidth?: number }>[]
+  /**
+   * `'contained'` (default) clips to the host's own box — the original
+   * full-bleed zone behaviour. `'spill'` lets marks overshoot the host by
+   * `--doodle-overshoot` on every side instead of clipping, for a host too
+   * small to hold a doodle cluster on its own (e.g. a text cell).
+   */
+  fit?: 'contained' | 'spill'
+  /** Scroll-driven parallax on the depth layers. Independent of `fit`. */
+  parallax?: boolean
 }
 
 /**
@@ -62,6 +98,8 @@ export function DoodleLayer({
   zoneId,
   density = 10,
   icons = DEFAULT_ICONS,
+  fit = 'contained',
+  parallax = true,
 }: DoodleLayerProps) {
   const count = Math.min(density, MAX_MARKS)
   const random = createSeededRandom(zoneId)
@@ -100,7 +138,12 @@ export function DoodleLayer({
   )
 
   return (
-    <div className={styles.zone} aria-hidden="true">
+    <div
+      className={styles.zone}
+      data-fit={fit}
+      data-parallax={parallax}
+      aria-hidden="true"
+    >
       {layers.map((layerMarks, depth) => (
         <div className={styles.layer} data-depth={depth} key={depth}>
           {layerMarks.map(({ id, t, Icon, left, top, rotate }) => (
