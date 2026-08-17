@@ -611,22 +611,6 @@ export interface FramedRowsBlock {
   rows?:
     | {
         title: string;
-        body?: {
-          root: {
-            type: string;
-            children: {
-              type: any;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        } | null;
-        image?: (number | null) | Media;
         /**
          * Icon shown above the eyebrow.
          */
@@ -653,6 +637,22 @@ export interface FramedRowsBlock {
          * Short label shown above the title, e.g. hours or a tagline.
          */
         eyebrow?: string | null;
+        body?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        image?: (number | null) | Media;
         id?: string | null;
       }[]
     | null;
@@ -1325,10 +1325,10 @@ export interface FramedRowsBlockSelect<T extends boolean = true> {
     | T
     | {
         title?: T;
-        body?: T;
-        image?: T;
         icon?: T;
         eyebrow?: T;
+        body?: T;
+        image?: T;
         id?: T;
       };
   header?:
