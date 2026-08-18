@@ -4,6 +4,7 @@ import {
   HeaderRichText,
   type HeaderRichTextProps,
 } from '@/components/rich-text/header-rich-text'
+import { lexicalHasText } from '@/lib/lexical-has-text'
 import styles from './section-header.module.css'
 import type { CSSProperties } from 'react'
 
@@ -23,14 +24,15 @@ export type SectionHeaderProps = {
   visualLevel?: Level
 }
 
-/**
- * Own `flow-s` rhythm, deliberately tighter than the section's own `flow` —
- * eyebrow/heading/lead read as one unit, not three loosely related
- * items at the section's larger spacing.
- */
+/** Whether `SectionHeader` would render anything — lets a block downgrade its own heading level when the section heading it would otherwise follow is absent, so the document outline never skips a level. */
+export function hasSectionHeading(header?: SectionHeaderData | null): boolean {
+  return Boolean(header?.eyebrow || lexicalHasText(header?.heading) || header?.lead)
+}
+
 export function SectionHeader({ header, level = 2, visualLevel }: SectionHeaderProps) {
   if (!header) return null
-  const { eyebrow, heading, lead, accent } = header
+  const { eyebrow, lead, accent } = header
+  const heading = lexicalHasText(header.heading) ? header.heading : null
   if (!eyebrow && !heading && !lead) return null
 
   return (

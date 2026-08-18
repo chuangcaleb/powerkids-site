@@ -15,7 +15,7 @@ export async function FooterNav() {
           <Logo className={styles.icon} />
           <Wordmark variant="stroke" className={styles.wordmark} />
         </div>
-        <nav className={cx('grid-auto', styles.cols)}>
+        <nav aria-label="Footer" className={cx('grid-auto', styles.cols)}>
           {(navigation.footerColumns ?? []).map((column) => (
             <div key={column.id ?? column.heading} className="flow-xs">
               <h2 className={styles.heading}>{column.heading}</h2>

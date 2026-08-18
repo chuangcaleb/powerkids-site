@@ -11,7 +11,10 @@ import { Pill } from '@/components/pill/pill'
 import { VideoEmbed } from '@/components/video-embed/video-embed'
 import { cx } from '@/lib/cx'
 import { isProduction } from '@/lib/env'
+import { CardGrid } from '@/payload/blocks/card-grid/component'
+import { Content } from '@/payload/blocks/content/component'
 import { FramedRows } from '@/payload/blocks/framed-rows/component'
+import { Gallery } from '@/payload/blocks/gallery/component'
 import { Scrapbook } from '@/payload/blocks/scrapbook/component'
 import type { Media } from '@/payload-types'
 import styles from './kitchen-sink.module.css'
@@ -318,6 +321,87 @@ export default function KitchenSinkPage() {
               media: [samplePhoto(9, 700, 700, '%232434e8')],
             },
           ]}
+        />
+      </section>
+
+      <section className="flow">
+        <div className="wrapper">
+          <Heading level={2}>Card Grid block</Heading>
+        </div>
+        {/* Minimal card: no image, no body. Extreme card: 90-char heading. */}
+        <CardGrid
+          id="kitchen-sink-card-grid"
+          blockType="card-grid"
+          header={{ heading: richText('Card Grid edge cases') }}
+          cards={[
+            { heading: 'Minimal card, no image or body' },
+            {
+              heading:
+                'A ninety character card heading exists to prove wrapping holds even here',
+              body: 'Has a body and no image.',
+            },
+          ]}
+        />
+      </section>
+
+      <section className="flow">
+        <div className="wrapper">
+          <Heading level={2}>Gallery block</Heading>
+        </div>
+        {/* Extreme case: 20 images, unknown final count is the whole point of the block. */}
+        <Gallery
+          id="kitchen-sink-gallery-extreme"
+          blockType="gallery"
+          mode="manual"
+          header={{ heading: richText('Extreme: 20 images') }}
+          images={Array.from({ length: 20 }, (_, index) =>
+            samplePhoto(
+              100 + index,
+              600,
+              400,
+              index % 2 === 0 ? '%232434e8' : '%23e12c2c',
+            ),
+          )}
+        />
+        {/* Minimal case: no header, no images. */}
+        <Gallery
+          id="kitchen-sink-gallery-minimal"
+          blockType="gallery"
+          mode="manual"
+          images={[]}
+        />
+      </section>
+
+      <section className="flow">
+        <div className="wrapper">
+          <Heading level={2}>Content block</Heading>
+        </div>
+        {/* Extreme case: 90-char heading, long body copy. */}
+        <Content
+          id="kitchen-sink-content-extreme"
+          blockType="content"
+          header={{
+            heading: richText(
+              'A ninety character heading exists to prove wrapping holds even at this length here',
+            ),
+          }}
+          columns={[
+            {
+              size: 'full',
+              variant: 'align-start',
+              richText: richText(
+                'Long body copy repeated to check the column does not overflow or clip. '.repeat(
+                  6,
+                ),
+              ),
+            },
+          ]}
+        />
+        {/* Minimal case: no header, column with no richText and no media. */}
+        <Content
+          id="kitchen-sink-content-minimal"
+          blockType="content"
+          columns={[{ size: 'full', variant: 'align-start' }]}
         />
       </section>
 

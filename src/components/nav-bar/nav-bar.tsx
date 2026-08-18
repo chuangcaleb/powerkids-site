@@ -22,13 +22,14 @@ export function NavBar({ links }: NavBarProps) {
       <div className={cx('wrapper', 'repel', styles.inner)}>
         <Link
           href="/"
+          aria-label="PowerKids"
           className={cx('cluster', styles.brand)}
           style={{ '--cluster-gap': 'var(--space-xs)' } as CSSProperties}
         >
           <Logo className={styles.icon} />
           <Wordmark className={styles.wordmark} />
         </Link>
-        <nav className={cx('cluster', styles.nav)}>
+        <nav aria-label="Primary" className={cx('cluster', styles.nav)}>
           {links.map((link) => (
             <a key={link.id ?? link.url} href={link.url} className={styles.link}>
               {link.label}

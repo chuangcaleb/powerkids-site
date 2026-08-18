@@ -11,7 +11,12 @@ export function PolaroidReel({ photos }: PolaroidReelProps) {
   if (photos.length === 0) return null
 
   return (
-    <ul role="list" className={styles.strip}>
+    <ul
+      role="list"
+      tabIndex={0}
+      aria-label="Photo reel, scroll for more"
+      className={styles.strip}
+    >
       {photos.map((photo, index) => (
         <li key={photo.id} className={styles.item}>
           <Polaroid

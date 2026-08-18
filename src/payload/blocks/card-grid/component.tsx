@@ -1,7 +1,10 @@
 import { Card } from '@/components/card/card'
 import { Heading } from '@/components/heading/heading'
 import { Media } from '@/components/media/media'
-import { SectionHeader } from '@/components/section-header/section-header'
+import {
+  hasSectionHeading,
+  SectionHeader,
+} from '@/components/section-header/section-header'
 import type { CardGridBlock, Media as MediaDoc } from '@/payload-types'
 
 type CardItem = {
@@ -24,6 +27,7 @@ function resolveCards(block: CardGridBlock): CardItem[] {
 
 export function CardGrid(block: CardGridBlock) {
   const cards = resolveCards(block)
+  const cardLevel = hasSectionHeading(block.header) ? 3 : 2
 
   return (
     <section className="wrapper flow region">
@@ -34,7 +38,7 @@ export function CardGrid(block: CardGridBlock) {
             {card.image ? (
               <Media doc={card.image} sizes="(min-width: 768px) 33vw, 100vw" />
             ) : null}
-            <Heading level={3}>
+            <Heading level={cardLevel}>
               {card.url ? <a href={card.url}>{card.heading}</a> : card.heading}
             </Heading>
             {card.body ? <p>{card.body}</p> : null}

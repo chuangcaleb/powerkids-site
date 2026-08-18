@@ -58,9 +58,9 @@ await payload.updateGlobal({
     foundedYear: 2001,
     email: 'powerkidschool@gmail.com',
     phones: [
-      { number: '010 - 221 2482', href: 'tel:+60102212482' },
-      { number: '03 - 9056 4288', href: 'tel:+60390564288' },
-      { number: '010 - 221 2483', href: 'tel:+60102212483' },
+      { number: '010 - 221 2482', href: '+60102212482' },
+      { number: '03 - 9056 4288', href: '+60390564288' },
+      { number: '010 - 221 2483', href: '+60102212483' },
     ],
     openingHours: '8:30am - 5:00pm',
     openingDays: 'Monday - Friday',
@@ -104,6 +104,11 @@ await payload.updateGlobal({
   slug: 'navigation',
   context: { disableRevalidate: true },
   data: {
+    headerLinks: [
+      { label: 'Who We Are', url: '/about' },
+      { label: 'Our Schools', url: '/about#our-schools' },
+      { label: "We're Hiring!", url: '/careers' },
+    ],
     footerColumns: [
       {
         heading: 'About',
@@ -126,8 +131,8 @@ const schoolSeeds = [
     address:
       '2, Jalan 5/149B\nTaman Sri Endah\nBandar Baru Sri Petaling\n57000 Kuala Lumpur',
     phones: [
-      { number: '03 - 9056 4288', href: 'tel:+60390564288' },
-      { number: '010 - 221 2482', href: 'tel:+60102212482' },
+      { number: '03 - 9056 4288', href: '+60390564288' },
+      { number: '010 - 221 2482', href: '+60102212482' },
     ],
     principalName: 'Ms. Wan Hong',
     principalBio: richText(loremParagraph(), loremParagraph(), loremParagraph()),
@@ -137,8 +142,8 @@ const schoolSeeds = [
     slug: 'puchong-utama',
     address: 'No 1, Jalan PU 3/1A\nTaman Puchong Utama\n47140 Puchong, Selangor',
     phones: [
-      { number: '03 - 8066 9363', href: 'tel:+60380669363' },
-      { number: '012 - 218 0240', href: 'tel:+60122180240' },
+      { number: '03 - 8066 9363', href: '+60380669363' },
+      { number: '012 - 218 0240', href: '+60122180240' },
     ],
     principalName: 'Uncle Chun Hoe',
     principalBio: richText(loremParagraph(), loremParagraph(), loremParagraph()),
@@ -148,8 +153,8 @@ const schoolSeeds = [
     slug: 'parklane-oug',
     address: 'D1-1-11 Jalan 1/152\nTaman OUG Parklane\n58200 Kuala Lumpur',
     phones: [
-      { number: '012 - 386 1123', href: 'tel:+60123861123' },
-      { number: '03 - 7498 1905', href: 'tel:+60374981905' },
+      { number: '012 - 386 1123', href: '+60123861123' },
+      { number: '03 - 7498 1905', href: '+60374981905' },
     ],
     principalName: 'Ms. Mary',
     principalBio: richText(loremParagraph(), loremParagraph(), loremParagraph()),

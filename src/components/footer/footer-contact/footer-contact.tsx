@@ -36,7 +36,7 @@ export async function FooterContact({ className }: FooterContactProps) {
   const { header } = cta.contact
 
   return (
-    <div className={cx('region', styles.contact, className)}>
+    <section className={cx('region', styles.contact, className)}>
       <DoodleLayer zoneId="contact" density={30} icons={DOODLE_ICONS} />
       <div className={cx('flow-2xl wrapper', styles.content)}>
         <SectionHeader header={header} />
@@ -101,6 +101,6 @@ export async function FooterContact({ className }: FooterContactProps) {
           ) : null}
         </div>
       </div>
-    </div>
+    </section>
   )
 }
