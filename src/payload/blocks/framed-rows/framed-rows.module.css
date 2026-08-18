@@ -4,14 +4,33 @@
 
 .band {
   border: var(--border-width) solid var(--border-strong);
-  border-radius: var(--radius-l);
+
+  --framed-rows-border-radius: var(--radius-l);
+  --framed-rows-border-radius-offset: calc(
+    var(--framed-rows-border-radius) - var(--border-width)
+  );
+
+  border-radius: var(--framed-rows-border-radius);
   box-shadow: var(--shadow-hard);
-  overflow: hidden;
   margin-inline: calc(var(--gutter) * -0.25);
 }
 
 .row {
   padding-block: var(--space-2xl);
+}
+
+/* .band's own border-radius only shapes its border/shadow, not the flat
+ * corners of the row filling it — first/last row need the same curve so
+ * their background doesn't square off past the frame. Inset by the border
+ * width so the fill nests concentrically inside the border's own curve. */
+.roundTop {
+  border-start-start-radius: var(--framed-rows-border-radius-offset);
+  border-start-end-radius: var(--framed-rows-border-radius-offset);
+}
+
+.roundBottom {
+  border-end-start-radius: var(--framed-rows-border-radius-offset);
+  border-end-end-radius: var(--framed-rows-border-radius-offset);
 }
 
 .accentA {
@@ -57,4 +76,12 @@
   font-size: var(--step-2);
   line-height: 1;
   letter-spacing: var(--tracking-display);
+}
+
+.left {
+  margin-inline-start: calc(var(--gutter) * -3);
+}
+
+.right {
+  margin-inline-end: calc(var(--gutter) * -3);
 }

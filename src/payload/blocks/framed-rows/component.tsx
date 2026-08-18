@@ -1,4 +1,3 @@
-import type { CSSProperties } from 'react'
 import { Heading } from '@/components/heading/heading'
 import { Polaroid } from '@/components/polaroid/polaroid'
 import { RichText } from '@/components/rich-text/rich-text'
@@ -7,6 +6,7 @@ import { SectionSeam } from '@/components/section-seam/section-seam'
 import { cx } from '@/lib/cx'
 import { ICONS, isIconName } from '@/lib/icons'
 import type { FramedRowsBlock as FramedRowsBlockType } from '@/payload-types'
+import type { CSSProperties } from 'react'
 import styles from './framed-rows.module.css'
 
 /** Position, not the CMS, decides colour and tilt — D-11/06-baseline-config.md#3. */
@@ -26,6 +26,8 @@ const SUB_SEAM = { shape: 'wave', width: 5.75, depth: 0.25, referenceWidth: 75 }
 export function FramedRows({ header, rows }: FramedRowsBlockType) {
   if (!rows || rows.length === 0) return null
 
+  const hasHeader = Boolean(header?.eyebrow || header?.heading || header?.lead)
+
   return (
     <section
       className="wrapper flow region"
@@ -36,9 +38,9 @@ export function FramedRows({ header, rows }: FramedRowsBlockType) {
       }
     >
       <div className={styles.band}>
-        {header?.eyebrow || header?.heading || header?.lead ? (
+        {hasHeader ? (
           <>
-            <div className={cx(styles.row)}>
+            <div className={cx(styles.row, styles.roundTop)}>
               <div className="wrapper">
                 <SectionHeader header={header} />
               </div>
@@ -59,7 +61,14 @@ export function FramedRows({ header, rows }: FramedRowsBlockType) {
                   below={accentFill(index)}
                 />
               ) : null}
-              <div className={cx(styles.row, ACCENTS[index % ACCENTS.length])}>
+              <div
+                className={cx(
+                  styles.row,
+                  ACCENTS[index % ACCENTS.length],
+                  index === 0 && !hasHeader && styles.roundTop,
+                  index === rows.length - 1 && styles.roundBottom,
+                )}
+              >
                 <div
                   className={cx(
                     'switcher',
@@ -85,7 +94,7 @@ export function FramedRows({ header, rows }: FramedRowsBlockType) {
                       doc={image}
                       sizes="(min-width: 768px) 33vw, 100vw"
                       tilt={index % 2 === 1 ? -5 : 5}
-                      className={styles.media}
+                      className={cx(styles.media, index % 2 ? styles.left : styles.right)}
                     />
                   ) : null}
                 </div>
