@@ -292,7 +292,7 @@ export default function KitchenSinkPage() {
               id: 'camp',
               header: { heading: richText('Holiday Robotics Camp') },
               button: { label: 'See the camp', url: '#' },
-              doodleIcons: ['rocket', 'star', 'sparkles'],
+              icons: ['Rocket', 'Star', 'Sparkles'],
               media: [
                 samplePhoto(1, 960, 540, '%232434e8'),
                 samplePhoto(2, 800, 600, '%23e12c2c'),

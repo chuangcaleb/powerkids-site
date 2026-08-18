@@ -612,27 +612,9 @@ export interface FramedRowsBlock {
     | {
         title: string;
         /**
-         * Icon shown above the eyebrow.
+         * Icon shown above the eyebrow (optional).
          */
-        icon?:
-          | (
-              | 'sunrise'
-              | 'sun'
-              | 'sunset'
-              | 'star'
-              | 'cloud'
-              | 'sparkles'
-              | 'smile'
-              | 'feather'
-              | 'music'
-              | 'rocket'
-              | 'palette'
-              | 'pen-line'
-              | 'zap'
-              | 'rainbow'
-              | 'flower'
-            )
-          | null;
+        icon?: string | null;
         /**
          * Short label shown above the title, e.g. hours or a tagline.
          */
@@ -750,29 +732,13 @@ export interface ScrapbookBlock {
       url?: string | null;
     };
     /**
+     * Decorative doodles scattered around this item's text. Leave empty to skip.
+     */
+    icons?: string[] | null;
+    /**
      * Photos for this item. Drag to reorder.
      */
     media: (number | Media)[];
-    /**
-     * Decorative doodles scattered around this item's text. Leave empty to skip.
-     */
-    doodleIcons?:
-      | (
-          | 'star'
-          | 'sun'
-          | 'cloud'
-          | 'sparkles'
-          | 'smile'
-          | 'feather'
-          | 'music'
-          | 'rocket'
-          | 'palette'
-          | 'pen-line'
-          | 'zap'
-          | 'rainbow'
-          | 'flower'
-        )[]
-      | null;
     id?: string | null;
   }[];
   /**
@@ -1363,8 +1329,8 @@ export interface ScrapbookBlockSelect<T extends boolean = true> {
               label?: T;
               url?: T;
             };
+        icons?: T;
         media?: T;
-        doodleIcons?: T;
         id?: T;
       };
   seed?: T;

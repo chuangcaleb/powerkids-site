@@ -13,6 +13,7 @@ import { LinkFeatureClient as LinkFeatureClient_e70f5e05f09f93e00b997edb1ef0c864
 import { EmphasisFeatureClient as EmphasisFeatureClient_0863f3c3442c21695abd476791201620 } from '@/payload/richtext/emphasis/feature.client'
 import { FixedToolbarFeatureClient as FixedToolbarFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { InlineToolbarFeatureClient as InlineToolbarFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
+import { IconPicker as IconPicker_2c17c03ccccbfa92c6bf284890d87e7c } from '@/payload/admin/components/icon-picker'
 import { ScrapbookRowLabel as ScrapbookRowLabel_7006ac3e4783576ec70b4f9a79609b1e } from '@/payload/admin/components/scrapbook-row-label'
 import { SeedField as SeedField_bf6be1d3db4d17a28c85e8bf7d7be5d2 } from '@/payload/admin/components/seed-field'
 import { OverviewComponent as OverviewComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
@@ -41,6 +42,7 @@ export const importMap = {
   "@/payload/richtext/emphasis/feature.client#EmphasisFeatureClient": EmphasisFeatureClient_0863f3c3442c21695abd476791201620,
   "@payloadcms/richtext-lexical/client#FixedToolbarFeatureClient": FixedToolbarFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@payloadcms/richtext-lexical/client#InlineToolbarFeatureClient": InlineToolbarFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
+  "@/payload/admin/components/icon-picker#IconPicker": IconPicker_2c17c03ccccbfa92c6bf284890d87e7c,
   "@/payload/admin/components/scrapbook-row-label#ScrapbookRowLabel": ScrapbookRowLabel_7006ac3e4783576ec70b4f9a79609b1e,
   "@/payload/admin/components/seed-field#SeedField": SeedField_bf6be1d3db4d17a28c85e8bf7d7be5d2,
   "@payloadcms/plugin-seo/client#OverviewComponent": OverviewComponent_a8a977ebc872c5d5ea7ee689724c0860,

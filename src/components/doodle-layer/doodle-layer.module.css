@@ -6,6 +6,13 @@
   pointer-events: none;
 }
 
+/* Purely decorative, so an off-screen zone should cost no paint or layout work.
+ * Contained zones only: `content-visibility` implies paint containment, which
+ * would clip the `spill` zones to the host box they exist to overshoot. */
+.zone[data-fit='contained'] {
+  content-visibility: auto;
+}
+
 /* Overshoots the host box on every side instead of clipping to it — for a
  * host too small to hold a doodle cluster on its own (e.g. a text cell). */
 .zone[data-fit='spill'] {

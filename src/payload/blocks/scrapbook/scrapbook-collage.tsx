@@ -6,7 +6,7 @@
 // rather than a media query — see lane-layout.ts and packer.ts for why.
 
 import { Button } from '@/components/button/button'
-import { DoodleLayer, ICON_MAP } from '@/components/doodle-layer/doodle-layer'
+import { DoodleLayer } from '@/components/doodle-layer/doodle-layer'
 import { Heading } from '@/components/heading/heading'
 import { PolaroidReel } from '@/components/polaroid-reel/polaroid-reel'
 import { Polaroid } from '@/components/polaroid/polaroid'
@@ -15,6 +15,7 @@ import {
   type HeaderRichTextProps,
 } from '@/components/rich-text/header-rich-text'
 import { cx } from '@/lib/cx'
+import { ICONS, isIconName } from '@/lib/icons'
 import { createSeededRandom } from '@/lib/seeded-random'
 import type { Media as MediaDoc } from '@/payload-types'
 import type { CSSProperties, RefObject } from 'react'
@@ -32,7 +33,7 @@ export type CollageItem = {
     accent?: 'neutral' | 'red' | 'blue' | null
   }
   button?: { label?: string | null; url?: string | null } | null
-  doodleIcons: string[]
+  icons: string[]
   photos: { id: string; doc: MediaDoc; aspectRatio: number }[]
 }
 
@@ -307,9 +308,9 @@ export function ScrapbookCollage({
           return null
 
         if (cell.kind === 'text') {
-          const icons = item.doodleIcons
-            .map((name) => ICON_MAP[name as keyof typeof ICON_MAP])
-            .filter(Boolean)
+          // An unknown name means a registry cut whose migration hasn't run;
+          // drop it rather than render a stand-in an editor never chose.
+          const icons = item.icons.filter(isIconName).map((name) => ICONS[name])
 
           return (
             <div
