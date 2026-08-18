@@ -31,6 +31,7 @@ Stop at first failure, fix it. Don't commit around red step. Don't disable rule 
 - **Schema changes** need `pnpm generate:types` + migration. See [../ops/migrations.md](../ops/migrations.md). Adding admin component also needs `pnpm generate:importmap`.
 - **New pure functions** in `src/lib/` need unit test, same change.
 - **Visual changes** need look at rendered result at 320px, 768px, 1440px. Green checks don't prove layout right.
+- **Markup/landmark/heading changes** need `pnpm test:a11y` against a running `pnpm dev` (real dev DB, not CI's fake env — see `scripts/check-a11y.mjs`). Not part of `pnpm verify`; run it by hand.
 - **New or changed blocks** need [../architecture/blocks.md](../architecture/blocks.md) updated only when the change breaks a rule stated there or adds rationale the config can't express. Don't add the block to a list — that doc holds no list.
 
 ## CI

@@ -49,13 +49,14 @@ Fully agentic per block. Doc recommends one PR per 2–3 blocks ("phase 4" is no
 ```bash
 pnpm verify
 pnpm dev
+pnpm test:a11y
 ```
 
 - [x] Every route at three widths, no horizontal scroll
 - [x] Keyboard-only pass: accordion and every link/CTA reachable and visibly focused. No nav drawer exists or is needed — header nav is a small flat link set (`headerLinks`, capped at 7) that wraps in place at 320px without overflowing; the phase doc's own comment on `Navigation` already calls this "flat, no dropdowns"
 - [x] Screen-reader pass over nav and one content page — accessibility tree checked on `/` and `/careers`; single `banner`/`main`/`contentinfo`, correct heading order, tel/mailto links resolve correctly (fixed a double `tel:tel:` prefix in seed data along the way)
 - [x] Publish a change in `/admin`, confirm it appears on the front end — confirmed working
-- [ ] Add axe-core here — deferred from Phase 1 deliberately, since specs written against a placeholder page get rewritten. One-off axe-core scan run manually this pass (0 violations on `/`, `/careers`); wiring it into `pnpm verify` as a permanent check is still open
+- [x] axe-core, not Playwright — `scripts/check-a11y.mjs` (`pnpm test:a11y`), puppeteer-driven, against a running `pnpm dev`. Not wired into `pnpm verify`: that runs against CI's fake-env build, which has no DB to render real pages against, so there'd be nothing meaningful to scan. Run it manually against a real dev DB instead
 
 ## Traps
 
