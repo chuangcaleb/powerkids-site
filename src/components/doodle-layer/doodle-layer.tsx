@@ -1,65 +1,18 @@
 import type { ComponentType, CSSProperties } from 'react'
-import {
-  Cloud,
-  Feather,
-  Flower,
-  Music,
-  Palette,
-  PenLine,
-  Rainbow,
-  Rocket,
-  Smile,
-  Sparkles,
-  Star,
-  Sun,
-  Zap,
-} from 'lucide-react'
-import type { DoodleIconName } from '@/lib/doodle-icon-names'
+import { AMBIENT_ICON_NAMES, ICONS } from '@/lib/icons'
 import { createSeededRandom } from '@/lib/seeded-random'
 import styles from './doodle-layer.module.css'
 
-/** lucide-react — line icons at the same 24x24/stroke shape the prototype's hand-rolled paths used. */
-const DEFAULT_ICONS = [
-  Star,
-  Sun,
-  Cloud,
-  Sparkles,
-  Smile,
-  Feather,
-  Music,
-  Rocket,
-  Palette,
-  PenLine,
-  Zap,
-  Rainbow,
-  Flower,
-]
+type DoodleIcon = ComponentType<{ size?: string | number; strokeWidth?: number }>
 
 /**
- * Keyed the same way as framed-rows' `ICONS` map, so a Payload `select`
- * field's string value can resolve straight to a component. `satisfies`
- * against `DoodleIconName` (from `@/lib/doodle-icon-names`, also consumed by
- * a field's `options`) means adding/renaming an icon in one place without
- * the other is a type error here, not a silent runtime drift.
+ * Registry's decorative subset, resolved once. Callers that want a
+ * context-specific set (contact glyphs in the footer, writing glyphs by the
+ * registration form) pass their own components instead — those are authored
+ * decoration, not an editor's choice, so they stay out of the icon field's
+ * closed set.
  */
-export const ICON_MAP = {
-  star: Star,
-  sun: Sun,
-  cloud: Cloud,
-  sparkles: Sparkles,
-  smile: Smile,
-  feather: Feather,
-  music: Music,
-  rocket: Rocket,
-  palette: Palette,
-  'pen-line': PenLine,
-  zap: Zap,
-  rainbow: Rainbow,
-  flower: Flower,
-} satisfies Record<
-  DoodleIconName,
-  ComponentType<{ size?: string | number; strokeWidth?: number }>
->
+const DEFAULT_ICONS: DoodleIcon[] = AMBIENT_ICON_NAMES.map((name) => ICONS[name])
 
 const DEPTH_COUNT = 3
 const MAX_MARKS = 18
@@ -69,8 +22,8 @@ export type DoodleLayerProps = {
   zoneId: string
   /** Marks generated for this zone, hard-capped so no zone runs away with node count. */
   density?: number
-  /** Icon set to draw from — defaults to the full decorative set. */
-  icons?: ComponentType<{ size?: string | number; strokeWidth?: number }>[]
+  /** Icon set to draw from — defaults to the registry's decorative subset. */
+  icons?: DoodleIcon[]
   /**
    * `'contained'` (default) clips to the host's own box — the original
    * full-bleed zone behaviour. `'spill'` lets marks overshoot the host by
@@ -126,7 +79,7 @@ export function DoodleLayer({
       id: index,
       depth,
       t,
-      Icon: icons[Math.floor(random() * icons.length)] ?? Star,
+      Icon: icons[Math.floor(random() * icons.length)] ?? ICONS.Star,
       left,
       top,
       rotate: random() * 70 - 35,

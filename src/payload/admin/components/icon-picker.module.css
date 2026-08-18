@@ -1,0 +1,8 @@
+/* Lays the glyph beside its name inside an option label. Block-level rather than
+ * inline, or the line box adds a few pixels and the control ends up taller than
+ * a sibling text input. Everything else is Payload's select styling. */
+.option {
+  display: flex;
+  gap: calc(var(--base) * 0.4);
+  align-items: center;
+}

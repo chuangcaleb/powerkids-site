@@ -1,7 +1,7 @@
 import type { Block } from 'payload'
-import { DOODLE_ICON_NAMES } from '@/lib/doodle-icon-names'
 import { buttonField } from '@/payload/fields/button'
 import { headerField, withHeaderTabs } from '@/payload/fields/header'
+import { iconField } from '@/payload/fields/icon'
 
 /**
  * Photo-collage recap of past activity — one "item" (an event, camp, class)
@@ -46,8 +46,16 @@ export const ScrapbookBlock: Block = {
               ],
             },
             {
-              label: 'Media',
+              label: 'Graphics',
               fields: [
+                // Above the photo list on purpose: the list grows to eight rows,
+                // and a field below it is easy to miss entirely.
+                iconField({
+                  name: 'icons',
+                  hasMany: true,
+                  description:
+                    "Decorative doodles scattered around this item's text. Leave empty to skip.",
+                }),
                 {
                   name: 'media',
                   type: 'upload',
@@ -59,18 +67,6 @@ export const ScrapbookBlock: Block = {
                   admin: {
                     description: 'Photos for this item. Drag to reorder.',
                   },
-                },
-                {
-                  name: 'doodleIcons',
-                  type: 'select',
-                  hasMany: true,
-                  admin: {
-                    description:
-                      "Decorative doodles scattered around this item's text. Leave empty to skip.",
-                  },
-                  // Shared with `ICON_MAP` in doodle-layer.tsx — `satisfies`
-                  // there is a type error if the two ever drift apart.
-                  options: [...DOODLE_ICON_NAMES],
                 },
               ],
             },

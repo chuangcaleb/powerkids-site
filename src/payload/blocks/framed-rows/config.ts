@@ -1,4 +1,5 @@
 import type { Block } from 'payload'
+import { iconField } from '@/payload/fields/icon'
 import { withHeaderTabs } from '@/payload/fields/header'
 
 /**
@@ -25,31 +26,10 @@ export const FramedRowsBlock: Block = {
         {
           type: 'row',
           fields: [
-            {
-              name: 'icon',
-              type: 'select',
-              admin: {
-                width: '50%',
-                description: 'Icon shown above the eyebrow.',
-              },
-              options: [
-                'sunrise',
-                'sun',
-                'sunset',
-                'star',
-                'cloud',
-                'sparkles',
-                'smile',
-                'feather',
-                'music',
-                'rocket',
-                'palette',
-                'pen-line',
-                'zap',
-                'rainbow',
-                'flower',
-              ],
-            },
+            iconField({
+              width: '50%',
+              description: 'Icon shown above the eyebrow (optional).',
+            }),
             {
               name: 'eyebrow',
               type: 'text',

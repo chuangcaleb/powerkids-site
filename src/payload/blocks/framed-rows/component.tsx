@@ -1,47 +1,13 @@
 import type { CSSProperties } from 'react'
-import {
-  Cloud,
-  Feather,
-  Flower,
-  Music,
-  Palette,
-  PenLine,
-  Rainbow,
-  Rocket,
-  Smile,
-  Sparkles,
-  Star,
-  Sun,
-  Sunrise,
-  Sunset,
-  Zap,
-} from 'lucide-react'
 import { Heading } from '@/components/heading/heading'
 import { Polaroid } from '@/components/polaroid/polaroid'
 import { RichText } from '@/components/rich-text/rich-text'
 import { SectionHeader } from '@/components/section-header/section-header'
 import { SectionSeam } from '@/components/section-seam/section-seam'
 import { cx } from '@/lib/cx'
+import { ICONS, isIconName } from '@/lib/icons'
 import type { FramedRowsBlock as FramedRowsBlockType } from '@/payload-types'
 import styles from './framed-rows.module.css'
-
-const ICONS = {
-  sunrise: Sunrise,
-  sun: Sun,
-  sunset: Sunset,
-  star: Star,
-  cloud: Cloud,
-  sparkles: Sparkles,
-  smile: Smile,
-  feather: Feather,
-  music: Music,
-  rocket: Rocket,
-  palette: Palette,
-  'pen-line': PenLine,
-  zap: Zap,
-  rainbow: Rainbow,
-  flower: Flower,
-}
 
 /** Position, not the CMS, decides colour and tilt — D-11/06-baseline-config.md#3. */
 const ACCENTS = [styles.accentA, styles.accentB, styles.accentC]
@@ -81,7 +47,7 @@ export function FramedRows({ header, rows }: FramedRowsBlockType) {
           </>
         ) : null}
         {rows.map((row, index) => {
-          const Icon = row.icon ? ICONS[row.icon as keyof typeof ICONS] : null
+          const Icon = isIconName(row.icon) ? ICONS[row.icon] : null
           const image = typeof row.image === 'object' ? row.image : null
 
           return (
