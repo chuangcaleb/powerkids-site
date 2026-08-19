@@ -26,5 +26,5 @@
    its edges (sub-pixel positioning), where a CSS border fills pixels edge to
    edge. Bumped up so the rule reads as bold as the borders it sits beside. */
 .stroke {
-  stroke-width: calc(var(--border-width) * 1.2);
+  stroke-width: calc(var(--border-width) * 2);
 }
