@@ -20,32 +20,35 @@
 }
 
 /* .band's own border-radius only shapes its border/shadow, not the flat
- * corners of the row filling it — first/last row need the same curve so
- * their background doesn't square off past the frame. Inset by the border
- * width so the fill nests concentrically inside the border's own curve. */
-.roundTop {
+ * corners of the row filling it — first/last child (header row when
+ * present, else the first/last data row) need the same curve so their
+ * background doesn't square off past the frame. Inset by the border width
+ * so the fill nests concentrically inside the border's own curve. */
+.band > :first-child {
   border-start-start-radius: var(--framed-rows-border-radius-offset);
   border-start-end-radius: var(--framed-rows-border-radius-offset);
 }
 
-.roundBottom {
+.band > :last-child {
   border-end-start-radius: var(--framed-rows-border-radius-offset);
   border-end-end-radius: var(--framed-rows-border-radius-offset);
 }
 
-.accentA {
+/* Accent cycles every 3rd row, counting only .row siblings so the
+ * SectionSeam dividers interleaved between them don't skew the count. */
+.row:nth-child(3n + 1 of .row) {
   background-color: var(--accent-red-fill);
 
   --row-accent: var(--accent-red);
 }
 
-.accentB {
+.row:nth-child(3n + 2 of .row) {
   background-color: var(--accent-blue-fill);
 
   --row-accent: var(--accent-blue);
 }
 
-.accentC {
+.row:nth-child(3n of .row) {
   background-color: var(--accent-amber-fill);
 
   --row-accent: var(--accent-amber);
@@ -57,7 +60,7 @@
   align-items: center;
 }
 
-.reverse {
+.row:nth-child(2n of .row) .switcher {
   flex-direction: row-reverse;
 }
 
@@ -78,10 +81,12 @@
   letter-spacing: var(--tracking-display);
 }
 
-.left {
+/* Media bleeds toward the outer edge, alternating with the switcher's
+ * reverse — even .row siblings (index odd) bleed left, odd bleed right. */
+.row:nth-child(2n of .row) figure {
   margin-inline-start: calc(var(--gutter) * -3);
 }
 
-.right {
+.row:nth-child(2n + 1 of .row) figure {
   margin-inline-end: calc(var(--gutter) * -3);
 }

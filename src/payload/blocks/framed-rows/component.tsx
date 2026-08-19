@@ -6,11 +6,13 @@ import { SectionSeam } from '@/components/section-seam/section-seam'
 import { cx } from '@/lib/cx'
 import { ICONS, isIconName } from '@/lib/icons'
 import type { FramedRowsBlock as FramedRowsBlockType } from '@/payload-types'
-import type { CSSProperties } from 'react'
+import { Fragment, type CSSProperties } from 'react'
 import styles from './framed-rows.module.css'
 
-/** Position, not the CMS, decides colour and tilt — D-11/06-baseline-config.md#3. */
-const ACCENTS = [styles.accentA, styles.accentB, styles.accentC]
+/** Position, not the CMS, decides colour and tilt — D-11/06-baseline-config.md#3.
+ * The .row class handles its own accent/reverse/bleed via nth-child selectors
+ * in framed-rows.module.css; only the SectionSeam gradient still needs the
+ * resolved colour in JS since it's an inline style, not a class. */
 const ACCENT_FILLS = [
   'var(--accent-red-fill)',
   'var(--accent-blue-fill)',
@@ -40,7 +42,7 @@ export function FramedRows({ header, rows }: FramedRowsBlockType) {
       <div className={styles.band}>
         {hasHeader ? (
           <>
-            <div className={cx(styles.row, styles.roundTop)}>
+            <div className={styles.row}>
               <div className="wrapper">
                 <SectionHeader header={header} />
               </div>
@@ -53,7 +55,7 @@ export function FramedRows({ header, rows }: FramedRowsBlockType) {
           const image = typeof row.image === 'object' ? row.image : null
 
           return (
-            <div key={row.id ?? index}>
+            <Fragment key={row.id ?? index}>
               {index > 0 ? (
                 <SectionSeam
                   {...SUB_SEAM}
@@ -61,22 +63,8 @@ export function FramedRows({ header, rows }: FramedRowsBlockType) {
                   below={accentFill(index)}
                 />
               ) : null}
-              <div
-                className={cx(
-                  styles.row,
-                  ACCENTS[index % ACCENTS.length],
-                  index === 0 && !hasHeader && styles.roundTop,
-                  index === rows.length - 1 && styles.roundBottom,
-                )}
-              >
-                <div
-                  className={cx(
-                    'switcher',
-                    'wrapper',
-                    styles.switcher,
-                    index % 2 === 1 && styles.reverse,
-                  )}
-                >
+              <div className={styles.row}>
+                <div className={cx('switcher', 'wrapper', styles.switcher)}>
                   <div className="flow-m">
                     <div className="flow-xs">
                       <div className={cx('flow-2xs', styles.timeStack)}>
@@ -94,12 +82,11 @@ export function FramedRows({ header, rows }: FramedRowsBlockType) {
                       doc={image}
                       sizes="(min-width: 768px) 33vw, 100vw"
                       tilt={index % 2 === 1 ? -5 : 5}
-                      className={cx(styles.media, index % 2 ? styles.left : styles.right)}
                     />
                   ) : null}
                 </div>
               </div>
-            </div>
+            </Fragment>
           )
         })}
       </div>
