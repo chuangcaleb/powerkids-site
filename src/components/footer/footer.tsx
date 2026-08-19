@@ -1,4 +1,5 @@
 import { cx } from '@/lib/cx'
+import { SITE_CREDIT, SITE_NAME } from '@/lib/site'
 import { RegistrationSection } from '@/components/registration-section/registration-section'
 import { SectionSeam } from '@/components/section-seam/section-seam'
 import { Sticker } from '@/components/sticker/sticker'
@@ -41,11 +42,13 @@ export async function Footer() {
       <FooterNav />
       <div className={styles.bottom}>
         <div className={cx('cluster', 'wrapper')}>
-          <span>&copy; {new Date().getFullYear()} PowerKids Kindergarten</span>
+          <span>
+            &copy; {new Date().getFullYear()} {SITE_NAME}
+          </span>
           <span>
             {'Designed by '}
-            <a href="https://chuangcaleb.com" target="_blank" rel="noopener noreferrer">
-              Chuang Caleb
+            <a href={SITE_CREDIT.url} target="_blank" rel="noopener noreferrer">
+              {SITE_CREDIT.label}
             </a>
           </span>
         </div>

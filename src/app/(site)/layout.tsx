@@ -5,6 +5,7 @@ import { AdminBar } from '@/components/admin-bar/admin-bar'
 import { Footer } from '@/components/footer/footer'
 import { Header } from '@/components/header/header'
 import { cx } from '@/lib/cx'
+import { SITE_NAME } from '@/lib/site'
 import { archivo } from '@/styles/fonts/archivo'
 import { bricolageGrotesque } from '@/styles/fonts/bricolage-grotesque'
 import '@/styles/tokens/index.css'
@@ -18,7 +19,7 @@ import '@/styles/global/index.css'
  * Header, footer, and content-driven metadata arrive with the CMS.
  */
 export const metadata: Metadata = {
-  title: 'PowerKids Kindergarten',
+  title: SITE_NAME,
 }
 
 export const viewport: Viewport = {
