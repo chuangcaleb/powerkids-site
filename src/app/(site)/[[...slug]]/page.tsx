@@ -1,4 +1,5 @@
 import { getServerUrl } from '@/lib/get-server-url'
+import { INDEX_SLUG, slugFromSegments, urlForSlug } from '@/lib/page-path'
 import { getPayloadClient } from '@/lib/payload'
 import type { Media } from '@/payload-types'
 import { RenderBlocks } from '@/payload/blocks/render-blocks'
@@ -13,10 +14,6 @@ import { notFound } from 'next/navigation'
 
 type Props = { params: Promise<{ slug?: string[] }> }
 
-function slugFromParams(slug: string[] | undefined) {
-  return slug?.length ? slug.join('/') : 'index'
-}
-
 export async function generateStaticParams() {
   const payload = await getPayloadClient()
   const { docs } = await payload.find({
@@ -28,13 +25,13 @@ export async function generateStaticParams() {
   })
 
   return docs
-    .filter((doc) => doc.slug !== 'index')
+    .filter((doc) => doc.slug !== INDEX_SLUG)
     .map((doc) => ({ slug: doc.slug.split('/') }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
-  const page = await getPage(slugFromParams(slug))
+  const page = await getPage(slugFromSegments(slug))
   if (!page) return {}
 
   const seoDefaults = await getSeoDefaults()
@@ -50,7 +47,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title,
       description,
-      url: `${getServerUrl()}/${page.slug === 'index' ? '' : page.slug}`,
+      url: urlForSlug(getServerUrl(), page.slug),
       images: imageUrl ? [{ url: imageUrl }] : undefined,
     },
   }
@@ -58,7 +55,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function Page({ params }: Props) {
   const { slug } = await params
-  const page = await getPage(slugFromParams(slug))
+  const page = await getPage(slugFromSegments(slug))
 
   if (!page) notFound()
 

@@ -1,4 +1,5 @@
 import type { AnchorHTMLAttributes } from 'react'
+import { pathForSlug } from '@/lib/page-path'
 import type { ContentBlock } from '@/payload-types'
 
 type LinkField = NonNullable<NonNullable<ContentBlock['columns']>[number]['link']>
@@ -15,7 +16,7 @@ export function CMSLink({ link, className, ...rest }: CMSLinkProps) {
     type === 'custom'
       ? url
       : typeof reference === 'object' && reference !== null
-        ? `/${reference.slug === 'index' ? '' : reference.slug}`
+        ? pathForSlug(reference.slug)
         : undefined
 
   if (!href) return null

@@ -21,6 +21,7 @@ import { SeoDefaults } from '@/payload/globals/seo-defaults'
 import { SiteSettings } from '@/payload/globals/site-settings'
 import { S3_REGION, requireEnv } from '@/lib/env'
 import { getServerUrl } from '@/lib/get-server-url'
+import { urlForSlug } from '@/lib/page-path'
 import type { Page } from '@/payload-types'
 
 const TITLE_SUFFIX = 'PowerKids Kindergarten: The Centre With A Heart'
@@ -28,10 +29,7 @@ const TITLE_SUFFIX = 'PowerKids Kindergarten: The Centre With A Heart'
 const generateTitle: GenerateTitle<Page> = ({ doc }) =>
   doc?.title ? `${doc.title} | ${TITLE_SUFFIX}` : TITLE_SUFFIX
 
-const generateURL: GenerateURL<Page> = ({ doc }) => {
-  const base = getServerUrl()
-  return doc?.slug && doc.slug !== 'index' ? `${base}/${doc.slug}` : base
-}
+const generateURL: GenerateURL<Page> = ({ doc }) => urlForSlug(getServerUrl(), doc?.slug)
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 
