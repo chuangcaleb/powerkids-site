@@ -9,12 +9,6 @@ Not a task tracker for phase work — phases own their own scope ([phases/README
 
 ## Link `appearance` is a dead admin control
 
-`link()` ships an `appearance` select (`default` / `outline`) and the enum columns exist in the database, but `CMSLink` renders a plain anchor and never reads the value. An editor can pick an appearance and nothing changes.
+`linkField()` ships an `appearance` select (`default` / `outline`) and the enum columns exist in the database, but `CMSLink` renders a plain anchor and never reads the value. An editor can pick an appearance and nothing changes.
 
-Decide one way: either style the two appearances in `CMSLink`, or drop the field — dropping costs a migration to remove the `link_appearance` columns and their enums.
-
-## `link()` factory has unused parameters
-
-`link()` accepts `appearances`, `disableLabel`, and `extraFields`; its only caller passes `overrides` alone. Speculative generality until a second caller needs them. Trim to what is used, or keep and record which planned block needs each.
-
-Resolve together with the `appearance` item above — same field, same decision.
+Decide one way: either style the two appearances in `CMSLink`, or drop the field — dropping costs a migration to remove the `link_appearance` columns and their enums. The field is kept for now purely because the column exists; the factory no longer lets a call site vary it.

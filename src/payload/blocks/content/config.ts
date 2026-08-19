@@ -1,5 +1,5 @@
-import { link } from '@/fields/link'
 import { withHeaderTabs } from '@/payload/fields/header'
+import { linkField } from '@/payload/fields/link'
 import { HeadingFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
 import type { Block } from 'payload'
 
@@ -70,12 +70,8 @@ export const Content: Block = {
           name: 'enableLink',
           type: 'checkbox',
         },
-        link({
-          overrides: {
-            admin: {
-              condition: (_data, siblingData) => Boolean(siblingData?.enableLink),
-            },
-          },
+        linkField({
+          condition: (_data, siblingData) => Boolean(siblingData?.enableLink),
         }),
       ],
     },
