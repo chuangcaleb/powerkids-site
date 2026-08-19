@@ -8,6 +8,7 @@ import { ICONS, isIconName } from '@/lib/icons'
 import type { FramedRowsBlock as FramedRowsBlockType } from '@/payload-types'
 import { Fragment, type CSSProperties } from 'react'
 import styles from './framed-rows.module.css'
+import { DoodleLayer } from '@/components/doodle-layer/doodle-layer'
 
 /** Position, not the CMS, decides colour and tilt — D-11/06-baseline-config.md#3.
  * The .row class handles its own accent/reverse/bleed via nth-child selectors
@@ -25,7 +26,7 @@ const accentFill = (index: number) =>
 
 const SUB_SEAM = { shape: 'wave', width: 5.75, depth: 0.25, referenceWidth: 75 } as const
 
-export function FramedRows({ header, rows }: FramedRowsBlockType) {
+export function FramedRows({ header, rows, id }: FramedRowsBlockType) {
   if (!rows || rows.length === 0) return null
 
   const hasHeader = Boolean(header?.eyebrow || header?.heading || header?.lead)
@@ -43,6 +44,7 @@ export function FramedRows({ header, rows }: FramedRowsBlockType) {
         {hasHeader ? (
           <>
             <div className={styles.row}>
+              <DoodleLayer zoneId={String(id)} />
               <div className="wrapper">
                 <SectionHeader header={header} />
               </div>

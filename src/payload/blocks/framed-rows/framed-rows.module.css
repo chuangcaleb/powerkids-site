@@ -17,6 +17,7 @@
 
 .row {
   padding-block: var(--space-2xl);
+  position: relative;
 }
 
 /* .band's own border-radius only shapes its border/shadow, not the flat
@@ -34,21 +35,22 @@
   border-end-end-radius: var(--framed-rows-border-radius-offset);
 }
 
-/* Accent cycles every 3rd row, counting only .row siblings so the
- * SectionSeam dividers interleaved between them don't skew the count. */
-.row:nth-child(3n + 1 of .row) {
+/* Accent cycles every 3rd row starting from the 2nd row, counting only
+ * .row siblings so the SectionSeam dividers interleaved between them don't
+ * skew the count. */
+.row:nth-child(3n + 2 of .row) {
   background-color: var(--accent-red-fill);
 
   --row-accent: var(--accent-red);
 }
 
-.row:nth-child(3n + 2 of .row) {
+.row:nth-child(3n of .row) {
   background-color: var(--accent-blue-fill);
 
   --row-accent: var(--accent-blue);
 }
 
-.row:nth-child(3n of .row) {
+.row:nth-child(3n + 4 of .row) {
   background-color: var(--accent-amber-fill);
 
   --row-accent: var(--accent-amber);
