@@ -22,8 +22,6 @@
 CMS uses these words too. Use them exactly.
 
 - **School** — a physical branch (Sri Petaling, Puchong Utama, Parklane OUG). Not "location", "centre", "branch".
-- **Program** — a daily offering with fixed hours (Morning School, After School Program, Evening Daycare). Not "class", "course".
-- **Event** — a recurring school activity type (Graduation, Sports Day, Field Trips, Community Service). Not a dated calendar entry.
 - **Block** — one entry in a page's `layout` array; the unit an editor adds and reorders.
 - **Page** — an editor-composed route, built from blocks.
 
