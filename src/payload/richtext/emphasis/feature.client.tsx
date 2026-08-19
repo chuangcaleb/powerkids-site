@@ -1,5 +1,8 @@
 'use client'
 
+// Client component: Lexical toolbar features register commands against the
+// editor instance, which only exists in the browser.
+
 import {
   createClientFeature,
   toolbarFormatGroupWithItems,

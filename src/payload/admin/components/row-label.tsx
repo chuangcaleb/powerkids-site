@@ -1,5 +1,8 @@
 'use client'
 
+// Client component: `useRowLabel` reads the live array-row value from admin
+// form state, so the label re-renders as the editor types.
+
 import type { RowLabelProps } from '@payloadcms/ui'
 import { useRowLabel } from '@payloadcms/ui'
 

@@ -1,5 +1,7 @@
 'use client'
 
+// Client component: rendered inside the Lexical toolbar (see feature.client).
+
 /**
  * Toolbar icon — a wavy double underline, hinting at the hand-drawn mark
  * this feature applies. Named for the mark it draws (not just "icon") since

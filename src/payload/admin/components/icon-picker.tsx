@@ -1,5 +1,8 @@
 'use client'
 
+// Client component: a Payload custom field UI — `useField` binds it to the
+// admin form state, which only exists in the browser.
+
 import {
   fieldBaseClass,
   FieldDescription,

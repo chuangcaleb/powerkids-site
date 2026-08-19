@@ -1,5 +1,8 @@
 'use client'
 
+// Client component: auth state arrives via `PayloadAdminBar`'s `onAuthChange`
+// callback, and the frame check reads `window` — both browser-only.
+
 import type { PayloadAdminBarProps, PayloadMeUser } from '@payloadcms/admin-bar'
 import { PayloadAdminBar } from '@payloadcms/admin-bar'
 import { useRouter } from 'next/navigation'

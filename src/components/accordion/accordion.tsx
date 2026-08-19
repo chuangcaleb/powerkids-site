@@ -1,5 +1,8 @@
 'use client'
 
+// Client component: disclosure open/closed state plus roving-focus keyboard
+// navigation both live in React state — no server equivalent.
+
 import { useRef, useState, type KeyboardEvent, type ReactNode } from 'react'
 import { cx } from '@/lib/cx'
 import styles from './accordion.module.css'

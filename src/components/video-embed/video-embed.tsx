@@ -1,5 +1,8 @@
 'use client'
 
+// Client component: click-to-load facade. The iframe is only mounted after a
+// user click, so the third-party embed costs nothing until asked for.
+
 import { useState } from 'react'
 import { cx } from '@/lib/cx'
 import styles from './video-embed.module.css'
