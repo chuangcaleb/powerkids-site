@@ -4,7 +4,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--sidebar-gap, var(--space-l));
-  align-items: var(--align, flex-start);
+  align-items: var(--sidebar-align, flex-start);
 }
 
 .sidebar {

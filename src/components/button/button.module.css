@@ -4,6 +4,7 @@
   justify-content: center;
   gap: var(--space-3xs);
   font-family: var(--font-display);
+  font-weight: var(--weight-display);
   border: var(--border-width) solid var(--border-strong);
   border-radius: var(--radius-l);
   box-shadow: var(--shadow-hard);

@@ -1,11 +1,18 @@
 .mark {
+  color: var(--text-strong);
   background-color: transparent;
-  background-image: linear-gradient(to right, var(--fill-colour) 50%, transparent 50%);
-  background-size: 200% 100%;
-  background-position: 0% 0;
-  color: var(--text-on-accent);
+  background-repeat: no-repeat;
+  background-image:
+    linear-gradient(var(--fill-colour), var(--fill-colour)),
+    linear-gradient(var(--fill-colour), var(--fill-colour));
+  background-size:
+    100% var(--stroke-width),
+    100% var(--stroke-width);
+  background-position:
+    0 100%,
+    0 calc(100% - 0.35em);
   padding-inline: 0.15em;
-  border-radius: var(--radius-s);
+  padding-bottom: 0.15em;
 }
 
 .red {
@@ -18,23 +25,17 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .mark {
-    background-position: 100% 0;
-    color: var(--text-strong);
-    animation:
-      sweep-bg var(--duration-sweep) var(--ease-standard) forwards,
-      sweep-text var(--duration-sweep) var(--ease-standard) forwards;
+    background-size:
+      0% var(--stroke-width),
+      0% var(--stroke-width);
+    animation: draw-underline var(--duration-sweep) var(--ease-standard) forwards;
   }
 
-  @keyframes sweep-bg {
+  @keyframes draw-underline {
     to {
-      background-position: 0% 0;
-    }
-  }
-
-  @keyframes sweep-text {
-    50%,
-    100% {
-      color: var(--text-on-accent);
+      background-size:
+        100% var(--stroke-width),
+        100% var(--stroke-width);
     }
   }
 }

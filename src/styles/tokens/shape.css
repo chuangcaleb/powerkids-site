@@ -1,20 +1,26 @@
 /*
- * Rounded neo-brutalism's shape language: large radii, one hard offset
- * shadow, no soft/blurred variants. See DESIGN.md invariants 5 and 9.
+ * Values and invariants: DESIGN.md. Intent: docs/design/tokens.md.
  */
 :root {
-  --radius-s: 12px;
-  --radius-m: 18px;
-  --radius-l: 24px;
+  --radius-s: 0.75rem;
+  --radius-m: 1.125rem;
+  --radius-l: 1.4375rem;
+  --radius-pill: 999px;
 
-  --border-width: 0.2em;
+  --border-width: 0.375rem;
+  --pill-border-width: 0.1875rem;
+  --stroke-width: 0.1875rem;
 
-  --shadow-offset: 5px;
+  --shadow-offset: 0.5625rem;
   --shadow-hard: var(--shadow-offset) var(--shadow-offset) 0 0 var(--shadow-colour);
   /* Button hover-lift / press interaction — see DESIGN.md's Motion section. */
   --shadow-hard-lift: calc(var(--shadow-offset) * 1.2) calc(var(--shadow-offset) * 1.2) 0
     0 var(--shadow-colour);
   --shadow-hard-flat: 0 0 0 0 var(--shadow-colour);
 
-  --focus-offset: 3px;
+  --pill-shadow-offset: 0.2rem;
+  --shadow-hard-pill: var(--pill-shadow-offset) var(--pill-shadow-offset) 0 0
+    var(--shadow-colour);
+
+  --focus-offset: 0.1875rem;
 }

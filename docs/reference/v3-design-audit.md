@@ -1,9 +1,9 @@
 # v3 Design Audit
 
 **Purpose:** record what the v3 site actually looked like, in values, so `DESIGN.md` can be authored deliberately instead of reverse-engineered twice.
-**Read this when:** writing `DESIGN.md` or building the token layer in Phase 2.
+**Read this when:** deciding whether a v3 visual element carries over.
 
-This is an audit, not a specification. It describes what exists; `DESIGN.md` will decide what to keep.
+> **Historical record, not current spec.** It describes what v3 looked like. `DESIGN.md` decides what PowerKids v4 actually does — where the two disagree, `DESIGN.md` wins.
 
 ---
 

@@ -1,32 +1,48 @@
 /*
- * Values and invariants: DESIGN.md. This file is the CSS implementation of
- * those decisions — do not add a colour here that DESIGN.md doesn't already
- * name.
+ * Values and invariants: DESIGN.md. Intent: docs/design/tokens.md.
  */
 :root {
   /* Base palette. Components reach for the semantic aliases below, not these. */
-  --colour-cream: #fffcf5;
-  --colour-ink: #1a1a1a;
-  --colour-charcoal: #44403c;
+  --colour-cream: #fffcf7;
+  --colour-ink: #171310;
+  --colour-charcoal: #4c433a;
   --colour-muted: #8a8681;
   --colour-black: #000000;
   --colour-white: #ffffff;
-  --colour-red: #cc0000;
-  --colour-blue: #0000eb;
-  --colour-red-tint: color-mix(in srgb, var(--colour-red) 12%, var(--colour-cream));
-  --colour-blue-tint: color-mix(in srgb, var(--colour-blue) 12%, var(--colour-cream));
+  /* Bolder than v3's #cc2828 — brightened just enough to clear 4.5:1 against
+   * both white and black (needed now the mascot icon's stroke sits on the
+   * footer's black bg). Same hue/saturation family as the original, not a
+   * desaturated compromise. This is also the accent a future CTA fill will
+   * use. See DESIGN.md's contrast rule. */
+  --colour-red: #e12c2c;
+  --colour-blue: #2434e8;
+  --colour-amber: #a15d0c;
+  --colour-red-tint: #ffe6e4;
+  --colour-blue-tint: #e4e7ff;
+  --colour-amber-tint: #fdeeda;
+  --colour-parchment: #cfc4bb;
+  --colour-cta-red: #d42a2a;
 
   /* Semantic aliases. Components use these. */
   --bg-surface: var(--colour-cream);
+  --bg-sun: #ffc929;
+  --bg-contact: #2435c6;
+  --bg-inverse: var(--colour-black);
+  --bg-cta: var(--colour-cta-red);
   --text-strong: var(--colour-ink);
   --text-body: var(--colour-charcoal);
   --text-muted: var(--colour-muted);
   --text-on-accent: var(--colour-white);
+  --text-on-inverse: var(--colour-parchment);
+  --text-on-cta: var(--colour-white);
+  --text-on-contact: var(--colour-white);
   --border-strong: var(--colour-black);
   --shadow-colour: var(--colour-black);
 
   --accent-red: var(--colour-red);
   --accent-blue: var(--colour-blue);
+  --accent-amber: var(--colour-amber);
   --accent-red-fill: var(--colour-red-tint);
   --accent-blue-fill: var(--colour-blue-tint);
+  --accent-amber-fill: var(--colour-amber-tint);
 }

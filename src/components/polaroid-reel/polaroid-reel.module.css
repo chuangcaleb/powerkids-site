@@ -1,0 +1,24 @@
+.strip {
+  display: flex;
+  gap: var(--space-s);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  list-style: none;
+  margin: 0;
+  padding: var(--space-l) var(--space-m);
+  scrollbar-width: none;
+  margin-inline: calc(var(--gutter) * -1);
+}
+
+.strip::-webkit-scrollbar {
+  display: none;
+}
+
+.item {
+  flex: 0 0 17.5rem;
+  scroll-snap-align: start;
+}
+
+.polaroid {
+  width: 100%;
+}

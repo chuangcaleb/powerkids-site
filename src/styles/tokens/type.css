@@ -1,20 +1,29 @@
 /*
- * Fluid scale via Utopia (320px -> 1440px viewport, 18px/1.2 ratio min ->
- * 21px/1.25 ratio max). Values are an entry point — see DESIGN.md's "Type"
- * section for why the ratios are this close together, and tune here once
- * real content is visible on the kitchen sink.
+ * Values and invariants: DESIGN.md. Intent: docs/design/tokens.md.
  */
 :root {
-  /* --font-shantell-sans is supplied at runtime by next/font/local — see src/fonts/shantell-sans.ts. */
-  --font-display: var(--font-shantell-sans), system-ui, sans-serif;
-  --font-body: system-ui, -apple-system, 'Segoe UI', 'Helvetica Neue', sans-serif;
+  /* --font-bricolage-grotesque supplied by next/font/local — src/styles/fonts/bricolage-grotesque.ts.
+   * --font-archivo supplied by next/font/google — src/styles/fonts/archivo.ts. */
+  --font-display: var(--font-bricolage-grotesque), system-ui, sans-serif;
+  --font-body: var(--font-archivo), system-ui, sans-serif;
 
-  --step--2: clamp(0.7813rem, 0.7645rem + 0.0839vw, 0.84rem);
-  --step--1: clamp(0.9375rem, 0.9054rem + 0.1607vw, 1.05rem);
-  --step-0: clamp(1.125rem, 1.0714rem + 0.2679vw, 1.3125rem);
-  --step-1: clamp(1.35rem, 1.267rem + 0.4152vw, 1.6406rem);
-  --step-2: clamp(1.62rem, 1.4969rem + 0.6154vw, 2.0508rem);
-  --step-3: clamp(1.944rem, 1.767rem + 0.885vw, 2.5635rem);
-  --step-4: clamp(2.3328rem, 2.0838rem + 1.2451vw, 3.2043rem);
-  --step-5: clamp(2.7994rem, 2.4548rem + 1.723vw, 4.0054rem);
+  /* Bricolage's wdth axis is pinned in the font file itself (already maxed
+   * at 100 — see src/styles/fonts/bricolage-grotesque/NOTES.md), so this is
+   * the one live knob for perceived width. Tune here only. */
+  --tracking-display: -0.02em;
+  --weight-display: 800;
+  --opsz-display: 36;
+
+  --step--2: clamp(0.7378rem, 0.7201rem + 0.0888vw, 0.8rem);
+  --step--1: clamp(0.8854rem, 0.8527rem + 0.1637vw, 1rem);
+  --step-0: clamp(1.0625rem, 1.0089rem + 0.2679vw, 1.25rem);
+  --step-1: clamp(1.275rem, 1.1929rem + 0.4107vw, 1.5625rem);
+  --step-2: clamp(1.53rem, 1.4091rem + 0.6045vw, 1.9531rem);
+  --step-3: clamp(1.75rem, 1.3929rem + 1.7857vw, 3rem);
+  --step-4: clamp(2.125rem, 1.625rem + 2.5vw, 3.875rem);
+  --step-5: clamp(2.5rem, 1.6071rem + 4.4643vw, 5.625rem);
+
+  /* Custom fluid scales */
+  --step-hero: clamp(3.5rem, 1rem + 9vw, 5.7rem);
+  --step-wordmark: clamp(3.5rem, 2.8rem + 7vw, 15rem);
 }

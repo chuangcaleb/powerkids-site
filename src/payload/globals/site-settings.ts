@@ -2,6 +2,8 @@ import type { GlobalConfig } from 'payload'
 
 import { authenticated } from '@/payload/access/authenticated'
 
+import { revalidateLayout } from './hooks/revalidate-layout'
+
 /**
  * Brand-wide facts referenced across the site. Founding year is stored, not
  * hard-coded, so "{n} years & counting" stays a computed value.
@@ -15,12 +17,10 @@ export const SiteSettings: GlobalConfig = {
     read: () => true,
     update: authenticated,
   },
+  hooks: {
+    afterChange: [revalidateLayout],
+  },
   fields: [
-    {
-      name: 'tagline',
-      type: 'text',
-      required: true,
-    },
     {
       name: 'foundedYear',
       type: 'number',

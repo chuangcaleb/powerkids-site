@@ -1,0 +1,44 @@
+/* DOT-GRID — radial-gradient dot texture, tileable, no image asset.
+ * Colour/size/dot-radius are overridable per usage via custom properties;
+ * defaults match the original body-wide texture. See DESIGN.md's
+ * "Character" section. */
+
+/* Plain, unfaded dot field — used directly, or as the base for `.dot-grid-edge-fade` below. */
+.dot-grid {
+  background-image: radial-gradient(
+    var(--dot-grid-colour, color-mix(in srgb, var(--colour-black) 10%, transparent))
+      var(--dot-grid-radius, 0.0625rem),
+    transparent var(--dot-grid-fade, 0.0625rem)
+  );
+  background-size: var(--dot-grid-size, 1.5rem) var(--dot-grid-size, 1.5rem);
+}
+
+/* Fades the dot field out at the top/bottom edges of a full-bleed layer.
+ * `--dot-grid-edge-fade` is the fade's own extent, distinct from
+ * `--dot-grid-fade` (the radial-gradient's dot-softness stop).
+ *
+ * Not a `mask-image` — see gotchas.md. Paints `--dot-grid-bg-color` as both
+ * a real `background-color` and the gradient's opaque stops, so the layer
+ * carries its own backing colour instead of relying on the consumer's
+ * background matching it by coincidence. */
+.dot-grid-edge-fade {
+  margin-block: calc(var(--space-xs) * -1);
+  background-color: var(--dot-grid-bg-color, transparent);
+  background-image:
+    linear-gradient(
+      to bottom,
+      var(--dot-grid-bg-color, transparent) 0,
+      transparent var(--dot-grid-edge-fade, var(--space-xl)),
+      transparent calc(100% - var(--dot-grid-edge-fade, var(--space-xl))),
+      var(--dot-grid-bg-color, transparent) 100%
+    ),
+    radial-gradient(
+      var(--dot-grid-colour, color-mix(in srgb, var(--colour-black) 10%, transparent))
+        var(--dot-grid-radius, 0.0625rem),
+      transparent var(--dot-grid-fade, 0.0625rem)
+    );
+  background-repeat: no-repeat, repeat;
+  background-size:
+    100% 100%,
+    var(--dot-grid-size, 1.5rem) var(--dot-grid-size, 1.5rem);
+}

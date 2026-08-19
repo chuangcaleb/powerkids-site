@@ -1,23 +1,20 @@
 import type { Block } from 'payload'
+import { withHeaderTabs } from '@/payload/fields/header'
 
-/** Photo grid, any number of images. Primitive: `grid-auto`. */
+/** Photo grid, any number of images — curated manually, or every Media doc carrying a tag. Primitive: `grid-auto`. */
 export const Gallery: Block = {
   slug: 'gallery',
   interfaceName: 'GalleryBlock',
   labels: { singular: 'Gallery', plural: 'Gallery Blocks' },
-  fields: [
+  fields: withHeaderTabs([
     {
-      name: 'heading',
-      type: 'text',
-    },
-    {
-      name: 'source',
+      name: 'mode',
       type: 'select',
       required: true,
       defaultValue: 'manual',
       options: [
         { label: 'Manual images', value: 'manual' },
-        { label: "An event's gallery", value: 'event' },
+        { label: 'Every photo tagged...', value: 'tag' },
       ],
     },
     {
@@ -26,17 +23,31 @@ export const Gallery: Block = {
       relationTo: 'media',
       hasMany: true,
       admin: {
-        condition: (_, { source } = {}) => source === 'manual',
+        condition: (_, { mode } = {}) => mode === 'manual',
+        description: 'Drag to reorder.',
       },
     },
     {
-      name: 'event',
+      name: 'tag',
       type: 'relationship',
-      relationTo: 'events',
+      relationTo: 'media-tags',
       admin: {
-        condition: (_, { source } = {}) => source === 'event',
-        description: "Renders that event's own gallery field.",
+        condition: (_, { mode } = {}) => mode === 'tag',
       },
     },
-  ],
+    {
+      name: 'sort',
+      type: 'select',
+      defaultValue: 'newest',
+      options: [
+        { label: 'Newest first', value: 'newest' },
+        { label: 'Oldest first', value: 'oldest' },
+        { label: 'Filename', value: 'filename' },
+      ],
+      admin: {
+        condition: (_, { mode } = {}) => mode === 'tag',
+        description: 'No per-image ordering in tag mode — pick a sort instead.',
+      },
+    },
+  ]),
 }

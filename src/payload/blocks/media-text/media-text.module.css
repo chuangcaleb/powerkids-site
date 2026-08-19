@@ -1,0 +1,7 @@
+.switcher {
+  align-items: center;
+}
+
+.reverse {
+  flex-direction: row-reverse;
+}

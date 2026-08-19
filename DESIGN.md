@@ -1,36 +1,64 @@
 ---
 color:
-  cream: '#fffcf5'
-  ink: '#1a1a1a'
-  charcoal: '#44403c'
+  cream: '#fffcf7'
+  ink: '#171310'
+  charcoal: '#4c433a'
   muted: '#8a8681'
   black: '#000000'
   white: '#ffffff'
-  red: '#cc0000'
-  blue: '#0000eb'
-  redTint: 'color-mix(in srgb, #cc0000 12%, #fffcf5)'
-  blueTint: 'color-mix(in srgb, #0000eb 12%, #fffcf5)'
+  sun: '#ffc929'
+  contact: '#2435c6'
+  red: '#cc2828'
+  blue: '#1f30cf'
+  amber: '#a15d0c'
+  redTint: '#ffe6e4'
+  blueTint: '#e4e7ff'
+  amberTint: '#fdeeda'
 type:
-  display: 'Shantell Sans'
-  body: 'system-ui, -apple-system, "Segoe UI", "Helvetica Neue", sans-serif'
+  display: 'Bricolage Grotesque'
+  body: 'Archivo'
+  width: 100
+  displayTracking: -0.02em
+  displayWeight: 800
+  displayOpsz: 36
   minViewport: 320
   maxViewport: 1440
-  minSize: 18
-  maxSize: 21
-  minRatio: 1.2
-  maxRatio: 1.25
-  steps: [-2, -1, 0, 1, 2, 3, 4, 5]
+  caption:
+    minSize: 17
+    maxSize: 20
+    minRatio: 1.2
+    maxRatio: 1.25
+    steps: [-2, -1, 0, 1, 2]
+  display:
+    steps:
+      3: { minSize: 28, maxSize: 48 }
+      4: { minSize: 34, maxSize: 62 }
+      5: { minSize: 40, maxSize: 90 }
 shape:
-  radiusS: '12px'
-  radiusM: '18px'
-  radiusL: '24px'
-  borderWidth: '0.2em'
-  shadowOffset: '5px'
-  focusOffset: '3px'
+  radiusS: '0.75rem'
+  radiusM: '1.125rem'
+  radiusL: '1.4375rem'
+  radiusPill: '999px'
+  borderWidth: '0.375rem'
+  pillBorderWidth: '0.1875rem'
+  strokeWidth: '0.1875rem'
+  shadowOffset: '0.5625rem'
+  pillShadowOffset: '0.1875rem'
+  focusOffset: '0.1875rem'
 motion:
   durationFast: '150ms'
   durationBase: '300ms'
   durationSweep: '600ms'
+doodle:
+  opacity: 0.07
+  sizeMin: '20px'
+  sizeMax: '100px'
+  travel: '170px'
+width:
+  maxBleed: '120ch'
+  maxPage: '100ch'
+  maxProse: '65ch'
+  maxHeading: '40ch'
 ---
 
 # Design
@@ -43,7 +71,7 @@ motion:
 
 ## Character
 
-Rounded neo-brutalism. Loud colour-blocking and hard offset shadows — brutalism's raw honesty — softened by generous corner radii and a warm, hand-crafted palette instead of stark white/black. Reads as kindergarten craft-table, not corporate, not harsh. Every v3 motif is dropped; nothing carries over by inertia.
+Warm, hand-crafted brutalism — loud colour-blocking and a hard offset shadow, softened by a narrow, rounded grotesque display face and pastel accent tints instead of stark white/black. Reads as kindergarten craft-table, not corporate, not harsh.
 
 ---
 
@@ -51,63 +79,93 @@ Rounded neo-brutalism. Loud colour-blocking and hard offset shadows — brutalis
 
 1. **No pure white or pure black as a text/background pair.** Background is warm cream (`color.cream`). Heading text is near-black (`color.ink`); body text is a visibly softer charcoal (`color.charcoal`) — the difference in darkness _is_ the heading/body emphasis signal, not a separate font-weight rule.
 2. **Border and shadow stay pure black.** These are structural lines, not a text/background contrast pair, so the "no pure black" rule above does not apply to them. This is deliberate, not an inconsistency.
-3. **Red and blue are identity accents, not surface colours.** Full-saturation `color.red` / `color.blue` are reserved for small interactive or identity elements: buttons, badges, links, the highlighter band, the wordmark. Any large fill — section background, decorative shape, card tint — uses the corresponding tint (`color.redTint` / `color.blueTint`), never the raw accent. Large-area full saturation reads as aggressive, not playful, once stacked against the brutalist border/shadow/texture already carrying the "loud" signal.
-4. **Contrast is checked on the pair actually rendered, not the token in isolation.** Every pair must clear 4.5:1 for body-sized text. Verified: ink-on-cream 16.98:1, charcoal-on-cream 10.02:1, white-on-red 5.89:1, white-on-blue 9.55:1, red-on-cream 5.74:1, blue-on-cream 9.31:1. Add a line here when a new pair enters production use.
+3. **Red, blue, and amber are identity accents, not surface colours.** Full-saturation values are for small interactive/identity elements only; any large fill uses the matching tint (`color.redTint` / `color.blueTint` / `color.amberTint`), never the raw accent.
+4. **Contrast is checked on the pair actually rendered, not the token in isolation.** Every pair must clear 4.5:1 for body-sized text — opacity counts, since it composites against whatever's behind it; never use opacity to soften text colour. Verified pairs and workings: `docs/design/tokens.md`. Add a line there when a new pair enters production use.
 5. **No soft shadows, ever.** Only the hard offset shadow (`shape.shadowOffset`, zero blur, pure black) exists in this system. A `box-shadow` with any blur radius is a review finding — this is the opposite of a quiet/editorial system's rule, and the difference is deliberate, not an oversight to "fix" later.
 6. **No fixed-width media queries.** Layout responds through the primitives in `src/styles/compositions/` (container-relative flex-basis math), not `@media (min-width: …)` breakpoints. A media query for layout positioning is the v3 anti-pattern this system exists to delete.
-7. **Every animation is gated on `prefers-reduced-motion`.** Highlighter-band sweep, button hover-lift/press, accordion expand — all must have a reduced-motion fallback that changes state instantly with no transition.
+7. **Every animation is gated on `prefers-reduced-motion`.** Button hover-lift/press, accordion expand — all must have a reduced-motion fallback that changes state instantly with no transition.
 8. **No raw hex, rgb, or px value in a component.** If no token fits, the token set is incomplete — add one to `src/styles/tokens/` and document it here, rather than hand-writing a value. Enforced by ESLint for `.ts`/`.tsx` and Stylelint for `.css`/`.module.css`.
-9. **Corners are always rounded.** No component ships a sharp 0-radius corner — that reads as classic brutalism, not this system's rounded variant. Buttons trend pill-like (`shape.radiusL`); cards and inputs use `shape.radiusM`; small elements (badges, chips) use `shape.radiusS`.
+9. **Corners are always rounded.** No component ships a sharp 0-radius corner. Buttons are only slightly rounded (`shape.radiusL`); pills are always fully round (`shape.radiusPill`) **and** always carry a shadow — radius, not shadow, tells a pill and a button apart. Cards and inputs use `shape.radiusM`; small elements (badges, chips) use `shape.radiusS`.
 10. **Focus is a solid black outline, never a soft ring.** `outline: shape.borderWidth solid color.black`, offset by `shape.focusOffset` — same structural-black language as border/shadow (invariant 2), not a browser-default blue glow or a blurred box-shadow ring. Applies on `:focus-visible` only; shown or hidden instantly, no transition, regardless of `prefers-reduced-motion`.
 
 ---
 
 ## Colour
 
-Two brand accents, each with a tint for large fills, over a warm cream/ink/charcoal neutral base plus one muted grey step.
+Three brand accents, each with a tint for large fills, over a warm cream/ink/charcoal neutral base plus one muted grey step and two saturated surface colours (`sun`, `contact`) used whole-section, not as text/fill pairs. What each token is _for_: `docs/design/tokens.md`.
 
-| Token               | Value                                                           | Use                                                                   |
-| ------------------- | --------------------------------------------------------------- | --------------------------------------------------------------------- |
-| `--color-cream`     | `#fffcf5`                                                       | Page background. The system's "white."                                |
-| `--color-ink`       | `#1a1a1a`                                                       | Heading text, high-emphasis content. The system's "black" for text.   |
-| `--color-charcoal`  | `#44403c`                                                       | Body text — deliberately lighter than heading text.                   |
-| `--color-muted`     | `#8a8681`                                                       | Muted text, subtle dividers, disabled states only.                    |
-| `--color-black`     | `#000000`                                                       | Border, shadow. Structural only — never text or a fill.               |
-| `--color-white`     | `#ffffff`                                                       | Text on full-saturation accent fills (buttons, badges).               |
-| `--color-red`       | `#cc0000`                                                       | "Power" identity accent — buttons, badges, links, wordmark half.      |
-| `--color-blue`      | `#0000eb`                                                       | "Kids" identity accent — same use set as red.                         |
-| `--color-red-tint`  | `color-mix(in srgb, var(--color-red) 12%, var(--color-cream))`  | Large fills only: section backgrounds, decorative shapes, card tints. |
-| `--color-blue-tint` | `color-mix(in srgb, var(--color-blue) 12%, var(--color-cream))` | Same, blue half.                                                      |
+| Token                 | Value     |
+| --------------------- | --------- |
+| `--colour-cream`      | `#fffcf7` |
+| `--colour-ink`        | `#171310` |
+| `--colour-charcoal`   | `#4c433a` |
+| `--colour-muted`      | `#8a8681` |
+| `--colour-black`      | `#000000` |
+| `--colour-white`      | `#ffffff` |
+| `--bg-sun`            | `#ffc929` |
+| `--bg-contact`        | `#2435c6` |
+| `--colour-red`        | `#cc2828` |
+| `--colour-blue`       | `#1f30cf` |
+| `--colour-amber`      | `#a15d0c` |
+| `--colour-red-tint`   | `#ffe6e4` |
+| `--colour-blue-tint`  | `#e4e7ff` |
+| `--colour-amber-tint` | `#fdeeda` |
 
 v3 carried a full shadcn neutral ramp (`--muted-foreground`, `--ring`, `--destructive`, etc.) that was mostly unused boilerplate — none of it is reintroduced here. One muted step covers every "quiet" need this system actually has.
 
 ## Type
 
-Two families: Shantell Sans for display (headings, wordmark), system stack for body.
+Two families: Bricolage Grotesque for display (`--font-display`, headings + anything using the `.disp`/`.wm`-equivalent treatment), Archivo for body (`--font-body`, running copy and UI chrome — nav, pills, labels). `Button` is display-face text, not body — see `docs/design/components.md`.
 
-- Shantell Sans self-hosted as a trimmed variable font — weight, Bounce, and Informality axes kept (for future text animation), Spacing kept too since dropping it barely changes file size, italic dropped (separate upstream file, no current use case), Latin subset. Never Marker Felt, never Comic Sans MS, including as a fallback.
-- Body uses the platform's own default sans, Roboto excluded, so Android falls to a narrower system alternative: `system-ui, -apple-system, "Segoe UI", "Helvetica Neue", sans-serif`.
-- Fluid scale via Utopia: 320px viewport → 18px base at 1.2 ratio, up to 1440px viewport → 21px base at 1.25 ratio. Steps `-2` through `5`. Ratios stay close together deliberately — a wider gap (e.g. 1.333) inverts the scale at step `-2` (max ends up smaller than min), since it compounds over more steps than the max side's larger multiplier can outrun. These are entry values — first thing to tune once real content renders on the kitchen sink, not a measured final.
+- Bricolage Grotesque self-hosted as a partial variable font: `wdth` pinned at build time, not a runtime knob; `opsz` and `wght` stay variable. Latin subset, no italic. Build command: `src/styles/fonts/bricolage-grotesque/NOTES.md`.
+- Archivo loaded via `next/font/google` (self-hosted at build time, no runtime request) — no axis worth pinning, so no manual pipeline. Weights `400`–`700`.
+- `font-optical-sizing: auto` set globally for Bricolage's `opsz` axis; harmless no-op on Archivo.
+- Two regimes in the fluid scale, both via Utopia (320px → 1440px viewport): caption through h5/h4 (steps `-2` to `2`) compound from a tight ratio (17px/1.2 min → 20px/1.25 max); h3/h2/h1 (steps `3`–`5`) are explicit hand-picked pairs instead — `28px→48px`, `34px→62px`, `40px→90px` — since a single ratio compounded that far inverts at one end.
+- Entry values — first thing to tune once real content renders on the kitchen sink, not a measured final.
 
 ## Space
 
 Fluid scale (Utopia-generated, same mechanism as type: 320px → 1440px viewport), consumed by the layout primitives through their own custom properties (`--flow-space`, `--cluster-gap`, `--grid-item-min`, etc.) — components never set spacing directly.
 
-Tiers are multiples of the step-0 base (18px min / 21px max): `3xs` .25x, `2xs` .5x, `xs` .75x, `s` 1x, `m` 1.5x, `l` 2x, `xl` 3x, `2xl` 4x, `3xl` 6x, `4xl` 8x.
+Tiers are multiples of the step-0 base (17px min / 20px max): `3xs` .25x, `2xs` .5x, `xs` .75x, `s` 1x, `m` 1.5x, `l` 2x, `xl` 3x, `2xl` 4x, `3xl` 6x, `4xl` 8x.
 
 ## Shape
 
-- Radius: `--radius-s: 12px` (badges, chips), `--radius-m: 18px` (cards, inputs), `--radius-l: 24px` (buttons, pill-leaning elements)
-- Border: `--border-width: 0.2em`, always `--color-black`
-- Shadow: `--shadow-offset: 5px`, always `--color-black`, zero blur — the one hard offset shadow, no variants
-- Focus: `--focus-offset: 3px`, outline `--border-width` thick, always `--color-black` — a solid offset outline on `:focus-visible`, no glow, no blur
+- Radius, border, shadow, and focus offset are all `rem`-based, not `px` — they scale with the user's root font-size preference, same axis as type and space, rather than staying fixed while the text around them grows.
+- Radius: `--radius-s: 0.75rem` (badges, chips), `--radius-m: 1.125rem` (cards, inputs), `--radius-l: 1.4375rem` (buttons — only slightly rounded), `--radius-pill: 999px` (pills — always fully round; not a real measurement, so it stays `px`)
+- Border: `--border-width: 0.375rem`, always `--colour-black`. Pills use a lighter `--pill-border-width: 0.1875rem`. `--stroke-width: 0.1875rem` covers the footer's outline wordmark.
+- Shadow: `--shadow-offset: 0.5625rem`, always `--colour-black`, zero blur — the one hard offset shadow, no soft variants. Pills carry a lighter `--pill-shadow-offset: 0.1875rem` shadow of their own (invariant 9).
+- Focus: `--focus-offset: 0.1875rem`, outline `--border-width` thick, always `--colour-black` — a solid offset outline on `:focus-visible`, no glow, no blur
 
 ## Motion
 
 - `--duration-fast: 150ms` — button hover-lift
 - `--duration-base: 300ms` — accordion expand, general transitions
-- `--duration-sweep: 600ms` — highlighter-band slide-in
+- `--duration-sweep: 600ms` — `Mark`'s double-underline draw-in
 - All wrapped in `@media (prefers-reduced-motion: no-preference)`; the no-motion path is the default, not an override.
+
+## Width
+
+- `--max-bleed: 120ch` — widest permitted measure, rare full-bleed exceptions.
+- `--max-page: 100ch` — page-level layout cap, consumed by `wrapper.css`'s `--wrapper-max-width`.
+- `--max-prose: 65ch` — default reading measure for paragraph/list/blockquote text.
+- `--max-heading: 40ch` — default reading measure for headings.
+- `--gutter: var(--space-s)` — alias, not a new value; inline padding for wrapper/bleed compositions.
+
+## Section seams
+
+Shaped cuts between full-bleed colour bands — `SectionSeam`, `src/components/section-seam/`. Four rules govern where one is allowed and how it may look:
+
+- **A seam's job is momentum toward the CTA**, texture second. Seams get louder toward the bottom of the page.
+- **Vocabulary is cut paper, not web-divider stock.** Every seam keeps the black rule at full weight (invariant: no blurred shadow, borders pure black); only its _path_ changes.
+- **Not every boundary gets one.** Treat the hero's bottom edge and the coloured seams in the closing run. Same-background neighbours get spacing, not a shape.
+- **Static.** No scroll-reactive seams, no motion of any kind.
+
+Which shape suits which job: `docs/design/section-seams.md`.
+
+## Doodle layer
+
+Decorative background marks — `DoodleLayer`, `src/components/doodle-layer/`. `--doodle-opacity: 0.07`, `--doodle-size-min: 20px`, `--doodle-size-max: 100px`, `--doodle-travel: 170px` (parallax distance). Density is a component prop, not a token — it has a layout cost, not just a paint cost. Placement is a PRNG seeded on the zone id, never `Math.random`; parallax is pure CSS (`animation-timeline: view()`), no scroll listener. Implementation notes: `docs/phases/phase-4-rendering.md`.
 
 ---
 
@@ -115,5 +173,6 @@ Tiers are multiples of the step-0 base (18px min / 21px max): `3xs` .25x, `2xs` 
 
 - What each token is _for_: `docs/design/tokens.md`
 - Layout primitives: `docs/design/layout-primitives.md`
+- Seam shape pick-guide: `docs/design/section-seams.md`
 - Component inventory: `docs/design/components.md`
 - What v3 used and why it changed: `docs/reference/v3-design-audit.md`

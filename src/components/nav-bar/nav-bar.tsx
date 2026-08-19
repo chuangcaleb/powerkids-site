@@ -1,32 +1,41 @@
-import type { ReactNode } from 'react'
+import Link from 'next/link'
 import { cx } from '@/lib/cx'
+import { Logo } from '@/components/logo/logo'
+import { Wordmark } from '@/components/wordmark/wordmark'
 import styles from './nav-bar.module.css'
+import type { CSSProperties } from 'react'
 
 export type NavLink = {
-  href: string
+  id?: string | null
   label: string
+  url: string
 }
 
 export type NavBarProps = {
-  logo: ReactNode
   links: NavLink[]
 }
 
-/** Desktop header nav. Mobile drawer is a later phase — see docs/design/components.md. */
-export function NavBar({ logo, links }: NavBarProps) {
+/** Site header. */
+export function NavBar({ links }: NavBarProps) {
   return (
     <header className={styles.header}>
       <div className={cx('wrapper', 'repel', styles.inner)}>
-        <div className={styles.logo}>{logo}</div>
-        <ul role="list" className={cx('cluster', styles.links)}>
+        <Link
+          href="/"
+          aria-label="PowerKids"
+          className={cx('cluster', styles.brand)}
+          style={{ '--cluster-gap': 'var(--space-xs)' } as CSSProperties}
+        >
+          <Logo className={styles.icon} />
+          <Wordmark className={styles.wordmark} />
+        </Link>
+        <nav aria-label="Primary" className={cx('cluster', styles.nav)}>
           {links.map((link) => (
-            <li key={link.href}>
-              <a href={link.href} className={styles.link}>
-                {link.label}
-              </a>
-            </li>
+            <a key={link.id ?? link.url} href={link.url} className={styles.link}>
+              {link.label}
+            </a>
           ))}
-        </ul>
+        </nav>
       </div>
     </header>
   )

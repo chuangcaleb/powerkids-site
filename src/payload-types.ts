@@ -69,10 +69,9 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    'media-tags': MediaTag;
     pages: Page;
     schools: School;
-    programs: Program;
-    events: Event;
     people: Person;
     'payload-kv': PayloadKv;
     'payload-folders': FolderInterface;
@@ -88,10 +87,9 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    'media-tags': MediaTagsSelect<false> | MediaTagsSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     schools: SchoolsSelect<false> | SchoolsSelect<true>;
-    programs: ProgramsSelect<false> | ProgramsSelect<true>;
-    events: EventsSelect<false> | EventsSelect<true>;
     people: PeopleSelect<false> | PeopleSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-folders': PayloadFoldersSelect<false> | PayloadFoldersSelect<true>;
@@ -107,11 +105,13 @@ export interface Config {
     'site-settings': SiteSetting;
     navigation: Navigation;
     'seo-defaults': SeoDefault;
+    cta: Cta;
   };
   globalsSelect: {
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
     navigation: NavigationSelect<false> | NavigationSelect<true>;
     'seo-defaults': SeoDefaultsSelect<false> | SeoDefaultsSelect<true>;
+    cta: CtaSelect<false> | CtaSelect<true>;
   };
   locale: 'en';
   widgets: {
@@ -192,6 +192,7 @@ export interface Media {
    * Set automatically when an upload matches an existing file's content. Reuse the linked doc instead of this one if it really is the same photo.
    */
   possibleDuplicateOf?: (number | null) | Media;
+  tags?: (number | MediaTag)[] | null;
   folder?: (number | null) | FolderInterface;
   updatedAt: string;
   createdAt: string;
@@ -230,6 +231,21 @@ export interface Media {
       filename?: string | null;
     };
   };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media-tags".
+ */
+export interface MediaTag {
+  id: number;
+  name: string;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -277,19 +293,7 @@ export interface Page {
       | null;
     media?: (number | null) | Media;
   };
-  layout: (
-    | ProseBlock
-    | MediaTextBlock
-    | CardGridBlock
-    | StepsBlock
-    | StatsBlock
-    | GalleryBlock
-    | CtaBannerBlock
-    | SchoolsBlock
-    | FaqBlock
-    | ContactBlock
-    | VideoBlock
-  )[];
+  layout: (ContentBlock | MediaTextBlock | GalleryBlock | SchoolsBlock | FramedRowsBlock | ScrapbookBlock | FaqBlock)[];
   meta?: {
     title?: string | null;
     /**
@@ -310,27 +314,87 @@ export interface Page {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ProseBlock".
+ * via the `definition` "ContentBlock".
  */
-export interface ProseBlock {
-  content: {
-    root: {
-      type: string;
-      children: {
-        type: any;
+export interface ContentBlock {
+  columns?:
+    | {
+        size?: ('full' | 'oneHalfWide' | 'oneThird' | 'twoThirds' | 'oneHalfNarrow') | null;
+        variant?: ('align-start' | 'align-center' | 'image') | null;
+        richText?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        media?: (number | null) | Media;
+        enableLink?: boolean | null;
+        link?: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?: (number | null) | Page;
+          url?: string | null;
+          label: string;
+          /**
+           * Choose how the link should be rendered.
+           */
+          appearance?: ('default' | 'outline') | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  header?: {
+    /**
+     * Rendered as a pill.
+     */
+    eyebrow?: string | null;
+    /**
+     * Pill + emphasis color.
+     */
+    accent?: ('neutral' | 'red' | 'blue') | null;
+    heading?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
         version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
+      };
+      [k: string]: unknown;
+    } | null;
+    lead?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
   };
   id?: string | null;
   blockName?: string | null;
-  blockType: 'prose';
+  blockType: 'content';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -363,177 +427,303 @@ export interface MediaTextBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CardGridBlock".
- */
-export interface CardGridBlock {
-  heading?: string | null;
-  /**
-   * Auto-populated cards stay in sync as programs/events are added or removed. Manual cards give full control over copy per card.
-   */
-  source: 'manual' | 'programs' | 'events';
-  cards?:
-    | {
-        heading: string;
-        body?: string | null;
-        image?: (number | null) | Media;
-        /**
-         * Optional — makes the card a link.
-         */
-        url?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'card-grid';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "StepsBlock".
- */
-export interface StepsBlock {
-  heading: string;
-  steps?:
-    | {
-        label: string;
-        id?: string | null;
-      }[]
-    | null;
-  /**
-   * Optional call-to-action link shown after the steps.
-   */
-  cta?: {
-    label?: string | null;
-    url?: string | null;
-  };
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'steps';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "StatsBlock".
- */
-export interface StatsBlock {
-  heading?: string | null;
-  stats?:
-    | {
-        /**
-         * Compute this stat as "{n} years & counting" from site-settings.foundedYear instead of a fixed value.
-         */
-        useFoundedYear?: boolean | null;
-        /**
-         * e.g. "500+".
-         */
-        value?: string | null;
-        label: string;
-        id?: string | null;
-      }[]
-    | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'stats';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "GalleryBlock".
  */
 export interface GalleryBlock {
-  heading?: string | null;
-  source: 'manual' | 'event';
-  images?: (number | Media)[] | null;
+  mode: 'manual' | 'tag';
   /**
-   * Renders that event's own gallery field.
+   * Drag to reorder.
    */
-  event?: (number | null) | Event;
+  images?: (number | Media)[] | null;
+  tag?: (number | null) | MediaTag;
+  /**
+   * No per-image ordering in tag mode — pick a sort instead.
+   */
+  sort?: ('newest' | 'oldest' | 'filename') | null;
+  header?: {
+    /**
+     * Rendered as a pill.
+     */
+    eyebrow?: string | null;
+    /**
+     * Pill + emphasis color.
+     */
+    accent?: ('neutral' | 'red' | 'blue') | null;
+    heading?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    lead?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'gallery';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "events".
- */
-export interface Event {
-  id: number;
-  name: string;
-  /**
-   * When enabled, the slug will auto-generate from the title field on save and autosave.
-   */
-  generateSlug?: boolean | null;
-  slug: string;
-  summary?: string | null;
-  body?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  gallery?: (number | Media)[] | null;
-  /**
-   * One entry per year. Add a new one each occurrence — this replaced a hard-coded, developer-maintained list.
-   */
-  videos?:
-    | {
-        /**
-         * e.g. "Graduation 2026".
-         */
-        label: string;
-        /**
-         * Video platform embed/video ID.
-         */
-        embedId: string;
-        id?: string | null;
-      }[]
-    | null;
-  /**
-   * Controls listing order. Lower shows first.
-   */
-  order?: number | null;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CtaBannerBlock".
- */
-export interface CtaBannerBlock {
-  heading: string;
-  body?: string | null;
-  cta: {
-    label: string;
-    url: string;
-  };
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'cta-banner';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "SchoolsBlock".
  */
 export interface SchoolsBlock {
-  heading?: string | null;
+  header?: {
+    /**
+     * Rendered as a pill.
+     */
+    eyebrow?: string | null;
+    /**
+     * Pill + emphasis color.
+     */
+    accent?: ('neutral' | 'red' | 'blue') | null;
+    heading?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    lead?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'schools';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FramedRowsBlock".
+ */
+export interface FramedRowsBlock {
+  rows?:
+    | {
+        title: string;
+        /**
+         * Icon shown above the eyebrow (optional).
+         */
+        icon?: string | null;
+        /**
+         * Short label shown above the title, e.g. hours or a tagline.
+         */
+        eyebrow?: string | null;
+        body?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        image?: (number | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  header?: {
+    /**
+     * Rendered as a pill.
+     */
+    eyebrow?: string | null;
+    /**
+     * Pill + emphasis color.
+     */
+    accent?: ('neutral' | 'red' | 'blue') | null;
+    heading?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    lead?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'framed-rows';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ScrapbookBlock".
+ */
+export interface ScrapbookBlock {
+  items: {
+    header?: {
+      /**
+       * Pill + emphasis color.
+       */
+      accent?: ('neutral' | 'red' | 'blue') | null;
+      heading?: {
+        root: {
+          type: string;
+          children: {
+            type: any;
+            version: number;
+            [k: string]: unknown;
+          }[];
+          direction: ('ltr' | 'rtl') | null;
+          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+          indent: number;
+          version: number;
+        };
+        [k: string]: unknown;
+      } | null;
+      lead?: {
+        root: {
+          type: string;
+          children: {
+            type: any;
+            version: number;
+            [k: string]: unknown;
+          }[];
+          direction: ('ltr' | 'rtl') | null;
+          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+          indent: number;
+          version: number;
+        };
+        [k: string]: unknown;
+      } | null;
+    };
+    /**
+     * Optional call-to-action button.
+     */
+    button?: {
+      label?: string | null;
+      url?: string | null;
+    };
+    /**
+     * Decorative doodles scattered around this item's text. Leave empty to skip.
+     */
+    icons?: string[] | null;
+    /**
+     * Photos for this item. Drag to reorder.
+     */
+    media: (number | Media)[];
+    id?: string | null;
+  }[];
+  /**
+   * Seeds the collage’s random arrangement (stagger, jitter, tilt, photo sizes). Shuffle to preview a different roll, then save to keep it — otherwise the layout is stable per page, not re-rolled on every visit.
+   */
+  seed?: string | null;
+  header?: {
+    /**
+     * Rendered as a pill.
+     */
+    eyebrow?: string | null;
+    /**
+     * Pill + emphasis color.
+     */
+    accent?: ('neutral' | 'red' | 'blue') | null;
+    heading?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    lead?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'scrapbook';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "FaqBlock".
  */
 export interface FaqBlock {
-  heading?: string | null;
   items?:
     | {
         question: string;
@@ -555,42 +745,49 @@ export interface FaqBlock {
         id?: string | null;
       }[]
     | null;
+  header?: {
+    /**
+     * Rendered as a pill.
+     */
+    eyebrow?: string | null;
+    /**
+     * Pill + emphasis color.
+     */
+    accent?: ('neutral' | 'red' | 'blue') | null;
+    heading?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    lead?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'faq';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ContactBlock".
- */
-export interface ContactBlock {
-  heading?: string | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'contact';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "VideoBlock".
- */
-export interface VideoBlock {
-  heading?: string | null;
-  source: 'manual' | 'event';
-  /**
-   * Video platform embed/video ID.
-   */
-  embedId?: string | null;
-  /**
-   * Shown before the editor presses play.
-   */
-  poster?: (number | null) | Media;
-  /**
-   * Each entry in that event's `videos` array becomes one tab.
-   */
-  event?: (number | null) | Event;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'video';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -676,55 +873,6 @@ export interface Person {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "programs".
- */
-export interface Program {
-  id: number;
-  name: string;
-  /**
-   * When enabled, the slug will auto-generate from the title field on save and autosave.
-   */
-  generateSlug?: boolean | null;
-  slug: string;
-  /**
-   * e.g. "7:30am - 1:00pm".
-   */
-  hours: string;
-  /**
-   * e.g. "3 - 6 years". Leave empty if not age-restricted.
-   */
-  ageRange?: string | null;
-  /**
-   * Short one-liner shown in card/list views.
-   */
-  strapline?: string | null;
-  summary?: string | null;
-  body?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  image?: (number | null) | Media;
-  /**
-   * Controls listing order. Lower shows first.
-   */
-  order?: number | null;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -756,20 +904,16 @@ export interface PayloadLockedDocument {
         value: number | Media;
       } | null)
     | ({
+        relationTo: 'media-tags';
+        value: number | MediaTag;
+      } | null)
+    | ({
         relationTo: 'pages';
         value: number | Page;
       } | null)
     | ({
         relationTo: 'schools';
         value: number | School;
-      } | null)
-    | ({
-        relationTo: 'programs';
-        value: number | Program;
-      } | null)
-    | ({
-        relationTo: 'events';
-        value: number | Event;
       } | null)
     | ({
         relationTo: 'people';
@@ -854,6 +998,7 @@ export interface MediaSelect<T extends boolean = true> {
   caption?: T;
   checksum?: T;
   possibleDuplicateOf?: T;
+  tags?: T;
   folder?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -903,6 +1048,17 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media-tags_select".
+ */
+export interface MediaTagsSelect<T extends boolean = true> {
+  name?: T;
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "pages_select".
  */
 export interface PagesSelect<T extends boolean = true> {
@@ -925,17 +1081,13 @@ export interface PagesSelect<T extends boolean = true> {
   layout?:
     | T
     | {
-        prose?: T | ProseBlockSelect<T>;
+        content?: T | ContentBlockSelect<T>;
         'media-text'?: T | MediaTextBlockSelect<T>;
-        'card-grid'?: T | CardGridBlockSelect<T>;
-        steps?: T | StepsBlockSelect<T>;
-        stats?: T | StatsBlockSelect<T>;
         gallery?: T | GalleryBlockSelect<T>;
-        'cta-banner'?: T | CtaBannerBlockSelect<T>;
         schools?: T | SchoolsBlockSelect<T>;
+        'framed-rows'?: T | FramedRowsBlockSelect<T>;
+        scrapbook?: T | ScrapbookBlockSelect<T>;
         faq?: T | FaqBlockSelect<T>;
-        contact?: T | ContactBlockSelect<T>;
-        video?: T | VideoBlockSelect<T>;
       };
   meta?:
     | T
@@ -953,10 +1105,37 @@ export interface PagesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ProseBlock_select".
+ * via the `definition` "ContentBlock_select".
  */
-export interface ProseBlockSelect<T extends boolean = true> {
-  content?: T;
+export interface ContentBlockSelect<T extends boolean = true> {
+  columns?:
+    | T
+    | {
+        size?: T;
+        variant?: T;
+        richText?: T;
+        media?: T;
+        enableLink?: T;
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+              appearance?: T;
+            };
+        id?: T;
+      };
+  header?:
+    | T
+    | {
+        eyebrow?: T;
+        accent?: T;
+        heading?: T;
+        lead?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -973,85 +1152,20 @@ export interface MediaTextBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CardGridBlock_select".
- */
-export interface CardGridBlockSelect<T extends boolean = true> {
-  heading?: T;
-  source?: T;
-  cards?:
-    | T
-    | {
-        heading?: T;
-        body?: T;
-        image?: T;
-        url?: T;
-        id?: T;
-      };
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "StepsBlock_select".
- */
-export interface StepsBlockSelect<T extends boolean = true> {
-  heading?: T;
-  steps?:
-    | T
-    | {
-        label?: T;
-        id?: T;
-      };
-  cta?:
-    | T
-    | {
-        label?: T;
-        url?: T;
-      };
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "StatsBlock_select".
- */
-export interface StatsBlockSelect<T extends boolean = true> {
-  heading?: T;
-  stats?:
-    | T
-    | {
-        useFoundedYear?: T;
-        value?: T;
-        label?: T;
-        id?: T;
-      };
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "GalleryBlock_select".
  */
 export interface GalleryBlockSelect<T extends boolean = true> {
-  heading?: T;
-  source?: T;
+  mode?: T;
   images?: T;
-  event?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CtaBannerBlock_select".
- */
-export interface CtaBannerBlockSelect<T extends boolean = true> {
-  heading?: T;
-  body?: T;
-  cta?:
+  tag?: T;
+  sort?: T;
+  header?:
     | T
     | {
-        label?: T;
-        url?: T;
+        eyebrow?: T;
+        accent?: T;
+        heading?: T;
+        lead?: T;
       };
   id?: T;
   blockName?: T;
@@ -1061,7 +1175,77 @@ export interface CtaBannerBlockSelect<T extends boolean = true> {
  * via the `definition` "SchoolsBlock_select".
  */
 export interface SchoolsBlockSelect<T extends boolean = true> {
-  heading?: T;
+  header?:
+    | T
+    | {
+        eyebrow?: T;
+        accent?: T;
+        heading?: T;
+        lead?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FramedRowsBlock_select".
+ */
+export interface FramedRowsBlockSelect<T extends boolean = true> {
+  rows?:
+    | T
+    | {
+        title?: T;
+        icon?: T;
+        eyebrow?: T;
+        body?: T;
+        image?: T;
+        id?: T;
+      };
+  header?:
+    | T
+    | {
+        eyebrow?: T;
+        accent?: T;
+        heading?: T;
+        lead?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ScrapbookBlock_select".
+ */
+export interface ScrapbookBlockSelect<T extends boolean = true> {
+  items?:
+    | T
+    | {
+        header?:
+          | T
+          | {
+              accent?: T;
+              heading?: T;
+              lead?: T;
+            };
+        button?:
+          | T
+          | {
+              label?: T;
+              url?: T;
+            };
+        icons?: T;
+        media?: T;
+        id?: T;
+      };
+  seed?: T;
+  header?:
+    | T
+    | {
+        eyebrow?: T;
+        accent?: T;
+        heading?: T;
+        lead?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -1070,7 +1254,6 @@ export interface SchoolsBlockSelect<T extends boolean = true> {
  * via the `definition` "FaqBlock_select".
  */
 export interface FaqBlockSelect<T extends boolean = true> {
-  heading?: T;
   items?:
     | T
     | {
@@ -1078,28 +1261,14 @@ export interface FaqBlockSelect<T extends boolean = true> {
         answer?: T;
         id?: T;
       };
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ContactBlock_select".
- */
-export interface ContactBlockSelect<T extends boolean = true> {
-  heading?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "VideoBlock_select".
- */
-export interface VideoBlockSelect<T extends boolean = true> {
-  heading?: T;
-  source?: T;
-  embedId?: T;
-  poster?: T;
-  event?: T;
+  header?:
+    | T
+    | {
+        eyebrow?: T;
+        accent?: T;
+        heading?: T;
+        lead?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -1122,48 +1291,6 @@ export interface SchoolsSelect<T extends boolean = true> {
   mapUrl?: T;
   photo?: T;
   principal?: T;
-  order?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "programs_select".
- */
-export interface ProgramsSelect<T extends boolean = true> {
-  name?: T;
-  generateSlug?: T;
-  slug?: T;
-  hours?: T;
-  ageRange?: T;
-  strapline?: T;
-  summary?: T;
-  body?: T;
-  image?: T;
-  order?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "events_select".
- */
-export interface EventsSelect<T extends boolean = true> {
-  name?: T;
-  generateSlug?: T;
-  slug?: T;
-  summary?: T;
-  body?: T;
-  gallery?: T;
-  videos?:
-    | T
-    | {
-        label?: T;
-        embedId?: T;
-        id?: T;
-      };
   order?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -1242,7 +1369,6 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface SiteSetting {
   id: number;
-  tagline: string;
   /**
    * Used to compute "{n} years & counting" — do not hard-code the count anywhere.
    */
@@ -1283,7 +1409,10 @@ export interface SiteSetting {
  */
 export interface Navigation {
   id: number;
-  header?:
+  /**
+   * Flat top-level nav — no dropdowns.
+   */
+  headerLinks?:
     | {
         label: string;
         url: string;
@@ -1326,10 +1455,113 @@ export interface SeoDefault {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cta".
+ */
+export interface Cta {
+  id: number;
+  /**
+   * Sticker text, above the footer CTA.
+   */
+  footerSticker?: string | null;
+  registration: {
+    header: {
+      /**
+       * Rendered as a pill.
+       */
+      eyebrow?: string | null;
+      /**
+       * Pill + emphasis color.
+       */
+      accent?: ('neutral' | 'red' | 'blue') | null;
+      heading: {
+        root: {
+          type: string;
+          children: {
+            type: any;
+            version: number;
+            [k: string]: unknown;
+          }[];
+          direction: ('ltr' | 'rtl') | null;
+          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+          indent: number;
+          version: number;
+        };
+        [k: string]: unknown;
+      };
+      lead?: {
+        root: {
+          type: string;
+          children: {
+            type: any;
+            version: number;
+            [k: string]: unknown;
+          }[];
+          direction: ('ltr' | 'rtl') | null;
+          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+          indent: number;
+          version: number;
+        };
+        [k: string]: unknown;
+      } | null;
+    };
+    /**
+     * Optional call-to-action button.
+     */
+    button?: {
+      label?: string | null;
+      url?: string | null;
+    };
+  };
+  contact: {
+    header: {
+      /**
+       * Rendered as a pill.
+       */
+      eyebrow?: string | null;
+      /**
+       * Pill + emphasis color.
+       */
+      accent?: ('neutral' | 'red' | 'blue') | null;
+      heading: {
+        root: {
+          type: string;
+          children: {
+            type: any;
+            version: number;
+            [k: string]: unknown;
+          }[];
+          direction: ('ltr' | 'rtl') | null;
+          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+          indent: number;
+          version: number;
+        };
+        [k: string]: unknown;
+      };
+      lead?: {
+        root: {
+          type: string;
+          children: {
+            type: any;
+            version: number;
+            [k: string]: unknown;
+          }[];
+          direction: ('ltr' | 'rtl') | null;
+          format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+          indent: number;
+          version: number;
+        };
+        [k: string]: unknown;
+      } | null;
+    };
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "site-settings_select".
  */
 export interface SiteSettingsSelect<T extends boolean = true> {
-  tagline?: T;
   foundedYear?: T;
   email?: T;
   phones?:
@@ -1358,7 +1590,7 @@ export interface SiteSettingsSelect<T extends boolean = true> {
  * via the `definition` "navigation_select".
  */
 export interface NavigationSelect<T extends boolean = true> {
-  header?:
+  headerLinks?:
     | T
     | {
         label?: T;
@@ -1390,6 +1622,46 @@ export interface SeoDefaultsSelect<T extends boolean = true> {
   titleTemplate?: T;
   defaultDescription?: T;
   defaultImage?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cta_select".
+ */
+export interface CtaSelect<T extends boolean = true> {
+  footerSticker?: T;
+  registration?:
+    | T
+    | {
+        header?:
+          | T
+          | {
+              eyebrow?: T;
+              accent?: T;
+              heading?: T;
+              lead?: T;
+            };
+        button?:
+          | T
+          | {
+              label?: T;
+              url?: T;
+            };
+      };
+  contact?:
+    | T
+    | {
+        header?:
+          | T
+          | {
+              eyebrow?: T;
+              accent?: T;
+              heading?: T;
+              lead?: T;
+            };
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

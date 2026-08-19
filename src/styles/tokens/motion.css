@@ -2,7 +2,7 @@
  * Durations from DESIGN.md. Easings are this file's own addition (not yet in
  * DESIGN.md) — --ease-playful gives buttons a slight springy overshoot for
  * the hover-lift/press interaction; --ease-standard is a plain deceleration
- * for the accordion and highlighter-band sweep, where overshoot would look
+ * for the accordion and the Mark underline draw-in, where overshoot would look
  * like a glitch rather than a bounce. Flag on the kitchen sink if either
  * reads wrong once you see it move — these are a first guess, not measured.
  *

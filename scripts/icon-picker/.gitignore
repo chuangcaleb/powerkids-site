@@ -1,0 +1,3 @@
+# Build output — regenerate with `node extract-icons.mjs && node build.mjs`
+icons.json
+index.html

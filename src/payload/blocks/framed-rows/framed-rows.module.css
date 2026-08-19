@@ -1,0 +1,92 @@
+/* .section {
+  padding-inline: calc(var(--gutter) * 0.5);
+} */
+
+.band {
+  border: var(--border-width) solid var(--border-strong);
+
+  --framed-rows-border-radius: var(--radius-l);
+  --framed-rows-border-radius-offset: calc(
+    var(--framed-rows-border-radius) - var(--border-width)
+  );
+
+  border-radius: var(--framed-rows-border-radius);
+  box-shadow: var(--shadow-hard);
+  margin-inline: calc(var(--gutter) * -0.25);
+}
+
+.row {
+  padding-block: var(--space-2xl);
+}
+
+/* .band's own border-radius only shapes its border/shadow, not the flat
+ * corners of the row filling it — first/last child (header row when
+ * present, else the first/last data row) need the same curve so their
+ * background doesn't square off past the frame. Inset by the border width
+ * so the fill nests concentrically inside the border's own curve. */
+.band > :first-child {
+  border-start-start-radius: var(--framed-rows-border-radius-offset);
+  border-start-end-radius: var(--framed-rows-border-radius-offset);
+}
+
+.band > :last-child {
+  border-end-start-radius: var(--framed-rows-border-radius-offset);
+  border-end-end-radius: var(--framed-rows-border-radius-offset);
+}
+
+/* Accent cycles every 3rd row, counting only .row siblings so the
+ * SectionSeam dividers interleaved between them don't skew the count. */
+.row:nth-child(3n + 1 of .row) {
+  background-color: var(--accent-red-fill);
+
+  --row-accent: var(--accent-red);
+}
+
+.row:nth-child(3n + 2 of .row) {
+  background-color: var(--accent-blue-fill);
+
+  --row-accent: var(--accent-blue);
+}
+
+.row:nth-child(3n of .row) {
+  background-color: var(--accent-amber-fill);
+
+  --row-accent: var(--accent-amber);
+}
+
+.switcher {
+  --switcher-gap: var(--space-2xl);
+
+  align-items: center;
+}
+
+.row:nth-child(2n of .row) .switcher {
+  flex-direction: row-reverse;
+}
+
+.timeStack {
+  color: var(--row-accent);
+}
+
+.timeStack svg {
+  width: 2em;
+  height: 2em;
+}
+
+.hours {
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  font-size: var(--step-2);
+  line-height: 1;
+  letter-spacing: var(--tracking-display);
+}
+
+/* Media bleeds toward the outer edge, alternating with the switcher's
+ * reverse — even .row siblings (index odd) bleed left, odd bleed right. */
+.row:nth-child(2n of .row) figure {
+  margin-inline-start: calc(var(--gutter) * -3);
+}
+
+.row:nth-child(2n + 1 of .row) figure {
+  margin-inline-end: calc(var(--gutter) * -3);
+}

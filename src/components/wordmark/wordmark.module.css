@@ -1,0 +1,26 @@
+.wordmark {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-variation-settings: 'opsz' var(--opsz-display);
+  font-weight: var(--weight-display);
+  line-height: 1;
+  letter-spacing: var(--tracking-display);
+
+  * {
+    color: var(--wordmark-colour);
+  }
+}
+
+.red {
+  --wordmark-colour: var(--accent-red);
+}
+
+.blue {
+  --wordmark-colour: var(--accent-blue);
+}
+
+.stroke .red,
+.stroke .blue {
+  color: transparent;
+  -webkit-text-stroke: var(--stroke-width) var(--wordmark-colour);
+}

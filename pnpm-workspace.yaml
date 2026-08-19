@@ -10,3 +10,6 @@ allowBuilds:
   unrs-resolver: true
   # Pulled in by Payload's build pipeline.
   esbuild: true
+  # Downloads its own bundled Chromium — headless browser for the axe-core
+  # accessibility check (scripts/check-a11y.mjs).
+  puppeteer: true

@@ -11,7 +11,7 @@ export type CardProps = {
 
 export function Card({ children, tabHeader, className }: CardProps) {
   return (
-    <div className={cx(styles.wrapper, className)}>
+    <div className={cx('flow', styles.root, className)}>
       {tabHeader ? <div className={styles.tabHeader}>{tabHeader}</div> : null}
       <div className={tabHeader ? styles.bodyWithTab : styles.body}>{children}</div>
     </div>

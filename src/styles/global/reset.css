@@ -14,11 +14,29 @@ html {
   /* stylelint-disable-next-line property-no-vendor-prefix -- iOS Safari needs the prefixed form */
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+
+  /* Reserve the scrollbar gutter unconditionally so viewport width never
+   * shifts when a scrollbar appears/disappears — width-driven layout (e.g.
+   * the scrapbook block's reel/collage decision) reads window.innerWidth
+   * and would otherwise feed back into its own measurement: switching mode
+   * changes page height, which toggles the scrollbar, which changes width,
+   * which can flip mode again. */
+  scrollbar-gutter: stable;
+
+  /* Global safety net for decorative bleed (photo scale, doodle-layer
+   * overshoot) that's meant to spill past its own component's edges but
+   * never past the viewport — hiding here instead of per-component keeps
+   * those effects free to escape section/cell boundaries. `clip` doesn't
+   * reliably suppress viewport-level horizontal scroll on the root element
+   * the way it does on an ordinary block, so `hidden` (the standard
+   * root-level fix) wins here specifically. */
+  overflow-x: hidden;
 }
 
 body {
   min-height: 100vh;
   line-height: 1.5;
+  overflow-x: clip;
 }
 
 img,
@@ -52,6 +70,11 @@ h4,
 h5,
 h6 {
   overflow-wrap: break-word;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
 }
 
 ul[role='list'],

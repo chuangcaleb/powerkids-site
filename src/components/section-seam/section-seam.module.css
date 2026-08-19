@@ -1,0 +1,30 @@
+/* SECTION-SEAM — shaped cut between two full-bleed colour bands. See
+   docs/design/section-seams.md. Height matches a flat divider (depth 0)
+   exactly, so `shape="flat"` is a drop-in replacement for the old
+   `border-block-*` rule. */
+
+.seam {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: calc(var(--seam-depth, 0rem) + var(--border-width));
+  line-height: 0;
+}
+
+.svg {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-start: 0;
+  width: 100%;
+  height: calc(var(--seam-depth, 0rem) + var(--border-width));
+  display: block;
+  overflow: visible;
+}
+
+/* An SVG stroke at exactly `--border-width` reads visibly thinner than a
+   solid CSS border of the same nominal width — vector anti-aliasing softens
+   its edges (sub-pixel positioning), where a CSS border fills pixels edge to
+   edge. Bumped up so the rule reads as bold as the borders it sits beside. */
+.stroke {
+  stroke-width: calc(var(--border-width) * 2);
+}

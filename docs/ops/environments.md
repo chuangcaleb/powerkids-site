@@ -48,13 +48,13 @@ Every name below appear in `.env.example` with comment. Values come from owner.
 | `S3_ACCESS_KEY_ID`       | R2 access key                                                        |
 | `S3_SECRET_ACCESS_KEY`   | R2 secret                                                            |
 | `S3_ENDPOINT`            | R2 S3-compatible endpoint                                            |
-| `S3_REGION`              | `auto` for R2 — not bucket's location hint                           |
 | `R2_PUBLIC_URL`          | Public base URL media served from                                    |
 | `PREVIEW_SECRET`         | Guards draft-preview route                                           |
+| `VERCEL_URL`             | Set by Vercel, not by hand. Deployment origin fallback               |
 
-`S3_REGION` is `auto` for R2. Using location hint instead common, confusing failure.
+### Three R2 traps
 
-### Two R2 traps
+**Region is not a variable.** R2's region is always the literal `auto`, so it's a hard-coded constant in `src/lib/env.ts`, not something to configure. Passing the bucket's location hint produces signature errors that read like a credentials problem.
 
 **Endpoint is not public URL.** `S3_ENDPOINT` is account-level write endpoint (no bucket path); `R2_PUBLIC_URL` is separate public read URL. Swap them: uploads appear to work, images break.
 
@@ -67,6 +67,8 @@ Every name below appear in `.env.example` with comment. Values come from owner.
 **Applies at build time too.** Payload config calls `requireEnv` while being constructed, Next constructs it during page-data collection, so missing variable fails build. Ordering deliberate: deploy that cannot work should fail at deploy, not at first request that happens to need variable.
 
 Consequence: **every build needs every variable set to something**. CI sets deliberately fake values in `.github/workflows/verify.yml`; Vercel needs real ones present for **both** Preview and Production, or deployment fails at build.
+
+**CI's build never touches a real database, even with `generateStaticParams`.** Pages that call the Payload Local API at build time (SSG) need a working `DATABASE_URI` — real on Vercel, but CI's is a placeholder. CI runs `pnpm build:compile` (`next build --experimental-build-mode compile`) instead of plain `pnpm build`: it compiles and type-checks every route without running static generation, so no DB connection is needed. Vercel's actual Preview/Production builds use plain `pnpm build` with a real `DATABASE_URI` and do the full static generation there. See [Payload: Building without a DB connection](https://payloadcms.com/docs/production/building-without-a-db-connection).
 
 ## Media serving and cache
 

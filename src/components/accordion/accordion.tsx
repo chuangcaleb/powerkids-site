@@ -1,5 +1,8 @@
 'use client'
 
+// Client component: disclosure open/closed state plus roving-focus keyboard
+// navigation both live in React state — no server equivalent.
+
 import { useRef, useState, type KeyboardEvent, type ReactNode } from 'react'
 import { cx } from '@/lib/cx'
 import styles from './accordion.module.css'
@@ -48,7 +51,7 @@ export function Accordion({ items, allowMultiple = false, className }: Accordion
   }
 
   return (
-    <div className={cx(styles.accordion, className)}>
+    <div className={cx('flow-s', className)}>
       {items.map((item, index) => {
         const isOpen = openIds.has(item.id)
         const panelId = `accordion-panel-${item.id}`
@@ -63,7 +66,7 @@ export function Accordion({ items, allowMultiple = false, className }: Accordion
                 }}
                 id={triggerId}
                 type="button"
-                className={styles.trigger}
+                className={cx('repel', styles.trigger)}
                 aria-expanded={isOpen}
                 aria-controls={panelId}
                 onClick={() => toggle(item.id)}

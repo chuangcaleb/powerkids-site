@@ -1,15 +1,12 @@
 import type { Block } from 'payload'
+import { withHeaderTabs } from '@/payload/fields/header'
 
 /** Accordion. Primitive: `flow`. */
 export const Faq: Block = {
   slug: 'faq',
   interfaceName: 'FaqBlock',
   labels: { singular: 'FAQ', plural: 'FAQ Blocks' },
-  fields: [
-    {
-      name: 'heading',
-      type: 'text',
-    },
+  fields: withHeaderTabs([
     {
       name: 'items',
       type: 'array',
@@ -22,5 +19,5 @@ export const Faq: Block = {
         { name: 'answer', type: 'richText', required: true },
       ],
     },
-  ],
+  ]),
 }

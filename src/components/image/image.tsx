@@ -7,6 +7,9 @@ export type ImageProps = {
   alt: string
   width: number
   height: number
+  /** Responsive size hint passed to `next/image`. Defaults to full-bleed. */
+  sizes?: string
+  priority?: boolean
   /** Wraps the image in the brutalist bordered/hard-shadow frame. */
   bordered?: boolean
   className?: string
@@ -17,6 +20,8 @@ export function Image({
   alt,
   width,
   height,
+  sizes = '100vw',
+  priority,
   bordered = false,
   className,
 }: ImageProps) {
@@ -26,6 +31,8 @@ export function Image({
       alt={alt}
       width={width}
       height={height}
+      sizes={sizes}
+      priority={priority}
       className={cx(styles.image, className)}
     />
   )

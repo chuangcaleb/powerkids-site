@@ -1,30 +1,9 @@
 # Components
 
-**Purpose:** shared UI inventory — what exist, what variants, what not build twice.
-**Read this when:** need button, card, heading, or about create new shared component.
+**Purpose:** rules for shared UI — what counts as shared, how variants work.
+**Read this when:** about to create a new shared component, or unsure whether something belongs in `src/components/`.
 
-> **Status: nearly complete.** Built: `Button`, `Card`, `Heading`, `Mark`, `Divider`, `Image`, `Accordion`, `NavBar`, `VideoEmbed` — all rendered on `/dev/kitchen-sink`. Still to come: `NavDrawer`, deliberately deferred to a later phase.
-
----
-
-## Planned inventory
-
-| Component    | Variants                                            | Status   |
-| ------------ | --------------------------------------------------- | -------- |
-| `Button`     | `red`, `blue`, `outline`, `ghost`, `link` × sizes   | built    |
-| `Card`       | default, tab-header                                 | built    |
-| `Heading`    | levels, with display face                           | built    |
-| `Mark`       | animated highlight sweep, reduced-motion safe       | built    |
-| `Divider`    | rule variant, no motif (v3's heart rule dropped)    | built    |
-| `Image`      | Next `<Image>` wrapper, R2 handling, bordered frame | built    |
-| `Accordion`  | client component, keyboard-navigable                | built    |
-| `NavBar`     | desktop header nav                                  | built    |
-| `VideoEmbed` | lazy-loaded, click-to-play facade                   | built    |
-| `NavDrawer`  | mobile nav drawer — deferred to a later phase       | deferred |
-
-`Pill`, `SuperHead`, and `cva` as a variant mechanism are deliberately not in this list — removed outright during the Phase 2 design revision, no replacement pattern. Headings stand alone; variants are CSS Module classes, never a variant library.
-
-Rest of the inventory derived from v3 audit — see [../reference/v3-design-audit.md](../reference/v3-design-audit.md) for what each looked like, which worth keeping.
+**The inventory lives in code:** `src/components/`, one directory per component. Read that directory for what exists; this doc does not restate it.
 
 ---
 
@@ -32,11 +11,25 @@ Rest of the inventory derived from v3 audit — see [../reference/v3-design-audi
 
 - One directory per component, CSS Module co-located.
 - Variants: props backed by CSS Module classes. No utility-class strings, no variant libraries.
-- Server component unless need state or event handlers.
-- Component appear once, one page — not shared UI. Keep beside block that use it.
-- Anything render content take it as props. Components never fetch, never contain copy.
+- Server component unless it needs state or event handlers.
+- Component appears once, on one page — not shared UI. Keep it beside the block that uses it.
+- Anything that renders content takes it as props. Components never fetch, never contain copy.
 - CMS-only admin-panel components go under `src/payload/admin/`, not `src/components/`.
+
+## Deliberate omissions
+
+Don't reintroduce these — each was removed during the Phase 2 design revision with no replacement pattern:
+
+- **`cva` or any variant library.** Variants are CSS Module classes.
+- **`SuperHead`.** Headings stand alone.
+- **v3's heart-motif rule.** The divider is a plain rule.
+
+`Pill` was on this list too, but came back in Phase 4 as a real shape-language component — see `DESIGN.md` invariant 9. Distinct from `Button`: pill is always fully round and always shadowed; button is only slightly rounded. `Button` reads `--font-display`; `Pill` reads `--font-body`.
+
+Rest of the inventory derives from the v3 audit — see [../reference/v3-design-audit.md](../reference/v3-design-audit.md) for what each looked like and which were worth keeping.
 
 ## Kitchen sink
 
-`/dev/kitchen-sink` renders every token, primitive, component variant on one page. Keep current — how visual regressions get caught before reviewer see them. Excluded from production builds, from sitemap.
+`/dev/kitchen-sink` renders tokens, primitives, and component variants on one page. Keep it current — it's how visual regressions get caught before a reviewer sees them. It `notFound()`s in production and stays out of the sitemap.
+
+It covers the presentational components. Layout shells (header, footer, admin bar) and CMS plumbing (`cms-link`, `media`, `rich-text`) aren't on it — they only make sense against real content, so verify those on a real page instead.

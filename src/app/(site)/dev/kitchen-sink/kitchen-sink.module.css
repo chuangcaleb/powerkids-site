@@ -1,8 +1,5 @@
 .swatch {
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: var(--space-3xs);
 }
 
 .swatchFill {
@@ -13,9 +10,7 @@
 }
 
 .spaceRow {
-  display: flex;
-  align-items: center;
-  gap: var(--space-s);
+  --cluster-gap: var(--space-s);
 }
 
 .spaceBar {
@@ -29,4 +24,12 @@
   border-radius: var(--radius-s);
   padding: var(--space-s);
   background-color: var(--accent-blue-fill);
+}
+
+.doodleDemo {
+  position: relative;
+  min-height: 16rem;
+  border: var(--border-width) solid var(--border-strong);
+  border-radius: var(--radius-m);
+  overflow: clip;
 }

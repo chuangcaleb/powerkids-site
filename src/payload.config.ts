@@ -4,23 +4,24 @@ import { fileURLToPath } from 'node:url'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import type { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { s3Storage } from '@payloadcms/storage-s3'
 import { buildConfig } from 'payload'
 import sharp from 'sharp'
 
-import { Events } from '@/payload/collections/events'
 import { Media } from '@/payload/collections/media'
+import { MediaTags } from '@/payload/collections/media-tags'
 import { Pages } from '@/payload/collections/pages'
 import { People } from '@/payload/collections/people'
-import { Programs } from '@/payload/collections/programs'
 import { Schools } from '@/payload/collections/schools'
 import { Users } from '@/payload/collections/users'
+import { defaultLexical } from '@/payload/fields/default-lexical'
+import { Cta } from '@/payload/globals/cta'
 import { Navigation } from '@/payload/globals/navigation'
 import { SeoDefaults } from '@/payload/globals/seo-defaults'
 import { SiteSettings } from '@/payload/globals/site-settings'
 import { S3_REGION, requireEnv } from '@/lib/env'
 import { getServerUrl } from '@/lib/get-server-url'
+import { urlForSlug } from '@/lib/page-path'
 import type { Page } from '@/payload-types'
 
 const TITLE_SUFFIX = 'PowerKids Kindergarten: The Centre With A Heart'
@@ -28,10 +29,7 @@ const TITLE_SUFFIX = 'PowerKids Kindergarten: The Centre With A Heart'
 const generateTitle: GenerateTitle<Page> = ({ doc }) =>
   doc?.title ? `${doc.title} | ${TITLE_SUFFIX}` : TITLE_SUFFIX
 
-const generateURL: GenerateURL<Page> = ({ doc }) => {
-  const base = getServerUrl()
-  return doc?.slug && doc.slug !== 'home' ? `${base}/${doc.slug}` : base
-}
+const generateURL: GenerateURL<Page> = ({ doc }) => urlForSlug(getServerUrl(), doc?.slug)
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -41,25 +39,24 @@ export default buildConfig({
     meta: {
       titleSuffix: '— PowerKids',
     },
+    livePreview: {
+      url: getServerUrl(),
+      collections: ['pages'],
+    },
   },
 
-  collections: [Users, Media, Pages, Schools, Programs, Events, People],
+  collections: [Users, Media, MediaTags, Pages, Schools, People],
 
-  globals: [SiteSettings, Navigation, SeoDefaults],
+  globals: [SiteSettings, Navigation, SeoDefaults, Cta],
 
   folders: {},
 
-  editor: lexicalEditor(),
+  editor: defaultLexical,
 
   db: postgresAdapter({
     pool: { connectionString: requireEnv('DATABASE_URI') },
-    // Push mode reconciles schema by diffing live tables against the
-    // collection config. For structural changes (blocks/arrays/relationships,
-    // enum edits, type changes) it resolves the diff by dropping and
-    // recreating the table instead of altering it — silently, no prompt,
-    // since dev runs non-interactively. That destroys real dev data. Always
-    // false: every schema change goes through a reviewed migration, in dev
-    // too — see docs/ops/migrations.md.
+    // Unconditionally false, dev included — push resolves structural diffs by
+    // dropping and recreating tables, silently. See docs/ops/migrations.md.
     push: false,
     // Defaults to `<config dir>/migrations`; migrations live under
     // src/payload/ with the rest of the Payload-only code.

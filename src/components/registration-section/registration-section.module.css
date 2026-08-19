@@ -1,0 +1,20 @@
+.section {
+  position: relative;
+  overflow: clip;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--bg-cta);
+  color: var(--text-on-cta);
+
+  --doodle-color: var(--text-on-cta);
+}
+
+.section h2 {
+  color: var(--text-on-cta);
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+}

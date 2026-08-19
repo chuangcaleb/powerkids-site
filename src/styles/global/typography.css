@@ -1,5 +1,13 @@
 /* Base typography — see DESIGN.md's Type/Colour sections for the token values. */
 
+html {
+  /* Lets the variable font's opsz axis track each element's actual rendered
+   * size without a hand-set value. Headings override with a fixed opsz below
+   * (matches the reference proto's pinned cut); this stays the default for
+   * everything else. */
+  font-optical-sizing: auto;
+}
+
 body {
   background-color: var(--bg-surface);
   color: var(--text-body);
@@ -15,7 +23,19 @@ h5,
 h6 {
   color: var(--text-strong);
   font-family: var(--font-display);
+  font-variation-settings: 'opsz' var(--opsz-display);
+  font-weight: var(--weight-display);
+  letter-spacing: var(--tracking-display);
   line-height: 1.15;
+  max-width: var(--max-heading);
+}
+
+p,
+ul:not([role='list']),
+ol:not([role='list']),
+dl,
+blockquote {
+  max-width: var(--max-prose);
 }
 
 h1 {
@@ -47,6 +67,20 @@ small {
   color: var(--text-muted);
 }
 
-a {
+a:not([class]) {
   color: inherit;
+  text-decoration-line: underline;
+  text-decoration-thickness: 0.0625rem;
+  text-underline-offset: 0.15em;
+  transition: text-decoration-thickness var(--duration-base) var(--ease-standard);
+}
+
+a:not([class]):hover,
+a:not([class]):focus-visible {
+  text-decoration-thickness: 0.125rem;
+}
+
+a:not([class]):focus-visible {
+  outline: 0.125rem solid currentcolor;
+  outline-offset: var(--focus-offset);
 }

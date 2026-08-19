@@ -3,8 +3,6 @@
 **Purpose:** how new routes come into being — why most need no code at all.
 **Read when:** someone ask for new page.
 
-> **Status: not yet implemented.** Phase 4 deliver catch-all route this depends on.
-
 ---
 
 ## Most pages need no developer
@@ -29,9 +27,8 @@ Someone asks developer for "new page" — first question: is it really new _kind
 6. **Add `generateStaticParams`** for collection-driven routes.
 7. **Handle not-found** properly, with `notFound()`.
 8. **Add it to sitemap.**
-9. **Extend Playwright smoke run.**
-10. **Update route map** in content inventory, and architecture overview if shape changed.
-11. **Run verify loop**, then open PR.
+9. **Update route map** in content inventory, and architecture overview if shape changed.
+10. **Run verify loop**, then open PR.
 
 ## Redirects
 

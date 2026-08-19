@@ -1,0 +1,72 @@
+/* D-06: half-text/half-image split, via .sidebar — collapses without a
+ * media query (F-03). D-07: image column is a taped polaroid. K-06's hero
+ * ground (solid `--bg-sun` + dot texture) is panel3.html's round-6 default
+ * (`class="hero g-dots"`) and D-15 already ruled out the notebook-rules
+ * alternative for a hero, so this is the settled choice, not a guess.
+ * Contrast checked in 09-contrast-audit.md: ink/black on sun is 11.99–13.64:1. */
+.hero {
+  position: relative;
+  overflow: clip;
+  background-color: var(--bg-sun);
+}
+
+/* Dot field lives on its own layer, not the section's own background — a
+ * mask (for the edge fade) clips the whole element it's on, and the section
+ * also carries real heading/body text that must never fade near the edges. */
+.texture {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  --dot-grid-colour: color-mix(in srgb, var(--colour-black) 9%, transparent);
+  --dot-grid-radius: 0.125rem;
+  --dot-grid-fade: 0.1375rem;
+  --dot-grid-size: 1.125rem;
+  --dot-grid-bg-color: var(--bg-sun);
+}
+
+/* Content sits above the DoodleLayer (z-index: 0) and the background. */
+.content {
+  position: relative;
+  z-index: 1;
+  min-height: 70vh;
+
+  --sidebar-size: 43%;
+  --sidebar-gap: var(--space-xl);
+  --sidebar-wrap-at: 51%;
+  --sidebar-align: center;
+}
+
+.copy {
+  color: var(--text-strong);
+  font-size: var(--step-1);
+
+  p {
+    max-width: var(--max-lead);
+  }
+
+  h1 {
+    line-height: 1;
+    font-size: var(--step-hero);
+  }
+}
+
+.highlight {
+  display: inline-block;
+  color: var(--text-on-accent);
+  padding: 0 0.13em;
+  border: var(--border-width) solid var(--border-strong);
+  border-radius: var(--radius-s);
+  box-shadow: var(--shadow-hard-pill);
+}
+
+.highlightBlue {
+  background-color: var(--accent-blue);
+  transform: rotate(-2.4deg);
+}
+
+.highlightRed {
+  background-color: var(--accent-red);
+  transform: rotate(2deg);
+}

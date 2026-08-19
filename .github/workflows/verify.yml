@@ -31,11 +31,18 @@ jobs:
       - run: pnpm lint
       - run: pnpm typecheck
       - run: pnpm test
-      - run: pnpm build
+      # `--experimental-build-mode compile` compiles and type-checks routes
+      # without running static generation, so pages with generateStaticParams
+      # (which hit Postgres via the Local API) don't need a real database
+      # here. Preview/Production builds on Vercel use plain `pnpm build` with
+      # a real DATABASE_URI (see docs/ops/environments.md) and do the actual
+      # static generation there. See:
+      # https://payloadcms.com/docs/production/building-without-a-db-connection
+      - run: pnpm build:compile
         env:
           # Every variable the Payload config reads must be present, because
           # the config is constructed while Next collects page data. They are
-          # deliberately fake: the build must never reach a real service.
+          # deliberately fake: this build must never reach a real service.
           #
           # Keep this list in sync with the EnvKey union in src/lib/env.ts. A
           # variable added there without a placeholder here fails CI at the
@@ -48,3 +55,4 @@ jobs:
           S3_SECRET_ACCESS_KEY: placeholder
           S3_ENDPOINT: https://placeholder.r2.cloudflarestorage.com
           R2_PUBLIC_URL: https://placeholder.example.com
+          PREVIEW_SECRET: placeholder-preview-secret
