@@ -58,6 +58,7 @@ Load-on-demand. Open a doc **when** its trigger fires, not to browse.
 | [docs/reference/content-inventory.md](docs/reference/content-inventory.md)   | Need real v3 copy, a route that must keep resolving, or an owner ruling |
 | [docs/reference/v3-design-audit.md](docs/reference/v3-design-audit.md)       | Deciding whether a v3 visual element carries over                       |
 | [docs/phases/README.md](docs/phases/README.md)                               | Starting a phase, or need to know what phase the repo is in             |
+| [docs/backlog.md](docs/backlog.md)                                           | Loose end looks like a bug — check it wasn't a deliberate deferral      |
 
 ---
 
