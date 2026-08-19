@@ -1,10 +1,7 @@
 import { SectionHeader } from '@/components/section-header/section-header'
 import { cx } from '@/lib/cx'
-import type {
-  Media as MediaDoc,
-  ScrapbookBlock as ScrapbookBlockType,
-} from '@/payload-types'
-import type { CollageItem } from './scrapbook-collage'
+import type { ScrapbookBlock as ScrapbookBlockType } from '@/payload-types'
+import { resolveCollageItems, resolveSeed } from './normalize-items'
 import { ScrapbookCollage } from './scrapbook-collage'
 import styles from './scrapbook.module.css'
 
@@ -16,35 +13,11 @@ import styles from './scrapbook.module.css'
  * (doodles, texture, header) that's the same regardless of mode.
  */
 export function Scrapbook({ header, items, id, seed: storedSeed }: ScrapbookBlockType) {
-  const resolvedItems: CollageItem[] = (items ?? [])
-    .map((item) => ({
-      id: item.id ?? '',
-      header: {
-        heading: item.header?.heading ?? null,
-        lead: item.header?.lead ?? null,
-        accent: item.header?.accent ?? 'neutral',
-      },
-      button: item.button,
-      icons: item.icons ?? [],
-      photos: (item.media ?? [])
-        .filter((media): media is MediaDoc => typeof media === 'object')
-        .filter((doc) => doc.width && doc.height)
-        .map((doc) => ({
-          id: String(doc.id),
-          doc,
-          aspectRatio: doc.width! / doc.height!,
-        })),
-    }))
-    .filter((item) => item.photos.length > 0)
+  const resolvedItems = resolveCollageItems(items)
 
   if (resolvedItems.length === 0) return null
 
-  // Editor-controlled via the "Shuffle layout" button (see seed-field.tsx),
-  // stored on the block rather than left implicit — otherwise the only way
-  // to change the arrangement would be to edit content and re-trigger a
-  // build, and the id-derived fallback would silently reshuffle any time the
-  // block's id itself changes (e.g. duplicating the block).
-  const seed = storedSeed || `scrapbook-${id ?? 'preview'}`
+  const seed = resolveSeed(storedSeed, id)
 
   return (
     <section className={cx('flow', 'region', styles.scrapbook)}>

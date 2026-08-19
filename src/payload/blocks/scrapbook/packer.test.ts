@@ -30,14 +30,6 @@ describe('packLanes', () => {
     }
   })
 
-  it('honors a forced start for a text cell, once', () => {
-    const cells: PackCell[] = [
-      { id: 'text-1', kind: 'text', span: 1, rows: 10, lead: 0, forcedStart: 2 },
-    ]
-    const placed = packLanes(cells, 4, [0, 0, 0, 0])
-    expect(placed[0]!.columnStart).toBe(3)
-  })
-
   it('never repeats the previous text block start when packer picks freely', () => {
     const cells: PackCell[] = [
       { id: 'text-1', kind: 'text', span: 1, rows: 10, lead: 0 },

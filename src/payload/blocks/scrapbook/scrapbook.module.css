@@ -48,10 +48,27 @@
   max-width: var(--max-bleed);
   padding-inline: var(--gutter);
 
-  /* Read back by the packer as the row unit for converting pixel heights to
+  /* Read back by the layout as the row unit for converting pixel heights to
    * grid rows — one owner, declared here, never assumed in JS. */
   --row-unit: 0.5rem;
   --gap: var(--space-l);
+
+  /* Narrowest a lane may be, and the only width figure in this block.
+   * collage-layout.ts reads it to derive the lane count (and so the
+   * reel/collage decision), and the no-JS grid below sizes its `auto-fit`
+   * tracks from it — one value, both tiers, no viewport breakpoint. Must stay
+   * a literal rem: JS resolves it with parseFloat. */
+  --min-lane-width: 24.25rem;
+
+  /* Declared here rather than on .collageGrid so the gap computes to a
+   * length in every mode — the layout reads it back, and a gap that only
+   * resolved in collage mode is what let a measurement taken in one mode
+   * disagree with the next. */
+  gap: var(--gap);
+
+  /* Queried by the no-JS tier switch below, so that switch sees the same
+   * content-box width the layout measures. */
+  container-type: inline-size;
 }
 
 .collageGrid {
@@ -180,26 +197,32 @@
   display: none;
 }
 
-/* 53.125rem mirrors `REEL_BELOW_PX` — see it, and reel-breakpoint.test.ts. */
-@media (width >= 53.125rem) {
+/*
+ * The tier switch: below two lanes there is no grid worth showing, so the reel
+ * wins — the same rule collage-layout.ts applies, and the only threshold left
+ * in this file. `51rem` is `2 * --min-lane-width` plus one nominal `--gap`
+ * (2.5rem, the midpoint of its clamp), i.e. the narrowest container that fits
+ * two lanes; scrapbook-css-contract.test.ts fails if the two drift apart. A
+ * container query, not a media query, so it sees the same content-box width
+ * the layout measures rather than the viewport.
+ *
+ * Column *count* needs no threshold at all: `auto-fit` fits as many
+ * `--min-lane-width` tracks as there is room for, which is the same rule the
+ * JS lane derivation follows.
+ */
+@container (width >= 51rem) {
   .noJsReel {
     display: none;
   }
 
   .noJsGrid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(min(100%, var(--min-lane-width)), 1fr)
+    );
     grid-auto-flow: dense;
     gap: var(--gap);
-  }
-}
-
-/* Matches the JS collage's own MAX_LANES-driven feel at wide viewports —
- * three columns is where a 2-column text span leaves a real gap for
- * `dense` to backfill with a photo, rather than already filling the row. */
-@media (width >= 75rem) {
-  .noJsGrid {
-    grid-template-columns: repeat(3, 1fr);
   }
 }
 
@@ -227,11 +250,12 @@
   padding-inline: var(--gutter);
 }
 
-/* 53.125rem mirrors `REEL_BELOW_PX` — see it for the contract, and
- * reel-breakpoint.test.ts, which fails if the two drift. Below it the text
- * sits full-bleed like the reel strip, rather than keeping the gutter meant
- * for wide-viewport reel occurrences. */
-@media (width <= 53.125rem) {
+/* Strictly below the tier switch above, not at it: the text sits full-bleed
+ * like the reel strip, rather than keeping the gutter meant for wide-container
+ * reel occurrences. Inclusive `<=` here used to overlap the switch by exactly
+ * one value, so at that width the gutter vanished while the layout considered
+ * the container wide. */
+@container (width < 51rem) {
   .reelItem > .itemText {
     padding-inline: 0;
   }

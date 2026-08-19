@@ -17,8 +17,6 @@ export type PackCell = {
   rows: number
   /** Extra row offset applied on top of the shortest lane found (vertical scatter). */
   lead: number
-  /** Force a specific starting lane (text rhythm); null lets the packer pick. */
-  forcedStart?: number | null
 }
 
 export type PackedCell = {
@@ -40,22 +38,12 @@ export function packLanes(
 
   for (const cell of cells) {
     const span = Math.min(cell.span, laneCount)
-    let start: number
-
-    if (
-      cell.kind === 'text' &&
-      cell.forcedStart != null &&
-      cell.forcedStart !== lastTextStart
-    ) {
-      start = cell.forcedStart
-    } else {
-      start = shortestRun(
-        heights,
-        span,
-        laneCount,
-        cell.kind === 'text' ? lastTextStart : -1,
-      )
-    }
+    const start = shortestRun(
+      heights,
+      span,
+      laneCount,
+      cell.kind === 'text' ? lastTextStart : -1,
+    )
     if (cell.kind === 'text') lastTextStart = start
 
     const rowStart = Math.max(...heights.slice(start, start + span)) + cell.lead
