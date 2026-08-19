@@ -1,54 +1,47 @@
 # Phase 5 — Content Migration
 
-**Goal:** `pnpm seed` populates a fresh database with the real site content.
+**Goal:** `pnpm seed` populates a fresh database with placeholder/dummy content, enough for local dev and `/admin` walkthroughs. No real v3 copy migration — owner fills production CMS by hand.
 
-Fully agentic. Owner proof-reads the result in `/admin`, not the script.
+Fully agentic.
 
 ---
 
 ## Pre
 
 - [ ] Phase 4 done — content actually renders, so seeded data is visible rather than theoretical
-- [ ] **Owner has answered the open content questions** in `docs/reference/content-inventory.md`. Seeding wrong copy then correcting it in the panel wastes the whole exercise.
-- [ ] **Owner decides gallery migration.** v3 galleries live in Cloudinary at unknown counts. Options: export via Cloudinary console, script the Admin API, or treat launch as a clean start and re-upload what is worth keeping. Needs Cloudinary account access.
 
 ## Work
 
-**`scripts/seed.ts`**, run by `pnpm seed`, using Payload local API (`payload run`, which resolves `@payload-config` and `@/` aliases — plain `node` does not).
+**`scripts/seed.ts`**, run by `pnpm seed`, using Payload local API (`payload run`, which resolves `@payload-config` and `@/` aliases — plain `node` does not). Consolidates the phase-4 throwaway scripts (`scripts/seed-kitchen-sink-page.ts`, `scripts/seed-dummy-pages.ts`) into the one real script.
 
-Populates: globals first (`site-settings`, `navigation`, `seo-defaults`), then `media`, then `schools` / `programs` / `events` / `people`, then `pages` composed of blocks.
+Populates: globals first (`site-settings`, `navigation`, `seo-defaults`), then `media`, then `schools` / `programs` / `events` / `people`, then `pages` composed of blocks — all placeholder content, not transcribed v3 copy. `docs/reference/content-inventory.md` is **not** a source for this script; it stays as a standalone reference for real copy/route-map lookups, unrelated to seeding.
 
-**Source of truth is `docs/reference/content-inventory.md`**, not the `v3` branch. Copy is transcribed there verbatim, with defects flagged. Do not re-scrape old source.
+**Media**: dummy uploads (existing sampled files in `_reference/media/` are fine as stand-ins). Every upload needs real `alt` — schema enforces it, so a lazy seed fails loudly.
 
-**Media**: upload the sampled files from `_reference/media/` (gitignored). Every upload needs real `alt` — schema enforces it, so a lazy seed fails loudly. Galleries get 2–3 representative images only; real counts are noted in the inventory so an admin knows what remains to re-upload.
+**Idempotent.** Find-by-unique-field (slug) then update, not blind `create` — re-run updates existing docs, doesn't duplicate. Local API runs as admin by default (no `overrideAccess` needed for trusted script), but pages need `draft: false` so seeded content actually publishes, not stuck as unpublished draft. Set `context: { disableRevalidate: true }` on seed writes so Phase 4's revalidation hook skips firing per-document during bulk run.
 
-**Idempotent.** Find-by-unique-field (slug, or inventory ID stashed in spare field) then update, not blind `create` — re-run updates existing docs, doesn't duplicate. Local API runs as admin by default (no `overrideAccess` needed for trusted script), but pages need `draft: false` so seeded content actually publishes, not stuck as unpublished draft. Set `context: { disableRevalidate: true }` on seed writes so Phase 4's revalidation hook skips firing per-document during bulk run. Safe re-run against fresh Neon branch. Doubles as onboarding for any future developer.
+**Production seeding — open decision, not this phase.** Whether `pnpm seed`'s dummy data ever runs against the actual production database (pre-launch, before real visitors) or production stays seed-free and owner populates every doc by hand from an empty CMS is undecided. Ask the owner again once migration mechanics are solid and launch timing is closer — do not run seed against production without that explicit go-ahead.
 
 ## Post
 
-- [ ] `pnpm seed` on an empty database produces a site resembling the current one
-- [ ] Every page from the v3 route map exists
+- [ ] `pnpm seed` on an empty database produces a rendering site with placeholder content on every route
 - [ ] Every seeded image has meaningful alt text
-- [ ] Globals populated — nav, socials, phones, hours, addresses
+- [ ] Globals populated — nav, socials, phones, hours, addresses (dummy values, correct shape)
 - [ ] Script re-runnable without duplicating records
-- [ ] Owner has read every page in `/admin` for stale copy
 - [ ] `pnpm verify` green
 
 ## Verify
 
 ```bash
-# against a scratch Neon branch, never the primary
+# against a scratch Neon branch, never production
 pnpm migrate && pnpm seed && pnpm dev
 ```
 
-- Diff rendered output against `https://powerkids.edu.my` side by side, page by page
 - Re-run `pnpm seed`; confirm counts unchanged
-- Spot-check phone links actually dial: v3 had `tel:+0102212483`, missing the country code
+- Walk `/admin` — every collection/global has at least one populated doc, editor can see the shape of real usage
 
 ## Traps
 
-- **Content has known defects.** The inventory flags them: "four locations" where three exist, a 2025-specific hero alt text, static year counts in principal bios that silently go stale, typos, a `http://` foundation link. Seeding them verbatim reproduces them. Owner decides fix-or-preserve per item.
-- **N+1 lookups when re-run.** Idempotency-check queries (find-by-slug before create) inside loop over dozens of docs = one query per item — fine for one-shot seed script, don't carry pattern into request-path code.
+- **N+1 lookups on re-run.** Idempotency-check queries (find-by-slug before create) inside a loop over dozens of docs = one query per item — fine for a one-shot seed script, don't carry the pattern into request-path code.
 - **Media filenames are content-hashed.** Re-running the seed with identical files produces identical names — that is intended. Payload still enforces unique filenames per document, so identical content across two documents becomes `-1`.
-- **Never seed production from a script run locally.** Seed a Neon branch, review, then decide. Production content is what school staff will have edited by then.
-- **Principal bios and quotes are personal statements.** Transcribe exactly; do not paraphrase or "improve" someone's words about their own career.
+- **Never seed production without explicit sign-off.** Default assumption is a scratch Neon branch. See "Production seeding" above — that decision is still open.
