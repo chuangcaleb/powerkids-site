@@ -1,0 +1,11 @@
+/**
+ * Cascade layer order for all global CSS. Layered rules always lose to
+ * unlayered rules (CSS Modules), regardless of build/chunk order — so
+ * component styles reliably override these without specificity hacks.
+ */
+@layer base, tokens, compositions, utilities;
+
+@import url('base/index.css') layer(base);
+@import url('tokens/index.css') layer(tokens);
+@import url('compositions/index.css') layer(compositions);
+@import url('utilities/index.css') layer(utilities);

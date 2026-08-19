@@ -8,10 +8,7 @@ import { cx } from '@/lib/cx'
 import { SITE_NAME } from '@/lib/site'
 import { archivo } from '@/styles/fonts/archivo'
 import { bricolageGrotesque } from '@/styles/fonts/bricolage-grotesque'
-import '@/styles/tokens/index.css'
-import '@/styles/compositions/index.css'
-import '@/styles/utilities/index.css'
-import '@/styles/global/index.css'
+import '@/styles/index.css'
 
 /**
  * Root layout for the public site.
