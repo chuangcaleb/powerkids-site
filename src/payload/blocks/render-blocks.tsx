@@ -1,6 +1,5 @@
 import type { Page } from '@/payload-types'
 
-import { CardGrid } from './card-grid/component'
 import { Content } from './content/component'
 import { Faq } from './faq/component'
 import { FramedRows } from './framed-rows/component'
@@ -10,7 +9,6 @@ import { Scrapbook } from './scrapbook/component'
 import { SchoolsBlock } from './schools/component'
 
 const blockComponents = {
-  'card-grid': CardGrid,
   content: Content,
   faq: Faq,
   'framed-rows': FramedRows,

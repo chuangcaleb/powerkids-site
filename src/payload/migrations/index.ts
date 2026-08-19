@@ -29,9 +29,9 @@ import * as migration_20260816_091026_drop_site_settings_footer_reel from './202
 import * as migration_20260817_130357 from './20260817_130357'
 import * as migration_20260817_143448 from './20260817_143448'
 import * as migration_20260817_154407 from './20260817_154407'
-
 import * as migration_20260817_160000_drop_legacy_doodle_icon_tables from './20260817_160000_drop_legacy_doodle_icon_tables'
 import * as migration_20260818_183000_rename_doodle_icons_to_icons from './20260818_183000_rename_doodle_icons_to_icons'
+import * as migration_20260819_125503_drop_card_grid_block from './20260819_125503_drop_card_grid_block'
 
 export const migrations = [
   {
@@ -198,5 +198,10 @@ export const migrations = [
     up: migration_20260818_183000_rename_doodle_icons_to_icons.up,
     down: migration_20260818_183000_rename_doodle_icons_to_icons.down,
     name: '20260818_183000_rename_doodle_icons_to_icons',
+  },
+  {
+    up: migration_20260819_125503_drop_card_grid_block.up,
+    down: migration_20260819_125503_drop_card_grid_block.down,
+    name: '20260819_125503_drop_card_grid_block',
   },
 ]

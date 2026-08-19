@@ -11,7 +11,6 @@ import { Pill } from '@/components/pill/pill'
 import { VideoEmbed } from '@/components/video-embed/video-embed'
 import { cx } from '@/lib/cx'
 import { isProduction } from '@/lib/env'
-import { CardGrid } from '@/payload/blocks/card-grid/component'
 import { Content } from '@/payload/blocks/content/component'
 import { FramedRows } from '@/payload/blocks/framed-rows/component'
 import { Gallery } from '@/payload/blocks/gallery/component'
@@ -319,26 +318,6 @@ export default function KitchenSinkPage() {
               id: 'reading-corner',
               header: { heading: richText('Reading Corner') },
               media: [samplePhoto(9, 700, 700, '%232434e8')],
-            },
-          ]}
-        />
-      </section>
-
-      <section className="flow">
-        <div className="wrapper">
-          <Heading level={2}>Card Grid block</Heading>
-        </div>
-        {/* Minimal card: no image, no body. Extreme card: 90-char heading. */}
-        <CardGrid
-          id="kitchen-sink-card-grid"
-          blockType="card-grid"
-          header={{ heading: richText('Card Grid edge cases') }}
-          cards={[
-            { heading: 'Minimal card, no image or body' },
-            {
-              heading:
-                'A ninety character card heading exists to prove wrapping holds even here',
-              body: 'Has a body and no image.',
             },
           ]}
         />

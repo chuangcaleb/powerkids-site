@@ -293,16 +293,7 @@ export interface Page {
       | null;
     media?: (number | null) | Media;
   };
-  layout: (
-    | ContentBlock
-    | MediaTextBlock
-    | CardGridBlock
-    | GalleryBlock
-    | SchoolsBlock
-    | FramedRowsBlock
-    | ScrapbookBlock
-    | FaqBlock
-  )[];
+  layout: (ContentBlock | MediaTextBlock | GalleryBlock | SchoolsBlock | FramedRowsBlock | ScrapbookBlock | FaqBlock)[];
   meta?: {
     title?: string | null;
     /**
@@ -433,67 +424,6 @@ export interface MediaTextBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'media-text';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CardGridBlock".
- */
-export interface CardGridBlock {
-  cards?:
-    | {
-        heading: string;
-        body?: string | null;
-        image?: (number | null) | Media;
-        /**
-         * Optional — makes the card a link.
-         */
-        url?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  header?: {
-    /**
-     * Rendered as a pill.
-     */
-    eyebrow?: string | null;
-    /**
-     * Pill + emphasis color.
-     */
-    accent?: ('neutral' | 'red' | 'blue') | null;
-    heading?: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
-    lead?: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
-  };
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'card-grid';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1153,7 +1083,6 @@ export interface PagesSelect<T extends boolean = true> {
     | {
         content?: T | ContentBlockSelect<T>;
         'media-text'?: T | MediaTextBlockSelect<T>;
-        'card-grid'?: T | CardGridBlockSelect<T>;
         gallery?: T | GalleryBlockSelect<T>;
         schools?: T | SchoolsBlockSelect<T>;
         'framed-rows'?: T | FramedRowsBlockSelect<T>;
@@ -1218,31 +1147,6 @@ export interface MediaTextBlockSelect<T extends boolean = true> {
   media?: T;
   content?: T;
   mediaSide?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CardGridBlock_select".
- */
-export interface CardGridBlockSelect<T extends boolean = true> {
-  cards?:
-    | T
-    | {
-        heading?: T;
-        body?: T;
-        image?: T;
-        url?: T;
-        id?: T;
-      };
-  header?:
-    | T
-    | {
-        eyebrow?: T;
-        accent?: T;
-        heading?: T;
-        lead?: T;
-      };
   id?: T;
   blockName?: T;
 }

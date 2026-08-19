@@ -26,7 +26,7 @@
     "generate:types": "payload generate:types",
     "generate:importmap": "payload generate:importmap",
     "migrate": "payload migrate",
-    "migrate:create": "payload migrate:create && node scripts/fix-migration-imports.mjs",
+    "migrate:create": "sh -c 'payload migrate:create \"$@\" && node scripts/fix-migration-imports.mjs' --",
     "sync:dev-admin": "bash scripts/sync-dev-admin.sh",
     "seed:dev-admin": "payload run scripts/seed-admin.ts",
     "prepare": "lefthook install"

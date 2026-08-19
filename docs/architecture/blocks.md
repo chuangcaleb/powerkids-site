@@ -19,13 +19,13 @@ Before adding one, check existing block with new variant wouldn't do. Two blocks
 
 ## Rules for every block
 
-1. **Named for what it is, not where sits.** `card-grid`, never `homepage-section-3`.
+1. **Named for what it is, not where sits.** `framed-rows`, never `homepage-section-3`.
 2. **Fields carry admin labels + descriptions.** Editor who never saw code must pick right block from panel.
 3. **Layout comes from primitives.** Block needing media query probably picked wrong primitive.
 4. **Degrades at any content length.** One card and twelve cards both look right; long headings must not overflow.
 5. **Server component unless interactivity unavoidable.** Accordion and video tabs are the expected exceptions.
 6. **No content defaults pretending to be design.** If field optional, block must render sensibly without it.
-7. **`interfaceName` set on every block config.** Without it `generate:types` emits an anonymous inline type per usage site instead of one named type — e.g. `ProseBlock`, `CardGridBlock`.
+7. **`interfaceName` set on every block config.** Without it `generate:types` emits an anonymous inline type per usage site instead of one named type — e.g. `FaqBlock`, `ScrapbookBlock`.
 8. **Content-driven blocks offer a `source` toggle.** Where a block can either take hand-written entries or pull from a collection (cards from programs/events, gallery from an event, video tabs from an event), give the editor both. Auto-populated sources stay in sync as the collection changes; manual gives per-instance copy control.
 
 ---

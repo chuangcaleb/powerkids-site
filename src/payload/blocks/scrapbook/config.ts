@@ -10,7 +10,7 @@ import { iconField } from '@/payload/fields/icon'
  * renderer; this only shapes what an editor authors. See
  * `docs/architecture/blocks.md` for the closed-set rules this follows.
  *
- * No collection-backed `source` toggle (contrast `gallery`/`card-grid`):
+ * No collection-backed `source` toggle (contrast `gallery`):
  * there's no collection of past one-off camps/showcases to pull from — each
  * item's photos are specific to that occasion and exist nowhere else.
  */

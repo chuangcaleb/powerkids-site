@@ -11,7 +11,6 @@ import {
 import { authenticated } from '@/payload/access/authenticated'
 import { authenticatedOrPublished } from '@/payload/access/authenticated-or-published'
 import { requireEnv } from '@/lib/env'
-import { CardGrid } from '@/payload/blocks/card-grid/config'
 import { Content } from '@/payload/blocks/content/config'
 import { Faq } from '@/payload/blocks/faq/config'
 import { FramedRowsBlock } from '@/payload/blocks/framed-rows/config'
@@ -99,7 +98,6 @@ export const Pages: CollectionConfig = {
               blocks: [
                 Content,
                 MediaText,
-                CardGrid,
                 Gallery,
                 SchoolsBlock,
                 FramedRowsBlock,

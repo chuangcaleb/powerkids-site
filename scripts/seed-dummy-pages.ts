@@ -229,22 +229,41 @@ await payload.create({
     },
     layout: [
       {
-        blockType: 'card-grid',
+        blockType: 'framed-rows',
         header: { heading: richText('Our Programs') },
-        cards: [
-          { heading: 'Morning School', body: loremSentence(), image: media.id },
-          { heading: 'After School Program', body: loremSentence(), image: media.id },
-          { heading: 'Evening Daycare', body: loremSentence(), image: media.id },
+        rows: [
+          {
+            title: 'Morning School',
+            eyebrow: '8:00am – 12:00pm',
+            body: richText(loremSentence()),
+            image: media.id,
+          },
+          {
+            title: 'After School Program',
+            eyebrow: '12:00pm – 4:00pm',
+            body: richText(loremSentence()),
+            image: media.id,
+          },
+          {
+            title: 'Evening Daycare',
+            eyebrow: '4:00pm – 7:00pm',
+            body: richText(loremSentence()),
+            image: media.id,
+          },
         ],
       },
       {
-        blockType: 'card-grid',
+        blockType: 'framed-rows',
         header: { heading: richText('Our Events') },
-        cards: [
-          { heading: 'Graduation', body: loremSentence(), image: media.id },
-          { heading: 'Sports Day', body: loremSentence(), image: media.id },
-          { heading: 'Field Trips', body: loremSentence(), image: media.id },
-          { heading: 'Community Service', body: loremSentence(), image: media.id },
+        rows: [
+          { title: 'Graduation', body: richText(loremSentence()), image: media.id },
+          { title: 'Sports Day', body: richText(loremSentence()), image: media.id },
+          { title: 'Field Trips', body: richText(loremSentence()), image: media.id },
+          {
+            title: 'Community Service',
+            body: richText(loremSentence()),
+            image: media.id,
+          },
         ],
       },
     ],
@@ -264,22 +283,6 @@ await payload.create({
       subheading: loremSentence(),
     },
     layout: [
-      {
-        blockType: 'card-grid',
-        header: { heading: richText('Our Mission & Vision') },
-        cards: [
-          {
-            heading: 'Our Mission',
-            body: loremSentence(),
-            image: media.id,
-          },
-          {
-            heading: 'Our Vision',
-            body: loremSentence(),
-            image: media.id,
-          },
-        ],
-      },
       { blockType: 'schools', header: { heading: richText('Our Schools') } },
       {
         blockType: 'media-text',
@@ -328,12 +331,13 @@ await payload.create({
     },
     layout: [
       {
-        blockType: 'card-grid',
+        blockType: 'framed-rows',
         header: { heading: richText('Current Vacancies') },
-        cards: [
+        rows: [
           {
-            heading: 'Teacher',
-            body: loremSentence(),
+            title: 'Teacher',
+            eyebrow: 'Full time',
+            body: richText(loremSentence()),
             image: media.id,
           },
         ],
