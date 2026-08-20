@@ -2,6 +2,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import { postgresAdapter } from '@payloadcms/db-postgres'
+import { resendAdapter } from '@payloadcms/email-resend'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import type { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
 import { s3Storage } from '@payloadcms/storage-s3'
@@ -34,6 +35,8 @@ const generateURL: GenerateURL<Page> = ({ doc }) => urlForSlug(getServerUrl(), d
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 
 export default buildConfig({
+  serverURL: getServerUrl(),
+
   admin: {
     user: Users.slug,
     meta: {
@@ -52,6 +55,12 @@ export default buildConfig({
   folders: {},
 
   editor: defaultLexical,
+
+  email: resendAdapter({
+    defaultFromAddress: requireEnv('RESEND_FROM_ADDRESS'),
+    defaultFromName: 'PowerKids Kindergarten',
+    apiKey: requireEnv('RESEND_API_KEY'),
+  }),
 
   db: postgresAdapter({
     pool: { connectionString: requireEnv('DATABASE_URI') },

@@ -18,6 +18,8 @@ type EnvKey =
   | 'R2_PUBLIC_URL'
   | 'PREVIEW_SECRET'
   | 'VERCEL_URL'
+  | 'RESEND_API_KEY'
+  | 'RESEND_FROM_ADDRESS'
 
 /** Read a required variable, or throw naming it. */
 export function requireEnv(key: EnvKey): string {

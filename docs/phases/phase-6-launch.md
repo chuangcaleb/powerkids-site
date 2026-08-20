@@ -9,10 +9,9 @@ Agent prepares. Owner switches DNS.
 ## Pre
 
 - [ ] Phase 5 done — production content seeded and proof-read
-- [ ] **Email adapter configured.** Payload currently logs mail to console. Password resets reach nobody. Staff accounts cannot be handed over until this works — see `docs/ops/environments.md` "Known gaps".
+- [x] **Email adapter configured.** Payload currently logs mail to console. Password resets reach nobody. Staff accounts cannot be handed over until this works — see `docs/ops/environments.md` "Known gaps".
 - [ ] Production env vars set in Vercel, distinct `PAYLOAD_SECRET` from preview
 - [ ] Owner has DNS access and a rollback window
-- [ ] Owner decides analytics (or none)
 
 ## Work
 

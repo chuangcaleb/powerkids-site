@@ -51,6 +51,8 @@ Every name below appear in `.env.example` with comment. Values come from owner.
 | `R2_PUBLIC_URL`          | Public base URL media served from                                    |
 | `PREVIEW_SECRET`         | Guards draft-preview route                                           |
 | `VERCEL_URL`             | Set by Vercel, not by hand. Deployment origin fallback               |
+| `RESEND_API_KEY`         | Resend API key, sends Payload auth/notification email                |
+| `RESEND_FROM_ADDRESS`    | Sender address; domain must be verified in Resend                    |
 
 ### Three R2 traps
 
@@ -93,10 +95,6 @@ Local Payload admin needs one permanent login both owner and agents can use. A "
 - Seed into Payload: `pnpm seed:dev-admin` reads that file, creates the user if missing or updates name/password if it exists. Guarded `NODE_ENV !== 'production'` — cannot run against prod.
 - Rotate the password in your password manager first, rerun sync script, rerun seed script.
 - Never reuse this password for preview or production admin accounts.
-
-## Known gaps
-
-**No email adapter.** Payload logs warning at boot, writes mail to console instead of sending it. Nothing depends on email yet, but **password resets will not reach anyone** until adapter configured — so first real admin accounts must have passwords set directly rather than through reset link. Resolve before handing accounts to school staff (Phase 6), or earlier if registration form lands first (Phase 7). Both want same adapter
 
 ## Adding a variable
 

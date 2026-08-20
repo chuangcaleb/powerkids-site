@@ -35,6 +35,7 @@
     "@icons-pack/react-simple-icons": "^13.13.0",
     "@payloadcms/admin-bar": "3.88.0",
     "@payloadcms/db-postgres": "3.88.0",
+    "@payloadcms/email-resend": "3.88.0",
     "@payloadcms/live-preview-react": "3.88.0",
     "@payloadcms/next": "3.88.0",
     "@payloadcms/plugin-seo": "3.88.0",
