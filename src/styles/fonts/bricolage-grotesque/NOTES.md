@@ -18,8 +18,8 @@ still reads narrow, that's the typeface's shape, not this axis; the tuning knob 
 `--tracking-display` in `src/styles/tokens/type.css` (letter-spacing on the display face), value
 decided in `DESIGN.md`'s `type.displayTracking`.
 
-Display face only — `--font-display`. Body/UI text (`--font-body`) is Archivo,
-`src/styles/fonts/archivo.ts`; see `DESIGN.md`'s Type section for the split.
+Display face only — `--font-display`. Body/UI text (`--font-body`) is Figtree,
+`src/styles/fonts/figtree.ts`; see `DESIGN.md`'s Type section for the split.
 
 Regenerate (manual, no build script — this file is committed as-is):
 

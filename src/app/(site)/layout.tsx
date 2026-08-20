@@ -6,8 +6,8 @@ import { Footer } from '@/components/footer/footer'
 import { Header } from '@/components/header/header'
 import { cx } from '@/lib/cx'
 import { SITE_NAME } from '@/lib/site'
-import { archivo } from '@/styles/fonts/archivo'
 import { bricolageGrotesque } from '@/styles/fonts/bricolage-grotesque'
+import { figtree } from '@/styles/fonts/figtree'
 import '@/styles/index.css'
 
 /**
@@ -28,7 +28,7 @@ export default async function SiteLayout({ children }: { children: ReactNode }) 
   const { isEnabled: preview } = await draftMode()
 
   return (
-    <html lang="en" className={cx(bricolageGrotesque.variable, archivo.variable)}>
+    <html lang="en" className={cx(bricolageGrotesque.variable, figtree.variable)}>
       <body>
         <AdminBar preview={preview} />
         <Header />

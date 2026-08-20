@@ -3,9 +3,9 @@
  */
 :root {
   /* --font-bricolage-grotesque supplied by next/font/local — src/styles/fonts/bricolage-grotesque.ts.
-   * --font-archivo supplied by next/font/google — src/styles/fonts/archivo.ts. */
+   * --font-figtree supplied by next/font/google — src/styles/fonts/figtree.ts. */
   --font-display: var(--font-bricolage-grotesque), system-ui, sans-serif;
-  --font-body: var(--font-archivo), system-ui, sans-serif;
+  --font-body: var(--font-figtree), system-ui, sans-serif;
 
   /* Bricolage's wdth axis is pinned in the font file itself (already maxed
    * at 100 — see src/styles/fonts/bricolage-grotesque/NOTES.md), so this is
