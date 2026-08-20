@@ -3,9 +3,18 @@
  */
 :root {
   /* --font-bricolage-grotesque supplied by next/font/local — src/styles/fonts/bricolage-grotesque.ts.
-   * --font-figtree supplied by next/font/google — src/styles/fonts/figtree.ts. */
-  --font-display: var(--font-bricolage-grotesque), system-ui, sans-serif;
-  --font-body: var(--font-figtree), system-ui, sans-serif;
+   * --font-figtree supplied by next/font/google — src/styles/fonts/figtree.ts.
+   *
+   * Fallback chains from https://modernfontstacks.com — geometric-humanist for
+   * display (nearest system-font match to Bricolage's grotesque form), humanist
+   * for body (nearest match to Figtree). Cuts flash-of-wrong-shape before the
+   * webfont loads, not just flash-of-unstyled-text. */
+  --font-display:
+    var(--font-bricolage-grotesque), Avenir, Montserrat, Corbel, 'URW Gothic',
+    source-sans-pro, sans-serif;
+  --font-body:
+    var(--font-figtree), Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans',
+    source-sans-pro, sans-serif;
 
   /* Bricolage's wdth axis is pinned in the font file itself (already maxed
    * at 100 — see src/styles/fonts/bricolage-grotesque/NOTES.md), so this is
