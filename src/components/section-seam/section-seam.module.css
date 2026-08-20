@@ -21,10 +21,23 @@
   overflow: visible;
 }
 
-/* An SVG stroke at exactly `--border-width` reads visibly thinner than a
-   solid CSS border of the same nominal width — vector anti-aliasing softens
-   its edges (sub-pixel positioning), where a CSS border fills pixels edge to
-   edge. Bumped up so the rule reads as bold as the borders it sits beside. */
+/*
+  An SVG stroke at exactly `--border-width` reads visibly thinner than a
+  solid CSS border of the same nominal width — vector anti-aliasing softens
+  its edges (sub-pixel positioning), where a CSS border fills pixels edge to
+  edge.
+
+  The 2x boost fixes that at desktop width, but `SectionSeam`'s fixed
+  reference width (docs/design/section-seams.md) squashes tooth pitch down
+  near stroke width on narrow viewports, so the same boost there overlaps
+  adjacent strokes into one thick band. Fluidly scale the boost itself
+  between 1x at 20rem viewport width and 2x at 90rem, same min/max viewport
+  pair as the `--step-*`/`--space-*` type-scale tokens (src/styles/tokens).
+*/
 .stroke {
-  stroke-width: calc(var(--border-width) * 2);
+  stroke-width: clamp(
+    var(--border-width),
+    0.2679rem + 0.5357vw,
+    calc(var(--border-width) * 2)
+  );
 }
