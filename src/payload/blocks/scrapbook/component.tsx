@@ -20,7 +20,7 @@ export function Scrapbook({ header, items, id, seed: storedSeed }: ScrapbookBloc
   const seed = resolveSeed(storedSeed, id)
 
   return (
-    <section className={cx('flow', 'region', styles.scrapbook)}>
+    <section className={cx('flow-xl', 'region', styles.scrapbook)}>
       <div className={cx('dot-grid-edge-fade', styles.texture)} aria-hidden="true" />
       <div className={cx('wrapper flow', styles.header)}>
         <SectionHeader header={header} />

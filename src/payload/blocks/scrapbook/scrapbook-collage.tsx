@@ -364,7 +364,7 @@ function ItemText({ item }: { item: CollageItem }) {
   const button = item.button
 
   return (
-    <div className={cx('flow-s max-lead', styles.itemText)}>
+    <div className={cx('flow-m max-prose', styles.itemText)}>
       {heading ? (
         <Heading level={3}>
           <HeaderRichText data={heading} accent={accent} />
@@ -376,7 +376,7 @@ function ItemText({ item }: { item: CollageItem }) {
         </p>
       ) : null}
       {button?.label && button.url ? (
-        <Button href={button.url} size="sm" className={styles.itemButton}>
+        <Button href={button.url} className={styles.itemButton}>
           {button.label}
         </Button>
       ) : null}

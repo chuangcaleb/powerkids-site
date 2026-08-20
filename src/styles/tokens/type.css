@@ -23,20 +23,20 @@
   --weight-display: 800;
   --opsz-display: 36;
 
-  /* Fluid scale, 320px -> 1440px viewport (DESIGN.md type.minViewport/
-   * maxViewport). The wide-viewport jump from any step to the next is the
-   * same everywhere, not just at the ends. step--2/--1/0 don't change
-   * across ratio candidates below (they're below/at the step-0 anchor). */
-  --step--2: clamp(0.7378rem, 0.7201rem + 0.0888vw, 0.8rem);
-  --step--1: clamp(0.8854rem, 0.8527rem + 0.1637vw, 1rem);
-  --step-0: clamp(1.0625rem, 1.0089rem + 0.2679vw, 1.25rem);
+  /* Fluid scale, 320px -> 1024px viewport — narrowed from DESIGN.md's
+   * 320/1440 (same min/max per step) so the tuned max ratio is reached
+   * by a typical laptop width, not only at full desktop widths.
+   * step--2/--1/0 fixed regardless of ratio; steps 1-5 compound at 1.35. */
+  --step--2: clamp(0.7378rem, 0.7095rem + 0.1414vw, 0.8rem);
+  --step--1: clamp(0.8854rem, 0.8333rem + 0.2605vw, 1rem);
+  --step-0: clamp(1.0625rem, 0.9773rem + 0.4261vw, 1.25rem);
 
   /* ratio 1.35 */
-  --step-1: clamp(1.275rem, 1.1571rem + 0.5893vw, 1.6875rem);
-  --step-2: clamp(1.53rem, 1.3162rem + 1.0688vw, 2.2781rem);
-  --step-3: clamp(1.75rem, 1.3713rem + 1.8935vw, 3.0755rem);
-  --step-4: clamp(2.125rem, 1.5459rem + 2.8955vw, 4.1519rem);
-  --step-5: clamp(2.5rem, 1.6128rem + 4.4358vw, 5.605rem);
+  --step-1: clamp(1.275rem, 1.0875rem + 0.9375vw, 1.6875rem);
+  --step-2: clamp(1.53rem, 1.19rem + 1.7002vw, 2.2781rem);
+  --step-3: clamp(1.75rem, 1.1475rem + 3.0125vw, 3.0755rem);
+  --step-4: clamp(2.125rem, 1.2037rem + 4.6066vw, 4.1519rem);
+  --step-5: clamp(2.5rem, 1.0886rem + 7.0568vw, 5.605rem);
 
   /* Custom fluid scales — hand-tuned, not Utopia-generated (no DESIGN.md
    * viewport pair backs these), so kept as own base+slope, not reusing
