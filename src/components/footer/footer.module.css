@@ -1,7 +1,3 @@
-.footer {
-  margin-block-start: var(--space-xl);
-}
-
 /* CTA + Contact always stack — each keeps its own colour, so the seams above
    and below the split only ever touch one colour each. */
 .closingWrap {

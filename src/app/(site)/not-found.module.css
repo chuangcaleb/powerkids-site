@@ -1,0 +1,16 @@
+/*
+ * Values and invariants: DESIGN.md. Intent: docs/design/tokens.md.
+ */
+.root {
+  position: relative;
+  background-color: var(--bg-sun);
+  text-align: center;
+}
+
+.content {
+  min-height: 80vh;
+  position: relative;
+  z-index: 1;
+  align-items: center;
+  justify-content: center;
+}

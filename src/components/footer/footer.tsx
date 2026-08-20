@@ -12,13 +12,13 @@ export async function Footer() {
   const cta = await getCta()
 
   return (
-    <footer className={styles.footer}>
+    <footer>
       <div className={styles.closingWrap}>
         <SectionSeam
           shape="pinking"
           width={13.125}
           depth={1.375}
-          above="var(--bg-surface)"
+          above="var(--page-trailing-bg, var(--bg-surface))"
           below="var(--seam-cream-closing)"
         >
           {cta.footerSticker && <Sticker>{cta.footerSticker}</Sticker>}
