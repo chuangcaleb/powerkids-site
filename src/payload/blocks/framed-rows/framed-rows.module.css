@@ -78,7 +78,7 @@
 .hours {
   font-family: var(--font-display);
   font-weight: var(--weight-display);
-  font-size: var(--step-2);
+  font-size: var(--step-1);
   line-height: 1;
   letter-spacing: var(--tracking-display);
 }

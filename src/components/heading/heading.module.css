@@ -5,25 +5,25 @@
 }
 
 .size1 {
-  font-size: var(--step-5);
-}
-
-.size2 {
   font-size: var(--step-4);
 }
 
-.size3 {
+.size2 {
   font-size: var(--step-3);
 }
 
-.size4 {
+.size3 {
   font-size: var(--step-2);
 }
 
-.size5 {
+.size4 {
   font-size: var(--step-1);
 }
 
-.size6 {
+.size5 {
   font-size: var(--step-0);
+}
+
+.size6 {
+  font-size: var(--step--1);
 }
