@@ -29,7 +29,7 @@
   --dot-grid-colour: color-mix(in srgb, var(--text-strong) 44%, transparent);
   --dot-grid-radius: 0.08rem;
   --dot-grid-fade: 0.09rem;
-  --dot-grid-edge-fade: var(--space-3xl);
+  --dot-grid-edge-fade: calc(var(--space-3xl) * 1.5);
   --dot-grid-bg-color: var(--bg-surface);
 }
 
