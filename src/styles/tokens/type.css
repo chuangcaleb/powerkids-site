@@ -14,16 +14,41 @@
   --weight-display: 800;
   --opsz-display: 36;
 
+  /* Fluid scale, 320px -> 1440px viewport (DESIGN.md type.minViewport/
+   * maxViewport). The wide-viewport jump from any step to the next is the
+   * same everywhere, not just at the ends. step--2/--1/0 don't change
+   * across ratio candidates below (they're below/at the step-0 anchor). */
   --step--2: clamp(0.7378rem, 0.7201rem + 0.0888vw, 0.8rem);
   --step--1: clamp(0.8854rem, 0.8527rem + 0.1637vw, 1rem);
   --step-0: clamp(1.0625rem, 1.0089rem + 0.2679vw, 1.25rem);
-  --step-1: clamp(1.275rem, 1.1929rem + 0.4107vw, 1.5625rem);
-  --step-2: clamp(1.53rem, 1.4091rem + 0.6045vw, 1.9531rem);
-  --step-3: clamp(1.75rem, 1.3929rem + 1.7857vw, 3rem);
-  --step-4: clamp(2.125rem, 1.625rem + 2.5vw, 3.875rem);
-  --step-5: clamp(2.5rem, 1.6071rem + 4.4643vw, 5.625rem);
 
-  /* Custom fluid scales */
-  --step-hero: clamp(3.5rem, 1rem + 9vw, 5.7rem);
-  --step-wordmark: clamp(3.5rem, 2.8rem + 7vw, 15rem);
+  /* ratio 1.35 */
+  --step-1: clamp(1.275rem, 1.1571rem + 0.5893vw, 1.6875rem);
+  --step-2: clamp(1.53rem, 1.3162rem + 1.0688vw, 2.2781rem);
+  --step-3: clamp(1.75rem, 1.3713rem + 1.8935vw, 3.0755rem);
+  --step-4: clamp(2.125rem, 1.5459rem + 2.8955vw, 4.1519rem);
+  --step-5: clamp(2.5rem, 1.6128rem + 4.4358vw, 5.605rem);
+
+  /* Custom fluid scales — hand-tuned, not Utopia-generated (no DESIGN.md
+   * viewport pair backs these), so kept as own base+slope, not reusing
+   * --fluid-min-vw/--fluid-max-vw above. */
+  --step-hero-min: 3.45rem;
+  --step-hero-max: 5.7rem;
+  --step-hero-base: 1rem;
+  --step-hero-slope: 10vw;
+  --step-hero: clamp(
+    var(--step-hero-min),
+    calc(var(--step-hero-base) + var(--step-hero-slope)),
+    var(--step-hero-max)
+  );
+
+  --step-wordmark-min: 3.5rem;
+  --step-wordmark-max: 11rem;
+  --step-wordmark-base: 1rem;
+  --step-wordmark-slope: 13vw;
+  --step-wordmark: clamp(
+    var(--step-wordmark-min),
+    calc(var(--step-wordmark-base) + var(--step-wordmark-slope)),
+    var(--step-wordmark-max)
+  );
 }
