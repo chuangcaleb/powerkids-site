@@ -26,16 +26,23 @@
   /* Fluid scale, 320px -> 1024px viewport — narrowed from DESIGN.md's
    * 320/1440 (same min/max per step) so the tuned max ratio is reached
    * by a typical laptop width, not only at full desktop widths.
-   * step--2/--1 fixed regardless of ratio; steps 0-4 compound at 1.35. */
-  --step--2: clamp(0.8854rem, 0.8333rem + 0.2605vw, 1rem);
-  --step--1: clamp(1.0625rem, 0.9773rem + 0.4261vw, 1.25rem);
+   * step--2/--1 extend the same geometric chain below step-0 (dividing by
+   * the ~1.221/~1.39 min/max ratios), so they track the 18/24px rescale. */
+  --step--2: clamp(0.7547rem, 0.7451rem + 0.0481vw, 0.7759rem);
+  --step--1: clamp(0.9215rem, 0.8499rem + 0.3577vw, 1.0788rem);
 
-  /* ratio 1.35 */
-  --step-0: clamp(1.275rem, 1.0875rem + 0.9375vw, 1.6875rem);
-  --step-1: clamp(1.53rem, 1.19rem + 1.7002vw, 2.2781rem);
-  --step-2: clamp(1.75rem, 1.1475rem + 3.0125vw, 3.0755rem);
-  --step-3: clamp(2.125rem, 1.2037rem + 4.6066vw, 4.1519rem);
-  --step-4: clamp(2.5rem, 1.0886rem + 7.0568vw, 5.605rem);
+  /* step-0 pinned to 18/24px (body text); step-5 kept byte-identical to
+   * the old step-4 (the size scale you liked, now h1); step-1 is the new
+   * lead-text step; 2/3/4 shifted up from the old 1/2/3 (h4/h3/h2). All
+   * re-solved as one geometric chain between the two fixed ends (5 links,
+   * ~1.302 max-ratio, ~1.173 min-ratio — shallower than the old 4-link
+   * chain since there's now one more step to cover the same range). */
+  --step-0: clamp(1.125rem, 0.9545rem + 0.8523vw, 1.5rem);
+  --step-1: clamp(1.3198rem, 1.1243rem + 0.9777vw, 1.75rem);
+  --step-2: clamp(1.5483rem, 1.0969rem + 2.2571vw, 2.5415rem);
+  --step-3: clamp(1.8165rem, 1.1384rem + 3.3902vw, 3.3081rem);
+  --step-4: clamp(2.131rem, 1.1423rem + 4.9433vw, 4.306rem);
+  --step-5: clamp(2.5rem, 1.0886rem + 7.0568vw, 5.605rem);
 
   /* Custom fluid scales — hand-tuned, not Utopia-generated (no DESIGN.md
    * viewport pair backs these), so kept as own base+slope, not reusing

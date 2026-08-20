@@ -1,8 +1,8 @@
 :root {
-  --max-bleed: 110ch;
-  --max-page: 90ch;
+  --max-bleed: 90ch;
+  --max-page: 77ch;
   --max-prose: 60ch;
-  --max-lead: 44ch;
+  --max-lead: 45ch;
   --max-heading: 20ch;
   --gutter: var(--space-s);
 }

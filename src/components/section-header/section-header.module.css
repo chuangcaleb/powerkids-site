@@ -2,5 +2,5 @@
  * Values and invariants: DESIGN.md. Intent: docs/design/tokens.md.
  */
 .lead {
-  font-size: var(--step-0);
+  font-size: var(--step-1);
 }
