@@ -13,6 +13,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "vercel-build": "payload migrate && next build",
     "build:compile": "next build --experimental-build-mode compile",
     "start": "next start",
     "lint": "eslint . && stylelint \"src/**/*.css\"",
