@@ -26,9 +26,14 @@ Regenerate (manual, no build script — this file is committed as-is):
 ```bash
 curl -sL -o var.ttf "https://raw.githubusercontent.com/google/fonts/main/ofl/bricolagegrotesque/BricolageGrotesque%5Bopsz%2Cwdth%2Cwght%5D.ttf"
 fonttools varLib.instancer var.ttf wdth=100 -o var-wdth100.ttf
-pyftsubset var-wdth100.ttf --output-file=bricolage-grotesque-variable.woff2 --flavor=woff2 --layout-features='*' \
+pyftsubset var-wdth100.ttf --output-file=bricolage-grotesque-variable.woff2 --flavor=woff2 --layout-features='kern' \
   --unicodes="U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD"
 ```
+
+`--layout-features='kern'` (not `'*'`) — `'*'` keeps every GSUB feature including stylistic
+alternates this site never toggles, dragging in their glyph variants. Site doesn't use alternates;
+`kern` alone keeps letter-pair spacing (matters at display sizes) and drops the rest. Cut file
+90KB → 70KB, no visual diff. Verified against phase-6 performance audit, 2026-08-21.
 
 `pyftsubset --flavor=woff2` needs the `brotli` Python package (`pip install brotli`) — not
 installed by default even when `fonttools`/`pyftsubset` are on `PATH`.
