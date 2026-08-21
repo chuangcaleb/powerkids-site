@@ -41,6 +41,12 @@ export default buildConfig({
     user: Users.slug,
     meta: {
       titleSuffix: '— PowerKids',
+      // Overrides Payload's own default favicon (@payloadcms/ui/assets),
+      // reusing the same Next.js icon routes the public site serves.
+      icons: [
+        { type: 'image/png', rel: 'icon', sizes: '32x32', url: '/icon.png' },
+        { rel: 'apple-touch-icon', url: '/apple-icon.png' },
+      ],
     },
     livePreview: {
       url: getServerUrl(),

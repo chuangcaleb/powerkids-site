@@ -82,7 +82,7 @@ export default tseslint.config(
   // to a given file has to be listed together in the block that wins.
   {
     files: ['src/**/*.{ts,tsx}'],
-    ignores: ['src/lib/env.ts'],
+    ignores: ['src/lib/env.ts', 'src/lib/brand-colours.ts'],
     rules: {
       'no-restricted-syntax': ['error', ...NO_RAW_COLOURS, NO_PROCESS_ENV],
     },
