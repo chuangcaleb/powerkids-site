@@ -47,3 +47,8 @@
 .link:focus-visible {
   background-size: 100% var(--stroke-width);
 }
+
+.brand:hover svg {
+  transform: rotate(8deg);
+  transition: transform var(--duration-base) var(--ease-playful);
+}
