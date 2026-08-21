@@ -67,8 +67,8 @@ export function FramedRows({ header, rows, id }: FramedRowsBlockType) {
               ) : null}
               <div className={styles.row}>
                 <div className={cx('switcher', 'wrapper', styles.switcher)}>
-                  <div className="flow-m">
-                    <div className="flow-xs">
+                  <div className="flow-s">
+                    <div className="flow-2xs">
                       <div className={cx('flow-2xs', styles.timeStack)}>
                         {Icon ? <Icon aria-hidden="true" strokeWidth={2.2} /> : null}
                         {row.eyebrow ? (

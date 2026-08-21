@@ -38,7 +38,7 @@
   stroke-width: clamp(
     var(--border-width),
     0.2679rem + 0.5357vw,
-    calc(var(--border-width) * 2)
+    calc(var(--border-width) * 1.15)
   );
 }
 

@@ -26,23 +26,24 @@
   /* Fluid scale, 320px -> 1024px viewport — narrowed from DESIGN.md's
    * 320/1440 (same min/max per step) so the tuned max ratio is reached
    * by a typical laptop width, not only at full desktop widths.
-   * step--2/--1 extend the same geometric chain below step-0 (dividing by
-   * the ~1.221/~1.39 min/max ratios), so they track the 18/24px rescale. */
-  --step--2: clamp(0.7547rem, 0.7451rem + 0.0481vw, 0.7759rem);
-  --step--1: clamp(0.9215rem, 0.8499rem + 0.3577vw, 1.0788rem);
-
-  /* step-0 pinned to 18/24px (body text); step-5 kept byte-identical to
-   * the old step-4 (the size scale you liked, now h1); step-1 is the new
-   * lead-text step; 2/3/4 shifted up from the old 1/2/3 (h4/h3/h2). All
-   * re-solved as one geometric chain between the two fixed ends (5 links,
-   * ~1.302 max-ratio, ~1.173 min-ratio — shallower than the old 4-link
-   * chain since there's now one more step to cover the same range). */
-  --step-0: clamp(1.125rem, 0.9545rem + 0.8523vw, 1.5rem);
-  --step-1: clamp(1.3198rem, 1.1243rem + 0.9777vw, 1.75rem);
-  --step-2: clamp(1.5483rem, 1.0969rem + 2.2571vw, 2.5415rem);
-  --step-3: clamp(1.8165rem, 1.1384rem + 3.3902vw, 3.3081rem);
-  --step-4: clamp(2.131rem, 1.1423rem + 4.9433vw, 4.306rem);
-  --step-5: clamp(2.5rem, 1.0886rem + 7.0568vw, 5.605rem);
+   * step--2/--1 extend below step-0 by dividing both min and max by a
+   * single ratio, --step-1-5-ratio: the constant min-side ratio measured
+   * across step-1..step-5 (min5/min1)^(1/4) = (2.5/1.3198)^(1/4) ≈ 1.1732.
+   * Only the min chain holds one ratio end-to-end — the max chain doesn't
+   * (its per-step ratio runs 1.168-1.384, reshaped by the 0.7-factor cut),
+   * so max-side ratio-per-step can't be reused here: applying each step's
+   * own (bigger) max ratio backwards shrinks max faster than min and
+   * inverts step--2's clamp (max < min). Using the one stable ratio for
+   * both sides keeps step-0's max/min proportion constant down the chain. */
+  --step-1-5-ratio: 1.1732; /* (step-5-min / step-1-min) ^ (1/4) */
+  --step--2: clamp(0.8174rem, 0.7307rem + 0.4335vw, 1.0081rem);
+  --step--1: clamp(0.9589rem, 0.8572rem + 0.5085vw, 1.1827rem);
+  --step-0: clamp(1.125rem, 1.0057rem + 0.5966vw, 1.3875rem);
+  --step-1: clamp(1.3198rem, 1.1829rem + 0.6844vw, 1.6209rem);
+  --step-2: clamp(1.5483rem, 1.2323rem + 1.5801vw, 2.2435rem);
+  --step-3: clamp(1.8165rem, 1.3419rem + 2.373vw, 2.8606rem);
+  --step-4: clamp(2.131rem, 1.439rem + 3.4602vw, 3.6535rem);
+  --step-5: clamp(2.5rem, 1.512rem + 4.9398vw, 4.6735rem);
 
   /* Custom fluid scales — hand-tuned, not Utopia-generated (no DESIGN.md
    * viewport pair backs these), so kept as own base+slope, not reusing
@@ -58,9 +59,9 @@
   );
 
   --step-wordmark-min: 3.5rem;
-  --step-wordmark-max: 11rem;
+  --step-wordmark-max: 10.75rem;
   --step-wordmark-base: 1rem;
-  --step-wordmark-slope: 13vw;
+  --step-wordmark-slope: 13.75vw;
   --step-wordmark: clamp(
     var(--step-wordmark-min),
     calc(var(--step-wordmark-base) + var(--step-wordmark-slope)),

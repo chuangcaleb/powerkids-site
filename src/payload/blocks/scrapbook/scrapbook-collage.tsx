@@ -364,7 +364,7 @@ function ItemText({ item }: { item: CollageItem }) {
   const button = item.button
 
   return (
-    <div className={cx('flow-m max-lead', styles.itemText)}>
+    <div className={cx('flow-s max-lead', styles.itemText)}>
       {heading ? (
         <Heading level={3}>
           <HeaderRichText data={heading} accent={accent} />

@@ -17,7 +17,7 @@ Agent prepares. Owner switches DNS.
 
 **SEO** — `sitemap.xml`, `robots.txt`, canonical URLs, OG images. JSON-LD: `Organization`, plus `LocalBusiness` per school with address and phone. Sitemap generation queries every published `pages`/`programs`/`events` doc — use `select` for just `slug`/`updatedAt`, `pagination: false`, not full-depth `find`.
 
-**Performance** — bundle budget, font loading strategy (Shantell Sans is variable; subset it), image `sizes` correctness. Consider raising media cache to `max-age=31536000, immutable` — safe because filenames are content-addressed.
+**Performance** — bundle budget, font loading strategy (Bricolage is variable; subset it), image `sizes` correctness. Consider raising media cache to `max-age=31536000, immutable` — safe because filenames are content-addressed.
 
 **Accessibility audit** — keyboard, focus visibility, screen reader over nav and forms, contrast against `DESIGN.md` invariants, reduced-motion honoured.
 

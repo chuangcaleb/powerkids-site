@@ -39,20 +39,21 @@ Because filenames content-addressed (see [Media serving and cache](#media-servin
 
 Every name below appear in `.env.example` with comment. Values come from owner.
 
-| Name                     | Purpose                                                              |
-| ------------------------ | -------------------------------------------------------------------- |
-| `DATABASE_URI`           | Neon connection string for this environment                          |
-| `PAYLOAD_SECRET`         | Signs auth tokens. Unique per environment; rotating log everyone out |
-| `NEXT_PUBLIC_SERVER_URL` | Public origin, used for absolute URLs and preview callbacks          |
-| `S3_BUCKET`              | R2 bucket name                                                       |
-| `S3_ACCESS_KEY_ID`       | R2 access key                                                        |
-| `S3_SECRET_ACCESS_KEY`   | R2 secret                                                            |
-| `S3_ENDPOINT`            | R2 S3-compatible endpoint                                            |
-| `R2_PUBLIC_URL`          | Public base URL media served from                                    |
-| `PREVIEW_SECRET`         | Guards draft-preview route                                           |
-| `VERCEL_URL`             | Set by Vercel, not by hand. Deployment origin fallback               |
-| `RESEND_API_KEY`         | Resend API key, sends Payload auth/notification email                |
-| `RESEND_FROM_ADDRESS`    | Sender address; domain must be verified in Resend                    |
+| Name                     | Purpose                                                                                                                             |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `DATABASE_URI`           | Neon connection string for this environment                                                                                         |
+| `PAYLOAD_SECRET`         | Signs auth tokens. Unique per environment; rotating log everyone out                                                                |
+| `NEXT_PUBLIC_SERVER_URL` | Public origin, used for absolute URLs and preview callbacks                                                                         |
+| `S3_BUCKET`              | R2 bucket name                                                                                                                      |
+| `S3_ACCESS_KEY_ID`       | R2 access key                                                                                                                       |
+| `S3_SECRET_ACCESS_KEY`   | R2 secret                                                                                                                           |
+| `S3_ENDPOINT`            | R2 S3-compatible endpoint                                                                                                           |
+| `R2_PUBLIC_URL`          | Public base URL media served from                                                                                                   |
+| `PREVIEW_SECRET`         | Guards draft-preview route                                                                                                          |
+| `VERCEL_BRANCH_URL`      | Set by Vercel, not by hand. Stable per-branch origin fallback — used for Preview `serverURL` so it matches the alias domain browsed |
+| `VERCEL_URL`             | Set by Vercel, not by hand. Per-deployment origin, last-resort fallback only                                                        |
+| `RESEND_API_KEY`         | Resend API key, sends Payload auth/notification email                                                                               |
+| `RESEND_FROM_ADDRESS`    | Sender address; domain must be verified in Resend                                                                                   |
 
 ### Three R2 traps
 
