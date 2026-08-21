@@ -23,6 +23,7 @@ export function PolaroidReel({ photos }: PolaroidReelProps) {
             doc={photo}
             tilt={index % 2 === 0 ? -4 : 3}
             noTape
+            sizes="17.5rem"
             className={styles.polaroid}
           />
         </li>
