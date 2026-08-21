@@ -1,5 +1,7 @@
 # Phase 5 — Content Migration
 
+**Status: skipped, permanent** (owner ruling, 2026-08-21). No seed script. Owner populates every doc by hand from empty CMS — production and local both. Rest of file kept as frozen record only; do not act on it.
+
 **Goal:** `pnpm seed` populates a fresh database with placeholder/dummy content, enough for local dev and `/admin` walkthroughs. No real v3 copy migration — owner fills production CMS by hand.
 
 Fully agentic.
@@ -14,7 +16,7 @@ Fully agentic.
 
 **`scripts/seed.ts`**, run by `pnpm seed`, using Payload local API (`payload run`, which resolves `@payload-config` and `@/` aliases — plain `node` does not). Consolidates the phase-4 throwaway scripts (`scripts/seed-kitchen-sink-page.ts`, `scripts/seed-dummy-pages.ts`) into the one real script.
 
-Populates: globals first (`site-settings`, `navigation`, `seo-defaults`), then `media`, then `schools` / `programs` / `events` / `people`, then `pages` composed of blocks — all placeholder content, not transcribed v3 copy. `docs/reference/content-inventory.md` is **not** a source for this script; it stays as a standalone reference for real copy/route-map lookups, unrelated to seeding.
+Populates: globals first (`site-settings`, `navigation`, `seo-defaults`), then `media`, then `schools` / `programs` / `events` / `people`, then `pages` composed of blocks — all placeholder content, not transcribed v3 copy. `docs/reference/content-inventory.md` was **not** a source for this script; it held real copy/route-map lookups, unrelated to seeding — since deleted, see [decisions/0004](../decisions/0004-single-page-mvp-no-redirects.md).
 
 **Media**: dummy uploads (existing sampled files in `_reference/media/` are fine as stand-ins). Every upload needs real `alt` — schema enforces it, so a lazy seed fails loudly.
 

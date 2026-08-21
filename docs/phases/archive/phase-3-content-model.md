@@ -12,7 +12,7 @@ Cheap to change now, expensive once content exists — every later change is a m
 
 - [x] Phase 2 done — tokens and primitives exist, so block fields can be specified against real layout vocabulary
 - [x] Read `docs/architecture/content-model.md` (draft schema) and `docs/architecture/blocks.md` (catalogue)
-- [x] Read `docs/reference/content-inventory.md` — every field here exists to hold specific v3 content; check the source before inventing fields
+- [x] Read `docs/reference/content-inventory.md` (since deleted — see [decisions/0004](../../decisions/0004-single-page-mvp-no-redirects.md)) — every field here exists to hold specific v3 content; check the source before inventing fields
 - [x] **Owner answers open content questions** in that inventory's "Open questions". Three schools, Our Team dropped (nav link only, no `people` collection), Graduation videos editor-managed (repeatable field on `events`), FunGates canonical casing, `evening-daycare` slug — all 13 answered
 
 ## Work

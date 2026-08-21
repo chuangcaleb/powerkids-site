@@ -5,8 +5,6 @@
 
 **The model itself lives in code:** `src/payload/collections/` and `src/payload/globals/`. Read those for current fields, types, and access. This doc holds only what the schema can't say.
 
-Source content for every entity: [../reference/content-inventory.md](../reference/content-inventory.md).
-
 ---
 
 ## Rule
@@ -36,7 +34,7 @@ Things a reader would otherwise mistake for arbitrary:
 - **Founding year is stored, elapsed years are computed.** Same reasoning as any other derived value: store the fact, derive the display.
 - **Brand name is not a CMS field.** `PowerKids` with "Power" red and "Kids" blue is a fixed display convention — see `DESIGN.md`.
 - **Footer column headings are fields, not markup.** Staff reorganise the footer without a deploy.
-- **Two schools are inactive, not deleted.** See the inventory for which and why.
+- **Two schools are inactive, not deleted.** Salak South Garden and Bukit Jalil were commented out in v3; not seeded in v4 unless the owner says otherwise.
 
 ## Relationships
 

@@ -11,20 +11,20 @@
 
 ## Status
 
-| #   | Phase                                        | State        | File                                                                 |
-| --- | -------------------------------------------- | ------------ | -------------------------------------------------------------------- |
-| 0   | Archive + docs skeleton                      | done         | —                                                                    |
-| 1   | Foundation — app, DB, storage, CI            | archived     | [archive/phase-1-foundation.md](archive/phase-1-foundation.md)       |
-| 2   | Design system — tokens, primitives           | archived     | [archive/phase-2-design-system.md](archive/phase-2-design-system.md) |
-| 3   | Content model — collections, globals, blocks | archived     | [archive/phase-3-content-model.md](archive/phase-3-content-model.md) |
-| 4   | Rendering — layouts, block renderers         | done         | [archive/phase-4-rendering.md](archive/phase-4-rendering.md)         |
-| 5   | Content migration — seed script              | next         | [phase-5-content-migration.md](phase-5-content-migration.md)         |
-| 6   | Launch — SEO, a11y, cutover                  | blocked on 5 | [phase-6-launch.md](phase-6-launch.md)                               |
-| 7   | Forms — registration, careers                | deferred     | [phase-7-forms.md](phase-7-forms.md)                                 |
-| 8   | Localisation — activate `ms`                 | deferred     | [phase-8-localisation.md](phase-8-localisation.md)                   |
-| 9   | Media hygiene — unreferenced-media cleanup   | deferred     | [phase-9-media-hygiene.md](phase-9-media-hygiene.md)                 |
+| #   | Phase                                        | State                  | File                                                                 |
+| --- | -------------------------------------------- | ---------------------- | -------------------------------------------------------------------- |
+| 0   | Archive + docs skeleton                      | done                   | —                                                                    |
+| 1   | Foundation — app, DB, storage, CI            | archived               | [archive/phase-1-foundation.md](archive/phase-1-foundation.md)       |
+| 2   | Design system — tokens, primitives           | archived               | [archive/phase-2-design-system.md](archive/phase-2-design-system.md) |
+| 3   | Content model — collections, globals, blocks | archived               | [archive/phase-3-content-model.md](archive/phase-3-content-model.md) |
+| 4   | Rendering — layouts, block renderers         | done                   | [archive/phase-4-rendering.md](archive/phase-4-rendering.md)         |
+| 5   | Content migration — seed script              | **skipped, permanent** | [phase-5-content-migration.md](phase-5-content-migration.md)         |
+| 6   | Launch — SEO, a11y, cutover                  | next                   | [phase-6-launch.md](phase-6-launch.md)                               |
+| 7   | Forms — registration, careers                | deferred               | [phase-7-forms.md](phase-7-forms.md)                                 |
+| 8   | Localisation — activate `ms`                 | deferred               | [phase-8-localisation.md](phase-8-localisation.md)                   |
+| 9   | Media hygiene — unreferenced-media cleanup   | deferred               | [phase-9-media-hygiene.md](phase-9-media-hygiene.md)                 |
 
-**Phase 4 done.** Phase 5 next.
+**Phase 4 done.** Phase 5 skipped permanently (owner ruling, 2026-08-21) — owner populates production CMS by hand, no seed script. Phase 6 next.
 
 ---
 

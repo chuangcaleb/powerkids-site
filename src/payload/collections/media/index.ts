@@ -15,8 +15,7 @@ const WEBP = { format: 'webp', options: { quality: 80 } } as const
  *
  * `alt` is required at the schema level, so it cannot be skipped from the
  * panel, the API, or a seed script. The v3 site shipped image-only brochure
- * scans with empty alt text — see docs/reference/content-inventory.md. That
- * class of defect is not possible here.
+ * scans with empty alt text. That class of defect is not possible here.
  *
  * `folders: true` turns on Payload's built-in folder browser for this
  * collection (checked against the installed 3.86 API — the newer

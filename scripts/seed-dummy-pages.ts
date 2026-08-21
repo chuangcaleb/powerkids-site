@@ -1,10 +1,9 @@
 /**
  * Realistic dummy content for visual styling review — home, about, careers
  * pages, 3 schools, 4 people. Structure (names, slugs, addresses, phone
- * numbers) mirrors docs/reference/content-inventory.md; all prose/body copy
- * is generated lorem ipsum (via the `lorem-ipsum` package), not
- * hand-written. One placeholder image reused everywhere a media/upload
- * field is needed.
+ * numbers) mirrors real v3 content; all prose/body copy is generated lorem
+ * ipsum (via the `lorem-ipsum` package), not hand-written. One placeholder
+ * image reused everywhere a media/upload field is needed.
  *
  *   pnpm payload run scripts/seed-dummy-pages.ts
  */

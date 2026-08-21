@@ -47,8 +47,8 @@ Automated contributors never push to `main`. Owner merges.
 Planned in full before the day. Outline:
 
 1. Lower DNS TTL well in advance.
-2. Verify every v3 URL resolves on new deployment — route map in [../reference/content-inventory.md](../reference/content-inventory.md) is checklist.
-3. Seed and proof-read production content.
+2. v3 URLs not preserved — see [decisions/0004-single-page-mvp-no-redirects.md](decisions/0004-single-page-mvp-no-redirects.md). No route-map check needed.
+3. Owner hand-populates and proof-reads production content.
 4. Switch DNS.
 5. Watch logs and analytics for 404s.
 6. Keep v3 deployment live and reachable until new site proven.
