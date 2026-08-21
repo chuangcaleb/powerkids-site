@@ -19,7 +19,7 @@ Agent prepares. Owner switches DNS.
 
 - [x] **Performance.** Bundle audited (public route ~166KB gzip JS, admin's 1.1MB ajv/GraphQL bundle confirmed isolated to `/admin`, no fix needed). Bricolage subset trimmed 90KB → 70KB (`--layout-features='kern'` not `'*'`, see [NOTES.md](../../src/styles/fonts/bricolage-grotesque/NOTES.md)). Image `sizes` audited across all blocks, one real gap fixed (`polaroid-reel.tsx`). Media cache `max-age=31536000, immutable` still **not applied** — Cloudflare-side setting on custom domain, owner action, not code.
 
-**Accessibility audit** — keyboard, focus visibility, screen reader over nav and forms, contrast against `DESIGN.md` invariants, reduced-motion honoured.
+- [x] **Accessibility audit** — keyboard, focus visibility, screen reader over nav and forms, contrast against `DESIGN.md` invariants, reduced-motion honoured.
 
 - [x] **404 page** that helps rather than apologises. Shipped.
 
