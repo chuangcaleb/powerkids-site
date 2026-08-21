@@ -3,7 +3,8 @@
   gap: var(--space-s);
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  list-style: none;
+
+  /* list-style: none; */
   margin: 0;
   padding: var(--space-l) var(--space-m);
   scrollbar-width: none;
@@ -15,7 +16,7 @@
 }
 
 .item {
-  flex: 0 0 17.5rem;
+  flex: 0 0 min(80vw, 30rem);
   scroll-snap-align: start;
 }
 
