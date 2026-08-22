@@ -40,11 +40,15 @@ export default buildConfig({
   admin: {
     user: Users.slug,
     meta: {
+      title: 'PowerKids Admin',
+      description: 'Content management system for PowerKids Kindergarten.',
       titleSuffix: '— PowerKids',
-      // Overrides Payload's own default favicon (@payloadcms/ui/assets),
-      // reusing the same Next.js icon routes the public site serves.
+      // Distinct from the public site's favicon (src/app/icon.png) so the
+      // admin tab is visually distinguishable from the front-end site.
       icons: [
-        { type: 'image/png', rel: 'icon', sizes: '32x32', url: '/icon.png' },
+        { type: 'image/png', rel: 'icon', sizes: '16x16', url: '/admin-icon-16.png' },
+        { type: 'image/png', rel: 'icon', sizes: '32x32', url: '/admin-icon-32.png' },
+        { type: 'image/png', rel: 'icon', sizes: '48x48', url: '/admin-icon-48.png' },
         { rel: 'apple-touch-icon', url: '/apple-icon.png' },
       ],
     },
@@ -56,6 +60,10 @@ export default buildConfig({
       beforeDashboard: [
         '@/payload/admin/components/media-duplicates/duplicate-review-widget#DuplicateReviewWidget',
       ],
+      graphics: {
+        Logo: '@/payload/admin/components/graphics/logo#Logo',
+        Icon: '@/payload/admin/components/graphics/icon#Icon',
+      },
     },
   },
 

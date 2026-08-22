@@ -8,6 +8,9 @@ import { importMap } from './admin/importMap.js'
 import React from 'react'
 
 import '@payloadcms/next/css'
+// Colour tokens only — the admin's own CSS doesn't define --accent-red etc.,
+// but the mascot graphic (Logo/Icon) reads them.
+import '@/styles/tokens/colour.css'
 
 type Args = {
   children: React.ReactNode
