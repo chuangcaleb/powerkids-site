@@ -31,7 +31,6 @@ Things a reader would otherwise mistake for arbitrary:
 
 - **`pages` is the only collection with a block layout.** Everything else is structured data that blocks render. Adding `layout` to another collection means rethinking this boundary, not copying a field.
 - **Media carries `checksum` + `possibleDuplicateOf`** to flag re-uploads of a file already present. Non-blocking by design — the editor decides, the system only warns. See `src/payload/collections/media/hooks/flag-duplicate.ts`.
-- **Founding year is stored, elapsed years are computed.** Same reasoning as any other derived value: store the fact, derive the display.
 - **Brand name is not a CMS field.** `PowerKids` with "Power" red and "Kids" blue is a fixed display convention — see `DESIGN.md`.
 - **Footer column headings are fields, not markup.** Staff reorganise the footer without a deploy.
 - **Two schools are inactive, not deleted.** Salak South Garden and Bukit Jalil were commented out in v3; not seeded in v4 unless the owner says otherwise.

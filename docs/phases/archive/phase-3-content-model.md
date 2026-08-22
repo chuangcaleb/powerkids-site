@@ -21,8 +21,6 @@ Cheap to change now, expensive once content exists — every later change is a m
 
 **Globals:** `site-settings` (brand, tagline, founding year, email, phones, hours, socials), `navigation` (header + footer trees, column headings as fields), `seo-defaults`.
 
-Founding year stored, not hard-coded — "{n} years & counting" stays computed.
-
 **Blocks**, closed set of 11: `prose` `media-text` `card-grid` `steps` `stats` `gallery` `cta-banner` `schools` `faq` `contact` `video`. One directory each: `src/payload/blocks/<name>/config.ts`. `hero` is not one of these — every page has exactly one, as its own always-present field (`src/payload/collections/pages/hero.ts`), independent of `layout`. See `docs/architecture/blocks.md`.
 
 **Use built-in `slugField()` helper**, imported from `payload`, not hand-written `text` field. Returns wired field set — auto-generate from another field (`useAsSlug`, default `'title'`), unique + indexed, admin lock/unlock + regenerate. Marked **experimental** upstream, may change or vanish, use at own risk — re-check `docs/fields/slug.mdx` in Payload repo on upgrade.

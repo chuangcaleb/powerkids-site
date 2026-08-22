@@ -3,7 +3,7 @@
 **Purpose:** what Payload's own docs can't tell you — this project's constraints, plus corrections to mistakes agents make here.
 **Read when:** any task touching `src/payload/`.
 
-For Payload's API surface (field types, config shapes, hook signatures, operator lists) use the `payload` skill or <https://payloadcms.com/docs>. Do not vendor upstream docs back into this repo — a stale copy is worse than no copy, and the last one contradicted shipped code in three places.
+For Payload's API surface (field types, config shapes, hook signatures, operator lists) use the `payload` skill or <https://payloadcms.com/docs>. Do not vendor upstream docs back into this repo — a stale copy is worse than no copy.
 
 ## Rules that survive every task
 
