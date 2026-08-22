@@ -16,7 +16,7 @@ const rowLabel = {
 /**
  * Header and footer link trees. Header nav is flat (D-04/K-04 resolved to a
  * plain underline style, not dropdowns) — the homepage is a single scrolling
- * page (see docs/decisions/0004-single-page-mvp-no-redirects.md), so header
+ * page (see docs/adr/0004-single-page-mvp-no-redirects.md), so header
  * links are anchors/routes, capped small. Footer link groups are the only
  * nesting; footer column headings are fields, not markup.
  */

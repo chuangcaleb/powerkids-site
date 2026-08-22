@@ -36,6 +36,17 @@ import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-vercel-postg
 
 If you generate migration by calling Payload CLI directly, run script yourself. Delete both once Payload release fixes generator.
 
+### create-vs-rename prompt needs a raw-mode TTY
+
+`migrate:create`'s enum/column create-vs-rename prompt needs a raw-mode TTY, which a plain piped shell doesn't have. Two ways through:
+
+- Drive it with `expect` (`spawn pnpm migrate:create <name>`, `expect "create column" { send "\r"; exp_continue }`) so the tool runs normally end to end — preferred, since it keeps the generated migration paired with its schema snapshot.
+- Introspect the live schema instead (`payload.db.drizzle.execute(...)` via a throwaway `pnpm payload run` script) and hand-write the migration — see `20260811_230000_drop_programs_events_authored_blocks.ts` for the pattern.
+
+### A hand-written migration has no schema snapshot
+
+It skips `migrate:create` entirely, so `migrate:create`'s next run diffs against whatever snapshot predates it — stale — and regenerates bogus statements for columns the hand-written migration already touched. Fix by temporarily reverting the collection config to the state the hand-written migration actually shipped, running `migrate:create` again to produce the missing snapshot `.json`, renaming it to match the hand-written migration's filename, discarding the throwaway `.ts` it also generated, then restoring the real config and re-running `migrate:create` for the real change.
+
 ## Writing them
 
 - **Name for what they do**: `add-school-map-url`, not `update-1`.

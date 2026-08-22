@@ -17,10 +17,13 @@
  * `--dot-grid-edge-fade` is the fade's own extent, distinct from
  * `--dot-grid-fade` (the radial-gradient's dot-softness stop).
  *
- * Not a `mask-image` — see gotchas.md. Paints `--dot-grid-bg-color` as both
- * a real `background-color` and the gradient's opaque stops, so the layer
- * carries its own backing colour instead of relying on the consumer's
- * background matching it by coincidence. */
+ * Not a `mask-image`: Chromium silently fails to composite a mask over an
+ * element that also has a `background-image` (a plain `background-color`
+ * masks fine; swap in any `background-image` and the mask stops applying).
+ * Paints `--dot-grid-bg-color` as both a real `background-color` and the
+ * gradient's opaque stops instead, so the layer carries its own backing
+ * colour rather than relying on the consumer's background matching it by
+ * coincidence. */
 .dot-grid-edge-fade {
   margin-block: calc(var(--space-xs) * -1);
   background-color: var(--dot-grid-bg-color, transparent);

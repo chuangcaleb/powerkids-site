@@ -13,8 +13,8 @@ import {
  * hand-writing, but `payload migrate:create`'s create-vs-rename TUI prompt
  * for `has_duplicate` (it can't tell "rename `possible_duplicate_of_id`"
  * from "new column" on its own) still can't run non-interactively in this
- * environment — see docs/gotchas.md. Written by hand instead, matching what
- * the generator would have produced for a plain create.
+ * environment — see docs/ops/migrations.md. Written by hand instead, matching
+ * what the generator would have produced for a plain create.
  *
  * No backfill: issue #12's "No backfill migration" decision — the Media
  * library was empty at spec time. Re-check that assumption before replaying

@@ -6,7 +6,7 @@ This branch (`v4`) is a ground-up rebuild. Its purpose is to move every piece of
 
 ## Status
 
-**Phase 1 of 8** — foundation. App, admin panel, database, media storage exist; no design system, content model, or public content yet. See [the phase list](#phases).
+Phases 0–4 (foundation, design system, content model, rendering) are done. Phase 5 (automated content migration) was permanently skipped — the owner populates the CMS by hand instead of migrating v3 copy. **Phase 6 (launch: SEO, accessibility, cutover) is next.** See [the phase list](#phases).
 
 ## Stack
 
@@ -21,7 +21,7 @@ This branch (`v4`) is a ground-up rebuild. Its purpose is to move every piece of
 | Language  | TypeScript, strict                                                            |
 | Packages  | pnpm                                                                          |
 
-Versions pinned exactly, not caret-ranged. Payload couples tightly to Next — doesn't support Next `15.5`–`16.1.x` — so upgrades deliberate change, not incidental.
+Versions pinned exactly, not caret-ranged. Payload couples tightly to Next — doesn't support Next `15.5`–`16.1.x` — so upgrades are deliberate change, not incidental.
 
 ## Getting started
 
@@ -63,32 +63,34 @@ See [docs/ops/environments.md](docs/ops/environments.md#dev-admin-account) for w
 
 Git hooks handle formatting on commit, run full verify loop on push.
 
+## Code structure & notable engineering practices
+
+For a reviewer skimming the codebase rather than running it.
+
+**One app, two route groups.** `src/app/(site)/` is the public marketing site; `src/app/(payload)/` is the generated Payload admin panel, mounted in the same Next.js deploy rather than run as a separate service (see [ADR 0001](docs/adr/0001-nextjs-payload-vercel.md)). `(payload)` and `src/payload-types.ts` are generated output — excluded from lint/format, never hand-edited, regenerated with `pnpm generate:types`.
+
+**Content is data, never markup.** Navigation, contact details, opening hours, school addresses, programs, and events are all CMS records (`src/payload/collections/`, `src/payload/globals/`), not hardcoded JSX. Pages are editor-composed from a closed catalogue of **blocks** — see [docs/architecture/blocks.md](docs/architecture/blocks.md).
+
+**Every schema change ships through a migration, in every environment — no exceptions, dev included.** The Postgres adapter's `push` option is unconditionally `false`; it used to auto-push schema in dev, until drizzle-kit's structural-diff resolution silently dropped and recreated a table on a shared dev database. See [docs/ops/migrations.md](docs/ops/migrations.md).
+
+**Media filenames are content-addressed.** Uploads are renamed to include a content hash (`hero-4846c1b1.webp`) before Payload derives size variants, so a 4-hour edge cache never serves stale bytes after a replacement — different content gets a different URL instead of colliding on cache-control. See [docs/ops/environments.md#media-serving-and-cache](docs/ops/environments.md#media-serving-and-cache).
+
+**Duplicate uploads are flagged, not blocked.** Media re-uploads are detected by checksum group and surfaced to editors for review rather than silently rejected or silently allowed — the system warns, the editor decides. See [ADR 0005](docs/adr/0005-media-duplicate-detection-by-checksum-group.md).
+
+**CI never touches a real database.** Pages using the Payload Local API at build time need a live `DATABASE_URI` for static generation; CI instead runs `next build --experimental-build-mode compile`, which type-checks and compiles every route without running generation, so a placeholder `DATABASE_URI` is enough. The real static build happens on Vercel, where a real database is present. See [docs/ops/environments.md](docs/ops/environments.md).
+
+**Docs are progressive disclosure, not a wiki.** [AGENTS.md](AGENTS.md) stays a short router; each `docs/<topic>/` folder carries its own index of what's inside and when to read it, so an agent (or a new contributor) opens only what the current task needs. [CONTEXT.md](CONTEXT.md) holds the domain glossary; [docs/adr/](docs/adr/) holds decisions expensive enough to justify writing down.
+
 ## Documentation
 
-Docs use progressive disclosure: start narrow, follow links only as far as your task needs.
-
-- **[AGENTS.md](AGENTS.md)** — conventions, non-negotiables, map of every other doc. Start here.
-- **DESIGN.md** — visual identity: tokens, type scale, invariants. _(Phase 2)_
-- **[docs/architecture/](docs/architecture/)** — system shape, content model, block catalogue
-- **[docs/design/](docs/design/)** — layout primitives, tokens, components
-- **[docs/workflows/](docs/workflows/)** — verify loop, how to add a block or page, how to edit content
-- **[docs/ops/](docs/ops/)** — environments, deploy, migrations
-- **[docs/decisions/](docs/decisions/)** — architecture decision records
-- **[docs/reference/](docs/reference/)** — audited v3 content and design, migration source of truth
-
-## Phases
-
-| #   | Phase                                                     | State       |
-| --- | --------------------------------------------------------- | ----------- |
-| 0   | Archive, extract, document skeleton                       | done        |
-| 1   | Foundation — app, database, storage, CI, deploy           | in progress |
-| 2   | Design system — tokens, primitives, components            |             |
-| 3   | Content model — collections, globals, blocks              |             |
-| 4   | Rendering — layouts, pages, block renderers               |             |
-| 5   | Content migration — seed script                           |             |
-| 6   | Launch — SEO, performance, accessibility, cutover         |             |
-| 7   | Forms — registration and careers _(deferred)_             |             |
-| 8   | Localisation — activate additional languages _(deferred)_ |             |
+- **[AGENTS.md](AGENTS.md)** — conventions, non-negotiables, pointers to everything else. Start here.
+- **[CONTEXT.md](CONTEXT.md)** — domain glossary (School, Block, Page).
+- **DESIGN.md** — visual identity: tokens, type scale, invariants.
+- **[docs/architecture/](docs/architecture/)** — system shape, content model, block catalogue.
+- **[docs/design/](docs/design/)** — layout primitives, tokens, components.
+- **[docs/workflows/](docs/workflows/)** — verify loop, worktrees, how to add a block or page, how to edit content.
+- **[docs/ops/](docs/ops/)** — environments, deploy, migrations.
+- **[docs/adr/](docs/adr/)** — architecture decision records.
 
 ## History
 

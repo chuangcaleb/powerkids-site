@@ -16,7 +16,7 @@ Fully agentic.
 
 **`scripts/seed.ts`**, run by `pnpm seed`, using Payload local API (`payload run`, which resolves `@payload-config` and `@/` aliases — plain `node` does not). Consolidates the phase-4 throwaway scripts (`scripts/seed-kitchen-sink-page.ts`, `scripts/seed-dummy-pages.ts`) into the one real script.
 
-Populates: globals first (`site-settings`, `navigation`, `seo-defaults`), then `media`, then `schools` / `programs` / `events` / `people`, then `pages` composed of blocks — all placeholder content, not transcribed v3 copy. `docs/reference/content-inventory.md` was **not** a source for this script; it held real copy/route-map lookups, unrelated to seeding — since deleted, see [decisions/0004](../decisions/0004-single-page-mvp-no-redirects.md).
+Populates: globals first (`site-settings`, `navigation`, `seo-defaults`), then `media`, then `schools` / `programs` / `events` / `people`, then `pages` composed of blocks — all placeholder content, not transcribed v3 copy. `docs/reference/content-inventory.md` was **not** a source for this script; it held real copy/route-map lookups, unrelated to seeding — since deleted, see [adr/0004](../adr/0004-single-page-mvp-no-redirects.md).
 
 **Media**: dummy uploads (existing sampled files in `_reference/media/` are fine as stand-ins). Every upload needs real `alt` — schema enforces it, so a lazy seed fails loudly.
 

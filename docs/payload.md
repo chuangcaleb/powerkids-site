@@ -35,6 +35,8 @@ Each of these is a correction to something an agent gets wrong by default — us
 - **`migrationDir` is `src/payload/migrations`**, resolved from `payload.config.ts` — not `./migrations`.
 - **Preview route is `src/app/(site)/preview/route.ts`** (with `exit-preview` alongside), not Payload's suggested `/api/preview`.
 - **R2 needs `region: 'auto'`** — it's a required-field placeholder, not a location hint.
+- **`src/app/(payload)/` and `src/payload-types.ts` are generated**, excluded from lint and formatting. Regenerate (`pnpm generate:types`), never hand-edit.
+- **Adding an admin component needs `pnpm generate:importmap`**, not just `generate:types`.
 
 ## Related
 
