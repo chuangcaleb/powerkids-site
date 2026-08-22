@@ -2,7 +2,7 @@
 
 Website for **PowerKids Kindergarten** — three schools across the Klang Valley, Malaysia. <https://powerkids.edu.my>
 
-This branch (`v4`) is a ground-up rebuild. Its purpose is to move every piece of content out of code and into a CMS, so school staff can edit copy, swap photos, add pages, and rearrange sections without a developer.
+This v4 is a ground-up rebuild in PayloadCMS. Its purpose is to move every piece of content out of code and into a CMS, so school staff can edit copy, swap photos, add pages, and rearrange sections without a developer.
 
 ## Status
 
@@ -91,13 +91,6 @@ For a reviewer skimming the codebase rather than running it.
 - **[docs/workflows/](docs/workflows/)** — verify loop, worktrees, how to add a block or page, how to edit content.
 - **[docs/ops/](docs/ops/)** — environments, deploy, migrations.
 - **[docs/adr/](docs/adr/)** — architecture decision records.
-
-## History
-
-| Ref              | What                                         |
-| ---------------- | -------------------------------------------- |
-| `main`           | Currently live v3 site                       |
-| `v3-final` (tag) | Exact state of live site at start of rebuild |
 
 ## Licence
 
