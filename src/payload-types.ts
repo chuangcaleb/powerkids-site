@@ -172,31 +172,22 @@ export interface User {
   collection: 'users';
 }
 /**
- * Photos and files used across the site.
- *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
 export interface Media {
   id: number;
   /**
-   * Describe the image for someone who cannot see it. If the image is purely decorative, write "Decorative".
+   * Describe the image for someone who cannot see it — also shown as the caption where a block supports one. If purely decorative, write "Decorative".
    */
   alt: string;
-  /**
-   * Optional. Shown beneath the image where a block supports it.
-   */
-  caption?: string | null;
+  tags?: (number | MediaTag)[] | null;
   checksum?: string | null;
-  /**
-   * Set automatically when this file's content matches another Media doc — see the notice above for which one(s).
-   */
   hasDuplicate?: boolean | null;
   /**
-   * Check once reviewed and confirmed this is not actually a duplicate. Clears the flag for this doc only, not the rest of its group.
+   * Check once reviewed and confirmed this is not actually a duplicate. Clears the flag for this doc only, not the duplicate siblings.
    */
   duplicateDismissed?: boolean | null;
-  tags?: (number | MediaTag)[] | null;
   folder?: (number | null) | FolderInterface;
   updatedAt: string;
   createdAt: string;
@@ -999,11 +990,10 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
-  caption?: T;
+  tags?: T;
   checksum?: T;
   hasDuplicate?: T;
   duplicateDismissed?: T;
-  tags?: T;
   folder?: T;
   updatedAt?: T;
   createdAt?: T;

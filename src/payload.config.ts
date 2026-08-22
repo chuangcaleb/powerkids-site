@@ -54,7 +54,7 @@ export default buildConfig({
     },
     components: {
       beforeDashboard: [
-        '@/payload/admin/components/duplicate-review-widget#DuplicateReviewWidget',
+        '@/payload/admin/components/media-duplicates/duplicate-review-widget#DuplicateReviewWidget',
       ],
     },
   },

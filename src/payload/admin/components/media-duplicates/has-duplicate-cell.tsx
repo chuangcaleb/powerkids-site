@@ -8,10 +8,22 @@ import type { DefaultCellComponentProps } from 'payload'
 
 /** List-view marker for user story 3 — visible only while genuinely unreviewed. */
 export const HasDuplicateCell: React.FC<DefaultCellComponentProps> = ({
-  cellData,
+  cellData: _,
   rowData,
 }) => {
-  if (!cellData || rowData.duplicateDismissed) return null
+  if (!rowData.hasDuplicate) return null
 
-  return <Pill pillStyle="warning">Possible duplicate</Pill>
+  if (!rowData.duplicateDismissed) {
+    return (
+      <Pill pillStyle="error" size="small">
+        Unhandled
+      </Pill>
+    )
+  }
+
+  return (
+    <Pill pillStyle="light" size="small">
+      Dismissed
+    </Pill>
+  )
 }

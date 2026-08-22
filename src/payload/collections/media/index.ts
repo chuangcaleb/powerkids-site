@@ -29,14 +29,12 @@ export const Media: CollectionConfig = {
   slug: 'media',
   admin: {
     group: 'Content',
-    description: 'Photos and files used across the site.',
-    defaultColumns: ['filename', 'alt', 'hasDuplicate'],
+    defaultColumns: ['filename', 'alt', 'duplicateStatus'],
     components: {
       edit: {
-        // Above-the-fold notice + live sibling list for a flagged doc —
-        // reasoning in ADR 0005.
+        // Above-the-fold notice — reasoning in ADR 0005.
         beforeDocumentControls: [
-          '@/payload/admin/components/duplicate-review-banner#DuplicateReviewBanner',
+          '@/payload/admin/components/media-duplicates/has-duplicate-pill#HasDuplicatePill',
         ],
       },
     },
@@ -89,20 +87,28 @@ export const Media: CollectionConfig = {
   },
   fields: [
     {
-      name: 'alt',
-      type: 'text',
-      required: true,
-      admin: {
-        description:
-          'Describe the image for someone who cannot see it. If the image is purely decorative, write "Decorative".',
-      },
-    },
-    {
-      name: 'caption',
-      type: 'text',
-      admin: {
-        description: 'Optional. Shown beneath the image where a block supports it.',
-      },
+      type: 'row',
+      fields: [
+        {
+          name: 'alt',
+          type: 'text',
+          required: true,
+          admin: {
+            width: '50%',
+            // Doubles as the caption where a block renders one — one text
+            // field, not two to keep in sync. See ADR 0005 addendum.
+            description:
+              'Describe the image for someone who cannot see it — also shown as the caption where a block supports one. If purely decorative, write "Decorative".',
+          },
+        },
+        {
+          name: 'tags',
+          type: 'relationship',
+          relationTo: 'media-tags',
+          hasMany: true,
+          admin: { width: '50%' },
+        },
+      ],
     },
     {
       name: 'checksum',
@@ -114,37 +120,48 @@ export const Media: CollectionConfig = {
       admin: { hidden: true },
     },
     {
-      name: 'hasDuplicate',
-      type: 'checkbox',
-      defaultValue: false,
-      index: true,
-      access: { read: authenticatedFieldAccess },
+      type: 'ui',
+      name: 'duplicateStatus',
       admin: {
-        readOnly: true,
-        description:
-          "Set automatically when this file's content matches another Media doc — see the notice above for which one(s).",
+        condition: (data) => Boolean(data?.hasDuplicate),
         components: {
-          Cell: '@/payload/admin/components/has-duplicate-cell#HasDuplicateCell',
+          Cell: '@/payload/admin/components/media-duplicates/has-duplicate-cell#HasDuplicateCell',
         },
       },
     },
     {
-      name: 'duplicateDismissed',
+      name: 'hasDuplicate',
       type: 'checkbox',
+      label: 'Has Duplicate(s)?',
       defaultValue: false,
+      index: true,
       access: { read: authenticatedFieldAccess },
       admin: {
-        // Only meaningful once flagged — a plain doc has nothing to dismiss.
         condition: (data) => Boolean(data?.hasDuplicate),
-        description:
-          'Check once reviewed and confirmed this is not actually a duplicate. Clears the flag for this doc only, not the rest of its group.',
+        readOnly: true,
+        components: {
+          Field:
+            '@/payload/admin/components/media-duplicates/list-duplicate-media#ListDuplicateMedia',
+        },
       },
     },
     {
-      name: 'tags',
-      type: 'relationship',
-      relationTo: 'media-tags',
-      hasMany: true,
+      type: 'row',
+      fields: [
+        {
+          name: 'duplicateDismissed',
+          type: 'checkbox',
+          label: 'Dismiss Duplicate(s)?',
+          defaultValue: false,
+          access: { read: authenticatedFieldAccess },
+          admin: {
+            condition: (data) => Boolean(data?.hasDuplicate),
+            width: '50%',
+            description:
+              'Check once reviewed and confirmed this is not actually a duplicate. Clears the flag for this doc only, not the duplicate siblings.',
+          },
+        },
+      ],
     },
   ],
 }
