@@ -16,6 +16,13 @@
    * use. See DESIGN.md's contrast rule. */
   --colour-red: #e12c2c;
   --colour-blue: #2434e8;
+  /* Blue on the footer's black bg: #2434e8 only clears ~2.8:1 there, but
+   * brightening the base blue to fix that washes it out on light bg too.
+   * Separate bold variant for dark bg, tuned to clear 4.5:1 against black
+   * only. Option A active; swap in B/C if A reads too close to the original.
+   * See DESIGN.md's contrast rule. */
+  --colour-blue-inverse: #4a68f5;
+
   --colour-amber: #a15d0c;
   --colour-red-tint: #ffe6e4;
   --colour-blue-tint: #e4e7ff;
@@ -41,6 +48,7 @@
 
   --accent-red: var(--colour-red);
   --accent-blue: var(--colour-blue);
+  --accent-blue-inverse: var(--colour-blue-inverse);
   --accent-amber: var(--colour-amber);
   --accent-red-fill: var(--colour-red-tint);
   --accent-blue-fill: var(--colour-blue-tint);

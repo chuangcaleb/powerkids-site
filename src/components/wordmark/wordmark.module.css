@@ -19,6 +19,10 @@
   --wordmark-colour: var(--accent-blue);
 }
 
+.stroke .blue {
+  --wordmark-colour: var(--accent-blue-inverse);
+}
+
 .stroke .red,
 .stroke .blue {
   color: transparent;
