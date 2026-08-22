@@ -42,7 +42,7 @@ export const hero: Field = {
       admin: {
         condition: (_, { type } = {}) => type !== 'none',
         components: {
-          RowLabel: '@/payload/admin/components/row-label#RowLabel',
+          RowLabel: '@/payload/admin/components/row-labels/row-label#RowLabel',
         },
       },
       fields: [

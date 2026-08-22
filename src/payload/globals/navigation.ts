@@ -9,7 +9,9 @@ const linkFields = [
   { name: 'url', type: 'text', required: true },
 ] as const
 
-const rowLabel = { RowLabel: '@/payload/admin/components/row-label#RowLabel' } as const
+const rowLabel = {
+  RowLabel: '@/payload/admin/components/row-labels/row-label#RowLabel',
+} as const
 
 /**
  * Header and footer link trees. Header nav is flat (D-04/K-04 resolved to a

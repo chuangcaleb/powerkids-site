@@ -48,7 +48,9 @@ export const Schools: CollectionConfig = {
       type: 'array',
       minRows: 1,
       admin: {
-        components: { RowLabel: '@/payload/admin/components/row-label#RowLabel' },
+        components: {
+          RowLabel: '@/payload/admin/components/row-labels/row-label#RowLabel',
+        },
       },
       fields: [
         {

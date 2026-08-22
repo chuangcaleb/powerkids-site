@@ -17,9 +17,9 @@ Nothing in the CMS is hard-coded in a component. Phone number, address, nav labe
 
 - **File structure:** `src/payload/collections/<slug>/index.ts`, with `hooks/` alongside for anything more than a one-line access check.
 - **Access:** shared utilities in `src/payload/access/` (`authenticated`, `authenticatedOrPublished`, `anyone`, `admin`/`adminFieldAccess`) — collections compose these rather than repeating inline role checks. `users`' `update` stays inline (self-or-admin) since that compound check doesn't fit any single utility.
-- **Row labels:** array-field rows use the shared `src/payload/admin/components/row-label.tsx` client component (`admin.components.RowLabel`) instead of one bespoke label component per field.
+- **Row labels:** array-field rows use the shared `src/payload/admin/components/row-labels/row-label.tsx` client component (`admin.components.RowLabel`) instead of one bespoke label component per field.
 - **Ordering:** collections rendered as lists carry an explicit `order` field. Never rely on creation order or alphabetical sort for editor-visible sequence.
-- **Uploads:** `alt` is required — no exceptions, no empty strings.
+- **Uploads:** `alt` is required — no exceptions, no empty strings. It also doubles as the caption wherever a block renders one — no separate `caption` field, so there's nothing to keep in sync.
 
 ## Roles
 

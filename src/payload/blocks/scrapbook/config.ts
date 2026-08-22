@@ -29,7 +29,8 @@ export const ScrapbookBlock: Block = {
       maxRows: 6,
       admin: {
         components: {
-          RowLabel: '@/payload/admin/components/scrapbook-row-label#ScrapbookRowLabel',
+          RowLabel:
+            '@/payload/admin/components/row-labels/scrapbook-row-label#ScrapbookRowLabel',
         },
       },
       fields: [

@@ -37,7 +37,7 @@ export function iconField({
       width,
       description,
       components: {
-        Field: '@/payload/admin/components/icon-picker#IconPicker',
+        Field: '@/payload/admin/components/icon-picker/icon-picker#IconPicker',
       },
     },
     validate: (value: string | string[] | null | undefined) => {
