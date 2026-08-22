@@ -33,6 +33,7 @@ import * as migration_20260817_160000_drop_legacy_doodle_icon_tables from './202
 import * as migration_20260818_183000_rename_doodle_icons_to_icons from './20260818_183000_rename_doodle_icons_to_icons'
 import * as migration_20260819_125503_drop_card_grid_block from './20260819_125503_drop_card_grid_block'
 import * as migration_20260822_023226_remove_founded_year from './20260822_023226_remove_founded_year'
+import * as migration_20260822_120000_media_duplicate_review_by_checksum_group from './20260822_120000_media_duplicate_review_by_checksum_group'
 
 export const migrations = [
   {
@@ -209,5 +210,10 @@ export const migrations = [
     up: migration_20260822_023226_remove_founded_year.up,
     down: migration_20260822_023226_remove_founded_year.down,
     name: '20260822_023226_remove_founded_year',
+  },
+  {
+    up: migration_20260822_120000_media_duplicate_review_by_checksum_group.up,
+    down: migration_20260822_120000_media_duplicate_review_by_checksum_group.down,
+    name: '20260822_120000_media_duplicate_review_by_checksum_group',
   },
 ]

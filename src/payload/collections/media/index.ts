@@ -1,10 +1,14 @@
 import type { CollectionConfig } from 'payload'
 
 import { anyone } from '@/payload/access/anyone'
-import { authenticated } from '@/payload/access/authenticated'
+import { authenticated, authenticatedFieldAccess } from '@/payload/access/authenticated'
 import { hashedFilename } from '@/lib/media-filename'
 
-import { flagDuplicate } from './hooks/flag-duplicate'
+import { computeChecksum } from './hooks/compute-checksum'
+import {
+  flagDuplicateAfterChange,
+  flagDuplicateAfterDelete,
+} from './hooks/flag-duplicate'
 
 /** Quality 80 is the usual sweet spot: no visible artefacts, big size win. */
 const WEBP = { format: 'webp', options: { quality: 80 } } as const
@@ -26,7 +30,16 @@ export const Media: CollectionConfig = {
   admin: {
     group: 'Content',
     description: 'Photos and files used across the site.',
-    defaultColumns: ['filename', 'alt', 'possibleDuplicateOf'],
+    defaultColumns: ['filename', 'alt', 'hasDuplicate'],
+    components: {
+      edit: {
+        // Above-the-fold notice + live sibling list for a flagged doc —
+        // reasoning in ADR 0005.
+        beforeDocumentControls: [
+          '@/payload/admin/components/duplicate-review-banner#DuplicateReviewBanner',
+        ],
+      },
+    },
   },
   folders: true,
   access: {
@@ -46,8 +59,10 @@ export const Media: CollectionConfig = {
 
         req.file.name = hashedFilename(req.file.name, req.file.data)
       },
-      flagDuplicate,
+      computeChecksum,
     ],
+    afterChange: [flagDuplicateAfterChange],
+    afterDelete: [flagDuplicateAfterDelete],
   },
   upload: {
     mimeTypes: ['image/*', 'application/pdf'],
@@ -93,16 +108,36 @@ export const Media: CollectionConfig = {
       name: 'checksum',
       type: 'text',
       index: true,
+      // Authenticated-only: sole ground truth for duplicate grouping, no
+      // reason for it to appear in a public API response.
+      access: { read: authenticatedFieldAccess },
       admin: { hidden: true },
     },
     {
-      name: 'possibleDuplicateOf',
-      type: 'relationship',
-      relationTo: 'media',
+      name: 'hasDuplicate',
+      type: 'checkbox',
+      defaultValue: false,
+      index: true,
+      access: { read: authenticatedFieldAccess },
       admin: {
         readOnly: true,
         description:
-          "Set automatically when an upload matches an existing file's content. Reuse the linked doc instead of this one if it really is the same photo.",
+          "Set automatically when this file's content matches another Media doc — see the notice above for which one(s).",
+        components: {
+          Cell: '@/payload/admin/components/has-duplicate-cell#HasDuplicateCell',
+        },
+      },
+    },
+    {
+      name: 'duplicateDismissed',
+      type: 'checkbox',
+      defaultValue: false,
+      access: { read: authenticatedFieldAccess },
+      admin: {
+        // Only meaningful once flagged — a plain doc has nothing to dismiss.
+        condition: (data) => Boolean(data?.hasDuplicate),
+        description:
+          'Check once reviewed and confirmed this is not actually a duplicate. Clears the flag for this doc only, not the rest of its group.',
       },
     },
     {

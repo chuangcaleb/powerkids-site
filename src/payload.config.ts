@@ -52,6 +52,11 @@ export default buildConfig({
       url: getServerUrl(),
       collections: ['pages'],
     },
+    components: {
+      beforeDashboard: [
+        '@/payload/admin/components/duplicate-review-widget#DuplicateReviewWidget',
+      ],
+    },
   },
 
   collections: [Users, Media, MediaTags, Pages, Schools, People],

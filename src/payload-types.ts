@@ -189,9 +189,13 @@ export interface Media {
   caption?: string | null;
   checksum?: string | null;
   /**
-   * Set automatically when an upload matches an existing file's content. Reuse the linked doc instead of this one if it really is the same photo.
+   * Set automatically when this file's content matches another Media doc — see the notice above for which one(s).
    */
-  possibleDuplicateOf?: (number | null) | Media;
+  hasDuplicate?: boolean | null;
+  /**
+   * Check once reviewed and confirmed this is not actually a duplicate. Clears the flag for this doc only, not the rest of its group.
+   */
+  duplicateDismissed?: boolean | null;
   tags?: (number | MediaTag)[] | null;
   folder?: (number | null) | FolderInterface;
   updatedAt: string;
@@ -997,7 +1001,8 @@ export interface MediaSelect<T extends boolean = true> {
   alt?: T;
   caption?: T;
   checksum?: T;
-  possibleDuplicateOf?: T;
+  hasDuplicate?: T;
+  duplicateDismissed?: T;
   tags?: T;
   folder?: T;
   updatedAt?: T;
