@@ -23,7 +23,7 @@ import path from 'node:path'
 const MIGRATIONS_DIR = path.join(process.cwd(), 'src/payload/migrations')
 
 const BROKEN =
-  /^import \{ MigrateUpArgs, MigrateDownArgs, sql \} from '@payloadcms\/db-postgres'$/m
+  /^import \{ MigrateUpArgs, MigrateDownArgs, sql \} from '@payloadcms\/db-vercel-postgres'$/m
 
 const FIXED =
   "import { type MigrateDownArgs, type MigrateUpArgs, sql } from '@payloadcms/db-vercel-postgres'"
