@@ -1,4 +1,8 @@
-import { type MigrateDownArgs, type MigrateUpArgs, sql } from '@payloadcms/db-postgres'
+import {
+  type MigrateDownArgs,
+  type MigrateUpArgs,
+  sql,
+} from '@payloadcms/db-vercel-postgres'
 
 /**
  * Hand-written, not generator output: `payload migrate:create`'s diff was

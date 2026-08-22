@@ -13,3 +13,5 @@ allowBuilds:
   # Downloads its own bundled Chromium — headless browser for the axe-core
   # accessibility check (scripts/check-a11y.mjs).
   puppeteer: true
+  # Native WebSocket buffer utils, pulled in by @vercel/postgres via `ws`.
+  bufferutil: true

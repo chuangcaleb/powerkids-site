@@ -1,5 +1,5 @@
 import config from '@payload-config'
-import { sql } from '@payloadcms/db-postgres'
+import { sql } from '@payloadcms/db-vercel-postgres'
 import { getPayload } from 'payload'
 import { isIconName } from '@/lib/icons'
 

@@ -1,4 +1,8 @@
-import { type MigrateDownArgs, type MigrateUpArgs, sql } from '@payloadcms/db-postgres'
+import {
+  type MigrateDownArgs,
+  type MigrateUpArgs,
+  sql,
+} from '@payloadcms/db-vercel-postgres'
 
 /**
  * The `content` block's variant enum dropped `card` and added `image`

@@ -1,4 +1,8 @@
-import { type MigrateDownArgs, type MigrateUpArgs, sql } from '@payloadcms/db-postgres'
+import {
+  type MigrateDownArgs,
+  type MigrateUpArgs,
+  sql,
+} from '@payloadcms/db-vercel-postgres'
 
 /**
  * `programs-showcase` renamed to `framed-rows` — a block name describes the

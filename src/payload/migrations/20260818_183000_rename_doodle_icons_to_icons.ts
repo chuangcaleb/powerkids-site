@@ -1,4 +1,8 @@
-import { type MigrateDownArgs, type MigrateUpArgs, sql } from '@payloadcms/db-postgres'
+import {
+  type MigrateDownArgs,
+  type MigrateUpArgs,
+  sql,
+} from '@payloadcms/db-vercel-postgres'
 
 /**
  * Scrapbook's `doodleIcons` becomes `icons`, matching the `icon`/`icons` naming

@@ -1,7 +1,7 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-import { postgresAdapter } from '@payloadcms/db-postgres'
+import { vercelPostgresAdapter } from '@payloadcms/db-vercel-postgres'
 import { resendAdapter } from '@payloadcms/email-resend'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import type { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
@@ -68,7 +68,7 @@ export default buildConfig({
     apiKey: requireEnv('RESEND_API_KEY'),
   }),
 
-  db: postgresAdapter({
+  db: vercelPostgresAdapter({
     pool: { connectionString: requireEnv('DATABASE_URI') },
     // Unconditionally false, dev included — push resolves structural diffs by
     // dropping and recreating tables, silently. See docs/ops/migrations.md.

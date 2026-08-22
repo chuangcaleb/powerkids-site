@@ -27,7 +27,7 @@ Commit migration file and regenerated types together with schema change. Migrati
 Payload's generator emits this at top of every migration:
 
 ```ts
-import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-postgres'
+import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-vercel-postgres'
 ```
 
 `MigrateUpArgs` and `MigrateDownArgs` are **type-only** exports, so under ESM this fails at runtime with `does not provide an export named 'MigrateDownArgs'` and `pnpm migrate` dies before applying anything — error points at module system, not real cause.

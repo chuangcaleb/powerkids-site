@@ -4,7 +4,7 @@
  *
  * The generator writes:
  *
- *   import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-postgres'
+ *   import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-vercel-postgres'
  *
  * but `MigrateUpArgs` and `MigrateDownArgs` are type-only exports. Under ESM
  * that import fails at runtime — `does not provide an export named
@@ -26,7 +26,7 @@ const BROKEN =
   /^import \{ MigrateUpArgs, MigrateDownArgs, sql \} from '@payloadcms\/db-postgres'$/m
 
 const FIXED =
-  "import { type MigrateDownArgs, type MigrateUpArgs, sql } from '@payloadcms/db-postgres'"
+  "import { type MigrateDownArgs, type MigrateUpArgs, sql } from '@payloadcms/db-vercel-postgres'"
 
 const files = await readdir(MIGRATIONS_DIR).catch(() => [])
 const migrations = files.filter((f) => f.endsWith('.ts') && f !== 'index.ts')
