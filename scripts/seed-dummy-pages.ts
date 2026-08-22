@@ -54,7 +54,6 @@ await payload.updateGlobal({
   slug: 'site-settings',
   context: { disableRevalidate: true },
   data: {
-    foundedYear: 2001,
     email: 'powerkidschool@gmail.com',
     phones: [
       { number: '010 - 221 2482', href: '+60102212482' },

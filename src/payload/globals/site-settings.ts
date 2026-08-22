@@ -22,15 +22,6 @@ export const SiteSettings: GlobalConfig = {
   },
   fields: [
     {
-      name: 'foundedYear',
-      type: 'number',
-      required: true,
-      admin: {
-        description:
-          'Used to compute "{n} years & counting" — do not hard-code the count anywhere.',
-      },
-    },
-    {
       name: 'email',
       type: 'email',
       required: true,

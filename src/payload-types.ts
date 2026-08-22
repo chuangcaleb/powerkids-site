@@ -1369,10 +1369,6 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface SiteSetting {
   id: number;
-  /**
-   * Used to compute "{n} years & counting" — do not hard-code the count anywhere.
-   */
-  foundedYear: number;
   email: string;
   phones?:
     | {
@@ -1562,7 +1558,6 @@ export interface Cta {
  * via the `definition` "site-settings_select".
  */
 export interface SiteSettingsSelect<T extends boolean = true> {
-  foundedYear?: T;
   email?: T;
   phones?:
     | T
