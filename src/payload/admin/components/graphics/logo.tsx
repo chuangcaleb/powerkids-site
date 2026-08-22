@@ -6,18 +6,21 @@ export const Logo: React.FC = () => (
     style={{
       display: 'flex',
       alignItems: 'center',
-      gap: '1em',
+      gap: '1.5em',
     }}
   >
     <Mascot
       role="img"
       aria-label="PowerKids"
       style={{
-        width: '3rem',
+        width: '7rem',
         color: 'var(--theme-text)',
         backgroundColor: 'var(--theme-bg)',
       }}
     />
-    <h2 style={{ fontSize: '3rem' }}>PowerKids Kindergarten</h2>
+    <h2 style={{ fontSize: '5rem', fontWeight: 800 }}>
+      <span style={{ color: 'var(--accent-red)' }}>Power</span>
+      <span style={{ color: 'var(--accent-blue)' }}>Kids</span>
+    </h2>
   </div>
 )
