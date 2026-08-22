@@ -37,6 +37,10 @@ const dirname = path.dirname(fileURLToPath(import.meta.url))
 export default buildConfig({
   serverURL: getServerUrl(),
 
+  // GraphQL is unused — this is a REST/Local API project. Disabling removes
+  // an otherwise-open, unauthenticated query-complexity attack surface.
+  graphQL: { disable: true },
+
   admin: {
     user: Users.slug,
     meta: {
