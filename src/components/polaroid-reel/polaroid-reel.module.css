@@ -11,12 +11,14 @@
   margin-inline: calc(var(--gutter) * -1);
 }
 
-.strip::-webkit-scrollbar {
+/* accesibility, always show scrollbar */
+
+/* .strip::-webkit-scrollbar {
   display: none;
-}
+} */
 
 .item {
-  flex: 0 0 min(80vw, 30rem);
+  flex: 0 0 min(90vw, 30rem);
   scroll-snap-align: start;
 }
 
