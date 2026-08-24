@@ -15,6 +15,8 @@ import { ItalicFeatureClient as ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0
 import { LinkFeatureClient as LinkFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { EmphasisFeatureClient as EmphasisFeatureClient_0863f3c3442c21695abd476791201620 } from '@/payload/richtext/emphasis/feature.client'
 import { FixedToolbarFeatureClient as FixedToolbarFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
+import { OrderedListFeatureClient as OrderedListFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
+import { UnorderedListFeatureClient as UnorderedListFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { InlineToolbarFeatureClient as InlineToolbarFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { IconPicker as IconPicker_8109d9fc6d233a28d0ca519fc605decb } from '@/payload/admin/components/icon-picker/icon-picker'
 import { ScrapbookRowLabel as ScrapbookRowLabel_8fac5d5920a286e14837a27ca835d73c } from '@/payload/admin/components/row-labels/scrapbook-row-label'
@@ -50,6 +52,8 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#LinkFeatureClient": LinkFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@/payload/richtext/emphasis/feature.client#EmphasisFeatureClient": EmphasisFeatureClient_0863f3c3442c21695abd476791201620,
   "@payloadcms/richtext-lexical/client#FixedToolbarFeatureClient": FixedToolbarFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
+  "@payloadcms/richtext-lexical/client#OrderedListFeatureClient": OrderedListFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
+  "@payloadcms/richtext-lexical/client#UnorderedListFeatureClient": UnorderedListFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@payloadcms/richtext-lexical/client#InlineToolbarFeatureClient": InlineToolbarFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@/payload/admin/components/icon-picker/icon-picker#IconPicker": IconPicker_8109d9fc6d233a28d0ca519fc605decb,
   "@/payload/admin/components/row-labels/scrapbook-row-label#ScrapbookRowLabel": ScrapbookRowLabel_8fac5d5920a286e14837a27ca835d73c,

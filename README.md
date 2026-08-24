@@ -71,7 +71,7 @@ Git hooks handle formatting on commit, run full verify loop on push.
 
 ### Design & Styling
 
-**Token-driven design.**. Avoid magic values, always declare standard tokens in native CSS Variables. `DESIGN.md` is the primary source of truth for why. `src/styles/tokens/` is the implementation of tokens, and the next highest authority.
+**Token-driven design.** Avoid magic values, always declare standard tokens in native CSS Variables. `DESIGN.md` is the primary source of truth for why. `src/styles/tokens/` is the implementation of tokens, and the next highest authority.
 
 **Reusable layout primitives.** [Every Layout](https://every-layout.dev/layouts/) methodology is to give layout _hints_ to the browser, and let the browser decide. There's really only a handful of layout archetypes, so we should avoid micromanaging every single box.
 

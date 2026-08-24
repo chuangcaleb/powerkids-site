@@ -80,7 +80,7 @@ export const ScrapbookBlock: Block = {
       type: 'text',
       admin: {
         description:
-          'Seeds the collage’s random arrangement (stagger, jitter, tilt, photo sizes). Shuffle to preview a different roll, then save to keep it — otherwise the layout is stable per page, not re-rolled on every visit.',
+          "Seeds the collage's random arrangement (stagger, jitter, tilt, photo sizes). Shuffle to preview a different roll, then save to keep it — otherwise the layout is stable per page, not re-rolled on every visit.",
         components: { Field: '@/payload/admin/components/seed-field#SeedField' },
       },
     },

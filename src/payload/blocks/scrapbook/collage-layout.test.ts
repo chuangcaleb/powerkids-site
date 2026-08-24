@@ -214,7 +214,7 @@ describe('determinism', () => {
     expect(buildCells(items, 'other')).not.toEqual(buildCells(items, 'seed'))
   })
 
-  it('keeps an item’s photos near its own text block', () => {
+  it("keeps an item's photos near its own text block", () => {
     const cells = buildCells(landscapeItems(4, 2), 'seed')
     for (const cell of cells) {
       expect(Math.abs(cell.order - cell.itemIndex)).toBeLessThan(1)

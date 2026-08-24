@@ -65,15 +65,11 @@ export const Pages: CollectionConfig = {
       url: ({ data }) => previewUrl(data?.slug),
     },
   },
-  // Server-side Live Preview (`RefreshRouteOnSave`) only refreshes the
-  // iframe on an actual save — draft save, autosave, or publish — never on
-  // a bare keystroke (that's client-side Live Preview's `useLivePreview`
-  // hook, which tracks form state directly —
-  // https://payloadcms.com/docs/live-preview/server).
-  // Without autosave, "Live Preview isn't updating" looks identical to a
-  // wiring bug: nothing ever fires the save that would trigger a refresh.
-  // 375ms matches the interval the official docs use to make this feel
-  // responsive.
+  // Server-side Live Preview (`RefreshRouteOnSave`) only refreshes the iframe
+  // on an actual save — draft save, autosave, or publish — never on a bare
+  // keystroke. Without autosave, "Live Preview isn't updating" looks
+  // identical to a wiring bug: nothing ever fires the save that would
+  // trigger a refresh.
   versions: {
     drafts: { autosave: true },
     maxPerDoc: 20,
