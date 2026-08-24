@@ -1,0 +1,26 @@
+/*
+ * Values and invariants: DESIGN.md. Intent: docs/design/tokens.md.
+ * Shared by `RichText` and `HeaderRichText` — both apply the `emphasis`
+ * mark (reused `underline` format bit) the same way.
+ */
+
+/* Hand-drawn double-underline mark. Ported from proto/panel3.html's `.em`
+   annotation system — a CSS mask'd SVG squiggle, not a real underline. */
+.emphasis {
+  position: relative;
+  display: inline-block;
+  font-style: normal;
+  isolation: isolate;
+}
+
+.emphasis::after {
+  content: '';
+  position: absolute;
+  left: -2%;
+  right: -2%;
+  bottom: -0.28em;
+  height: 0.34em;
+  background-color: var(--accent-color, var(--text-strong));
+  pointer-events: none;
+  mask: var(--emphasis-underline) left center / 100% 100% no-repeat;
+}

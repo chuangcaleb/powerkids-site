@@ -9,7 +9,6 @@ export type CollageItem = {
   header: {
     heading?: HeaderRichTextProps['data'] | null
     lead?: HeaderRichTextProps['data'] | null
-    accent?: 'neutral' | 'red' | 'blue' | null
   }
   button?: { label?: string | null; url?: string | null } | null
   icons: string[]
@@ -35,7 +34,6 @@ export function resolveCollageItems(
       header: {
         heading: item.header?.heading ?? null,
         lead: item.header?.lead ?? null,
-        accent: item.header?.accent ?? 'neutral',
       },
       button: item.button,
       icons: item.icons ?? [],

@@ -35,6 +35,7 @@ import * as migration_20260819_125503_drop_card_grid_block from './20260819_1255
 import * as migration_20260822_023226_remove_founded_year from './20260822_023226_remove_founded_year'
 import * as migration_20260822_072756_drop_media_caption from './20260822_072756_drop_media_caption'
 import * as migration_20260822_120000_media_duplicate_review_by_checksum_group from './20260822_120000_media_duplicate_review_by_checksum_group'
+import * as migration_20260824_143253_drop_scrapbook_item_accent from './20260824_143253_drop_scrapbook_item_accent'
 
 export const migrations = [
   {
@@ -221,5 +222,10 @@ export const migrations = [
     up: migration_20260822_120000_media_duplicate_review_by_checksum_group.up,
     down: migration_20260822_120000_media_duplicate_review_by_checksum_group.down,
     name: '20260822_120000_media_duplicate_review_by_checksum_group',
+  },
+  {
+    up: migration_20260824_143253_drop_scrapbook_item_accent.up,
+    down: migration_20260824_143253_drop_scrapbook_item_accent.down,
+    name: '20260824_143253_drop_scrapbook_item_accent',
   },
 ]

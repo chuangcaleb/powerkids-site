@@ -5,7 +5,9 @@ import {
   ItalicFeature,
   lexicalEditor,
   LinkFeature,
+  OrderedListFeature,
   ParagraphFeature,
+  UnorderedListFeature,
   type LinkFields,
 } from '@payloadcms/richtext-lexical'
 import type { TextFieldSingleValidation } from 'payload'
@@ -50,6 +52,8 @@ export const defaultLexical = lexicalEditor({
     linkFeature(),
     EmphasisFeature(),
     FixedToolbarFeature(),
+    OrderedListFeature(),
+    UnorderedListFeature(),
     InlineToolbarFeature(),
   ],
 })

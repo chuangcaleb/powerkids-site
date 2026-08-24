@@ -11,6 +11,8 @@ import { Heading } from '@/components/heading/heading'
 import { PolaroidReel } from '@/components/polaroid-reel/polaroid-reel'
 import { Polaroid } from '@/components/polaroid/polaroid'
 import { HeaderRichText } from '@/components/rich-text/header-rich-text'
+import { RichText } from '@/components/rich-text/rich-text'
+import { accentButtonVariant, accentStyle, type Accent } from '@/lib/accent'
 import { cx } from '@/lib/cx'
 import { ICONS, isIconName } from '@/lib/icons'
 import type { CSSProperties, RefObject } from 'react'
@@ -123,9 +125,11 @@ function readCellHeights(pads: Map<string, HTMLDivElement>): Record<string, numb
 export function ScrapbookCollage({
   items,
   seed,
+  accent,
 }: {
   items: CollageItem[]
   seed: string
+  accent?: Accent | null
 }) {
   const containerRef = useRef<HTMLDivElement>(null)
   const cellRefs = useRef(new Map<string, HTMLDivElement>())
@@ -250,11 +254,17 @@ export function ScrapbookCollage({
     return () => observer.disconnect()
   }, [computeLayout, mode, lanes])
 
-  if (mode === 'noJs') return <NoJsFallback items={items} containerRef={containerRef} />
-  if (mode === 'reel') return <ReelList items={items} containerRef={containerRef} />
+  if (mode === 'noJs')
+    return <NoJsFallback items={items} containerRef={containerRef} accent={accent} />
+  if (mode === 'reel')
+    return <ReelList items={items} containerRef={containerRef} accent={accent} />
 
   return (
-    <div ref={containerRef} className={cx(styles.collage, styles.collageGrid)}>
+    <div
+      ref={containerRef}
+      className={cx(styles.collage, styles.collageGrid)}
+      style={accentStyle(accent)}
+    >
       {cells.map((cell) => {
         const key = cellKey(cell)
         const item = items[cell.itemIndex]
@@ -301,7 +311,7 @@ export function ScrapbookCollage({
                     } as CSSProperties
                   }
                 >
-                  <ItemText item={item} />
+                  <ItemText item={item} accent={accent} />
                 </div>
               </div>
             </div>
@@ -359,24 +369,24 @@ export function ScrapbookCollage({
   )
 }
 
-function ItemText({ item }: { item: CollageItem }) {
-  const { heading, lead, accent = 'neutral' } = item.header
+function ItemText({ item, accent }: { item: CollageItem; accent?: Accent | null }) {
+  const { heading, lead } = item.header
   const button = item.button
 
   return (
     <div className={cx('flow-s max-lead', styles.itemText)}>
       {heading ? (
         <Heading level={3}>
-          <HeaderRichText data={heading} accent={accent} />
+          <HeaderRichText data={heading} />
         </Heading>
       ) : null}
-      {lead ? (
-        <p className={styles.itemLead}>
-          <HeaderRichText data={lead} accent={accent} />
-        </p>
-      ) : null}
+      {lead ? <RichText data={lead} className={styles.itemLead} /> : null}
       {button?.label && button.url ? (
-        <Button href={button.url} className={styles.itemButton}>
+        <Button
+          href={button.url}
+          variant={accentButtonVariant(accent)}
+          className={styles.itemButton}
+        >
           {button.label}
         </Button>
       ) : null}
@@ -392,16 +402,18 @@ function ItemText({ item }: { item: CollageItem }) {
 function NoJsFallback({
   items,
   containerRef,
+  accent,
 }: {
   items: CollageItem[]
   containerRef: RefObject<HTMLDivElement | null>
+  accent?: Accent | null
 }) {
   return (
-    <div ref={containerRef} className={styles.collage}>
+    <div ref={containerRef} className={styles.collage} style={accentStyle(accent)}>
       <ul role="list" className={cx(styles.reelList, styles.noJsReel)}>
         {items.map((item, itemIndex) => (
           <li key={`${item.id}-${itemIndex}`} className={styles.reelItem}>
-            <ItemText item={item} />
+            <ItemText item={item} accent={accent} />
             <PolaroidReel photos={item.photos.map((photo) => photo.doc)} />
           </li>
         ))}
@@ -409,7 +421,7 @@ function NoJsFallback({
       <div className={styles.noJsGrid}>
         {items.flatMap((item, itemIndex) => [
           <div key={`text-${itemIndex}`} className={styles.noJsText}>
-            <ItemText item={item} />
+            <ItemText item={item} accent={accent} />
           </div>,
           ...item.photos.map((photo, index) => (
             <Polaroid
@@ -429,16 +441,18 @@ function NoJsFallback({
 function ReelList({
   items,
   containerRef,
+  accent,
 }: {
   items: CollageItem[]
   containerRef: RefObject<HTMLDivElement | null>
+  accent?: Accent | null
 }) {
   return (
-    <div ref={containerRef} className={styles.collage}>
+    <div ref={containerRef} className={styles.collage} style={accentStyle(accent)}>
       <ul role="list" className={styles.reelList}>
         {items.map((item, itemIndex) => (
           <li key={`${item.id}-${itemIndex}`} className={styles.reelItem}>
-            <ItemText item={item} />
+            <ItemText item={item} accent={accent} />
             <PolaroidReel photos={item.photos.map((photo) => photo.doc)} />
           </li>
         ))}

@@ -4,6 +4,8 @@ import {
   HeaderRichText,
   type HeaderRichTextProps,
 } from '@/components/rich-text/header-rich-text'
+import { RichText } from '@/components/rich-text/rich-text'
+import { accentStyle } from '@/lib/accent'
 import { lexicalHasText } from '@/lib/lexical-has-text'
 import styles from './section-header.module.css'
 import type { CSSProperties } from 'react'
@@ -36,20 +38,19 @@ export function SectionHeader({ header, level = 2, visualLevel }: SectionHeaderP
   if (!eyebrow && !heading && !lead) return null
 
   return (
-    <header className="flow-xs">
+    <header className="flow-xs" style={accentStyle(accent)}>
       {eyebrow ? <Pill variant={accent ?? 'neutral'}>{eyebrow}</Pill> : null}
       {heading ? (
         <Heading level={level} visualLevel={visualLevel}>
-          <HeaderRichText data={heading} accent={accent} />
+          <HeaderRichText data={heading} />
         </Heading>
       ) : null}
       {lead ? (
-        <p
+        <RichText
+          data={lead}
           className={`${styles.lead} max-lead`}
           style={{ '--flow-space': 'var(--space-m)' } as CSSProperties}
-        >
-          <HeaderRichText data={lead} accent={accent} />
-        </p>
+        />
       ) : null}
     </header>
   )

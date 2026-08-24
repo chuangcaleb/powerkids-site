@@ -25,7 +25,7 @@ export function Scrapbook({ header, items, id, seed: storedSeed }: ScrapbookBloc
       <div className={cx('wrapper flow', styles.header)}>
         <SectionHeader header={header} />
       </div>
-      <ScrapbookCollage items={resolvedItems} seed={seed} />
+      <ScrapbookCollage items={resolvedItems} seed={seed} accent={header?.accent} />
     </section>
   )
 }

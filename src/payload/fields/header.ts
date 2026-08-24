@@ -20,7 +20,9 @@ type HeaderFieldOptions = {
   /** Match the block's existing heading requiredness — defaults to optional. */
   headingRequired?: boolean
   /** Suppress the eyebrow input, e.g. for a repeated sub-item where a pill per row would be noise. Defaults to shown. */
-  showEyebrow?: boolean
+  hasEyebrow?: boolean
+  /** Suppress the accent input, e.g. for a repeated sub-item that inherits its section's accent instead of picking its own. Defaults to shown. */
+  hasAccent?: boolean
 }
 
 /**
@@ -30,8 +32,18 @@ type HeaderFieldOptions = {
  */
 export function headerField({
   headingRequired = false,
-  showEyebrow = true,
+  hasEyebrow = true,
+  hasAccent = true,
 }: HeaderFieldOptions = {}): Field {
+  const eyebrowField: Field = {
+    name: 'eyebrow',
+    type: 'text',
+    admin: {
+      width: hasAccent ? '50%' : undefined,
+      description: 'Rendered as a pill.',
+    },
+  }
+
   const accentField: Field = {
     name: 'accent',
     type: 'select',
@@ -42,31 +54,23 @@ export function headerField({
       { label: 'Blue', value: 'blue' },
     ],
     admin: {
-      width: showEyebrow ? '50%' : undefined,
+      width: hasEyebrow ? '50%' : undefined,
       description: 'Pill + emphasis color.',
     },
   }
+
+  const topFields: Field[] = [
+    ...(hasEyebrow ? [eyebrowField] : []),
+    ...(hasAccent ? [accentField] : []),
+  ]
 
   return {
     name: 'header',
     type: 'group',
     fields: [
-      showEyebrow
-        ? {
-            type: 'row',
-            fields: [
-              {
-                name: 'eyebrow',
-                type: 'text',
-                admin: {
-                  width: '50%',
-                  description: 'Rendered as a pill.',
-                },
-              },
-              accentField,
-            ],
-          }
-        : accentField,
+      ...(topFields.length > 1
+        ? [{ type: 'row', fields: topFields } as Field]
+        : topFields),
       {
         name: 'heading',
         type: 'richText',

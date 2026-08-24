@@ -51,11 +51,6 @@ describe('resolveCollageItems', () => {
     expect(resolved.map((entry) => entry.id)).toEqual(['kept'])
   })
 
-  it('defaults a missing accent to neutral', () => {
-    const [resolved] = resolveCollageItems([item()])
-    expect(resolved!.header.accent).toBe('neutral')
-  })
-
   it('treats a missing items array as empty', () => {
     expect(resolveCollageItems(null)).toEqual([])
     expect(resolveCollageItems(undefined)).toEqual([])

@@ -40,9 +40,11 @@ export const ScrapbookBlock: Block = {
             {
               label: 'Content',
               fields: [
-                // Eyebrow suppressed: a pill per item, repeated up to six
-                // times, is noise the section-level header already covers.
-                headerField({ showEyebrow: false }),
+                // Eyebrow and accent suppressed: a pill per item, and a
+                // color independent of the rest of the section, are noise
+                // the section-level header already covers — see `Scrapbook`,
+                // which threads its own `header.accent` into every item.
+                headerField({ hasEyebrow: false, hasAccent: false }),
                 buttonField(),
               ],
             },

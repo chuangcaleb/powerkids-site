@@ -614,10 +614,6 @@ export interface FramedRowsBlock {
 export interface ScrapbookBlock {
   items: {
     header?: {
-      /**
-       * Pill + emphasis color.
-       */
-      accent?: ('neutral' | 'red' | 'blue') | null;
       heading?: {
         root: {
           type: string;
@@ -1218,7 +1214,6 @@ export interface ScrapbookBlockSelect<T extends boolean = true> {
         header?:
           | T
           | {
-              accent?: T;
               heading?: T;
               lead?: T;
             };
