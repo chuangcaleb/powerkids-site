@@ -47,7 +47,7 @@ Automated contributors never push to `main`. Owner merges.
 Planned in full before the day. Outline:
 
 1. Lower DNS TTL well in advance.
-2. v3 URLs not preserved — see [decisions/0004-single-page-mvp-no-redirects.md](decisions/0004-single-page-mvp-no-redirects.md). No route-map check needed.
+2. v3 URLs not preserved — see [../adr/0004-single-page-mvp-no-redirects.md](../adr/0004-single-page-mvp-no-redirects.md). No route-map check needed.
 3. Owner hand-populates and proof-reads production content.
 4. Switch DNS.
 5. Watch logs and analytics for 404s.

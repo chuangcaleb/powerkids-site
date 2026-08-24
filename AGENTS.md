@@ -10,10 +10,9 @@
 
 ## Non-negotiables
 
-1. **Never copy v3 code.** Old implementation on `v3` branch / `v3-final` tag. Read for content and design intent (`git show v3-final:<path>`); reimplement from scratch. Same for `archive/v4-payload-template`, an abandoned starter-template attempt.
-2. **Content is data, never markup.** Navigation, social links, contact details, opening hours, school addresses, programs, events — CMS records.
-3. **Code declares what exists; docs say why and which.** Never write a doc that restates code: no counters, no field lists, no block/component inventories, no directory maps. Rules, rationale, and pick-guides for closed hand-authored sets (layout primitives, token groups) belong in docs; their values do not. Code is single source of truth.
-4. **Never read `.env`.** Secrets are the owner's business. Maintain `.env.example` with key names + comments only.
+1. **Content is data, never markup.** Navigation, social links, contact details, opening hours, school addresses, programs, events — CMS records.
+2. **Code declares what exists; docs say why and which.** Never write a doc that restates code: no counters, no field lists, no block/component inventories, no directory maps. Rules, rationale, and pick-guides for closed hand-authored sets (layout primitives, token groups) belong in docs; their values do not. Code is single source of truth.
+3. **Never read `.env`.** Secrets are the owner's business. Maintain `.env.example` with key names + comments only.
 
 Domain vocabulary lives in [`CONTEXT.md`](CONTEXT.md) — read it, use those words exactly.
 
@@ -23,7 +22,7 @@ Domain vocabulary lives in [`CONTEXT.md`](CONTEXT.md) — read it, use those wor
 
 Each `docs/<topic>/` folder has its own `README.md` indexing what's inside and when to read it — browse there for the topic you need, rather than a flat list here. Non-negotiables below still fire on every task; a few docs fire on every task too and are called out for that reason:
 
-- [docs/conventions.md](docs/conventions.md) — writing or reviewing any code in `src/`.
+- [docs/coding-standards.md](docs/coding-standards.md) — writing or reviewing any code in `src/`.
 - [docs/workflows/verify-loop.md](docs/workflows/verify-loop.md) — before every commit and every push.
 - [docs/ops/migrations.md](docs/ops/migrations.md) — schema changed, always, no exceptions.
 - [docs/phases/README.md](docs/phases/README.md) — the only place phase status is recorded; read before starting any phase work.

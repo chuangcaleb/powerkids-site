@@ -44,9 +44,3 @@ CUBE-CSS-style compositions, adapted from Every Layout. Each solves a single arr
 - Don't set fixed heights on `.grid-auto` items; use `--grid-align-items`.
 - Don't apply `.wrapper` to `<body>` — wrap sections, not the document.
 - Don't reintroduce breakpoint-specific positioning. v3's per-index class arrays are exactly what these replace.
-
----
-
-## Origin
-
-Adapted from primitives in [chuangcaleb.com](https://chuangcaleb.com)'s design system, which derive from [Every Layout](https://every-layout.dev). Layout mechanics carry over; visual language does **not** — PowerKids is loud and playful where that system is quiet and editorial. See [../reference/v3-design-audit.md](../reference/v3-design-audit.md) for the points where the two systems deliberately disagree (shadows, most of all).

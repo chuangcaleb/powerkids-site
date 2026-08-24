@@ -49,4 +49,4 @@ Editors and visitors hit same deployment. No separate CMS service to run, monito
 - Content model: [content-model.md](content-model.md)
 - Block catalogue: [blocks.md](blocks.md)
 - Environments and bindings: [../ops/environments.md](../ops/environments.md)
-- Why this stack: [../decisions/0001-nextjs-payload-vercel.md](../decisions/0001-nextjs-payload-vercel.md)
+- Why this stack: [../adr/0001-nextjs-payload-vercel.md](../adr/0001-nextjs-payload-vercel.md)

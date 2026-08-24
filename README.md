@@ -12,8 +12,8 @@ Phases 0–4 (foundation, design system, content model, rendering) are done. Pha
 
 | Layer     | Choice                                                                                                             |
 | --------- | ------------------------------------------------------------------------------------------------------------------ |
-| Framework | [Next.js](https://nextjs.org) (App Router), `16.2.12`                                                              |
-| CMS       | [Payload](https://payloadcms.com) `3.86.0`, mounted in same app                                                    |
+| Framework | [Next.js](https://nextjs.org) (App Router)                                                                         |
+| CMS       | [Payload](https://payloadcms.com), mounted in same app                                                             |
 | Database  | [Neon](https://neon.tech) Postgres                                                                                 |
 | Media     | [Cloudflare R2](https://developers.cloudflare.com/r2/), S3-compatible adapter                                      |
 | Hosting   | [Vercel](https://vercel.com)                                                                                       |

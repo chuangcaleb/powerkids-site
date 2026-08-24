@@ -94,22 +94,7 @@ Warm, hand-crafted brutalism — loud colour-blocking and a hard offset shadow, 
 
 Three brand accents, each with a tint for large fills, over a warm cream/ink/charcoal neutral base plus one muted grey step and two saturated surface colours (`sun`, `contact`) used whole-section, not as text/fill pairs. What each token is _for_: `docs/design/tokens.md`.
 
-| Token                 | Value     |
-| --------------------- | --------- |
-| `--colour-cream`      | `#fffcf7` |
-| `--colour-ink`        | `#171310` |
-| `--colour-charcoal`   | `#4c433a` |
-| `--colour-muted`      | `#8a8681` |
-| `--colour-black`      | `#000000` |
-| `--colour-white`      | `#ffffff` |
-| `--bg-sun`            | `#ffc929` |
-| `--bg-contact`        | `#2435c6` |
-| `--colour-red`        | `#cc2828` |
-| `--colour-blue`       | `#1f30cf` |
-| `--colour-amber`      | `#a15d0c` |
-| `--colour-red-tint`   | `#ffe6e4` |
-| `--colour-blue-tint`  | `#e4e7ff` |
-| `--colour-amber-tint` | `#fdeeda` |
+Values live once, in the front-matter above. CSS variable names follow `color.<key>` → `--colour-<kebab-key>` (`redTint` → `--colour-red-tint`), except `sun` and `contact`, which are surface fills rather than text/border colours and so become `--bg-sun` / `--bg-contact`.
 
 v3 carried a full shadcn neutral ramp (`--muted-foreground`, `--ring`, `--destructive`, etc.) that was mostly unused boilerplate — none of it is reintroduced here. One muted step covers every "quiet" need this system actually has.
 
@@ -175,4 +160,3 @@ Decorative background marks — `DoodleLayer`, `src/components/doodle-layer/`. `
 - Layout primitives: `docs/design/layout-primitives.md`
 - Seam shape pick-guide: `docs/design/section-seams.md`
 - Component inventory: `docs/design/components.md`
-- What v3 used and why it changed: `docs/reference/v3-design-audit.md`
