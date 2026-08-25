@@ -38,6 +38,11 @@ blockquote {
   max-width: var(--max-prose);
 }
 
+ul:not([role='list']),
+ol:not([role='list']) {
+  padding-inline-start: var(--space-m);
+}
+
 h1 {
   font-size: var(--step-5);
 }
