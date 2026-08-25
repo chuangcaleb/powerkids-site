@@ -31,11 +31,6 @@
   position: relative;
   z-index: 1;
   min-height: 70vh;
-
-  --sidebar-size: 43%;
-  --sidebar-gap: var(--space-xl);
-  --sidebar-wrap-at: 51%;
-  --sidebar-align: center;
 }
 
 .copy {

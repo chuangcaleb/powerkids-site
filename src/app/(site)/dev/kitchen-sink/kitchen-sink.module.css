@@ -9,10 +9,6 @@
   border-radius: var(--radius-s);
 }
 
-.spaceRow {
-  --cluster-gap: var(--space-s);
-}
-
 .spaceBar {
   height: var(--space-s);
   background-color: var(--accent-red);

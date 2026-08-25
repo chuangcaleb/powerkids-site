@@ -6,6 +6,6 @@
   margin-inline: auto;
   width: 100%;
   max-width: var(--wrapper-max-width);
-  padding-inline: var(--gutter, var(--space-m));
+  padding-inline: var(--wrapper-gutter, var(--space-m));
   position: relative;
 }

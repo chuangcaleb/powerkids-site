@@ -11,6 +11,7 @@ import { Pill } from '@/components/pill/pill'
 import { VideoEmbed } from '@/components/video-embed/video-embed'
 import { cx } from '@/lib/cx'
 import { isProduction } from '@/lib/env'
+import { primitiveVars } from '@/lib/primitive-vars'
 import { Content } from '@/payload/blocks/content/component'
 import { FramedRows } from '@/payload/blocks/framed-rows/component'
 import { Gallery } from '@/payload/blocks/gallery/component'
@@ -118,7 +119,11 @@ export default function KitchenSinkPage() {
         <Heading level={2}>Space scale</Heading>
         <div className="flow-2xs">
           {SPACE_STEPS.map((step) => (
-            <div key={step} className={cx('cluster', styles.spaceRow)}>
+            <div
+              key={step}
+              className="cluster"
+              style={primitiveVars({ '--cluster-gap': 'var(--space-s)' })}
+            >
               <code>{step}</code>
               <div
                 className={styles.spaceBar}

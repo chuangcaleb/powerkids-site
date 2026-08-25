@@ -13,6 +13,7 @@
 ## Styling
 
 - **No CSS framework.** Layout composes from primitives in `src/styles/compositions/`; component styles are scoped CSS Modules. Layout wants a media query — check the primitives first ([design/layout-primitives.md](design/layout-primitives.md)).
+- **Override a layout primitive's custom property with `primitiveVars()`, not a CSS Module class** — see [design/layout-primitives.md#overriding](design/layout-primitives.md#overriding) for the convention, its two exceptions, and why ([ADR 0007](adr/0007-primitive-override-convention.md)).
 - **No magic values.** Colours, spacing, type sizes, radii come from tokens. A raw hex or px value in a component is a review finding — and Stylelint/ESLint block most of them mechanically ([design/tokens.md](design/tokens.md)).
 
 ## Reuse before writing
@@ -30,7 +31,3 @@ Comments here carry _why_, not _what_ — that part is not in dispute. What need
 - **Same argument in two source files** → pick one owner, usually the file where the behaviour is actually implemented, and point from the other.
 
 Two copies of a rationale is the failure mode, not a long comment. Length is fine; divergence is not.
-
-## Claims
-
-- **A library feature central to the plan gets proved before it's built on.** One cheap test (curl the API, inspect built output, read the served file) beats discovering it wrong after a full implementation cycle.

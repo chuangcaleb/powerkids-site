@@ -4,9 +4,10 @@ import { RichText } from '@/components/rich-text/rich-text'
 import { SectionHeader } from '@/components/section-header/section-header'
 import { SectionSeam } from '@/components/section-seam/section-seam'
 import { cx } from '@/lib/cx'
+import { primitiveVars } from '@/lib/primitive-vars'
 import { ICONS, isIconName } from '@/lib/icons'
 import type { FramedRowsBlock as FramedRowsBlockType } from '@/payload-types'
-import { Fragment, type CSSProperties } from 'react'
+import { Fragment } from 'react'
 import styles from './framed-rows.module.css'
 import { DoodleLayer } from '@/components/doodle-layer/doodle-layer'
 
@@ -34,11 +35,7 @@ export function FramedRows({ header, rows, id }: FramedRowsBlockType) {
   return (
     <section
       className="wrapper flow region"
-      style={
-        {
-          '--wrapper-max-width': 'var(--max-bleed)',
-        } as CSSProperties
-      }
+      style={primitiveVars({ '--wrapper-max-width': 'var(--max-bleed)' })}
     >
       <div className={styles.band}>
         {hasHeader ? (
@@ -66,7 +63,13 @@ export function FramedRows({ header, rows, id }: FramedRowsBlockType) {
                 />
               ) : null}
               <div className={styles.row}>
-                <div className={cx('switcher', 'wrapper', styles.switcher)}>
+                <div
+                  className={cx('switcher', 'wrapper', styles.switcher)}
+                  style={primitiveVars({
+                    '--switcher-gap': 'var(--space-2xl)',
+                    '--switcher-vertical-align': 'center',
+                  })}
+                >
                   <div className="flow-s">
                     <div className="flow-2xs">
                       <div className={cx('flow-2xs', styles.timeStack)}>

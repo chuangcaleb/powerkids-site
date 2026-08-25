@@ -4,7 +4,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--switcher-gap, var(--space-l));
-  align-items: var(--switcher-vertical-alignment, flex-start);
+  align-items: var(--switcher-vertical-align, flex-start);
   justify-content: var(--switcher-justify, space-between);
 }
 

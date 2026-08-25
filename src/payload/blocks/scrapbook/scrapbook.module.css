@@ -46,7 +46,7 @@
   width: 100%;
   margin-inline: auto;
   max-width: var(--max-bleed);
-  padding-inline: var(--gutter);
+  padding-inline: var(--wrapper-gutter);
 
   /* Read back by the layout as the row unit for converting pixel heights to
    * grid rows — one owner, declared here, never assumed in JS. */
@@ -247,7 +247,7 @@
 }
 
 .reelItem > .itemText {
-  padding-inline: var(--gutter);
+  padding-inline: var(--wrapper-gutter);
 }
 
 /* Strictly below the tier switch above, not at it: the text sits full-bleed

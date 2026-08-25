@@ -135,7 +135,7 @@ Tiers are multiples of the step-0 base (17px min / 20px max): `3xs` .25x, `2xs` 
 - `--max-page: 100ch` — page-level layout cap, consumed by `wrapper.css`'s `--wrapper-max-width`.
 - `--max-prose: 65ch` — default reading measure for paragraph/list/blockquote text.
 - `--max-heading: 40ch` — default reading measure for headings.
-- `--gutter: var(--space-s)` — alias, not a new value; inline padding for wrapper/bleed compositions.
+- `--wrapper-gutter: var(--space-s)` — alias, not a new value; inline padding for wrapper/bleed compositions.
 
 ## Section seams
 

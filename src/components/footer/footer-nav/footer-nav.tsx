@@ -1,5 +1,6 @@
 import { Wordmark } from '@/components/wordmark/wordmark'
 import { cx } from '@/lib/cx'
+import { primitiveVars } from '@/lib/primitive-vars'
 import { getNavigation } from '@/payload/globals/get-navigation'
 import styles from './footer-nav.module.css'
 import { Logo } from '@/components/logo/logo'
@@ -15,7 +16,11 @@ export async function FooterNav() {
           <Logo className={styles.icon} />
           <Wordmark variant="stroke" className={styles.wordmark} />
         </div>
-        <nav aria-label="Footer" className={cx('grid-auto', styles.cols)}>
+        <nav
+          aria-label="Footer"
+          className="grid-auto"
+          style={primitiveVars({ '--grid-item-min': 'calc(var(--max-heading) / 1.5)' })}
+        >
           {(navigation.footerColumns ?? []).map((column) => (
             <div key={column.id ?? column.heading} className="flow-xs">
               <h2 className={styles.heading}>{column.heading}</h2>
