@@ -11,7 +11,6 @@
   );
 
   border-radius: var(--framed-rows-border-radius);
-  box-shadow: var(--shadow-hard);
   margin-inline: calc(var(--gutter) * -0.25);
 }
 
