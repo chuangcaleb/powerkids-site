@@ -22,15 +22,32 @@ CUBE-CSS-style compositions, adapted from Every Layout. Each solves a single arr
 | `.switcher`  | **Two** items side by side, stack when narrow           | Image-and-text pairs, heading-and-byline                       |
 | `.repel`     | Items pushed to opposite edges, stack when no room      | Nav bars, card footers, left-thing-and-right-thing             |
 
-`.flow` also has `.flow-[size]` utilities (`3xs` through `2xl`) — reach for these instead of `primitiveVars()`. Every other primitive's override is typically a computed or cross-referencing value (`calc()`, a fallback chain, another var), often several set together — `primitiveVars()` earns its keep there. `--flow-space` is different: the only thing ever set on it is a bare token off the spacing scale, one property, used dozens of times per page. A fixed-step class for exactly that closed, single-axis enum is cheaper to read and write than an inline style object repeating `var(--space-xs)` at every call site — it's not a loophole, it's the same "pick from a closed set" case the utility-class alternative loses everywhere else primitive overrides take arbitrary expressions instead.
+---
 
-Read _ADR 0007_ for decision regarding override conventions.
+## Overriding
+
+Tune a primitive with `primitiveVars()` (`src/lib/primitive-vars.ts`), inline at the call site, not from a CSS Module class:
+
+```tsx
+<nav className="cluster" style={primitiveVars({ '--cluster-gap': 'var(--space-s)' })}>
+```
+
+A typo'd or non-existent var name is a type error. The check spans every primitive at once, so one call can freely mix vars from more than one (`--cluster-gap` with `--wrapper-max-width`, say) — no need to name a specific primitive's union. `primitive-vars.test.ts` asserts each primitive's var array matches its `compositions/*.css` file; update both together or the suite fails on drift.
+
+Two sanctioned exceptions:
+
+- **A CSS Module selector**, only when the override needs something `style` genuinely cannot express — a media/container query, a pseudo-class (`:hover`), or a structural/combinator selector (`:nth-child`, `> li + li`) targeting something other than the element itself. 99% of cases of plain, unconditional override still belongs inline even if the element already has a Module class for other reasons.
+- **`.flow`'s `.flow-[size]` utilities** (`3xs` through `2xl`), for `--flow-space` specifically. Every other primitive's override is typically a computed or cross-referencing value (`calc()`, a fallback chain, another var), often several set together — `primitiveVars()` earns its keep there. `--flow-space` is different: the only thing ever set on it is a bare token off the spacing scale, one property, used dozens of times per page. A fixed-step class for exactly that closed, single-axis enum is cheaper to read and write than an inline style object repeating `var(--space-xs)` at every call site — it's not a loophole, it's the same "pick from a closed set" case the utility-class alternative loses everywhere else primitive overrides take arbitrary expressions instead.
+
+`primitiveVars()` is scoped to layout-primitive vars only — a component's own custom property (`--sticker-rotate`, `--polaroid-tilt`, ...) still just takes a plain `style` object.
+
+See [ADR 0007](../adr/0007-primitive-override-convention.md) for why.
 
 ---
 
 ## Do
 
-- Tune with custom properties set on the element or its parent. Use `primitiveVars()` at the call site — see [coding-standards.md](../coding-standards.md#styling) for the convention and its sanctioned exceptions.
+- Tune with custom properties set on the element or its parent — see [Overriding](#overriding) above.
 - Nest freely — `.grid-auto` inside `.wrapper` inside `.flow` is the expected shape.
 - Use `.flow` instead of `margin-bottom` on components.
 - Use `.region` for a section's own top/bottom padding instead of relying on page-level margin between siblings.
