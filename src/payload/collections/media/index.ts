@@ -5,6 +5,7 @@ import { authenticated, authenticatedFieldAccess } from '@/payload/access/authen
 import { hashedFilename } from '@/lib/media-filename'
 
 import { computeChecksum } from './hooks/compute-checksum'
+import { flagOwnDuplicate } from './hooks/flag-own-duplicate'
 import {
   flagDuplicateAfterChange,
   flagDuplicateAfterDelete,
@@ -59,6 +60,7 @@ export const Media: CollectionConfig = {
       },
       computeChecksum,
     ],
+    beforeChange: [flagOwnDuplicate],
     afterChange: [flagDuplicateAfterChange],
     afterDelete: [flagDuplicateAfterDelete],
   },

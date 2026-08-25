@@ -21,6 +21,10 @@ import {
  * the doc has left its old group as well as joined a new one — both groups
  * need a recompute, or the old group's survivors are left stuck at
  * `hasDuplicate: true` after the only other member moved on.
+ *
+ * `doc` itself already has the correct `hasDuplicate` value — see
+ * `flag-own-duplicate.ts`. This hook's recompute only ever updates *other*
+ * group members, never `doc`.
  */
 export const flagDuplicateAfterChange: CollectionAfterChangeHook<Media> = async ({
   doc,

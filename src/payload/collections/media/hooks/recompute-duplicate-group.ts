@@ -31,18 +31,20 @@ export async function recomputeDuplicateGroup(
 
   const hasDuplicate = group.docs.length > 1
 
-  await Promise.all(
-    group.docs
-      .filter((doc) => Boolean(doc.hasDuplicate) !== hasDuplicate)
-      .map((doc) =>
-        req.payload.update({
-          collection: 'media',
-          id: doc.id,
-          data: { hasDuplicate },
-          depth: 0,
-          req,
-          context: { [SKIP_RECOMPUTE_CONTEXT_KEY]: true },
-        }),
-      ),
-  )
+  // Sequential, not `Promise.all`: these updates share `req`'s transaction,
+  // so firing them concurrently races multiple writes against one
+  // connection — one can throw mid-flight, which the caller catches and
+  // swallows, leaving the group partially flagged with no visible error.
+  for (const doc of group.docs) {
+    if (Boolean(doc.hasDuplicate) === hasDuplicate) continue
+
+    await req.payload.update({
+      collection: 'media',
+      id: doc.id,
+      data: { hasDuplicate },
+      depth: 0,
+      req,
+      context: { [SKIP_RECOMPUTE_CONTEXT_KEY]: true },
+    })
+  }
 }

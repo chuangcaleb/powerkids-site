@@ -28,21 +28,17 @@ export const ListDuplicateMedia: React.FC<DefaultCellComponentProps> = ({}) => {
   const checksum = useFormFields(([fields]) => fields.checksum?.value)
   const createdAt = data?.createdAt as string | undefined
 
-  const flagged = Boolean(hasDuplicate) && !duplicateDismissed
-
   const mediaURL = formatAdminURL({
     apiRoute: config.routes.api,
     path: '/media',
     serverURL: config.serverURL,
   })
 
-  // Empty `url` makes the hook skip fetching entirely — no point querying
-  // before there's a checksum to group by, or once the flag's dismissed.
-  // Sorted oldest-first so the earliest upload in the group can be read
-  // straight off `siblings[0]` — that's the one likeliest to be the
-  // original, everything else a re-upload of it.
+  // Not gated on dismissal — a dismissed doc still needs its real sibling
+  // list, or `siblings: []` from a skipped fetch reads as "found nothing".
+  // Sorted oldest-first so `siblings[0]` is the likely original.
   const [{ data: siblingsResponse, isLoading }] = usePayloadAPI(
-    flagged && checksum ? mediaURL : '',
+    hasDuplicate && checksum ? mediaURL : '',
     {
       initialParams: {
         depth: 0,
@@ -96,15 +92,17 @@ export const ListDuplicateMedia: React.FC<DefaultCellComponentProps> = ({}) => {
           ))}
         </ul>
       )}
-      {selfIsOldest && (
-        <p>
+
+      <div style={{ paddingBlockStart: '1em' }}>
+        {selfIsOldest && (
           <Pill pillStyle="success" size="small">
             Oldest
           </Pill>
-          — This is the oldest duplicate, likely canonical and you should delete the
-          others
-        </p>
-      )}
+        )}
+        {selfIsOldest
+          ? '— This is the oldest duplicate and likely canonical, so you probably want to delete the others'
+          : 'This is not the oldest duplicate, so you probably want to delete this copy.'}
+      </div>
     </Banner>
   )
 }
