@@ -8,7 +8,7 @@
   margin: 0;
   padding: var(--space-l) var(--space-m);
   scrollbar-width: thin;
-  margin-inline: calc(var(--gutter) * -1);
+  margin-inline: calc(var(--wrapper-gutter) * -1);
 }
 
 .item {

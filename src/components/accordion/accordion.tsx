@@ -70,7 +70,7 @@ export function Accordion({ items, allowMultiple = false, className }: Accordion
                 className={cx('repel', styles.trigger)}
                 style={primitiveVars({
                   '--repel-gap': 'var(--space-s)',
-                  '--repel-y-alignment': 'center',
+                  '--repel-vertical-align': 'center',
                 })}
                 aria-expanded={isOpen}
                 aria-controls={panelId}

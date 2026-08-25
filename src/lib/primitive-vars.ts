@@ -14,7 +14,7 @@ export type FlowVars = (typeof flowVars)[number]
 
 export const switcherVars = [
   '--switcher-gap',
-  '--switcher-vertical-alignment',
+  '--switcher-vertical-align',
   '--switcher-justify',
   '--switcher-inline-at',
 ] as const
@@ -23,7 +23,7 @@ export type SwitcherVars = (typeof switcherVars)[number]
 export const repelVars = [
   '--repel-direction',
   '--repel-gap',
-  '--repel-y-alignment',
+  '--repel-vertical-align',
 ] as const
 export type RepelVars = (typeof repelVars)[number]
 
@@ -39,16 +39,14 @@ export const gridAutoVars = [
   '--grid-placement',
   '--grid-gap',
   '--grid-item-min',
-  '--grid-align-items',
+  '--grid-align',
 ] as const
 export type GridAutoVars = (typeof gridAutoVars)[number]
 
 export const regionVars = ['--region-space'] as const
 export type RegionVars = (typeof regionVars)[number]
 
-// `--gutter` is unprefixed, unlike every other wrapper var — a known naming
-// irregularity, tracked for the primitive var-naming standardization pass.
-export const wrapperVars = ['--wrapper-max-width', '--gutter'] as const
+export const wrapperVars = ['--wrapper-max-width', '--wrapper-gutter'] as const
 export type WrapperVars = (typeof wrapperVars)[number]
 
 /** Every overridable custom property across all layout primitives. */

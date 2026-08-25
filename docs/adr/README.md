@@ -45,3 +45,4 @@ Records are immutable. A decision that changes gets a **new** ADR that supersede
 | [0005](0005-media-duplicate-detection-by-checksum-group.md) | Media duplicate detection by checksum group | accepted |
 | [0006](0006-no-e2e-suite.md)                                | No end-to-end test suite                    | accepted |
 | [0007](0007-primitive-override-convention.md)               | Layout primitive override convention        | accepted |
+| [0008](0008-primitive-var-naming.md)                        | Layout primitive var naming convention      | accepted |

@@ -67,7 +67,7 @@ export function FramedRows({ header, rows, id }: FramedRowsBlockType) {
                   className={cx('switcher', 'wrapper', styles.switcher)}
                   style={primitiveVars({
                     '--switcher-gap': 'var(--space-2xl)',
-                    '--switcher-vertical-alignment': 'center',
+                    '--switcher-vertical-align': 'center',
                   })}
                 >
                   <div className="flow-s">

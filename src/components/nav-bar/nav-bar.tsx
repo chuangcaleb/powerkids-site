@@ -21,7 +21,7 @@ export function NavBar({ links }: NavBarProps) {
     <header className={styles.header}>
       <div
         className={cx('wrapper', 'repel', styles.inner)}
-        style={primitiveVars({ '--repel-y-alignment': 'center' })}
+        style={primitiveVars({ '--repel-vertical-align': 'center' })}
       >
         <Link
           href="/"

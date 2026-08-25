@@ -4,5 +4,5 @@
   --max-prose: 60ch;
   --max-lead: 45ch;
   --max-heading: 20ch;
-  --gutter: var(--space-s);
+  --wrapper-gutter: var(--space-s);
 }

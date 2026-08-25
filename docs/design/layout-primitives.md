@@ -58,7 +58,7 @@ See [ADR 0007](../adr/0007-primitive-override-convention.md) for why.
 - Don't add `margin-bottom` to `.flow` children — the sibling selector handles spacing.
 - Don't use `.sidebar` without its `:has(> .sidebar)` parent; the collapse mechanic depends on it.
 - Don't put more than two direct children in `.switcher`.
-- Don't set fixed heights on `.grid-auto` items; use `--grid-align-items`.
+- Don't set fixed heights on `.grid-auto` items; use `--grid-align`.
 - Don't apply `.wrapper` to `<body>` — wrap sections, not the document.
 - Don't reintroduce breakpoint-specific positioning. v3's per-index class arrays are exactly what these replace.
 - Don't use layout primitives in CSS Modules — layout composition is almost always handled in JSX.

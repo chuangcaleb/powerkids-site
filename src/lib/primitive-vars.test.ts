@@ -25,7 +25,6 @@ const primitives: Array<{
   file: string
   prefix: string
   vars: readonly string[]
-  extra?: string[]
 }> = [
   { name: 'cluster', file: 'cluster.css', prefix: 'cluster', vars: clusterVars },
   { name: 'flow', file: 'flow.css', prefix: 'flow', vars: flowVars },
@@ -34,21 +33,13 @@ const primitives: Array<{
   { name: 'sidebar', file: 'sidebar.css', prefix: 'sidebar', vars: sidebarVars },
   { name: 'grid-auto', file: 'grid-auto.css', prefix: 'grid', vars: gridAutoVars },
   { name: 'region', file: 'region.css', prefix: 'region', vars: regionVars },
-  {
-    name: 'wrapper',
-    file: 'wrapper.css',
-    prefix: 'wrapper',
-    vars: wrapperVars,
-    extra: ['--gutter'],
-  },
+  { name: 'wrapper', file: 'wrapper.css', prefix: 'wrapper', vars: wrapperVars },
 ]
 
 describe('primitive var arrays stay in sync with compositions CSS', () => {
-  for (const { name, file, prefix, vars, extra = [] } of primitives) {
+  for (const { name, file, prefix, vars } of primitives) {
     it(`${name}Vars matches ${file}`, () => {
-      const declaredInCss = varsDeclaredIn(file, prefix)
-      for (const knownException of extra) declaredInCss.add(knownException)
-      expect(new Set(vars)).toEqual(declaredInCss)
+      expect(new Set(vars)).toEqual(varsDeclaredIn(file, prefix))
     })
   }
 })

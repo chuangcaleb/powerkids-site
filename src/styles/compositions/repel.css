@@ -4,6 +4,6 @@
   display: flex;
   flex-flow: var(--repel-direction, row) wrap;
   justify-content: space-between;
-  align-items: var(--repel-y-alignment, center);
+  align-items: var(--repel-vertical-align, center);
   gap: var(--repel-gap, var(--space-m));
 }
