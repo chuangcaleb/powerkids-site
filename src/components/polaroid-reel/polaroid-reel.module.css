@@ -7,7 +7,7 @@
   /* list-style: none; */
   margin: 0;
   padding: var(--space-l) var(--space-m);
-  scrollbar-width: none;
+  scrollbar-width: thin;
   margin-inline: calc(var(--gutter) * -1);
 }
 
