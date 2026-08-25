@@ -11,17 +11,27 @@
   margin-inline: calc(var(--gutter) * -1);
 }
 
-/* accesibility, always show scrollbar */
-
-/* .strip::-webkit-scrollbar {
-  display: none;
-} */
-
 .item {
-  flex: 0 0 min(90vw, 30rem);
+  /* Fixed height, a plain sizing decision (not derived from any photo's data) */
+  flex: 0 0 auto;
+  height: 16rem;
   scroll-snap-align: start;
 }
 
-.polaroid {
-  width: 100%;
+/* Compound selectors (not bare `.polaroid`/`.photo`) so these reliably beat
+ * polaroid.module.css's own same-specificity rules regardless of import
+ * order — that file stays untouched, its other callers (scrapbook's masonry
+ * packer measures against `photo.aspectRatio`) are unaffected. */
+.item > .polaroid {
+  width: auto;
+  height: 100%;
+}
+
+/* landscape-ish for a `min(90vw, 30rem)`-wide card. Width is
+ * intrinsic per photo below, so cards are narrower for portrait photos and
+ * peek at the next card once a photo reaches the max width.  */
+.item > .polaroid img {
+  width: auto;
+  max-width: min(90vw, 30rem);
+  height: 100%;
 }
