@@ -19,7 +19,10 @@ export type NavBarProps = {
 export function NavBar({ links }: NavBarProps) {
   return (
     <header className={styles.header}>
-      <div className={cx('wrapper', 'repel', styles.inner)}>
+      <div
+        className={cx('wrapper', 'repel', styles.inner)}
+        style={{ '--repel-y-alignment': 'center' } as CSSProperties}
+      >
         <Link
           href="/"
           aria-label="PowerKids"

@@ -29,6 +29,7 @@
 .link {
   position: relative;
   font-family: var(--font-body);
+  font-size: var(--step--1);
   text-decoration: none;
   background-repeat: no-repeat;
   background-image: linear-gradient(var(--accent-red), var(--accent-red));
