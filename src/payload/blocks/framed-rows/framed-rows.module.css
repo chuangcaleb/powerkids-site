@@ -55,12 +55,6 @@
   --row-accent: var(--accent-amber);
 }
 
-.switcher {
-  --switcher-gap: var(--space-2xl);
-
-  align-items: center;
-}
-
 .row:nth-child(2n of .row) .switcher {
   flex-direction: row-reverse;
 }

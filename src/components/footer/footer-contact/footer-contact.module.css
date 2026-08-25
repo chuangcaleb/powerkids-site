@@ -29,17 +29,6 @@
   opacity: 0.7;
 }
 
-/* Caps at two columns: each track is forced to at least half the container,
-   so auto-fill can never place a third. One line, no media query — halved
-   further by grid-auto's own wrap once a track can't fit even that. */
-.grid {
-  --grid-gap: var(--space-xl);
-  --grid-item-min: max(
-    var(--max-heading),
-    calc((100% - var(--grid-gap, var(--space-l))) / 2)
-  );
-}
-
 .social {
   color: inherit;
   text-transform: capitalize;

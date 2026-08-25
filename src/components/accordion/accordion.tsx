@@ -5,6 +5,7 @@
 
 import { useRef, useState, type KeyboardEvent, type ReactNode } from 'react'
 import { cx } from '@/lib/cx'
+import { primitiveVars } from '@/lib/primitive-vars'
 import styles from './accordion.module.css'
 
 export type AccordionItemData = {
@@ -67,6 +68,10 @@ export function Accordion({ items, allowMultiple = false, className }: Accordion
                 id={triggerId}
                 type="button"
                 className={cx('repel', styles.trigger)}
+                style={primitiveVars({
+                  '--repel-gap': 'var(--space-s)',
+                  '--repel-y-alignment': 'center',
+                })}
                 aria-expanded={isOpen}
                 aria-controls={panelId}
                 onClick={() => toggle(item.id)}

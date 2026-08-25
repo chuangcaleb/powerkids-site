@@ -22,15 +22,15 @@ CUBE-CSS-style compositions, adapted from Every Layout. Each solves a single arr
 | `.switcher`  | **Two** items side by side, stack when narrow           | Image-and-text pairs, heading-and-byline                       |
 | `.repel`     | Items pushed to opposite edges, stack when no room      | Nav bars, card footers, left-thing-and-right-thing             |
 
-`.flow` also has `.flow-[size]` utilities (`3xs` through `2xl`) for one-off spacing changes without setting a custom property.
+`.flow` also has `.flow-[size]` utilities (`3xs` through `2xl`) — reach for these instead of `primitiveVars()`. Every other primitive's override is typically a computed or cross-referencing value (`calc()`, a fallback chain, another var), often several set together — `primitiveVars()` earns its keep there. `--flow-space` is different: the only thing ever set on it is a bare token off the spacing scale, one property, used dozens of times per page. A fixed-step class for exactly that closed, single-axis enum is cheaper to read and write than an inline style object repeating `var(--space-xs)` at every call site — it's not a loophole, it's the same "pick from a closed set" case the utility-class alternative loses everywhere else primitive overrides take arbitrary expressions instead.
 
-`.wrapper` replaces v3's `Section` component's `contentWidth` prop. Its max width is an entry value, not yet measured against real content.
+Read _ADR 0007_ for decision regarding override conventions.
 
 ---
 
 ## Do
 
-- Tune with custom properties set on the element or its parent. Defaults cover most cases.
+- Tune with custom properties set on the element or its parent. Use `primitiveVars()` at the call site — see [coding-standards.md](../coding-standards.md#styling) for the convention and its sanctioned exceptions.
 - Nest freely — `.grid-auto` inside `.wrapper` inside `.flow` is the expected shape.
 - Use `.flow` instead of `margin-bottom` on components.
 - Use `.region` for a section's own top/bottom padding instead of relying on page-level margin between siblings.
@@ -44,3 +44,4 @@ CUBE-CSS-style compositions, adapted from Every Layout. Each solves a single arr
 - Don't set fixed heights on `.grid-auto` items; use `--grid-align-items`.
 - Don't apply `.wrapper` to `<body>` — wrap sections, not the document.
 - Don't reintroduce breakpoint-specific positioning. v3's per-index class arrays are exactly what these replace.
+- Don't use layout primitives in CSS Modules — layout composition is almost always handled in JSX.

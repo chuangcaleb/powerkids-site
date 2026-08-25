@@ -6,9 +6,9 @@ import {
 } from '@/components/rich-text/header-rich-text'
 import { RichText } from '@/components/rich-text/rich-text'
 import { accentStyle } from '@/lib/accent'
+import { primitiveVars } from '@/lib/primitive-vars'
 import { lexicalHasText } from '@/lib/lexical-has-text'
 import styles from './section-header.module.css'
-import type { CSSProperties } from 'react'
 
 type Level = 1 | 2 | 3 | 4 | 5 | 6
 
@@ -49,7 +49,7 @@ export function SectionHeader({ header, level = 2, visualLevel }: SectionHeaderP
         <RichText
           data={lead}
           className={`${styles.lead} max-lead`}
-          style={{ '--flow-space': 'var(--space-m)' } as CSSProperties}
+          style={primitiveVars({ '--flow-space': 'var(--space-m)' })}
         />
       ) : null}
     </header>

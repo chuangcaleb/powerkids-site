@@ -1,3 +1,10 @@
+import { DoodleLayer } from '@/components/doodle-layer/doodle-layer'
+import { SectionHeader } from '@/components/section-header/section-header'
+import { primitiveVars } from '@/lib/primitive-vars'
+import { cx } from '@/lib/cx'
+import type { SiteSetting } from '@/payload-types'
+import { getCta } from '@/payload/globals/get-cta'
+import { getSiteSettings } from '@/payload/globals/get-site-settings'
 import {
   SiFacebook,
   SiInstagram,
@@ -5,13 +12,7 @@ import {
   SiYoutube,
 } from '@icons-pack/react-simple-icons'
 import { Clock, Mail, Phone, Share2 } from 'lucide-react'
-import type { ComponentType, CSSProperties } from 'react'
-import { DoodleLayer } from '@/components/doodle-layer/doodle-layer'
-import { SectionHeader } from '@/components/section-header/section-header'
-import { cx } from '@/lib/cx'
-import { getCta } from '@/payload/globals/get-cta'
-import { getSiteSettings } from '@/payload/globals/get-site-settings'
-import type { SiteSetting } from '@/payload-types'
+import type { ComponentType } from 'react'
 import styles from './footer-contact.module.css'
 
 const DOODLE_ICONS = [Mail, Phone, Clock, Share2]
@@ -40,7 +41,16 @@ export async function FooterContact({ className }: FooterContactProps) {
       <DoodleLayer zoneId="contact" density={30} icons={DOODLE_ICONS} />
       <div className={cx('flow-xl wrapper', styles.content)}>
         <SectionHeader header={header} />
-        <div className={cx('grid-auto max-prose', styles.grid)}>
+        {/* Caps at two columns: each track is forced to at least half the
+            container, so auto-fill can never place a third. */}
+        <div
+          className="grid-auto max-prose"
+          style={primitiveVars({
+            '--grid-gap': 'var(--space-xl)',
+            '--grid-item-min':
+              'max(var(--max-heading), calc((100% - var(--grid-gap, var(--space-l))) / 2))',
+          })}
+        >
           <div className="flow-xs">
             <h3 className={styles.label}>
               <Clock size={18} aria-hidden="true" /> Opening hours
@@ -88,7 +98,7 @@ export async function FooterContact({ className }: FooterContactProps) {
                       <a
                         href={social.url}
                         className={cx('cluster', styles.social)}
-                        style={{ '--cluster-gap': 'var(--space-2xs)' } as CSSProperties}
+                        style={primitiveVars({ '--cluster-gap': 'var(--space-2xs)' })}
                       >
                         <Icon size={20} title="" aria-hidden={true} />
                         {social.platform}

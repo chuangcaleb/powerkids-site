@@ -1,9 +1,10 @@
-import type { CSSProperties, ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import { Button } from '@/components/button/button'
 import { DoodleLayer } from '@/components/doodle-layer/doodle-layer'
 import { Heading } from '@/components/heading/heading'
 import { Polaroid } from '@/components/polaroid/polaroid'
 import { cx } from '@/lib/cx'
+import { primitiveVars } from '@/lib/primitive-vars'
 import type { Page } from '@/payload-types'
 import styles from './render-hero.module.css'
 
@@ -57,7 +58,15 @@ export function Hero({ hero }: HeroProps) {
     <section className={styles.hero}>
       <div className={cx('dot-grid-edge-fade', styles.texture)} aria-hidden="true" />
       <DoodleLayer zoneId="hero" density={50} />
-      <div className={cx('wrapper', 'region-2xl', styles.content)}>
+      <div
+        className={cx('wrapper', 'region-2xl', styles.content)}
+        style={primitiveVars({
+          '--sidebar-size': '43%',
+          '--sidebar-gap': 'var(--space-xl)',
+          '--sidebar-wrap-at': '51%',
+          '--sidebar-align': 'center',
+        })}
+      >
         <div className={cx('flow', styles.copy)}>
           {hero.heading ? (
             <Heading level={1}>{highlightHeading(hero.heading)}</Heading>
@@ -66,7 +75,7 @@ export function Hero({ hero }: HeroProps) {
           {hero.ctas?.length ? (
             <div
               className="cluster"
-              style={{ '--cluster-gap': 'var(--space-s)' } as CSSProperties}
+              style={primitiveVars({ '--cluster-gap': 'var(--space-s)' })}
             >
               {hero.ctas.map((cta, index) => (
                 <Button

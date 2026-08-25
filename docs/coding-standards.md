@@ -13,6 +13,17 @@
 ## Styling
 
 - **No CSS framework.** Layout composes from primitives in `src/styles/compositions/`; component styles are scoped CSS Modules. Layout wants a media query — check the primitives first ([design/layout-primitives.md](design/layout-primitives.md)).
+- **Override a layout primitive's custom property inline, with `primitiveVars()`** (`src/lib/primitive-vars.ts`), not from a CSS Module class:
+
+  ```tsx
+  style={primitiveVars({ '--cluster-gap': 'var(--space-s)' })}
+  ```
+
+  A typo'd or non-existent var name is a type error, not a silently-ignored property — no need to name a specific primitive's union, the helper checks against every primitive's vars at once, so one call can freely mix vars from more than one primitive on the same node (`--cluster-gap` with `--wrapper-max-width`, say). `primitive-vars.test.ts` asserts each primitive's var array matches its `compositions/*.css` file — update both together, or the suite fails on drift ([0007](adr/0007-primitive-override-convention.md)).
+  Only reach for a Module CSS selector instead when the override needs something `style` genuinely cannot express — a media/container query, a pseudo-class (`:hover`), or a structural/combinator selector (`:nth-child`, `> li + li`) targeting something other than the element itself. A plain, unconditional override belongs inline even if the element already has a Module class for other reasons.
+  `flow` is the one primitive with an exception to "inline": use its `.flow-[size]` utility classes (`.flow-3xs`…`.flow-2xl`) for spacing, not `primitiveVars()` — see [design/layout-primitives.md](design/layout-primitives.md) for why.
+  `primitiveVars()` is scoped to layout-primitive vars only — a component's own custom property (`--sticker-rotate`, `--polaroid-tilt`, ...) still just takes a plain `style` object.
+
 - **No magic values.** Colours, spacing, type sizes, radii come from tokens. A raw hex or px value in a component is a review finding — and Stylelint/ESLint block most of them mechanically ([design/tokens.md](design/tokens.md)).
 
 ## Reuse before writing
@@ -30,7 +41,3 @@ Comments here carry _why_, not _what_ — that part is not in dispute. What need
 - **Same argument in two source files** → pick one owner, usually the file where the behaviour is actually implemented, and point from the other.
 
 Two copies of a rationale is the failure mode, not a long comment. Length is fine; divergence is not.
-
-## Claims
-
-- **A library feature central to the plan gets proved before it's built on.** One cheap test (curl the API, inspect built output, read the served file) beats discovering it wrong after a full implementation cycle.

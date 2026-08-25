@@ -11,9 +11,6 @@
 }
 
 .trigger {
-  --repel-gap: var(--space-s);
-  --repel-y-alignment: center;
-
   width: 100%;
   padding: var(--space-s) var(--space-m);
   background: none;

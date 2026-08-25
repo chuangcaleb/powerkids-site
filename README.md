@@ -85,14 +85,14 @@ Git hooks handle formatting on commit, run full verify loop on push.
 
 ## Documentation
 
-- **[AGENTS.md](AGENTS.md)** — conventions, non-negotiables, pointers to everything else. Start here.
-- **[CONTEXT.md](CONTEXT.md)** — domain glossary (School, Block, Page).
+- **AGENTS.md** — conventions, non-negotiables, pointers to everything else. Start here.
+- **CONTEXT.md** — domain glossary (School, Block, Page).
 - **DESIGN.md** — visual identity: tokens, type scale, invariants.
-- **[docs/architecture/](docs/architecture/)** — system shape, content model, block catalogue.
-- **[docs/design/](docs/design/)** — layout primitives, tokens, components.
-- **[docs/workflows/](docs/workflows/)** — verify loop, worktrees, how to add a block or page, how to edit content.
-- **[docs/ops/](docs/ops/)** — environments, deploy, migrations.
-- **[docs/adr/](docs/adr/)** — architecture decision records.
+- **docs/architecture/** — system shape, content model, block catalogue.
+- **docs/design/** — layout primitives, tokens, components.
+- **docs/workflows/** — verify loop, worktrees, how to add a block or page, how to edit content.
+- **docs/ops/** — environments, deploy, migrations.
+- **docs/adr/** — architecture decision records.
 
 ## Licence
 
