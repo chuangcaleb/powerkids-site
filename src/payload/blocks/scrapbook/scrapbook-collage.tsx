@@ -354,7 +354,7 @@ export function ScrapbookCollage({
                   }
                 >
                   <Polaroid
-                    doc={photosByItem[cell.itemIndex]!.get(cell.photoId)!.doc}
+                    asset={photosByItem[cell.itemIndex]!.get(cell.photoId)!.asset}
                     tilt={cell.tilt * TILT_DEG}
                     className={styles.photoFrame}
                     sizes={`(min-width: ${COLLAGE_IMG_HINT_BREAKPOINT_REM}rem) ${Math.round(100 / lanes)}vw, 50vw`}
@@ -414,7 +414,7 @@ function NoJsFallback({
         {items.map((item, itemIndex) => (
           <li key={`${item.id}-${itemIndex}`} className={styles.reelItem}>
             <ItemText item={item} accent={accent} />
-            <PolaroidReel photos={item.photos.map((photo) => photo.doc)} />
+            <PolaroidReel photos={item.photos.map((photo) => photo.asset)} />
           </li>
         ))}
       </ul>
@@ -426,7 +426,7 @@ function NoJsFallback({
           ...item.photos.map((photo, index) => (
             <Polaroid
               key={`${itemIndex}-${index}`}
-              doc={photo.doc}
+              asset={photo.asset}
               tilt={index % 2 === 0 ? -4 : 3}
               sizes={`(min-width: ${NO_JS_GRID_THIRD_COLUMN_HINT_REM}rem) 33vw, 50vw`}
             />
@@ -453,7 +453,7 @@ function ReelList({
         {items.map((item, itemIndex) => (
           <li key={`${item.id}-${itemIndex}`} className={styles.reelItem}>
             <ItemText item={item} accent={accent} />
-            <PolaroidReel photos={item.photos.map((photo) => photo.doc)} />
+            <PolaroidReel photos={item.photos.map((photo) => photo.asset)} />
           </li>
         ))}
       </ul>

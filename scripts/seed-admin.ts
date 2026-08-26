@@ -4,7 +4,7 @@
  *   pnpm payload run scripts/seed-admin.ts
  *
  * Credential source is `.agents/secrets/dev-admin.json`, written by
- * `scripts/sync-dev-admin.sh` (see docs/ops/environments.md).
+ * `scripts/sync-dev-admin.sh` (see docs/workflows/environments.md).
  */
 import { readFileSync } from 'node:fs'
 import config from '@payload-config'

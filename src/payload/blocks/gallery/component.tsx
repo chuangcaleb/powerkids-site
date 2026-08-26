@@ -1,7 +1,7 @@
 import { Media } from '@/components/media/media'
 import { SectionHeader } from '@/components/section-header/section-header'
 import { getPayloadClient } from '@/lib/payload'
-import type { GalleryBlock, Media as MediaDoc } from '@/payload-types'
+import type { GalleryBlock, Media as TMedia } from '@/payload-types'
 
 const SORT: Record<NonNullable<GalleryBlock['sort']>, string> = {
   newest: '-createdAt',
@@ -9,7 +9,7 @@ const SORT: Record<NonNullable<GalleryBlock['sort']>, string> = {
   filename: 'filename',
 }
 
-async function resolveImages(block: GalleryBlock): Promise<MediaDoc[]> {
+async function resolveImages(block: GalleryBlock): Promise<TMedia[]> {
   if (block.mode === 'tag') {
     if (!block.tag) return []
     const tagId = typeof block.tag === 'object' ? block.tag.id : block.tag
@@ -25,7 +25,9 @@ async function resolveImages(block: GalleryBlock): Promise<MediaDoc[]> {
     return result.docs
   }
 
-  return (block.images ?? []).filter((doc): doc is MediaDoc => typeof doc === 'object')
+  return (block.images ?? []).filter(
+    (asset): asset is TMedia => typeof asset === 'object',
+  )
 }
 
 export async function Gallery(block: GalleryBlock) {
@@ -40,7 +42,7 @@ export async function Gallery(block: GalleryBlock) {
           // photo in more than one slot, which would otherwise collide.
           <Media
             key={`${image.id}-${index}`}
-            doc={image}
+            asset={image}
             sizes="(min-width: 768px) 25vw, 50vw"
           />
         ))}

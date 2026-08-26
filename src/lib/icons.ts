@@ -118,7 +118,7 @@ import {
  * grouping and exports this list.
  *
  * Adding an icon needs no migration; removing one does — see
- * `docs/ops/migrations.md`, and audit first with
+ * `docs/workflows/migrations.md`, and audit first with
  * `payload run scripts/audit-icon-usage.ts`.
  */
 const REGISTRY = {

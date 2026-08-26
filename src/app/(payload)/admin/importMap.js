@@ -29,8 +29,11 @@ import { PreviewComponent as PreviewComponent_a8a977ebc872c5d5ea7ee689724c0860 }
 import { FolderTypeField as FolderTypeField_2b8867833a34864a02ddf429b0728a40 } from '@payloadcms/next/client'
 import { Icon as Icon_769439766aa6e0cca42ab9a2dbedc9f9 } from '@/payload/admin/components/graphics/icon'
 import { Logo as Logo_c679d9b3cceb9f1d8a0ba3b8efb5784b } from '@/payload/admin/components/graphics/logo'
+import { StaffGuideNavLink as StaffGuideNavLink_59397b23b02dc9929d6215812445ed3f } from '@/payload/admin/components/staff-guide/staff-guide-nav-link'
 import { DuplicateReviewWidget as DuplicateReviewWidget_f091f1365d788e14cf65c3d835c486fd } from '@/payload/admin/components/media-duplicates/duplicate-review-widget'
+import { StaffGuideLink as StaffGuideLink_bfa12f6e5257f976daab4b8cbdf3328d } from '@/payload/admin/components/staff-guide/staff-guide-link'
 import { S3ClientUploadHandler as S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24 } from '@payloadcms/storage-s3/client'
+import { StaffGuideView as StaffGuideView_5f433351b44df92586df79f3e3163f3b } from '@/payload/admin/components/staff-guide/staff-guide-view'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 
 /** @type import('payload').ImportMap */
@@ -66,7 +69,10 @@ export const importMap = {
   "@payloadcms/next/client#FolderTypeField": FolderTypeField_2b8867833a34864a02ddf429b0728a40,
   "@/payload/admin/components/graphics/icon#Icon": Icon_769439766aa6e0cca42ab9a2dbedc9f9,
   "@/payload/admin/components/graphics/logo#Logo": Logo_c679d9b3cceb9f1d8a0ba3b8efb5784b,
+  "@/payload/admin/components/staff-guide/staff-guide-nav-link#StaffGuideNavLink": StaffGuideNavLink_59397b23b02dc9929d6215812445ed3f,
   "@/payload/admin/components/media-duplicates/duplicate-review-widget#DuplicateReviewWidget": DuplicateReviewWidget_f091f1365d788e14cf65c3d835c486fd,
+  "@/payload/admin/components/staff-guide/staff-guide-link#StaffGuideLink": StaffGuideLink_bfa12f6e5257f976daab4b8cbdf3328d,
   "@payloadcms/storage-s3/client#S3ClientUploadHandler": S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24,
+  "@/payload/admin/components/staff-guide/staff-guide-view#StaffGuideView": StaffGuideView_5f433351b44df92586df79f3e3163f3b,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
 }

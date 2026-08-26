@@ -159,7 +159,7 @@ export const Media: CollectionConfig = {
             condition: (data) => Boolean(data?.hasDuplicate),
             width: '50%',
             description:
-              'Check once reviewed and confirmed this is not actually a duplicate. Clears the flag for this doc only, not the duplicate siblings.',
+              'Check once reviewed and confirmed this is not actually a duplicate. Clears the flag for this asset only, not the duplicate siblings.',
           },
         },
       ],

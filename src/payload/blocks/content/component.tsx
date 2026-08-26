@@ -34,7 +34,7 @@ export function Content({ header, columns }: ContentBlock) {
             >
               {variant === 'image' ? (
                 hasMedia ? (
-                  <Media doc={media} sizes="(min-width: 1024px) 33vw, 100vw" />
+                  <Media asset={media} sizes="(min-width: 1024px) 33vw, 100vw" />
                 ) : null
               ) : richText ? (
                 <RichText data={richText} />

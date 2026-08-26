@@ -1,4 +1,4 @@
-# Phase 7 — Forms
+# Forms — registration and careers
 
 **Deferred.** Owner: "much later". Registration currently links to a Google Form; careers says "call or email". Both work. Do not start without explicit go-ahead.
 
@@ -8,8 +8,7 @@
 
 ## Pre
 
-- [ ] Owner explicitly requests this phase
-- [ ] Phase 6 done — site live
+- [ ] Owner explicitly requests this
 - [ ] **Email adapter working** (Resend or similar). A form nobody is notified about is worse than a Google Form link.
 - [ ] **Owner decides on data handling.** This collects children's names and dates of birth. Malaysian PDPA applies. Decide retention period, who may access submissions, and whether a privacy notice is needed before building anything that stores it.
 - [ ] ADR written for form-builder plugin vs hand-rolled server actions — pull `@payloadcms/plugin-form-builder` details from <https://payloadcms.com/docs/plugins/overview> rather than guess at API

@@ -1,11 +1,11 @@
 import type { CSSProperties } from 'react'
 import { Media } from '@/components/media/media'
 import { cx } from '@/lib/cx'
-import type { Media as MediaDoc } from '@/payload-types'
+import type { Media as TMedia } from '@/payload-types'
 import styles from './polaroid.module.css'
 
 export type PolaroidProps = {
-  doc: MediaDoc
+  asset: TMedia
   /** Rendered as the figcaption. Omit for no caption strip. */
   caption?: string
   priority?: boolean
@@ -20,7 +20,7 @@ export type PolaroidProps = {
 
 /** White-framed, taped photo card. Sizing is the caller's job; tilt is a prop. */
 export function Polaroid({
-  doc,
+  asset,
   caption,
   priority,
   sizes,
@@ -34,7 +34,7 @@ export function Polaroid({
       style={tilt ? ({ '--polaroid-tilt': `${tilt}deg` } as CSSProperties) : undefined}
     >
       {!noTape ? <span className={styles.tape} aria-hidden="true" /> : null}
-      <Media doc={doc} priority={priority} sizes={sizes} className={styles.photo} />
+      <Media asset={asset} priority={priority} sizes={sizes} className={styles.photo} />
       {caption ? <figcaption className={styles.caption}>{caption}</figcaption> : null}
     </figure>
   )

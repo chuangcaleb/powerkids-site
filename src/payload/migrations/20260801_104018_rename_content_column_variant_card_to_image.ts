@@ -9,7 +9,7 @@ import {
  * (see `src/payload/blocks/content/config.ts`) without a migration — the
  * generator's default drop-and-recreate would have destroyed any row
  * already set to `card`. Rewritten as a real rename per
- * docs/ops/migrations.md; no data loss either way.
+ * docs/workflows/migrations.md; no data loss either way.
  */
 export async function up({ db }: MigrateUpArgs): Promise<void> {
   await db.execute(sql`

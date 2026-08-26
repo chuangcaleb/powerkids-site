@@ -4,7 +4,7 @@
  * means every build needs every variable set to something.
  *
  * Why that ordering, and how CI/Vercel satisfy it:
- * docs/ops/environments.md § How variables are read.
+ * docs/workflows/environments.md § How variables are read.
  */
 
 type EnvKey =
@@ -29,7 +29,7 @@ export function requireEnv(key: EnvKey): string {
   if (!value) {
     throw new Error(
       `Missing required environment variable: ${key}. ` +
-        `See .env.example and docs/ops/environments.md.`,
+        `See .env.example and docs/workflows/environments.md.`,
     )
   }
 
@@ -44,7 +44,7 @@ export function optionalEnv(key: EnvKey, fallback: string): string {
 /**
  * R2's region is always the literal `auto`, so it is a constant, not a
  * variable — hard-coded here so it cannot be misconfigured. See
- * docs/ops/environments.md § Three R2 traps.
+ * docs/workflows/environments.md § Three R2 traps.
  */
 export const S3_REGION = 'auto'
 

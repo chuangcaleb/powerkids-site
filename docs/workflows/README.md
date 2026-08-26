@@ -7,5 +7,7 @@ Step-by-step procedures for recurring tasks.
 - [upgrading-packages.md](upgrading-packages.md) — bumping a dependency, or `pnpm outdated` comes up.
 - [adding-a-block.md](adding-a-block.md) — a content need no existing block covers.
 - [adding-a-page.md](adding-a-page.md) — someone asks for a new page.
-- [content-editing.md](content-editing.md) — editing content as an editor would, or writing editor-facing guidance.
 - [worktrees.md](worktrees.md) — creating or working in a git worktree.
+- [environments.md](environments.md) — touching env vars, R2, Neon, or anything that differs per environment.
+- [migrations.md](migrations.md) — schema changed — always, no exceptions.
+- [deploy.md](deploy.md) — deploying, launch cutover, or rolling back.

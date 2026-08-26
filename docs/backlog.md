@@ -3,7 +3,7 @@
 **Purpose:** small, deliberate deferrals — known gaps nobody is working on yet.
 **Read when:** picking up loose ends between phases, or about to "fix" something that was left this way on purpose.
 
-Not a task tracker for phase work — phases own their own scope ([phases/README.md](phases/README.md)). An item lands here only when it was found during other work, judged real, and consciously postponed.
+Not a general task tracker — see [future/README.md](future/README.md) for larger deferred work. An item lands here only when it was found during other work, judged real, and consciously postponed.
 
 ---
 

@@ -3,7 +3,7 @@
 **Purpose:** how code reach production, and how to get back when it shouldn't have.
 **Read this when:** shipping, or something broken in production.
 
-> **Status: pipeline live, cutover pending.** Preview and production deploys work as described. Phase 6 cover DNS switch.
+> **Status: pipeline live, cutover pending.** Preview and production deploys work as described below.
 
 ---
 
@@ -28,7 +28,7 @@ feature branch ──PR──► preview deploy + CI
                         merge ──► production deploy
 ```
 
-Every pull request get preview URL with working admin panel against dev database. CI run the [verify loop](../workflows/verify-loop.md); red blocks merge.
+Every pull request get preview URL with working admin panel against dev database. CI run the [verify loop](verify-loop.md); red blocks merge.
 
 Automated contributors never push to `main`. Owner merges.
 
@@ -42,7 +42,20 @@ Automated contributors never push to `main`. Owner merges.
 
 **Bad media** — deleting/replacing file takes effect in database immediately, but media domain caches four hours, so edge keeps serving old image. See [environments.md](environments.md#media-serving-and-cache)
 
-## Launch cutover (Phase 6)
+## Launch checklist
+
+Not yet done, in order:
+
+- [ ] Production env vars set in Vercel, distinct `PAYLOAD_SECRET` from preview
+- [ ] Owner has populated and proof-read production CMS content by hand — no seed script, no v3 copy migration
+- [ ] Owner has DNS access and a rollback window
+- [ ] Lighthouse ≥95 across the board; accessibility 100
+- [ ] Structured data validates
+- [ ] Staff guide (`/admin/staff-guide`) tested on an actual staff member, screenshots added
+- [ ] At least one staff account created and able to log in
+- [ ] Rollback documented above, understood by owner
+
+## Cutover
 
 Planned in full before the day. Outline:
 

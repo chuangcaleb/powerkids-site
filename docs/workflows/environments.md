@@ -81,7 +81,7 @@ Uploads go to R2 through S3 adapter, served from `R2_PUBLIC_URL` directly, not p
 
 Exists because media domain caches four hours (`cache-control: max-age=14400`). Without content-addressed names, replacing photo reuses filename, edge keeps serving old bytes, editor concludes CMS broken. With them, different content is different URL: replacement visible immediately, old object deleted.
 
-Verified in Phase 1: replacing document's file produced new URL that served instantly, while previous URL returned 404 on cache-busted request.
+Verified: replacing a document's file produces a new URL that serves instantly, while the previous URL returns 404 on a cache-busted request.
 
 Two consequences worth knowing:
 

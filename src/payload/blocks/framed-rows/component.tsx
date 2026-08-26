@@ -84,7 +84,7 @@ export function FramedRows({ header, rows, id }: FramedRowsBlockType) {
                   </div>
                   {image ? (
                     <Polaroid
-                      doc={image}
+                      asset={image}
                       sizes="(min-width: 768px) 33vw, 100vw"
                       tilt={index % 2 === 1 ? 5 : -5}
                     />

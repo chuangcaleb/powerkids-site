@@ -22,14 +22,14 @@ For Payload's API surface (field types, config shapes, hook signatures, operator
 ## Project constraints
 
 - One auth collection (`users`), no public signup. `Boolean(req.user)` is a sufficient admin check for most operations.
-- Single-language content — `locale` is unused. Activating `ms` is Phase 8, not now.
+- Single-language content — `locale` is unused. Activating a second locale is deferred — see [future/localisation.md](future/localisation.md).
 - Server components read **exclusively** through the Local API. REST/GraphQL exist but are only relevant if a client component fetches after mount.
 
 ## Gotchas
 
 Each of these is a correction to something an agent gets wrong by default — usually because upstream examples show otherwise.
 
-- **`push: false`, unconditionally.** Upstream examples gate it on `NODE_ENV === 'development'`. Don't. A stray dev run against a shared database already destroyed data once — see [ops/migrations.md](ops/migrations.md).
+- **`push: false`, unconditionally.** Upstream examples gate it on `NODE_ENV === 'development'`. Don't. A stray dev run against a shared database already destroyed data once — see [workflows/migrations.md](workflows/migrations.md).
 - **`slugField()` option is `fieldToUse`**, not `useAsSlug`. See call sites in `src/payload/collections/*/index.ts`.
 - **The home page slug is `index`, not `home`.** Hooks, preview redirects, and sitemap logic all branch on it. Copying an upstream revalidate example that tests `slug === 'home'` produces a page that never revalidates.
 - **`migrationDir` is `src/payload/migrations`**, resolved from `payload.config.ts` — not `./migrations`.
@@ -43,5 +43,5 @@ Each of these is a correction to something an agent gets wrong by default — us
 - This project's collections, globals, fields: [architecture/content-model.md](architecture/content-model.md)
 - Block catalogue and editor rules: [architecture/blocks.md](architecture/blocks.md)
 - Add a block, end to end: [workflows/adding-a-block.md](workflows/adding-a-block.md)
-- Migration workflow and commands: [ops/migrations.md](ops/migrations.md)
-- Env vars and service bindings: [ops/environments.md](ops/environments.md)
+- Migration workflow and commands: [workflows/migrations.md](workflows/migrations.md)
+- Env vars and service bindings: [workflows/environments.md](workflows/environments.md)

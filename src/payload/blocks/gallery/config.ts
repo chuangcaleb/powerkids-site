@@ -1,7 +1,7 @@
 import type { Block } from 'payload'
 import { withHeaderTabs } from '@/payload/fields/header'
 
-/** Photo grid, any number of images — curated manually, or every Media doc carrying a tag. Primitive: `grid-auto`. */
+/** Photo grid, any number of images — curated manually, or every Media asset carrying a tag. Primitive: `grid-auto`. */
 export const Gallery: Block = {
   slug: 'gallery',
   interfaceName: 'GalleryBlock',

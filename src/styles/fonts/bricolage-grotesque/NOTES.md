@@ -33,7 +33,7 @@ pyftsubset var-wdth100.ttf --output-file=bricolage-grotesque-variable.woff2 --fl
 `--layout-features='kern'` (not `'*'`) — `'*'` keeps every GSUB feature including stylistic
 alternates this site never toggles, dragging in their glyph variants. Site doesn't use alternates;
 `kern` alone keeps letter-pair spacing (matters at display sizes) and drops the rest. Cut file
-90KB → 70KB, no visual diff. Verified against phase-6 performance audit, 2026-08-21.
+90KB → 70KB, no visual diff. Verified against performance audit, 2026-08-21.
 
 `pyftsubset --flavor=woff2` needs the `brotli` Python package (`pip install brotli`) — not
 installed by default even when `fonttools`/`pyftsubset` are on `PATH`.

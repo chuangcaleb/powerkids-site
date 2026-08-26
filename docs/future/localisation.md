@@ -1,4 +1,4 @@
-# Phase 8 — Localisation
+# Localisation
 
 **Deferred.** Schema already supports it; nothing forces the timing.
 
@@ -10,11 +10,10 @@
 
 - [ ] Owner explicitly requests it, and has decided **which** language — Bahasa Malaysia and/or Chinese. v3 had Chinese-language brochure scans for the After School Program, which hints at the audience.
 - [ ] Owner has a translator. This is a content project, not a code project — the code side is roughly a day, the translation is not.
-- [ ] Phase 6 done
 
 ## Work
 
-Payload localisation is already configured with `en` as the only active locale, so this is a config change rather than a migration of every text field. That was deliberate in Phase 1. Pull `localization.locales`/field-level `localized` details from <https://payloadcms.com/docs/configuration/localization> rather than guess.
+Payload localisation is already configured with `en` as the only active locale, so this is a config change rather than a migration of every text field. Pull `localization.locales`/field-level `localized` details from <https://payloadcms.com/docs/configuration/localization> rather than guess.
 
 - Add the locale to `localization.locales` in `src/payload.config.ts`
 - Locale routing in the App Router; `generateStaticParams` per locale

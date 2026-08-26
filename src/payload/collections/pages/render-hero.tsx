@@ -91,7 +91,7 @@ export function Hero({ hero }: HeroProps) {
         {media ? (
           <div className="sidebar">
             <Polaroid
-              doc={media}
+              asset={media}
               caption={media.alt}
               priority
               sizes="(min-width: 40rem) 45vw, 100vw"

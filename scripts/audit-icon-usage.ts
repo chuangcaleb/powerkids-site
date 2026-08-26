@@ -6,7 +6,7 @@ import { isIconName } from '@/lib/icons'
  * Reports every icon value stored in page content and whether the registry
  * still knows it. Run before cutting an icon from `src/lib/icons.ts` — a name
  * that live pages reference cannot just be deleted, it needs a migration that
- * remaps or clears those rows (`docs/ops/migrations.md`).
+ * remaps or clears those rows (`docs/workflows/migrations.md`).
  *
  * Walks the document tree by field name rather than by block path, so a new
  * block with an icon field is covered without editing this script.

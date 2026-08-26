@@ -148,7 +148,7 @@ Which shape suits which job: `docs/design/section-seams.md`.
 
 ## Doodle layer
 
-Decorative background marks — `DoodleLayer`, `src/components/doodle-layer/`. `--doodle-opacity: 0.07`, `--doodle-size-min: 20px`, `--doodle-size-max: 100px`, `--doodle-travel: 170px` (parallax distance). Density is a component prop, not a token — it has a layout cost, not just a paint cost. Placement is a PRNG seeded on the zone id, never `Math.random`; parallax is pure CSS (`animation-timeline: view()`), no scroll listener. Implementation notes: `docs/phases/phase-4-rendering.md`.
+Decorative background marks — `DoodleLayer`, `src/components/doodle-layer/`. `--doodle-opacity: 0.07`, `--doodle-size-min: 20px`, `--doodle-size-max: 100px`, `--doodle-travel: 170px` (parallax distance). Density is a component prop, not a token — it has a layout cost, not just a paint cost. Placement is a PRNG seeded on the zone id, never `Math.random`; parallax is pure CSS (`animation-timeline: view()`), no scroll listener. Implementation notes: `src/components/doodle-layer/doodle-layer.tsx`.
 
 ---
 

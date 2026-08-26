@@ -20,7 +20,7 @@ export function PolaroidReel({ photos }: PolaroidReelProps) {
       {photos.map((photo, index) => (
         <li key={photo.id} className={styles.item}>
           <Polaroid
-            doc={photo}
+            asset={photo}
             tilt={index % 2 === 0 ? -4 : 3}
             noTape
             sizes="30rem"

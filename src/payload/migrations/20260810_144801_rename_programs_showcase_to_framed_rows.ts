@@ -7,7 +7,7 @@ import {
 /**
  * `programs-showcase` renamed to `framed-rows` — a block name describes the
  * visual pattern (see `src/payload/blocks/framed-rows/config.ts`), not its
- * one current consumer. Written as a real rename per docs/ops/migrations.md
+ * one current consumer. Written as a real rename per docs/workflows/migrations.md
  * — the generator's interactive prompt (create vs. rename) can't run
  * non-interactively, so this mirrors what it would have produced.
  */

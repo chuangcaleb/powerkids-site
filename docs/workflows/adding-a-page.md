@@ -9,7 +9,7 @@
 
 Point of rebuild. Editor creates `pages` record in admin panel, gives slug, stacks blocks, publishes. Catch-all route resolves it. No deploy, no PR.
 
-Someone asks developer for "new page" — first question: is it really new _kind_ of page. Usually not — point them at [content-editing.md](content-editing.md).
+Someone asks developer for "new page" — first question: is it really new _kind_ of page. Usually not — point them at the staff guide (`/admin/staff-guide`).
 
 ## Page needs code only when
 

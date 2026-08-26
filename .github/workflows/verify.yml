@@ -35,7 +35,7 @@ jobs:
       # without running static generation, so pages with generateStaticParams
       # (which hit Postgres via the Local API) don't need a real database
       # here. Preview/Production builds on Vercel use plain `pnpm build` with
-      # a real DATABASE_URI (see docs/ops/environments.md) and do the actual
+      # a real DATABASE_URI (see docs/workflows/environments.md) and do the actual
       # static generation there. See:
       # https://payloadcms.com/docs/production/building-without-a-db-connection
       - run: pnpm build:compile

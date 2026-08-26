@@ -35,7 +35,7 @@ Editors and visitors hit same deployment. No separate CMS service to run, monito
 - **`src/payload/`** holds everything Payload owns: collections, globals, blocks, access utilities, admin components, migrations. `payload.config.ts` at `src/` is the centre of gravity.
 - **`src/app/(payload)/`** is Payload's required integration shape, not hand-written app code. Excluded from lint and formatting; regenerate rather than edit.
 - **`src/payload-types.ts`** is generated from the config — never edit it. Regenerate with `pnpm generate:types`.
-- **Migrations** are generated, committed, and never hand-edited after running — see [../ops/migrations.md](../ops/migrations.md).
+- **Migrations** are generated, committed, and never hand-edited after running — see [../workflows/migrations.md](../workflows/migrations.md).
 
 ## Boundaries
 
@@ -48,5 +48,5 @@ Editors and visitors hit same deployment. No separate CMS service to run, monito
 
 - Content model: [content-model.md](content-model.md)
 - Block catalogue: [blocks.md](blocks.md)
-- Environments and bindings: [../ops/environments.md](../ops/environments.md)
+- Environments and bindings: [../workflows/environments.md](../workflows/environments.md)
 - Why this stack: [../adr/0001-nextjs-payload-vercel.md](../adr/0001-nextjs-payload-vercel.md)

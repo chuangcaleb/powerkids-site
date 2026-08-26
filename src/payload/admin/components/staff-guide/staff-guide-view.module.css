@@ -1,0 +1,22 @@
+.wrap {
+  max-width: 70ch;
+  padding-bottom: calc(var(--base) * 3);
+}
+
+.heading {
+  margin-top: calc(var(--base) * 1.5);
+  margin-bottom: calc(var(--base) * 0.5);
+}
+
+.heading:first-child {
+  margin-top: 0;
+}
+
+.block {
+  margin-top: 0;
+  margin-bottom: calc(var(--base) * 1);
+}
+
+.item {
+  margin-bottom: calc(var(--base) * 0.25);
+}

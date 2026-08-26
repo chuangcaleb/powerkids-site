@@ -16,7 +16,7 @@ import { createHash } from 'node:crypto'
  * Re-check on a Payload upgrade; delete this if a native option appears.
  *
  * Why content-addressed names at all (long CDN cache, stale replacements):
- * docs/ops/environments.md § Media serving and cache.
+ * docs/workflows/environments.md § Media serving and cache.
  *
  * Hashing the *content* rather than using a random suffix means:
  *   - different content always gets a different URL, so replacements appear

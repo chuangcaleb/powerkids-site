@@ -13,7 +13,7 @@ Editors get freedom of _arrangement_, not freedom of _design_. Fixed catalogue m
 
 Before adding one, check existing block with new variant wouldn't do. Two blocks differ only in alignment = one block with alignment field.
 
-**Hero is not a block.** Every page has exactly one, always present, independent of `layout` — `src/payload/collections/pages/hero.ts`. Pulled out of the closed set deliberately: editors don't choose whether a page has a hero, only its content and impact level. Decided when Pages itself was built (Phase 3); the one deviation from the Phase 2 catalogue.
+**Hero is not a block.** Every page has exactly one, always present, independent of `layout` — `src/payload/collections/pages/hero.ts`. Pulled out of the closed set deliberately: editors don't choose whether a page has a hero, only its content and impact level. Decided when Pages itself was built — the one deviation from the block catalogue.
 
 ---
 

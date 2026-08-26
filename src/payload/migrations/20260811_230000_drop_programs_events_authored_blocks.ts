@@ -7,7 +7,7 @@ import {
 /**
  * Drops `programs` and `events` collections (seed dummy data only, nothing
  * migrated) and their route-facing coupling in three blocks. Written by hand
- * per docs/ops/migrations.md — the generator's interactive create-vs-rename
+ * per docs/workflows/migrations.md — the generator's interactive create-vs-rename
  * prompt for the touched enums can't run non-interactively in this
  * environment, so this mirrors what it would have produced, confirmed
  * against the live schema.

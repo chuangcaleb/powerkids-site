@@ -1,8 +1,5 @@
 import type { HeaderRichTextProps } from '@/components/rich-text/header-rich-text'
-import type {
-  Media as MediaDoc,
-  ScrapbookBlock as ScrapbookBlockType,
-} from '@/payload-types'
+import type { Media, ScrapbookBlock } from '@/payload-types'
 
 export type CollageItem = {
   id: string
@@ -12,21 +9,21 @@ export type CollageItem = {
   }
   button?: { label?: string | null; url?: string | null } | null
   icons: string[]
-  photos: { id: string; doc: MediaDoc; aspectRatio: number }[]
+  photos: { id: string; asset: Media; aspectRatio: number }[]
 }
 
 /**
  * CMS data to plain collage props.
  *
  * Split out of the block component so it is reachable from a node test: an
- * unpopulated relationship, a media doc uploaded before dimensions were
+ * unpopulated relationship, a media asset uploaded before dimensions were
  * recorded, and an item whose every photo was dropped are all real editor
  * states, and each one used to be an untested branch inside a server
  * component. Items with no usable photo are dropped entirely — a text cell
  * alone has nothing to collage.
  */
 export function resolveCollageItems(
-  items: ScrapbookBlockType['items'] | null | undefined,
+  items: ScrapbookBlock['items'] | null | undefined,
 ): CollageItem[] {
   return (items ?? [])
     .map((item) => ({
@@ -38,12 +35,12 @@ export function resolveCollageItems(
       button: item.button,
       icons: item.icons ?? [],
       photos: (item.media ?? [])
-        .filter((media): media is MediaDoc => typeof media === 'object')
-        .filter((doc) => doc.width && doc.height)
-        .map((doc) => ({
-          id: String(doc.id),
-          doc,
-          aspectRatio: doc.width! / doc.height!,
+        .filter((media): media is Media => typeof media === 'object')
+        .filter((asset) => asset.width && asset.height)
+        .map((asset) => ({
+          id: String(asset.id),
+          asset,
+          aspectRatio: asset.width! / asset.height!,
         })),
     }))
     .filter((item) => item.photos.length > 0)
@@ -57,8 +54,8 @@ export function resolveCollageItems(
  * itself changes (e.g. duplicating the block).
  */
 export function resolveSeed(
-  storedSeed: ScrapbookBlockType['seed'],
-  id: ScrapbookBlockType['id'],
+  storedSeed: ScrapbookBlock['seed'],
+  id: ScrapbookBlock['id'],
 ): string {
   return storedSeed || `scrapbook-${id ?? 'preview'}`
 }

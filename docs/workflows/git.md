@@ -7,15 +7,16 @@
 
 ## Gates
 
-- **Plan gate per phase.** Propose the plan, get approval, then start. The plan states the branch/PR split and where the review checkpoints sit.
+- **Plan gate for non-trivial work.** Propose the plan, get approval, then start. The plan states the branch split and where the review checkpoints sit.
 - **Small, obvious change:** execute directly. **Architectural:** propose first.
 - **Review checkpoint is a natural checkpoint, not every commit.** Stop and ask for review at the end of a logical chunk — wherever you'd otherwise pause to ask "continue?".
 
-## Branches and PRs
+## Branches, previews, and merging
 
-- **Base is `v4`** during phase development. Feature branch off it, PR into it. Never push to `main`.
-- Descriptive names: `feat/hero-block`, `fix/footer-nav-order`.
-- **PR per feature; "feature" sized by judgment, not a fixed unit count.** Default: one branch per large coherent unit, grouping small units together (especially frontend work you're confident in) rather than branching per sub-step (tokens, then primitives, then styles, …). Some phases need several branches, some one. Cut branches finer than the stated granularity and the git ceremony — ancestor check, fast-forward, push — repeats with no review benefit.
+- **Base is `main`.** Feature branch off it. Never push to `main` directly.
+- Descriptive names: `feat/hero-block`, `fix/footer-nav-order`. No tool-name prefix.
+- **One branch per group of related commits that needs its own preview deployment.** A branch gets a Vercel preview URL on its PR — that's the unit a reviewer looks at. Group small, related units onto one branch (especially frontend work you're confident in) rather than branching per sub-step (tokens, then primitives, then styles, …); split onto a new branch when the work is large enough, or different enough, to want its own preview and its own review pass. Cutting branches finer than that repeats the git ceremony — ancestor check, fast-forward, push — for no review benefit.
+- **Merge to `main` at the end of the session** once the branch's work is reviewed and green. Small, low-risk refactors may fast-forward-merge locally without a PR if the owner says so for that change; anything else goes through a PR with a preview deploy.
 
 ## Commits
 

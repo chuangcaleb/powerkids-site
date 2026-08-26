@@ -27,7 +27,7 @@ export async function SchoolsBlock({ header }: SchoolsBlockType) {
               }}
             />
             {typeof school.photo === 'object' && school.photo ? (
-              <Media doc={school.photo} sizes="(min-width: 768px) 33vw, 100vw" />
+              <Media asset={school.photo} sizes="(min-width: 768px) 33vw, 100vw" />
             ) : null}
             <Heading level={3}>{school.name}</Heading>
             <p>{school.address}</p>

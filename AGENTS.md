@@ -20,7 +20,7 @@ Each `docs/<topic>/` folder has its own `README.md` index. Some common docs:
 
 - [docs/coding-standards.md](docs/coding-standards.md) — writing or reviewing any code in `src/`.
 - [docs/workflows/verify-loop.md](docs/workflows/verify-loop.md) — before every commit and every push.
-- [docs/ops/migrations.md](docs/ops/migrations.md) — when schema changes
+- [docs/workflows/migrations.md](docs/workflows/migrations.md) — when schema changes
 - [docs/adr/](docs/adr/) — about to redo or reverse a past architectural decision.
 
 ---

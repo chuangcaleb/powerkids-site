@@ -61,12 +61,24 @@ export default buildConfig({
       collections: ['pages'],
     },
     components: {
+      afterNavLinks: [
+        '@/payload/admin/components/staff-guide/staff-guide-nav-link#StaffGuideNavLink',
+      ],
       beforeDashboard: [
         '@/payload/admin/components/media-duplicates/duplicate-review-widget#DuplicateReviewWidget',
+        '@/payload/admin/components/staff-guide/staff-guide-link#StaffGuideLink',
       ],
       graphics: {
         Logo: '@/payload/admin/components/graphics/logo#Logo',
         Icon: '@/payload/admin/components/graphics/icon#Icon',
+      },
+      views: {
+        staffGuide: {
+          Component:
+            '@/payload/admin/components/staff-guide/staff-guide-view#StaffGuideView',
+          path: '/staff-guide',
+          meta: { title: 'Staff Guide' },
+        },
       },
     },
   },
@@ -88,7 +100,7 @@ export default buildConfig({
   db: vercelPostgresAdapter({
     pool: { connectionString: requireEnv('DATABASE_URI') },
     // Unconditionally false, dev included — push resolves structural diffs by
-    // dropping and recreating tables, silently. See docs/ops/migrations.md.
+    // dropping and recreating tables, silently. See docs/workflows/migrations.md.
     push: false,
     // Defaults to `<config dir>/migrations`; migrations live under
     // src/payload/ with the rest of the Payload-only code.
@@ -123,7 +135,7 @@ export default buildConfig({
 
   // Localisation is configured now with English as the only active locale, so
   // adding Bahasa Malaysia later is a config change rather than a migration of
-  // every text field. See the phase plan.
+  // every text field. (`docs/future/localisation.md`)
   localization: {
     locales: [{ code: 'en', label: 'English' }],
     defaultLocale: 'en',

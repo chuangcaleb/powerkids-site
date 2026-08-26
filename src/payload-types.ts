@@ -185,7 +185,7 @@ export interface Media {
   checksum?: string | null;
   hasDuplicate?: boolean | null;
   /**
-   * Check once reviewed and confirmed this is not actually a duplicate. Clears the flag for this doc only, not the duplicate siblings.
+   * Check once reviewed and confirmed this is not actually a duplicate. Clears the flag for this asset only, not the duplicate siblings.
    */
   duplicateDismissed?: boolean | null;
   folder?: (number | null) | FolderInterface;

@@ -4,7 +4,7 @@ import { resolveCollageItems, resolveSeed } from './normalize-items'
 
 type Items = NonNullable<ScrapbookBlock['items']>
 
-function mediaDoc(overrides: Partial<Media> = {}): Media {
+function mediaAsset(overrides: Partial<Media> = {}): Media {
   return {
     id: 1,
     alt: 'A photo',
@@ -20,13 +20,13 @@ function mediaDoc(overrides: Partial<Media> = {}): Media {
 function item(overrides: Partial<Items[number]> = {}): Items[number] {
   return {
     id: 'item-1',
-    media: [mediaDoc()],
+    media: [mediaAsset()],
     ...overrides,
   } as Items[number]
 }
 
 describe('resolveCollageItems', () => {
-  it('derives an aspect ratio from the media doc', () => {
+  it('derives an aspect ratio from the media asset', () => {
     const [resolved] = resolveCollageItems([item()])
     expect(resolved!.photos[0]!.aspectRatio).toBe(1.5)
   })
@@ -36,9 +36,9 @@ describe('resolveCollageItems', () => {
     expect(resolved).toEqual([])
   })
 
-  it('drops a media doc with no recorded dimensions', () => {
+  it('drops a media asset with no recorded dimensions', () => {
     const resolved = resolveCollageItems([
-      item({ media: [mediaDoc({ width: null, height: null })] }),
+      item({ media: [mediaAsset({ width: null, height: null })] }),
     ])
     expect(resolved).toEqual([])
   })

@@ -6,7 +6,7 @@ This v4 is a ground-up rebuild in PayloadCMS. Its purpose is to move every piece
 
 ## Status
 
-Phases 0–4 (foundation, design system, content model, rendering) are done. Phase 5 (automated content migration) was permanently skipped — the owner populates the CMS by hand instead of migrating v3 copy. **Phase 6 (launch: SEO, accessibility, cutover) is next.** See [the phase list](#phases).
+Foundation, design system, content model, and rendering are done. Automated content migration was permanently skipped — the owner populates the CMS by hand instead of migrating v3 copy. **Launch (SEO, accessibility, cutover) is next** — see [docs/workflows/deploy.md](docs/workflows/deploy.md#launch-checklist).
 
 ## Stack
 
@@ -30,7 +30,7 @@ pnpm install
 cp .env.example .env
 ```
 
-Fill in `.env`. See [docs/ops/environments.md](docs/ops/environments.md).
+Fill in `.env`. See [docs/workflows/environments.md](docs/workflows/environments.md).
 
 ```bash
 pnpm migrate
@@ -44,7 +44,7 @@ pnpm sync:dev-admin  # paste credentials from your password manager
 pnpm seed:dev-admin  # creates/updates the account in your local DB
 ```
 
-See [docs/ops/environments.md](docs/ops/environments.md#dev-admin-account) for why and the full flow.
+See [docs/workflows/environments.md](docs/workflows/environments.md#dev-admin-account) for why and the full flow.
 
 **Every variable must be set before anything runs, including build** — Payload config reads them while Next collects page data. Missing one fails loudly, naming itself.
 
@@ -79,7 +79,7 @@ Git hooks handle formatting on commit, run full verify loop on push.
 
 ### Media assets
 
-**Media filenames are content-addressed.** Uploads are renamed to include a content hash (`hero-4846c1b1.webp`) before Payload derives size variants, so edge cache never serves stale assets after a replacement. See [docs/ops/environments.md#media-serving-and-cache](docs/ops/environments.md#media-serving-and-cache).
+**Media filenames are content-addressed.** Uploads are renamed to include a content hash (`hero-4846c1b1.webp`) before Payload derives size variants, so edge cache never serves stale assets after a replacement. See [docs/workflows/environments.md#media-serving-and-cache](docs/workflows/environments.md#media-serving-and-cache).
 
 **Duplicate uploads are flagged, not blocked.** Media re-uploads are detected by checksum group and flagged to editors for review/dismissal, rather than silently rejected. See [ADR 0005](docs/adr/0005-media-duplicate-detection-by-checksum-group.md).
 
@@ -90,9 +90,9 @@ Git hooks handle formatting on commit, run full verify loop on push.
 - **DESIGN.md** — visual identity: tokens, type scale, invariants.
 - **docs/architecture/** — system shape, content model, block catalogue.
 - **docs/design/** — layout primitives, tokens, components.
-- **docs/workflows/** — verify loop, worktrees, how to add a block or page, how to edit content.
-- **docs/ops/** — environments, deploy, migrations.
+- **docs/workflows/** — git, verify loop, worktrees, environments, deploy, migrations, how to add a block or page, how to edit content.
 - **docs/adr/** — architecture decision records.
+- **docs/future/** — deferred, larger-scope work with no current owner or timeline.
 
 ## Licence
 

@@ -47,5 +47,5 @@ Verified pairs (contrast ratio, 4.5:1 floor): ink-on-cream 18.05:1, charcoal-on-
 
 ## Related
 
-- Values and invariants: `DESIGN.md` _(Phase 2)_
+- Values and invariants: `DESIGN.md`
 - Layout: [layout-primitives.md](layout-primitives.md)

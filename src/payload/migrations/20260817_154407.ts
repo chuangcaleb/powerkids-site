@@ -12,7 +12,7 @@ import {
  * Hand-edited from the generated SQL, which dropped
  * `pages_blocks_scrapbook_items_doodle_icons` outright — the `hasMany` values
  * live in the new shared `pages_texts` table, and nothing copied them across.
- * Following the additive-first rule in `docs/ops/migrations.md`, this step only
+ * Following the additive-first rule in `docs/workflows/migrations.md`, this step only
  * adds and rewrites; `scripts/backfill-doodle-icons.ts` republishes the doodle
  * selections through the Local API (which is what knows how to build a
  * `pages_texts.path`), and a later migration drops the emptied tables.
