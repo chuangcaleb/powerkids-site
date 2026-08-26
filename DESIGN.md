@@ -96,8 +96,6 @@ Three brand accents, each with a tint for large fills, over a warm cream/ink/cha
 
 Values live once, in the front-matter above. CSS variable names follow `color.<key>` → `--colour-<kebab-key>` (`redTint` → `--colour-red-tint`), except `sun` and `contact`, which are surface fills rather than text/border colours and so become `--bg-sun` / `--bg-contact`.
 
-v3 carried a full shadcn neutral ramp (`--muted-foreground`, `--ring`, `--destructive`, etc.) that was mostly unused boilerplate — none of it is reintroduced here. One muted step covers every "quiet" need this system actually has.
-
 ## Type
 
 Two families: Bricolage Grotesque for display (`--font-display`, headings + anything using the `.disp`/`.wm`-equivalent treatment), Figtree for body (`--font-body`, running copy and UI chrome — nav, pills, labels). `Button` is display-face text, not body — see `docs/design/components.md`.

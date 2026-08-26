@@ -7,8 +7,7 @@ import { authenticatedOrPublished } from '@/payload/access/authenticated-or-publ
 import { revalidateSchool, revalidateSchoolDelete } from './hooks/revalidate-schools'
 
 /**
- * Physical branches. Three active. Salak South Garden and Bukit Jalil were
- * commented out in v3 and are not seeded here unless the owner says otherwise.
+ * Physical branches.
  */
 export const Schools: CollectionConfig = {
   slug: 'schools',

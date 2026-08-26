@@ -79,14 +79,14 @@ Git hooks handle formatting on commit, run full verify loop on push.
 
 ### Media assets
 
-**Media filenames are content-addressed.** Uploads are renamed to include a content hash (`hero-4846c1b1.webp`) before Payload derives size variants, so a 4-hour edge cache never serves stale bytes after a replacement — different content gets a different URL instead of colliding on cache-control. See [docs/ops/environments.md#media-serving-and-cache](docs/ops/environments.md#media-serving-and-cache).
+**Media filenames are content-addressed.** Uploads are renamed to include a content hash (`hero-4846c1b1.webp`) before Payload derives size variants, so edge cache never serves stale assets after a replacement. See [docs/ops/environments.md#media-serving-and-cache](docs/ops/environments.md#media-serving-and-cache).
 
-**Duplicate uploads are flagged, not blocked.** Media re-uploads are detected by checksum group and surfaced to editors for review rather than silently rejected. See [ADR 0005](docs/adr/0005-media-duplicate-detection-by-checksum-group.md).
+**Duplicate uploads are flagged, not blocked.** Media re-uploads are detected by checksum group and flagged to editors for review/dismissal, rather than silently rejected. See [ADR 0005](docs/adr/0005-media-duplicate-detection-by-checksum-group.md).
 
 ## Documentation
 
 - **AGENTS.md** — conventions, non-negotiables, pointers to everything else. Start here.
-- **CONTEXT.md** — domain glossary (School, Block, Page).
+- **CONTEXT.md** — domain glossary.
 - **DESIGN.md** — visual identity: tokens, type scale, invariants.
 - **docs/architecture/** — system shape, content model, block catalogue.
 - **docs/design/** — layout primitives, tokens, components.

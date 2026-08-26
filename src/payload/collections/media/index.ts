@@ -19,8 +19,7 @@ const WEBP = { format: 'webp', options: { quality: 80 } } as const
  * sizes below at upload time on the Node runtime.
  *
  * `alt` is required at the schema level, so it cannot be skipped from the
- * panel, the API, or a seed script. The v3 site shipped image-only brochure
- * scans with empty alt text. That class of defect is not possible here.
+ * panel, the API, or a seed script.
  *
  * `folders: true` turns on Payload's built-in folder browser for this
  * collection (checked against the installed 3.86 API — the newer

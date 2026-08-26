@@ -33,14 +33,11 @@ Things a reader would otherwise mistake for arbitrary:
 - **Media carries `checksum`, `hasDuplicate`, and `duplicateDismissed`** to flag re-uploads of a file already present, by checksum group rather than a single pointer. Non-blocking by design — the editor decides, the system only warns. See [ADR 0005](../adr/0005-media-duplicate-detection-by-checksum-group.md) and `src/payload/collections/media/hooks/flag-duplicate.ts`.
 - **Brand name is not a CMS field.** `PowerKids` with "Power" red and "Kids" blue is a fixed display convention — see `DESIGN.md`.
 - **Footer column headings are fields, not markup.** Staff reorganise the footer without a deploy.
-- **Two schools are inactive, not deleted.** Salak South Garden and Bukit Jalil were commented out in v3; not seeded in v4 unless the owner says otherwise.
 
 ## Relationships
 
 ```
 pages ──has many──► blocks (embedded)
 blocks ──reference──► media, programs, events, schools
-schools ──one──► people (principal)
 people ──one──► schools
-events ──many──► media (gallery)
 ```

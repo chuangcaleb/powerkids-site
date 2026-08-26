@@ -16,18 +16,6 @@
 - Anything that renders content takes it as props. Components never fetch, never contain copy.
 - CMS-only admin-panel components go under `src/payload/admin/`, not `src/components/`.
 
-## Deliberate omissions
-
-Don't reintroduce these — each was removed during the Phase 2 design revision with no replacement pattern:
-
-- **`cva` or any variant library.** Variants are CSS Module classes.
-- **`SuperHead`.** Headings stand alone.
-- **v3's heart-motif rule.** The divider is a plain rule.
-
-`Pill` was on this list too, but came back in Phase 4 as a real shape-language component — see `DESIGN.md` invariant 9. Distinct from `Button`: pill is always fully round and always shadowed; button is only slightly rounded. `Button` reads `--font-display`; `Pill` reads `--font-body`.
-
-Rest of the inventory derives from the v3 audit — read `v3-final` (`git show v3-final:<path>`) for what each looked like and which were worth keeping.
-
 ## Kitchen sink
 
 `/dev/kitchen-sink` renders tokens, primitives, and component variants on one page. Keep it current — it's how visual regressions get caught before a reviewer sees them. It `notFound()`s in production and stays out of the sitemap.

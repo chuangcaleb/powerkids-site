@@ -14,9 +14,8 @@ export type HeroProps = { hero: Page['hero'] }
  * D-09: `Centre` and `Heart` get the tilted box highlight anywhere they
  * appear in the hero headline. `hero.heading` is a plain `text` field (no
  * richText), so this matches whole words in the string rather than needing a
- * schema change — it's a fixed design rule (carries the v3 wordmark logic
- * forward), not per-page markup an editor authors, so it doesn't conflict
- * with "content is data, never markup".
+ * schema change — it's a fixed design rule, not per-page markup an editor authors,
+ * so it doesn't conflict with "content is data, never markup".
  *
  * This is panel3.html's `.hl` box style, deliberately not the shared `Mark`
  * double-underline — per 06-baseline-config.md, general heading emphasis
