@@ -4,5 +4,6 @@ Domain vocabulary. The CMS uses these words too — use them exactly, everywhere
 
 - **School** — a physical branch (Sri Petaling, Puchong Utama, Parklane OUG). Not "location", "centre", "branch".
 - **Block** — one entry in a page's `layout` array; the unit an editor adds and reorders.
+- **Global** — content authored once, rendered identically on every page; editors don't choose whether it appears. Contrast Block, which editors add and arrange per page.
 - **Page** — an editor-composed route, built from blocks.
 - **Asset** — a `media` collection record. Not "media doc" or "doc", different from repo's own `docs/`.

@@ -1,5 +1,6 @@
 import { cx } from '@/lib/cx'
 import { SITE_CREDIT, SITE_NAME } from '@/lib/site'
+import { FaqSection } from '@/components/faq-section/faq-section'
 import { RegistrationSection } from '@/components/registration-section/registration-section'
 import { SectionSeam } from '@/components/section-seam/section-seam'
 import { Sticker } from '@/components/sticker/sticker'
@@ -13,6 +14,8 @@ export async function Footer() {
 
   return (
     <footer>
+      <FaqSection />
+
       <div className={styles.closingWrap}>
         <SectionSeam
           shape="pinking"

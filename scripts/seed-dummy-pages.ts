@@ -98,6 +98,32 @@ await payload.updateGlobal({
 })
 
 await payload.updateGlobal({
+  slug: 'faq',
+  context: { disableRevalidate: true },
+  data: {
+    header: {
+      eyebrow: 'Still curious?',
+      heading: richText('Frequently asked questions'),
+      lead: richText("Can't find what you're after? Reach out and we'll help."),
+    },
+    items: [
+      {
+        question: `${loremSentence().replace(/\.$/, '')}?`,
+        answer: richText(loremSentence()),
+      },
+      {
+        question: `${loremSentence().replace(/\.$/, '')}?`,
+        answer: richText(loremSentence()),
+      },
+      {
+        question: `${loremSentence().replace(/\.$/, '')}?`,
+        answer: richText(loremSentence()),
+      },
+    ],
+  },
+})
+
+await payload.updateGlobal({
   slug: 'navigation',
   context: { disableRevalidate: true },
   data: {
@@ -295,20 +321,6 @@ await payload.create({
           'Ms. Wan Hong — Principal of PowerKids Sri Petaling',
           loremParagraph(),
         ),
-      },
-      {
-        blockType: 'faq',
-        header: { heading: richText('Frequently Asked Questions') },
-        items: [
-          {
-            question: `${loremSentence().replace(/\.$/, '')}?`,
-            answer: richText(loremSentence()),
-          },
-          {
-            question: `${loremSentence().replace(/\.$/, '')}?`,
-            answer: richText(loremSentence()),
-          },
-        ],
       },
     ],
   },

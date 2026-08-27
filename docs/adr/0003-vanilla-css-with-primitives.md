@@ -31,4 +31,4 @@ The primitives — `flow`, `cluster`, `grid-auto`, `wrapper`, `sidebar`, `switch
 
 **Panda CSS or vanilla-extract.** Type-safe tokens with zero runtime is genuinely the strongest correctness story here. Rejected on build complexity and unfamiliarity relative to the size of the project. Worth revisiting if the token layer ever gets large enough that type safety earns its cost.
 
-**shadcn/ui again.** Rejected: v3 used a fraction of it. Two brand components and an accordion do not justify the dependency, and generated component files invite the same ad-hoc styling the rest of this decision is meant to prevent.
+**shadcn/ui again.** Rejected: v3 used a fraction of it. Two brand components and an accordion do not justify the dependency, and generated component files invite the same ad-hoc styling the rest of this decision is meant to prevent. See [0009-headless-ui-for-complex-interactive-components.md](0009-headless-ui-for-complex-interactive-components.md) — narrower reversal for bare headless primitives (not shadcn) on complex interactive components.

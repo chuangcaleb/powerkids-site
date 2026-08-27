@@ -7,7 +7,10 @@
 }
 
 .header {
-  margin: 0;
+  /* `h1`–`h6` get `max-width: var(--max-heading)` globally (typography.css)
+   * for prose-style headings — wrong here, where the header exists only to
+   * carry heading semantics and must let its trigger fill the full item box. */
+  max-width: none;
 }
 
 .trigger {
@@ -16,15 +19,16 @@
   background: none;
   border: none;
   font-family: var(--font-display);
-  font-size: var(--step--1);
+  font-size: var(--step-0);
   color: var(--text-strong);
   cursor: pointer;
   text-align: left;
-}
+  flex-wrap: nowrap;
 
-.trigger:focus-visible {
-  outline: var(--border-width) solid var(--border-strong);
-  outline-offset: calc(var(--focus-offset) * -1);
+  /* &:focus-visible {
+    outline: var(--border-width) solid var(--border-strong);
+    outline-offset: calc(var(--focus-offset) * -1);
+  } */
 }
 
 .icon {
@@ -32,25 +36,25 @@
   flex-shrink: 0;
   width: var(--space-s);
   height: var(--space-s);
-}
 
-.icon::before,
-.icon::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  margin: auto;
-  background-color: var(--text-strong);
-}
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    background-color: var(--text-strong);
+  }
 
-.icon::before {
-  width: 100%;
-  height: var(--border-width);
-}
+  &::before {
+    width: 100%;
+    height: var(--border-width);
+  }
 
-.icon::after {
-  width: var(--border-width);
-  height: 100%;
+  &::after {
+    width: var(--border-width);
+    height: 100%;
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -59,31 +63,56 @@
   }
 }
 
-.panelOpen .icon::after {
+.item[data-state='open'] .icon::after {
   transform: rotate(90deg);
 }
 
+/*
+ * Radix measures its own content height into `--radix-accordion-content-height`
+ * and animates off that var — a hand-rolled `grid-template-rows: 0fr/1fr`
+ * trick here fights that measurement (both try to own sizing) and deadlocks
+ * to a permanent 0 height when nested inside a flex ancestor.
+ * `forceMount` is deliberately not used: Radix unmounts panel content after
+ * the close animation, which is also what makes the un-animated (reduced
+ * motion) case work for free.
+ */
 .panel {
-  display: grid;
-  grid-template-rows: 0fr;
+  overflow: hidden;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .panel {
-    transition: grid-template-rows var(--duration-base) var(--ease-standard);
+    &[data-state='open'] {
+      animation: accordion-open var(--duration-base) var(--ease-standard);
+    }
+
+    &[data-state='closed'] {
+      animation: accordion-close var(--duration-base) var(--ease-standard);
+    }
   }
 }
 
-.panelOpen {
-  grid-template-rows: 1fr;
+@keyframes accordion-open {
+  from {
+    height: 0;
+  }
+
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes accordion-close {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+
+  to {
+    height: 0;
+  }
 }
 
 .panelInner {
-  min-height: 0;
-  overflow: hidden;
   padding-inline: var(--space-m);
-}
-
-.panelOpen .panelInner {
   padding-block-end: var(--space-m);
 }

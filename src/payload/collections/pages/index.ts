@@ -12,7 +12,6 @@ import { authenticated } from '@/payload/access/authenticated'
 import { authenticatedOrPublished } from '@/payload/access/authenticated-or-published'
 import { requireEnv } from '@/lib/env'
 import { Content } from '@/payload/blocks/content/config'
-import { Faq } from '@/payload/blocks/faq/config'
 import { FramedRowsBlock } from '@/payload/blocks/framed-rows/config'
 import { Gallery } from '@/payload/blocks/gallery/config'
 import { MediaText } from '@/payload/blocks/media-text/config'
@@ -98,7 +97,6 @@ export const Pages: CollectionConfig = {
                 SchoolsBlock,
                 FramedRowsBlock,
                 ScrapbookBlock,
-                Faq,
               ],
             },
           ],

@@ -2,7 +2,6 @@ import type { ComponentType } from 'react'
 import type { Page } from '@/payload-types'
 
 import { Content } from './content/component'
-import { Faq } from './faq/component'
 import { FramedRows } from './framed-rows/component'
 import { Gallery } from './gallery/component'
 import { MediaText } from './media-text/component'
@@ -28,7 +27,6 @@ type BlockRenderers = { [T in BlockType]: ComponentType<BlockProps<T>> }
 
 const blockComponents: BlockRenderers = {
   content: Content,
-  faq: Faq,
   'framed-rows': FramedRows,
   gallery: Gallery,
   'media-text': MediaText,

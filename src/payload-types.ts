@@ -106,12 +106,14 @@ export interface Config {
     navigation: Navigation;
     'seo-defaults': SeoDefault;
     cta: Cta;
+    faq: Faq;
   };
   globalsSelect: {
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
     navigation: NavigationSelect<false> | NavigationSelect<true>;
     'seo-defaults': SeoDefaultsSelect<false> | SeoDefaultsSelect<true>;
     cta: CtaSelect<false> | CtaSelect<true>;
+    faq: FaqSelect<false> | FaqSelect<true>;
   };
   locale: 'en';
   widgets: {
@@ -288,7 +290,7 @@ export interface Page {
       | null;
     media?: (number | null) | Media;
   };
-  layout: (ContentBlock | MediaTextBlock | GalleryBlock | SchoolsBlock | FramedRowsBlock | ScrapbookBlock | FaqBlock)[];
+  layout: (ContentBlock | MediaTextBlock | GalleryBlock | SchoolsBlock | FramedRowsBlock | ScrapbookBlock)[];
   meta?: {
     title?: string | null;
     /**
@@ -712,76 +714,6 @@ export interface ScrapbookBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "FaqBlock".
- */
-export interface FaqBlock {
-  items?:
-    | {
-        question: string;
-        answer: {
-          root: {
-            type: string;
-            children: {
-              type: any;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        };
-        id?: string | null;
-      }[]
-    | null;
-  header?: {
-    /**
-     * Rendered as a pill.
-     */
-    eyebrow?: string | null;
-    /**
-     * Pill + emphasis color.
-     */
-    accent?: ('neutral' | 'red' | 'blue') | null;
-    heading?: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
-    lead?: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
-  };
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'faq';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "schools".
  */
 export interface School {
@@ -1078,7 +1010,6 @@ export interface PagesSelect<T extends boolean = true> {
         schools?: T | SchoolsBlockSelect<T>;
         'framed-rows'?: T | FramedRowsBlockSelect<T>;
         scrapbook?: T | ScrapbookBlockSelect<T>;
-        faq?: T | FaqBlockSelect<T>;
       };
   meta?:
     | T
@@ -1228,29 +1159,6 @@ export interface ScrapbookBlockSelect<T extends boolean = true> {
         id?: T;
       };
   seed?: T;
-  header?:
-    | T
-    | {
-        eyebrow?: T;
-        accent?: T;
-        heading?: T;
-        lead?: T;
-      };
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "FaqBlock_select".
- */
-export interface FaqBlockSelect<T extends boolean = true> {
-  items?:
-    | T
-    | {
-        question?: T;
-        answer?: T;
-        id?: T;
-      };
   header?:
     | T
     | {
@@ -1545,6 +1453,76 @@ export interface Cta {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faq".
+ */
+export interface Faq {
+  id: number;
+  header?: {
+    /**
+     * Rendered as a pill.
+     */
+    eyebrow?: string | null;
+    /**
+     * Pill + emphasis color.
+     */
+    accent?: ('neutral' | 'red' | 'blue') | null;
+    heading?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    lead?: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+  };
+  items?:
+    | {
+        question: string;
+        answer: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "site-settings_select".
  */
 export interface SiteSettingsSelect<T extends boolean = true> {
@@ -1646,6 +1624,30 @@ export interface CtaSelect<T extends boolean = true> {
               heading?: T;
               lead?: T;
             };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faq_select".
+ */
+export interface FaqSelect<T extends boolean = true> {
+  header?:
+    | T
+    | {
+        eyebrow?: T;
+        accent?: T;
+        heading?: T;
+        lead?: T;
+      };
+  items?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;
