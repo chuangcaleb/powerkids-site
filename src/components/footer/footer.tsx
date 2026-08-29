@@ -2,7 +2,7 @@ import { cx } from '@/lib/cx'
 import { SITE_CREDIT, SITE_NAME } from '@/lib/site'
 import { FaqSection } from '@/components/faq-section/faq-section'
 import { RegistrationSection } from '@/components/registration-section/registration-section'
-import { SectionSeam } from '@/components/section-seam/section-seam'
+import { SectionDivider } from '@/components/section-divider/section-divider'
 import { Sticker } from '@/components/sticker/sticker'
 import { getCta } from '@/payload/globals/get-cta'
 import { FooterContact } from './footer-contact/footer-contact'
@@ -17,27 +17,27 @@ export async function Footer() {
       <FaqSection id="faq" />
 
       <div className={styles.closingWrap}>
-        <SectionSeam
+        <SectionDivider
           shape="pinking"
           width={13.125}
           depth={1.375}
           above="var(--page-trailing-bg, var(--bg-surface))"
-          below="var(--seam-cream-closing)"
+          below="var(--divider-cream-closing)"
         >
           {cta.footerSticker && <Sticker>{cta.footerSticker}</Sticker>}
-        </SectionSeam>
+        </SectionDivider>
 
         <div className={styles.closing}>
           <RegistrationSection className={styles.cta} />
           <FooterContact className={styles.contact} />
         </div>
 
-        <SectionSeam
+        <SectionDivider
           shape="torn"
           width={1.5}
           depth={0.3}
           seed="closing-nav"
-          above="var(--seam-closing-nav)"
+          above="var(--divider-closing-nav)"
           below="var(--bg-inverse)"
         />
       </div>

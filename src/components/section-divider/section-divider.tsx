@@ -1,13 +1,17 @@
 import type { CSSProperties, ReactNode } from 'react'
 import { cx } from '@/lib/cx'
 import { createSeededRandom } from '@/lib/seeded-random'
-import { buildSeamPath, SEAM_STROKE_REF, type SeamShape } from '@/lib/seam-shapes'
-import styles from './section-seam.module.css'
+import {
+  buildDividerPath,
+  DIVIDER_STROKE_REF,
+  type DividerShape,
+} from '@/lib/divider-shapes'
+import styles from './section-divider.module.css'
 
-export type { SeamShape }
+export type { DividerShape }
 
-export type SectionSeamProps = {
-  shape: SeamShape
+export type SectionDividerProps = {
+  shape: DividerShape
   /** Tooth width in rem — the period of one repeat. Ignored by `arc`/`flat`. */
   width?: number
   /** Tooth depth in rem — vertical extent of the cut. Ignored by `flat`. */
@@ -27,14 +31,14 @@ export type SectionSeamProps = {
    * which handles gradients fine).
    */
   above: string
-  /** Colour behind the cut — the seam element's own `background`. Gradients are fine here. */
+  /** Colour behind the cut — the divider element's own `background`. Gradients are fine here. */
   below: string
   /** Mirrors the cut about the strip's midline, handing the shape to the lower band instead of the upper one. */
   flip?: boolean
   /** Seeds `torn`/`wobble` jitter — required for those shapes. Must be stable across server/client renders. */
   seed?: string
   className?: string
-  /** Overlaid content — e.g. the registration sticker straddling a seam. */
+  /** Overlaid content — e.g. the registration sticker straddling a divider. */
   children?: ReactNode
   /** Set for a content-level divider (e.g. `<hr>` replacement); omit between full sections. */
   role?: string
@@ -44,7 +48,7 @@ export type SectionSeamProps = {
  * Internal SVG userSpace scale, not a rendered pixel size — keeps the
  * generator maths identical to the shape-assignment table's tuned values
  * (144, 18, …) while the component's public API stays in rem. Actual on-screen
- * size comes entirely from CSS (`--seam-depth`, `var(--border-width)`).
+ * size comes entirely from CSS (`--divider-depth`, `var(--border-width)`).
  */
 const REM_TO_UNIT = 16
 
@@ -57,11 +61,11 @@ const DEFAULT_REFERENCE_WIDTH = 90
  * and three of the four in use are irregular. No client JS measures the
  * container: the path is generated once against a nominal width and left to
  * stretch, so teeth read wider on wide viewports and narrower on mobile by
- * design. A seam is a standalone element between sections, never a
+ * design. A divider is a standalone element between sections, never a
  * pseudo-element or child of one — that's what keeps `overflow: clip` on the
  * sections themselves a non-issue.
  */
-export function SectionSeam({
+export function SectionDivider({
   shape,
   width = 0,
   depth = 0,
@@ -73,7 +77,7 @@ export function SectionSeam({
   className,
   children,
   role,
-}: SectionSeamProps) {
+}: SectionDividerProps) {
   const w = Math.max(1, referenceWidth * REM_TO_UNIT)
   const toothWidth = Math.max(1, width * REM_TO_UNIT)
   const random = seed ? createSeededRandom(seed) : undefined
@@ -81,18 +85,18 @@ export function SectionSeam({
     cut,
     fill,
     depth: d,
-  } = buildSeamPath(shape, w, depth * REM_TO_UNIT, toothWidth, random)
+  } = buildDividerPath(shape, w, depth * REM_TO_UNIT, toothWidth, random)
 
   const paint = flip ? below : above
   const backdrop = flip ? above : below
-  const top = -SEAM_STROKE_REF / 2
-  const viewBoxHeight = d + SEAM_STROKE_REF
+  const top = -DIVIDER_STROKE_REF / 2
+  const viewBoxHeight = d + DIVIDER_STROKE_REF
 
   return (
     <div
-      className={cx(styles.seam, className)}
+      className={cx(styles.divider, className)}
       role={role}
-      style={{ background: backdrop, '--seam-depth': `${depth}rem` } as CSSProperties}
+      style={{ background: backdrop, '--divider-depth': `${depth}rem` } as CSSProperties}
     >
       <svg
         viewBox={`0 ${top} ${w} ${viewBoxHeight}`}

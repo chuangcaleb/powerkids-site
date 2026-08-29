@@ -2,7 +2,7 @@ import { Heading } from '@/components/heading/heading'
 import { Polaroid } from '@/components/polaroid/polaroid'
 import { RichText } from '@/components/rich-text/rich-text'
 import { SectionHeader } from '@/components/section-header/section-header'
-import { SectionSeam } from '@/components/section-seam/section-seam'
+import { SectionDivider } from '@/components/section-divider/section-divider'
 import { cx } from '@/lib/cx'
 import { primitiveVars } from '@/lib/primitive-vars'
 import { ICONS, isIconName } from '@/lib/icons'
@@ -14,7 +14,7 @@ import { DoodleLayer } from '@/components/doodle-layer/doodle-layer'
 
 /** Position, not the CMS, decides colour and tilt — D-11/06-baseline-config.md#3.
  * The .row class handles its own accent/reverse/bleed via nth-child selectors
- * in framed-rows.module.css; only the SectionSeam gradient still needs the
+ * in framed-rows.module.css; only the SectionDivider gradient still needs the
  * resolved colour in JS since it's an inline style, not a class. */
 const ACCENT_FILLS = [
   'var(--accent-red-fill)',
@@ -26,7 +26,12 @@ const accentFill = (index: number) =>
     ((index % ACCENT_FILLS.length) + ACCENT_FILLS.length) % ACCENT_FILLS.length
   ]!
 
-const SUB_SEAM = { shape: 'wave', width: 5.75, depth: 0.25, referenceWidth: 75 } as const
+const SUB_DIVIDER = {
+  shape: 'wave',
+  width: 5.75,
+  depth: 0.25,
+  referenceWidth: 75,
+} as const
 
 export function FramedRows({ header, rows, id }: FramedRowsBlockType) {
   if (!rows || rows.length === 0) return null
@@ -48,7 +53,11 @@ export function FramedRows({ header, rows, id }: FramedRowsBlockType) {
                 <SectionHeader header={header} />
               </div>
             </div>
-            <SectionSeam {...SUB_SEAM} above="var(--bg-surface)" below={accentFill(0)} />
+            <SectionDivider
+              {...SUB_DIVIDER}
+              above="var(--bg-surface)"
+              below={accentFill(0)}
+            />
           </>
         ) : null}
         {rows.map((row, index) => {
@@ -58,8 +67,8 @@ export function FramedRows({ header, rows, id }: FramedRowsBlockType) {
           return (
             <Fragment key={row.id ?? index}>
               {index > 0 ? (
-                <SectionSeam
-                  {...SUB_SEAM}
+                <SectionDivider
+                  {...SUB_DIVIDER}
                   above={accentFill(index - 1)}
                   below={accentFill(index)}
                 />

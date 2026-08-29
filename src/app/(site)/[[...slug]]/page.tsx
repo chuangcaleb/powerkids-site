@@ -7,7 +7,7 @@ import { getPage } from '@/payload/collections/pages/get-page'
 import { LivePreviewListener } from '@/payload/collections/pages/live-preview-listener'
 import { Hero } from '@/payload/collections/pages/render-hero'
 import { getSeoDefaults } from '@/payload/globals/get-seo-defaults'
-import { SectionSeam } from '@/components/section-seam/section-seam'
+import { SectionDivider } from '@/components/section-divider/section-divider'
 import type { Metadata } from 'next'
 import { draftMode } from 'next/headers'
 import { notFound } from 'next/navigation'
@@ -68,7 +68,7 @@ export default async function Page({ params }: Props) {
       <main>
         <Hero hero={page.hero} />
         {page.hero.type !== 'none' ? (
-          <SectionSeam
+          <SectionDivider
             shape="pinking"
             width={13.125}
             depth={1.375}

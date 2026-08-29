@@ -35,7 +35,7 @@
 }
 
 /* Accent cycles every 3rd row starting from the 2nd row, counting only
- * .row siblings so the SectionSeam dividers interleaved between them don't
+ * .row siblings so the SectionDivider dividers interleaved between them don't
  * skew the count. */
 .row:nth-child(3n + 2 of .row) {
   background-color: var(--accent-red-fill);

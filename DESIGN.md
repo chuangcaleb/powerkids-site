@@ -135,16 +135,16 @@ Tiers are multiples of the step-0 base (17px min / 20px max): `3xs` .25x, `2xs` 
 - `--max-heading: 40ch` — default reading measure for headings.
 - `--wrapper-gutter: var(--space-s)` — alias, not a new value; inline padding for wrapper/bleed compositions.
 
-## Section seams
+## Section dividers
 
-Shaped cuts between full-bleed colour bands — `SectionSeam`, `src/components/section-seam/`. Four rules govern where one is allowed and how it may look:
+Shaped cuts between full-bleed colour bands — `SectionDivider`, `src/components/section-divider/`. Four rules govern where one is allowed and how it may look:
 
-- **A seam's job is momentum toward the CTA**, texture second. Seams get louder toward the bottom of the page.
-- **Vocabulary is cut paper, not web-divider stock.** Every seam keeps the black rule at full weight (invariant: no blurred shadow, borders pure black); only its _path_ changes.
-- **Not every boundary gets one.** Treat the hero's bottom edge and the coloured seams in the closing run. Same-background neighbours get spacing, not a shape.
-- **Static.** No scroll-reactive seams, no motion of any kind.
+- **A divider's job is momentum toward the CTA**, texture second. Dividers get louder toward the bottom of the page.
+- **Vocabulary is cut paper, not web-divider stock.** Every divider keeps the black rule at full weight (invariant: no blurred shadow, borders pure black); only its _path_ changes.
+- **Not every boundary gets one.** Treat the hero's bottom edge and the coloured dividers in the closing run. Same-background neighbours get spacing, not a shape.
+- **Static.** No scroll-reactive dividers, no motion of any kind.
 
-Which shape suits which job: `docs/design/section-seams.md`.
+Which shape suits which job: `docs/design/section-dividers.md`.
 
 ## Doodle layer
 
@@ -156,5 +156,5 @@ Decorative background marks — `DoodleLayer`, `src/components/doodle-layer/`. `
 
 - What each token is _for_: `docs/design/tokens.md`
 - Layout primitives: `docs/design/layout-primitives.md`
-- Seam shape pick-guide: `docs/design/section-seams.md`
+- Divider shape pick-guide: `docs/design/section-dividers.md`
 - Component inventory: `docs/design/components.md`

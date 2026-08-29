@@ -9,7 +9,7 @@ export type StickerProps = {
   className?: string
 }
 
-/** Pill badge meant to straddle a `SectionSeam`, centred on its parent. */
+/** Pill badge meant to straddle a `SectionDivider`, centred on its parent. */
 export function Sticker({ children, rotate = -5, className }: StickerProps) {
   return (
     <span

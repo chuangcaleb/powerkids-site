@@ -3,7 +3,7 @@ import { DoodleLayer } from '@/components/doodle-layer/doodle-layer'
 import { Heading } from '@/components/heading/heading'
 import { cx } from '@/lib/cx'
 import styles from './not-found.module.css'
-import { SectionSeam } from '@/components/section-seam/section-seam'
+import { SectionDivider } from '@/components/section-divider/section-divider'
 
 export default function NotFound() {
   return (
@@ -20,7 +20,7 @@ export default function NotFound() {
             Back to homepage
           </Button>
         </div>
-        <SectionSeam
+        <SectionDivider
           shape="pinking"
           width={13.125}
           depth={1.375}

@@ -1,9 +1,9 @@
-# Section seams
+# Section dividers
 
-**Purpose:** which seam shape to reach for, and which ones were tried and dropped.
-**Read this when:** placing a `SectionSeam`, or tempted to add a shape to the set.
+**Purpose:** which divider shape to reach for, and which ones were tried and dropped.
+**Read this when:** placing a `SectionDivider`, or tempted to add a shape to the set.
 
-`SeamShape` in `src/lib/seam-shapes.ts` is the closed set. Width, depth and flip are per-call-site props — read the call sites for current values; they are tuned by eye and this doc does not mirror them. Design rules for _whether_ a boundary gets a seam at all live in [../../DESIGN.md](../../DESIGN.md) § Section seams.
+`DividerShape` in `src/lib/divider-shapes.ts` is the closed set. Width, depth and flip are per-call-site props — read the call sites for current values; they are tuned by eye and this doc does not mirror them. Design rules for _whether_ a boundary gets a divider at all live in [../../DESIGN.md](../../DESIGN.md) § Section dividers.
 
 ---
 
@@ -33,15 +33,15 @@ Two are worth remembering if this is ever revisited:
 
 ## Rendering: alternatives rejected
 
-Inline SVG, no CSS masks, no client JS. The mechanics and the exactness details are documented on `SectionSeam` and `buildSeamPath` themselves. What those can't record is what was tried instead:
+Inline SVG, no CSS masks, no client JS. The mechanics and the exactness details are documented on `SectionDivider` and `buildDividerPath` themselves. What those can't record is what was tried instead:
 
 - **CSS `mask` with repeating gradients** only works for periodic shapes. Most of the set is irregular, so a mask route would cover part of it and leave two systems to maintain.
 - **URL-encoding the SVG as a repeating `background-image`** forces hex values into a data URI, which leaves the token system and trips `stylelint-declaration-strict-value`.
-- **Measuring container width in client JS** means shipping a `ResizeObserver` per seam to a static marketing page. Stretching one viewBox is the trade taken instead: teeth read wider on wide viewports and narrower on mobile, which is intended, not a defect.
+- **Measuring container width in client JS** means shipping a `ResizeObserver` per divider to a static marketing page. Stretching one viewBox is the trade taken instead: teeth read wider on wide viewports and narrower on mobile, which is intended, not a defect.
 
 ## Vertical joins
 
-A vertical seam works — the generator is axis-agnostic, so it is one rotation on an absolutely-positioned copy. It is still not used, for two reasons: its length is the container _height_, which varies far more than width, so the stretch artifact is severe; and knowing that height needs JS, reintroducing exactly the machinery the SVG approach avoids. A straight border is the standing choice. Reversible later — only the plumbing costs.
+A vertical divider works — the generator is axis-agnostic, so it is one rotation on an absolutely-positioned copy. It is still not used, for two reasons: its length is the container _height_, which varies far more than width, so the stretch artifact is severe; and knowing that height needs JS, reintroducing exactly the machinery the SVG approach avoids. A straight border is the standing choice. Reversible later — only the plumbing costs.
 
 ## References
 

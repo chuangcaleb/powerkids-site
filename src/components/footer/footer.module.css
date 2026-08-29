@@ -1,8 +1,8 @@
-/* CTA + Contact always stack — each keeps its own colour, so the seams above
+/* CTA + Contact always stack — each keeps its own colour, so the dividers above
    and below the split only ever touch one colour each. */
 .closingWrap {
-  --seam-cream-closing: var(--bg-cta);
-  --seam-closing-nav: var(--bg-contact);
+  --divider-cream-closing: var(--bg-cta);
+  --divider-closing-nav: var(--bg-contact);
 }
 
 .closing {

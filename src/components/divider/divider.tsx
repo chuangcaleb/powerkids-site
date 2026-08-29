@@ -1,4 +1,4 @@
-import { SectionSeam } from '@/components/section-seam/section-seam'
+import { SectionDivider } from '@/components/section-divider/section-divider'
 import { cx } from '@/lib/cx'
 import styles from './divider.module.css'
 
@@ -10,7 +10,7 @@ export type DividerProps = {
 
 export function Divider({ className, seed = 'divider' }: DividerProps) {
   return (
-    <SectionSeam
+    <SectionDivider
       role="separator"
       shape="torn"
       width={1.25}

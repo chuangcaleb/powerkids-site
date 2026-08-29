@@ -1,5 +1,5 @@
 /**
- * Path generators for `SectionSeam`. Every shape emits the **cut edge only**,
+ * Path generators for `SectionDivider`. Every shape emits the **cut edge only**,
  * drawn strictly left to right from `(0, 0)` to `(width, 0)`, staying within
  * `y ∈ [0, depth]` — no shape dips above its own strip. The fill polygon is
  * derived by closing the cut *upward*, off-canvas, in the same direction the
@@ -11,12 +11,12 @@
  * hydration mismatch.
  */
 
-export type SeamShape = 'arc' | 'torn' | 'wave' | 'pinking' | 'wobble' | 'flat'
+export type DividerShape = 'arc' | 'torn' | 'wave' | 'pinking' | 'wobble' | 'flat'
 
 const f = (n: number) => Math.round(n * 100) / 100
 
 function cutPath(
-  shape: SeamShape,
+  shape: DividerShape,
   width: number,
   depth: number,
   toothWidth: number,
@@ -94,11 +94,11 @@ function cutPath(
   return `M0,0 L${f(width)},0`
 }
 
-/** Half the (approximate) stroke headroom baked into the viewBox — see `SectionSeam`. */
-export const SEAM_STROKE_REF = 6
+/** Half the (approximate) stroke headroom baked into the viewBox — see `SectionDivider`. */
+export const DIVIDER_STROKE_REF = 6
 
-export function buildSeamPath(
-  shape: SeamShape,
+export function buildDividerPath(
+  shape: DividerShape,
   width: number,
   depth: number,
   toothWidth: number,
@@ -106,7 +106,7 @@ export function buildSeamPath(
 ) {
   const d = shape === 'flat' ? 0 : depth
   const cut = cutPath(shape, width, d, toothWidth, random)
-  const top = -SEAM_STROKE_REF / 2
+  const top = -DIVIDER_STROKE_REF / 2
   const fill = `${cut} L${f(width)},${f(top)} L0,${f(top)} Z`
   return { cut, fill, depth: d }
 }
