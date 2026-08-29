@@ -94,6 +94,21 @@ Git hooks handle formatting on commit, run full verify loop on push.
 - **docs/adr/** — architecture decision records.
 - **docs/future/** — deferred, larger-scope work with no current owner or timeline.
 
+## Previous versions
+
+- v1 was made in 2019 with **Weebly** website builder.
+
+- v2 was made in 2021 with **Jekyll**, [source code here](https://github.com/chuangcaleb/powerkids-jekyll)
+
+- v3 was made in 2023 with **Astro**, see [v3-final](https://github.com/chuangcaleb/powerkids-site/tree/v3-final) branch.
+
+  - Optimised performance with minimal Astro.js + Typescript
+  - Interactive components with shadcn/ui + Radix UI + React
+  - Responsive design with Tailwind CSS, with Utopia's fluid typography/spacing
+  - SEO friendly with sitemap and robots.txt generation
+  - Image optimization with Cloudinary
+  - High Lighthouse performance with techniques
+
 ## Licence
 
 MIT
