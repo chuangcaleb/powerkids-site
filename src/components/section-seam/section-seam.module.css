@@ -45,6 +45,9 @@
 /* Page content paints over the body background (e.g. 404's sun-yellow main).
  * Footer's first seam reads --page-trailing-bg so its cut matches whatever
  * colour actually sits above it, not always the cream default. */
-body:has(main[data-page-bg='sun']) {
+
+/* commented out because FAQ section now sits at top of footer. Keeping here for reference */
+
+/* body:has(main[data-page-bg='sun']) {
   --page-trailing-bg: var(--bg-sun);
-}
+} */
