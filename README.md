@@ -63,7 +63,7 @@ Git hooks handle formatting on commit, run full verify loop on push.
 
 ## Engineering conventions
 
-### PayloadCMS
+### Content
 
 **One app, two route groups.** Following PayloadCMS recommended conventions, `src/app/(site)/` is the public-facing marketing site; `src/app/(payload)/` is the generated Payload admin panel, mounted in the same Next.js deploy rather than run as a separate service (see [ADR 0001](docs/adr/0001-nextjs-payload-vercel.md)). `(payload)` and `src/payload-types.ts` are generated output — excluded from lint/format, never hand-edited, regenerated with `pnpm generate:types`.
 

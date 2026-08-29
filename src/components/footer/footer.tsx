@@ -13,8 +13,8 @@ export async function Footer() {
   const cta = await getCta()
 
   return (
-    <footer>
-      <FaqSection />
+    <footer id="footer">
+      <FaqSection id="faq" />
 
       <div className={styles.closingWrap}>
         <SectionSeam

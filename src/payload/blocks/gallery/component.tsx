@@ -1,6 +1,7 @@
 import { Media } from '@/components/media/media'
 import { SectionHeader } from '@/components/section-header/section-header'
 import { getPayloadClient } from '@/lib/payload'
+import { sectionId } from '@/lib/section-id'
 import type { GalleryBlock, Media as TMedia } from '@/payload-types'
 
 const SORT: Record<NonNullable<GalleryBlock['sort']>, string> = {
@@ -34,7 +35,7 @@ export async function Gallery(block: GalleryBlock) {
   const images = await resolveImages(block)
 
   return (
-    <section className="wrapper flow region">
+    <section id={sectionId(block.header)} className="wrapper flow region">
       <SectionHeader header={block.header} />
       <div className="grid-auto">
         {images.map((image, index) => (

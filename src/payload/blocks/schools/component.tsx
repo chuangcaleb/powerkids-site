@@ -3,6 +3,7 @@ import { Heading } from '@/components/heading/heading'
 import { JsonLd } from '@/components/json-ld/json-ld'
 import { Media } from '@/components/media/media'
 import { SectionHeader } from '@/components/section-header/section-header'
+import { sectionId } from '@/lib/section-id'
 import { getSchools } from '@/payload/collections/schools/get-schools'
 import type { SchoolsBlock as SchoolsBlockType } from '@/payload-types'
 
@@ -10,7 +11,7 @@ export async function SchoolsBlock({ header }: SchoolsBlockType) {
   const schools = await getSchools()
 
   return (
-    <section className="wrapper flow region">
+    <section id={sectionId(header)} className="wrapper flow region">
       <SectionHeader header={header} />
       <div className="grid-auto">
         {schools.map((school) => (

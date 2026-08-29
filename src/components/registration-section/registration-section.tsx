@@ -16,7 +16,7 @@ export async function RegistrationSection({ className }: RegistrationSectionProp
   const { header, button } = cta.registration
 
   return (
-    <section className={cx('region', styles.section, className)}>
+    <section id="register" className={cx('region', styles.section, className)}>
       <DoodleLayer zoneId="registration" density={30} icons={DOODLE_ICONS} />
       <div className={cx('wrapper ', styles.content)}>
         <div className="flow max-prose">

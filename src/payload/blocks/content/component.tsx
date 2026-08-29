@@ -3,6 +3,7 @@ import { Media } from '@/components/media/media'
 import { RichText } from '@/components/rich-text/rich-text'
 import { SectionHeader } from '@/components/section-header/section-header'
 import { cx } from '@/lib/cx'
+import { sectionId } from '@/lib/section-id'
 import type { ContentBlock } from '@/payload-types'
 import styles from './content.module.css'
 
@@ -18,7 +19,7 @@ const sizeStyles: Record<NonNullable<Column['size']>, string> = {
 
 export function Content({ header, columns }: ContentBlock) {
   return (
-    <section className="wrapper flow region">
+    <section id={sectionId(header)} className="wrapper flow region">
       <SectionHeader header={header} />
       <div className={styles.grid}>
         {(columns ?? []).map((column, index) => {

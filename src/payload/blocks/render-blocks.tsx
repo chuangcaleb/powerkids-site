@@ -1,4 +1,4 @@
-import type { ComponentType } from 'react'
+import { Fragment, type ComponentType } from 'react'
 import type { Page } from '@/payload-types'
 
 import { Content } from './content/component'
@@ -53,7 +53,7 @@ export function RenderBlocks({ layout }: { layout: Page['layout'] }) {
   return (
     <>
       {layout.map((block, index) => (
-        <div key={block.id ?? index}>{renderBlock(block)}</div>
+        <Fragment key={block.id ?? index}>{renderBlock(block)}</Fragment>
       ))}
     </>
   )

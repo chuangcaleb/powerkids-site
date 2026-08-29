@@ -21,7 +21,10 @@ export function NavBar({ links }: NavBarProps) {
     <header className={styles.header}>
       <div
         className={cx('wrapper', 'repel', styles.inner)}
-        style={primitiveVars({ '--repel-vertical-align': 'center' })}
+        style={primitiveVars({
+          '--repel-vertical-align': 'center',
+          '--repel-gap': 'var(--space-2xs)',
+        })}
       >
         <Link
           href="/"

@@ -6,6 +6,7 @@ import { SectionSeam } from '@/components/section-seam/section-seam'
 import { cx } from '@/lib/cx'
 import { primitiveVars } from '@/lib/primitive-vars'
 import { ICONS, isIconName } from '@/lib/icons'
+import { sectionId } from '@/lib/section-id'
 import type { FramedRowsBlock as FramedRowsBlockType } from '@/payload-types'
 import { Fragment } from 'react'
 import styles from './framed-rows.module.css'
@@ -34,6 +35,7 @@ export function FramedRows({ header, rows, id }: FramedRowsBlockType) {
 
   return (
     <section
+      id={sectionId(header)}
       className="wrapper flow region"
       style={primitiveVars({ '--wrapper-max-width': 'var(--max-bleed)' })}
     >
