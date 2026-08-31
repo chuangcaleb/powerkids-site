@@ -20,6 +20,7 @@ Nothing in the CMS is hard-coded in a component. Phone number, address, nav labe
 - **Row labels:** array-field rows use the shared `src/payload/admin/components/row-labels/row-label.tsx` client component (`admin.components.RowLabel`) instead of one bespoke label component per field.
 - **Ordering:** collections rendered as lists carry an explicit `order` field. Never rely on creation order or alphabetical sort for editor-visible sequence.
 - **Uploads:** `alt` is required — no exceptions, no empty strings. It also doubles as the caption wherever a block renders one — no separate `caption` field, so there's nothing to keep in sync.
+- **Media cannot live at the folder root.** Enforced by a `beforeValidate` hook (`media/hooks/require-folder.ts`), since the folder field is Payload-managed and has no `required` option to set. Scripts creating `media` docs must assign a folder or the write throws.
 
 ## Roles
 

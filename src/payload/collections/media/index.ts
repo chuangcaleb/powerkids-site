@@ -6,6 +6,7 @@ import { hashedFilename } from '@/lib/media-filename'
 
 import { computeChecksum } from './hooks/compute-checksum'
 import { flagOwnDuplicate } from './hooks/flag-own-duplicate'
+import { requireFolder } from './hooks/require-folder'
 import {
   flagDuplicateAfterChange,
   flagDuplicateAfterDelete,
@@ -59,6 +60,7 @@ export const Media: CollectionConfig = {
       },
       computeChecksum,
     ],
+    beforeValidate: [requireFolder],
     beforeChange: [flagOwnDuplicate],
     afterChange: [flagDuplicateAfterChange],
     afterDelete: [flagDuplicateAfterDelete],

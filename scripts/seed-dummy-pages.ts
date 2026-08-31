@@ -6,8 +6,8 @@
  *
  *   pnpm payload run scripts/seed-dummy-pages.ts
  */
-import { getPayload } from 'payload'
 import { LoremIpsum } from 'lorem-ipsum'
+import { getPayload } from 'payload'
 
 import config from '@payload-config'
 
@@ -43,9 +43,14 @@ const richText = (...paragraphs: string[]) => ({
 
 const payload = await getPayload({ config })
 
+const seedFolder = await payload.create({
+  collection: 'payload-folders',
+  data: { name: 'Seed', folderType: ['media'] },
+})
+
 const media = await payload.create({
   collection: 'media',
-  data: { alt: 'Placeholder photo' },
+  data: { alt: 'Placeholder photo', folder: seedFolder.id },
   filePath: PLACEHOLDER_IMAGE,
 })
 

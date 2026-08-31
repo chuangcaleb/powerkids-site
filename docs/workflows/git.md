@@ -13,7 +13,7 @@
 
 ## Branches, previews, and merging
 
-- **Base is `main`.** Feature branch off it. Never push to `main` directly.
+- **Base is `main`.** Feature branch off it.
 - Descriptive names: `feat/hero-block`, `fix/footer-nav-order`. No tool-name prefix.
 - **One branch per group of related commits that needs its own preview deployment.** A branch gets a Vercel preview URL on its PR — that's the unit a reviewer looks at. Group small, related units onto one branch (especially frontend work you're confident in) rather than branching per sub-step (tokens, then primitives, then styles, …); split onto a new branch when the work is large enough, or different enough, to want its own preview and its own review pass. Cutting branches finer than that repeats the git ceremony — ancestor check, fast-forward, push — for no review benefit.
 - **Merge to `main` at the end of the session** once the branch's work is reviewed and green. Small, low-risk refactors may fast-forward-merge locally without a PR if the owner says so for that change; anything else goes through a PR with a preview deploy.
