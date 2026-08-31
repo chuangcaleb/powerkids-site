@@ -227,6 +227,54 @@ describe('flagDuplicateAfterDelete', () => {
     expect(docs[0]!.hasDuplicate).toBe(false)
   })
 
+  it('resets a dismissed survivor once its last duplicate is deleted', async () => {
+    const docs: FakeDoc[] = [
+      { id: 1, checksum: 'abc', hasDuplicate: true, duplicateDismissed: true },
+    ]
+    const { req } = fakeReq(docs)
+
+    await flagDuplicateAfterDelete({
+      doc: { id: 2, checksum: 'abc' },
+      req,
+    } as never)
+
+    expect(docs[0]!.hasDuplicate).toBe(false)
+    expect(docs[0]!.duplicateDismissed).toBe(false)
+  })
+
+  it('self-heals a stale dismissal on a doc that already reads hasDuplicate: false', async () => {
+    // Simulates data written before this fix existed: hasDuplicate already
+    // false, but duplicateDismissed never got cleared. Any recompute that
+    // touches this checksum should still correct it.
+    const docs: FakeDoc[] = [
+      { id: 1, checksum: 'abc', hasDuplicate: false, duplicateDismissed: true },
+    ]
+    const { req } = fakeReq(docs)
+
+    await flagDuplicateAfterDelete({
+      doc: { id: 2, checksum: 'abc' },
+      req,
+    } as never)
+
+    expect(docs[0]!.duplicateDismissed).toBe(false)
+  })
+
+  it('leaves duplicateDismissed alone when the group still has duplicates', async () => {
+    const docs: FakeDoc[] = [
+      { id: 1, checksum: 'abc', hasDuplicate: true, duplicateDismissed: true },
+      { id: 2, checksum: 'abc', hasDuplicate: true, duplicateDismissed: false },
+    ]
+    const { req } = fakeReq(docs)
+
+    await flagDuplicateAfterDelete({
+      doc: { id: 3, checksum: 'abc' },
+      req,
+    } as never)
+
+    expect(docs[0]!.duplicateDismissed).toBe(true)
+    expect(docs[1]!.duplicateDismissed).toBe(false)
+  })
+
   it('never throws when the recompute itself fails, and logs instead', async () => {
     const docs: FakeDoc[] = [{ id: 1, checksum: 'abc', hasDuplicate: true }]
     const { req, payload } = fakeReq(docs)
