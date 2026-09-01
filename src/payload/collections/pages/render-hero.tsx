@@ -92,7 +92,6 @@ export function Hero({ hero }: HeroProps) {
           <div className="sidebar">
             <Polaroid
               asset={media}
-              caption={media.alt}
               priority
               sizes="(min-width: 40rem) 45vw, 100vw"
               tilt={-3}
