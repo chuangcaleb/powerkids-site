@@ -16,7 +16,6 @@ import { FramedRowsBlock } from '@/payload/blocks/framed-rows/config'
 import { Gallery } from '@/payload/blocks/gallery/config'
 import { MediaText } from '@/payload/blocks/media-text/config'
 import { ScrapbookBlock } from '@/payload/blocks/scrapbook/config'
-import { SchoolsBlock } from '@/payload/blocks/schools/config'
 
 import { hero } from './hero'
 import { populatePublishedAt } from './hooks/populate-published-at'
@@ -90,14 +89,7 @@ export const Pages: CollectionConfig = {
               type: 'blocks',
               required: true,
               admin: { initCollapsed: true },
-              blocks: [
-                Content,
-                MediaText,
-                Gallery,
-                SchoolsBlock,
-                FramedRowsBlock,
-                ScrapbookBlock,
-              ],
+              blocks: [Content, MediaText, Gallery, FramedRowsBlock, ScrapbookBlock],
             },
           ],
           label: 'Content',

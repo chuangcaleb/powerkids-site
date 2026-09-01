@@ -11,7 +11,7 @@ export const People: CollectionConfig = {
   slug: 'people',
   admin: {
     useAsTitle: 'name',
-    defaultColumns: ['name', 'role', 'school'],
+    defaultColumns: ['name', 'role'],
     group: 'Content',
   },
   access: {
@@ -33,14 +33,6 @@ export const People: CollectionConfig = {
       required: true,
       admin: {
         description: 'e.g. "Principal", "Curriculum Lead".',
-      },
-    },
-    {
-      name: 'school',
-      type: 'relationship',
-      relationTo: 'schools',
-      admin: {
-        description: 'Leave empty if not tied to a single school.',
       },
     },
     {

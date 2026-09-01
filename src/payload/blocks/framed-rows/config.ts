@@ -4,7 +4,7 @@ import { withHeaderTabs } from '@/payload/fields/header'
 
 /**
  * Alternating, tilted rows inside a bordered band — no per-instance content
- * defaults pretending to be design (see `schools` block). Colour and tilt
+ * defaults pretending to be design. Colour and tilt
  * are assigned by position, not authored in the CMS. Named for the visual
  * pattern, not the content — the "framed band" layout from
  * `04-open-knobs.md` K-07 — since a block name is part of the closed set the

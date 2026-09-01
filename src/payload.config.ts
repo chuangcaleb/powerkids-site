@@ -13,7 +13,6 @@ import { Media } from '@/payload/collections/media'
 import { MediaTags } from '@/payload/collections/media-tags'
 import { Pages } from '@/payload/collections/pages'
 import { People } from '@/payload/collections/people'
-import { Schools } from '@/payload/collections/schools'
 import { Users } from '@/payload/collections/users'
 import { defaultLexical } from '@/payload/fields/default-lexical'
 import { Cta } from '@/payload/globals/cta'
@@ -84,7 +83,7 @@ export default buildConfig({
     },
   },
 
-  collections: [Users, Media, MediaTags, Pages, Schools, People],
+  collections: [Users, Media, MediaTags, Pages, People],
 
   globals: [SiteSettings, Navigation, SeoDefaults, Cta, Faq],
 

@@ -71,7 +71,6 @@ export interface Config {
     media: Media;
     'media-tags': MediaTag;
     pages: Page;
-    schools: School;
     people: Person;
     'payload-kv': PayloadKv;
     'payload-folders': FolderInterface;
@@ -89,7 +88,6 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     'media-tags': MediaTagsSelect<false> | MediaTagsSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
-    schools: SchoolsSelect<false> | SchoolsSelect<true>;
     people: PeopleSelect<false> | PeopleSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-folders': PayloadFoldersSelect<false> | PayloadFoldersSelect<true>;
@@ -290,7 +288,7 @@ export interface Page {
       | null;
     media?: (number | null) | Media;
   };
-  layout: (ContentBlock | MediaTextBlock | GalleryBlock | SchoolsBlock | FramedRowsBlock | ScrapbookBlock)[];
+  layout: (ContentBlock | MediaTextBlock | GalleryBlock | FramedRowsBlock | ScrapbookBlock)[];
   meta?: {
     title?: string | null;
     /**
@@ -483,55 +481,6 @@ export interface GalleryBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "SchoolsBlock".
- */
-export interface SchoolsBlock {
-  header?: {
-    /**
-     * Rendered as a pill.
-     */
-    eyebrow?: string | null;
-    /**
-     * Pill + emphasis color.
-     */
-    accent?: ('neutral' | 'red' | 'blue') | null;
-    heading?: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
-    lead?: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
-  };
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'schools';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "FramedRowsBlock".
  */
 export interface FramedRowsBlock {
@@ -714,49 +663,6 @@ export interface ScrapbookBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "schools".
- */
-export interface School {
-  id: number;
-  name: string;
-  /**
-   * When enabled, the slug will auto-generate from the title field on save and autosave.
-   */
-  generateSlug?: boolean | null;
-  slug: string;
-  /**
-   * Multi-line. Rendered as written, no auto-formatting.
-   */
-  address: string;
-  phones?:
-    | {
-        /**
-         * Display form, e.g. "010 - 221 2482".
-         */
-        number: string;
-        /**
-         * tel: link target, e.g. "+60102212482". Include country code.
-         */
-        href: string;
-        id?: string | null;
-      }[]
-    | null;
-  /**
-   * Google Maps link for this school.
-   */
-  mapUrl?: string | null;
-  photo?: (number | null) | Media;
-  principal?: (number | null) | Person;
-  /**
-   * Controls listing order on the schools page. Lower shows first.
-   */
-  order?: number | null;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "people".
  */
 export interface Person {
@@ -766,10 +672,6 @@ export interface Person {
    * e.g. "Principal", "Curriculum Lead".
    */
   role: string;
-  /**
-   * Leave empty if not tied to a single school.
-   */
-  school?: (number | null) | School;
   bio?: {
     root: {
       type: string;
@@ -833,10 +735,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'pages';
         value: number | Page;
-      } | null)
-    | ({
-        relationTo: 'schools';
-        value: number | School;
       } | null)
     | ({
         relationTo: 'people';
@@ -1007,7 +905,6 @@ export interface PagesSelect<T extends boolean = true> {
         content?: T | ContentBlockSelect<T>;
         'media-text'?: T | MediaTextBlockSelect<T>;
         gallery?: T | GalleryBlockSelect<T>;
-        schools?: T | SchoolsBlockSelect<T>;
         'framed-rows'?: T | FramedRowsBlockSelect<T>;
         scrapbook?: T | ScrapbookBlockSelect<T>;
       };
@@ -1094,22 +991,6 @@ export interface GalleryBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "SchoolsBlock_select".
- */
-export interface SchoolsBlockSelect<T extends boolean = true> {
-  header?:
-    | T
-    | {
-        eyebrow?: T;
-        accent?: T;
-        heading?: T;
-        lead?: T;
-      };
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "FramedRowsBlock_select".
  */
 export interface FramedRowsBlockSelect<T extends boolean = true> {
@@ -1172,36 +1053,11 @@ export interface ScrapbookBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "schools_select".
- */
-export interface SchoolsSelect<T extends boolean = true> {
-  name?: T;
-  generateSlug?: T;
-  slug?: T;
-  address?: T;
-  phones?:
-    | T
-    | {
-        number?: T;
-        href?: T;
-        id?: T;
-      };
-  mapUrl?: T;
-  photo?: T;
-  principal?: T;
-  order?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "people_select".
  */
 export interface PeopleSelect<T extends boolean = true> {
   name?: T;
   role?: T;
-  school?: T;
   bio?: T;
   portrait?: T;
   order?: T;

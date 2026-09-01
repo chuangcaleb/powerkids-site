@@ -1,6 +1,6 @@
 /**
  * Realistic dummy content for visual styling review — home, about, careers
- * pages, 3 schools, 4 people. All prose/body copy is generated lorem
+ * pages, 4 people. All prose/body copy is generated lorem
  * ipsum (via the `lorem-ipsum` package), not hand-written. One placeholder
  * image reused everywhere a media/upload field is needed.
  *
@@ -134,7 +134,6 @@ await payload.updateGlobal({
   data: {
     headerLinks: [
       { label: 'Who We Are', url: '/about' },
-      { label: 'Our Schools', url: '/about#our-schools' },
       { label: "We're Hiring!", url: '/careers' },
     ],
     footerColumns: [
@@ -142,7 +141,6 @@ await payload.updateGlobal({
         heading: 'About',
         links: [
           { label: 'Who We Are', url: '/about' },
-          { label: 'Our Schools', url: '/about#our-schools' },
           { label: "We're Hiring!", url: '/careers' },
         ],
       },
@@ -150,78 +148,24 @@ await payload.updateGlobal({
   },
 })
 
-// --- Schools + People (principals) -----------------------------------
+// --- People ------------------------------------------------------------
 
-const schoolSeeds = [
-  {
-    name: 'PowerKids Sri Petaling',
-    slug: 'sri-petaling',
-    address:
-      '2, Jalan 5/149B\nTaman Sri Endah\nBandar Baru Sri Petaling\n57000 Kuala Lumpur',
-    phones: [
-      { number: '03 - 9056 4288', href: '+60390564288' },
-      { number: '010 - 221 2482', href: '+60102212482' },
-    ],
-    principalName: 'Ms. Wan Hong',
-    principalBio: richText(loremParagraph(), loremParagraph(), loremParagraph()),
-  },
-  {
-    name: 'PowerKids Puchong Utama',
-    slug: 'puchong-utama',
-    address: 'No 1, Jalan PU 3/1A\nTaman Puchong Utama\n47140 Puchong, Selangor',
-    phones: [
-      { number: '03 - 8066 9363', href: '+60380669363' },
-      { number: '012 - 218 0240', href: '+60122180240' },
-    ],
-    principalName: 'Uncle Chun Hoe',
-    principalBio: richText(loremParagraph(), loremParagraph(), loremParagraph()),
-  },
-  {
-    name: 'PowerKids Parklane OUG',
-    slug: 'parklane-oug',
-    address: 'D1-1-11 Jalan 1/152\nTaman OUG Parklane\n58200 Kuala Lumpur',
-    phones: [
-      { number: '012 - 386 1123', href: '+60123861123' },
-      { number: '03 - 7498 1905', href: '+60374981905' },
-    ],
-    principalName: 'Ms. Mary',
-    principalBio: richText(loremParagraph(), loremParagraph(), loremParagraph()),
-  },
+const principalSeeds = [
+  { name: 'Ms. Wan Hong', role: 'Principal of PowerKids Sri Petaling' },
+  { name: 'Uncle Chun Hoe', role: 'Principal of PowerKids Puchong Utama' },
+  { name: 'Ms. Mary', role: 'Principal of PowerKids Parklane OUG' },
 ]
 
-const schoolIds: number[] = []
-for (const [index, seed] of schoolSeeds.entries()) {
-  const school = await payload.create({
-    collection: 'schools',
-    context: { disableRevalidate: true },
-    data: {
-      name: seed.name,
-      slug: seed.slug,
-      address: seed.address,
-      phones: seed.phones,
-      photo: media.id,
-      order: index,
-    },
-  })
-  schoolIds.push(school.id)
-
-  const principal = await payload.create({
+for (const [index, seed] of principalSeeds.entries()) {
+  await payload.create({
     collection: 'people',
     data: {
-      name: seed.principalName,
-      role: `Principal of ${seed.name}`,
-      school: school.id,
-      bio: seed.principalBio,
+      name: seed.name,
+      role: seed.role,
+      bio: richText(loremParagraph(), loremParagraph(), loremParagraph()),
       portrait: media.id,
       order: index,
     },
-  })
-
-  await payload.update({
-    collection: 'schools',
-    id: school.id,
-    context: { disableRevalidate: true },
-    data: { principal: principal.id },
   })
 }
 
@@ -311,7 +255,6 @@ await payload.create({
       subheading: loremSentence(),
     },
     layout: [
-      { blockType: 'schools', header: { heading: richText('Our Schools') } },
       {
         blockType: 'media-text',
         media: media.id,
@@ -360,5 +303,5 @@ await payload.create({
   },
 })
 
-console.log(`Seeded 3 pages, ${schoolIds.length} schools, 4 people.`)
+console.log('Seeded 3 pages, 4 people.')
 process.exit(0)

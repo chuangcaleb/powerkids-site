@@ -27,14 +27,3 @@ Before adding one, check existing block with new variant wouldn't do. Two blocks
 6. **No content defaults pretending to be design.** If field optional, block must render sensibly without it.
 7. **`interfaceName` set on every block config.** Without it `generate:types` emits an anonymous inline type per usage site instead of one named type — e.g. `FaqBlock`, `ScrapbookBlock`.
 8. **Content-driven blocks offer a `source` toggle.** Where a block can either take hand-written entries or pull from a collection (cards from programs/events, gallery from an event, video tabs from an event), give the editor both. Auto-populated sources stay in sync as the collection changes; manual gives per-instance copy control.
-
----
-
-## Intent worth keeping
-
-Reasons behind block shapes that the config file can't explain:
-
-- **Stats can compute from `site-settings.foundedYear`** rather than store a number, so "{n} years & counting" never goes stale.
-- **Events carry their own videos** so the Graduation page's per-year entries stop being a developer task.
-- **Contact and schools blocks take a heading only** — every other value comes from globals or the `schools` collection. Deliberate: contact details in JSX is the defect this whole content model exists to prevent.
-- **Styling is intentionally boilerplate.** Renderers cover layout and logic; visual polish is a later pass, not an omission.

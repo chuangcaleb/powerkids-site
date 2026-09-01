@@ -39,6 +39,5 @@ Things a reader would otherwise mistake for arbitrary:
 
 ```
 pages ──has many──► blocks (embedded)
-blocks ──reference──► media, programs, events, schools
-people ──one──► schools
+blocks ──reference──► media, programs, events
 ```
