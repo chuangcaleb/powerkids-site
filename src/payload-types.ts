@@ -1150,6 +1150,28 @@ export interface SiteSetting {
       }[]
     | null;
   defaultShareImage?: (number | null) | Media;
+  locations?:
+    | {
+        name: string;
+        /**
+         * Multi-line — rendered as written, no auto-formatting.
+         */
+        address: string;
+        /**
+         * Right-click the exact spot in Google Maps — the first context-menu item copies it.
+         */
+        latitude: number;
+        /**
+         * Right-click the exact spot in Google Maps — the first context-menu item copies it.
+         */
+        longitude: number;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Screenshot of the three Location pins — re-shoot and re-upload whenever a Location's coordinates change.
+   */
+  locationsMapPoster?: (number | null) | Media;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1400,6 +1422,16 @@ export interface SiteSettingsSelect<T extends boolean = true> {
         id?: T;
       };
   defaultShareImage?: T;
+  locations?:
+    | T
+    | {
+        name?: T;
+        address?: T;
+        latitude?: T;
+        longitude?: T;
+        id?: T;
+      };
+  locationsMapPoster?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

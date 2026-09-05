@@ -74,5 +74,52 @@ export const SiteSettings: GlobalConfig = {
       type: 'upload',
       relationTo: 'media',
     },
+    {
+      name: 'locations',
+      type: 'array',
+      minRows: 1,
+      maxRows: 10,
+      admin: {
+        components: {
+          RowLabel: '@/payload/admin/components/row-labels/row-label#RowLabel',
+        },
+      },
+      fields: [
+        { name: 'name', type: 'text', required: true },
+        {
+          name: 'address',
+          type: 'textarea',
+          required: true,
+          admin: { description: 'Multi-line — rendered as written, no auto-formatting.' },
+        },
+        {
+          name: 'latitude',
+          type: 'number',
+          required: true,
+          admin: {
+            description:
+              'Right-click the exact spot in Google Maps — the first context-menu item copies it.',
+          },
+        },
+        {
+          name: 'longitude',
+          type: 'number',
+          required: true,
+          admin: {
+            description:
+              'Right-click the exact spot in Google Maps — the first context-menu item copies it.',
+          },
+        },
+      ],
+    },
+    {
+      name: 'locationsMapPoster',
+      type: 'upload',
+      relationTo: 'media',
+      admin: {
+        description:
+          "Screenshot of the three Location pins — re-shoot and re-upload whenever a Location's coordinates change.",
+      },
+    },
   ],
 }

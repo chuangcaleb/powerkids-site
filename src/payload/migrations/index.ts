@@ -38,6 +38,7 @@ import * as migration_20260822_120000_media_duplicate_review_by_checksum_group f
 import * as migration_20260824_143253_drop_scrapbook_item_accent from './20260824_143253_drop_scrapbook_item_accent'
 import * as migration_20260827_033426_faq_global from './20260827_033426_faq_global'
 import * as migration_20260901_130630_remove_schools_collection from './20260901_130630_remove_schools_collection'
+import * as migration_20260905_063518_add_site_settings_locations from './20260905_063518_add_site_settings_locations'
 
 export const migrations = [
   {
@@ -239,5 +240,10 @@ export const migrations = [
     up: migration_20260901_130630_remove_schools_collection.up,
     down: migration_20260901_130630_remove_schools_collection.down,
     name: '20260901_130630_remove_schools_collection',
+  },
+  {
+    up: migration_20260905_063518_add_site_settings_locations.up,
+    down: migration_20260905_063518_add_site_settings_locations.down,
+    name: '20260905_063518_add_site_settings_locations',
   },
 ]
