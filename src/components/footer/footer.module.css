@@ -3,6 +3,8 @@
 .closingWrap {
   --divider-cream-closing: var(--bg-cta);
   --divider-closing-nav: var(--bg-contact);
+
+  padding-block-start: var(--space-2xl);
 }
 
 .closing {
