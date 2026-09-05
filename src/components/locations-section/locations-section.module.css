@@ -1,7 +1,3 @@
-.locationName {
-  font-weight: var(--weight-display);
-}
-
 .locationAddress {
   /* Textarea content is rendered as written, no auto-formatting. */
   white-space: pre-line;

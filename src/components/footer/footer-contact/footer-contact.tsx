@@ -1,5 +1,4 @@
 import { DoodleLayer } from '@/components/doodle-layer/doodle-layer'
-import { LocationsSection } from '@/components/locations-section/locations-section'
 import { SectionHeader } from '@/components/section-header/section-header'
 import { cx } from '@/lib/cx'
 import { primitiveVars } from '@/lib/primitive-vars'
@@ -36,7 +35,6 @@ export type FooterContactProps = { className?: string }
 export async function FooterContact({ className }: FooterContactProps) {
   const [cta, siteSettings] = await Promise.all([getCta(), getSiteSettings()])
   const { header } = cta.contact
-  const hasLocations = Boolean(siteSettings.locations?.length)
 
   return (
     <section id="contact" className={cx('region', styles.contact, className)}>
@@ -112,12 +110,6 @@ export async function FooterContact({ className }: FooterContactProps) {
             </div>
           ) : null}
         </div>
-        {hasLocations ? (
-          <>
-            <hr />
-            <LocationsSection />
-          </>
-        ) : null}
       </div>
     </section>
   )

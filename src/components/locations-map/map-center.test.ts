@@ -8,7 +8,7 @@ describe('mapCenter', () => {
         { latitude: 3.0, longitude: 101.0 },
         { latitude: 3.2, longitude: 101.2 },
       ]),
-    ).toEqual({ latitude: 3.1, longitude: 101.1, zoom: 10 })
+    ).toEqual({ latitude: 3.1, longitude: 101.1, zoom: 10.5 })
   })
 
   it('zooms in closer for a single location', () => {

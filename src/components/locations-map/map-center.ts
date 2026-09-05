@@ -10,7 +10,7 @@ export function mapCenter(locations: MapCenterInput[]): MapCenterOutput {
   return {
     latitude: average(locations.map((l) => l.latitude)),
     longitude: average(locations.map((l) => l.longitude)),
-    zoom: locations.length > 1 ? 10 : 14,
+    zoom: locations.length > 1 ? 10.5 : 14,
   }
 }
 

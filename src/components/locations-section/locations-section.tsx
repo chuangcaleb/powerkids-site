@@ -1,5 +1,4 @@
 import { LocationsMap } from '@/components/locations-map/locations-map'
-import { cx } from '@/lib/cx'
 import { directionsLink } from '@/lib/directions-link'
 import { primitiveVars } from '@/lib/primitive-vars'
 import { getSiteSettings } from '@/payload/globals/get-site-settings'
@@ -25,11 +24,11 @@ export async function LocationsSection() {
           {locations.map((location) => (
             <li key={location.id ?? location.name} className="flow-3xs">
               <p
-                className={cx(styles.locationName, 'cluster')}
+                className="cluster"
                 style={primitiveVars({ '--cluster-gap': 'var(--space-2xs)' })}
               >
                 <MapPin />
-                {location.name}
+                <b>{location.name}</b>
               </p>
               <p className={styles.locationAddress}>{location.address}</p>
               <span className={styles.directionsLinkWrap}>
