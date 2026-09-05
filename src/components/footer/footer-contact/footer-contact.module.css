@@ -47,3 +47,12 @@
   outline: 0.125rem solid currentcolor;
   outline-offset: var(--focus-offset);
 }
+
+.locationName {
+  font-weight: var(--weight-display);
+}
+
+.locationAddress {
+  /* Textarea content is rendered as written, no auto-formatting. */
+  white-space: pre-line;
+}

@@ -1,7 +1,9 @@
 import { DoodleLayer } from '@/components/doodle-layer/doodle-layer'
+import { LocationsMap } from '@/components/locations-map/locations-map'
 import { SectionHeader } from '@/components/section-header/section-header'
 import { primitiveVars } from '@/lib/primitive-vars'
 import { cx } from '@/lib/cx'
+import { directionsLink } from '@/lib/directions-link'
 import type { SiteSetting } from '@/payload-types'
 import { getCta } from '@/payload/globals/get-cta'
 import { getSiteSettings } from '@/payload/globals/get-site-settings'
@@ -11,7 +13,7 @@ import {
   SiTiktok,
   SiYoutube,
 } from '@icons-pack/react-simple-icons'
-import { Clock, Mail, Phone, Share2 } from 'lucide-react'
+import { Clock, Mail, MapPin, Phone, Share2 } from 'lucide-react'
 import type { ComponentType } from 'react'
 import styles from './footer-contact.module.css'
 
@@ -35,6 +37,11 @@ export type FooterContactProps = { className?: string }
 export async function FooterContact({ className }: FooterContactProps) {
   const [cta, siteSettings] = await Promise.all([getCta(), getSiteSettings()])
   const { header } = cta.contact
+  const locations = siteSettings.locations ?? []
+  const posterAsset =
+    typeof siteSettings.locationsMapPoster === 'object'
+      ? siteSettings.locationsMapPoster
+      : null
 
   return (
     <section id="contact" className={cx('region', styles.contact, className)}>
@@ -110,6 +117,44 @@ export async function FooterContact({ className }: FooterContactProps) {
             </div>
           ) : null}
         </div>
+        {locations.length ? (
+          <div
+            className="switcher"
+            style={primitiveVars({ '--switcher-gap': 'var(--space-xl)' })}
+          >
+            <div className="flow-xs">
+              <h3 className={styles.label}>
+                <MapPin size={18} aria-hidden="true" /> Locations
+              </h3>
+              <ul role="list" className="flow-m">
+                {locations.map((location) => (
+                  <li key={location.id ?? location.name} className="flow-3xs">
+                    <p className={styles.locationName}>{location.name}</p>
+                    <p className={styles.locationAddress}>{location.address}</p>
+                    <a
+                      href={directionsLink(location.latitude, location.longitude)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Get directions
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            {posterAsset?.url ? (
+              <LocationsMap
+                locations={locations.map((location) => ({
+                  id: location.id ?? location.name,
+                  name: location.name,
+                  latitude: location.latitude,
+                  longitude: location.longitude,
+                }))}
+                posterUrl={posterAsset.url}
+              />
+            ) : null}
+          </div>
+        ) : null}
       </div>
     </section>
   )
