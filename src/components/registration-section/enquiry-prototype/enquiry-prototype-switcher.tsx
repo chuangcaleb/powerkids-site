@@ -56,13 +56,11 @@ export function EnquiryPrototypeSwitcher({ header }: EnquiryPrototypeSwitcherPro
     const param = readParam('replyBy')
     return REPLY_BY_OPTIONS.some((o) => o.key === param)
       ? (param as ReplyByVariantKey)
-      : 'R1'
+      : 'R2'
   })
   const [alertTone, setAlertTone] = useState<AlertTone>(() => {
     const param = readParam('alert')
-    return ALERT_OPTIONS.some((o) => o.key === param)
-      ? (param as AlertTone)
-      : 'red-on-white'
+    return ALERT_OPTIONS.some((o) => o.key === param) ? (param as AlertTone) : 'tint-chip'
   })
   const [simulate, setSimulate] = useState<Simulate>('success')
   const [slowNetwork, setSlowNetwork] = useState(false)

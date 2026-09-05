@@ -1,6 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
+import { CheckCircle2 } from 'lucide-react'
 import { Button } from '@/components/button/button'
 import {
   SectionHeader,
@@ -82,6 +83,7 @@ export function FinalCard({
                 ref={firstFieldRef}
                 id="fc-name"
                 label="Name"
+                autoComplete="name"
                 maxLength={80}
                 value={values.name}
                 onChange={(e) => set('name', e.target.value)}
@@ -93,30 +95,32 @@ export function FinalCard({
                   id="fc-phone"
                   label="Phone"
                   type="tel"
+                  autoComplete="tel"
                   pattern="[0-9+\-\s()]{6,20}"
                   maxLength={20}
                   value={values.phone}
                   onChange={(e) => set('phone', e.target.value)}
                   error={errors.phone}
-                  className={styles.half}
+                  wrapperClassName={styles.half}
                 />
                 <TextField
                   id="fc-email"
                   label="Email"
                   hint="(optional)"
                   type="email"
+                  autoComplete="email"
                   maxLength={254}
                   value={values.email}
                   onChange={(e) => set('email', e.target.value)}
                   error={errors.email}
-                  className={styles.half}
+                  wrapperClassName={styles.half}
                 />
               </div>
 
               <ReplyBy
                 value={values.replyBy}
                 onChange={(v) => set('replyBy', v)}
-                emailPresent={Boolean(values.email)}
+                error={errors.replyBy}
               />
 
               <SelectField
@@ -146,11 +150,12 @@ export function FinalCard({
           </form>
 
           <div
-            className={styles.stackItem}
+            className={styles.success}
             data-hidden={!success}
             role="status"
             inert={!success || undefined}
           >
+            <CheckCircle2 size={40} aria-hidden="true" className={styles.successIcon} />
             <p>
               Thanks, {values.name.split(' ')[0] || 'there'} — we&apos;ve got your
               enquiry.
@@ -159,7 +164,7 @@ export function FinalCard({
               We&apos;ll reply by{' '}
               {values.replyBy === 'whatsapp' ? 'WhatsApp' : values.replyBy} soon.
             </p>
-            <Button variant="outline" onClick={form.reset}>
+            <Button variant="red" onClick={form.reset}>
               Send another enquiry
             </Button>
           </div>

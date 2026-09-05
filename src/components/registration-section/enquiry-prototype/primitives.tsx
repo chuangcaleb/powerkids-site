@@ -15,12 +15,20 @@ type FieldShellProps = {
   hint?: string
   error?: string
   htmlFor: string
+  wrapperClassName?: string
   children: ReactNode
 }
 
-function FieldShell({ label, hint, error, htmlFor, children }: FieldShellProps) {
+function FieldShell({
+  label,
+  hint,
+  error,
+  htmlFor,
+  wrapperClassName,
+  children,
+}: FieldShellProps) {
   return (
-    <div className={styles.field}>
+    <div className={cx(styles.field, wrapperClassName)}>
       <label htmlFor={htmlFor}>
         {label}
         {hint ? <span className={styles.hint}> {hint}</span> : null}
@@ -39,6 +47,7 @@ export type TextFieldProps = {
   label: string
   hint?: string
   error?: string
+  wrapperClassName?: string
   ref?: React.Ref<HTMLInputElement>
 } & InputHTMLAttributes<HTMLInputElement>
 
@@ -48,11 +57,18 @@ export function TextField({
   error,
   id,
   className,
+  wrapperClassName,
   ref,
   ...rest
 }: TextFieldProps) {
   return (
-    <FieldShell label={label} hint={hint} error={error} htmlFor={id!}>
+    <FieldShell
+      label={label}
+      hint={hint}
+      error={error}
+      htmlFor={id!}
+      wrapperClassName={wrapperClassName}
+    >
       <input
         ref={ref}
         id={id}
@@ -83,7 +99,7 @@ export function TextAreaField({
     <FieldShell label={label} hint={hint} error={error} htmlFor={id!}>
       <textarea
         id={id}
-        className={cx(styles.control, className)}
+        className={cx(styles.control, styles.textarea, className)}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? `${id}-error` : undefined}
         {...rest}

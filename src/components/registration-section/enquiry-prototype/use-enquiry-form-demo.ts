@@ -52,14 +52,7 @@ export function useEnquiryFormDemo(
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   function set<K extends keyof EnquiryFormValues>(key: K, value: EnquiryFormValues[K]) {
-    setValues((prev) => {
-      const next = { ...prev, [key]: value }
-      // Email cleared while "Email" reply chosen: fall back, since the option
-      // only exists once there's an email to reply to.
-      if (key === 'email' && value === '' && prev.replyBy === 'email')
-        next.replyBy = 'whatsapp'
-      return next
-    })
+    setValues((prev) => ({ ...prev, [key]: value }))
   }
 
   function validate(): FieldErrors {
@@ -70,6 +63,11 @@ export function useEnquiryFormDemo(
       next.phone = "That doesn't look like a phone number."
     if (values.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
       next.email = "That doesn't look like an email address."
+    }
+    // Email stays a selectable reply-by option even with no email typed yet —
+    // caught here instead of disabling the option outright.
+    if (values.replyBy === 'email' && !values.email.trim()) {
+      next.replyBy = 'Add an email above so we can reply there.'
     }
     if (!values.enquiryType) next.enquiryType = 'Choose what this is about.'
     if (values.message.length > 1000)

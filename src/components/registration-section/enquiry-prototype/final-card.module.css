@@ -26,6 +26,29 @@
   pointer-events: none;
 }
 
+/* Centered rather than top-anchored: the grid-stack trick locks this to the
+ * form's (taller) height, and top-anchoring two short lines in that much
+ * space read as empty/broken. Centering makes the leftover space read as
+ * intentional. */
+.success {
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-s);
+  text-align: center;
+}
+
+.success[data-hidden='true'] {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.successIcon {
+  color: var(--accent-red);
+}
+
 .fieldset {
   display: flex;
   flex-direction: column;
