@@ -1,7 +1,7 @@
 import { DoodleLayer } from '@/components/doodle-layer/doodle-layer'
 import { SectionHeader } from '@/components/section-header/section-header'
-import { primitiveVars } from '@/lib/primitive-vars'
 import { cx } from '@/lib/cx'
+import { primitiveVars } from '@/lib/primitive-vars'
 import type { SiteSetting } from '@/payload-types'
 import { getCta } from '@/payload/globals/get-cta'
 import { getSiteSettings } from '@/payload/globals/get-site-settings'
