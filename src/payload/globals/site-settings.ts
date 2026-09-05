@@ -79,11 +79,7 @@ export const SiteSettings: GlobalConfig = {
       type: 'array',
       minRows: 1,
       maxRows: 10,
-      admin: {
-        components: {
-          RowLabel: '@/payload/admin/components/row-labels/row-label#RowLabel',
-        },
-      },
+      // No custom RowLabel — the default one already reads `name` first.
       fields: [
         { name: 'name', type: 'text', required: true },
         {
@@ -118,7 +114,7 @@ export const SiteSettings: GlobalConfig = {
       relationTo: 'media',
       admin: {
         description:
-          "Screenshot of the three Location pins — re-shoot and re-upload whenever a Location's coordinates change.",
+          "Screenshot of the Location pins above — re-shoot and re-upload whenever a Location's coordinates change.",
       },
     },
   ],

@@ -16,16 +16,6 @@
   box-shadow: var(--shadow-hard-pill);
 }
 
-.frame {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  border: var(--border-width) solid var(--border-strong);
-  border-radius: var(--radius-m);
-  box-shadow: var(--shadow-hard);
-  overflow: hidden;
-}
-
 .spinner {
   position: absolute;
   inset: 0;
