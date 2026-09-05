@@ -169,7 +169,7 @@ export function ErrorCallout({ message, tone, calloutRef }: ErrorCalloutProps) {
       role="alert"
       tabIndex={-1}
     >
-      <AlertTriangle size={18} aria-hidden="true" className={styles.calloutIcon} />
+      <AlertTriangle aria-hidden="true" className={styles.calloutIcon} />
       <span>{message}</span>
     </div>
   )

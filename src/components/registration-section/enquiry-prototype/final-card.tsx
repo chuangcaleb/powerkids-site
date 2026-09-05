@@ -1,8 +1,8 @@
 'use client'
 
 import { useRef } from 'react'
-import { CheckCircle2 } from 'lucide-react'
 import { Button } from '@/components/button/button'
+import { Logo } from '@/components/logo/logo'
 import {
   SectionHeader,
   type SectionHeaderData,
@@ -35,8 +35,10 @@ export type FinalCardProps = {
 /**
  * PROTOTYPE — throwaway. Consolidates #29's locked decisions (Variant C card,
  * half-width phone/email row, native select, fieldset-disabled submitting
- * state, top error banner, height-stable success swap) with the still-open
- * reply-by and alert-tone threads left switchable.
+ * state, top error banner) with the still-open reply-by and alert-tone
+ * threads left switchable. Success collapses the card rather than locking
+ * its height — the owner reversed that earlier call once they saw the
+ * wasted whitespace it caused.
  */
 export function FinalCard({
   header,
@@ -55,107 +57,14 @@ export function FinalCard({
   const { values, set, phase, errors, errorMessage } = form
   const ReplyBy = REPLY_BY_VARIANTS[replyByVariant]
   const submitting = phase === 'submitting'
-  const success = phase === 'success'
 
-  return (
-    <div className="flow max-prose">
-      <SectionHeader header={header} />
-      <div className={styles.card}>
-        {/* Height-stable swap: both branches stay laid out via CSS grid stacking (final-card.module.css), so the card never collapses on success. */}
-        <div className={styles.stack}>
-          <form
-            className={styles.stackItem}
-            data-hidden={success}
-            inert={success || undefined}
-            onSubmit={form.submit}
-            noValidate
-          >
-            {phase === 'error' && errorMessage ? (
-              <ErrorCallout
-                message={errorMessage}
-                tone={alertTone}
-                calloutRef={errorSummaryRef}
-              />
-            ) : null}
-
-            <fieldset className={styles.fieldset} disabled={submitting}>
-              <TextField
-                ref={firstFieldRef}
-                id="fc-name"
-                label="Name"
-                autoComplete="name"
-                maxLength={80}
-                value={values.name}
-                onChange={(e) => set('name', e.target.value)}
-                error={errors.name}
-              />
-
-              <div className={styles.row}>
-                <TextField
-                  id="fc-phone"
-                  label="Phone"
-                  type="tel"
-                  autoComplete="tel"
-                  pattern="[0-9+\-\s()]{6,20}"
-                  maxLength={20}
-                  value={values.phone}
-                  onChange={(e) => set('phone', e.target.value)}
-                  error={errors.phone}
-                  wrapperClassName={styles.half}
-                />
-                <TextField
-                  id="fc-email"
-                  label="Email"
-                  hint="(optional)"
-                  type="email"
-                  autoComplete="email"
-                  maxLength={254}
-                  value={values.email}
-                  onChange={(e) => set('email', e.target.value)}
-                  error={errors.email}
-                  wrapperClassName={styles.half}
-                />
-              </div>
-
-              <ReplyBy
-                value={values.replyBy}
-                onChange={(v) => set('replyBy', v)}
-                error={errors.replyBy}
-              />
-
-              <SelectField
-                id="fc-type"
-                label="What's this about?"
-                options={enquiryTypes}
-                value={values.enquiryType}
-                onChange={(e) => set('enquiryType', e.target.value)}
-                error={errors.enquiryType}
-              />
-
-              <TextAreaField
-                id="fc-message"
-                label="Message"
-                hint="(optional, max 1000 characters)"
-                rows={3}
-                maxLength={1000}
-                value={values.message}
-                onChange={(e) => set('message', e.target.value)}
-                error={errors.message}
-              />
-
-              <Button type="submit" variant="red">
-                {submitting ? 'Sending…' : 'Send enquiry'}
-              </Button>
-            </fieldset>
-          </form>
-
-          <div
-            className={styles.success}
-            data-hidden={!success}
-            role="status"
-            inert={!success || undefined}
-          >
-            <CheckCircle2 size={40} aria-hidden="true" className={styles.successIcon} />
+  if (phase === 'success') {
+    return (
+      <div className="flow max-prose">
+        <SectionHeader header={header} />
+        <div className={styles.card}>
+          <div className={styles.success} role="status">
+            <Logo className={styles.successLogo} aria-hidden="true" />
             <p>
               Thanks, {values.name.split(' ')[0] || 'there'} — we&apos;ve got your
               enquiry.
@@ -169,6 +78,93 @@ export function FinalCard({
             </Button>
           </div>
         </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="flow max-prose">
+      <SectionHeader header={header} />
+      <div className={styles.card}>
+        <form onSubmit={form.submit} noValidate>
+          {phase === 'error' && errorMessage ? (
+            <ErrorCallout
+              message={errorMessage}
+              tone={alertTone}
+              calloutRef={errorSummaryRef}
+            />
+          ) : null}
+
+          <fieldset className={styles.fieldset} disabled={submitting}>
+            <TextField
+              ref={firstFieldRef}
+              id="fc-name"
+              label="Name"
+              autoComplete="name"
+              maxLength={80}
+              value={values.name}
+              onChange={(e) => set('name', e.target.value)}
+              error={errors.name}
+            />
+
+            <div className={styles.row}>
+              <TextField
+                id="fc-phone"
+                label="Phone"
+                type="tel"
+                autoComplete="tel"
+                pattern="[0-9+\-\s()]{6,20}"
+                maxLength={20}
+                value={values.phone}
+                onChange={(e) => set('phone', e.target.value)}
+                error={errors.phone}
+                wrapperClassName={styles.half}
+              />
+              <TextField
+                id="fc-email"
+                label="Email"
+                hint="(optional)"
+                type="email"
+                autoComplete="email"
+                maxLength={254}
+                value={values.email}
+                onChange={(e) => set('email', e.target.value)}
+                error={errors.email}
+                wrapperClassName={styles.half}
+              />
+            </div>
+
+            <ReplyBy
+              value={values.replyBy}
+              onChange={(v) => set('replyBy', v)}
+              error={errors.replyBy}
+            />
+
+            <SelectField
+              id="fc-type"
+              label="What's this about?"
+              options={enquiryTypes}
+              value={values.enquiryType}
+              onChange={(e) => set('enquiryType', e.target.value)}
+              error={errors.enquiryType}
+            />
+
+            <TextAreaField
+              id="fc-message"
+              label="Message"
+              hint="(optional, max 1000 characters)"
+              rows={3}
+              maxLength={1000}
+              value={values.message}
+              onChange={(e) => set('message', e.target.value)}
+              error={errors.message}
+            />
+
+            <Button type="submit" variant="red">
+              {submitting ? 'Sending…' : 'Send enquiry'}
+            </Button>
+          </fieldset>
+        </form>
       </div>
     </div>
   )

@@ -7,46 +7,21 @@
   padding: var(--space-l);
 }
 
-/* Height-stable success swap: both branches share one grid cell, so the
- * taller one (usually the form) sets the track height regardless of which
- * is currently visible — the card never collapses on submit. */
-.stack {
-  display: grid;
-}
-
-.stackItem {
-  grid-area: 1 / 1;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-m);
-}
-
-.stackItem[data-hidden='true'] {
-  visibility: hidden;
-  pointer-events: none;
-}
-
-/* Centered rather than top-anchored: the grid-stack trick locks this to the
- * form's (taller) height, and top-anchoring two short lines in that much
- * space read as empty/broken. Centering makes the leftover space read as
- * intentional. */
+/* Deliberately not height-locked to the form — owner reversed that call:
+ * top- or center-anchoring two short lines inside a form-height card read as
+ * empty/broken. Collapsing naturally on success is the simpler, better fit. */
 .success {
-  grid-area: 1 / 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   gap: var(--space-s);
   text-align: center;
 }
 
-.success[data-hidden='true'] {
-  visibility: hidden;
-  pointer-events: none;
-}
-
-.successIcon {
-  color: var(--accent-red);
+.successLogo {
+  width: 4rem;
+  height: 4rem;
+  color: var(--text-strong);
 }
 
 .fieldset {
@@ -70,7 +45,12 @@
 
 @media (width <= 30rem) {
   .row {
+    /* Stacked, phone/email become two more rows in the same vertical
+     * rhythm as the rest of the fieldset — match its gap instead of the
+     * row's own (smaller) side-by-side gap, so name→phone and phone→email
+     * read as equal spacing. */
     flex-direction: column;
+    gap: var(--space-m);
   }
 }
 

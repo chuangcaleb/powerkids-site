@@ -1,5 +1,6 @@
 import { Mail, Phone } from 'lucide-react'
 import { SiWhatsapp } from '@icons-pack/react-simple-icons'
+import { Button } from '@/components/button/button'
 import { cx } from '@/lib/cx'
 import type { ReplyBy } from './use-enquiry-form-demo'
 import styles from './reply-by-variants.module.css'
@@ -31,22 +32,22 @@ function Footer({ error }: { error?: string }) {
   )
 }
 
-/** R1 — plain hard-shadow pills, no icons. Email is always selectable; missing email is a validation error on submit, not a disabled control. */
+/** R1 — the real `Button` component, no icons. Selected option is `variant="red"`, others `variant="outline"`. Email is always selectable; missing email is a validation error on submit, not a disabled control. */
 export function ReplyByR1({ value, onChange, error }: ReplyByVariantProps) {
   return (
     <div>
       <span className={styles.legend}>Reply by</span>
       <div className={styles.pillRow} role="group" aria-label="Reply by">
         {OPTIONS.map((option) => (
-          <button
+          <Button
             key={option.value}
             type="button"
-            className={styles.pill}
-            data-active={value === option.value}
+            size="sm"
+            variant={value === option.value ? 'red' : 'outline'}
             onClick={() => onChange(option.value)}
           >
             {option.label}
-          </button>
+          </Button>
         ))}
       </div>
       <Footer error={error} />
@@ -54,23 +55,23 @@ export function ReplyByR1({ value, onChange, error }: ReplyByVariantProps) {
   )
 }
 
-/** R2 — same pills, with a leading brand/lucide icon per option. */
+/** R2 — same, with a leading brand/lucide icon per option. */
 export function ReplyByR2({ value, onChange, error }: ReplyByVariantProps) {
   return (
     <div>
       <span className={styles.legend}>Reply by</span>
       <div className={styles.pillRow} role="group" aria-label="Reply by">
         {OPTIONS.map(({ value: optionValue, label, Icon }) => (
-          <button
+          <Button
             key={optionValue}
             type="button"
-            className={styles.pill}
-            data-active={value === optionValue}
+            size="sm"
+            variant={value === optionValue ? 'red' : 'outline'}
             onClick={() => onChange(optionValue)}
           >
-            <Icon size={16} aria-hidden="true" />
+            <Icon size={16} aria-hidden="true" className={styles.buttonIcon} />
             {label}
-          </button>
+          </Button>
         ))}
       </div>
       <Footer error={error} />

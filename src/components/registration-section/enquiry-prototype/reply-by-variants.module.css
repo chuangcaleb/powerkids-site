@@ -4,14 +4,14 @@
 
 .helper {
   color: var(--text-muted);
-  font-size: 0.85em;
+  font-size: var(--step--1);
   margin-block-start: var(--space-2xs);
 }
 
 .error {
   display: block;
   color: var(--accent-red);
-  font-size: 0.85em;
+  font-size: var(--step--1);
   margin-block-start: var(--space-2xs);
 }
 
@@ -22,41 +22,8 @@
   margin-block-start: var(--space-2xs);
 }
 
-/*
- * Deliberately not the site's `Pill` shape (full pill radius, thin border) —
- * that reads as a decorative eyebrow elsewhere on the page. This control is
- * interactive, so it borrows the Button's squarer corners and press/lift
- * behaviour instead of looking like a label.
- */
-.pill {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-3xs);
-  font: inherit;
-  font-weight: 600;
-  background: var(--colour-white);
-  border: var(--stroke-width) solid var(--border-strong);
-  border-radius: var(--radius-m);
-  padding: var(--space-2xs) var(--space-s);
-  box-shadow: var(--shadow-hard-pill);
-  cursor: pointer;
-}
-
-.pill[data-active='true'] {
-  background: var(--accent-red);
-  color: var(--colour-white);
-}
-
-.pill:active {
-  box-shadow: none;
-  transform: translate(var(--pill-shadow-offset), var(--pill-shadow-offset));
-}
-
-.pill:hover:not([data-active='true']) {
-  transform: translate(
-    calc(var(--pill-shadow-offset) * -0.3),
-    calc(var(--pill-shadow-offset) * -0.3)
-  );
+.buttonIcon {
+  flex-shrink: 0;
 }
 
 .segmentedR3 {
