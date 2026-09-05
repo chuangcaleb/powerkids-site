@@ -19,14 +19,6 @@ const OPTIONS: { value: ReplyBy; label: string; Icon: typeof Phone }[] = [
   { value: 'email', label: 'Email', Icon: Mail },
 ]
 
-function Helper() {
-  return (
-    <p className={styles.helper}>
-      Add an email address for us to send the confirmation email to.
-    </p>
-  )
-}
-
 /** R1 — `ToggleChip`, no icons. Email is always selectable; which of phone/email is required flips with the choice — see final-card.tsx. */
 export function ReplyByR1({ value, onChange }: ReplyByVariantProps) {
   return (
@@ -43,7 +35,6 @@ export function ReplyByR1({ value, onChange }: ReplyByVariantProps) {
           </ToggleChip>
         ))}
       </div>
-      <Helper />
     </div>
   )
 }
@@ -65,7 +56,6 @@ export function ReplyByR2({ value, onChange }: ReplyByVariantProps) {
           </ToggleChip>
         ))}
       </div>
-      <Helper />
     </div>
   )
 }
@@ -88,7 +78,6 @@ export function ReplyByR3({ value, onChange }: ReplyByVariantProps) {
           </ToggleChip>
         ))}
       </div>
-      <Helper />
     </div>
   )
 }

@@ -52,10 +52,10 @@ function validateField(
 ): string | undefined {
   switch (field) {
     case 'name':
-      return value.trim() ? undefined : 'Enter your name.'
+      return value.trim() ? undefined : 'Required.'
     case 'phone': {
       if (!value.trim()) {
-        return replyBy === 'email' ? undefined : 'Enter a phone number.'
+        return replyBy === 'email' ? undefined : 'Required.'
       }
       return /^[0-9+\-\s()]{6,20}$/.test(value)
         ? undefined
@@ -63,14 +63,14 @@ function validateField(
     }
     case 'email': {
       if (!value.trim()) {
-        return replyBy === 'email' ? 'Enter an email address.' : undefined
+        return replyBy === 'email' ? 'Required.' : undefined
       }
       return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
         ? undefined
         : "That doesn't look like an email address."
     }
     case 'enquiryType':
-      return value ? undefined : 'Choose what this is about.'
+      return value ? undefined : 'Required.'
     case 'message':
       return value.length > 1000
         ? 'Message is too long (max 1000 characters).'

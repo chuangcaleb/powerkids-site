@@ -74,10 +74,3 @@
 .stepButton {
   align-self: flex-start;
 }
-
-/* Button's own sm is too small, md reads oversized in this compact card —
- * same font as md, tighter padding closer to sm. */
-.navButton {
-  padding: var(--space-2xs) var(--space-m);
-  font-size: var(--step--1);
-}

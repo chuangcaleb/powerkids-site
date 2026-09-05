@@ -46,7 +46,8 @@ export type FinalCardProps = {
  * reply-by and alert-tone threads left switchable, as a two-step wizard:
  * step 1 picks what the enquiry is about, step 2 collects contact details.
  * Step 2 leads with reply-by, since it decides which of phone/email is
- * required — that field renders first in the row.
+ * required — phone/email stay in fixed order, just the "(optional)" hint
+ * and validation requirement flip with the choice.
  */
 export function FinalCard({
   header,
@@ -69,7 +70,7 @@ export function FinalCard({
 
   function handleNext() {
     if (!values.enquiryType) {
-      form.setErrors({ enquiryType: 'Choose what this is about.' })
+      form.setErrors({ enquiryType: 'Required.' })
       return
     }
     form.setErrors({})
@@ -99,36 +100,6 @@ export function FinalCard({
       </div>
     )
   }
-
-  const phoneField = (
-    <TextField
-      id="fc-phone"
-      label="Phone"
-      hint={emailRequired ? '(optional)' : undefined}
-      type="tel"
-      autoComplete="tel"
-      pattern="[0-9+\-\s()]{6,20}"
-      maxLength={20}
-      value={values.phone}
-      onChange={(e) => set('phone', e.target.value)}
-      error={errors.phone}
-      wrapperClassName={styles.half}
-    />
-  )
-  const emailField = (
-    <TextField
-      id="fc-email"
-      label="Email"
-      hint={emailRequired ? undefined : '(optional)'}
-      type="email"
-      autoComplete="email"
-      maxLength={254}
-      value={values.email}
-      onChange={(e) => set('email', e.target.value)}
-      error={errors.email}
-      wrapperClassName={styles.half}
-    />
-  )
 
   return (
     <div className="flow max-prose">
@@ -160,7 +131,7 @@ export function FinalCard({
               <Button
                 type="button"
                 variant="red"
-                className={cx(styles.navButton, styles.stepButton)}
+                className={styles.stepButton}
                 style={WIDER_GAP_ABOVE}
                 onClick={handleNext}
               >
@@ -182,35 +153,39 @@ export function FinalCard({
               />
 
               <div className={styles.row}>
-                {emailRequired ? (
-                  <>
-                    {emailField}
-                    {phoneField}
-                  </>
-                ) : (
-                  <>
-                    {phoneField}
-                    {emailField}
-                  </>
-                )}
+                <TextField
+                  id="fc-phone"
+                  label="Phone"
+                  hint={emailRequired ? '(optional)' : undefined}
+                  type="tel"
+                  autoComplete="tel"
+                  pattern="[0-9+\-\s()]{6,20}"
+                  maxLength={20}
+                  value={values.phone}
+                  onChange={(e) => set('phone', e.target.value)}
+                  error={errors.phone}
+                  wrapperClassName={styles.half}
+                />
+                <TextField
+                  id="fc-email"
+                  label="Email"
+                  hint={emailRequired ? undefined : '(optional)'}
+                  type="email"
+                  autoComplete="email"
+                  maxLength={254}
+                  value={values.email}
+                  onChange={(e) => set('email', e.target.value)}
+                  error={errors.email}
+                  wrapperClassName={styles.half}
+                />
               </div>
 
               <div className={styles.buttonRow} style={WIDER_GAP_ABOVE}>
-                <Button
-                  type="button"
-                  variant="outline"
-                  className={styles.navButton}
-                  onClick={() => setStep(1)}
-                >
+                <Button type="button" variant="outline" onClick={() => setStep(1)}>
                   Back
                 </Button>
-                <Button
-                  type="submit"
-                  variant="red"
-                  className={styles.navButton}
-                  disabled={submitting}
-                >
-                  {submitting ? 'Sending…' : 'Send enquiry'}
+                <Button type="submit" variant="red" disabled={submitting}>
+                  {submitting ? 'Sending…' : 'Submit'}
                 </Button>
               </div>
             </fieldset>
