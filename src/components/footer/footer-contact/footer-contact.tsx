@@ -1,9 +1,9 @@
 import { DoodleLayer } from '@/components/doodle-layer/doodle-layer'
 import { LocationsMap } from '@/components/locations-map/locations-map'
 import { SectionHeader } from '@/components/section-header/section-header'
-import { primitiveVars } from '@/lib/primitive-vars'
 import { cx } from '@/lib/cx'
 import { directionsLink } from '@/lib/directions-link'
+import { primitiveVars } from '@/lib/primitive-vars'
 import type { SiteSetting } from '@/payload-types'
 import { getCta } from '@/payload/globals/get-cta'
 import { getSiteSettings } from '@/payload/globals/get-site-settings'
@@ -13,7 +13,7 @@ import {
   SiTiktok,
   SiYoutube,
 } from '@icons-pack/react-simple-icons'
-import { Clock, Mail, MapPin, Phone, Share2 } from 'lucide-react'
+import { Clock, Mail, Phone, Share2 } from 'lucide-react'
 import type { ComponentType } from 'react'
 import styles from './footer-contact.module.css'
 
@@ -117,15 +117,14 @@ export async function FooterContact({ className }: FooterContactProps) {
             </div>
           ) : null}
         </div>
+        <hr />
         {locations.length ? (
           <div
             className="switcher"
             style={primitiveVars({ '--switcher-gap': 'var(--space-xl)' })}
           >
             <div className="flow-xs">
-              <h3 className={styles.label}>
-                <MapPin size={18} aria-hidden="true" /> Locations
-              </h3>
+              <h2>Locations</h2>
               <ul role="list" className="flow-m">
                 {locations.map((location) => (
                   <li key={location.id ?? location.name} className="flow-3xs">

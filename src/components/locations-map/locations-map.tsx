@@ -5,18 +5,19 @@
 // inside the click handler — creating it at module scope would pull it into
 // this component's own chunk and defeat the code-split.
 
-import { useCallback, useEffect, useState } from 'react'
-import { createRoot } from 'react-dom/client'
-import { Map } from '@vis.gl/react-maplibre'
-import type { MapLib } from '@vis.gl/react-maplibre'
-import type { Map as MapInstance } from 'maplibre-gl'
-import 'maplibre-gl/dist/maplibre-gl.css'
 import { ClickToLoadFacade } from '@/components/click-to-load-facade/click-to-load-facade'
 import facadeStyles from '@/components/click-to-load-facade/click-to-load-facade.module.css'
 import { cx } from '@/lib/cx'
 import { directionsLink } from '@/lib/directions-link'
-import { mapCenter } from './map-center'
+import type { MapLib } from '@vis.gl/react-maplibre'
+import { Map } from '@vis.gl/react-maplibre'
+import type { Map as MapInstance } from 'maplibre-gl'
+import 'maplibre-gl/dist/maplibre-gl.css'
+import { useCallback, useEffect, useState } from 'react'
+import { createRoot } from 'react-dom/client'
+import { Pill } from '../pill/pill'
 import styles from './locations-map.module.css'
+import { mapCenter } from './map-center'
 
 /**
  * Full-colour, legible against brand pins — chosen over `positron` in the
@@ -115,7 +116,7 @@ export function LocationsMap({ locations, posterUrl, className }: LocationsMapPr
         onClick={handleClick}
         className={className}
       >
-        <span className={styles.pill}>Show interactive map</span>
+        <Pill>Show interactive map</Pill>
       </ClickToLoadFacade>
     )
   }

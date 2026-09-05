@@ -1169,7 +1169,7 @@ export interface SiteSetting {
       }[]
     | null;
   /**
-   * Screenshot of the three Location pins — re-shoot and re-upload whenever a Location's coordinates change.
+   * Screenshot of the Location pins above — re-shoot and re-upload whenever a Location's coordinates change.
    */
   locationsMapPoster?: (number | null) | Media;
   updatedAt?: string | null;
