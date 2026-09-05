@@ -13,7 +13,7 @@ import {
   SiTiktok,
   SiYoutube,
 } from '@icons-pack/react-simple-icons'
-import { Clock, Mail, Phone, Share2 } from 'lucide-react'
+import { Clock, Mail, MapPin, Phone, Share2 } from 'lucide-react'
 import type { ComponentType } from 'react'
 import styles from './footer-contact.module.css'
 
@@ -119,16 +119,19 @@ export async function FooterContact({ className }: FooterContactProps) {
         </div>
         <hr />
         {locations.length ? (
-          <div
-            className="switcher"
-            style={primitiveVars({ '--switcher-gap': 'var(--space-xl)' })}
-          >
-            <div className="flow-xs">
+          <>
+            <div className="flow-xl">
               <h2>Locations</h2>
-              <ul role="list" className="flow-m">
+              <ul role="list" className="flow-m max-lead">
                 {locations.map((location) => (
                   <li key={location.id ?? location.name} className="flow-3xs">
-                    <p className={styles.locationName}>{location.name}</p>
+                    <p
+                      className={cx(styles.locationName, 'cluster')}
+                      style={primitiveVars({ '--cluster-gap': 'var(--space-2xs)' })}
+                    >
+                      <MapPin />
+                      {location.name}
+                    </p>
                     <p className={styles.locationAddress}>{location.address}</p>
                     <a
                       href={directionsLink(location.latitude, location.longitude)}
@@ -155,7 +158,7 @@ export async function FooterContact({ className }: FooterContactProps) {
                 className={styles.mapBleed}
               />
             ) : null}
-          </div>
+          </>
         ) : null}
       </div>
     </section>
