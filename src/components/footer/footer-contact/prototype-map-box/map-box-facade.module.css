@@ -1,0 +1,164 @@
+.box {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius-l);
+  overflow: clip;
+  border: var(--border-width) solid var(--border-strong);
+}
+
+.poster {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.affordance-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--bg-inverse);
+  opacity: 0;
+  transition: opacity var(--duration-base) var(--ease-standard);
+}
+
+.affordance-button:hover::before,
+.affordance-button:focus-visible::before {
+  opacity: 0.25;
+}
+
+.playPill {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  padding: var(--space-xs) var(--space-m);
+  border-radius: var(--radius-pill);
+  background: var(--bg-surface);
+  color: var(--text-strong);
+  font-weight: var(--weight-display);
+  box-shadow: var(--shadow-hard-pill);
+}
+
+.playIcon {
+  width: 0;
+  height: 0;
+  border-inline-start: var(--space-2xs) solid currentcolor;
+  border-block-start: var(--space-3xs) solid transparent;
+  border-block-end: var(--space-3xs) solid transparent;
+}
+
+.affordance-badge .badge {
+  position: absolute;
+  inset-block-start: var(--space-s);
+  inset-inline-end: var(--space-s);
+  padding: var(--space-3xs) var(--space-xs);
+  border-radius: var(--radius-pill);
+  background: var(--bg-surface);
+  color: var(--text-strong);
+  font-size: var(--step--1);
+  font-weight: var(--weight-display);
+  box-shadow: var(--shadow-hard-pill);
+}
+
+.affordance-badge:hover,
+.affordance-badge:focus-visible {
+  outline: var(--stroke-width) solid var(--border-strong);
+  outline-offset: calc(var(--stroke-width) * -1);
+}
+
+.affordance-border {
+  border: var(--stroke-width) dashed transparent;
+  transition: border-color var(--duration-base) var(--ease-standard);
+}
+
+.affordance-border:hover,
+.affordance-border:focus-visible {
+  border-color: var(--border-strong);
+}
+
+.affordance-border .caption {
+  position: absolute;
+  inset-block-end: var(--space-s);
+  inset-inline: 0;
+  text-align: center;
+  font-size: var(--step--1);
+  color: var(--text-strong);
+  background: var(--bg-surface);
+  padding-block: var(--space-3xs);
+}
+
+.spinner {
+  position: absolute;
+  z-index: 2;
+  inset-inline-start: 50%;
+  inset-block-start: 50%;
+  width: var(--space-l);
+  height: var(--space-l);
+  margin: calc(var(--space-l) / -2);
+  border-radius: var(--radius-pill);
+  border: var(--stroke-width) solid var(--bg-surface);
+  border-block-start-color: var(--text-strong);
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.mounted {
+  width: 100%;
+  height: 100%;
+}
+
+.mapMock {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.pin {
+  all: unset;
+  position: absolute;
+  width: var(--space-l);
+  height: var(--space-l);
+  margin-inline-start: calc(var(--space-l) / -2);
+  margin-block-start: calc(-1 * var(--space-l));
+  border-radius: var(--radius-pill);
+  background: var(--accent-red);
+  border: var(--stroke-width) solid var(--border-strong);
+  cursor: pointer;
+}
+
+.pin:hover,
+.pin:focus-visible {
+  background: var(--accent-red-fill);
+}
+
+.popup {
+  position: absolute;
+  inset-block-start: var(--space-s);
+  inset-inline-start: var(--space-s);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xs);
+  padding: var(--space-xs) var(--space-s);
+  border-radius: var(--radius-m);
+  border: var(--border-width) solid var(--border-strong);
+  background: var(--bg-surface);
+  color: var(--text-strong);
+  box-shadow: var(--shadow-hard);
+  max-width: var(--max-heading);
+}

@@ -1,5 +1,7 @@
+import { Suspense } from 'react'
 import { notFound } from 'next/navigation'
 import { Accordion } from '@/components/accordion/accordion'
+import { MapBoxPrototypeSection } from '@/components/footer/footer-contact/prototype-map-box/map-box-prototype-section'
 import { Button } from '@/components/button/button'
 import { Card } from '@/components/card/card'
 import { Divider } from '@/components/divider/divider'
@@ -235,6 +237,17 @@ export default function KitchenSinkPage() {
             posterUrl="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='180'%3E%3Crect width='320' height='180' fill='%230000eb'/%3E%3C/svg%3E"
           />
         </div>
+      </section>
+
+      <section className="flow wrapper">
+        <Heading level={2}>Map box prototype (issue #18)</Heading>
+        <p>
+          Footer-blue background dropped for the prototype — real placement uses
+          `.contact`.
+        </p>
+        <Suspense fallback={null}>
+          <MapBoxPrototypeSection />
+        </Suspense>
       </section>
 
       <section className="flow">
