@@ -1,10 +1,10 @@
 /* CTA + Contact always stack — each keeps its own colour, so the dividers above
    and below the split only ever touch one colour each. */
 .closingWrap {
+  margin-block-start: var(--space-2xl);
+
   --divider-cream-closing: var(--bg-cta);
   --divider-closing-nav: var(--bg-contact);
-
-  padding-block-start: var(--space-2xl);
 }
 
 .closing {
