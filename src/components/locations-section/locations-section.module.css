@@ -7,26 +7,13 @@
   white-space: pre-line;
 }
 
-.directionsLink {
+.directionsLinkWrap {
   /* `.flow-3xs`'s `display: flex; flex-direction: column` stretches flex
      items full-width by default — override on this child only, not the
-     primitive. */
+     primitive. Lives on a wrapper, not the anchor itself, so the anchor
+     stays classless and picks up `a:not([class])`'s underline recipe from
+     typography.css instead of a second copy of it. */
   align-self: flex-start;
-  color: inherit;
-  text-decoration-line: underline;
-  text-decoration-thickness: 0.0625rem;
-  text-underline-offset: 0.15em;
-  transition: text-decoration-thickness var(--duration-base) var(--ease-standard);
-}
-
-.directionsLink:hover,
-.directionsLink:focus-visible {
-  text-decoration-thickness: 0.125rem;
-}
-
-.directionsLink:focus-visible {
-  outline: 0.125rem solid currentcolor;
-  outline-offset: var(--focus-offset);
 }
 
 /* No primitive covers "this one child bleeds full-width, its siblings and

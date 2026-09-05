@@ -32,14 +32,15 @@ export async function LocationsSection() {
                 {location.name}
               </p>
               <p className={styles.locationAddress}>{location.address}</p>
-              <a
-                href={directionsLink(location.latitude, location.longitude)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.directionsLink}
-              >
-                Get directions
-              </a>
+              <span className={styles.directionsLinkWrap}>
+                <a
+                  href={directionsLink(location.latitude, location.longitude)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Get directions
+                </a>
+              </span>
             </li>
           ))}
         </ul>
