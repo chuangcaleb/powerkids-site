@@ -6,6 +6,7 @@ import { Divider } from '@/components/divider/divider'
 import { DoodleLayer } from '@/components/doodle-layer/doodle-layer'
 import { Heading } from '@/components/heading/heading'
 import { LocationsMap } from '@/components/locations-map/locations-map'
+import { LocationsSection } from '@/components/locations-section/locations-section'
 import { Mark } from '@/components/mark/mark'
 import { NavBar } from '@/components/nav-bar/nav-bar'
 import { Pill } from '@/components/pill/pill'
@@ -268,6 +269,11 @@ export default function KitchenSinkPage() {
             ]}
           />
         </div>
+      </section>
+
+      <section className="flow wrapper">
+        <Heading level={2}>Locations block</Heading>
+        <LocationsSection />
       </section>
 
       <section className="flow">

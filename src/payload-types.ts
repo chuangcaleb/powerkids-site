@@ -288,7 +288,7 @@ export interface Page {
       | null;
     media?: (number | null) | Media;
   };
-  layout: (ContentBlock | MediaTextBlock | GalleryBlock | FramedRowsBlock | ScrapbookBlock)[];
+  layout: (ContentBlock | MediaTextBlock | GalleryBlock | FramedRowsBlock | ScrapbookBlock | LocationsBlock)[];
   meta?: {
     title?: string | null;
     /**
@@ -663,6 +663,15 @@ export interface ScrapbookBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LocationsBlock".
+ */
+export interface LocationsBlock {
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'locations';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "people".
  */
 export interface Person {
@@ -907,6 +916,7 @@ export interface PagesSelect<T extends boolean = true> {
         gallery?: T | GalleryBlockSelect<T>;
         'framed-rows'?: T | FramedRowsBlockSelect<T>;
         scrapbook?: T | ScrapbookBlockSelect<T>;
+        locations?: T | LocationsBlockSelect<T>;
       };
   meta?:
     | T
@@ -1048,6 +1058,14 @@ export interface ScrapbookBlockSelect<T extends boolean = true> {
         heading?: T;
         lead?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LocationsBlock_select".
+ */
+export interface LocationsBlockSelect<T extends boolean = true> {
   id?: T;
   blockName?: T;
 }

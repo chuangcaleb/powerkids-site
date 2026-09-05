@@ -39,6 +39,7 @@ import * as migration_20260824_143253_drop_scrapbook_item_accent from './2026082
 import * as migration_20260827_033426_faq_global from './20260827_033426_faq_global'
 import * as migration_20260901_130630_remove_schools_collection from './20260901_130630_remove_schools_collection'
 import * as migration_20260905_063518_add_site_settings_locations from './20260905_063518_add_site_settings_locations'
+import * as migration_20260905_085821_add_locations_block from './20260905_085821_add_locations_block'
 
 export const migrations = [
   {
@@ -245,5 +246,10 @@ export const migrations = [
     up: migration_20260905_063518_add_site_settings_locations.up,
     down: migration_20260905_063518_add_site_settings_locations.down,
     name: '20260905_063518_add_site_settings_locations',
+  },
+  {
+    up: migration_20260905_085821_add_locations_block.up,
+    down: migration_20260905_085821_add_locations_block.down,
+    name: '20260905_085821_add_locations_block',
   },
 ]

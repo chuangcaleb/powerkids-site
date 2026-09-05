@@ -14,6 +14,7 @@ import { requireEnv } from '@/lib/env'
 import { Content } from '@/payload/blocks/content/config'
 import { FramedRowsBlock } from '@/payload/blocks/framed-rows/config'
 import { Gallery } from '@/payload/blocks/gallery/config'
+import { Locations } from '@/payload/blocks/locations/config'
 import { MediaText } from '@/payload/blocks/media-text/config'
 import { ScrapbookBlock } from '@/payload/blocks/scrapbook/config'
 
@@ -89,7 +90,14 @@ export const Pages: CollectionConfig = {
               type: 'blocks',
               required: true,
               admin: { initCollapsed: true },
-              blocks: [Content, MediaText, Gallery, FramedRowsBlock, ScrapbookBlock],
+              blocks: [
+                Content,
+                MediaText,
+                Gallery,
+                FramedRowsBlock,
+                ScrapbookBlock,
+                Locations,
+              ],
             },
           ],
           label: 'Content',

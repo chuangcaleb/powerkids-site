@@ -4,6 +4,7 @@ import type { Page } from '@/payload-types'
 import { Content } from './content/component'
 import { FramedRows } from './framed-rows/component'
 import { Gallery } from './gallery/component'
+import { Locations } from './locations/component'
 import { MediaText } from './media-text/component'
 import { Scrapbook } from './scrapbook/component'
 
@@ -28,6 +29,7 @@ const blockComponents: BlockRenderers = {
   content: Content,
   'framed-rows': FramedRows,
   gallery: Gallery,
+  locations: Locations,
   'media-text': MediaText,
   scrapbook: Scrapbook,
 }
