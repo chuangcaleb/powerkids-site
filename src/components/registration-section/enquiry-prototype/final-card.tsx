@@ -8,6 +8,7 @@ import {
   type SectionHeaderData,
 } from '@/components/section-header/section-header'
 import { cx } from '@/lib/cx'
+import { primitiveVars } from '@/lib/primitive-vars'
 import {
   ErrorCallout,
   SelectField,
@@ -24,6 +25,12 @@ export type ReplyByVariantKey = 'R1' | 'R2' | 'R3'
 
 const REPLY_BY_VARIANTS = { R1: ReplyByR1, R2: ReplyByR2, R3: ReplyByR3 }
 
+// A bigger gap than the rest of the fieldset's `flow-m` rhythm, ahead of a
+// step-nav button row — set as a local override on that row's own
+// `--flow-space`, since flow's margin reads whatever custom property is
+// nearest the element itself.
+const WIDER_GAP_ABOVE = primitiveVars({ '--flow-space': 'var(--space-l)' })
+
 export type FinalCardProps = {
   header?: SectionHeaderData | null
   enquiryTypes: string[]
@@ -35,11 +42,11 @@ export type FinalCardProps = {
 
 /**
  * PROTOTYPE — throwaway. Consolidates #29's locked decisions (Variant C card,
- * half-width phone/email row, native select, fieldset-disabled submitting
- * state) with the still-open reply-by and alert-tone threads left
- * switchable, now as a two-step wizard: step 1 picks what the enquiry is
- * about, step 2 collects contact details and submits. Owner's read: the
- * single-step form felt too tall for a "just asking something" visitor.
+ * native select, fieldset-disabled submitting state) with the still-open
+ * reply-by and alert-tone threads left switchable, as a two-step wizard:
+ * step 1 picks what the enquiry is about, step 2 collects contact details.
+ * Step 2 leads with reply-by, since it decides which of phone/email is
+ * required — that field renders first in the row.
  */
 export function FinalCard({
   header,
@@ -58,6 +65,7 @@ export function FinalCard({
   const { values, set, phase, errors, errorMessage } = form
   const ReplyBy = REPLY_BY_VARIANTS[replyByVariant]
   const submitting = phase === 'submitting'
+  const emailRequired = values.replyBy === 'email'
 
   function handleNext() {
     if (!values.enquiryType) {
@@ -92,6 +100,36 @@ export function FinalCard({
     )
   }
 
+  const phoneField = (
+    <TextField
+      id="fc-phone"
+      label="Phone"
+      hint={emailRequired ? '(optional)' : undefined}
+      type="tel"
+      autoComplete="tel"
+      pattern="[0-9+\-\s()]{6,20}"
+      maxLength={20}
+      value={values.phone}
+      onChange={(e) => set('phone', e.target.value)}
+      error={errors.phone}
+      wrapperClassName={styles.half}
+    />
+  )
+  const emailField = (
+    <TextField
+      id="fc-email"
+      label="Email"
+      hint={emailRequired ? undefined : '(optional)'}
+      type="email"
+      autoComplete="email"
+      maxLength={254}
+      value={values.email}
+      onChange={(e) => set('email', e.target.value)}
+      error={errors.email}
+      wrapperClassName={styles.half}
+    />
+  )
+
   return (
     <div className="flow max-prose">
       <SectionHeader header={header} />
@@ -119,12 +157,20 @@ export function FinalCard({
                 error={errors.message}
               />
 
-              <Button type="button" variant="red" onClick={handleNext}>
+              <Button
+                type="button"
+                variant="red"
+                className={cx(styles.navButton, styles.stepButton)}
+                style={WIDER_GAP_ABOVE}
+                onClick={handleNext}
+              >
                 Next
               </Button>
             </fieldset>
           ) : (
             <fieldset className={cx('flow-m', styles.fieldset)} disabled={submitting}>
+              <ReplyBy value={values.replyBy} onChange={(v) => set('replyBy', v)} />
+
               <TextField
                 id="fc-name"
                 label="Name"
@@ -136,43 +182,34 @@ export function FinalCard({
               />
 
               <div className={styles.row}>
-                <TextField
-                  id="fc-phone"
-                  label="Phone"
-                  type="tel"
-                  autoComplete="tel"
-                  pattern="[0-9+\-\s()]{6,20}"
-                  maxLength={20}
-                  value={values.phone}
-                  onChange={(e) => set('phone', e.target.value)}
-                  error={errors.phone}
-                  wrapperClassName={styles.half}
-                />
-                <TextField
-                  id="fc-email"
-                  label="Email"
-                  hint="(optional)"
-                  type="email"
-                  autoComplete="email"
-                  maxLength={254}
-                  value={values.email}
-                  onChange={(e) => set('email', e.target.value)}
-                  error={errors.email}
-                  wrapperClassName={styles.half}
-                />
+                {emailRequired ? (
+                  <>
+                    {emailField}
+                    {phoneField}
+                  </>
+                ) : (
+                  <>
+                    {phoneField}
+                    {emailField}
+                  </>
+                )}
               </div>
 
-              <ReplyBy
-                value={values.replyBy}
-                onChange={(v) => set('replyBy', v)}
-                error={errors.replyBy}
-              />
-
-              <div className={styles.buttonRow}>
-                <Button type="button" variant="outline" onClick={() => setStep(1)}>
+              <div className={styles.buttonRow} style={WIDER_GAP_ABOVE}>
+                <Button
+                  type="button"
+                  variant="outline"
+                  className={styles.navButton}
+                  onClick={() => setStep(1)}
+                >
                   Back
                 </Button>
-                <Button type="submit" variant="red" disabled={submitting}>
+                <Button
+                  type="submit"
+                  variant="red"
+                  className={styles.navButton}
+                  disabled={submitting}
+                >
                   {submitting ? 'Sending…' : 'Send enquiry'}
                 </Button>
               </div>

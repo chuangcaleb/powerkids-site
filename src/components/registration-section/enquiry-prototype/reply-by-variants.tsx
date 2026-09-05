@@ -6,10 +6,11 @@ import styles from './reply-by-variants.module.css'
 
 /** PROTOTYPE — throwaway. Three takes on the reply-by control, #29's least-settled piece. */
 
+const LEGEND = 'How should we reply to you?'
+
 export type ReplyByVariantProps = {
   value: ReplyBy
   onChange: (value: ReplyBy) => void
-  error?: string
 }
 
 const OPTIONS: { value: ReplyBy; label: string; Icon: typeof Phone }[] = [
@@ -18,24 +19,20 @@ const OPTIONS: { value: ReplyBy; label: string; Icon: typeof Phone }[] = [
   { value: 'email', label: 'Email', Icon: Mail },
 ]
 
-function Footer({ error }: { error?: string }) {
-  return error ? (
-    <span className={styles.error} role="alert">
-      {error}
-    </span>
-  ) : (
+function Helper() {
+  return (
     <p className={styles.helper}>
       Add an email address for us to send the confirmation email to.
     </p>
   )
 }
 
-/** R1 — `ToggleChip`, no icons. Email is always selectable; missing email is a validation error on submit, not a disabled control. */
-export function ReplyByR1({ value, onChange, error }: ReplyByVariantProps) {
+/** R1 — `ToggleChip`, no icons. Email is always selectable; which of phone/email is required flips with the choice — see final-card.tsx. */
+export function ReplyByR1({ value, onChange }: ReplyByVariantProps) {
   return (
     <div>
-      <span className={styles.legend}>Reply by</span>
-      <div className={styles.pillRow} role="group" aria-label="Reply by">
+      <span className={styles.legend}>{LEGEND}</span>
+      <div className={styles.pillRow} role="group" aria-label={LEGEND}>
         {OPTIONS.map((option) => (
           <ToggleChip
             key={option.value}
@@ -46,17 +43,17 @@ export function ReplyByR1({ value, onChange, error }: ReplyByVariantProps) {
           </ToggleChip>
         ))}
       </div>
-      <Footer error={error} />
+      <Helper />
     </div>
   )
 }
 
 /** R2 — same, with a leading brand/lucide icon per option. */
-export function ReplyByR2({ value, onChange, error }: ReplyByVariantProps) {
+export function ReplyByR2({ value, onChange }: ReplyByVariantProps) {
   return (
     <div>
-      <span className={styles.legend}>Reply by</span>
-      <div className={styles.pillRow} role="group" aria-label="Reply by">
+      <span className={styles.legend}>{LEGEND}</span>
+      <div className={styles.pillRow} role="group" aria-label={LEGEND}>
         {OPTIONS.map(({ value: optionValue, label, Icon }) => (
           <ToggleChip
             key={optionValue}
@@ -68,17 +65,17 @@ export function ReplyByR2({ value, onChange, error }: ReplyByVariantProps) {
           </ToggleChip>
         ))}
       </div>
-      <Footer error={error} />
+      <Helper />
     </div>
   )
 }
 
 /** R3 — same chips, squarer "segment" shape, joined tighter. */
-export function ReplyByR3({ value, onChange, error }: ReplyByVariantProps) {
+export function ReplyByR3({ value, onChange }: ReplyByVariantProps) {
   return (
     <div>
-      <span className={styles.legend}>Reply by</span>
-      <div className={styles.segmentedR3} role="group" aria-label="Reply by">
+      <span className={styles.legend}>{LEGEND}</span>
+      <div className={styles.segmentedR3} role="group" aria-label={LEGEND}>
         {OPTIONS.map(({ value: optionValue, label, Icon }) => (
           <ToggleChip
             key={optionValue}
@@ -91,7 +88,7 @@ export function ReplyByR3({ value, onChange, error }: ReplyByVariantProps) {
           </ToggleChip>
         ))}
       </div>
-      <Footer error={error} />
+      <Helper />
     </div>
   )
 }

@@ -18,7 +18,8 @@ export type EnquiryFormValues = {
   message: string
 }
 
-type FieldErrors = Partial<Record<keyof EnquiryFormValues, string>>
+type ValidatableField = 'name' | 'phone' | 'email' | 'enquiryType' | 'message'
+type FieldErrors = Partial<Record<ValidatableField, string>>
 
 type Callbacks = {
   /** Fired after an error is set — variant focuses its own error-summary ref. */
@@ -38,6 +39,45 @@ function initialValues(enquiryTypes: string[]): EnquiryFormValues {
   }
 }
 
+/**
+ * Per-field validity, given the reply-by choice a phone/email required-ness
+ * depends on. Shared by the full submit-time `validate()` and by `set()`'s
+ * live re-check, so a field's error clears the moment it becomes valid
+ * instead of waiting for the next submit attempt.
+ */
+function validateField(
+  field: ValidatableField,
+  value: string,
+  replyBy: ReplyBy,
+): string | undefined {
+  switch (field) {
+    case 'name':
+      return value.trim() ? undefined : 'Enter your name.'
+    case 'phone': {
+      if (!value.trim()) {
+        return replyBy === 'email' ? undefined : 'Enter a phone number.'
+      }
+      return /^[0-9+\-\s()]{6,20}$/.test(value)
+        ? undefined
+        : "That doesn't look like a phone number."
+    }
+    case 'email': {
+      if (!value.trim()) {
+        return replyBy === 'email' ? 'Enter an email address.' : undefined
+      }
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+        ? undefined
+        : "That doesn't look like an email address."
+    }
+    case 'enquiryType':
+      return value ? undefined : 'Choose what this is about.'
+    case 'message':
+      return value.length > 1000
+        ? 'Message is too long (max 1000 characters).'
+        : undefined
+  }
+}
+
 export function useEnquiryFormDemo(
   simulate: Simulate,
   slowNetwork: boolean,
@@ -53,25 +93,51 @@ export function useEnquiryFormDemo(
 
   function set<K extends keyof EnquiryFormValues>(key: K, value: EnquiryFormValues[K]) {
     setValues((prev) => ({ ...prev, [key]: value }))
+
+    setErrors((prevErrors) => {
+      if (Object.keys(prevErrors).length === 0) return prevErrors
+      const nextErrors = { ...prevErrors }
+      const nextReplyBy = key === 'replyBy' ? (value as ReplyBy) : values.replyBy
+
+      if (key !== 'replyBy') {
+        const ownError = validateField(
+          key as ValidatableField,
+          value as string,
+          nextReplyBy,
+        )
+        if (ownError) nextErrors[key as ValidatableField] = ownError
+        else delete nextErrors[key as ValidatableField]
+      }
+
+      // Switching reply-by flips which of phone/email is required —
+      // re-check both against the new choice, not just the edited field.
+      if (key === 'replyBy') {
+        const phoneError = validateField('phone', values.phone, nextReplyBy)
+        if (phoneError) nextErrors.phone = phoneError
+        else delete nextErrors.phone
+
+        const emailError = validateField('email', values.email, nextReplyBy)
+        if (emailError) nextErrors.email = emailError
+        else delete nextErrors.email
+      }
+
+      return nextErrors
+    })
   }
 
   function validate(): FieldErrors {
     const next: FieldErrors = {}
-    if (!values.name.trim()) next.name = 'Enter your name.'
-    if (!values.phone.trim()) next.phone = 'Enter a phone number.'
-    else if (!/^[0-9+\-\s()]{6,20}$/.test(values.phone))
-      next.phone = "That doesn't look like a phone number."
-    if (values.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
-      next.email = "That doesn't look like an email address."
+    const fields: ValidatableField[] = [
+      'name',
+      'phone',
+      'email',
+      'enquiryType',
+      'message',
+    ]
+    for (const field of fields) {
+      const error = validateField(field, values[field] as string, values.replyBy)
+      if (error) next[field] = error
     }
-    // Email stays a selectable reply-by option even with no email typed yet —
-    // caught here instead of disabling the option outright.
-    if (values.replyBy === 'email' && !values.email.trim()) {
-      next.replyBy = 'Add an email above so we can reply there.'
-    }
-    if (!values.enquiryType) next.enquiryType = 'Choose what this is about.'
-    if (values.message.length > 1000)
-      next.message = 'Message is too long (max 1000 characters).'
     return next
   }
 

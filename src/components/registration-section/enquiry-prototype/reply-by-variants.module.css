@@ -8,13 +8,6 @@
   margin-block-start: var(--space-2xs);
 }
 
-.error {
-  display: block;
-  color: var(--accent-red);
-  font-size: var(--step--1);
-  margin-block-start: var(--space-2xs);
-}
-
 .pillRow {
   display: flex;
   flex-wrap: wrap;
