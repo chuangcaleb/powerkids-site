@@ -1,0 +1,33 @@
+.spinner {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  background-color: var(--text-muted);
+}
+
+.spinner::after {
+  content: '';
+  width: var(--space-xl);
+  height: var(--space-xl);
+  border: var(--border-width) solid var(--border-strong);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.popupName {
+  font-weight: bold;
+}
+
+.popupAddress {
+  /* Textarea content is rendered as written, no auto-formatting. */
+  white-space: pre-line;
+}

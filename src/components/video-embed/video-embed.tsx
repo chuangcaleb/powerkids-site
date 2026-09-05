@@ -4,6 +4,8 @@
 // user click, so the third-party embed costs nothing until asked for.
 
 import { useState } from 'react'
+import { ClickToLoadFacade } from '@/components/click-to-load-facade/click-to-load-facade'
+import facadeStyles from '@/components/click-to-load-facade/click-to-load-facade.module.css'
 import { cx } from '@/lib/cx'
 import styles from './video-embed.module.css'
 
@@ -21,7 +23,7 @@ export function VideoEmbed({ embedUrl, title, posterUrl, className }: VideoEmbed
 
   if (playing) {
     return (
-      <div className={cx(styles.frame, className)}>
+      <div className={cx(facadeStyles.frame, className)}>
         <iframe
           className={styles.iframe}
           src={embedUrl}
@@ -34,14 +36,13 @@ export function VideoEmbed({ embedUrl, title, posterUrl, className }: VideoEmbed
   }
 
   return (
-    <button
-      type="button"
-      className={cx(styles.frame, styles.poster, className)}
-      style={{ backgroundImage: `url("${posterUrl}")` }}
+    <ClickToLoadFacade
+      posterUrl={posterUrl}
+      ariaLabel={`Play video: ${title}`}
       onClick={() => setPlaying(true)}
-      aria-label={`Play video: ${title}`}
+      className={className}
     >
       <span className={styles.playIcon} aria-hidden="true" />
-    </button>
+    </ClickToLoadFacade>
   )
 }

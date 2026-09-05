@@ -1,0 +1,18 @@
+.frame {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: var(--border-width) solid var(--border-strong);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-hard);
+  overflow: hidden;
+}
+
+.poster {
+  background-color: var(--text-muted);
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  padding: 0;
+}

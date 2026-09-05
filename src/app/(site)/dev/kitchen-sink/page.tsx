@@ -5,6 +5,8 @@ import { Card } from '@/components/card/card'
 import { Divider } from '@/components/divider/divider'
 import { DoodleLayer } from '@/components/doodle-layer/doodle-layer'
 import { Heading } from '@/components/heading/heading'
+import { LocationsMap } from '@/components/locations-map/locations-map'
+import { LocationsSection } from '@/components/locations-section/locations-section'
 import { Mark } from '@/components/mark/mark'
 import { NavBar } from '@/components/nav-bar/nav-bar'
 import { Pill } from '@/components/pill/pill'
@@ -235,6 +237,43 @@ export default function KitchenSinkPage() {
             posterUrl="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='180'%3E%3Crect width='320' height='180' fill='%230000eb'/%3E%3C/svg%3E"
           />
         </div>
+      </section>
+
+      <section className="flow wrapper">
+        <Heading level={2}>LocationsMap</Heading>
+        <div style={{ maxWidth: '32rem' }}>
+          <LocationsMap
+            posterUrl="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='180'%3E%3Crect width='320' height='180' fill='%23888'/%3E%3C/svg%3E"
+            locations={[
+              {
+                id: 'sri-petaling',
+                name: 'Sri Petaling',
+                address: '1 Jalan Radin Anum, Sri Petaling, 57000 Kuala Lumpur',
+                latitude: 3.0631,
+                longitude: 101.6851,
+              },
+              {
+                id: 'puchong-utama',
+                name: 'Puchong Utama',
+                address: '2 Jalan Puchong Utama, 47100 Puchong, Selangor',
+                latitude: 3.0339,
+                longitude: 101.6172,
+              },
+              {
+                id: 'parklane-oug',
+                name: 'Parklane OUG',
+                address: '3 Jalan OUG, Overseas Union Garden, 58200 Kuala Lumpur',
+                latitude: 3.0656,
+                longitude: 101.6698,
+              },
+            ]}
+          />
+        </div>
+      </section>
+
+      <section className="flow wrapper">
+        <Heading level={2}>Locations block</Heading>
+        <LocationsSection />
       </section>
 
       <section className="flow">

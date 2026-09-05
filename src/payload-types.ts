@@ -288,7 +288,7 @@ export interface Page {
       | null;
     media?: (number | null) | Media;
   };
-  layout: (ContentBlock | MediaTextBlock | GalleryBlock | FramedRowsBlock | ScrapbookBlock)[];
+  layout: (ContentBlock | MediaTextBlock | GalleryBlock | FramedRowsBlock | ScrapbookBlock | LocationsBlock)[];
   meta?: {
     title?: string | null;
     /**
@@ -663,6 +663,15 @@ export interface ScrapbookBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LocationsBlock".
+ */
+export interface LocationsBlock {
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'locations';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "people".
  */
 export interface Person {
@@ -907,6 +916,7 @@ export interface PagesSelect<T extends boolean = true> {
         gallery?: T | GalleryBlockSelect<T>;
         'framed-rows'?: T | FramedRowsBlockSelect<T>;
         scrapbook?: T | ScrapbookBlockSelect<T>;
+        locations?: T | LocationsBlockSelect<T>;
       };
   meta?:
     | T
@@ -1053,6 +1063,14 @@ export interface ScrapbookBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LocationsBlock_select".
+ */
+export interface LocationsBlockSelect<T extends boolean = true> {
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "people_select".
  */
 export interface PeopleSelect<T extends boolean = true> {
@@ -1150,6 +1168,28 @@ export interface SiteSetting {
       }[]
     | null;
   defaultShareImage?: (number | null) | Media;
+  locations?:
+    | {
+        name: string;
+        /**
+         * Multi-line — rendered as written, no auto-formatting.
+         */
+        address: string;
+        /**
+         * Right-click the exact spot in Google Maps — the first context-menu item copies it.
+         */
+        latitude: number;
+        /**
+         * Right-click the exact spot in Google Maps — the first context-menu item copies it.
+         */
+        longitude: number;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Screenshot of the Location pins above — re-shoot and re-upload whenever a Location's coordinates change.
+   */
+  locationsMapPoster?: (number | null) | Media;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1400,6 +1440,16 @@ export interface SiteSettingsSelect<T extends boolean = true> {
         id?: T;
       };
   defaultShareImage?: T;
+  locations?:
+    | T
+    | {
+        name?: T;
+        address?: T;
+        latitude?: T;
+        longitude?: T;
+        id?: T;
+      };
+  locationsMapPoster?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

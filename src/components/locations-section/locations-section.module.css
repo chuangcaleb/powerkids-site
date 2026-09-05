@@ -1,0 +1,27 @@
+.locationAddress {
+  /* Textarea content is rendered as written, no auto-formatting. */
+  white-space: pre-line;
+}
+
+.directionsLinkWrap {
+  /* `.flow-3xs`'s `display: flex; flex-direction: column` stretches flex
+     items full-width by default — override on this child only, not the
+     primitive. Lives on a wrapper, not the anchor itself, so the anchor
+     stays classless and picks up `a:not([class])`'s underline recipe from
+     typography.css instead of a second copy of it. */
+  align-self: flex-start;
+}
+
+/* No primitive covers "this one child bleeds full-width, its siblings and
+   the section around it don't" — a fixed breakpoint (not a fluid primitive)
+   is the right tool since it's undoing `.wrapper`'s own fixed gutter. */
+@media (width <= 40rem) {
+  .mapBleed {
+    /* `.switcher` gives every child a calc()'d flex-basis, which wins over
+       `width` for a flex item's main size — force flex-basis back to `auto`
+       so this child's own `width` is what actually sizes it. */
+    flex: 0 0 auto;
+    width: calc(100% + var(--wrapper-gutter, var(--space-m)) * 2);
+    margin-inline: calc(-1 * var(--wrapper-gutter, var(--space-m)));
+  }
+}
