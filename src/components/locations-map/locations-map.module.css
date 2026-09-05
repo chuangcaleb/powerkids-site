@@ -1,0 +1,56 @@
+.pill {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: max-content;
+  height: max-content;
+  padding: var(--space-2xs) var(--space-m);
+  background-color: var(--accent-red);
+  color: var(--text-on-accent);
+  font-weight: bold;
+  border: var(--pill-border-width) solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-hard-pill);
+}
+
+.frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: var(--border-width) solid var(--border-strong);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-hard);
+  overflow: hidden;
+}
+
+.spinner {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  background-color: var(--text-muted);
+}
+
+.spinner::after {
+  content: '';
+  width: var(--space-xl);
+  height: var(--space-xl);
+  border: var(--border-width) solid var(--border-strong);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.popupName {
+  font-weight: bold;
+}
