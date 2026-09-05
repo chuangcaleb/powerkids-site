@@ -89,22 +89,29 @@ export const SiteSettings: GlobalConfig = {
           admin: { description: 'Multi-line — rendered as written, no auto-formatting.' },
         },
         {
-          name: 'latitude',
-          type: 'number',
-          required: true,
-          admin: {
-            description:
-              'Right-click the exact spot in Google Maps — the first context-menu item copies it.',
-          },
-        },
-        {
-          name: 'longitude',
-          type: 'number',
-          required: true,
-          admin: {
-            description:
-              'Right-click the exact spot in Google Maps — the first context-menu item copies it.',
-          },
+          type: 'row',
+          fields: [
+            {
+              name: 'latitude',
+              type: 'number',
+              required: true,
+              admin: {
+                width: '50%',
+                description:
+                  'Right-click the exact spot in Google Maps — the first context-menu item copies it.',
+              },
+            },
+            {
+              name: 'longitude',
+              type: 'number',
+              required: true,
+              admin: {
+                width: '50%',
+                description:
+                  'Right-click the exact spot in Google Maps — the first context-menu item copies it.',
+              },
+            },
+          ],
         },
       ],
     },

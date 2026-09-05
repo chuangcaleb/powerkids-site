@@ -247,18 +247,21 @@ export default function KitchenSinkPage() {
               {
                 id: 'sri-petaling',
                 name: 'Sri Petaling',
+                address: '1 Jalan Radin Anum, Sri Petaling, 57000 Kuala Lumpur',
                 latitude: 3.0631,
                 longitude: 101.6851,
               },
               {
                 id: 'puchong-utama',
                 name: 'Puchong Utama',
+                address: '2 Jalan Puchong Utama, 47100 Puchong, Selangor',
                 latitude: 3.0339,
                 longitude: 101.6172,
               },
               {
                 id: 'parklane-oug',
                 name: 'Parklane OUG',
+                address: '3 Jalan OUG, Overseas Union Garden, 58200 Kuala Lumpur',
                 latitude: 3.0656,
                 longitude: 101.6698,
               },

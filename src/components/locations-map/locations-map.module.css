@@ -44,3 +44,8 @@
 .popupName {
   font-weight: bold;
 }
+
+.popupAddress {
+  /* Textarea content is rendered as written, no auto-formatting. */
+  white-space: pre-line;
+}

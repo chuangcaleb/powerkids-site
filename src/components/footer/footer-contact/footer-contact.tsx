@@ -134,6 +134,7 @@ export async function FooterContact({ className }: FooterContactProps) {
                       href={directionsLink(location.latitude, location.longitude)}
                       target="_blank"
                       rel="noopener noreferrer"
+                      className={styles.directionsLink}
                     >
                       Get directions
                     </a>
@@ -146,10 +147,12 @@ export async function FooterContact({ className }: FooterContactProps) {
                 locations={locations.map((location) => ({
                   id: location.id ?? location.name,
                   name: location.name,
+                  address: location.address,
                   latitude: location.latitude,
                   longitude: location.longitude,
                 }))}
                 posterUrl={posterAsset.url}
+                className={styles.mapBleed}
               />
             ) : null}
           </div>

@@ -8,7 +8,6 @@
 import { ClickToLoadFacade } from '@/components/click-to-load-facade/click-to-load-facade'
 import facadeStyles from '@/components/click-to-load-facade/click-to-load-facade.module.css'
 import { cx } from '@/lib/cx'
-import { directionsLink } from '@/lib/directions-link'
 import type { MapLib } from '@vis.gl/react-maplibre'
 import { Map } from '@vis.gl/react-maplibre'
 import type { Map as MapInstance } from 'maplibre-gl'
@@ -32,6 +31,7 @@ const WORKER_URL = '/maplibre/maplibre-gl-worker.mjs'
 export type LocationsMapLocation = {
   id: string
   name: string
+  address: string
   latitude: number
   longitude: number
 }
@@ -76,13 +76,7 @@ export function LocationsMap({ locations, posterUrl, className }: LocationsMapPr
       root.render(
         <>
           <p className={styles.popupName}>{location.name}</p>
-          <a
-            href={directionsLink(location.latitude, location.longitude)}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Get directions
-          </a>
+          <p className={styles.popupAddress}>{location.address}</p>
         </>,
       )
 
