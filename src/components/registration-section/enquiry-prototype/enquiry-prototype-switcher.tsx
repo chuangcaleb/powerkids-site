@@ -2,28 +2,33 @@
 
 import { useEffect, useState } from 'react'
 import type { SectionHeaderData } from '@/components/section-header/section-header'
+import type { AlertTone } from './primitives'
+import { FinalCard, type ReplyByVariantKey } from './final-card'
 import { NoJsFallback } from './no-js-fallback'
 import type { Simulate } from './use-enquiry-form-demo'
-import { VariantAStacked } from './variant-a-stacked'
-import { VariantBGrid } from './variant-b-grid'
-import { VariantCCard } from './variant-c-card'
 import styles from './enquiry-prototype-switcher.module.css'
 
 /**
  * PROTOTYPE — throwaway, ticket #29 (wayfinder map #20: Registration section
- * becomes an Enquiry form). Three variants of the form living where the
- * button used to be, switchable via `?variant=`, plus a state-matrix control
- * panel driving simulated submit outcomes. Dev-only: mounted by
- * registration-section.tsx only when NODE_ENV !== 'production'.
+ * becomes an Enquiry form). Base layout (Variant C, floating card) is locked;
+ * this switcher now compares the two still-open threads — reply-by control
+ * and alert/error visual tone — against that same locked card. Dev-only:
+ * mounted by registration-section.tsx only when NODE_ENV !== 'production'.
  */
 
 const ENQUIRY_TYPES = ['General', 'Enrolment', 'Tour booking', 'Fees', 'Other']
 
-const VARIANTS = [
-  { key: 'A', label: 'Stacked, native controls', Component: VariantAStacked },
-  { key: 'B', label: 'Two-column grid, shrunk heading, chips', Component: VariantBGrid },
-  { key: 'C', label: 'Floating card, section as backdrop', Component: VariantCCard },
-] as const
+const REPLY_BY_OPTIONS: { key: ReplyByVariantKey; label: string }[] = [
+  { key: 'R1', label: 'Plain shadow pills' },
+  { key: 'R2', label: 'Shadow pills + icons' },
+  { key: 'R3', label: 'Segmented + lock affordance' },
+]
+
+const ALERT_OPTIONS: { key: AlertTone; label: string }[] = [
+  { key: 'red-on-white', label: 'Red text, red border' },
+  { key: 'tint-chip', label: 'Tint chip, dark text' },
+  { key: 'icon-only', label: 'Neutral border, red icon' },
+]
 
 const SIMULATE_OPTIONS: { value: Simulate; label: string }[] = [
   { value: 'success', label: 'Success' },
@@ -47,77 +52,73 @@ function writeParam(name: string, value: string) {
 export type EnquiryPrototypeSwitcherProps = { header?: SectionHeaderData | null }
 
 export function EnquiryPrototypeSwitcher({ header }: EnquiryPrototypeSwitcherProps) {
-  const [variantIndex, setVariantIndex] = useState(() => {
-    const idx = VARIANTS.findIndex((v) => v.key === readParam('variant'))
-    return idx >= 0 ? idx : 0
+  const [replyByVariant, setReplyByVariant] = useState<ReplyByVariantKey>(() => {
+    const param = readParam('replyBy')
+    return REPLY_BY_OPTIONS.some((o) => o.key === param)
+      ? (param as ReplyByVariantKey)
+      : 'R1'
+  })
+  const [alertTone, setAlertTone] = useState<AlertTone>(() => {
+    const param = readParam('alert')
+    return ALERT_OPTIONS.some((o) => o.key === param)
+      ? (param as AlertTone)
+      : 'red-on-white'
   })
   const [simulate, setSimulate] = useState<Simulate>('success')
   const [slowNetwork, setSlowNetwork] = useState(false)
   const [noJs, setNoJs] = useState(false)
 
   useEffect(() => {
-    writeParam('variant', (VARIANTS[variantIndex] ?? VARIANTS[0]).key)
-  }, [variantIndex])
+    writeParam('replyBy', replyByVariant)
+  }, [replyByVariant])
 
   useEffect(() => {
-    function onKey(event: KeyboardEvent) {
-      const target = event.target as HTMLElement
-      if (
-        ['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName) ||
-        target.isContentEditable
-      ) {
-        return
-      }
-      if (event.key === 'ArrowLeft') {
-        setVariantIndex((i) => (i - 1 + VARIANTS.length) % VARIANTS.length)
-      }
-      if (event.key === 'ArrowRight') {
-        setVariantIndex((i) => (i + 1) % VARIANTS.length)
-      }
-    }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [])
-
-  const { key, label, Component } = VARIANTS[variantIndex] ?? VARIANTS[0]
+    writeParam('alert', alertTone)
+  }, [alertTone])
 
   return (
     <>
       {noJs ? (
         <NoJsFallback header={header} />
       ) : (
-        <Component
+        <FinalCard
           header={header}
           enquiryTypes={ENQUIRY_TYPES}
           simulate={simulate}
           slowNetwork={slowNetwork}
+          replyByVariant={replyByVariant}
+          alertTone={alertTone}
         />
       )}
 
       <div className={styles.bar}>
-        <div className={styles.group}>
-          <button
-            type="button"
-            className={styles.arrow}
-            onClick={() =>
-              setVariantIndex((i) => (i - 1 + VARIANTS.length) % VARIANTS.length)
-            }
-            aria-label="Previous variant"
+        <label className={styles.control}>
+          Reply-by
+          <select
+            value={replyByVariant}
+            onChange={(e) => setReplyByVariant(e.target.value as ReplyByVariantKey)}
           >
-            ←
-          </button>
-          <span className={styles.label}>
-            {key} — {label}
-          </span>
-          <button
-            type="button"
-            className={styles.arrow}
-            onClick={() => setVariantIndex((i) => (i + 1) % VARIANTS.length)}
-            aria-label="Next variant"
+            {REPLY_BY_OPTIONS.map((option) => (
+              <option key={option.key} value={option.key}>
+                {option.key} — {option.label}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <label className={styles.control}>
+          Alert tone
+          <select
+            value={alertTone}
+            onChange={(e) => setAlertTone(e.target.value as AlertTone)}
           >
-            →
-          </button>
-        </div>
+            {ALERT_OPTIONS.map((option) => (
+              <option key={option.key} value={option.key}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </label>
 
         <label className={styles.control}>
           Simulate

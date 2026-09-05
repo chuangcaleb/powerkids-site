@@ -1,0 +1,57 @@
+.card {
+  background: var(--colour-white);
+  color: var(--text-strong);
+  border: var(--stroke-width) solid var(--border-strong);
+  border-radius: var(--radius-l);
+  box-shadow: var(--shadow-hard);
+  padding: var(--space-l);
+}
+
+/* Height-stable success swap: both branches share one grid cell, so the
+ * taller one (usually the form) sets the track height regardless of which
+ * is currently visible — the card never collapses on submit. */
+.stack {
+  display: grid;
+}
+
+.stackItem {
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m);
+}
+
+.stackItem[data-hidden='true'] {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m);
+  border: none;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+
+.fieldset:disabled {
+  opacity: 0.6;
+}
+
+.row {
+  display: flex;
+  gap: var(--space-s);
+}
+
+@media (width <= 30rem) {
+  .row {
+    flex-direction: column;
+  }
+}
+
+.half {
+  flex: 1;
+  min-width: 0;
+}

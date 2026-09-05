@@ -1,0 +1,87 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xs);
+}
+
+.hint {
+  font-weight: normal;
+  color: var(--text-muted);
+}
+
+.control {
+  font: inherit;
+  color: var(--text-strong);
+  background: var(--bg-surface);
+  border: var(--stroke-width) solid var(--border-strong);
+  border-radius: var(--radius-s);
+  padding: var(--space-2xs) var(--space-xs);
+}
+
+.control[aria-invalid='true'] {
+  border-color: var(--accent-red);
+  background: var(--accent-red-fill);
+}
+
+.selectShell {
+  position: relative;
+  display: flex;
+}
+
+.select {
+  appearance: none;
+  width: 100%;
+  padding-inline-end: var(--space-l);
+}
+
+.chevron {
+  position: absolute;
+  top: 50%;
+  right: var(--space-xs);
+  width: 0.75rem;
+  height: 0.5rem;
+  transform: translateY(-50%);
+  color: var(--text-strong);
+  pointer-events: none;
+}
+
+.error {
+  color: var(--accent-red);
+  font-size: 0.85em;
+}
+
+.callout {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2xs);
+  border-radius: var(--radius-s);
+  padding: var(--space-xs) var(--space-s);
+}
+
+.callout-red-on-white {
+  background: var(--colour-white);
+  border: var(--stroke-width) solid var(--accent-red);
+  color: var(--accent-red);
+}
+
+.callout-tint-chip {
+  background: var(--accent-red-fill);
+  border: none;
+  color: var(--text-strong);
+}
+
+.callout-icon-only {
+  background: var(--colour-white);
+  border: var(--stroke-width) solid var(--border-strong);
+  color: var(--text-strong);
+}
+
+.calloutIcon {
+  flex-shrink: 0;
+  margin-block-start: 0.15em;
+}
+
+.callout-tint-chip .calloutIcon,
+.callout-icon-only .calloutIcon {
+  color: var(--accent-red);
+}

@@ -66,6 +66,11 @@ export function useEnquiryFormDemo(
     const next: FieldErrors = {}
     if (!values.name.trim()) next.name = 'Enter your name.'
     if (!values.phone.trim()) next.phone = 'Enter a phone number.'
+    else if (!/^[0-9+\-\s()]{6,20}$/.test(values.phone))
+      next.phone = "That doesn't look like a phone number."
+    if (values.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
+      next.email = "That doesn't look like an email address."
+    }
     if (!values.enquiryType) next.enquiryType = 'Choose what this is about.'
     if (values.message.length > 1000)
       next.message = 'Message is too long (max 1000 characters).'
