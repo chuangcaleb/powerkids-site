@@ -131,5 +131,5 @@ export function useEnquiryFormDemo(
     onReset?.()
   }
 
-  return { values, set, phase, errors, errorMessage, submit, reset }
+  return { values, set, phase, errors, setErrors, errorMessage, submit, reset }
 }

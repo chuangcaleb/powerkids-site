@@ -1,7 +1,6 @@
 import { Mail, Phone } from 'lucide-react'
 import { SiWhatsapp } from '@icons-pack/react-simple-icons'
-import { Button } from '@/components/button/button'
-import { cx } from '@/lib/cx'
+import { ToggleChip } from './toggle-chip'
 import type { ReplyBy } from './use-enquiry-form-demo'
 import styles from './reply-by-variants.module.css'
 
@@ -26,28 +25,25 @@ function Footer({ error }: { error?: string }) {
     </span>
   ) : (
     <p className={styles.helper}>
-      We can also send an email confirming we&apos;ve received your enquiry — add one
-      above if you&apos;d like it.
+      Add an email address for us to send the confirmation email to.
     </p>
   )
 }
 
-/** R1 — the real `Button` component, no icons. Selected option is `variant="red"`, others `variant="outline"`. Email is always selectable; missing email is a validation error on submit, not a disabled control. */
+/** R1 — `ToggleChip`, no icons. Email is always selectable; missing email is a validation error on submit, not a disabled control. */
 export function ReplyByR1({ value, onChange, error }: ReplyByVariantProps) {
   return (
     <div>
       <span className={styles.legend}>Reply by</span>
       <div className={styles.pillRow} role="group" aria-label="Reply by">
         {OPTIONS.map((option) => (
-          <Button
+          <ToggleChip
             key={option.value}
-            type="button"
-            size="sm"
-            variant={value === option.value ? 'red' : 'outline'}
+            active={value === option.value}
             onClick={() => onChange(option.value)}
           >
             {option.label}
-          </Button>
+          </ToggleChip>
         ))}
       </div>
       <Footer error={error} />
@@ -62,16 +58,14 @@ export function ReplyByR2({ value, onChange, error }: ReplyByVariantProps) {
       <span className={styles.legend}>Reply by</span>
       <div className={styles.pillRow} role="group" aria-label="Reply by">
         {OPTIONS.map(({ value: optionValue, label, Icon }) => (
-          <Button
+          <ToggleChip
             key={optionValue}
-            type="button"
-            size="sm"
-            variant={value === optionValue ? 'red' : 'outline'}
+            active={value === optionValue}
             onClick={() => onChange(optionValue)}
           >
-            <Icon size={16} aria-hidden="true" className={styles.buttonIcon} />
+            <Icon size={16} aria-hidden="true" />
             {label}
-          </Button>
+          </ToggleChip>
         ))}
       </div>
       <Footer error={error} />
@@ -79,23 +73,22 @@ export function ReplyByR2({ value, onChange, error }: ReplyByVariantProps) {
   )
 }
 
-/** R3 — single joined segmented control, icons, no separate pill gaps. */
+/** R3 — same chips, squarer "segment" shape, joined tighter. */
 export function ReplyByR3({ value, onChange, error }: ReplyByVariantProps) {
   return (
     <div>
       <span className={styles.legend}>Reply by</span>
       <div className={styles.segmentedR3} role="group" aria-label="Reply by">
         {OPTIONS.map(({ value: optionValue, label, Icon }) => (
-          <button
+          <ToggleChip
             key={optionValue}
-            type="button"
-            className={cx(styles.segmentR3)}
-            data-active={value === optionValue}
+            shape="segment"
+            active={value === optionValue}
             onClick={() => onChange(optionValue)}
           >
             <Icon size={16} aria-hidden="true" />
             {label}
-          </button>
+          </ToggleChip>
         ))}
       </div>
       <Footer error={error} />

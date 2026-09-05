@@ -16,18 +16,20 @@
   align-items: center;
   gap: var(--space-s);
   text-align: center;
+  padding-block: var(--space-xl);
 }
 
+/* Fluid, not a fixed rem: a multiple of the same clamp scale everything
+ * else's font-size rides on, so the mark scales with the viewport too. */
 .successLogo {
-  width: 4rem;
-  height: 4rem;
+  width: calc(var(--step-4) * 2);
+  height: calc(var(--step-4) * 2);
   color: var(--text-strong);
 }
 
+/* `flow-m` (applied alongside this in JSX) handles the vertical rhythm
+ * between fields — this class only resets fieldset's own border/margin. */
 .fieldset {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-m);
   border: none;
   padding: 0;
   margin: 0;
@@ -46,9 +48,11 @@
 @media (width <= 30rem) {
   .row {
     /* Stacked, phone/email become two more rows in the same vertical
-     * rhythm as the rest of the fieldset — match its gap instead of the
-     * row's own (smaller) side-by-side gap, so name→phone and phone→email
-     * read as equal spacing. */
+     * rhythm as the rest of the fieldset — match `flow-m`'s own
+     * `--space-m` instead of the row's tighter side-by-side gap, so
+     * name→phone and phone→email read as equal spacing. Can't reuse the
+     * `flow` utility class directly here: it forces flex-direction:column
+     * unconditionally, which fights this row's side-by-side default. */
     flex-direction: column;
     gap: var(--space-m);
   }
@@ -57,4 +61,9 @@
 .half {
   flex: 1;
   min-width: 0;
+}
+
+.buttonRow {
+  display: flex;
+  gap: var(--space-s);
 }

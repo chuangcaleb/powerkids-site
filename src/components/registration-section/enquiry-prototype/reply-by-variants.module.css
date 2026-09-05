@@ -22,32 +22,9 @@
   margin-block-start: var(--space-2xs);
 }
 
-.buttonIcon {
-  flex-shrink: 0;
-}
-
 .segmentedR3 {
   display: inline-flex;
   flex-wrap: wrap;
   gap: var(--space-3xs);
   margin-block-start: var(--space-2xs);
-}
-
-.segmentR3 {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-3xs);
-  font: inherit;
-  font-weight: 600;
-  background: var(--colour-white);
-  border: var(--stroke-width) solid var(--border-strong);
-  border-radius: var(--radius-s);
-  padding: var(--space-2xs) var(--space-s);
-  box-shadow: var(--shadow-hard-pill);
-  cursor: pointer;
-}
-
-.segmentR3[data-active='true'] {
-  background: var(--accent-red);
-  color: var(--colour-white);
 }
