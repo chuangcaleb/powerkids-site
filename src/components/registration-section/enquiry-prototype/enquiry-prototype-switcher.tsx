@@ -21,7 +21,7 @@ const ENQUIRY_TYPES = ['General', 'Enrolment', 'Tour booking', 'Fees', 'Other']
 const REPLY_BY_OPTIONS: { key: ReplyByVariantKey; label: string }[] = [
   { key: 'R1', label: 'Plain shadow pills' },
   { key: 'R2', label: 'Shadow pills + icons' },
-  { key: 'R3', label: 'Segmented + lock affordance' },
+  { key: 'R3', label: 'Segmented control' },
 ]
 
 const ALERT_OPTIONS: { key: AlertTone; label: string }[] = [
