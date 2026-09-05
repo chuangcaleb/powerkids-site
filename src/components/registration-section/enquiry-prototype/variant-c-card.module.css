@@ -1,0 +1,88 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m);
+  background: var(--colour-white);
+  color: var(--text-strong);
+  border: var(--stroke-width) solid var(--border-strong);
+  border-radius: var(--radius-l);
+  box-shadow: var(--shadow-hard);
+  padding: var(--space-l);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xs);
+}
+
+.row {
+  display: flex;
+  gap: var(--space-s);
+}
+
+.row > .field {
+  flex: 1;
+}
+
+.field input,
+.field select,
+.field textarea {
+  font: inherit;
+  color: var(--text-strong);
+  background: var(--bg-surface);
+  border: var(--stroke-width) solid var(--border-strong);
+  border-radius: var(--radius-s);
+  padding: var(--space-2xs) var(--space-xs);
+}
+
+.field [aria-invalid='true'] {
+  border-color: var(--accent-red);
+  background: var(--accent-red-fill);
+}
+
+.pillGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3xs);
+}
+
+.pillButton {
+  font: inherit;
+  border: var(--stroke-width) solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  padding: var(--space-3xs) var(--space-s);
+  background: var(--bg-surface);
+  cursor: pointer;
+}
+
+.pillButton[data-active='true'] {
+  background: var(--accent-red);
+  color: var(--colour-white);
+}
+
+.pillButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.hint {
+  font-size: 0.8em;
+  color: var(--text-muted);
+}
+
+.error {
+  color: var(--colour-white);
+  background: var(--colour-black);
+  display: inline-block;
+  width: fit-content;
+  padding: 0 var(--space-3xs);
+  font-size: 0.85em;
+}
+
+.banner {
+  background: var(--accent-red-fill);
+  border: var(--stroke-width) solid var(--accent-red);
+  border-radius: var(--radius-s);
+  padding: var(--space-xs);
+}

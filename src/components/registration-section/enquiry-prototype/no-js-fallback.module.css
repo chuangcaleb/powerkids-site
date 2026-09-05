@@ -1,0 +1,6 @@
+.copy {
+  border: var(--stroke-width) dashed var(--text-on-cta);
+  border-radius: var(--radius-s);
+  padding: var(--space-s);
+  max-width: var(--max-lead);
+}

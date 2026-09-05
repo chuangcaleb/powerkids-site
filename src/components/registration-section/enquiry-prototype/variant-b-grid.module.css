@@ -1,0 +1,91 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xs);
+}
+
+.field input,
+.field textarea {
+  font: inherit;
+  color: var(--text-strong);
+  background: var(--colour-white);
+  border: var(--stroke-width) solid var(--border-strong);
+  border-radius: var(--radius-s);
+  padding: var(--space-2xs) var(--space-xs);
+}
+
+.field [aria-invalid='true'] {
+  border-color: var(--accent-red);
+  background: var(--accent-red-fill);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3xs);
+}
+
+.chipButton {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.segmented {
+  display: inline-flex;
+  border: var(--stroke-width) solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  overflow: clip;
+  width: fit-content;
+  background: var(--colour-white);
+}
+
+.segment {
+  font: inherit;
+  padding: var(--space-3xs) var(--space-s);
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--text-strong);
+}
+
+.segment[data-active='true'] {
+  background: var(--accent-red);
+  color: var(--colour-white);
+}
+
+.segment:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.error {
+  color: var(--colour-white);
+  background: var(--colour-black);
+  display: inline-block;
+  width: fit-content;
+  padding: 0 var(--space-3xs);
+  font-size: 0.85em;
+}
+
+.banner {
+  background: var(--colour-white);
+  color: var(--text-strong);
+  border: var(--stroke-width) solid var(--border-strong);
+  border-radius: var(--radius-s);
+  padding: var(--space-xs);
+}
+
+.success {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+  align-items: flex-start;
+}
