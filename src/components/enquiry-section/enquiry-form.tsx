@@ -266,7 +266,7 @@ function EnquiryFormFields({
               />
 
               <div
-                className={cx('switcher', styles.contactRow)}
+                className="switcher"
                 style={primitiveVars({
                   '--switcher-gap': 'var(--space-s)',
                   '--switcher-inline-at': '30rem',

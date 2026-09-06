@@ -1,7 +1,6 @@
-import { AlertTriangle } from 'lucide-react'
-import { forwardRef } from 'react'
-import type { HTMLAttributes } from 'react'
 import { cx } from '@/lib/cx'
+import type { HTMLAttributes } from 'react'
+import { forwardRef } from 'react'
 import styles from './alert-callout.module.css'
 
 export type AlertCalloutProps = HTMLAttributes<HTMLDivElement> & {
@@ -23,7 +22,6 @@ export const AlertCallout = forwardRef<HTMLDivElement, AlertCalloutProps>(
         className={cx(styles.callout, className)}
         {...rest}
       >
-        <AlertTriangle aria-hidden="true" className={styles.icon} />
         <p>{children}</p>
       </div>
     )
