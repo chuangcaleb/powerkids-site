@@ -114,14 +114,22 @@ export const Enquiries: CollectionConfig = {
       admin: { readOnly: true },
     },
     {
-      name: 'adminNotificationFailed',
-      type: 'checkbox',
-      defaultValue: false,
-      label: 'Admin notification email failed',
+      name: 'notificationErrors',
+      type: 'json',
+      defaultValue: [],
+      label: 'Admin notification errors',
+      admin: {
+        readOnly: true,
+        description:
+          'System-set. Non-empty means the admin notification email failed to send.',
+      },
+      typescriptSchema: [() => ({ type: 'array', items: { type: 'string' } })],
       ...staffOnly,
     },
 
     // Phase 2 — reserved now, unused until the admin follow-up UX ships.
+    // Not tri-state: "failed" is derived from `notificationErrors`, never a
+    // stored status value — see CONTEXT.md.
     {
       name: 'status',
       type: 'select',

@@ -63,7 +63,10 @@ export const sendEnquiryEmails: CollectionAfterChangeHook<Enquiry> = async ({
     await req.payload.update({
       collection: 'enquiries',
       id: doc.id,
-      data: { adminNotificationFailed: true },
+      data: {
+        notificationErrors: [error instanceof Error ? error.message : String(error)],
+      },
+      context: { systemWrite: true },
     })
   }
 

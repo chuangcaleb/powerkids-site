@@ -4,7 +4,7 @@ const STAFF_ONLY_FIELDS = [
   'status',
   'closedBy',
   'closedAt',
-  'adminNotificationFailed',
+  'notificationErrors',
 ] as const
 
 /**
@@ -12,10 +12,17 @@ const STAFF_ONLY_FIELDS = [
  * `access.create: false` only signals intent in the admin UI, it does not
  * stop an anonymous API/Local-API caller from setting these keys directly.
  * Strips them whenever the request has no authenticated user, regardless of
- * operation.
+ * operation — except the system's own follow-up write in
+ * `sendEnquiryEmails`, which runs on the same (anonymous) request and marks
+ * itself via `context.systemWrite` so its own staff-only field write isn't
+ * stripped.
  */
-export const stripStaffOnlyFields: CollectionBeforeChangeHook = ({ data, req }) => {
-  if (req.user) return data
+export const stripStaffOnlyFields: CollectionBeforeChangeHook = ({
+  data,
+  req,
+  context,
+}) => {
+  if (req.user || context.systemWrite) return data
 
   for (const field of STAFF_ONLY_FIELDS) {
     delete data[field]

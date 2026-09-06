@@ -729,7 +729,7 @@ export interface Enquiry {
    */
   enquiryTypeLabel: string;
   message?: string | null;
-  adminNotificationFailed?: boolean | null;
+  notificationErrors?: string[];
   status?: ('unread' | 'closed') | null;
   closedBy?: (number | null) | User;
   closedAt?: string | null;
@@ -1130,7 +1130,7 @@ export interface EnquiriesSelect<T extends boolean = true> {
   enquiryTypeId?: T;
   enquiryTypeLabel?: T;
   message?: T;
-  adminNotificationFailed?: T;
+  notificationErrors?: T;
   status?: T;
   closedBy?: T;
   closedAt?: T;

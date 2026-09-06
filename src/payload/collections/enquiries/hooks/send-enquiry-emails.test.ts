@@ -64,7 +64,7 @@ describe('sendEnquiryEmails', () => {
     expect(sendEmail.mock.calls[0]![0].to).toBe('admin@powerkids.edu.my')
   })
 
-  it('never rethrows when the admin notification fails, and flags adminNotificationFailed', async () => {
+  it('never rethrows when the admin notification fails, and records the error', async () => {
     const sendEmail = vi.fn().mockRejectedValue(new Error('quota exceeded'))
     const { req, update } = fakeReq({ sendEmail })
 
@@ -75,7 +75,10 @@ describe('sendEnquiryEmails', () => {
     ).resolves.not.toThrow()
 
     expect(update).toHaveBeenCalledWith(
-      expect.objectContaining({ data: { adminNotificationFailed: true } }),
+      expect.objectContaining({
+        data: { notificationErrors: ['quota exceeded'] },
+        context: { systemWrite: true },
+      }),
     )
   })
 
