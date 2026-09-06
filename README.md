@@ -48,6 +48,8 @@ See [docs/workflows/environments.md](docs/workflows/environments.md#dev-admin-ac
 
 **Every variable must be set before anything runs, including build** — Payload config reads them while Next collects page data. Missing one fails loudly, naming itself.
 
+**Known gap:** enquiry-form infra (Turnstile keys, Vercel Firewall rate limit) not yet live — see [issue #39](https://github.com/chuangcaleb/powerkids-site/issues/39).
+
 ### Commands
 
 |                              |                                                          |
