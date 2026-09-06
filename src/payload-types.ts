@@ -713,13 +713,6 @@ export interface Person {
  */
 export interface Enquiry {
   id: number;
-  name: string;
-  /**
-   * Stored exactly as typed — no normalisation.
-   */
-  phone?: string | null;
-  email?: string | null;
-  replyBy: 'whatsapp' | 'call' | 'email';
   /**
    * Soft reference to cta.enquiry.types[].id — no referential integrity. Debug-only, query DB directly if needed.
    */
@@ -728,9 +721,13 @@ export interface Enquiry {
    * Snapshotted at submit time, so a later-deleted type option still reads.
    */
   enquiryTypeLabel: string;
-  message?: string | null;
-  notificationErrors?: string[];
   status?: ('unread' | 'closed') | null;
+  message?: string | null;
+  replyBy: 'whatsapp' | 'call' | 'email';
+  name: string;
+  phone?: string | null;
+  email?: string | null;
+  notificationErrors?: string[];
   closedBy?: (number | null) | User;
   closedAt?: string | null;
   updatedAt: string;
@@ -1123,15 +1120,15 @@ export interface PeopleSelect<T extends boolean = true> {
  * via the `definition` "enquiries_select".
  */
 export interface EnquiriesSelect<T extends boolean = true> {
+  enquiryTypeId?: T;
+  enquiryTypeLabel?: T;
+  status?: T;
+  message?: T;
+  replyBy?: T;
   name?: T;
   phone?: T;
   email?: T;
-  replyBy?: T;
-  enquiryTypeId?: T;
-  enquiryTypeLabel?: T;
-  message?: T;
   notificationErrors?: T;
-  status?: T;
   closedBy?: T;
   closedAt?: T;
   updatedAt?: T;

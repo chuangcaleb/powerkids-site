@@ -26,9 +26,9 @@ import { MetaTitleComponent as MetaTitleComponent_a8a977ebc872c5d5ea7ee689724c08
 import { MetaImageComponent as MetaImageComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
 import { MetaDescriptionComponent as MetaDescriptionComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
 import { PreviewComponent as PreviewComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
+import { StatusCell as StatusCell_89abfd3870b8cad1de3a9892995cf926 } from '@/payload/admin/components/enquiries/status-cell'
 import { ContactCell as ContactCell_8bb27028658379fa3ce904e5c28dcb1a } from '@/payload/admin/components/enquiries/contact-cell'
 import { NotificationErrorsField as NotificationErrorsField_0a69e04ae879a17aa0e278ec60cfc4d2 } from '@/payload/admin/components/enquiries/notification-errors-field'
-import { StatusCell as StatusCell_89abfd3870b8cad1de3a9892995cf926 } from '@/payload/admin/components/enquiries/status-cell'
 import { FolderTypeField as FolderTypeField_2b8867833a34864a02ddf429b0728a40 } from '@payloadcms/next/client'
 import { Icon as Icon_769439766aa6e0cca42ab9a2dbedc9f9 } from '@/payload/admin/components/graphics/icon'
 import { Logo as Logo_c679d9b3cceb9f1d8a0ba3b8efb5784b } from '@/payload/admin/components/graphics/logo'
@@ -69,9 +69,9 @@ export const importMap = {
   "@payloadcms/plugin-seo/client#MetaImageComponent": MetaImageComponent_a8a977ebc872c5d5ea7ee689724c0860,
   "@payloadcms/plugin-seo/client#MetaDescriptionComponent": MetaDescriptionComponent_a8a977ebc872c5d5ea7ee689724c0860,
   "@payloadcms/plugin-seo/client#PreviewComponent": PreviewComponent_a8a977ebc872c5d5ea7ee689724c0860,
+  "@/payload/admin/components/enquiries/status-cell#StatusCell": StatusCell_89abfd3870b8cad1de3a9892995cf926,
   "@/payload/admin/components/enquiries/contact-cell#ContactCell": ContactCell_8bb27028658379fa3ce904e5c28dcb1a,
   "@/payload/admin/components/enquiries/notification-errors-field#NotificationErrorsField": NotificationErrorsField_0a69e04ae879a17aa0e278ec60cfc4d2,
-  "@/payload/admin/components/enquiries/status-cell#StatusCell": StatusCell_89abfd3870b8cad1de3a9892995cf926,
   "@payloadcms/next/client#FolderTypeField": FolderTypeField_2b8867833a34864a02ddf429b0728a40,
   "@/payload/admin/components/graphics/icon#Icon": Icon_769439766aa6e0cca42ab9a2dbedc9f9,
   "@/payload/admin/components/graphics/logo#Logo": Logo_c679d9b3cceb9f1d8a0ba3b8efb5784b,

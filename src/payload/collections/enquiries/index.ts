@@ -40,39 +40,58 @@ export const Enquiries: CollectionConfig = {
   },
   fields: [
     {
-      name: 'name',
-      type: 'text',
-      required: true,
-      maxLength: 80,
+      type: 'row',
+      fields: [
+        {
+          name: 'enquiryTypeId',
+          type: 'text',
+          required: true,
+          label: 'Enquiry type (row id)',
+          admin: {
+            readOnly: true,
+            hidden: true,
+            description:
+              'Soft reference to cta.enquiry.types[].id — no referential integrity. Debug-only, query DB directly if needed.',
+          },
+        },
+        {
+          name: 'enquiryTypeLabel',
+          type: 'text',
+          required: true,
+          label: 'Type',
+          admin: {
+            readOnly: true,
+            width: '50%',
+            description:
+              'Snapshotted at submit time, so a later-deleted type option still reads.',
+          },
+        },
+        // Phase 2 — reserved now, unused until the admin follow-up UX ships.
+        // Not tri-state: "failed" is derived from `notificationErrors`, never a
+        // stored status value — see CONTEXT.md.
+        {
+          name: 'status',
+          type: 'select',
+          defaultValue: 'unread',
+          options: [
+            { label: 'Unread', value: 'unread' },
+            { label: 'Closed', value: 'closed' },
+          ],
+          admin: {
+            width: '50%',
+            components: {
+              Cell: '@/payload/admin/components/enquiries/status-cell#StatusCell',
+            },
+          },
+          ...staffOnly,
+        },
+      ],
+    },
+    {
+      name: 'message',
+      type: 'textarea',
+      maxLength: 1000,
       admin: { readOnly: true },
-    },
-    {
-      name: 'phone',
-      type: 'text',
-      maxLength: 20,
-      admin: {
-        readOnly: true,
-        width: '50%',
-        description: 'Stored exactly as typed — no normalisation.',
-      },
-      validate: (
-        value: unknown,
-        { siblingData }: { siblingData: { replyBy?: ReplyBy } },
-      ) => {
-        return validateField('phone', String(value ?? ''), siblingData.replyBy) ?? true
-      },
-    },
-    {
-      name: 'email',
-      type: 'text',
-      maxLength: 254,
-      admin: { readOnly: true, width: '50%' },
-      validate: (
-        value: unknown,
-        { siblingData }: { siblingData: { replyBy?: ReplyBy } },
-      ) => {
-        return validateField('email', String(value ?? ''), siblingData.replyBy) ?? true
-      },
     },
     {
       name: 'replyBy',
@@ -81,9 +100,16 @@ export const Enquiries: CollectionConfig = {
       admin: { readOnly: true },
       options: [
         { label: 'WhatsApp', value: 'whatsapp' },
-        { label: 'Call', value: 'call' },
+        { label: 'Phone Call', value: 'call' },
         { label: 'Email', value: 'email' },
       ],
+    },
+    {
+      name: 'name',
+      type: 'text',
+      required: true,
+      maxLength: 80,
+      admin: { readOnly: true },
     },
     {
       name: 'contact',
@@ -96,35 +122,42 @@ export const Enquiries: CollectionConfig = {
       },
     },
     {
-      name: 'enquiryTypeId',
-      type: 'text',
-      required: true,
-      label: 'Enquiry type (row id)',
-      admin: {
-        readOnly: true,
-        hidden: true,
-        description:
-          'Soft reference to cta.enquiry.types[].id — no referential integrity. Debug-only, query DB directly if needed.',
-      },
+      type: 'row',
+      fields: [
+        {
+          name: 'phone',
+          type: 'text',
+          maxLength: 20,
+          admin: {
+            readOnly: true,
+            width: '50%',
+          },
+          validate: (
+            value: unknown,
+            { siblingData }: { siblingData: { replyBy?: ReplyBy } },
+          ) => {
+            return (
+              validateField('phone', String(value ?? ''), siblingData.replyBy) ?? true
+            )
+          },
+        },
+        {
+          name: 'email',
+          type: 'text',
+          maxLength: 254,
+          admin: { readOnly: true, width: '50%' },
+          validate: (
+            value: unknown,
+            { siblingData }: { siblingData: { replyBy?: ReplyBy } },
+          ) => {
+            return (
+              validateField('email', String(value ?? ''), siblingData.replyBy) ?? true
+            )
+          },
+        },
+      ],
     },
-    {
-      name: 'enquiryTypeLabel',
-      type: 'text',
-      required: true,
-      label: 'Type',
-      admin: {
-        readOnly: true,
-        width: '50%',
-        description:
-          'Snapshotted at submit time, so a later-deleted type option still reads.',
-      },
-    },
-    {
-      name: 'message',
-      type: 'textarea',
-      maxLength: 1000,
-      admin: { readOnly: true },
-    },
+
     {
       name: 'notificationErrors',
       type: 'json',
@@ -145,45 +178,36 @@ export const Enquiries: CollectionConfig = {
       ...staffOnly,
     },
 
-    // Phase 2 — reserved now, unused until the admin follow-up UX ships.
-    // Not tri-state: "failed" is derived from `notificationErrors`, never a
-    // stored status value — see CONTEXT.md.
     {
-      name: 'status',
-      type: 'select',
-      defaultValue: 'unread',
-      options: [
-        { label: 'Unread', value: 'unread' },
-        { label: 'Closed', value: 'closed' },
-      ],
-      admin: {
-        width: '50%',
-        components: {
-          Cell: '@/payload/admin/components/enquiries/status-cell#StatusCell',
+      type: 'group',
+      fields: [
+        {
+          type: 'row',
+          fields: [
+            {
+              name: 'closedBy',
+              type: 'relationship',
+              relationTo: 'users',
+              admin: {
+                readOnly: true,
+                width: '50%',
+                condition: (data) => data.status === 'closed',
+              },
+              access: { create: () => false, read: authenticatedFieldAccess },
+            },
+            {
+              name: 'closedAt',
+              type: 'date',
+              admin: {
+                readOnly: true,
+                width: '50%',
+                condition: (data) => data.status === 'closed',
+              },
+              ...staffOnly,
+            },
+          ],
         },
-      },
-      ...staffOnly,
-    },
-    {
-      name: 'closedBy',
-      type: 'relationship',
-      relationTo: 'users',
-      admin: {
-        readOnly: true,
-        width: '50%',
-        condition: (data) => data.status === 'closed',
-      },
-      access: { create: () => false, read: authenticatedFieldAccess },
-    },
-    {
-      name: 'closedAt',
-      type: 'date',
-      admin: {
-        readOnly: true,
-        width: '50%',
-        condition: (data) => data.status === 'closed',
-      },
-      ...staffOnly,
+      ],
     },
   ],
 }
