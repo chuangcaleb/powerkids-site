@@ -1,3 +1,12 @@
+/* Hook only — targeted by the `<noscript>` fallback's inline `\3c style>` to
+   hide the form when JavaScript is disabled. `position: static` is a no-op
+   placeholder value: stylelint's `block-no-empty` rejects an empty ruleset,
+   and the class must exist for the noscript selector to have something to
+   match. */
+.form {
+  position: static;
+}
+
 .stepVisible {
   display: block;
 }

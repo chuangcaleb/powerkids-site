@@ -6,6 +6,7 @@ import { getPayloadClient } from '@/lib/payload'
 import { verifyTurnstileToken } from '@/lib/turnstile'
 import { validateField } from '@/lib/validate-enquiry'
 import type { ReplyBy } from '@/lib/validate-enquiry'
+import { GENERIC_ERROR } from './generic-error'
 
 const REPLY_BY_VALUES: ReplyBy[] = ['whatsapp', 'call', 'email']
 
@@ -15,9 +16,6 @@ function parseReplyBy(value: FormDataEntryValue | null): ReplyBy | undefined {
 
 export type SubmitEnquiryState =
   { status: 'idle' } | { status: 'error'; message: string } | { status: 'success' }
-
-const GENERIC_ERROR =
-  'Something went wrong when submitting your enquiry — please try again, or reach us directly through the contact information below.'
 
 /**
  * Server Action behind the enquiry wizard's submit button. Rate limiting
