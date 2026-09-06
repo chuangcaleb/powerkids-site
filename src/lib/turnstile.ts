@@ -11,7 +11,10 @@ export async function verifyTurnstileToken(
   token: string,
   remoteIp: string,
 ): Promise<boolean> {
-  if (!token) return false
+  if (!token) {
+    console.error('verifyTurnstileToken: no token received from client')
+    return false
+  }
 
   try {
     const response = await fetch(SITEVERIFY_URL, {
@@ -24,9 +27,18 @@ export async function verifyTurnstileToken(
       }),
     })
 
-    const result = (await response.json()) as { success?: boolean }
+    const result = (await response.json()) as {
+      success?: boolean
+      'error-codes'?: string[]
+    }
+    if (result.success !== true) {
+      console.error('verifyTurnstileToken: siteverify rejected token', {
+        errorCodes: result['error-codes'],
+      })
+    }
     return result.success === true
-  } catch {
+  } catch (error) {
+    console.error('verifyTurnstileToken: request failed', error)
     return false
   }
 }
