@@ -13,7 +13,7 @@ import { NativeSelectField } from '@/components/native-select-field/native-selec
 import { TextField } from '@/components/text-field/text-field'
 import { TextareaField } from '@/components/textarea-field/textarea-field'
 import { ToggleChip } from '@/components/toggle-chip/toggle-chip'
-import { validateField } from '@/lib/validate-enquiry'
+import { emailRequired, phoneRequired, validateField } from '@/lib/validate-enquiry'
 import type { EnquiryFieldName, ReplyBy } from '@/lib/validate-enquiry'
 import { submitEnquiry } from './submit-enquiry'
 import { TurnstileWidget } from './turnstile-widget'
@@ -35,18 +35,39 @@ type FieldValues = {
   message: string
 }
 
-const INITIAL_VALUES: FieldValues = {
-  name: '',
-  phone: '',
-  email: '',
-  replyBy: 'whatsapp',
-  enquiryTypeId: '',
-  message: '',
+function initialValues(enquiryTypes: EnquiryTypeOption[]): FieldValues {
+  return {
+    name: '',
+    phone: '',
+    email: '',
+    replyBy: 'whatsapp',
+    enquiryTypeId: enquiryTypes[0]?.id ?? '',
+    message: '',
+  }
 }
 
-export function EnquiryForm({ enquiryTypes, turnstileSiteKey }: EnquiryFormProps) {
+// `useActionState`'s status never reverts to 'idle' on its own, and there is
+// no reset API for it — "Send another enquiry" instead remounts this whole
+// component under a fresh `key` (see `EnquiryForm` below), which gives every
+// hook here, including `useActionState`, a clean slate.
+export function EnquiryForm(props: EnquiryFormProps) {
+  const [instance, setInstance] = useState(0)
+  return (
+    <EnquiryFormFields
+      key={instance}
+      {...props}
+      onRequestReset={() => setInstance((n) => n + 1)}
+    />
+  )
+}
+
+function EnquiryFormFields({
+  enquiryTypes,
+  turnstileSiteKey,
+  onRequestReset,
+}: EnquiryFormProps & { onRequestReset: () => void }) {
   const [step, setStep] = useState<1 | 2>(1)
-  const [values, setValues] = useState<FieldValues>(INITIAL_VALUES)
+  const [values, setValues] = useState<FieldValues>(() => initialValues(enquiryTypes))
   const [errors, setErrors] = useState<Partial<Record<EnquiryFieldName, string>>>({})
   const [turnstileToken, setTurnstileToken] = useState('')
   const [state, formAction, isPending] = useActionState(submitEnquiry, { status: 'idle' })
@@ -116,14 +137,11 @@ export function EnquiryForm({ enquiryTypes, turnstileSiteKey }: EnquiryFormProps
       <div className={styles.success}>
         <Logo className={styles.successLogo} />
         <p className={styles.successTitle}>Successfully submitted</p>
-        <Button
-          type="button"
-          variant="red"
-          onClick={() => {
-            setValues(INITIAL_VALUES)
-            setStep(1)
-          }}
-        >
+        <p className={styles.successSubtitle}>
+          We&apos;ll reply by{' '}
+          {values.replyBy === 'whatsapp' ? 'WhatsApp' : values.replyBy} soon.
+        </p>
+        <Button type="button" variant="red" onClick={onRequestReset}>
           Send another enquiry
         </Button>
       </div>
@@ -138,7 +156,6 @@ export function EnquiryForm({ enquiryTypes, turnstileSiteKey }: EnquiryFormProps
             <NativeSelectField
               label="What can we help with?"
               name="enquiryTypeIdSelect"
-              placeholder="Choose an enquiry type"
               value={values.enquiryTypeId}
               onChange={(event) => setValue('enquiryTypeId', event.target.value)}
               options={enquiryTypes.map((type) => ({
@@ -158,7 +175,7 @@ export function EnquiryForm({ enquiryTypes, turnstileSiteKey }: EnquiryFormProps
             />
             <Button
               type="button"
-              variant="outline"
+              variant="red"
               className={styles.nextButton}
               onClick={goToStep2}
             >
@@ -213,6 +230,7 @@ export function EnquiryForm({ enquiryTypes, turnstileSiteKey }: EnquiryFormProps
               <TextField
                 label="Phone"
                 name="phone"
+                hint={phoneRequired(values.replyBy) ? undefined : '(optional)'}
                 type="tel"
                 autoComplete="tel"
                 maxLength={20}
@@ -223,6 +241,7 @@ export function EnquiryForm({ enquiryTypes, turnstileSiteKey }: EnquiryFormProps
               <TextField
                 label="Email"
                 name="email"
+                hint={emailRequired(values.replyBy) ? undefined : '(optional)'}
                 type="email"
                 autoComplete="email"
                 maxLength={254}
@@ -233,7 +252,7 @@ export function EnquiryForm({ enquiryTypes, turnstileSiteKey }: EnquiryFormProps
             </div>
 
             <div className={styles.stepActions}>
-              <Button type="button" variant="ghost" onClick={() => setStep(1)}>
+              <Button type="button" variant="outline" onClick={() => setStep(1)}>
                 Back
               </Button>
               <Button type="submit" variant="red">

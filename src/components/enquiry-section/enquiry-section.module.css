@@ -31,5 +31,4 @@
   border-radius: var(--radius-l);
   box-shadow: var(--shadow-hard);
   padding: var(--space-m);
-  max-width: 32rem;
 }

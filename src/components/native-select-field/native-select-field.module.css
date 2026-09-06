@@ -27,6 +27,7 @@
 
 .select.invalid {
   border-color: var(--accent-red);
+  background-color: var(--accent-red-fill);
 }
 
 .chevron {

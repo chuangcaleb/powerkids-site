@@ -25,20 +25,20 @@ export async function EnquirySection({ className }: EnquirySectionProps) {
       <div className={cx('wrapper', styles.content)}>
         <div className="flow max-prose">
           <SectionHeader header={header} />
-        </div>
-        <div className={styles.card}>
-          {/* JS is required — bot defence runs client-side, so there is no
-           * progressive-enhancement submit path (spec §4). */}
-          <noscript>
-            <p>
-              Please enable JavaScript to load this form, or reach us through the{' '}
-              <a href="#contact">contact information below</a>.
-            </p>
-          </noscript>
-          <EnquiryForm
-            enquiryTypes={enquiryTypes}
-            turnstileSiteKey={requireEnv('NEXT_PUBLIC_TURNSTILE_SITE_KEY')}
-          />
+          <div className={styles.card}>
+            {/* JS is required — bot defence runs client-side, so there is no
+             * progressive-enhancement submit path (spec §4). */}
+            <noscript>
+              <p>
+                Please enable JavaScript to load this form, or reach us through the{' '}
+                <a href="#contact">contact information below</a>.
+              </p>
+            </noscript>
+            <EnquiryForm
+              enquiryTypes={enquiryTypes}
+              turnstileSiteKey={requireEnv('NEXT_PUBLIC_TURNSTILE_SITE_KEY')}
+            />
+          </div>
         </div>
       </div>
     </section>
