@@ -185,7 +185,7 @@ function EnquiryFormFields({
   return (
     <form ref={formRef} action={formAction} onSubmit={handleSubmit} noValidate>
       <div className="flow">
-        <fieldset disabled={isPending}>
+        <fieldset disabled={isPending} className={isPending ? styles.pending : undefined}>
           <div className={step === 1 ? styles.stepVisible : styles.stepHidden}>
             <div className="flow">
               <NativeSelectField
@@ -328,7 +328,7 @@ function EnquiryFormFields({
           <input type="hidden" name="turnstileToken" value={turnstileToken} />
         </fieldset>
 
-        {step === 2 && state.status === 'error' && !serverErrorDismissed ? (
+        {step === 2 && state.status === 'error' && !serverErrorDismissed && !isPending ? (
           <AlertCallout ref={alertRef}>{state.message}</AlertCallout>
         ) : null}
       </div>
