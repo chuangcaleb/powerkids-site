@@ -1,0 +1,19 @@
+.callout {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2xs);
+  padding: var(--space-xs) var(--space-s);
+  border: var(--pill-border-width) solid var(--accent-red);
+  border-radius: var(--radius-s);
+  background-color: var(--accent-red-fill);
+  color: var(--accent-red);
+}
+
+.callout p {
+  margin: 0;
+}
+
+.icon {
+  flex-shrink: 0;
+  margin-top: 0.15em;
+}

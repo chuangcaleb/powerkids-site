@@ -21,6 +21,8 @@ type EnvKey =
   | 'VERCEL_BRANCH_URL'
   | 'RESEND_API_KEY'
   | 'RESEND_FROM_ADDRESS'
+  | 'TURNSTILE_SECRET_KEY'
+  | 'NEXT_PUBLIC_TURNSTILE_SITE_KEY'
 
 /** Read a required variable, or throw naming it. */
 export function requireEnv(key: EnvKey): string {

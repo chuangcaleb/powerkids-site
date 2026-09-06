@@ -1,0 +1,44 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xs);
+}
+
+.label {
+  font-weight: var(--weight-display, 600);
+  font-size: var(--step--1);
+}
+
+.selectWrap {
+  position: relative;
+  display: flex;
+}
+
+.select {
+  flex: 1;
+  font: inherit;
+  padding: var(--space-2xs) var(--space-xl) var(--space-2xs) var(--space-xs);
+  border: var(--pill-border-width) solid var(--border-strong);
+  border-radius: var(--radius-s);
+  background-color: var(--bg-surface);
+  color: var(--text-strong);
+  appearance: none;
+}
+
+.select.invalid {
+  border-color: var(--accent-red);
+}
+
+.chevron {
+  position: absolute;
+  right: var(--space-xs);
+  top: 50%;
+  translate: 0 -50%;
+  pointer-events: none;
+  color: var(--text-strong);
+}
+
+.error {
+  color: var(--accent-red);
+  font-size: var(--step--2);
+}

@@ -59,6 +59,7 @@ await payload.updateGlobal({
   context: { disableRevalidate: true },
   data: {
     email: 'powerkidschool@gmail.com',
+    enquiryNotificationEmail: 'powerkidschool@gmail.com',
     phones: [
       { number: '010 - 221 2482', href: '+60102212482' },
       { number: '03 - 9056 4288', href: '+60390564288' },
@@ -82,14 +83,21 @@ await payload.updateGlobal({
   slug: 'cta',
   context: { disableRevalidate: true },
   data: {
-    registration: {
+    enquiry: {
       header: {
-        eyebrow: 'Register today!',
+        eyebrow: 'Get in touch!',
         accent: 'neutral',
-        heading: richText('Three steps and your child has a place'),
-        lead: richText("We'll walk you through all of it."),
+        heading: richText('Have a question? We can help'),
+        lead: richText("Fill in the form below and we'll get back to you."),
       },
-      button: { label: 'Open our form', url: '#register' },
+      types: [
+        { label: 'Enrolment', hideFromForm: false },
+        { label: 'Fees', hideFromForm: false },
+        { label: 'Schedule Visit', hideFromForm: false },
+        { label: 'Programs', hideFromForm: false },
+        { label: 'Events', hideFromForm: false },
+        { label: 'Other', hideFromForm: false },
+      ],
     },
     contact: {
       header: {

@@ -1,7 +1,7 @@
 import { cx } from '@/lib/cx'
 import { SITE_CREDIT, SITE_NAME } from '@/lib/site'
+import { EnquirySection } from '@/components/enquiry-section/enquiry-section'
 import { FaqSection } from '@/components/faq-section/faq-section'
-import { RegistrationSection } from '@/components/registration-section/registration-section'
 import { SectionDivider } from '@/components/section-divider/section-divider'
 import { Sticker } from '@/components/sticker/sticker'
 import { getCta } from '@/payload/globals/get-cta'
@@ -28,7 +28,7 @@ export async function Footer() {
         </SectionDivider>
 
         <div className={styles.closing}>
-          <RegistrationSection className={styles.cta} />
+          <EnquirySection className={styles.cta} />
           <FooterContact className={styles.contact} />
         </div>
 

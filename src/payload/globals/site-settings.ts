@@ -26,6 +26,17 @@ export const SiteSettings: GlobalConfig = {
       required: true,
     },
     {
+      name: 'enquiryNotificationEmail',
+      type: 'email',
+      required: true,
+      admin: {
+        description:
+          'Where enquiry-form admin notifications are sent. Separate from the public ' +
+          'contact email above — changing that address should not silently redirect ' +
+          'enquiry alerts.',
+      },
+    },
+    {
       name: 'phones',
       type: 'array',
       minRows: 1,

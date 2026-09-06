@@ -72,6 +72,7 @@ export interface Config {
     'media-tags': MediaTag;
     pages: Page;
     people: Person;
+    enquiries: Enquiry;
     'payload-kv': PayloadKv;
     'payload-folders': FolderInterface;
     'payload-locked-documents': PayloadLockedDocument;
@@ -89,6 +90,7 @@ export interface Config {
     'media-tags': MediaTagsSelect<false> | MediaTagsSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     people: PeopleSelect<false> | PeopleSelect<true>;
+    enquiries: EnquiriesSelect<false> | EnquiriesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-folders': PayloadFoldersSelect<false> | PayloadFoldersSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -707,6 +709,36 @@ export interface Person {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "enquiries".
+ */
+export interface Enquiry {
+  id: number;
+  name: string;
+  /**
+   * Stored exactly as typed — no normalisation.
+   */
+  phone?: string | null;
+  email?: string | null;
+  replyBy: 'whatsapp' | 'call' | 'email';
+  /**
+   * Soft reference to cta.enquiry.types[].id — no referential integrity.
+   */
+  enquiryTypeId: string;
+  /**
+   * Snapshotted at submit time, so a later-deleted type option still reads.
+   */
+  enquiryTypeLabel: string;
+  message?: string | null;
+  confirmationFailed?: boolean | null;
+  adminNotificationFailed?: boolean | null;
+  status?: ('unread' | 'closed') | null;
+  closedBy?: (number | null) | User;
+  closedAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -748,6 +780,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'people';
         value: number | Person;
+      } | null)
+    | ({
+        relationTo: 'enquiries';
+        value: number | Enquiry;
       } | null)
     | ({
         relationTo: 'payload-folders';
@@ -1085,6 +1121,26 @@ export interface PeopleSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "enquiries_select".
+ */
+export interface EnquiriesSelect<T extends boolean = true> {
+  name?: T;
+  phone?: T;
+  email?: T;
+  replyBy?: T;
+  enquiryTypeId?: T;
+  enquiryTypeLabel?: T;
+  message?: T;
+  confirmationFailed?: T;
+  adminNotificationFailed?: T;
+  status?: T;
+  closedBy?: T;
+  closedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -1142,6 +1198,10 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 export interface SiteSetting {
   id: number;
   email: string;
+  /**
+   * Where enquiry-form admin notifications are sent. Separate from the public contact email above — changing that address should not silently redirect enquiry alerts.
+   */
+  enquiryNotificationEmail: string;
   phones?:
     | {
         number: string;
@@ -1253,7 +1313,7 @@ export interface Cta {
    * Sticker text, above the footer CTA.
    */
   footerSticker?: string | null;
-  registration: {
+  enquiry: {
     header: {
       /**
        * Rendered as a pill.
@@ -1295,12 +1355,15 @@ export interface Cta {
       } | null;
     };
     /**
-     * Optional call-to-action button.
+     * Options shown in the enquiry form. Row order is display order. "Hide from form" removes an option without deleting past enquiries that reference it.
      */
-    button?: {
-      label?: string | null;
-      url?: string | null;
-    };
+    types?:
+      | {
+          label: string;
+          hideFromForm?: boolean | null;
+          id?: string | null;
+        }[]
+      | null;
   };
   contact: {
     header: {
@@ -1423,6 +1486,7 @@ export interface Faq {
  */
 export interface SiteSettingsSelect<T extends boolean = true> {
   email?: T;
+  enquiryNotificationEmail?: T;
   phones?:
     | T
     | {
@@ -1501,7 +1565,7 @@ export interface SeoDefaultsSelect<T extends boolean = true> {
  */
 export interface CtaSelect<T extends boolean = true> {
   footerSticker?: T;
-  registration?:
+  enquiry?:
     | T
     | {
         header?:
@@ -1512,11 +1576,12 @@ export interface CtaSelect<T extends boolean = true> {
               heading?: T;
               lead?: T;
             };
-        button?:
+        types?:
           | T
           | {
               label?: T;
-              url?: T;
+              hideFromForm?: T;
+              id?: T;
             };
       };
   contact?:
