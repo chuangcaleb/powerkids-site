@@ -90,7 +90,11 @@ export const SiteSettings: GlobalConfig = {
       type: 'array',
       minRows: 1,
       maxRows: 10,
-      // No custom RowLabel — the default one already reads `name` first.
+      admin: {
+        components: {
+          RowLabel: '@/payload/admin/components/row-labels/row-label#RowLabel',
+        },
+      },
       fields: [
         { name: 'name', type: 'text', required: true },
         {
