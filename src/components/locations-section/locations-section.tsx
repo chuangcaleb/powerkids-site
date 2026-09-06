@@ -20,7 +20,7 @@ export async function LocationsSection() {
     <>
       <div className="flow-xl">
         <h2>Locations</h2>
-        <ul role="list" className="flow-m max-lead">
+        <ul role="list" className="grid-auto w-full">
           {locations.map((location) => (
             <li key={location.id ?? location.name} className="flow-3xs">
               <p

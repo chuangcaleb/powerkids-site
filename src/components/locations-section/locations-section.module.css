@@ -5,6 +5,7 @@
 .locationAddress {
   /* Textarea content is rendered as written, no auto-formatting. */
   white-space: pre-line;
+  flex: 1;
 }
 
 .directionsLinkWrap {
