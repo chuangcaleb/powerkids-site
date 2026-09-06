@@ -58,7 +58,6 @@ export const Pages: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', '_status'],
-    group: 'Content',
     preview: (doc) => previewUrl(doc?.slug),
     livePreview: {
       url: ({ data }) => previewUrl(data?.slug),

@@ -12,7 +12,6 @@ export const People: CollectionConfig = {
   admin: {
     useAsTitle: 'name',
     defaultColumns: ['name', 'role'],
-    group: 'Content',
   },
   access: {
     read: authenticatedOrPublished,

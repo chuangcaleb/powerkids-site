@@ -13,7 +13,6 @@ export const MediaTags: CollectionConfig = {
   slug: 'media-tags',
   admin: {
     useAsTitle: 'name',
-    group: 'Content',
   },
   access: {
     read: anyone,

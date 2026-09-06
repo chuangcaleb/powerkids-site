@@ -13,9 +13,6 @@ import { revalidateLayout } from './hooks/revalidate-layout'
  */
 export const Cta: GlobalConfig = {
   slug: 'cta',
-  admin: {
-    group: 'Settings',
-  },
   access: {
     read: () => true,
     update: authenticated,

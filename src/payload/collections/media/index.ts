@@ -29,7 +29,6 @@ const WEBP = { format: 'webp', options: { quality: 80 } } as const
 export const Media: CollectionConfig = {
   slug: 'media',
   admin: {
-    group: 'Content',
     defaultColumns: ['filename', 'alt', 'duplicateStatus'],
     components: {
       edit: {
