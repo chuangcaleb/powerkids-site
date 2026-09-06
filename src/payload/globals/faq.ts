@@ -6,7 +6,7 @@ import { headerField } from '@/payload/fields/header'
 import { revalidateLayout } from './hooks/revalidate-layout'
 
 /**
- * FAQ accordion rendered at the end of every page, above the registration
+ * FAQ accordion rendered at the end of every page, above the enquiry
  * section. One list, site-wide — not a per-page block. See
  * docs/adr/0009-headless-ui-for-complex-interactive-components.md for the
  * Radix accordion this feeds.

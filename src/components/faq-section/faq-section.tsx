@@ -7,7 +7,7 @@ import { getFaq } from '@/payload/globals/get-faq'
 
 export type FaqSectionProps = { className?: string; id?: string }
 
-/** Sitewide FAQ accordion, rendered at the end of every page above `RegistrationSection`. */
+/** Sitewide FAQ accordion, rendered at the end of every page above `EnquirySection`. */
 export async function FaqSection({ className, id }: FaqSectionProps) {
   const faq = await getFaq()
   const items = faq.items ?? []

@@ -1,0 +1,11 @@
+.callout {
+  padding: var(--space-xs) var(--space-s);
+  border: var(--pill-border-width) solid var(--accent-red);
+  border-radius: var(--radius-s);
+  background-color: var(--accent-red-fill);
+  color: var(--accent-red);
+}
+
+.callout p {
+  font-size: var(--step--1);
+}

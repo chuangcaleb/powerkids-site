@@ -1,0 +1,37 @@
+.chip {
+  font-weight: var(--weight-display);
+  font-size: var(--step--1);
+  color: var(--text-strong);
+  background-color: var(--bg-surface);
+  border: var(--pill-border-width) solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-hard-pill);
+  padding: var(--space-3xs) var(--space-s);
+  cursor: pointer;
+}
+
+.chip:has(.input:checked) {
+  background-color: var(--accent-red);
+  color: var(--text-on-accent);
+}
+
+.chip:has(.input:focus-visible) {
+  outline: var(--stroke-width) solid var(--accent-blue);
+  outline-offset: var(--focus-offset);
+}
+
+.input {
+  position: absolute;
+  width: 0.0625rem;
+  height: 0.0625rem;
+  padding: 0;
+  margin: -0.0625rem;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.icon {
+  display: inline-flex;
+}

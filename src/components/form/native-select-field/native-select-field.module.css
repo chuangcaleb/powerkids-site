@@ -1,0 +1,33 @@
+.selectWrap {
+  position: relative;
+  display: flex;
+}
+
+.select {
+  flex: 1;
+  font: inherit;
+
+  /* Chrome/Firefox render the native option listbox at the select's own
+   * font-size — inheriting the ambient card size read oversized there. */
+  font-size: var(--step--1);
+  padding: var(--space-2xs) var(--space-xl) var(--space-2xs) var(--space-xs);
+  border: var(--pill-border-width) solid var(--border-strong);
+  border-radius: var(--radius-s);
+  background-color: var(--bg-surface);
+  color: var(--text-strong);
+  appearance: none;
+}
+
+.select.invalid {
+  border-color: var(--accent-red);
+  background-color: var(--accent-red-fill);
+}
+
+.chevron {
+  position: absolute;
+  right: var(--space-xs);
+  top: 50%;
+  translate: 0 -50%;
+  pointer-events: none;
+  color: var(--text-strong);
+}

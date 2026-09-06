@@ -1,0 +1,15 @@
+.textarea {
+  font: inherit;
+  padding: var(--space-2xs) var(--space-xs);
+  border: var(--pill-border-width) solid var(--border-strong);
+  border-radius: var(--radius-s);
+  background-color: var(--bg-surface);
+  color: var(--text-strong);
+  resize: vertical;
+  min-height: 6rem;
+}
+
+.textarea.invalid {
+  border-color: var(--accent-red);
+  background-color: var(--accent-red-fill);
+}

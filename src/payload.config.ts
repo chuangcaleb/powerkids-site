@@ -9,6 +9,7 @@ import { s3Storage } from '@payloadcms/storage-s3'
 import { buildConfig } from 'payload'
 import sharp from 'sharp'
 
+import { Enquiries } from '@/payload/collections/enquiries'
 import { Media } from '@/payload/collections/media'
 import { MediaTags } from '@/payload/collections/media-tags'
 import { Pages } from '@/payload/collections/pages'
@@ -83,7 +84,7 @@ export default buildConfig({
     },
   },
 
-  collections: [Users, Media, MediaTags, Pages, People],
+  collections: [Users, Media, MediaTags, Pages, People, Enquiries],
 
   globals: [SiteSettings, Navigation, SeoDefaults, Cta, Faq],
 

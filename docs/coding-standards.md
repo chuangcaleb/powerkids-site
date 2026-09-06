@@ -8,6 +8,7 @@
 ## Structure
 
 - **kebab-case filenames**, always — including block renderers (`component.tsx`, not `Component.tsx`). Named exports preferred.
+- **`src/components/` is flat** — one dir per component — unless a group of components shares a control shape and a consumer closely enough to earn a nested subdir (e.g. `form/` for the field primitives). Don't nest pre-emptively.
 - **Server components by default.** `"use client"` only when the component genuinely needs interactivity; say why in a comment.
 
 ## Styling
@@ -24,6 +25,7 @@
 ## TypeScript
 
 - **Avoid `as` assertions.** Narrow with a runtime check (`typeof`, `in`, a type guard) instead.
+- Avoid disabling lint rules.
 
 ## Comments
 

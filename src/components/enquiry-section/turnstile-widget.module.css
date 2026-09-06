@@ -1,0 +1,9 @@
+/* Invisible-mode Turnstile still renders a shadow-root div (and, inside it,
+ * a hidden response input) — pinned out of flow so it never adds a gap in a
+ * `flow`/`flow-*` container regardless of what Cloudflare puts inside it. */
+.container {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
