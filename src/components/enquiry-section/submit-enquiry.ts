@@ -7,11 +7,17 @@ import { verifyTurnstileToken } from '@/lib/turnstile'
 import { validateField } from '@/lib/validate-enquiry'
 import type { ReplyBy } from '@/lib/validate-enquiry'
 
+const REPLY_BY_VALUES: ReplyBy[] = ['whatsapp', 'call', 'email']
+
+function parseReplyBy(value: FormDataEntryValue | null): ReplyBy | undefined {
+  return REPLY_BY_VALUES.find((option) => option === value)
+}
+
 export type SubmitEnquiryState =
   { status: 'idle' } | { status: 'error'; message: string } | { status: 'success' }
 
 const GENERIC_ERROR =
-  'Something went wrong submitting your enquiry — please try again, or reach us directly through the contact information below.'
+  'Something went wrong when submitting your enquiry — please try again, or reach us directly through the contact information below.'
 
 /**
  * Server Action behind the enquiry wizard's submit button. Rate limiting
@@ -29,7 +35,7 @@ export async function submitEnquiry(
   const name = String(formData.get('name') ?? '')
   const phone = String(formData.get('phone') ?? '')
   const email = String(formData.get('email') ?? '')
-  const replyBy = String(formData.get('replyBy') ?? '') as ReplyBy
+  const replyBy = parseReplyBy(formData.get('replyBy'))
   const enquiryTypeId = String(formData.get('enquiryTypeId') ?? '')
   const enquiryTypeLabel = String(formData.get('enquiryTypeLabel') ?? '')
   const message = String(formData.get('message') ?? '')
@@ -43,7 +49,7 @@ export async function submitEnquiry(
     validateField('message', message, replyBy),
   ].filter(Boolean)
 
-  if (fieldErrors.length > 0) {
+  if (!replyBy || fieldErrors.length > 0) {
     return { status: 'error', message: GENERIC_ERROR }
   }
 

@@ -1,11 +1,12 @@
+import { fromPartial } from '@total-typescript/shoehorn'
 import { describe, expect, it } from 'vitest'
 import type { PayloadRequest } from 'payload'
 
 import { stripStaffOnlyFields } from './strip-staff-only-fields'
 
-function run(data: Record<string, unknown>, user?: object) {
-  const req = { user } as unknown as PayloadRequest
-  return stripStaffOnlyFields({ data, req } as never)
+function run(data: Record<string, unknown>, user?: object): Record<string, unknown> {
+  const req = fromPartial<PayloadRequest>({ user })
+  return stripStaffOnlyFields(fromPartial({ data, req }))
 }
 
 describe('stripStaffOnlyFields', () => {
@@ -17,20 +18,20 @@ describe('stripStaffOnlyFields', () => {
       closedAt: '2026-01-01',
       confirmationFailed: true,
       adminNotificationFailed: true,
-    }) as Record<string, unknown>
+    })
 
     expect(result).toEqual({ name: 'Jane' })
   })
 
   it('leaves staff-only keys untouched when an authenticated user is present', () => {
     const data = { name: 'Jane', status: 'closed', closedBy: 1 }
-    const result = run(data, { id: 1 }) as Record<string, unknown>
+    const result = run(data, { id: 1 })
 
     expect(result).toEqual({ name: 'Jane', status: 'closed', closedBy: 1 })
   })
 
   it('is a no-op when none of the staff-only keys are present', () => {
-    const result = run({ name: 'Jane' }) as Record<string, unknown>
+    const result = run({ name: 'Jane' })
 
     expect(result).toEqual({ name: 'Jane' })
   })

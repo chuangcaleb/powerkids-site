@@ -1,3 +1,4 @@
+import { fromPartial } from '@total-typescript/shoehorn'
 import { describe, expect, it, vi } from 'vitest'
 import type { PayloadRequest } from 'payload'
 
@@ -29,7 +30,7 @@ function fakeReq({
       .mockResolvedValue({ enquiryNotificationEmail: siteSettingsEmail }),
     logger: { error: vi.fn() },
   }
-  const req = { payload, context: {} } as unknown as PayloadRequest
+  const req = fromPartial<PayloadRequest>({ payload, context: {} })
   return { req, payload, update, sendEmail }
 }
 
@@ -50,12 +51,14 @@ describe('sendEnquiryEmails', () => {
   it('sends only the admin notification when no email was given', async () => {
     const { req, sendEmail } = fakeReq()
 
-    await sendEnquiryEmails({
-      doc: doc(),
-      req,
-      operation: 'create',
-      context: {},
-    } as never)
+    await sendEnquiryEmails(
+      fromPartial({
+        doc: doc(),
+        req,
+        operation: 'create',
+        context: {},
+      }),
+    )
 
     expect(sendEmail).toHaveBeenCalledTimes(1)
     expect(sendEmail.mock.calls[0]![0].to).toBe('admin@powerkids.edu.my')
@@ -64,12 +67,14 @@ describe('sendEnquiryEmails', () => {
   it('sends both confirmation and admin notification when an email was given', async () => {
     const { req, sendEmail } = fakeReq()
 
-    await sendEnquiryEmails({
-      doc: doc({ email: 'parent@example.com' }),
-      req,
-      operation: 'create',
-      context: {},
-    } as never)
+    await sendEnquiryEmails(
+      fromPartial({
+        doc: doc({ email: 'parent@example.com' }),
+        req,
+        operation: 'create',
+        context: {},
+      }),
+    )
 
     expect(sendEmail).toHaveBeenCalledTimes(2)
     const recipients = sendEmail.mock.calls.map((call) => call[0].to)
@@ -85,12 +90,14 @@ describe('sendEnquiryEmails', () => {
     const { req, update } = fakeReq({ sendEmail })
 
     await expect(
-      sendEnquiryEmails({
-        doc: doc({ email: 'parent@example.com' }),
-        req,
-        operation: 'create',
-        context: {},
-      } as never),
+      sendEnquiryEmails(
+        fromPartial({
+          doc: doc({ email: 'parent@example.com' }),
+          req,
+          operation: 'create',
+          context: {},
+        }),
+      ),
     ).resolves.not.toThrow()
 
     expect(update).toHaveBeenCalledWith(
@@ -103,7 +110,9 @@ describe('sendEnquiryEmails', () => {
     const { req, update } = fakeReq({ sendEmail })
 
     await expect(
-      sendEnquiryEmails({ doc: doc(), req, operation: 'create', context: {} } as never),
+      sendEnquiryEmails(
+        fromPartial({ doc: doc(), req, operation: 'create', context: {} }),
+      ),
     ).resolves.not.toThrow()
 
     expect(update).toHaveBeenCalledWith(
@@ -114,12 +123,14 @@ describe('sendEnquiryEmails', () => {
   it('skips entirely on update — only fires on create', async () => {
     const { req, sendEmail } = fakeReq()
 
-    await sendEnquiryEmails({
-      doc: doc(),
-      req,
-      operation: 'update',
-      context: {},
-    } as never)
+    await sendEnquiryEmails(
+      fromPartial({
+        doc: doc(),
+        req,
+        operation: 'update',
+        context: {},
+      }),
+    )
 
     expect(sendEmail).not.toHaveBeenCalled()
   })
@@ -127,12 +138,14 @@ describe('sendEnquiryEmails', () => {
   it('does not echo the free-text message in the confirmation email body', async () => {
     const { req, sendEmail } = fakeReq()
 
-    await sendEnquiryEmails({
-      doc: doc({ email: 'parent@example.com', message: '<script>evil()</script>' }),
-      req,
-      operation: 'create',
-      context: {},
-    } as never)
+    await sendEnquiryEmails(
+      fromPartial({
+        doc: doc({ email: 'parent@example.com', message: '<script>evil()</script>' }),
+        req,
+        operation: 'create',
+        context: {},
+      }),
+    )
 
     const confirmationCall = sendEmail.mock.calls.find(
       (call) => call[0].to === 'parent@example.com',
@@ -143,12 +156,14 @@ describe('sendEnquiryEmails', () => {
   it('HTML-escapes interpolated values in the confirmation email', async () => {
     const { req, sendEmail } = fakeReq()
 
-    await sendEnquiryEmails({
-      doc: doc({ email: 'parent@example.com', name: '<b>Jane</b>' }),
-      req,
-      operation: 'create',
-      context: {},
-    } as never)
+    await sendEnquiryEmails(
+      fromPartial({
+        doc: doc({ email: 'parent@example.com', name: '<b>Jane</b>' }),
+        req,
+        operation: 'create',
+        context: {},
+      }),
+    )
 
     const confirmationCall = sendEmail.mock.calls.find(
       (call) => call[0].to === 'parent@example.com',

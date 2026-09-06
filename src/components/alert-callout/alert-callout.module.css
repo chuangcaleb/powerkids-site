@@ -1,7 +1,4 @@
 .callout {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-2xs);
   padding: var(--space-xs) var(--space-s);
   border: var(--pill-border-width) solid var(--accent-red);
   border-radius: var(--radius-s);

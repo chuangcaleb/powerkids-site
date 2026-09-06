@@ -24,6 +24,7 @@
 ## TypeScript
 
 - **Avoid `as` assertions.** Narrow with a runtime check (`typeof`, `in`, a type guard) instead.
+- Avoid disabling lint rules.
 
 ## Comments
 

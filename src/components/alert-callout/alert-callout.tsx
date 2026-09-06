@@ -2,6 +2,7 @@ import { AlertTriangle } from 'lucide-react'
 import { forwardRef } from 'react'
 import type { HTMLAttributes } from 'react'
 import { cx } from '@/lib/cx'
+import { primitiveVars } from '@/lib/primitive-vars'
 import styles from './alert-callout.module.css'
 
 export type AlertCalloutProps = HTMLAttributes<HTMLDivElement> & {
@@ -20,7 +21,11 @@ export const AlertCallout = forwardRef<HTMLDivElement, AlertCalloutProps>(
         ref={ref}
         role="alert"
         tabIndex={-1}
-        className={cx(styles.callout, className)}
+        className={cx('cluster', styles.callout, className)}
+        style={primitiveVars({
+          '--cluster-gap': 'var(--space-2xs)',
+          '--cluster-align-y': 'flex-start',
+        })}
         {...rest}
       >
         <AlertTriangle aria-hidden="true" className={styles.icon} />

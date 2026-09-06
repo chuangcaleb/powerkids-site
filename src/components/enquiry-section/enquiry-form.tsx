@@ -3,7 +3,8 @@
 // Client component: multi-step wizard state, field-level validation, and
 // the Turnstile widget all need the browser.
 
-import { Mail, MessageCircle, Phone } from 'lucide-react'
+import { SiWhatsapp } from '@icons-pack/react-simple-icons'
+import { Mail, Phone } from 'lucide-react'
 import { useActionState, useEffect, useRef, useState } from 'react'
 
 import { AlertCallout } from '@/components/alert-callout/alert-callout'
@@ -18,6 +19,8 @@ import type { EnquiryFieldName, ReplyBy } from '@/lib/validate-enquiry'
 import { submitEnquiry } from './submit-enquiry'
 import { TurnstileWidget } from './turnstile-widget'
 import styles from './enquiry-form.module.css'
+import { cx } from '@/lib/cx'
+import { primitiveVars } from '@/lib/primitive-vars'
 
 export type EnquiryTypeOption = { id: string; label: string }
 
@@ -84,13 +87,27 @@ function EnquiryFormFields({
     if (state.status === 'error') alertRef.current?.focus()
   }, [state])
 
+  // Field-values keys don't line up 1:1 with error keys (`enquiryTypeId` vs
+  // `enquiryType`, and `replyBy` has no error of its own) — this map is the
+  // single place that translates one to the other.
+  const errorKeyFor: Record<keyof FieldValues, EnquiryFieldName | undefined> = {
+    name: 'name',
+    phone: 'phone',
+    email: 'email',
+    replyBy: undefined,
+    enquiryTypeId: 'enquiryType',
+    message: 'message',
+  }
+
   function setValue<K extends keyof FieldValues>(key: K, value: FieldValues[K]) {
     setValues((prev) => ({ ...prev, [key]: value }))
     setServerErrorDismissed(true)
+    const errorKey = errorKeyFor[key]
+    if (!errorKey) return
     setErrors((prev) => {
-      if (!prev[key as EnquiryFieldName]) return prev
+      if (!prev[errorKey]) return prev
       const next = { ...prev }
-      delete next[key as EnquiryFieldName]
+      delete next[errorKey]
       return next
     })
   }
@@ -162,8 +179,8 @@ function EnquiryFormFields({
 
   return (
     <form ref={formRef} action={formAction} onSubmit={handleSubmit} noValidate>
-      <div className="flow-s">
-        <fieldset disabled={isPending} className={styles.fieldset}>
+      <div className="flow">
+        <fieldset disabled={isPending}>
           <div className={step === 1 ? styles.stepVisible : styles.stepHidden}>
             <div className="flow">
               <NativeSelectField
@@ -199,13 +216,16 @@ function EnquiryFormFields({
 
           <div className={step === 2 ? styles.stepVisible : styles.stepHidden}>
             <div className="flow">
-              <fieldset className={styles.replyByGroup}>
+              <fieldset className={cx('flow-2xs', styles.replyByGroup)}>
                 <legend>How should we reply to you?</legend>
-                <div className={styles.replyByChips}>
+                <div
+                  className="cluster"
+                  style={primitiveVars({ '--cluster-gap': 'var(--space-2xs)' })}
+                >
                   <ToggleChip
                     name="replyBy"
                     value="whatsapp"
-                    icon={<MessageCircle size={16} aria-hidden="true" />}
+                    icon={<SiWhatsapp size={18} aria-hidden="true" />}
                     label="WhatsApp"
                     checked={values.replyBy === 'whatsapp'}
                     onChange={() => setReplyBy('whatsapp')}
@@ -229,47 +249,54 @@ function EnquiryFormFields({
                 </div>
               </fieldset>
 
-              <TextField
-                label="Name"
-                name="name"
-                autoComplete="name"
-                maxLength={80}
-                value={values.name}
-                onChange={(event) => setValue('name', event.target.value)}
-                error={errors.name}
-              />
+              <div className="flow-s">
+                <TextField
+                  label="Name"
+                  name="name"
+                  autoComplete="name"
+                  maxLength={80}
+                  value={values.name}
+                  onChange={(event) => setValue('name', event.target.value)}
+                  error={errors.name}
+                />
 
-              <div className={styles.contactRow}>
-                <TextField
-                  label="Phone"
-                  name="phone"
-                  hint={phoneRequired(values.replyBy) ? undefined : '(optional)'}
-                  type="tel"
-                  autoComplete="tel"
-                  maxLength={20}
-                  value={values.phone}
-                  onChange={(event) => setValue('phone', event.target.value)}
-                  error={errors.phone}
-                />
-                <TextField
-                  label="Email"
-                  name="email"
-                  hint={emailRequired(values.replyBy) ? undefined : '(optional)'}
-                  type="email"
-                  autoComplete="email"
-                  maxLength={254}
-                  value={values.email}
-                  onChange={(event) => setValue('email', event.target.value)}
-                  error={errors.email}
-                />
+                <div
+                  className="switcher"
+                  style={primitiveVars({ '--switcher-gap': 'var(--space-s)' })}
+                >
+                  <TextField
+                    label="Phone"
+                    name="phone"
+                    hint={phoneRequired(values.replyBy) ? undefined : '(optional)'}
+                    type="tel"
+                    autoComplete="tel"
+                    maxLength={20}
+                    value={values.phone}
+                    onChange={(event) => setValue('phone', event.target.value)}
+                    error={errors.phone}
+                  />
+                  <TextField
+                    label="Email"
+                    name="email"
+                    hint={emailRequired(values.replyBy) ? undefined : '(optional)'}
+                    type="email"
+                    autoComplete="email"
+                    maxLength={254}
+                    value={values.email}
+                    onChange={(event) => setValue('email', event.target.value)}
+                    error={errors.email}
+                  />
+                </div>
               </div>
-
-              <p className={styles.contactNote}>
-                If you provide an email address, we&apos;ll also send a confirmation email
-                — even if WhatsApp or Call is your reply method.
+              <p
+                className={cx(styles.contactNote)}
+                style={primitiveVars({ '--flow-space': 'var(--space-s)' })}
+              >
+                If you provide an email address, we&apos;ll send a confirmation email once
+                we&apos;ve received your submission.
               </p>
 
-              <div className={styles.stepActions}>
+              <div className="repel">
                 <Button type="button" variant="outline" onClick={() => setStep(1)}>
                   Back
                 </Button>
@@ -291,7 +318,7 @@ function EnquiryFormFields({
           <input type="hidden" name="turnstileToken" value={turnstileToken} />
         </fieldset>
 
-        {state.status === 'error' && !serverErrorDismissed ? (
+        {step === 2 && state.status === 'error' && !serverErrorDismissed ? (
           <AlertCallout ref={alertRef}>{state.message}</AlertCallout>
         ) : null}
       </div>
