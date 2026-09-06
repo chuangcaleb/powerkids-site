@@ -100,7 +100,7 @@ export const Enquiries: CollectionConfig = {
       name: 'enquiryTypeLabel',
       type: 'text',
       required: true,
-      label: 'Enquiry type (label)',
+      label: 'Type',
       admin: {
         readOnly: true,
         description:
