@@ -7,7 +7,7 @@
 }
 
 .nextButton {
-  align-self: flex-start;
+  align-self: flex-end;
 }
 
 .replyByGroup legend {
