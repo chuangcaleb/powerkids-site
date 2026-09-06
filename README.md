@@ -4,10 +4,6 @@ Website for **PowerKids Kindergarten** — three schools across the Klang Valley
 
 This v4 is a ground-up rebuild in PayloadCMS. Its purpose is to move every piece of content out of code and into a CMS, so school staff can edit copy, swap photos, add pages, and rearrange sections without a developer.
 
-## Status
-
-Foundation, design system, content model, and rendering are done. Automated content migration was permanently skipped — the owner populates the CMS by hand instead of migrating v3 copy. **Launch (SEO, accessibility, cutover) is next** — see [docs/workflows/deploy.md](docs/workflows/deploy.md#launch-checklist).
-
 ## Stack
 
 | Layer     | Choice                                                                                                             |
@@ -48,8 +44,6 @@ See [docs/workflows/environments.md](docs/workflows/environments.md#dev-admin-ac
 
 **Every variable must be set before anything runs, including build** — Payload config reads them while Next collects page data. Missing one fails loudly, naming itself.
 
-**Known gap:** enquiry-form infra (Turnstile keys, Vercel Firewall rate limit) not yet live — see [issue #39](https://github.com/chuangcaleb/powerkids-site/issues/39).
-
 ### Commands
 
 |                              |                                                          |
@@ -85,6 +79,12 @@ Git hooks handle formatting on commit, run full verify loop on push.
 
 **Duplicate uploads are flagged, not blocked.** Media re-uploads are detected by checksum group and flagged to editors for review/dismissal, rather than silently rejected. See [ADR 0005](docs/adr/0005-media-duplicate-detection-by-checksum-group.md).
 
+<!-- ### CTA
+
+Location Map
+
+Contact Form -->
+
 ## Documentation
 
 - **AGENTS.md** — conventions, non-negotiables, pointers to everything else. Start here.
@@ -99,11 +99,8 @@ Git hooks handle formatting on commit, run full verify loop on push.
 ## Previous versions
 
 - v1 was made in 2019 with **Weebly** website builder.
-
 - v2 was made in 2021 with **Jekyll**, [source code here](https://github.com/chuangcaleb/powerkids-jekyll)
-
 - v3 was made in 2023 with **Astro**, see [v3-final](https://github.com/chuangcaleb/powerkids-site/tree/v3-final) branch.
-
   - Optimised performance with minimal Astro.js + Typescript
   - Interactive components with shadcn/ui + Radix UI + React
   - Responsive design with Tailwind CSS, with Utopia's fluid typography/spacing
