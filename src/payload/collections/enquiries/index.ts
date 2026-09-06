@@ -84,7 +84,6 @@ export const Enquiries: CollectionConfig = {
               Cell: '@/payload/admin/components/enquiries/status-cell#StatusCell',
             },
           },
-          ...staffOnly,
         },
       ],
     },
