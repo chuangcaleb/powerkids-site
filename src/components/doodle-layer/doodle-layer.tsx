@@ -8,7 +8,7 @@ type DoodleIcon = ComponentType<{ size?: string | number; strokeWidth?: number }
 /**
  * Registry's decorative subset, resolved once. Callers that want a
  * context-specific set (contact glyphs in the footer, writing glyphs by the
- * registration form) pass their own components instead — those are authored
+ * enquiry form) pass their own components instead — those are authored
  * decoration, not an editor's choice, so they stay out of the icon field's
  * closed set.
  */

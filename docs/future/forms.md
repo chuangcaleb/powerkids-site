@@ -1,5 +1,7 @@
 # Forms — registration and careers
 
+(Stale, see [#38](https://github.com/chuangcaleb/powerkids-site/issues/38))
+
 **Deferred.** Owner: "much later". Registration currently links to a Google Form; careers says "call or email". Both work. Do not start without explicit go-ahead.
 
 **Goal:** registration and careers handled in-app, submissions readable in the admin panel.

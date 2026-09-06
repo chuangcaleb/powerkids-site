@@ -38,7 +38,7 @@ export type SectionDividerProps = {
   /** Seeds `torn`/`wobble` jitter — required for those shapes. Must be stable across server/client renders. */
   seed?: string
   className?: string
-  /** Overlaid content — e.g. the registration sticker straddling a divider. */
+  /** Overlaid content — e.g. the sticker straddling a divider. */
   children?: ReactNode
   /** Set for a content-level divider (e.g. `<hr>` replacement); omit between full sections. */
   role?: string

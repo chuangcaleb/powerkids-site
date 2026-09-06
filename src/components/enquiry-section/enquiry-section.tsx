@@ -22,7 +22,7 @@ export async function EnquirySection({ className }: EnquirySectionProps) {
   return (
     <section id="enquiry" className={cx('region', styles.section, className)}>
       <DoodleLayer zoneId="enquiry" density={30} icons={DOODLE_ICONS} />
-      <div className={cx('wrapper', styles.content)}>
+      <div className="wrapper">
         <div className="flow max-prose">
           <SectionHeader header={header} />
           <div className={styles.card}>
