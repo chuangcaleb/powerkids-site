@@ -4,5 +4,4 @@ Deliberate, larger-scope work with no current owner or timeline — distinct fro
 
 **Do not start without an explicit go-ahead.** Read the file's own Pre-conditions first.
 
-- [forms.md](forms.md) — registration and careers in-app, replacing the Google Form.
 - [localisation.md](localisation.md) — activating a second language.

@@ -14,15 +14,7 @@
   color: var(--text-on-cta);
 }
 
-.content {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-l);
-}
-
-/* White floating card (Variant C) — white is what keeps red-accent fields
+/* White floating card, white is what keeps red-accent fields
  * and errors legible against the section's own red background. */
 .card {
   background-color: var(--bg-surface);
