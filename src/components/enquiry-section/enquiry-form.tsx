@@ -160,16 +160,16 @@ function EnquiryFormFields({
 
   if (state.status === 'success') {
     return (
-      <div className={styles.success}>
+      <div className={cx('flow-m region', styles.success)}>
         <Logo className={styles.successLogo} />
-        <p className={styles.successTitle}>
-          Thanks, {values.name.split(' ')[0] || 'there'}
-        </p>
-        <p className={styles.successSubtitle}>
-          We&apos;ll reply by{' '}
-          {values.replyBy === 'whatsapp' ? 'WhatsApp' : values.replyBy} soon.
-          {values.email ? ' A confirmation email is on its way to you.' : ''}
-        </p>
+        <div className="flow-xs">
+          <p className={styles.successTitle}>Successfully submitted</p>
+          <p className={styles.successSubtitle}>
+            Thanks, {values.name.split(' ')[0]}. We&apos;ll reply by{' '}
+            {values.replyBy === 'whatsapp' ? 'WhatsApp' : values.replyBy} soon.
+            {values.email ? ' A confirmation email is on its way to you.' : ''}
+          </p>
+        </div>
         <Button type="button" variant="red" onClick={onRequestReset}>
           Send another enquiry
         </Button>
