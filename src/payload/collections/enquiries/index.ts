@@ -114,19 +114,10 @@ export const Enquiries: CollectionConfig = {
       admin: { readOnly: true },
     },
     {
-      name: 'confirmationFailed',
-      type: 'checkbox',
-      defaultValue: false,
-      label: 'Confirmation email failed',
-      admin: { width: '50%' },
-      ...staffOnly,
-    },
-    {
       name: 'adminNotificationFailed',
       type: 'checkbox',
       defaultValue: false,
       label: 'Admin notification email failed',
-      admin: { width: '50%' },
       ...staffOnly,
     },
 

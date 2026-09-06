@@ -48,23 +48,7 @@ function doc(overrides: Partial<FakeDoc> = {}): FakeDoc {
 }
 
 describe('sendEnquiryEmails', () => {
-  it('sends only the admin notification when no email was given', async () => {
-    const { req, sendEmail } = fakeReq()
-
-    await sendEnquiryEmails(
-      fromPartial({
-        doc: doc(),
-        req,
-        operation: 'create',
-        context: {},
-      }),
-    )
-
-    expect(sendEmail).toHaveBeenCalledTimes(1)
-    expect(sendEmail.mock.calls[0]![0].to).toBe('admin@powerkids.edu.my')
-  })
-
-  it('sends both confirmation and admin notification when an email was given', async () => {
+  it('sends only the admin notification, regardless of whether an email was given', async () => {
     const { req, sendEmail } = fakeReq()
 
     await sendEnquiryEmails(
@@ -76,33 +60,8 @@ describe('sendEnquiryEmails', () => {
       }),
     )
 
-    expect(sendEmail).toHaveBeenCalledTimes(2)
-    const recipients = sendEmail.mock.calls.map((call) => call[0].to)
-    expect(recipients).toContain('parent@example.com')
-    expect(recipients).toContain('admin@powerkids.edu.my')
-  })
-
-  it('never rethrows when the confirmation send fails, and flags confirmationFailed', async () => {
-    const sendEmail = vi
-      .fn()
-      .mockRejectedValueOnce(new Error('quota exceeded')) // confirmation
-      .mockResolvedValueOnce(undefined) // admin notification
-    const { req, update } = fakeReq({ sendEmail })
-
-    await expect(
-      sendEnquiryEmails(
-        fromPartial({
-          doc: doc({ email: 'parent@example.com' }),
-          req,
-          operation: 'create',
-          context: {},
-        }),
-      ),
-    ).resolves.not.toThrow()
-
-    expect(update).toHaveBeenCalledWith(
-      expect.objectContaining({ data: { confirmationFailed: true } }),
-    )
+    expect(sendEmail).toHaveBeenCalledTimes(1)
+    expect(sendEmail.mock.calls[0]![0].to).toBe('admin@powerkids.edu.my')
   })
 
   it('never rethrows when the admin notification fails, and flags adminNotificationFailed', async () => {
@@ -135,40 +94,21 @@ describe('sendEnquiryEmails', () => {
     expect(sendEmail).not.toHaveBeenCalled()
   })
 
-  it('does not echo the free-text message in the confirmation email body', async () => {
+  it('HTML-escapes interpolated values in the admin notification', async () => {
     const { req, sendEmail } = fakeReq()
 
     await sendEnquiryEmails(
       fromPartial({
-        doc: doc({ email: 'parent@example.com', message: '<script>evil()</script>' }),
+        doc: doc({ name: '<b>Jane</b>', message: '<script>evil()</script>' }),
         req,
         operation: 'create',
         context: {},
       }),
     )
 
-    const confirmationCall = sendEmail.mock.calls.find(
-      (call) => call[0].to === 'parent@example.com',
-    )
-    expect(confirmationCall![0].html ?? confirmationCall![0].text).not.toContain('evil()')
-  })
-
-  it('HTML-escapes interpolated values in the confirmation email', async () => {
-    const { req, sendEmail } = fakeReq()
-
-    await sendEnquiryEmails(
-      fromPartial({
-        doc: doc({ email: 'parent@example.com', name: '<b>Jane</b>' }),
-        req,
-        operation: 'create',
-        context: {},
-      }),
-    )
-
-    const confirmationCall = sendEmail.mock.calls.find(
-      (call) => call[0].to === 'parent@example.com',
-    )
-    expect(confirmationCall![0].html).not.toContain('<b>Jane</b>')
-    expect(confirmationCall![0].html).toContain('&lt;b&gt;Jane&lt;/b&gt;')
+    const adminCall = sendEmail.mock.calls[0]![0]
+    expect(adminCall.html).not.toContain('<b>Jane</b>')
+    expect(adminCall.html).not.toContain('<script>evil()</script>')
+    expect(adminCall.html).toContain('&lt;b&gt;Jane&lt;/b&gt;')
   })
 })

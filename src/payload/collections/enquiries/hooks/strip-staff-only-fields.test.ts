@@ -16,7 +16,6 @@ describe('stripStaffOnlyFields', () => {
       status: 'closed',
       closedBy: 1,
       closedAt: '2026-01-01',
-      confirmationFailed: true,
       adminNotificationFailed: true,
     })
 

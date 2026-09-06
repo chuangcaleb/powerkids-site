@@ -173,7 +173,6 @@ function EnquiryFormFields({
           <p className={styles.successSubtitle}>
             Thanks, {values.name.split(' ')[0]}. We&apos;ll reply by{' '}
             {REPLY_BY_LABEL[values.replyBy]} soon.
-            {values.email ? ' A confirmation email is on its way to you.' : ''}
           </p>
         </div>
         <Button type="button" variant="red" onClick={onRequestReset}>
@@ -299,13 +298,6 @@ function EnquiryFormFields({
                   error={errors.email}
                 />
               </div>
-              <p
-                className={cx(styles.contactNote)}
-                style={primitiveVars({ '--flow-space': 'var(--space-s)' })}
-              >
-                If you provide an email address, we&apos;ll send a confirmation email once
-                we&apos;ve received your submission.
-              </p>
 
               <div className="repel">
                 <Button type="button" variant="outline" onClick={() => setStep(1)}>

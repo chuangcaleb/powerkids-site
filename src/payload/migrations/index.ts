@@ -41,6 +41,7 @@ import * as migration_20260901_130630_remove_schools_collection from './20260901
 import * as migration_20260905_063518_add_site_settings_locations from './20260905_063518_add_site_settings_locations'
 import * as migration_20260905_085821_add_locations_block from './20260905_085821_add_locations_block'
 import * as migration_20260906_021007_enquiry_form from './20260906_021007_enquiry_form'
+import * as migration_20260906_093553_drop_enquiries_confirmation_failed from './20260906_093553_drop_enquiries_confirmation_failed'
 
 export const migrations = [
   {
@@ -257,5 +258,10 @@ export const migrations = [
     up: migration_20260906_021007_enquiry_form.up,
     down: migration_20260906_021007_enquiry_form.down,
     name: '20260906_021007_enquiry_form',
+  },
+  {
+    up: migration_20260906_093553_drop_enquiries_confirmation_failed.up,
+    down: migration_20260906_093553_drop_enquiries_confirmation_failed.down,
+    name: '20260906_093553_drop_enquiries_confirmation_failed',
   },
 ]
