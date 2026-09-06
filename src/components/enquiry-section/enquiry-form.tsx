@@ -169,10 +169,11 @@ function EnquiryFormFields({
       <div className={cx('flow-m region', styles.success)}>
         <Logo className={styles.successLogo} />
         <div className="flow-xs">
-          <p className={styles.successTitle}>Successfully submitted</p>
+          <p className={styles.successTitle}>Successfully submitted!</p>
           <p className={styles.successSubtitle}>
-            Thanks, {values.name.split(' ')[0]}. We&apos;ll reply by{' '}
-            {REPLY_BY_LABEL[values.replyBy]} soon.
+            Thanks, {values.name.split(' ')[0]} — we&apos;ve received the enquiry.
+            <br />
+            We&apos;ll reply by {REPLY_BY_LABEL[values.replyBy]} soon.
           </p>
         </div>
         <Button type="button" variant="red" onClick={onRequestReset}>
