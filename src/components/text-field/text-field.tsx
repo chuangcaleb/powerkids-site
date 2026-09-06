@@ -20,12 +20,13 @@ export function TextField({
   ...rest
 }: TextFieldProps) {
   const fieldId = id ?? name
-  const messageId = error ? `${fieldId}-error` : hint ? `${fieldId}-hint` : undefined
+  const messageId = error ? `${fieldId}-error` : undefined
 
   return (
     <div className={cx(styles.field, className)}>
       <label htmlFor={fieldId} className={styles.label}>
         {label}
+        {hint ? <span className={styles.hint}> {hint}</span> : null}
       </label>
       <input
         id={fieldId}
@@ -38,10 +39,6 @@ export function TextField({
       {error ? (
         <p id={messageId} className={styles.error}>
           {error}
-        </p>
-      ) : hint ? (
-        <p id={messageId} className={styles.hint}>
-          {hint}
         </p>
       ) : null}
     </div>

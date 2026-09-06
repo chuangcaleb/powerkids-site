@@ -71,6 +71,11 @@ function EnquiryFormFields({
   const [errors, setErrors] = useState<Partial<Record<EnquiryFieldName, string>>>({})
   const [turnstileToken, setTurnstileToken] = useState('')
   const [state, formAction, isPending] = useActionState(submitEnquiry, { status: 'idle' })
+  // The submit-time server error banner doesn't come from `errors` (that's
+  // field-level only) and `useActionState` has no reset — so it's dismissed
+  // by hand on the next edit, otherwise it'd sit there stale through a whole
+  // fresh attempt.
+  const [serverErrorDismissed, setServerErrorDismissed] = useState(false)
 
   const formRef = useRef<HTMLFormElement>(null)
   const alertRef = useRef<HTMLDivElement>(null)
@@ -81,6 +86,7 @@ function EnquiryFormFields({
 
   function setValue<K extends keyof FieldValues>(key: K, value: FieldValues[K]) {
     setValues((prev) => ({ ...prev, [key]: value }))
+    setServerErrorDismissed(true)
     setErrors((prev) => {
       if (!prev[key as EnquiryFieldName]) return prev
       const next = { ...prev }
@@ -94,6 +100,7 @@ function EnquiryFormFields({
   // immediately, not wait for the next submit (spec §7).
   function setReplyBy(replyBy: ReplyBy) {
     setValues((prev) => ({ ...prev, replyBy }))
+    setServerErrorDismissed(true)
     setErrors((prev) => {
       const next = { ...prev }
       if (next.phone && !validateField('phone', values.phone, replyBy)) delete next.phone
@@ -129,17 +136,22 @@ function EnquiryFormFields({
     if (Object.keys(fieldErrors).length > 0) {
       event.preventDefault()
       setErrors(fieldErrors)
+      return
     }
+    setServerErrorDismissed(false)
   }
 
   if (state.status === 'success') {
     return (
       <div className={styles.success}>
         <Logo className={styles.successLogo} />
-        <p className={styles.successTitle}>Successfully submitted</p>
+        <p className={styles.successTitle}>
+          Thanks, {values.name.split(' ')[0] || 'there'}
+        </p>
         <p className={styles.successSubtitle}>
           We&apos;ll reply by{' '}
           {values.replyBy === 'whatsapp' ? 'WhatsApp' : values.replyBy} soon.
+          {values.email ? ' A confirmation email is on its way to you.' : ''}
         </p>
         <Button type="button" variant="red" onClick={onRequestReset}>
           Send another enquiry
@@ -150,134 +162,139 @@ function EnquiryFormFields({
 
   return (
     <form ref={formRef} action={formAction} onSubmit={handleSubmit} noValidate>
-      <fieldset disabled={isPending} className={styles.fieldset}>
-        <div className={step === 1 ? styles.stepVisible : styles.stepHidden}>
-          <div className="flow">
-            <NativeSelectField
-              label="What can we help with?"
-              name="enquiryTypeIdSelect"
-              value={values.enquiryTypeId}
-              onChange={(event) => setValue('enquiryTypeId', event.target.value)}
-              options={enquiryTypes.map((type) => ({
-                value: type.id,
-                label: type.label,
-              }))}
-              error={errors.enquiryType}
-            />
-            <TextareaField
-              label="Message"
-              name="message"
-              hint="Optional, max 1000 characters."
-              maxLength={1000}
-              value={values.message}
-              onChange={(event) => setValue('message', event.target.value)}
-              error={errors.message}
-            />
-            <Button
-              type="button"
-              variant="red"
-              className={styles.nextButton}
-              onClick={goToStep2}
-            >
-              Next
-            </Button>
+      <div className="flow-s">
+        <fieldset disabled={isPending} className={styles.fieldset}>
+          <div className={step === 1 ? styles.stepVisible : styles.stepHidden}>
+            <div className="flow">
+              <NativeSelectField
+                label="What can we help with?"
+                name="enquiryTypeIdSelect"
+                value={values.enquiryTypeId}
+                onChange={(event) => setValue('enquiryTypeId', event.target.value)}
+                options={enquiryTypes.map((type) => ({
+                  value: type.id,
+                  label: type.label,
+                }))}
+                error={errors.enquiryType}
+              />
+              <TextareaField
+                label="Message"
+                name="message"
+                hint="Optional, max 1000 characters."
+                maxLength={1000}
+                value={values.message}
+                onChange={(event) => setValue('message', event.target.value)}
+                error={errors.message}
+              />
+              <Button
+                type="button"
+                variant="red"
+                className={styles.nextButton}
+                onClick={goToStep2}
+              >
+                Next
+              </Button>
+            </div>
           </div>
-        </div>
 
-        <div className={step === 2 ? styles.stepVisible : styles.stepHidden}>
-          <div className="flow">
-            <fieldset className={styles.replyByGroup}>
-              <legend>How should we reply to you?</legend>
-              <div className={styles.replyByChips}>
-                <ToggleChip
-                  name="replyBy"
-                  value="whatsapp"
-                  icon={<MessageCircle size={16} aria-hidden="true" />}
-                  label="WhatsApp"
-                  checked={values.replyBy === 'whatsapp'}
-                  onChange={() => setReplyBy('whatsapp')}
+          <div className={step === 2 ? styles.stepVisible : styles.stepHidden}>
+            <div className="flow">
+              <fieldset className={styles.replyByGroup}>
+                <legend>How should we reply to you?</legend>
+                <div className={styles.replyByChips}>
+                  <ToggleChip
+                    name="replyBy"
+                    value="whatsapp"
+                    icon={<MessageCircle size={16} aria-hidden="true" />}
+                    label="WhatsApp"
+                    checked={values.replyBy === 'whatsapp'}
+                    onChange={() => setReplyBy('whatsapp')}
+                  />
+                  <ToggleChip
+                    name="replyBy"
+                    value="call"
+                    icon={<Phone size={16} aria-hidden="true" />}
+                    label="Call"
+                    checked={values.replyBy === 'call'}
+                    onChange={() => setReplyBy('call')}
+                  />
+                  <ToggleChip
+                    name="replyBy"
+                    value="email"
+                    icon={<Mail size={16} aria-hidden="true" />}
+                    label="Email"
+                    checked={values.replyBy === 'email'}
+                    onChange={() => setReplyBy('email')}
+                  />
+                </div>
+              </fieldset>
+
+              <TextField
+                label="Name"
+                name="name"
+                autoComplete="name"
+                maxLength={80}
+                value={values.name}
+                onChange={(event) => setValue('name', event.target.value)}
+                error={errors.name}
+              />
+
+              <div className={styles.contactRow}>
+                <TextField
+                  label="Phone"
+                  name="phone"
+                  hint={phoneRequired(values.replyBy) ? undefined : '(optional)'}
+                  type="tel"
+                  autoComplete="tel"
+                  maxLength={20}
+                  value={values.phone}
+                  onChange={(event) => setValue('phone', event.target.value)}
+                  error={errors.phone}
                 />
-                <ToggleChip
-                  name="replyBy"
-                  value="call"
-                  icon={<Phone size={16} aria-hidden="true" />}
-                  label="Call"
-                  checked={values.replyBy === 'call'}
-                  onChange={() => setReplyBy('call')}
-                />
-                <ToggleChip
-                  name="replyBy"
-                  value="email"
-                  icon={<Mail size={16} aria-hidden="true" />}
+                <TextField
                   label="Email"
-                  checked={values.replyBy === 'email'}
-                  onChange={() => setReplyBy('email')}
+                  name="email"
+                  hint={emailRequired(values.replyBy) ? undefined : '(optional)'}
+                  type="email"
+                  autoComplete="email"
+                  maxLength={254}
+                  value={values.email}
+                  onChange={(event) => setValue('email', event.target.value)}
+                  error={errors.email}
                 />
               </div>
-            </fieldset>
 
-            <TextField
-              label="Name"
-              name="name"
-              autoComplete="name"
-              maxLength={80}
-              value={values.name}
-              onChange={(event) => setValue('name', event.target.value)}
-              error={errors.name}
-            />
+              <p className={styles.contactNote}>
+                If you provide an email address, we&apos;ll also send a confirmation email
+                — even if WhatsApp or Call is your reply method.
+              </p>
 
-            <div className={styles.contactRow}>
-              <TextField
-                label="Phone"
-                name="phone"
-                hint={phoneRequired(values.replyBy) ? undefined : '(optional)'}
-                type="tel"
-                autoComplete="tel"
-                maxLength={20}
-                value={values.phone}
-                onChange={(event) => setValue('phone', event.target.value)}
-                error={errors.phone}
-              />
-              <TextField
-                label="Email"
-                name="email"
-                hint={emailRequired(values.replyBy) ? undefined : '(optional)'}
-                type="email"
-                autoComplete="email"
-                maxLength={254}
-                value={values.email}
-                onChange={(event) => setValue('email', event.target.value)}
-                error={errors.email}
-              />
-            </div>
-
-            <div className={styles.stepActions}>
-              <Button type="button" variant="outline" onClick={() => setStep(1)}>
-                Back
-              </Button>
-              <Button type="submit" variant="red">
-                Submit
-              </Button>
+              <div className={styles.stepActions}>
+                <Button type="button" variant="outline" onClick={() => setStep(1)}>
+                  Back
+                </Button>
+                <Button type="submit" variant="red">
+                  Submit
+                </Button>
+              </div>
             </div>
           </div>
-        </div>
 
-        <input type="hidden" name="enquiryTypeId" value={values.enquiryTypeId} />
-        <input
-          type="hidden"
-          name="enquiryTypeLabel"
-          value={
-            enquiryTypes.find((type) => type.id === values.enquiryTypeId)?.label ?? ''
-          }
-        />
-        <input type="hidden" name="turnstileToken" value={turnstileToken} />
-      </fieldset>
+          <input type="hidden" name="enquiryTypeId" value={values.enquiryTypeId} />
+          <input
+            type="hidden"
+            name="enquiryTypeLabel"
+            value={
+              enquiryTypes.find((type) => type.id === values.enquiryTypeId)?.label ?? ''
+            }
+          />
+          <input type="hidden" name="turnstileToken" value={turnstileToken} />
+        </fieldset>
 
-      {state.status === 'error' ? (
-        <AlertCallout ref={alertRef} className={styles.errorCallout}>
-          {state.message}
-        </AlertCallout>
-      ) : null}
+        {state.status === 'error' && !serverErrorDismissed ? (
+          <AlertCallout ref={alertRef}>{state.message}</AlertCallout>
+        ) : null}
+      </div>
 
       <TurnstileWidget
         siteKey={turnstileSiteKey}

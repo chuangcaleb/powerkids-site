@@ -1,4 +1,4 @@
-import { AlertCircle } from 'lucide-react'
+import { AlertTriangle } from 'lucide-react'
 import { forwardRef } from 'react'
 import type { HTMLAttributes } from 'react'
 import { cx } from '@/lib/cx'
@@ -23,7 +23,7 @@ export const AlertCallout = forwardRef<HTMLDivElement, AlertCalloutProps>(
         className={cx(styles.callout, className)}
         {...rest}
       >
-        <AlertCircle aria-hidden="true" className={styles.icon} />
+        <AlertTriangle aria-hidden="true" className={styles.icon} />
         <p>{children}</p>
       </div>
     )

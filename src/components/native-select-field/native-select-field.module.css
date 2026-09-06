@@ -17,6 +17,10 @@
 .select {
   flex: 1;
   font: inherit;
+
+  /* Chrome/Firefox render the native option listbox at the select's own
+   * font-size — inheriting the ambient card size read oversized there. */
+  font-size: var(--step--1);
   padding: var(--space-2xs) var(--space-xl) var(--space-2xs) var(--space-xs);
   border: var(--pill-border-width) solid var(--border-strong);
   border-radius: var(--radius-s);

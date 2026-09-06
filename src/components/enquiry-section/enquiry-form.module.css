@@ -45,6 +45,11 @@
   flex: 1;
 }
 
+.contactNote {
+  color: var(--text-muted);
+  font-size: var(--step--2);
+}
+
 @media (width <= 30rem) {
   .contactRow {
     flex-direction: column;
@@ -55,10 +60,6 @@
   display: flex;
   justify-content: space-between;
   gap: var(--space-s);
-}
-
-.errorCallout {
-  margin-top: var(--space-s);
 }
 
 .success {

@@ -4,6 +4,7 @@
 // widget API — no server equivalent.
 
 import { useEffect, useRef, useState } from 'react'
+import styles from './turnstile-widget.module.css'
 
 const SCRIPT_SRC = 'https://challenges.cloudflare.com/turnstile/v0/api.js'
 
@@ -96,5 +97,5 @@ export function TurnstileWidget({ siteKey, onToken, triggerRef }: TurnstileWidge
     }
   }, [shouldLoad, siteKey, onToken])
 
-  return <div ref={containerRef} />
+  return <div ref={containerRef} className={styles.container} />
 }
