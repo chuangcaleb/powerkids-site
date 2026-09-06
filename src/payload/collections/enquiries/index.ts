@@ -24,7 +24,7 @@ export const Enquiries: CollectionConfig = {
   admin: {
     useAsTitle: 'name',
     group: 'Content',
-    defaultColumns: ['status', 'name', 'phone', 'enquiryTypeLabel', 'createdAt'],
+    defaultColumns: ['id', 'status', 'name', 'phone', 'enquiryTypeLabel', 'createdAt'],
   },
   defaultSort: '-createdAt',
   access: {
@@ -51,6 +51,7 @@ export const Enquiries: CollectionConfig = {
       maxLength: 20,
       admin: {
         readOnly: true,
+        width: '50%',
         description: 'Stored exactly as typed — no normalisation.',
       },
       validate: (
@@ -64,7 +65,7 @@ export const Enquiries: CollectionConfig = {
       name: 'email',
       type: 'text',
       maxLength: 254,
-      admin: { readOnly: true },
+      admin: { readOnly: true, width: '50%' },
       validate: (
         value: unknown,
         { siblingData }: { siblingData: { replyBy?: ReplyBy } },
@@ -90,8 +91,9 @@ export const Enquiries: CollectionConfig = {
       label: 'Enquiry type (row id)',
       admin: {
         readOnly: true,
+        hidden: true,
         description:
-          'Soft reference to cta.enquiry.types[].id — no referential integrity.',
+          'Soft reference to cta.enquiry.types[].id — no referential integrity. Debug-only, query DB directly if needed.',
       },
     },
     {
@@ -116,6 +118,7 @@ export const Enquiries: CollectionConfig = {
       type: 'checkbox',
       defaultValue: false,
       label: 'Confirmation email failed',
+      admin: { width: '50%' },
       ...staffOnly,
     },
     {
@@ -123,6 +126,7 @@ export const Enquiries: CollectionConfig = {
       type: 'checkbox',
       defaultValue: false,
       label: 'Admin notification email failed',
+      admin: { width: '50%' },
       ...staffOnly,
     },
 
@@ -146,13 +150,13 @@ export const Enquiries: CollectionConfig = {
       name: 'closedBy',
       type: 'relationship',
       relationTo: 'users',
-      admin: { readOnly: true },
+      admin: { readOnly: true, width: '50%' },
       access: { create: () => false, read: authenticatedFieldAccess },
     },
     {
       name: 'closedAt',
       type: 'date',
-      admin: { readOnly: true },
+      admin: { readOnly: true, width: '50%' },
       ...staffOnly,
     },
   ],

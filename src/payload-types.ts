@@ -721,7 +721,7 @@ export interface Enquiry {
   email?: string | null;
   replyBy: 'whatsapp' | 'call' | 'email';
   /**
-   * Soft reference to cta.enquiry.types[].id — no referential integrity.
+   * Soft reference to cta.enquiry.types[].id — no referential integrity. Debug-only, query DB directly if needed.
    */
   enquiryTypeId: string;
   /**
