@@ -5,7 +5,7 @@
 
 import { SiWhatsapp } from '@icons-pack/react-simple-icons'
 import { Mail, Phone } from 'lucide-react'
-import { useActionState, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useTransition } from 'react'
 
 import { AlertCallout } from '@/components/alert-callout/alert-callout'
 import { Button } from '@/components/button/button'
@@ -16,7 +16,9 @@ import { TextareaField } from '@/components/form/textarea-field/textarea-field'
 import { ToggleChip } from '@/components/form/toggle-chip/toggle-chip'
 import { emailRequired, phoneRequired, validateField } from '@/lib/validate-enquiry'
 import type { EnquiryFieldName, ReplyBy } from '@/lib/validate-enquiry'
+import { GENERIC_ERROR } from './generic-error'
 import { submitEnquiry } from './submit-enquiry'
+import type { SubmitEnquiryState } from './submit-enquiry'
 import { TurnstileWidget } from './turnstile-widget'
 import styles from './enquiry-form.module.css'
 import { cx } from '@/lib/cx'
@@ -55,10 +57,9 @@ function initialValues(enquiryTypes: EnquiryTypeOption[]): FieldValues {
   }
 }
 
-// `useActionState`'s status never reverts to 'idle' on its own, and there is
-// no reset API for it — "Send another enquiry" instead remounts this whole
-// component under a fresh `key` (see `EnquiryForm` below), which gives every
-// hook here, including `useActionState`, a clean slate.
+// `state` never reverts to 'idle' on its own — "Send another enquiry"
+// instead remounts this whole component under a fresh `key` (see
+// `EnquiryForm` below), which gives every hook here a clean slate.
 export function EnquiryForm(props: EnquiryFormProps) {
   const [instance, setInstance] = useState(0)
   return (
@@ -79,11 +80,12 @@ function EnquiryFormFields({
   const [values, setValues] = useState<FieldValues>(() => initialValues(enquiryTypes))
   const [errors, setErrors] = useState<Partial<Record<EnquiryFieldName, string>>>({})
   const [turnstileToken, setTurnstileToken] = useState('')
-  const [state, formAction, isPending] = useActionState(submitEnquiry, { status: 'idle' })
+  const [state, setState] = useState<SubmitEnquiryState>({ status: 'idle' })
+  const [isPending, startTransition] = useTransition()
   // The submit-time server error banner doesn't come from `errors` (that's
-  // field-level only) and `useActionState` has no reset — so it's dismissed
-  // by hand on the next edit, otherwise it'd sit there stale through a whole
-  // fresh attempt.
+  // field-level only) and `state` has no reset — so it's dismissed by hand
+  // on the next edit, otherwise it'd sit there stale through a whole fresh
+  // attempt.
   const [serverErrorDismissed, setServerErrorDismissed] = useState(false)
 
   const formRef = useRef<HTMLFormElement>(null)
@@ -141,7 +143,14 @@ function EnquiryFormFields({
     setStep(2)
   }
 
+  // Native `<form action={formAction}>` dispatch (via `useActionState`) can't
+  // be used here: a WAF-denied submission returns a non-Server-Action-shaped
+  // response, which that dispatch rethrows to the nearest error boundary —
+  // there is none, so it crashes the app instead of showing this form's own
+  // alert. Calling the action ourselves lets us catch that case too.
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+
     const fieldErrors: Partial<Record<EnquiryFieldName, string>> = {}
     const fields: EnquiryFieldName[] = [
       'name',
@@ -157,11 +166,19 @@ function EnquiryFormFields({
     }
 
     if (Object.keys(fieldErrors).length > 0) {
-      event.preventDefault()
       setErrors(fieldErrors)
       return
     }
     setServerErrorDismissed(false)
+
+    const formData = new FormData(event.currentTarget)
+    startTransition(async () => {
+      try {
+        setState(await submitEnquiry(state, formData))
+      } catch {
+        setState({ status: 'error', message: GENERIC_ERROR })
+      }
+    })
   }
 
   if (state.status === 'success') {
@@ -184,158 +201,178 @@ function EnquiryFormFields({
   }
 
   return (
-    <form ref={formRef} action={formAction} onSubmit={handleSubmit} noValidate>
-      <div className="flow">
-        <fieldset disabled={isPending} className={isPending ? styles.pending : undefined}>
-          <div className={step === 1 ? styles.stepVisible : styles.stepHidden}>
-            <div className="flow">
-              <NativeSelectField
-                label="What can we help with?"
-                name="enquiryTypeIdSelect"
-                value={values.enquiryTypeId}
-                onChange={(event) => setValue('enquiryTypeId', event.target.value)}
-                options={enquiryTypes.map((type) => ({
-                  value: type.id,
-                  label: type.label,
-                }))}
-                error={errors.enquiryType}
-              />
-              <TextareaField
-                label="Message"
-                name="message"
-                hint="(optional, max 1000 characters)"
-                maxLength={1000}
-                value={values.message}
-                onChange={(event) => setValue('message', event.target.value)}
-                error={errors.message}
-              />
-              <div className="cluster">
-                <Button type="button" variant="red" onClick={goToStep2}>
-                  Next
-                </Button>
+    <>
+      {/* Submission is JS-only (manual dispatch below, plus the Turnstile
+          widget already requires JS) — no-JS users get a static fallback
+          instead of a form that silently does nothing on submit. */}
+      <noscript>
+        <style>{`.${styles.form} { display: none; }`}</style>
+        <div className="flow-m region">
+          <p>
+            This form needs JavaScript enabled. Please reach us directly through the{' '}
+            <a href="#contact">contact information below</a>.
+          </p>
+        </div>
+      </noscript>
+      <form ref={formRef} className={styles.form} onSubmit={handleSubmit} noValidate>
+        <div className="flow">
+          <fieldset
+            disabled={isPending}
+            className={isPending ? styles.pending : undefined}
+          >
+            <div className={step === 1 ? styles.stepVisible : styles.stepHidden}>
+              <div className="flow">
+                <NativeSelectField
+                  label="What can we help with?"
+                  name="enquiryTypeIdSelect"
+                  value={values.enquiryTypeId}
+                  onChange={(event) => setValue('enquiryTypeId', event.target.value)}
+                  options={enquiryTypes.map((type) => ({
+                    value: type.id,
+                    label: type.label,
+                  }))}
+                  error={errors.enquiryType}
+                />
+                <TextareaField
+                  label="Message"
+                  name="message"
+                  hint="(optional, max 1000 characters)"
+                  maxLength={1000}
+                  value={values.message}
+                  onChange={(event) => setValue('message', event.target.value)}
+                  error={errors.message}
+                />
+                <div className="cluster">
+                  <Button type="button" variant="red" onClick={goToStep2}>
+                    Next
+                  </Button>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className={step === 2 ? styles.stepVisible : styles.stepHidden}>
-            <div className="flow">
-              <fieldset className={cx('flow-2xs', styles.replyByGroup)}>
-                <legend>How should we reply to you?</legend>
+            <div className={step === 2 ? styles.stepVisible : styles.stepHidden}>
+              <div className="flow">
+                <fieldset className={cx('flow-2xs', styles.replyByGroup)}>
+                  <legend>How should we reply to you?</legend>
+                  <div
+                    className="cluster"
+                    style={primitiveVars({ '--cluster-gap': 'var(--space-2xs)' })}
+                  >
+                    <ToggleChip
+                      name="replyBy"
+                      value="whatsapp"
+                      icon={<SiWhatsapp size={18} aria-hidden="true" />}
+                      label="WhatsApp"
+                      checked={values.replyBy === 'whatsapp'}
+                      onChange={() => setReplyBy('whatsapp')}
+                    />
+                    <ToggleChip
+                      name="replyBy"
+                      value="call"
+                      icon={<Phone size={16} aria-hidden="true" />}
+                      label="Phone call"
+                      checked={values.replyBy === 'call'}
+                      onChange={() => setReplyBy('call')}
+                    />
+                    <ToggleChip
+                      name="replyBy"
+                      value="email"
+                      icon={<Mail size={16} aria-hidden="true" />}
+                      label="Email"
+                      checked={values.replyBy === 'email'}
+                      onChange={() => setReplyBy('email')}
+                    />
+                  </div>
+                </fieldset>
+
+                <TextField
+                  label="Name"
+                  name="name"
+                  autoComplete="name"
+                  maxLength={80}
+                  value={values.name}
+                  onChange={(event) => setValue('name', event.target.value)}
+                  error={errors.name}
+                />
+
                 <div
-                  className="cluster"
-                  style={primitiveVars({ '--cluster-gap': 'var(--space-2xs)' })}
+                  className="switcher"
+                  style={primitiveVars({
+                    '--switcher-gap': 'var(--space-s)',
+                    '--switcher-inline-at': '30rem',
+                  })}
                 >
-                  <ToggleChip
-                    name="replyBy"
-                    value="whatsapp"
-                    icon={<SiWhatsapp size={18} aria-hidden="true" />}
-                    label="WhatsApp"
-                    checked={values.replyBy === 'whatsapp'}
-                    onChange={() => setReplyBy('whatsapp')}
+                  <TextField
+                    label="Phone"
+                    name="phone"
+                    hint={
+                      phoneRequired(values.replyBy)
+                        ? '(e.g. +60123456789)'
+                        : '(optional, e.g. +60123456789)'
+                    }
+                    type="tel"
+                    autoComplete="tel"
+                    maxLength={20}
+                    value={values.phone}
+                    onChange={(event) => setValue('phone', event.target.value)}
+                    error={errors.phone}
                   />
-                  <ToggleChip
-                    name="replyBy"
-                    value="call"
-                    icon={<Phone size={16} aria-hidden="true" />}
-                    label="Phone call"
-                    checked={values.replyBy === 'call'}
-                    onChange={() => setReplyBy('call')}
-                  />
-                  <ToggleChip
-                    name="replyBy"
-                    value="email"
-                    icon={<Mail size={16} aria-hidden="true" />}
+                  <TextField
                     label="Email"
-                    checked={values.replyBy === 'email'}
-                    onChange={() => setReplyBy('email')}
+                    name="email"
+                    hint={emailRequired(values.replyBy) ? undefined : '(optional)'}
+                    type="email"
+                    autoComplete="email"
+                    maxLength={254}
+                    value={values.email}
+                    onChange={(event) => setValue('email', event.target.value)}
+                    error={errors.email}
                   />
                 </div>
-              </fieldset>
 
-              <TextField
-                label="Name"
-                name="name"
-                autoComplete="name"
-                maxLength={80}
-                value={values.name}
-                onChange={(event) => setValue('name', event.target.value)}
-                error={errors.name}
-              />
-
-              <div
-                className="switcher"
-                style={primitiveVars({
-                  '--switcher-gap': 'var(--space-s)',
-                  '--switcher-inline-at': '30rem',
-                })}
-              >
-                <TextField
-                  label="Phone"
-                  name="phone"
-                  hint={
-                    phoneRequired(values.replyBy)
-                      ? '(e.g. +60123456789)'
-                      : '(optional, e.g. +60123456789)'
-                  }
-                  type="tel"
-                  autoComplete="tel"
-                  maxLength={20}
-                  value={values.phone}
-                  onChange={(event) => setValue('phone', event.target.value)}
-                  error={errors.phone}
-                />
-                <TextField
-                  label="Email"
-                  name="email"
-                  hint={emailRequired(values.replyBy) ? undefined : '(optional)'}
-                  type="email"
-                  autoComplete="email"
-                  maxLength={254}
-                  value={values.email}
-                  onChange={(event) => setValue('email', event.target.value)}
-                  error={errors.email}
-                />
-              </div>
-
-              <div className="cluster">
-                <Button type="button" variant="outline" onClick={() => setStep(1)}>
-                  Back
-                </Button>
-                <Button type="submit" variant="red" aria-busy={isPending}>
-                  {isPending ? (
-                    <>
-                      <span className={styles.spinner} aria-hidden="true" />
-                      Submitting…
-                    </>
-                  ) : (
-                    'Submit'
-                  )}
-                </Button>
+                <div className="cluster">
+                  <Button type="button" variant="outline" onClick={() => setStep(1)}>
+                    Back
+                  </Button>
+                  <Button type="submit" variant="red" aria-busy={isPending}>
+                    {isPending ? (
+                      <>
+                        <span className={styles.spinner} aria-hidden="true" />
+                        Submitting…
+                      </>
+                    ) : (
+                      'Submit'
+                    )}
+                  </Button>
+                </div>
               </div>
             </div>
-          </div>
 
-          <input type="hidden" name="enquiryTypeId" value={values.enquiryTypeId} />
-          <input
-            type="hidden"
-            name="enquiryTypeLabel"
-            value={
-              enquiryTypes.find((type) => type.id === values.enquiryTypeId)?.label ?? ''
-            }
-          />
-          <input type="hidden" name="turnstileToken" value={turnstileToken} />
-        </fieldset>
+            <input type="hidden" name="enquiryTypeId" value={values.enquiryTypeId} />
+            <input
+              type="hidden"
+              name="enquiryTypeLabel"
+              value={
+                enquiryTypes.find((type) => type.id === values.enquiryTypeId)?.label ?? ''
+              }
+            />
+            <input type="hidden" name="turnstileToken" value={turnstileToken} />
+          </fieldset>
 
-        {step === 2 && state.status === 'error' && !serverErrorDismissed && !isPending ? (
-          <AlertCallout ref={alertRef}>{state.message}</AlertCallout>
-        ) : null}
-      </div>
+          {step === 2 &&
+          state.status === 'error' &&
+          !serverErrorDismissed &&
+          !isPending ? (
+            <AlertCallout ref={alertRef}>{state.message}</AlertCallout>
+          ) : null}
+        </div>
 
-      <TurnstileWidget
-        siteKey={turnstileSiteKey}
-        onToken={setTurnstileToken}
-        triggerRef={formRef}
-      />
-    </form>
+        <TurnstileWidget
+          siteKey={turnstileSiteKey}
+          onToken={setTurnstileToken}
+          triggerRef={formRef}
+        />
+      </form>
+    </>
   )
 }

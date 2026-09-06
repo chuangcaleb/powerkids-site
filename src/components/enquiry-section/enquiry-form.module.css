@@ -1,3 +1,9 @@
+/* Hook only — targeted by the `<noscript>` fallback's `\3c style>` to hide the
+   form when JavaScript is disabled. No visual effect on its own. */
+.form {
+  position: static;
+}
+
 .stepVisible {
   display: block;
 }
