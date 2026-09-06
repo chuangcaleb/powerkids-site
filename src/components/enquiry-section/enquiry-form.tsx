@@ -178,7 +178,8 @@ function EnquiryFormFields({
         // reducer chaining here, so pass a fixed placeholder rather than the
         // live `state` closure.
         setState(await submitEnquiry({ status: 'idle' }, formData))
-      } catch {
+      } catch (error) {
+        console.error('submitEnquiry: transport-level failure', error)
         setState({ status: 'error', message: GENERIC_ERROR })
       }
     })

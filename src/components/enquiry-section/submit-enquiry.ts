@@ -48,6 +48,10 @@ export async function submitEnquiry(
   ].filter(Boolean)
 
   if (!replyBy || fieldErrors.length > 0) {
+    console.error('submitEnquiry: server-side validation failed', {
+      replyBy,
+      fieldErrors,
+    })
     return { status: 'error', message: GENERIC_ERROR }
   }
 
@@ -59,6 +63,7 @@ export async function submitEnquiry(
   // `enquiries` with the spam the defence exists to keep out.
   const verified = await verifyTurnstileToken(turnstileToken, remoteIp)
   if (!verified) {
+    console.error('submitEnquiry: Turnstile verification failed', { remoteIp })
     return { status: 'error', message: GENERIC_ERROR }
   }
 
@@ -82,7 +87,8 @@ export async function submitEnquiry(
     })
 
     return { status: 'success' }
-  } catch {
+  } catch (error) {
+    console.error('submitEnquiry: payload.create failed', error)
     return { status: 'error', message: GENERIC_ERROR }
   }
 }
