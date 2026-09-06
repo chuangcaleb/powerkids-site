@@ -32,7 +32,7 @@ export function FieldShell({
   const messageId = error ? `${fieldId}-error` : undefined
 
   return (
-    <div className={cx(styles.field, className)}>
+    <div className={cx('flow-3xs', className)}>
       <label
         htmlFor={fieldId}
         className={cx('cluster', styles.label)}
