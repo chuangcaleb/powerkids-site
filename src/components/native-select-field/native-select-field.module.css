@@ -9,6 +9,10 @@
   font-size: var(--step--1);
 }
 
+.label.invalid {
+  color: var(--accent-red);
+}
+
 .selectWrap {
   position: relative;
   display: flex;

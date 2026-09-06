@@ -1,4 +1,10 @@
+/* No layout primitive fits: icon+message must stay side-by-side at every
+ * width, including narrow screens — cluster/switcher/repel all wrap or
+ * stack there by design. */
 .callout {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xs);
   padding: var(--space-xs) var(--space-s);
   border: var(--pill-border-width) solid var(--accent-red);
   border-radius: var(--radius-s);
@@ -13,5 +19,6 @@
 
 .icon {
   flex-shrink: 0;
-  margin-top: 0.15em;
+  width: 1.5em;
+  height: 1.5em;
 }

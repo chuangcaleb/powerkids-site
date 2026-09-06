@@ -27,7 +27,7 @@ export function TextField({
     <div className={cx(styles.field, className)}>
       <label
         htmlFor={fieldId}
-        className={cx('cluster', styles.label)}
+        className={cx('cluster', styles.label, error && styles.invalid)}
         style={primitiveVars({ '--cluster-gap': 'var(--space-3xs)' })}
       >
         {label}

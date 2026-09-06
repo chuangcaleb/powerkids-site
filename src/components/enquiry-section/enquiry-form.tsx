@@ -22,6 +22,12 @@ import styles from './enquiry-form.module.css'
 import { cx } from '@/lib/cx'
 import { primitiveVars } from '@/lib/primitive-vars'
 
+const REPLY_BY_LABEL: Record<ReplyBy, string> = {
+  whatsapp: 'WhatsApp',
+  call: 'phone call',
+  email: 'email',
+}
+
 export type EnquiryTypeOption = { id: string; label: string }
 
 export type EnquiryFormProps = {
@@ -166,7 +172,7 @@ function EnquiryFormFields({
           <p className={styles.successTitle}>Successfully submitted</p>
           <p className={styles.successSubtitle}>
             Thanks, {values.name.split(' ')[0]}. We&apos;ll reply by{' '}
-            {values.replyBy === 'whatsapp' ? 'WhatsApp' : values.replyBy} soon.
+            {REPLY_BY_LABEL[values.replyBy]} soon.
             {values.email ? ' A confirmation email is on its way to you.' : ''}
           </p>
         </div>
@@ -234,7 +240,7 @@ function EnquiryFormFields({
                     name="replyBy"
                     value="call"
                     icon={<Phone size={16} aria-hidden="true" />}
-                    label="Call"
+                    label="Phone call"
                     checked={values.replyBy === 'call'}
                     onChange={() => setReplyBy('call')}
                   />
@@ -249,44 +255,45 @@ function EnquiryFormFields({
                 </div>
               </fieldset>
 
-              <div className="flow-s">
-                <TextField
-                  label="Name"
-                  name="name"
-                  autoComplete="name"
-                  maxLength={80}
-                  value={values.name}
-                  onChange={(event) => setValue('name', event.target.value)}
-                  error={errors.name}
-                />
+              <TextField
+                label="Name"
+                name="name"
+                autoComplete="name"
+                maxLength={80}
+                value={values.name}
+                onChange={(event) => setValue('name', event.target.value)}
+                error={errors.name}
+              />
 
-                <div
-                  className="switcher"
-                  style={primitiveVars({ '--switcher-gap': 'var(--space-s)' })}
-                >
-                  <TextField
-                    label="Phone"
-                    name="phone"
-                    hint={phoneRequired(values.replyBy) ? undefined : '(optional)'}
-                    type="tel"
-                    autoComplete="tel"
-                    maxLength={20}
-                    value={values.phone}
-                    onChange={(event) => setValue('phone', event.target.value)}
-                    error={errors.phone}
-                  />
-                  <TextField
-                    label="Email"
-                    name="email"
-                    hint={emailRequired(values.replyBy) ? undefined : '(optional)'}
-                    type="email"
-                    autoComplete="email"
-                    maxLength={254}
-                    value={values.email}
-                    onChange={(event) => setValue('email', event.target.value)}
-                    error={errors.email}
-                  />
-                </div>
+              <div
+                className={cx('switcher', styles.contactRow)}
+                style={primitiveVars({
+                  '--switcher-gap': 'var(--space-s)',
+                  '--switcher-inline-at': '30rem',
+                })}
+              >
+                <TextField
+                  label="Phone"
+                  name="phone"
+                  hint={phoneRequired(values.replyBy) ? undefined : '(optional)'}
+                  type="tel"
+                  autoComplete="tel"
+                  maxLength={20}
+                  value={values.phone}
+                  onChange={(event) => setValue('phone', event.target.value)}
+                  error={errors.phone}
+                />
+                <TextField
+                  label="Email"
+                  name="email"
+                  hint={emailRequired(values.replyBy) ? undefined : '(optional)'}
+                  type="email"
+                  autoComplete="email"
+                  maxLength={254}
+                  value={values.email}
+                  onChange={(event) => setValue('email', event.target.value)}
+                  error={errors.email}
+                />
               </div>
               <p
                 className={cx(styles.contactNote)}

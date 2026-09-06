@@ -34,7 +34,7 @@ export function NativeSelectField({
 
   return (
     <div className={cx(styles.field, className)}>
-      <label htmlFor={fieldId} className={styles.label}>
+      <label htmlFor={fieldId} className={cx(styles.label, error && styles.invalid)}>
         {label}
       </label>
       <div className={styles.selectWrap}>

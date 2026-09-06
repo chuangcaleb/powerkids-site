@@ -9,6 +9,10 @@
   font-size: var(--step--1);
 }
 
+.label.invalid {
+  color: var(--accent-red);
+}
+
 .input {
   font: inherit;
   padding: var(--space-2xs) var(--space-xs);

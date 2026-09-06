@@ -17,6 +17,17 @@
   margin-bottom: var(--space-3xs);
 }
 
+/* Phone/email pair reads tighter than the surrounding flow while
+ * side-by-side, but once `.switcher` stacks them the gap must widen to
+ * match the ambient (unnamed, `--space-l`) flow rhythm above — otherwise
+ * name-to-phone reads wider than phone-to-email. `--switcher-inline-at`
+ * is pinned to the same 30rem so the two thresholds can't drift apart. */
+@media (width <= 30rem) {
+  .contactRow {
+    --switcher-gap: var(--space-l);
+  }
+}
+
 .contactNote {
   color: var(--text-muted);
   font-size: var(--step--2);
