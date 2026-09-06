@@ -4,7 +4,6 @@ const STAFF_ONLY_FIELDS = [
   'status',
   'closedBy',
   'closedAt',
-  'confirmationFailed',
   'adminNotificationFailed',
 ] as const
 

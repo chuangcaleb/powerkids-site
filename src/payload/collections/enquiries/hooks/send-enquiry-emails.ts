@@ -20,7 +20,7 @@ function escapeHtml(value: string): string {
 
 /**
  * Fires once, on create only — phase-2 status updates must never re-send.
- * Both sends are wrapped and never rethrown: this hook runs inside
+ * The send is wrapped and never rethrown: this hook runs inside
  * `afterChange`, which Payload runs *before* `commitTransaction`. An
  * uncaught throw here triggers `killTransaction`, deleting the just-created
  * Enquiry (verified in `node_modules/payload/dist/collections/operations/create.js`,
@@ -37,35 +37,6 @@ export const sendEnquiryEmails: CollectionAfterChangeHook<Enquiry> = async ({
 
   const siteSettings = await req.payload.findGlobal({ slug: 'site-settings' })
   const adminAddress = siteSettings.enquiryNotificationEmail
-
-  if (doc.email) {
-    try {
-      // Plain-worded, but still HTML-escaped: an injected value could still
-      // break the mail client's own auto-linking/quoting, not just an <html> parse.
-      await req.payload.sendEmail({
-        to: doc.email,
-        replyTo: adminAddress,
-        subject: 'PowerKids Kindergarten: we received your enquiry',
-        html: [
-          `<p>Hi ${escapeHtml(doc.name)},</p>`,
-          `<p>Thanks for reaching out about "${escapeHtml(doc.enquiryTypeLabel)}" — we've received your enquiry and will reply by ${REPLY_BY_LABEL[doc.replyBy]}.</p>`,
-          `<p>Name: ${escapeHtml(doc.name)}<br>`,
-          `Enquiry type: ${escapeHtml(doc.enquiryTypeLabel)}<br>`,
-          `Phone: ${escapeHtml(doc.phone ?? '—')}</p>`,
-        ].join('\n'),
-      })
-    } catch (error) {
-      req.payload.logger.error(
-        { err: error },
-        'Enquiry confirmation email failed to send',
-      )
-      await req.payload.update({
-        collection: 'enquiries',
-        id: doc.id,
-        data: { confirmationFailed: true },
-      })
-    }
-  }
 
   try {
     const adminUrl = `${getServerUrl()}/admin/collections/enquiries/${doc.id}`
