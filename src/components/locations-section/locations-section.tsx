@@ -27,7 +27,7 @@ export async function LocationsSection() {
                 className="cluster"
                 style={primitiveVars({ '--cluster-gap': 'var(--space-2xs)' })}
               >
-                <MapPin />
+                <MapPin className={styles.pinIcon} />
                 <b>{location.name}</b>
               </p>
               <p className={styles.locationAddress}>{location.address}</p>
