@@ -197,7 +197,7 @@ function EnquiryFormFields({
               <TextareaField
                 label="Message"
                 name="message"
-                hint="Optional, max 1000 characters."
+                hint="(optional, max 1000 characters)"
                 maxLength={1000}
                 value={values.message}
                 onChange={(event) => setValue('message', event.target.value)}

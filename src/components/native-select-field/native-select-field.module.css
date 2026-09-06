@@ -5,7 +5,7 @@
 }
 
 .label {
-  font-weight: var(--weight-display, 600);
+  font-weight: var(--weight-display);
   font-size: var(--step--1);
 }
 
