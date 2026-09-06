@@ -25,7 +25,6 @@ export const Enquiries: CollectionConfig = {
   slug: 'enquiries',
   admin: {
     useAsTitle: 'adminTitle',
-    group: 'Content',
     defaultColumns: ['id', 'enquiryTypeLabel', 'status', 'name', 'contact', 'createdAt'],
   },
   defaultSort: '-createdAt',
