@@ -208,14 +208,11 @@ function EnquiryFormFields({
                 onChange={(event) => setValue('message', event.target.value)}
                 error={errors.message}
               />
-              <Button
-                type="button"
-                variant="red"
-                className={styles.nextButton}
-                onClick={goToStep2}
-              >
-                Next
-              </Button>
+              <div className="cluster">
+                <Button type="button" variant="red" onClick={goToStep2}>
+                  Next
+                </Button>
+              </div>
             </div>
           </div>
 
@@ -299,7 +296,7 @@ function EnquiryFormFields({
                 />
               </div>
 
-              <div className="repel">
+              <div className="cluster">
                 <Button type="button" variant="outline" onClick={() => setStep(1)}>
                   Back
                 </Button>

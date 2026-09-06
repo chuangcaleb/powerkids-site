@@ -6,10 +6,6 @@
   display: none;
 }
 
-.nextButton {
-  align-self: flex-end;
-}
-
 .replyByGroup legend {
   font-weight: var(--weight-display);
   font-size: var(--step--1);
