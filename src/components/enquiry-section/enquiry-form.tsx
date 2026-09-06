@@ -275,7 +275,11 @@ function EnquiryFormFields({
                 <TextField
                   label="Phone"
                   name="phone"
-                  hint={phoneRequired(values.replyBy) ? undefined : '(optional)'}
+                  hint={
+                    phoneRequired(values.replyBy)
+                      ? '(e.g. +60123456789)'
+                      : '(optional, e.g. +60123456789)'
+                  }
                   type="tel"
                   autoComplete="tel"
                   maxLength={20}
