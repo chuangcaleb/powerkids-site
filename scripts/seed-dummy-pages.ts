@@ -202,7 +202,7 @@ await payload.create({
       heading: 'the Centre with a Heart',
       subheading: loremSentence(),
       ctas: [
-        { label: 'Register', url: '#register' },
+        { label: 'Enquire', url: '#enquiry' },
         { label: 'Contact', url: '#contact' },
       ],
       media: media.id,
