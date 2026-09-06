@@ -1,7 +1,4 @@
 .chip {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-3xs);
   font-weight: var(--weight-display);
   font-size: var(--step--1);
   color: var(--text-strong);
