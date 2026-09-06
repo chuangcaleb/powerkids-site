@@ -1,6 +1,6 @@
 import type { CollectionConfig } from 'payload'
 
-import { anyone } from '@/payload/access/anyone'
+import { anonymousOnly } from '@/payload/access/anonymous'
 import { authenticated, authenticatedFieldAccess } from '@/payload/access/authenticated'
 import { validateField } from '@/lib/validate-enquiry'
 import type { ReplyBy } from '@/lib/validate-enquiry'
@@ -15,7 +15,8 @@ const staffOnly = { access: { create: () => false } } as const
  * Public enquiry-form submissions. Created only via the enquiry Server
  * Action (Local API, `overrideAccess: false`) — see spec §3. Submitted
  * fields are readonly forever in the admin panel; only `status` (phase 2)
- * is ever editable. `create` is public so the form can write directly, but
+ * is ever editable. `create` is anonymous-only so the form can write directly
+ * but staff can't manually add records from the admin panel, and
  * `stripStaffOnlyFields` is the real boundary keeping an anonymous caller
  * from setting the staff-only fields below.
  */
@@ -24,12 +25,12 @@ export const Enquiries: CollectionConfig = {
   admin: {
     useAsTitle: 'name',
     group: 'Content',
-    defaultColumns: ['id', 'status', 'name', 'phone', 'enquiryTypeLabel', 'createdAt'],
+    defaultColumns: ['id', 'enquiryTypeLabel', 'status', 'name', 'contact', 'createdAt'],
   },
   defaultSort: '-createdAt',
   access: {
     read: authenticated,
-    create: anyone,
+    create: anonymousOnly,
     update: authenticated,
     delete: authenticated,
   },
@@ -85,6 +86,16 @@ export const Enquiries: CollectionConfig = {
       ],
     },
     {
+      name: 'contact',
+      type: 'ui',
+      label: 'Contact',
+      admin: {
+        components: {
+          Cell: '@/payload/admin/components/enquiries/contact-cell#ContactCell',
+        },
+      },
+    },
+    {
       name: 'enquiryTypeId',
       type: 'text',
       required: true,
@@ -103,6 +114,7 @@ export const Enquiries: CollectionConfig = {
       label: 'Type',
       admin: {
         readOnly: true,
+        width: '50%',
         description:
           'Snapshotted at submit time, so a later-deleted type option still reads.',
       },
@@ -122,6 +134,12 @@ export const Enquiries: CollectionConfig = {
         readOnly: true,
         description:
           'System-set. Non-empty means the admin notification email failed to send.',
+        condition: (data) =>
+          data.status !== 'closed' && Boolean(data.notificationErrors?.length),
+        components: {
+          Field:
+            '@/payload/admin/components/enquiries/notification-errors-field#NotificationErrorsField',
+        },
       },
       typescriptSchema: [() => ({ type: 'array', items: { type: 'string' } })],
       ...staffOnly,
@@ -139,6 +157,7 @@ export const Enquiries: CollectionConfig = {
         { label: 'Closed', value: 'closed' },
       ],
       admin: {
+        width: '50%',
         components: {
           Cell: '@/payload/admin/components/enquiries/status-cell#StatusCell',
         },
@@ -149,13 +168,21 @@ export const Enquiries: CollectionConfig = {
       name: 'closedBy',
       type: 'relationship',
       relationTo: 'users',
-      admin: { readOnly: true, width: '50%' },
+      admin: {
+        readOnly: true,
+        width: '50%',
+        condition: (data) => data.status === 'closed',
+      },
       access: { create: () => false, read: authenticatedFieldAccess },
     },
     {
       name: 'closedAt',
       type: 'date',
-      admin: { readOnly: true, width: '50%' },
+      admin: {
+        readOnly: true,
+        width: '50%',
+        condition: (data) => data.status === 'closed',
+      },
       ...staffOnly,
     },
   ],
