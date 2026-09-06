@@ -174,7 +174,10 @@ function EnquiryFormFields({
     const formData = new FormData(event.currentTarget)
     startTransition(async () => {
       try {
-        setState(await submitEnquiry(state, formData))
+        // `submitEnquiry`'s first param is unused (`_prevState`) — there's no
+        // reducer chaining here, so pass a fixed placeholder rather than the
+        // live `state` closure.
+        setState(await submitEnquiry({ status: 'idle' }, formData))
       } catch {
         setState({ status: 'error', message: GENERIC_ERROR })
       }
