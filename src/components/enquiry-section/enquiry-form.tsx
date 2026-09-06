@@ -303,8 +303,15 @@ function EnquiryFormFields({
                 <Button type="button" variant="outline" onClick={() => setStep(1)}>
                   Back
                 </Button>
-                <Button type="submit" variant="red">
-                  Submit
+                <Button type="submit" variant="red" aria-busy={isPending}>
+                  {isPending ? (
+                    <>
+                      <span className={styles.spinner} aria-hidden="true" />
+                      Submitting…
+                    </>
+                  ) : (
+                    'Submit'
+                  )}
                 </Button>
               </div>
             </div>
