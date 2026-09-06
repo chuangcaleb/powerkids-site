@@ -22,9 +22,6 @@ const rowLabel = {
  */
 export const Navigation: GlobalConfig = {
   slug: 'navigation',
-  admin: {
-    group: 'Settings',
-  },
   access: {
     read: () => true,
     update: authenticated,

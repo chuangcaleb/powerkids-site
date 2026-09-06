@@ -23,9 +23,6 @@ const ENQUIRY_TYPE_SEED = [
  */
 export const Cta: GlobalConfig = {
   slug: 'cta',
-  admin: {
-    group: 'Settings',
-  },
   access: {
     read: () => true,
     update: authenticated,

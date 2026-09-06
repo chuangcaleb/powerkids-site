@@ -5,9 +5,7 @@ import { authenticated } from '@/payload/access/authenticated'
 /** Fallback SEO values for any page that leaves its own `meta` tab empty. */
 export const SeoDefaults: GlobalConfig = {
   slug: 'seo-defaults',
-  admin: {
-    group: 'Settings',
-  },
+
   access: {
     read: () => true,
     update: authenticated,

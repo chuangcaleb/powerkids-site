@@ -14,7 +14,6 @@ export const Users: CollectionConfig = {
   admin: {
     useAsTitle: 'name',
     defaultColumns: ['name', 'email', 'role'],
-    group: 'Settings',
   },
   access: {
     // Only admins manage accounts. Editors can still read the list so that

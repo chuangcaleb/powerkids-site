@@ -13,9 +13,7 @@ import { revalidateLayout } from './hooks/revalidate-layout'
  */
 export const Faq: GlobalConfig = {
   slug: 'faq',
-  admin: {
-    group: 'Settings',
-  },
+
   access: {
     read: () => true,
     update: authenticated,

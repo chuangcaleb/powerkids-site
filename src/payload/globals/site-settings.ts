@@ -9,9 +9,7 @@ import { revalidateLayout } from './hooks/revalidate-layout'
  */
 export const SiteSettings: GlobalConfig = {
   slug: 'site-settings',
-  admin: {
-    group: 'Settings',
-  },
+
   access: {
     read: () => true,
     update: authenticated,
