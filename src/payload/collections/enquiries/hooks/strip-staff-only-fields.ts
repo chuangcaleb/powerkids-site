@@ -5,6 +5,7 @@ const STAFF_ONLY_FIELDS = [
   'closedBy',
   'closedAt',
   'notificationErrors',
+  'adminTitle',
 ] as const
 
 /**

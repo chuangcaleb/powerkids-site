@@ -77,6 +77,9 @@ export async function submitEnquiry(
         enquiryTypeId,
         enquiryTypeLabel,
         message: message || undefined,
+        // Stripped by `stripStaffOnlyFields`/field access regardless — set
+        // explicitly only to satisfy the now-required `status` field's type.
+        status: 'unread',
       },
     })
 

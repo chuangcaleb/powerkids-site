@@ -51,7 +51,7 @@ for (const sample of samples) {
 
   const created = await payload.create({
     collection: 'enquiries',
-    data,
+    data: { ...data, status: 'unread' },
     overrideAccess: true,
   })
 

@@ -31,7 +31,7 @@ export const StatusCell: React.FC<DefaultCellComponentProps> = ({
   }
 
   return (
-    <Pill pillStyle="error" size="small">
+    <Pill pillStyle="warning" size="small">
       Unread
     </Pill>
   )

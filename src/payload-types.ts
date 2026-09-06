@@ -721,12 +721,16 @@ export interface Enquiry {
    * Snapshotted at submit time, so a later-deleted type option still reads.
    */
   enquiryTypeLabel: string;
-  status?: ('unread' | 'closed') | null;
+  status: 'unread' | 'closed';
   message?: string | null;
   replyBy: 'whatsapp' | 'call' | 'email';
   name: string;
   phone?: string | null;
   email?: string | null;
+  /**
+   * System-set. Composed from id + type + name, stamped once on create.
+   */
+  adminTitle?: string | null;
   notificationErrors?: string[];
   closedBy?: (number | null) | User;
   closedAt?: string | null;
@@ -1128,6 +1132,7 @@ export interface EnquiriesSelect<T extends boolean = true> {
   name?: T;
   phone?: T;
   email?: T;
+  adminTitle?: T;
   notificationErrors?: T;
   closedBy?: T;
   closedAt?: T;

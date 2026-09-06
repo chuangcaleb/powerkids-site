@@ -6,6 +6,7 @@ import { validateField } from '@/lib/validate-enquiry'
 import type { ReplyBy } from '@/lib/validate-enquiry'
 
 import { sendEnquiryEmails } from './hooks/send-enquiry-emails'
+import { stampAdminTitle } from './hooks/stamp-admin-title'
 import { stampClose } from './hooks/stamp-close'
 import { stripStaffOnlyFields } from './hooks/strip-staff-only-fields'
 
@@ -23,7 +24,7 @@ const staffOnly = { access: { create: () => false } } as const
 export const Enquiries: CollectionConfig = {
   slug: 'enquiries',
   admin: {
-    useAsTitle: 'name',
+    useAsTitle: 'adminTitle',
     group: 'Content',
     defaultColumns: ['id', 'enquiryTypeLabel', 'status', 'name', 'contact', 'createdAt'],
   },
@@ -36,7 +37,7 @@ export const Enquiries: CollectionConfig = {
   },
   hooks: {
     beforeChange: [stripStaffOnlyFields, stampClose],
-    afterChange: [sendEnquiryEmails],
+    afterChange: [sendEnquiryEmails, stampAdminTitle],
   },
   fields: [
     {
@@ -73,6 +74,7 @@ export const Enquiries: CollectionConfig = {
           name: 'status',
           type: 'select',
           defaultValue: 'unread',
+          required: true,
           options: [
             { label: 'Unread', value: 'unread' },
             { label: 'Closed', value: 'closed' },
@@ -158,6 +160,18 @@ export const Enquiries: CollectionConfig = {
       ],
     },
 
+    {
+      name: 'adminTitle',
+      type: 'text',
+      label: 'Admin title',
+      admin: {
+        readOnly: true,
+        hidden: true,
+        description:
+          'System-set. Composed from id + type + name, stamped once on create.',
+      },
+      ...staffOnly,
+    },
     {
       name: 'notificationErrors',
       type: 'json',

@@ -43,6 +43,7 @@ import * as migration_20260905_085821_add_locations_block from './20260905_08582
 import * as migration_20260906_021007_enquiry_form from './20260906_021007_enquiry_form'
 import * as migration_20260906_093553_drop_enquiries_confirmation_failed from './20260906_093553_drop_enquiries_confirmation_failed'
 import * as migration_20260906_100408_drop_admin_notification_failed_add_notification_errors from './20260906_100408_drop_admin_notification_failed_add_notification_errors'
+import * as migration_20260906_150314_add_enquiries_admin_title_status_required from './20260906_150314_add_enquiries_admin_title_status_required'
 
 export const migrations = [
   {
@@ -269,5 +270,10 @@ export const migrations = [
     up: migration_20260906_100408_drop_admin_notification_failed_add_notification_errors.up,
     down: migration_20260906_100408_drop_admin_notification_failed_add_notification_errors.down,
     name: '20260906_100408_drop_admin_notification_failed_add_notification_errors',
+  },
+  {
+    up: migration_20260906_150314_add_enquiries_admin_title_status_required.up,
+    down: migration_20260906_150314_add_enquiries_admin_title_status_required.down,
+    name: '20260906_150314_add_enquiries_admin_title_status_required',
   },
 ]
