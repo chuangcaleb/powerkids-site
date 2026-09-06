@@ -95,71 +95,111 @@ export const Enquiries: CollectionConfig = {
       maxLength: 1000,
       admin: { readOnly: true },
     },
+
     {
-      name: 'replyBy',
-      type: 'radio',
-      required: true,
-      admin: { readOnly: true },
-      options: [
-        { label: 'WhatsApp', value: 'whatsapp' },
-        { label: 'Phone Call', value: 'call' },
-        { label: 'Email', value: 'email' },
-      ],
-    },
-    {
-      name: 'name',
-      type: 'text',
-      required: true,
-      maxLength: 80,
-      admin: { readOnly: true },
-    },
-    {
-      name: 'contact',
-      type: 'ui',
-      label: 'Contact',
-      admin: {
-        components: {
-          Cell: '@/payload/admin/components/enquiries/contact-cell#ContactCell',
-        },
-      },
-    },
-    {
-      type: 'row',
+      type: 'group',
+      label: 'Follow-up contact information',
       fields: [
         {
-          name: 'phone',
+          name: 'replyBy',
+          type: 'radio',
+          required: true,
+          admin: { readOnly: true },
+          options: [
+            { label: 'WhatsApp', value: 'whatsapp' },
+            { label: 'Phone Call', value: 'call' },
+            { label: 'Email', value: 'email' },
+          ],
+        },
+        {
+          name: 'name',
           type: 'text',
-          maxLength: 20,
+          required: true,
+          maxLength: 80,
+          admin: { readOnly: true },
+        },
+        {
+          name: 'contact',
+          type: 'ui',
+          label: 'Contact',
           admin: {
-            readOnly: true,
-            width: '50%',
-          },
-          validate: (
-            value: unknown,
-            { siblingData }: { siblingData: { replyBy?: ReplyBy } },
-          ) => {
-            return (
-              validateField('phone', String(value ?? ''), siblingData.replyBy) ?? true
-            )
+            components: {
+              Cell: '@/payload/admin/components/enquiries/contact-cell#ContactCell',
+            },
           },
         },
         {
-          name: 'email',
-          type: 'text',
-          maxLength: 254,
-          admin: { readOnly: true, width: '50%' },
-          validate: (
-            value: unknown,
-            { siblingData }: { siblingData: { replyBy?: ReplyBy } },
-          ) => {
-            return (
-              validateField('email', String(value ?? ''), siblingData.replyBy) ?? true
-            )
-          },
+          type: 'row',
+          fields: [
+            {
+              name: 'phone',
+              type: 'text',
+              maxLength: 20,
+              admin: {
+                readOnly: true,
+                width: '50%',
+              },
+              validate: (
+                value: unknown,
+                { siblingData }: { siblingData: { replyBy?: ReplyBy } },
+              ) => {
+                return (
+                  validateField('phone', String(value ?? ''), siblingData.replyBy) ?? true
+                )
+              },
+            },
+            {
+              name: 'email',
+              type: 'text',
+              maxLength: 254,
+              admin: { readOnly: true, width: '50%' },
+              validate: (
+                value: unknown,
+                { siblingData }: { siblingData: { replyBy?: ReplyBy } },
+              ) => {
+                return (
+                  validateField('email', String(value ?? ''), siblingData.replyBy) ?? true
+                )
+              },
+            },
+          ],
         },
       ],
     },
 
+    {
+      type: 'group',
+      label: 'Closed',
+      admin: {
+        condition: (data) => data.status === 'closed',
+      },
+      fields: [
+        {
+          type: 'row',
+          fields: [
+            {
+              name: 'closedBy',
+              type: 'relationship',
+              relationTo: 'users',
+              admin: {
+                readOnly: true,
+                width: '50%',
+              },
+              access: { create: () => false, read: authenticatedFieldAccess },
+            },
+            {
+              name: 'closedAt',
+              type: 'date',
+              admin: {
+                readOnly: true,
+                width: '50%',
+              },
+              ...staffOnly,
+            },
+          ],
+        },
+      ],
+    },
     {
       name: 'adminTitle',
       type: 'text',
@@ -190,38 +230,6 @@ export const Enquiries: CollectionConfig = {
       },
       typescriptSchema: [() => ({ type: 'array', items: { type: 'string' } })],
       ...staffOnly,
-    },
-
-    {
-      type: 'group',
-      fields: [
-        {
-          type: 'row',
-          fields: [
-            {
-              name: 'closedBy',
-              type: 'relationship',
-              relationTo: 'users',
-              admin: {
-                readOnly: true,
-                width: '50%',
-                condition: (data) => data.status === 'closed',
-              },
-              access: { create: () => false, read: authenticatedFieldAccess },
-            },
-            {
-              name: 'closedAt',
-              type: 'date',
-              admin: {
-                readOnly: true,
-                width: '50%',
-                condition: (data) => data.status === 'closed',
-              },
-              ...staffOnly,
-            },
-          ],
-        },
-      ],
     },
   ],
 }

@@ -727,13 +727,13 @@ export interface Enquiry {
   name: string;
   phone?: string | null;
   email?: string | null;
+  closedBy?: (number | null) | User;
+  closedAt?: string | null;
   /**
    * System-set. Composed from id + type + name, stamped once on create.
    */
   adminTitle?: string | null;
   notificationErrors?: string[];
-  closedBy?: (number | null) | User;
-  closedAt?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1132,10 +1132,10 @@ export interface EnquiriesSelect<T extends boolean = true> {
   name?: T;
   phone?: T;
   email?: T;
-  adminTitle?: T;
-  notificationErrors?: T;
   closedBy?: T;
   closedAt?: T;
+  adminTitle?: T;
+  notificationErrors?: T;
   updatedAt?: T;
   createdAt?: T;
 }
