@@ -8,9 +8,10 @@ function run(
   data: Record<string, unknown>,
   user?: object,
   context: Record<string, unknown> = {},
+  operation: 'create' | 'update' = 'update',
 ): Record<string, unknown> {
   const req = fromPartial<PayloadRequest>({ user })
-  return stripStaffOnlyFields(fromPartial({ data, req, context }))
+  return stripStaffOnlyFields(fromPartial({ data, operation, req, context }))
 }
 
 describe('stripStaffOnlyFields', () => {
@@ -44,5 +45,22 @@ describe('stripStaffOnlyFields', () => {
     const result = run(data, undefined, { systemWrite: true })
 
     expect(result).toEqual({ name: 'Jane', notificationErrors: ['boom'] })
+  })
+
+  it('re-seeds the required status default on an anonymous create', () => {
+    const result = run(
+      { name: 'Jane', status: 'closed', closedAt: '2026-01-01' },
+      undefined,
+      {},
+      'create',
+    )
+
+    expect(result).toEqual({ name: 'Jane', status: 'unread' })
+  })
+
+  it('does not re-add status on an anonymous update', () => {
+    const result = run({ name: 'Jane', status: 'closed' }, undefined, {}, 'update')
+
+    expect(result).toEqual({ name: 'Jane' })
   })
 })

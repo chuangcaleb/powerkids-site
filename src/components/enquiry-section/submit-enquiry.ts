@@ -80,8 +80,8 @@ export async function submitEnquiry(
         enquiryTypeId,
         enquiryTypeLabel,
         message: message || undefined,
-        // Stripped by `stripStaffOnlyFields`/field access regardless — set
-        // explicitly only to satisfy the now-required `status` field's type.
+        // `stripStaffOnlyFields` re-seeds this same default anyway — set
+        // here only to satisfy the required field's type.
         status: 'unread',
       },
     })
