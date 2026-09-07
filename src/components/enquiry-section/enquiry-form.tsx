@@ -20,6 +20,7 @@ import { GENERIC_ERROR } from './generic-error'
 import { submitEnquiry } from './submit-enquiry'
 import type { SubmitEnquiryState } from './submit-enquiry'
 import { TurnstileWidget } from './turnstile-widget'
+import type { TurnstileHandle } from './turnstile-widget'
 import styles from './enquiry-form.module.css'
 import { cx } from '@/lib/cx'
 import { primitiveVars } from '@/lib/primitive-vars'
@@ -79,7 +80,6 @@ function EnquiryFormFields({
   const [step, setStep] = useState<1 | 2>(1)
   const [values, setValues] = useState<FieldValues>(() => initialValues(enquiryTypes))
   const [errors, setErrors] = useState<Partial<Record<EnquiryFieldName, string>>>({})
-  const [turnstileToken, setTurnstileToken] = useState('')
   const [state, setState] = useState<SubmitEnquiryState>({ status: 'idle' })
   const [isPending, startTransition] = useTransition()
   // The submit-time server error banner doesn't come from `errors` (that's
@@ -89,6 +89,7 @@ function EnquiryFormFields({
   const [serverErrorDismissed, setServerErrorDismissed] = useState(false)
 
   const formRef = useRef<HTMLFormElement>(null)
+  const turnstileRef = useRef<TurnstileHandle>(null)
   const alertRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -174,12 +175,16 @@ function EnquiryFormFields({
     const formData = new FormData(event.currentTarget)
     startTransition(async () => {
       try {
+        // Fetched per attempt — a Turnstile token is single-use.
+        const turnstile = turnstileRef.current
+        if (!turnstile) throw new Error('Turnstile widget is not mounted')
+        formData.set('turnstileToken', await turnstile.getToken())
         // `submitEnquiry`'s first param is unused (`_prevState`) — there's no
         // reducer chaining here, so pass a fixed placeholder rather than the
         // live `state` closure.
         setState(await submitEnquiry({ status: 'idle' }, formData))
       } catch (error) {
-        console.error('submitEnquiry: transport-level failure', error)
+        console.error('submitEnquiry: token or transport-level failure', error)
         setState({ status: 'error', message: GENERIC_ERROR })
       }
     })
@@ -360,7 +365,6 @@ function EnquiryFormFields({
                 enquiryTypes.find((type) => type.id === values.enquiryTypeId)?.label ?? ''
               }
             />
-            <input type="hidden" name="turnstileToken" value={turnstileToken} />
           </fieldset>
 
           {step === 2 &&
@@ -373,7 +377,7 @@ function EnquiryFormFields({
 
         <TurnstileWidget
           siteKey={turnstileSiteKey}
-          onToken={setTurnstileToken}
+          ref={turnstileRef}
           triggerRef={formRef}
         />
       </form>
