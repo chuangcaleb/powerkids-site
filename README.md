@@ -79,11 +79,13 @@ Git hooks handle formatting on commit, run full verify loop on push.
 
 **Duplicate uploads are flagged, not blocked.** Media re-uploads are detected by checksum group and flagged to editors for review/dismissal, rather than silently rejected. See [ADR 0005](docs/adr/0005-media-duplicate-detection-by-checksum-group.md).
 
-<!-- ### CTA
+### Features
 
-Location Map
+**Scrapbook.** A page block section that for an organic sprawled-out layout of pictures, and thematic doodle icons in the background. On narrow screens, it collapses into a horizontal reel.
 
-Contact Form -->
+**Location Map.** With `openfreemap` + `react-maplibre` libraries. A click-to-load facade lazy-loads interactive map bundle on-demand.
+
+**Enquiry Form.** Entries are just another PayloadCMS collection. Submissions are rate-limited on Vercel rules, and bot-protected with Cloudflare Turnstile. Submissions send a notification email to a specified staff email.
 
 ## Documentation
 
