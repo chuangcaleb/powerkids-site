@@ -79,11 +79,40 @@ Git hooks handle formatting on commit, run full verify loop on push.
 
 **Duplicate uploads are flagged, not blocked.** Media re-uploads are detected by checksum group and flagged to editors for review/dismissal, rather than silently rejected. See [ADR 0005](docs/adr/0005-media-duplicate-detection-by-checksum-group.md).
 
-<!-- ### CTA
+### Locations map
 
-Location Map
+<!-- SCAFFOLD — 10 candidate one-liners. Narrow down, then rewrite as prose in the
+     style of the sections above: bolded claim sentence, then one supporting sentence,
+     then a link to the deeper doc if one exists. -->
 
-Contact Form -->
+- **Click-to-load facade.** Map renders as a static poster image + button; the 263 KB gz MapLibre engine is fetched only after a click, so the page's initial JS is unaffected.
+- **The code-split is defended in code.** The `mapLib` promise is created _inside_ the click handler — hoisting it to module scope would pull the engine into the component's own chunk and silently undo the split.
+- **Shared facade primitive.** `ClickToLoadFacade` is the one bordered 16:9 poster-button shape behind every deferred embed (map, video); the payload it unlocks is the caller's concern.
+- **Self-hosted-free tiles, no key, no bill.** Tiles come from OpenFreeMap (`liberty` style); "Get directions" uses the keyless Google Maps URLs API, so neither path is metered or needs a secret.
+- **Tile style is code, not CMS.** The style URL is a technical endpoint, not editorial content — one of the few deliberate exceptions to "content is data".
+- **DOM markers over a symbol layer.** A symbol layer hides colliding icons at low zoom; DOM markers always show all three schools.
+- **Accessibility comes from the native binding.** Binding a real MapLibre `Popup` via `setPopup` gives each marker `role="button"`, a managed tabindex, and a keyboard-reachable popup for free — only the generic "Map marker" label is overridden, with the Location's own name.
+- **Popups still render through React.** `createRoot` per marker keeps CMS strings as text nodes rather than injected HTML.
+- **Initial view is derived, not configured.** `mapCenter` averages every Location's coordinates and picks the zoom from how many there are — editors never hand-tune a viewport.
+- **The worker ships via a build script.** MapLibre v6 is ESM-only and resolves its worker from `import.meta.url`; neither bundler emits the worker's sibling module, so the map mounts and never requests a tile — silently. `scripts/copy-maplibre-worker.mjs` copies both files into `public/`, wired to `predev`/`prebuild` because `postinstall` alone gets skipped.
+- **One source, two surfaces.** The `locations` block has no fields — list, map, and footer contact all read Site Settings > Locations, so an address is edited once.
+
+### Enquiry form
+
+<!-- SCAFFOLD — 10 candidate one-liners. Same treatment as above. -->
+
+- **Two-step wizard, one submit.** Step 1 asks what the enquiry is about; step 2 collects contact details — both steps stay mounted, so nothing is lost stepping back.
+- **Reply-by drives what's required.** WhatsApp/Call require a phone, Email requires an email — never both, never neither.
+- **Switching reply-by clears the error it invalidated.** A "Required." on the now-optional field disappears immediately rather than waiting for the next submit attempt.
+- **One validation module, three call sites.** `validate-enquiry.ts` is shared by the client wizard, the Server Action, and the collection's field `validate` functions — the client copy is UX, the server copies are the authority.
+- **Manual action dispatch, on purpose.** Native `<form action>` rethrows a WAF-denied response to the nearest error boundary — there is none, so it would crash the page; calling the Server Action by hand lets the form catch transport failures and show its own alert.
+- **Invisible bot defence, lazily loaded.** The Turnstile script loads only when the form scrolls within 200 px or gains focus, never on page load; verification is server-side, and a rejected token is dropped, never persisted.
+- **The security boundary is a hook, not field access.** `stripStaffOnlyFields` deletes staff-only keys on any unauthenticated write — field-level `access.create: false` only signals intent to the admin UI, and the Server Action passes `overrideAccess: false` so the Local API doesn't bypass it all.
+- **The notification email can't destroy the enquiry.** Payload runs `afterChange` before the commit, so a throw would kill the transaction and delete the record; the send is caught, and the failure recorded on the doc as `notificationErrors` via a follow-up write.
+- **Failures surface to staff, not just to logs.** A non-empty `notificationErrors` renders a warning in the admin panel — "someone enquired and nobody was emailed" is visible rather than silent.
+- **Submitted fields are readonly forever.** Only `status` is editable; closing stamps `closedBy`/`closedAt` and re-opening clears them — current state, not an audit log.
+- **The type label is snapshotted.** Storing the label alongside the soft row-id reference means a later-deleted enquiry-type option still reads correctly months on.
+- **No-JS gets an honest fallback.** Bot defence is client-side, so there is no progressive-enhancement submit path; without JS the form is hidden and replaced with a pointer to direct contact details.
 
 ## Documentation
 
