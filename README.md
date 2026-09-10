@@ -1,6 +1,6 @@
 # powerkids-site
 
-Website for **PowerKids Kindergarten** — three schools across the Klang Valley, Malaysia. <https://powerkids.edu.my>
+Website for **PowerKids Kindergarten** — a preschool in Klang Valley, Malaysia. <https://powerkids.edu.my>
 
 This v4 is a ground-up rebuild in PayloadCMS. Its purpose is to move every piece of content out of code and into a CMS, so school staff can edit copy, swap photos, add pages, and rearrange sections without a developer.
 
@@ -12,7 +12,8 @@ This v4 is a ground-up rebuild in PayloadCMS. Its purpose is to move every piece
 | CMS       | [Payload](https://payloadcms.com), mounted in same app                                                             |
 | Database  | [Neon](https://neon.tech) Postgres                                                                                 |
 | Media     | [Cloudflare R2](https://developers.cloudflare.com/r2/), S3-compatible adapter                                      |
-| Hosting   | [Vercel](https://vercel.com)                                                                                       |
+| Hosting   | [Vercel](https://vercel.com) + Cloudflare DNS (provides Turnstile)                                                 |
+| Email     | [Resend](resend.com)                                                                                               |
 | Styling   | Vanilla CSS — design tokens, [Every Layout](https://every-layout.dev/layouts/) composition primitives, CSS Modules |
 | Language  | TypeScript, strict                                                                                                 |
 | Packages  | pnpm                                                                                                               |
@@ -42,7 +43,7 @@ pnpm seed:dev-admin  # creates/updates the account in your local DB
 
 See [docs/workflows/environments.md](docs/workflows/environments.md#dev-admin-account) for why and the full flow.
 
-**Every variable must be set before anything runs, including build** — Payload config reads them while Next collects page data. Missing one fails loudly, naming itself.
+**Every variable must be set before anything runs, including build** — Payload config reads them while Next collects page data.
 
 ### Commands
 
@@ -56,6 +57,14 @@ See [docs/workflows/environments.md](docs/workflows/environments.md#dev-admin-ac
 | `pnpm generate:importmap`    | Regenerate admin import map after adding admin component |
 
 Git hooks handle formatting on commit, run full verify loop on push.
+
+## Notable Features
+
+**Scrapbook.** A page block section that for an organic sprawled-out layout of pictures, and thematic doodle icons in the background. On narrow screens, it collapses into a horizontal reel.
+
+**Location Map.** With `openfreemap` + `react-maplibre` libraries. A click-to-load facade lazy-loads interactive map bundle on-demand.
+
+**Enquiry Form.** Entries are just another PayloadCMS collection. Submissions are rate-limited on Vercel rules, and bot-protected with Cloudflare Turnstile. Submissions send a notification email to a specified email address.
 
 ## Engineering conventions
 
@@ -78,14 +87,6 @@ Git hooks handle formatting on commit, run full verify loop on push.
 **Media filenames are content-addressed.** Uploads are renamed to include a content hash (`hero-4846c1b1.webp`) before Payload derives size variants, so edge cache never serves stale assets after a replacement. See [docs/workflows/environments.md#media-serving-and-cache](docs/workflows/environments.md#media-serving-and-cache).
 
 **Duplicate uploads are flagged, not blocked.** Media re-uploads are detected by checksum group and flagged to editors for review/dismissal, rather than silently rejected. See [ADR 0005](docs/adr/0005-media-duplicate-detection-by-checksum-group.md).
-
-### Features
-
-**Scrapbook.** A page block section that for an organic sprawled-out layout of pictures, and thematic doodle icons in the background. On narrow screens, it collapses into a horizontal reel.
-
-**Location Map.** With `openfreemap` + `react-maplibre` libraries. A click-to-load facade lazy-loads interactive map bundle on-demand.
-
-**Enquiry Form.** Entries are just another PayloadCMS collection. Submissions are rate-limited on Vercel rules, and bot-protected with Cloudflare Turnstile. Submissions send a notification email to a specified staff email.
 
 ## Documentation
 

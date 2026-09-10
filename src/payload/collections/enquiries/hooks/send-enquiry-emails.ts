@@ -19,7 +19,7 @@ function escapeHtml(value: string): string {
 }
 
 /**
- * Fires once, on create only — phase-2 status updates must never re-send.
+ * Fires once, on create only — status updates must never re-send.
  * The send is wrapped and never rethrown: this hook runs inside
  * `afterChange`, which Payload runs *before* `commitTransaction`. An
  * uncaught throw here triggers `killTransaction`, deleting the just-created
@@ -42,15 +42,15 @@ export const sendEnquiryEmails: CollectionAfterChangeHook<Enquiry> = async ({
     const adminUrl = `${getServerUrl()}/admin/collections/enquiries/${doc.id}`
     await req.payload.sendEmail({
       to: adminAddress,
-      subject: `Website Enquiry: ${doc.enquiryTypeLabel} ${REPLY_BY_LABEL[doc.replyBy]} - ${doc.name}`,
+      subject: `Website Enquiry: ${doc.enquiryTypeLabel} - ${doc.name}`,
       html: [
         `<p><strong>Name:</strong> ${escapeHtml(doc.name)}</p>`,
         `<p><strong>Phone:</strong> ${escapeHtml(doc.phone ?? '—')}</p>`,
         doc.email ? `<p><strong>Email:</strong> ${escapeHtml(doc.email)}</p>` : '',
         `<p><strong>Enquiry type:</strong> ${escapeHtml(doc.enquiryTypeLabel)}</p>`,
         `<p><strong>Reply by:</strong> ${REPLY_BY_LABEL[doc.replyBy]}</p>`,
-        doc.message ? `<p><strong>Message:</strong> ${escapeHtml(doc.message)}</p>` : '',
-        `<p><a href="${adminUrl}">View in admin</a> — remember to update its status.</p>`,
+        doc.message ? `<p><strong>Message:</strong>\n${escapeHtml(doc.message)}</p>` : '',
+        `<p><a href="${adminUrl}">Click here to go update its status in the admin panel.</a></p>`,
       ]
         .filter(Boolean)
         .join('\n'),
