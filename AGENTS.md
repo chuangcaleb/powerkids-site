@@ -25,6 +25,22 @@ Each `docs/<topic>/` folder has its own `README.md` index. Some common docs:
 
 ---
 
+## Agent skills
+
+### Issue tracker
+
+Issues tracked as GitHub issues (`gh` CLI). See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Default five canonical labels, no repo-specific mapping. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context: `/CONTEXT.md` + `docs/adr/`. See `docs/agents/domain.md`.
+
+---
+
 ## Keeping this file small
 
 This file is a router, read on every task. It carries only: what the project is, how to run it, rules that bind every task, and where to go next. Anything narrower goes in a linked doc.
