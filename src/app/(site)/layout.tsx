@@ -23,9 +23,10 @@ export const metadata: Metadata = {
   title: SITE_NAME,
   icons: {
     // Declaring `icons` at all replaces Next's file-convention auto-merge, so
-    // icon.png and apple-icon.png (both real routes — see src/app/icon.png,
-    // src/app/apple-icon.png) must be listed explicitly alongside the
-    // mask-icon, which has no file convention of its own.
+    // every icon is listed explicitly. icon.png and apple-icon.png live in
+    // public/ rather than as app/ file-convention files: the convention serves
+    // them at content-hashed URLs (`/icon-<hash>.png`), so these stable paths
+    // would 404. The mask-icon has no file convention of its own.
     icon: '/icon.png',
     apple: '/apple-icon.png',
     other: { rel: 'mask-icon', url: '/safari-pinned-tab.svg', color: BRAND.red },

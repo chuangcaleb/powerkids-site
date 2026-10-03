@@ -48,7 +48,7 @@ export default buildConfig({
       title: 'PowerKids Admin',
       description: 'Content management system for PowerKids Kindergarten.',
       titleSuffix: '— PowerKids',
-      // Distinct from the public site's favicon (src/app/icon.png) so the
+      // Distinct from the public site's favicon (public/icon.png) so the
       // admin tab is visually distinguishable from the front-end site.
       icons: [
         { type: 'image/png', rel: 'icon', sizes: '16x16', url: '/admin-icon-16.png' },
