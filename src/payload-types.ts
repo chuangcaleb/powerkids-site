@@ -161,6 +161,7 @@ export interface User {
   resetPasswordExpiration?: string | null;
   salt?: string | null;
   hash?: string | null;
+  resetPasswordRequestedAt?: string | null;
   loginAttempts?: number | null;
   lockUntil?: string | null;
   sessions?:
@@ -190,6 +191,7 @@ export interface Media {
    * Check once reviewed and confirmed this is not actually a duplicate. Clears the flag for this asset only, not the duplicate siblings.
    */
   duplicateDismissed?: boolean | null;
+  _objectKey?: string | null;
   folder?: (number | null) | FolderInterface;
   updatedAt: string;
   createdAt: string;
@@ -845,6 +847,7 @@ export interface UsersSelect<T extends boolean = true> {
   resetPasswordExpiration?: T;
   salt?: T;
   hash?: T;
+  resetPasswordRequestedAt?: T;
   loginAttempts?: T;
   lockUntil?: T;
   sessions?:
@@ -865,6 +868,7 @@ export interface MediaSelect<T extends boolean = true> {
   checksum?: T;
   hasDuplicate?: T;
   duplicateDismissed?: T;
+  _objectKey?: T;
   folder?: T;
   updatedAt?: T;
   createdAt?: T;
