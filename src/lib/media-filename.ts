@@ -4,7 +4,7 @@ import { createHash } from 'node:crypto'
  * Append a short content hash to an uploaded filename.
  *
  * Payload has no native equivalent — checked before writing this, against
- * 3.88.0, which is the latest stable release:
+ * 3.90.2, which is the latest stable release:
  *
  *   - `upload.cacheTags` appends a cache tag only to the *admin panel's*
  *     thumbnail requests, not to public URLs.
