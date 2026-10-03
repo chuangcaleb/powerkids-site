@@ -7,7 +7,10 @@ import {
   createClientFeature,
   toolbarFormatGroupWithItems,
 } from '@payloadcms/richtext-lexical/client'
-import { $isRangeSelection, FORMAT_TEXT_COMMAND } from 'lexical'
+import {
+  $isRangeSelection,
+  FORMAT_TEXT_COMMAND,
+} from '@payloadcms/richtext-lexical/lexical'
 import { EmphasisSvg } from './emphasis-svg'
 
 const toolbarGroups = [
