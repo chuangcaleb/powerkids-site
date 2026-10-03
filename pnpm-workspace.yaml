@@ -15,3 +15,17 @@ allowBuilds:
   puppeteer: true
   # Native WebSocket buffer utils, pulled in by @vercel/postgres via `ws`.
   bufferutil: true
+
+# Security overrides for transitive dependencies whose parents lag behind the
+# patched release. Each is a stopgap: re-check on every Payload / typescript-eslint
+# bump and delete once the parent ships the fix.
+overrides:
+  # Via payload. DoS, TLS validation bypass, response splitting.
+  # GHSA-w293-vg96-wgc3, GHSA-rfgv-xxqx-mfg5, GHSA-3wwx-pv8p-q78v and others.
+  'undici@>=7 <7.29.1': '^7.29.1'
+  # Via @payloadcms/ui > monaco-editor (admin UI only).
+  # GHSA-55q2-fjhq-7xh7, GHSA-cmwh-pvxp-8882.
+  'dompurify@<3.4.13': '^3.4.13'
+  # Via typescript-eslint > minimatch (dev only). DoS.
+  # GHSA-rgw5-rvv9-x895, GHSA-qhr7-859c-m2p7, GHSA-q2hr-2g5m-vwhr.
+  'brace-expansion@>=4 <5.0.12': '^5.0.12'
