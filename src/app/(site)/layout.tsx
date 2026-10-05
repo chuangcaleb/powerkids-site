@@ -12,7 +12,6 @@ import { getSiteSettings } from '@/payload/globals/get-site-settings'
 import { bricolageGrotesque } from '@/styles/fonts/bricolage-grotesque'
 import { figtree } from '@/styles/fonts/figtree'
 import '@/styles/index.css'
-import { BRAND } from '@/lib/brand-colours'
 
 /**
  * Root layout for the public site.
@@ -21,16 +20,8 @@ import { BRAND } from '@/lib/brand-colours'
  */
 export const metadata: Metadata = {
   title: SITE_NAME,
-  icons: {
-    // Declaring `icons` at all replaces Next's file-convention auto-merge, so
-    // every icon is listed explicitly. icon.png and apple-icon.png live in
-    // public/ rather than as app/ file-convention files: the convention serves
-    // them at content-hashed URLs (`/icon-<hash>.png`), so these stable paths
-    // would 404. The mask-icon has no file convention of its own.
-    icon: '/icon.png',
-    apple: '/apple-icon.png',
-    other: { rel: 'mask-icon', url: '/safari-pinned-tab.svg', color: BRAND.red },
-  },
+  // No `icons` here: declaring it suppresses the file-convention links. icon.png
+  // and apple-icon.png beside this file are served at content-hashed URLs.
 }
 
 export const viewport: Viewport = {
