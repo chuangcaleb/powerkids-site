@@ -36,13 +36,15 @@ Records are immutable. A decision that changes gets a **new** ADR that supersede
 
 ## Index
 
-| #                                                           | Title                                       | Status   |
-| ----------------------------------------------------------- | ------------------------------------------- | -------- |
-| [0001](0001-nextjs-payload-vercel.md)                       | Next.js + Payload on Vercel, Neon, and R2   | accepted |
-| [0002](0002-clean-rebuild-and-archival.md)                  | Clean rebuild with archived history         | accepted |
-| [0003](0003-vanilla-css-with-primitives.md)                 | Vanilla CSS with layout primitives          | accepted |
-| [0004](0004-single-page-mvp-no-redirects.md)                | Single-page MVP, no v3 URL preservation     | accepted |
-| [0005](0005-media-duplicate-detection-by-checksum-group.md) | Media duplicate detection by checksum group | accepted |
-| [0006](0006-no-e2e-suite.md)                                | No end-to-end test suite                    | accepted |
-| [0007](0007-primitive-override-convention.md)               | Layout primitive override convention        | accepted |
-| [0008](0008-primitive-var-naming.md)                        | Layout primitive var naming convention      | accepted |
+| #                                                               | Title                                                     | Status   |
+| --------------------------------------------------------------- | --------------------------------------------------------- | -------- |
+| [0001](0001-nextjs-payload-vercel.md)                           | Next.js + Payload on Vercel, Neon, and R2                 | accepted |
+| [0002](0002-clean-rebuild-and-archival.md)                      | Clean rebuild with archived history                       | accepted |
+| [0003](0003-vanilla-css-with-primitives.md)                     | Vanilla CSS with layout primitives                        | accepted |
+| [0004](0004-single-page-mvp-no-redirects.md)                    | Single-page MVP, no v3 URL preservation                   | accepted |
+| [0005](0005-media-duplicate-detection-by-checksum-group.md)     | Media duplicate detection by checksum group               | accepted |
+| [0006](0006-no-e2e-suite.md)                                    | No end-to-end test suite                                  | accepted |
+| [0007](0007-primitive-override-convention.md)                   | Layout primitive override convention                      | accepted |
+| [0008](0008-primitive-var-naming.md)                            | Layout primitive var naming convention                    | accepted |
+| [0009](0009-headless-ui-for-complex-interactive-components.md)  | Headless UI library for complex interactive components    | accepted |
+| [0010](0010-contact-global-split-from-cta-and-site-settings.md) | Split a `contact` global out of `cta` and `site-settings` | accepted |

@@ -35,9 +35,9 @@ import { Logo as Logo_c679d9b3cceb9f1d8a0ba3b8efb5784b } from '@/payload/admin/c
 import { StaffGuideNavLink as StaffGuideNavLink_59397b23b02dc9929d6215812445ed3f } from '@/payload/admin/components/staff-guide/staff-guide-nav-link'
 import { DuplicateReviewWidget as DuplicateReviewWidget_f091f1365d788e14cf65c3d835c486fd } from '@/payload/admin/components/media-duplicates/duplicate-review-widget'
 import { StaffGuideLink as StaffGuideLink_bfa12f6e5257f976daab4b8cbdf3328d } from '@/payload/admin/components/staff-guide/staff-guide-link'
-import { S3ClientUploadHandler as S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24 } from '@payloadcms/storage-s3/client'
 import { StaffGuideView as StaffGuideView_5f433351b44df92586df79f3e3163f3b } from '@/payload/admin/components/staff-guide/staff-guide-view'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
+import { S3ClientUploadHandler as S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24 } from '@payloadcms/storage-s3/client'
 
 /** @type import('payload').ImportMap */
 export const importMap = {
@@ -78,7 +78,7 @@ export const importMap = {
   "@/payload/admin/components/staff-guide/staff-guide-nav-link#StaffGuideNavLink": StaffGuideNavLink_59397b23b02dc9929d6215812445ed3f,
   "@/payload/admin/components/media-duplicates/duplicate-review-widget#DuplicateReviewWidget": DuplicateReviewWidget_f091f1365d788e14cf65c3d835c486fd,
   "@/payload/admin/components/staff-guide/staff-guide-link#StaffGuideLink": StaffGuideLink_bfa12f6e5257f976daab4b8cbdf3328d,
-  "@payloadcms/storage-s3/client#S3ClientUploadHandler": S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24,
   "@/payload/admin/components/staff-guide/staff-guide-view#StaffGuideView": StaffGuideView_5f433351b44df92586df79f3e3163f3b,
-  "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
+  "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1,
+  "@payloadcms/storage-s3/client#S3ClientUploadHandler": S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24
 }

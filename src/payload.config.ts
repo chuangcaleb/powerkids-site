@@ -48,13 +48,12 @@ export default buildConfig({
       title: 'PowerKids Admin',
       description: 'Content management system for PowerKids Kindergarten.',
       titleSuffix: '— PowerKids',
-      // Distinct from the public site's favicon (src/app/icon.png) so the
+      // Distinct from the public site's favicon (src/app/(site)/icon.png) so the
       // admin tab is visually distinguishable from the front-end site.
       icons: [
         { type: 'image/png', rel: 'icon', sizes: '16x16', url: '/admin-icon-16.png' },
         { type: 'image/png', rel: 'icon', sizes: '32x32', url: '/admin-icon-32.png' },
         { type: 'image/png', rel: 'icon', sizes: '48x48', url: '/admin-icon-48.png' },
-        { rel: 'apple-touch-icon', url: '/apple-icon.png' },
       ],
     },
     livePreview: {
