@@ -23,14 +23,7 @@ const maplibreDir = path.dirname(require.resolve('maplibre-gl/package.json'))
 const distDir = path.join(maplibreDir, 'dist')
 const outDir = path.join(process.cwd(), 'public/maplibre')
 
-// The .map files are not loaded at runtime. Both .mjs files end with a
-// `sourceMappingURL` comment, so DevTools requests them and logs a 404 if absent.
-const FILES = [
-  'maplibre-gl-worker.mjs',
-  'maplibre-gl-worker.mjs.map',
-  'maplibre-gl-shared.mjs',
-  'maplibre-gl-shared.mjs.map',
-]
+const FILES = ['maplibre-gl-worker.mjs', 'maplibre-gl-shared.mjs']
 
 await mkdir(outDir, { recursive: true })
 
