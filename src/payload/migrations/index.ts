@@ -46,6 +46,7 @@ import * as migration_20260906_100408_drop_admin_notification_failed_add_notific
 import * as migration_20260906_150314_add_enquiries_admin_title_status_required from './20260906_150314_add_enquiries_admin_title_status_required'
 import * as migration_20261003_073138_payload_3_90_auth_upload_columns from './20261003_073138_payload_3_90_auth_upload_columns'
 import * as migration_20261003_073244_add_media_object_key from './20261003_073244_add_media_object_key'
+import * as migration_20261018_110445_payload_3_91_locales_parent_index from './20261018_110445_payload_3_91_locales_parent_index'
 
 export const migrations = [
   {
@@ -287,5 +288,10 @@ export const migrations = [
     up: migration_20261003_073244_add_media_object_key.up,
     down: migration_20261003_073244_add_media_object_key.down,
     name: '20261003_073244_add_media_object_key',
+  },
+  {
+    up: migration_20261018_110445_payload_3_91_locales_parent_index.up,
+    down: migration_20261018_110445_payload_3_91_locales_parent_index.down,
+    name: '20261018_110445_payload_3_91_locales_parent_index',
   },
 ]
