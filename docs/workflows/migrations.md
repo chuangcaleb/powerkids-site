@@ -9,6 +9,8 @@
 
 **Every schema change ships with migration — dev included.** `push` is `false` unconditionally in `src/payload.config.ts`. It used to be `!isProduction`, so dev auto-pushed schema on every boot — but drizzle-kit push resolves structural diffs (blocks/arrays/relationships, enum edits, type changes) by dropping and recreating the table instead of altering it, silently, since a dev server has no TTY to prompt on. That wiped real dev data on restart. Migrations are the only schema path now, in every environment.
 
+A push also leaves a `name: 'dev'`, `batch: -1` row in `payload_migrations`. While it exists, `payload migrate` stops at a "data loss will occur?" prompt — answering yes only ignores the row; it doesn't remove it — and Vercel's TTY-less build either skips migrations silently or dies with exit 13. Delete that row from the affected database; it's a marker, not schema.
+
 ## Loop
 
 ```bash
