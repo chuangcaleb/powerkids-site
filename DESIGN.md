@@ -3,7 +3,7 @@ color:
   cream: '#fffcf7'
   ink: '#171310'
   charcoal: '#4c433a'
-  muted: '#8a8681'
+  muted: '#76726d'
   black: '#000000'
   white: '#ffffff'
   sun: '#ffc929'
