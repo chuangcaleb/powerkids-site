@@ -23,7 +23,7 @@ All three clear, proceed. New blocks need owner sign-off — change product, not
 2. **Create `src/payload/blocks/<name>/config.ts`.** Payload block config: `slug`, admin `labels`, and a `description` written for a non-technical editor. Every field gets label and, where not obvious, description.
 3. **Register it** on `pages.layout` field.
 4. **Generate types**: `pnpm generate:types`.
-5. **Create a migration.** See [../ops/migrations.md](../ops/migrations.md).
+5. **Create a migration.** See [migrations.md](migrations.md).
 6. **Build `src/payload/blocks/<name>/component.tsx`.** Server component. Layout from primitives, styling from tokens via co-located CSS Module. No raw values.
 7. **Register the renderer** in block dispatcher. Not optional and not forgettable — the dispatcher's map is keyed on the generated block union, so a missing or mispaired renderer fails `pnpm typecheck`.
 8. **Handle empty and extreme cases.** No image, no heading, one item, twenty items, 90-character heading.

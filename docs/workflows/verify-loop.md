@@ -28,7 +28,7 @@ Stop at first failure, fix it. Don't commit around red step. Don't disable rule 
 
 ## Also required
 
-- **Schema changes** need `pnpm generate:types` + migration. See [../ops/migrations.md](../ops/migrations.md). Adding admin component also needs `pnpm generate:importmap`.
+- **Schema changes** need `pnpm generate:types` + migration. See [migrations.md](migrations.md). Adding admin component also needs `pnpm generate:importmap`.
 - **New pure functions** in `src/lib/` need unit test, same change.
 - **Visual changes** need look at rendered result at 320px, 768px, 1440px. Green checks don't prove layout right.
 - **Markup/landmark/heading changes** need `pnpm test:a11y` against a running `pnpm dev` (real dev DB, not CI's fake env — see `scripts/check-a11y.mjs`). Not part of `pnpm verify`; run it by hand.
