@@ -52,6 +52,11 @@
   .underline {
     text-underline-offset: 0.15em;
   }
+  a[href^="tel:"],
+  a[href^="mailto:"],
+  a[href^="https://wa.me/"] {
+    @apply underline;
+  }
 }
 
 @layer components {
