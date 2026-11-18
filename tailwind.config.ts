@@ -1,7 +1,7 @@
 import utopia from "tailwind-utopia";
 import type { Config } from "tailwindcss";
 import animatePlugin from "tailwindcss-animate";
-import { shadcnPlugin } from "./lib/shadcn-plugin";
+import { shadcnPlugin } from "./lib/shadcn-plugin.ts";
 
 const config = {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
