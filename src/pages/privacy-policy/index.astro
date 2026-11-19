@@ -1,0 +1,22 @@
+---
+import SuperHead from "@/components/brand/super-head";
+import Document from "@/components/layout/Document.astro";
+import Section from "@/components/layout/Section.astro";
+import { Content } from "./_content.md";
+---
+
+<Document title="Privacy Policy">
+  <Section class="fl-space-y-m" paddingY="top">
+    <div>
+      <SuperHead color="red">Last Updated: November 2026</SuperHead>
+      <h1 class="font-marker fl-text-step-5">Privacy Policy</h1>
+    </div>
+  </Section>
+  <Section paddingY="bottom">
+    <article
+      class="max-w-prose fl-space-y-s [&_h2]:font-marker [&_h2]:fl-text-step-3 [&_h2]:fl-pt-m [&_h3]:font-bold [&_h3]:fl-text-step-1 [&_h3]:fl-pt-xs [&_ul]:list-disc [&_ul]:fl-pl-m [&_ul]:fl-space-y-2xs [&_a]:underline [&_a]:break-words"
+    >
+      <Content />
+    </article>
+  </Section>
+</Document>
