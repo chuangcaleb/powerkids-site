@@ -24,7 +24,7 @@ import {
   PROGRAMS,
   type NavLink,
 } from "./nav-links";
-import { LucidePhoneOutgoing } from "lucide-react";
+import { LucideGift } from "lucide-react";
 
 function DrawerItem({
   title,
@@ -66,10 +66,10 @@ export default function PowerKidsNavDrawer() {
           }),
           "fixed bottom-10 right-0 bg-green-300 p-3 text-black hover:bg-green-400 md:hidden",
         )}
-        href="#contact"
-        aria-label="contact information and social links"
+        href="/promotions"
+        aria-label="promotion"
       >
-        <LucidePhoneOutgoing />
+        <LucideGift />
       </a>
       <SheetTrigger asChild>
         <Button
@@ -124,10 +124,10 @@ export default function PowerKidsNavDrawer() {
             </SheetClose>
             <SheetPrimitive.Close asChild>
               <a
-                href="#contact"
+                href="/promotions"
                 className={buttonVariants({ size: "lg", variant: "blue" })}
               >
-                contact
+                promotion
               </a>
             </SheetPrimitive.Close>
           </div>

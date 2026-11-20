@@ -1,0 +1,27 @@
+---
+import Document from "@/components/layout/Document.astro";
+import Section from "@/components/layout/Section.astro";
+import { Content } from "./_content.md";
+---
+
+<Document title="PowerKids Open Day: RM500 Rebate">
+  <Section class="fl-space-y-m" paddingY="top">
+    <h1 class="font-marker fl-text-step-4">
+      PowerKids Open Day: Claim Your Exclusive RM500 Rebate!
+    </h1>
+    <img
+      src="/images/promotion-open-day.webp"
+      alt="PowerKids Open Day: RM500 rebate on enrolment, Saturday 28 November 2026, 10AM - 1PM"
+      width="1672"
+      height="941"
+      class="h-auto w-full rounded-lg"
+    />
+  </Section>
+  <Section paddingY="bottom">
+    <article
+      class="max-w-prose fl-mt-m fl-space-y-s [&_h2]:font-marker [&_h2]:fl-text-step-3 [&_h2]:fl-pt-m [&_ul]:list-disc [&_ul]:fl-pl-m [&_ul]:fl-space-y-2xs [&_ol]:list-decimal [&_ol]:fl-pl-m [&_ol]:fl-space-y-2xs [&_a]:underline [&_a]:break-words"
+    >
+      <Content />
+    </article>
+  </Section>
+</Document>
