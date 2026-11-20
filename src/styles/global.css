@@ -54,7 +54,7 @@
   }
   a[href^="tel:"],
   a[href^="mailto:"],
-  a[href^="https://wa.me/"] {
+  a[href="/whatsapp"] {
     @apply underline;
   }
 }
