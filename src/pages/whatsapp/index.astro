@@ -1,0 +1,53 @@
+---
+// Real on-domain landing page (HTTP 200) for ad Final URLs.
+// Do NOT turn this into a server/JS/meta redirect to wa.me: Google Ads and
+// Meta reject destinations that leave the advertised domain.
+import SuperHead from "@/components/brand/super-head";
+import WhatsAppIcon from "@/components/brand/WhatsAppIcon.astro";
+import Document from "@/components/layout/Document.astro";
+import Section from "@/components/layout/Section.astro";
+import { buttonVariants } from "@/components/ui/button";
+import { WHATSAPP_URL } from "@/lib/contact";
+import { cn } from "@/lib/utils";
+---
+
+<Document title="WhatsApp Us">
+  <Section class="fl-space-y-m" paddingY="top">
+    <div>
+      <SuperHead color="red">Chat With Us</SuperHead>
+      <h1 class="font-marker fl-text-step-5">WhatsApp PowerKids</h1>
+    </div>
+    <p class="max-w-prose fl-text-step-1">
+      Have a question about enrolment, programs, fees or our Open Day? Message
+      us on WhatsApp and our team will reply during office hours (Monday -
+      Friday, 8:30am - 5:00pm).
+    </p>
+  </Section>
+  <Section class="fl-space-y-s" paddingY="bottom">
+    <a
+      id="whatsapp-cta"
+      href={WHATSAPP_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      class={cn(
+        buttonVariants({ variant: "default", size: "lg" }),
+        "gap-2 [&_svg]:fl-h-m [&_svg]:fl-w-m",
+      )}
+    >
+      <WhatsAppIcon />Chat on WhatsApp
+    </a>
+    <p>
+      Or call us at <a href="tel:+60102212482">010 - 221 2482</a>.
+    </p>
+  </Section>
+</Document>
+
+<script>
+  document.getElementById("whatsapp-cta")?.addEventListener("click", () => {
+    // Meta Pixel only loads in production (see Document.astro).
+    (window as { fbq?: (...args: unknown[]) => void }).fbq?.(
+      "track",
+      "Contact",
+    );
+  });
+</script>

@@ -12,6 +12,7 @@ import WhatsAppIcon from "@/components/brand/WhatsAppIcon.astro";
 import { Card, CardDescription } from "../../ui/card";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { WHATSAPP_URL } from "@/lib/contact";
 ---
 
 <Card
@@ -41,7 +42,7 @@ import { cn } from "@/lib/utils";
     </li>
     <li>
       <a
-        href="/whatsapp"
+        href={WHATSAPP_URL}
         class="whitespace-nowrap"
         target="_blank"
         rel="noopener noreferrer"
