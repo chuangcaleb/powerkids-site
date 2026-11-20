@@ -11,19 +11,13 @@ import { WHATSAPP_URL } from "@/lib/contact";
 import { cn } from "@/lib/utils";
 ---
 
-<Document title="WhatsApp Us">
-  <Section class="fl-space-y-m" paddingY="top">
-    <div>
-      <SuperHead color="red">Chat With Us</SuperHead>
-      <h1 class="font-marker fl-text-step-5">WhatsApp PowerKids</h1>
-    </div>
+<Document title="WhatsApp Us" class:list="fl-space-y-m">
+  <Section class="fl-space-y-m">
+    <h1 class="font-marker fl-text-step-5">WhatsApp</h1>
     <p class="max-w-prose fl-text-step-1">
       Have a question about enrolment, programs, fees or our Open Day? Message
-      us on WhatsApp and our team will reply during office hours (Monday -
-      Friday, 8:30am - 5:00pm).
+      us on WhatsApp and our team will reply!
     </p>
-  </Section>
-  <Section class="fl-space-y-s" paddingY="bottom">
     <a
       id="whatsapp-cta"
       href={WHATSAPP_URL}
