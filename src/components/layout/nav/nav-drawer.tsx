@@ -15,7 +15,6 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
-import * as SheetPrimitive from "@radix-ui/react-dialog";
 import { LucideArrowRight, LucideMenu, LucideSchool } from "lucide-react";
 import {
   ABOUT,
@@ -25,6 +24,7 @@ import {
   type NavLink,
 } from "./nav-links";
 import { LucideGift } from "lucide-react";
+import { useRef, useState } from "react";
 
 function DrawerItem({
   title,
@@ -57,8 +57,11 @@ function DrawerItem({
 }
 
 export default function PowerKidsNavDrawer() {
+  const [open, setOpen] = useState(false);
+  const pendingHash = useRef<string | null>(null);
+
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       <a
         className={cn(
           buttonVariants({
@@ -81,7 +84,19 @@ export default function PowerKidsNavDrawer() {
           <LucideMenu className="mr-2" /> Menu
         </Button>
       </SheetTrigger>
-      <SheetContent className="w-[min(100%,400px)] overflow-auto md:hidden [&_a_svg:first-child]:mr-2 [&_svg]:inline-block">
+      <SheetContent
+        onCloseAutoFocus={(e) => {
+          const hash = pendingHash.current;
+          if (!hash) return;
+          // Skip focus return to the Menu trigger, which scrolls back to top.
+          e.preventDefault();
+          pendingHash.current = null;
+          requestAnimationFrame(() => {
+            history.pushState(null, "", hash);
+            document.querySelector(hash)?.scrollIntoView();
+          });
+        }}
+        className="w-[min(100%,400px)] overflow-auto md:hidden [&_a_svg:first-child]:mr-2 [&_svg]:inline-block">
         <SheetHeader>
           <SheetTitle className="inline-flex gap-x-3 fl-text-step-1">
             <LucideMenu className="place-self-center" />
@@ -116,20 +131,25 @@ export default function PowerKidsNavDrawer() {
           <div className="flex w-full justify-around">
             <SheetClose asChild>
               <a
-                href="#register"
-                className={buttonVariants({ variant: "red", size: "lg" })}
-              >
-                register
-              </a>
-            </SheetClose>
-            <SheetPrimitive.Close asChild>
-              <a
                 href="/promotions"
-                className={buttonVariants({ size: "lg", variant: "blue" })}
+                className={buttonVariants({ variant: "red", size: "lg" })}
               >
                 promotion
               </a>
-            </SheetPrimitive.Close>
+            </SheetClose>
+            <a
+              href="#contact"
+              onClick={(e) => {
+                // Defer the in-page jump until the drawer has fully closed,
+                // otherwise Radix's scroll lock + focus return cancel it.
+                e.preventDefault();
+                pendingHash.current = "#contact";
+                setOpen(false);
+              }}
+              className={buttonVariants({ size: "lg", variant: "blue" })}
+            >
+              contact us
+            </a>
           </div>
         </SheetFooter>
       </SheetContent>
